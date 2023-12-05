@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-8fb2b3bc","path":"/zh/category/faq/","title":"FAQ 分类","lang":"en-US","frontmatter":{"title":"FAQ 分类","dir":{"index":false},"feed":false,"sitemap":false,"blog":{"type":"category","name":"FAQ","key":"category"},"layout":"BlogCategory"},"headers":[],"git":{},"readingTime":{"minutes":0,"words":0},"filePathRelative":null,"excerpt":""}');export{e as data};

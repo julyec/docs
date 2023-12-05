@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>使用软件包</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="install.macosx.html">? macOS 系统下的安装</a></li>
+      <li style="float: right;"><a href="install.macosx.bundled.html">使用 macOS Monterey 之前内置的 PHP ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="install.macosx.html">macOS 系统下的安装</a></li>
+    <li>使用软件包</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="install.macosx.packages" class="sect1">
+ <h2 class="title">使用软件包</h2>
+ <p class="simpara">
+  macOS 下有几个预编译和打包的 PHP 版本。可以通过它使用标准的配置的
+  PHP，但是若需要不同的功能集（比如一个安全服务器，或者一个不同的数据库驱动程序），可能需要自己编译
+  PHP 和／或 web 服务器。如果不熟悉如何自己编译软件，可以试着找一下包含自己所需功能的
+  PHP 预编译版本。
+ </p>
+ <p class="simpara">
+   在 macOS 上安装 PHP 最简便的方式是用 homebrew：
+  </p>
+  <p class="para">
+   <ol type="1">
+    <li class="listitem">
+     <p class="para">
+      安装 homebrew：参考 <a href="https://brew.sh/" class="link external" title="Link : https://brew.sh/">&raquo;&nbsp;brew.sh</a> 上的说明
+     </p>
+    </li>
+    <li class="listitem">
+     <span class="simpara">
+      brew install php
+     </span>
+    </li>
+   </ol>
+  </p>
+  <p class="simpara">
+   下面可选资源提供了在 macOS 上易于安装的软件包和预编译的二进制 PHP。
+ </p>
+ <p class="para">
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <span class="simpara">
+     MacPorts: 
+     <a href="http://www.macports.org/" class="link external" title="Link : http://www.macports.org/">&raquo;&nbsp;http://www.macports.org/</a>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     Liip: 
+     <a href="http://php-osx.liip.ch/" class="link external" title="Link : http://php-osx.liip.ch/">&raquo;&nbsp;http://php-osx.liip.ch/</a>
+      (PHP 5.3 - PHP 7.3; 已废弃)
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     Fink: 
+     <a href="http://www.finkproject.org/" class="link external" title="Link : http://www.finkproject.org/">&raquo;&nbsp;http://www.finkproject.org/</a>
+    </span>
+   </li>
+  </ul>
+ </p>
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="128562""></a>
+  <div class="note">
+   <strong class="user">riordan at rocketmail dot com</strong>
+   <a href="#128562" class="date">21-May-2023 04:34</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Note that with recent versions of macos, you'll have to code-sign the PHP module installed by<br />
+<br />
+brew install php<br />
+<br />
+before Apache will load and run it.<br />
+<br />
+Instructions for this can be found at https://blog.phusion.nl/2020/12/22/future_of_macos_apache_modules/</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="127702""></a>
+  <div class="note">
+   <strong class="user">Chris Varen</strong>
+   <a href="#127702" class="date">07-Oct-2022 11:09</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+@marc_cole Note that phpbrew (https://github.com/phpbrew/phpbrew) requires you already have some version of PHP on your system. This is because phpbrew itself is written in php. And recent versions of macOS no longer come with php included.<br />
+<br />
+So phpbrew isn't really an alternative since you still need to use homebrew or something else to install php in the first place.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="127494""></a>
+  <div class="note">
+   <strong class="user">Anonymous</strong>
+   <a href="#127494" class="date">16-Aug-2022 11:07</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+remember after step 1 installing homebrew to run these two commands, one at a time in the terminal window - where xxxxx is the name of the current profile - (who you are logged in as)<br />
+<br />
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' &gt;&gt; /Users/xxxxx/.zprofile<br />
+&nbsp;<br />
+eval "$(/opt/homebrew/bin/brew shellenv)"<br />
+<br />
+Only then will you be able to run step 2 brew...</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="126751""></a>
+  <div class="note">
+   <strong class="user">saintalifrh at disroot dot org</strong>
+   <a href="#126751" class="date">06-Jan-2022 05:11</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Valet requires macOS and Homebrew. Before installation, you should make sure that no other programs such as Apache or Nginx are binding to your local machine's port 80.<br />
+<br />
+you need to install brew anyway</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="126732""></a>
+  <div class="note">
+   <strong class="user">Sajt</strong>
+   <a href="#126732" class="date">30-Dec-2021 11:01</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+You can use Laravel valet, what is included PHP, Nginx, DNSMasq and a lot of things for easy developing. (https://laravel.com/docs/8.x/valet)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="126664""></a>
+  <div class="note">
+   <strong class="user">marc_cole</strong>
+   <a href="#126664" class="date">04-Dec-2021 06:39</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Granted, this is not a "package", but I prefer to use phpbrew, as it allows me to install as many versions of PHP as I want for testing or whatever.<br />
+<br />
+https://github.com/phpbrew/phpbrew</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

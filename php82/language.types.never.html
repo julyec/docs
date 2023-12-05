@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>Never</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="language.types.void.html">? Void</a></li>
+      <li style="float: right;"><a href="language.types.relative-class-types.html">相对类类型 ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="language.types.html">类型</a></li>
+    <li>Never</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="language.types.never" class="sect1">
+ <h2 class="title">Never</h2>
+
+ <p class="para">
+  <span class="type"><span class="type never">never</span></span> 是仅用于返回的类型，表示函数不会终止。这意味着它要么调用
+  <span class="function"><a href="function.exit.html" class="function">exit()</a></span>，要么抛出异常，要么无限循环。因此，它不能是<a href="language.types.type-system.html#language.types.type-system.composite.union" class="link">联合类型</a>声明的一部分。自
+  PHP 8.1.0 起可用。
+ </p>
+ <p class="para">
+  <span class="type"><span class="type never">never</span></span> 是类型理论中的最底层类型。这意味着它是其它所有类型的子类型，并在可以在继承期间替换其它任何返回类型。
+ </p>
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="128740""></a>
+  <div class="note">
+   <strong class="user">mateusz dot charytoniuk at protonmail dot com</strong>
+   <a href="#128740" class="date">17-Jul-2023 02:51</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Overriding the return type of native interfaces:<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="keyword">class </span><span class="default">ReadonlyArrayAccess </span><span class="keyword">implements </span><span class="default">ArrayAccess<br />
+</span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">__construct</span><span class="keyword">(private readonly </span><span class="default">$array</span><span class="keyword">) {}<br />
+<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">offsetExists</span><span class="keyword">(</span><span class="default">mixed $offset</span><span class="keyword">): </span><span class="default">bool<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">{<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return isset(</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">array</span><span class="keyword">[</span><span class="default">$offset</span><span class="keyword">]);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">offsetGet</span><span class="keyword">(</span><span class="default">mixed $offset</span><span class="keyword">): </span><span class="default">mixed<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">{<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">array</span><span class="keyword">[</span><span class="default">$offset</span><span class="keyword">];<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">offsetSet</span><span class="keyword">(</span><span class="default">mixed $offset</span><span class="keyword">, </span><span class="default">mixed $value</span><span class="keyword">): </span><span class="default">never<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">{<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; throw new </span><span class="default">LogicException</span><span class="keyword">(</span><span class="string">'This array is read only'</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">offsetUnset</span><span class="keyword">(</span><span class="default">mixed $offset</span><span class="keyword">): </span><span class="default">never<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">{<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; throw new </span><span class="default">LogicException</span><span class="keyword">(</span><span class="string">'This array is read only'</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="128259""></a>
+  <div class="note">
+   <strong class="user">ali1289445 at gmail dot com</strong>
+   <a href="#128259" class="date">27-Feb-2023 05:06</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="keyword">function </span><span class="default">sayHello</span><span class="keyword">(</span><span class="default">string $name</span><span class="keyword">): </span><span class="default">never<br />
+</span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"Hello, </span><span class="default">$name</span><span class="string">"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; exit(); </span><span class="comment">// if we comment this line, php throws fatal error<br />
+</span><span class="keyword">}<br />
+<br />
+</span><span class="default">sayHello</span><span class="keyword">(</span><span class="string">"John"</span><span class="keyword">); </span><span class="comment">// result: "Hello, John"</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

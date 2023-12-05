@@ -1,0 +1,388 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>从套接字接收数据，无论它是否是面向连接的</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.socket-recv.html">? socket_recv</a></li>
+      <li style="float: right;"><a href="function.socket-recvmsg.html">socket_recvmsg ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.sockets.html">Socket 函数</a></li>
+    <li>从套接字接收数据，无论它是否是面向连接的</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.socket-recvfrom" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">socket_recvfrom</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.1.0, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">socket_recvfrom</span> &mdash; <span class="dc-title">从套接字接收数据，无论它是否是面向连接的</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.socket-recvfrom-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>socket_recvfrom</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><a href="class.socket.html" class="type Socket">Socket</a></span> <code class="parameter">$socket</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter reference">&$data</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$length</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$flags</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter reference">&$address</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter reference">&$port</code><span class="initializer"> = <strong><code>null</code></strong></span></span><br>): <span class="type"><span class="type">int</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   函数 <span class="function"><strong>socket_recvfrom()</strong></span> 使用 <code class="parameter">socket</code> 
+   从 <code class="parameter">address</code> 的 <code class="parameter">port</code> 
+   端口上接收 <code class="parameter">length</code> 字节数据到 <code class="parameter">data</code> 
+   中（如果套接字不是 <strong><code>AF_UNIX</code></strong> 类型）。<span class="function"><strong>socket_recvfrom()</strong></span> 
+   可用于从已连接或未连接的套接字上收集数据。另外，可以指定一个或多个标志来修改函数的行为。
+  </p>
+  <p class="para">
+   <code class="parameter">address</code> 和 <code class="parameter">port</code> 
+   必须是引用传递。如果套接字不是面向连接的，<code class="parameter">address</code> 
+   将设置为远程主机的互联网协议地址或 UNIX 套接字路径。如果套接字是面向连接的，<code class="parameter">address</code> 
+   是 <strong><code>null</code></strong>。另外，在 <strong><code>AF_INET</code></strong> 或 <strong><code>AF_INET6</code></strong> 
+   套接字未连接的情况下，<code class="parameter">port</code> 将包含远程主机的端口号。
+  </p>
+  <blockquote class="note"><p><strong class="note">Note</strong>: <span class="simpara">此函数可安全用于二进制对象。</span></p></blockquote>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.socket-recvfrom-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">socket</code></dt>
+
+     <dd>
+
+      <p class="para">
+       <code class="parameter">socket</code> 必须是先前由 socket_create() 创建的 <span class="classname"><a href="class.socket.html" class="classname">Socket</a></span> 实例。
+      </p>
+     </dd>
+
+    
+
+    
+     <dt>
+<code class="parameter">data</code></dt>
+
+     <dd>
+
+      <p class="para">
+       收到的数据将提取到 <code class="parameter">data</code> 指定的变量。
+      </p>
+     </dd>
+
+    
+
+    
+     <dt>
+<code class="parameter">length</code></dt>
+
+     <dd>
+
+      <p class="para">
+       最多可从远程主机获取的 <code class="parameter">length</code> 字节数。
+      </p>
+     </dd>
+
+    
+
+    
+     <dt>
+<code class="parameter">flags</code></dt>
+
+     <dd>
+
+      <p class="para">
+       <code class="parameter">flags</code> 的值可以是下列任意 flag 的组合。使用按位或运算符（<code class="literal">|</code>）来组合不同的 flag。
+      </p>
+      
+      <table class="doctable table">
+       <caption><strong><code class="parameter">flags</code> 可用值</strong></caption>
+       
+        <thead>
+         <tr>
+          <th>Flag</th>
+          <th>描述</th>
+         </tr>
+
+        </thead>
+
+        <tbody class="tbody">
+         <tr>
+          <td><strong><code>MSG_OOB</code></strong></td>
+          <td>
+           处理带外数据。
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>MSG_PEEK</code></strong></td>
+          <td>
+           从接收队列的起始位置接收数据，但不将他们从接收队列中移除。
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>MSG_WAITALL</code></strong></td>
+          <td>
+           在接受到至少 <code class="parameter">length</code> 
+           字节数据前阻塞。但是，如果接收到中断信号，或远程主机断开链接，函数可能返回不足 <code class="parameter">length</code> 字节的数据。
+          </td>
+         </tr>
+
+         <tr>
+          <td><strong><code>MSG_DONTWAIT</code></strong></td>
+          <td>
+           如果指定了该 flag，即使原有套接字是阻塞的，此函数也不会阻塞。
+          </td>
+         </tr>
+
+        </tbody>
+       
+      </table>
+
+     </dd>
+
+    
+
+    
+     <dt>
+<code class="parameter">address</code></dt>
+
+     <dd>
+
+      <p class="para">
+       如果套接字是 <strong><code>AF_UNIX</code></strong> 类型，<code class="parameter">address</code> 
+       是文件路径。否则，对于未连接的套接字，<code class="parameter">address</code> 
+       是远程主机的 IP 地址，如果套接字是面向连接的，是 <strong><code>null</code></strong>。
+      </p>
+     </dd>
+
+    
+
+    
+     <dt>
+<code class="parameter">port</code></dt>
+
+     <dd>
+
+      <p class="para">
+       此参数只适用于 <strong><code>AF_INET</code></strong> 和 <strong><code>AF_INET6</code></strong> 
+       类型的套接字，并指定接收数据的远程端口。如果套接字是面向连接的，<code class="parameter">port</code> 
+       是 <strong><code>null</code></strong>。
+      </p>
+     </dd>
+
+    
+    
+   </dl>
+
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 returnvalues" id="refsect1-function.socket-recvfrom-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   <span class="function"><strong>socket_recvfrom()</strong></span> 返回接收到的字节数，发生错误时返回 <strong><code>false</code></strong>。可以通过调用 <span class="function"><a href="function.socket-last-error.html" class="function">socket_last_error()</a></span> 
+   来检索实际的错误代码。此错误码可以传递给 <span class="function"><a href="function.socket-strerror.html" class="function">socket_strerror()</a></span> 获得错误的文本解释。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.socket-recvfrom-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+  <td>8.0.0</td>
+  <td>
+   现在 <code class="parameter">socket</code> 是 <span class="classname"><a href="class.socket.html" class="classname">Socket</a></span> 实例，
+   之前是 <span class="type">resource</span>。
+  </td>
+ </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.socket-recvfrom-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #1 <span class="function"><strong>socket_recvfrom()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />$socket </span><span style="color: #007700">= </span><span style="color: #0000BB">socket_create</span><span style="color: #007700">(</span><span style="color: #0000BB">AF_INET</span><span style="color: #007700">, </span><span style="color: #0000BB">SOCK_DGRAM</span><span style="color: #007700">, </span><span style="color: #0000BB">SOL_UDP</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">socket_bind</span><span style="color: #007700">(</span><span style="color: #0000BB">$socket</span><span style="color: #007700">, </span><span style="color: #DD0000">'127.0.0.1'</span><span style="color: #007700">, </span><span style="color: #0000BB">1223</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$from </span><span style="color: #007700">= </span><span style="color: #DD0000">''</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$port </span><span style="color: #007700">= </span><span style="color: #0000BB">0</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">socket_recvfrom</span><span style="color: #007700">(</span><span style="color: #0000BB">$socket</span><span style="color: #007700">, </span><span style="color: #0000BB">$buf</span><span style="color: #007700">, </span><span style="color: #0000BB">12</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">$from</span><span style="color: #007700">, </span><span style="color: #0000BB">$port</span><span style="color: #007700">);<br /><br />echo </span><span style="color: #DD0000">"Received </span><span style="color: #0000BB">$buf</span><span style="color: #DD0000"> from remote address </span><span style="color: #0000BB">$from</span><span style="color: #DD0000"> and remote port </span><span style="color: #0000BB">$port</span><span style="color: #DD0000">" </span><span style="color: #007700">. </span><span style="color: #0000BB">PHP_EOL</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>
+     此示例将在 127.0.0.1 的 1233 端口上初始化 UDP 套接字，并打印从远程主机收到的至少 12 个字符。
+    </p></div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.socket-recvfrom-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.socket-recv.html" class="function" rel="rdfs-seeAlso">socket_recv()</a> - 从已连接的 socket 接收数据</span></li>
+    <li class="member"><span class="function"><a href="function.socket-send.html" class="function" rel="rdfs-seeAlso">socket_send()</a> - 向已连接的套接字发送数据</span></li>
+    <li class="member"><span class="function"><a href="function.socket-sendto.html" class="function" rel="rdfs-seeAlso">socket_sendto()</a> - 向套接字发送消息，无论它是否已建立连接</span></li>
+    <li class="member"><span class="function"><a href="function.socket-create.html" class="function" rel="rdfs-seeAlso">socket_create()</a> - 创建一个套接字（通讯节点）</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="120350""></a>
+  <div class="note">
+   <strong class="user">ply2attoetensen-project.com</strong>
+   <a href="#120350" class="date">17-Dec-2016 10:07</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+MSG_DONTWAIT doesn't seem to exist in windows sockets. However socket_set_nonblock() seems to do the trick.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="117864""></a>
+  <div class="note">
+   <strong class="user">lorin dot weilenmann at gmail dot com</strong>
+   <a href="#117864" class="date">21-Aug-2015 10:24</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you use socket_recvfrom on a UDP socket and combine it with the MSG_DONTWAIT flag, it will raise a PHP Warning if there is nothing to read. AFAIK, there is no way around that warning except suppressing it with @ (i.e. you cannot check if there is data before calling socket_recvfrom).</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="107741""></a>
+  <div class="note">
+   <strong class="user">davide dot renzi at gmail dot com</strong>
+   <a href="#107741" class="date">01-Mar-2012 08:52</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Pay attention! On some PHP version the MSG_DONTWAIT flag is not defined (see https://bugs.php.net/bug.php?id=48326)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="79045""></a>
+  <div class="note">
+   <strong class="user">jaggerwang at gmail dot com</strong>
+   <a href="#79045" class="date">07-Nov-2007 09:56</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I'm confused about the rerturn value of socket_recvfrom(), it said -1 when failed, but when I call like this:<br />
+<br />
+if (($len = @socket_recvfrom($sock, $result, 32, 0, $ip, $port)) == -1) {<br />
+&nbsp;&nbsp;&nbsp; if ($this-&gt;_debug) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo "socket_read() failed: " . socket_strerror(socket_last_error()) . "\n";<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; return false;<br />
+}<br />
+<br />
+variable $len = false, when I change the buffer length from 32 to 4096, it becomes right.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="70063""></a>
+  <div class="note">
+   <strong class="user">ryan_at_ryanfisher_dot_com</strong>
+   <a href="#70063" class="date">01-Oct-2006 10:27</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+DNS RELAY USING UDP SOCKETS<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp;<br />
+</span><span class="keyword">while(</span><span class="default">TRUE</span><span class="keyword">) {<br />
+&nbsp;&nbsp; </span><span class="default">$socket </span><span class="keyword">= </span><span class="default">socket_create</span><span class="keyword">(</span><span class="default">AF_INET</span><span class="keyword">, </span><span class="default">SOCK_DGRAM</span><span class="keyword">, </span><span class="default">SOL_UDP</span><span class="keyword">); <br />
+&nbsp;&nbsp; if(</span><span class="default">$socket </span><span class="keyword">=== </span><span class="default">FALSE</span><span class="keyword">) <br />
+&nbsp;&nbsp; { <br />
+&nbsp;&nbsp; &nbsp; &nbsp; echo </span><span class="string">'Socket_create failed: '</span><span class="keyword">.</span><span class="default">socket_strerror</span><span class="keyword">(</span><span class="default">socket_last_error</span><span class="keyword">()).</span><span class="string">"\n"</span><span class="keyword">;<br />
+&nbsp;&nbsp; }<br />
+&nbsp;&nbsp; if(!</span><span class="default">socket_bind</span><span class="keyword">(</span><span class="default">$socketD</span><span class="keyword">, </span><span class="string">"0.0.0.0"</span><span class="keyword">, </span><span class="default">53</span><span class="keyword">)) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; </span><span class="default">socket_close</span><span class="keyword">(</span><span class="default">$socketD</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; echo </span><span class="string">'socket_bind failed: '</span><span class="keyword">.</span><span class="default">socket_strerror</span><span class="keyword">(</span><span class="default">socket_last_error</span><span class="keyword">()).</span><span class="string">"\n"</span><span class="keyword">;<br />
+&nbsp;&nbsp; }<br />
+&nbsp;&nbsp; </span><span class="default">socket_recvfrom</span><span class="keyword">(</span><span class="default">$socket</span><span class="keyword">,</span><span class="default">$buf</span><span class="keyword">,</span><span class="default">65535</span><span class="keyword">,</span><span class="default">0</span><span class="keyword">,</span><span class="default">$clientIP</span><span class="keyword">,</span><span class="default">$clientPort</span><span class="keyword">);<br />
+&nbsp;&nbsp; </span><span class="default">$stz </span><span class="keyword">= </span><span class="default">bin2hex</span><span class="keyword">(</span><span class="default">$buf</span><span class="keyword">);<br />
+&nbsp;&nbsp; </span><span class="default">$tx </span><span class="keyword">= </span><span class="string">""</span><span class="keyword">;<br />
+&nbsp;&nbsp; for(</span><span class="default">$i</span><span class="keyword">=</span><span class="default">0</span><span class="keyword">;</span><span class="default">$i</span><span class="keyword">&lt;(</span><span class="default">strlen</span><span class="keyword">(</span><span class="default">$stz</span><span class="keyword">)-</span><span class="default">26</span><span class="keyword">-</span><span class="default">10</span><span class="keyword">)/</span><span class="default">2</span><span class="keyword">;</span><span class="default">$i</span><span class="keyword">++)<br />
+&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; </span><span class="default">$e </span><span class="keyword">= </span><span class="string">"00"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; </span><span class="default">$e</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">] = </span><span class="default">$stz</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">*</span><span class="default">2</span><span class="keyword">+</span><span class="default">26</span><span class="keyword">];<br />
+&nbsp;&nbsp; &nbsp; </span><span class="default">$e</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">] = </span><span class="default">$stz</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">*</span><span class="default">2</span><span class="keyword">+</span><span class="default">27</span><span class="keyword">];<br />
+&nbsp;&nbsp; &nbsp; </span><span class="default">$f </span><span class="keyword">= </span><span class="default">hexdec</span><span class="keyword">(</span><span class="default">$e</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; if(</span><span class="default">$f </span><span class="keyword">&gt; </span><span class="default">0 </span><span class="keyword">&amp;&amp; </span><span class="default">$f </span><span class="keyword">&lt; </span><span class="default">32</span><span class="keyword">) </span><span class="default">$tx </span><span class="keyword">.= </span><span class="string">"."</span><span class="keyword">; else<br />
+&nbsp;&nbsp; &nbsp; </span><span class="default">$tx </span><span class="keyword">.= </span><span class="default">sprintf</span><span class="keyword">(</span><span class="string">"%c"</span><span class="keyword">,</span><span class="default">$f</span><span class="keyword">);<br />
+&nbsp;&nbsp; }<br />
+&nbsp;&nbsp; echo </span><span class="string">"</span><span class="default">$clientIP</span><span class="string"> &lt;"</span><span class="keyword">.</span><span class="default">$tx</span><span class="keyword">.</span><span class="string">"&gt;\n"</span><span class="keyword">;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp;&nbsp; </span><span class="default">$fp </span><span class="keyword">= </span><span class="default">fsockopen</span><span class="keyword">(</span><span class="string">"udp://72.174.110.4"</span><span class="keyword">,</span><span class="default">53</span><span class="keyword">,</span><span class="default">$errno</span><span class="keyword">,</span><span class="default">$errstr</span><span class="keyword">);<br />
+&nbsp;&nbsp; if (!</span><span class="default">$fp</span><span class="keyword">) <br />
+&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; echo </span><span class="string">"ERROR: </span><span class="default">$errno</span><span class="string"> - </span><span class="default">$errstr</span><span class="string">&lt;br /&gt;\n"</span><span class="keyword">;<br />
+&nbsp;&nbsp; } <br />
+&nbsp;&nbsp; else <br />
+&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">fwrite</span><span class="keyword">(</span><span class="default">$fp</span><span class="keyword">,</span><span class="default">$buf</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$ret </span><span class="keyword">= </span><span class="default">$buf</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$ret </span><span class="keyword">= </span><span class="default">fread</span><span class="keyword">(</span><span class="default">$fp</span><span class="keyword">,</span><span class="default">667</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">fclose</span><span class="keyword">(</span><span class="default">$fp</span><span class="keyword">);<br />
+&nbsp;&nbsp; }<br />
+&nbsp; }<br />
+</span><span class="default">socket_send</span><span class="keyword">(</span><span class="default">$socket</span><span class="keyword">,</span><span class="default">$ret</span><span class="keyword">,</span><span class="default">667</span><span class="keyword">,</span><span class="default">0</span><span class="keyword">);<br />
+}<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

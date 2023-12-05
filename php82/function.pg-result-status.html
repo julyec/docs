@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>获得查询结果的状态</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.pg-result-seek.html">? pg_result_seek</a></li>
+      <li style="float: right;"><a href="function.pg-select.html">pg_select ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.pgsql.html">PostgreSQL 函数</a></li>
+    <li>获得查询结果的状态</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.pg-result-status" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">pg_result_status</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.2.0, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">pg_result_status</span> &mdash; <span class="dc-title">
+   获得查询结果的状态
+  </span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.pg-result-status-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>pg_result_status</strong></span>(<span class="methodparam"><span class="type"><a href="class.pgsql-result.html" class="type PgSql\Result">PgSql\Result</a></span> <code class="parameter">$result</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$mode</code><span class="initializer"> = <strong><code>PGSQL_STATUS_LONG</code></strong></span></span>): <span class="type"><span class="type">string</span>|<span class="type">int</span></span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>pg_result_status()</strong></span> 返回 <span class="classname"><a href="class.pgsql-result.html" class="classname">PgSql\Result</a></span> 实例的状态，或者与 result 相关的 PostgreSQL 命令完成标记。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.pg-result-status-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">result</code></dt>
+
+     <dd>
+
+      <p class="para"><span class="classname"><a href="class.pgsql-result.html" class="classname">PgSql\Result</a></span> 实例，由
+<span class="function"><a href="function.pg-query.html" class="function">pg_query()</a></span>、<span class="function"><a href="function.pg-query-params.html" class="function">pg_query_params()</a></span> 或者 <span class="function"><a href="function.pg-execute.html" class="function">pg_execute()</a></span>（等）返回。</p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">mode</code></dt>
+
+     <dd>
+
+      <p class="para">
+       要么指定 <strong><code>PGSQL_STATUS_LONG</code></strong> 返回 <code class="parameter">result</code> 的数字状态，要么指定 <strong><code>PGSQL_STATUS_STRING</code></strong> 
+       返回 <code class="parameter">result</code> 的命令标记。如果未指定，默认是 <strong><code>PGSQL_STATUS_LONG</code></strong>。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.pg-result-status-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   如果指定 <strong><code>PGSQL_STATUS_LONG</code></strong>，可能返回的值是
+   <strong><code>PGSQL_EMPTY_QUERY</code></strong>、<strong><code>PGSQL_COMMAND_OK</code></strong>、<strong><code>PGSQL_TUPLES_OK</code></strong>、<strong><code>PGSQL_COPY_OUT</code></strong>、<strong><code>PGSQL_COPY_IN</code></strong>、<strong><code>PGSQL_BAD_RESPONSE</code></strong>、<strong><code>PGSQL_NONFATAL_ERROR</code></strong>
+   和 <strong><code>PGSQL_FATAL_ERROR</code></strong>。否则，返回包含 PostgreSQL 命令标记的 <span class="type">string</span>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.pg-result-status-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+ <td>8.1.0</td>
+ <td>
+  现在 <code class="parameter">result</code> 参数接受 <span class="classname"><a href="class.pgsql-result.html" class="classname">PgSql\Result</a></span>
+  实例，之前接受 <a href="language.types.resource.html" class="link">资源(resource)</a>。
+ </td>
+</tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.pg-result-status-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="example-3958">
+    <p><strong>Example #1 <span class="function"><strong>pg_result_status()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #FF8000">// Connect to the database<br /></span><span style="color: #0000BB">$conn </span><span style="color: #007700">= </span><span style="color: #0000BB">pg_pconnect</span><span style="color: #007700">(</span><span style="color: #DD0000">"dbname=publisher"</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// Execute a COPY<br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">pg_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">, </span><span style="color: #DD0000">"COPY authors FROM STDIN;"</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// Get the result status<br /></span><span style="color: #0000BB">$status </span><span style="color: #007700">= </span><span style="color: #0000BB">pg_result_status</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// Determine status<br /></span><span style="color: #007700">if (</span><span style="color: #0000BB">$status </span><span style="color: #007700">== </span><span style="color: #0000BB">PGSQL_COPY_IN</span><span style="color: #007700">)<br />   echo </span><span style="color: #DD0000">"Copy began."</span><span style="color: #007700">;<br />else<br />   echo </span><span style="color: #DD0000">"Copy failed."</span><span style="color: #007700">;<br /> <br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Copy began.
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 seealso" id="refsect1-function.pg-result-status-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.pg-connection-status.html" class="function" rel="rdfs-seeAlso">pg_connection_status()</a> - 获取连接状态</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="114507""></a>
+  <div class="note">
+   <strong class="user">Anonymous</strong>
+   <a href="#114507" class="date">01-Mar-2014 06:44</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+This function is useful it may not return a&nbsp; full non fatal error but you want to see if the query completes anyway.<br />
+<br />
+example<br />
+<br />
+<span class="default">&lt;?PHP<br />
+</span><span class="comment">//connect to pg database<br />
+// create PGSQL<br />
+<br />
+</span><span class="default">$PGSTAT </span><span class="keyword">= </span><span class="default">pg_result_status</span><span class="keyword">(</span><span class="default">$PGSQL</span><span class="keyword">);</span><span class="comment">//defaults to long<br />
+<br />
+//And run it through a check for example<br />
+<br />
+</span><span class="keyword">if((</span><span class="default">$PGSTAT </span><span class="keyword">== </span><span class="default">1</span><span class="keyword">) || (</span><span class="default">$PGSTAT </span><span class="keyword">== </span><span class="default">2</span><span class="keyword">)){<br />
+&nbsp;</span><span class="comment">// for query results;<br />
+</span><span class="keyword">}else if((</span><span class="default">$PGSTAT </span><span class="keyword">== </span><span class="default">3</span><span class="keyword">) || (</span><span class="default">$PGSTAT </span><span class="keyword">== </span><span class="default">4</span><span class="keyword">)){<br />
+&nbsp;</span><span class="comment">// for copy results;<br />
+</span><span class="keyword">}<br />
+if((</span><span class="default">$PGSTAT </span><span class="keyword">!= </span><span class="default">0</span><span class="keyword">) &amp;&amp; (</span><span class="default">$PGSTAT </span><span class="keyword">!= </span><span class="default">5</span><span class="keyword">) &amp;&amp; (</span><span class="default">$PGSTAT </span><span class="keyword">!= </span><span class="default">6</span><span class="keyword">) &amp;&amp; (</span><span class="default">$PGSTAT </span><span class="keyword">!= </span><span class="default">7</span><span class="keyword">)){<br />
+</span><span class="comment">// your code;<br />
+</span><span class="keyword">}else{<br />
+&nbsp;</span><span class="comment">// $ERRORS codes;<br />
+</span><span class="keyword">}<br />
+</span><span class="comment">// This is worked the best for me so far&nbsp; I tried using <br />
+// The command tag and I seem to still get an numeric result<br />
+//example<br />
+//$PGSTAT = pg_result_status($PGSQL, PGSQL_COMMAND_OK);<br />
+// got something like tuples ok so I recommend just use default long<br />
+</span><span class="default">?&gt;<br />
+</span>or use what ever condition check you feel fit</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="111274""></a>
+  <div class="note">
+   <strong class="user">dean at deansas dot org</strong>
+   <a href="#111274" class="date">01-Feb-2013 03:50</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+The postgres docs say that PHP should never be able to return PGRES_NONFATAL_ERROR<br />
+<br />
+"A result of status PGRES_NONFATAL_ERROR will never be returned directly by PQexec or other query execution functions" <a href="http://www.postgresql.org/docs/current/static/libpq-exec.html" rel="nofollow" target="_blank">http://www.postgresql.org/docs/current/static/libpq-exec.html</a><br />
+<br />
+Therefore you cannot use this function to check if this query produced a notice.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="53675""></a>
+  <div class="note">
+   <strong class="user">Meej Vaj</strong>
+   <a href="#53675" class="date">08-Jun-2005 06:45</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If on "accident" your program passes pg_result_status a variable that is NOT a actual pg resource, it will return an empty string.<br />
+(This is important to know if you want to make sure a pg resource is "good" before attempting some operation on it).</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="26050""></a>
+  <div class="note">
+   <strong class="user">romix at gmx dot de</strong>
+   <a href="#26050" class="date">16-Oct-2002 06:29</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+0 = PGSQL_EMPTY_QUERY<br />
+1 = PGSQL_COMMAND_OK<br />
+2 = PGSQL_TUPLES_OK<br />
+3 = PGSQL_COPY_TO<br />
+4 = PGSQL_COPY_FROM<br />
+5 = PGSQL_BAD_RESPONSE<br />
+6 = PGSQL_NONFATAL_ERROR<br />
+7 = PGSQL_FATAL_ERROR</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

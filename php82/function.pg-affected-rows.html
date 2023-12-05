@@ -1,0 +1,266 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>返回受影响的记录数（元组）</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="ref.pgsql.html">? PostgreSQL 函数</a></li>
+      <li style="float: right;"><a href="function.pg-cancel-query.html">pg_cancel_query ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.pgsql.html">PostgreSQL 函数</a></li>
+    <li>返回受影响的记录数（元组）</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.pg-affected-rows" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">pg_affected_rows</h1>
+    <p class="verinfo">(PHP 4 &gt;= 4.2.0, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">pg_affected_rows</span> &mdash; <span class="dc-title">返回受影响的记录数（元组）</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.pg-affected-rows-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>pg_affected_rows</strong></span>(<span class="methodparam"><span class="type"><a href="class.pgsql-result.html" class="type PgSql\Result">PgSql\Result</a></span> <code class="parameter">$result</code></span>): <span class="type">int</span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>pg_affected_rows()</strong></span> 返回受 <code class="literal">INSERT</code>、<code class="literal">UPDATE</code>
+   和 <code class="literal">DELETE</code> 查询影响的元组数（实例/记录/行）。
+  </p>
+  <p class="para">
+   从 PostgreSQL 9.0 及更高版本开始，服务器返回 SELECT 的行数。较旧的 PostgreSQL 则返回 0。
+  </p>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    此函数过去称为 <span class="function"><strong>pg_cmdtuples()</strong></span>。
+   </p>
+  </p></blockquote>
+ </div>
+
+
+<div class="refsect1 parameters" id="refsect1-function.pg-affected-rows-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">result</code></dt>
+
+     <dd>
+
+      <p class="para"><span class="classname"><a href="class.pgsql-result.html" class="classname">PgSql\Result</a></span> 实例，由
+<span class="function"><a href="function.pg-query.html" class="function">pg_query()</a></span>、<span class="function"><a href="function.pg-query-params.html" class="function">pg_query_params()</a></span> 或者 <span class="function"><a href="function.pg-execute.html" class="function">pg_execute()</a></span>（等）返回。</p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.pg-affected-rows-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   受查询影响的行数。如果没有元组受到影响，它将返回 <code class="literal">0</code>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.pg-affected-rows-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+ <td>8.1.0</td>
+ <td>
+  现在 <code class="parameter">result</code> 参数接受 <span class="classname"><a href="class.pgsql-result.html" class="classname">PgSql\Result</a></span>
+  实例，之前接受 <a href="language.types.resource.html" class="link">资源(resource)</a>。
+ </td>
+</tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+ 
+ <div class="refsect1 examples" id="refsect1-function.pg-affected-rows-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="example-3816">
+    <p><strong>Example #1 <span class="function"><strong>pg_affected_rows()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$result </span><span style="color: #007700">= </span><span style="color: #0000BB">pg_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">, </span><span style="color: #DD0000">"INSERT INTO authors VALUES ('Orwell', 2002, 'Animal Farm')"</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$cmdtuples </span><span style="color: #007700">= </span><span style="color: #0000BB">pg_affected_rows</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">);<br /><br />echo </span><span style="color: #0000BB">$cmdtuples </span><span style="color: #007700">. </span><span style="color: #DD0000">" tuples are affected.\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+1 tuples are affected.
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.pg-affected-rows-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.pg-query.html" class="function" rel="rdfs-seeAlso">pg_query()</a> - 执行查询</span></li>
+    <li class="member"><span class="function"><a href="function.pg-query-params.html" class="function" rel="rdfs-seeAlso">pg_query_params()</a> - Submits a command to the server and waits for the result, with the ability to pass parameters separately from the SQL command text</span></li>
+    <li class="member"><span class="function"><a href="function.pg-execute.html" class="function" rel="rdfs-seeAlso">pg_execute()</a> - Sends a request to execute a prepared statement with given parameters, and waits for the result</span></li>
+    <li class="member"><span class="function"><a href="function.pg-num-rows.html" class="function" rel="rdfs-seeAlso">pg_num_rows()</a> - 返回结果中行的数量</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="79937""></a>
+  <div class="note">
+   <strong class="user">Anonymous</strong>
+   <a href="#79937" class="date">20-Dec-2007 03:02</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+There is something called auto-commit, when you supply more than one query delimited by ; semicolon all-or-none is done if one fails. No need for BEGIN;COMMIT;ROLLBACK when doing one query. its logic to mee pg_affected_rows() returns affected rows and if you want to do 2 queries apart from each other.. do a BEGIN and then 1 and get pg_affected_rows() then do 2 and get pg_affected_rows() and then finally do COMMIT;</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="79179""></a>
+  <div class="note">
+   <strong class="user">Anonymous</strong>
+   <a href="#79179" class="date">14-Nov-2007 07:45</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+pg-affected-rows () only runs on the LAST SQL STATEMENT executed.&nbsp; If you compound several statements together then pg_affected_rows might not return what you expect.&nbsp; <br />
+<br />
+For example:<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+$result </span><span class="keyword">= </span><span class="default">pg_query </span><span class="keyword">(</span><span class="string">'BEGIN; INSERT INTO foo (bar) VALUES (\'baz\'; COMMIT'</span><span class="keyword">);<br />
+<br />
+echo (</span><span class="default">pg_affected_rows </span><span class="keyword">(</span><span class="default">$result</span><span class="keyword">));<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+will cause 0 to be printed, because the last statement executed by Postgres was COMMIT, which doesn't affect any rows.&nbsp; <br />
+<br />
+I haven't tried this so am not certain it works, but you SHOULD be able to get the row counts you want if you split your queries up.&nbsp; <br />
+<br />
+For example: <br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+$result </span><span class="keyword">= </span><span class="default">pg_query </span><span class="keyword">(</span><span class="string">'BEGIN; INSERT INTO foo (bar) VALUES (\'baz\';'</span><span class="keyword">);<br />
+<br />
+echo (</span><span class="default">pg_affected_rows </span><span class="keyword">(</span><span class="default">$result</span><span class="keyword">));<br />
+<br />
+</span><span class="default">pg_query </span><span class="keyword">(</span><span class="string">'COMMIT;'</span><span class="keyword">);<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+should allow you to get the number of rows affected by the previous query.&nbsp; I haven't tried this yet though, so don't count on it.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="55508""></a>
+  <div class="note">
+   
+   <a href="#55508" class="date">05-Aug-2005 03:31</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+That's not quite true, I've been able to execute multiple queries in a single call just fine. In stead, it has to do with the fact this function returns the affected rows for the last executed query, not the last set of queries specified to a single call to pg_query.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="54277""></a>
+  <div class="note">
+   
+   <a href="#54277" class="date">29-Jun-2005 06:15</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Concering Bruno Baguette's note:<br />
+<br />
+The pg_query function only allows one query per function call.&nbsp; When you do your<br />
+$sql="BEGIN;<br />
+INSERT ...<br />
+COMMIT;";<br />
+$result=pg_query($conn,$sql);<br />
+echo pg_affected_rows($result);<br />
+<br />
+you get a zero, because only the BEGIN; is executed.<br />
+<br />
+The single query per call is, I beleive, a PHP builtin protection against SQL injection attacks.&nbsp; (Ie someone submitting a string paramter that ends the current query and appends another one)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="54239""></a>
+  <div class="note">
+   <strong class="user">Bruno Baguette</strong>
+   <a href="#54239" class="date">28-Jun-2005 01:45</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Note that when you submit several SQL queries, within one BEGIN;COMMIT; like this one :<br />
+<br />
+$SQLQuery = 'BEGIN;';<br />
+$SQLQuery.= 'INSERT INTO a (a,b) VALUES (1,2);';<br />
+$SQLQuery.= 'INSERT INTO b (ref_b,c) VALUES (2,5);';<br />
+$SQLQuery.= 'COMMIT;';<br />
+<br />
+$HandleResults = pg_query($SQLQuery);<br />
+echo(pg_affected_rows($HandleResults));<br />
+<br />
+pg_affected_rows() will return 0</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

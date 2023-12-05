@@ -1,0 +1,995 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>构造函数和析构函数</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="language.oop5.autoload.html">? 类的自动加载</a></li>
+      <li style="float: right;"><a href="language.oop5.visibility.html">访问控制（可见性） ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="language.oop5.html">类与对象</a></li>
+    <li>构造函数和析构函数</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="language.oop5.decon" class="sect1">
+ <h2 class="title">构造函数和析构函数</h2>
+
+ <div class="sect2" id="language.oop5.decon.constructor">
+  <h3 class="title">构造函数</h3>
+   <div class="methodsynopsis dc-description" id="object.construct">
+    <span class="methodname"><strong>__construct</strong></span>(<span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">...$values</code><span class="initializer"> = &quot;&quot;</span></span>): <span class="type"><span class="type void">void</span></span></div>
+
+  <p class="para">
+   PHP 允许开发者在一个类中定义一个方法作为构造函数。具有构造函数的类会在每次创建新对象时先调用此方法，所以非常适合在使用对象之前做一些初始化工作。
+  </p>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <span class="simpara">
+    如果子类中定义了构造函数则不会隐式调用其父类的构造函数。要执行父类的构造函数，需要在子类的构造函数中调用
+    <span class="function"><strong>parent::__construct()</strong></span>。如果子类没有定义构造函数则会如同一个普通的类方法一样从父类继承（假如没有被定义为
+    private 的话）。
+   </span>
+  </p></blockquote>
+  <div class="example" id="example-454">
+   <p><strong>Example #1 继承中的构造函数</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">BaseClass </span><span style="color: #007700">{<br />    function </span><span style="color: #0000BB">__construct</span><span style="color: #007700">() {<br />        print </span><span style="color: #DD0000">"In BaseClass constructor\n"</span><span style="color: #007700">;<br />    }<br />}<br /><br />class </span><span style="color: #0000BB">SubClass </span><span style="color: #007700">extends </span><span style="color: #0000BB">BaseClass </span><span style="color: #007700">{<br />    function </span><span style="color: #0000BB">__construct</span><span style="color: #007700">() {<br />        </span><span style="color: #0000BB">parent</span><span style="color: #007700">::</span><span style="color: #0000BB">__construct</span><span style="color: #007700">();<br />        print </span><span style="color: #DD0000">"In SubClass constructor\n"</span><span style="color: #007700">;<br />    }<br />}<br /><br />class </span><span style="color: #0000BB">OtherSubClass </span><span style="color: #007700">extends </span><span style="color: #0000BB">BaseClass </span><span style="color: #007700">{<br />    </span><span style="color: #FF8000">// 继承 BaseClass 的构造函数<br /></span><span style="color: #007700">}<br /><br /></span><span style="color: #FF8000">// In BaseClass constructor<br /></span><span style="color: #0000BB">$obj </span><span style="color: #007700">= new </span><span style="color: #0000BB">BaseClass</span><span style="color: #007700">();<br /><br /></span><span style="color: #FF8000">// In BaseClass constructor<br />// In SubClass constructor<br /></span><span style="color: #0000BB">$obj </span><span style="color: #007700">= new </span><span style="color: #0000BB">SubClass</span><span style="color: #007700">();<br /><br /></span><span style="color: #FF8000">// In BaseClass constructor<br /></span><span style="color: #0000BB">$obj </span><span style="color: #007700">= new </span><span style="color: #0000BB">OtherSubClass</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+  <p class="para">
+   与其它方法不同， <a href="language.oop5.decon.html#object.construct" class="link">__construct()</a>
+   在继承时不受<a href="language.oop5.basic.html#language.oop.lsp" class="link">签名兼容性规则</a>的约束。
+  </p>
+  <p class="para">
+   自 PHP 5.3.3 起，在命名空间中，与类名同名的方法不再作为构造函数。不使用命名空间中的类则不受影响。
+    构造函数是一个普通的方法，在对应对象实例化时自动被调用。
+    因此可以定义任何数量的参数，可以是必选、可以有类型、可以有默认值。
+    构造器的参数放在类名后的括号里调用。
+  </p>
+  <div class="example" id="example-456">
+   <p><strong>Example #2 使用构造器参数</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">Point </span><span style="color: #007700">{<br />    protected </span><span style="color: #0000BB">int $x</span><span style="color: #007700">;<br />    protected </span><span style="color: #0000BB">int $y</span><span style="color: #007700">;<br /><br />    public function </span><span style="color: #0000BB">__construct</span><span style="color: #007700">(</span><span style="color: #0000BB">int $x</span><span style="color: #007700">, </span><span style="color: #0000BB">int $y </span><span style="color: #007700">= </span><span style="color: #0000BB">0</span><span style="color: #007700">) {<br />        </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">x </span><span style="color: #007700">= </span><span style="color: #0000BB">$x</span><span style="color: #007700">;<br />        </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">y </span><span style="color: #007700">= </span><span style="color: #0000BB">$y</span><span style="color: #007700">;<br />    }<br />}<br /><br /></span><span style="color: #FF8000">// 两个参数都传入<br /></span><span style="color: #0000BB">$p1 </span><span style="color: #007700">= new </span><span style="color: #0000BB">Point</span><span style="color: #007700">(</span><span style="color: #0000BB">4</span><span style="color: #007700">, </span><span style="color: #0000BB">5</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">// 仅传入必填的参数。 $y 会默认取值 0。<br /></span><span style="color: #0000BB">$p2 </span><span style="color: #007700">= new </span><span style="color: #0000BB">Point</span><span style="color: #007700">(</span><span style="color: #0000BB">4</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">// 使用命名参数（PHP 8.0 起）:<br /></span><span style="color: #0000BB">$p3 </span><span style="color: #007700">= new </span><span style="color: #0000BB">Point</span><span style="color: #007700">(</span><span style="color: #0000BB">y</span><span style="color: #007700">: </span><span style="color: #0000BB">5</span><span style="color: #007700">, </span><span style="color: #0000BB">x</span><span style="color: #007700">: </span><span style="color: #0000BB">4</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+  </div>
+   <p class="para">
+   如果一个类没有构造函数，以及构造函数的参数不是必填项时，括号就可以省略。
+   </p>
+   <div class="sect3">
+    <h4 class="title">旧式风格的构造器</h4>
+    <p class="para">
+     PHP 8.0.0 之前，全局命名空间内的类如果有一个同名的方法，则会解析为旧式风格的构造器。
+     虽然函数能被当作构造器，但该语法已被废弃，并会导致 <strong><code>E_DEPRECATED</code></strong> 错误。
+     如果 <a href="language.oop5.decon.html#object.construct" class="link">__construct()</a> 和同名方法同时存在时，
+     会调用 <a href="language.oop5.decon.html#object.construct" class="link">__construct()</a>。
+    </p>
+    <p class="para">
+     以下两种情况时，与类同名的方法不再有特殊意义：命名空间中的类、PHP 8.0.0 起的任何类。
+    </p>
+    <p class="para">新代码中要使用 <a href="language.oop5.decon.html#object.construct" class="link">__construct()</a>。
+    </p>
+   </div>
+   <div class="sect3" id="language.oop5.decon.constructor.promotion">
+    <h4 class="title">构造器属性提升</h4>
+    <p class="para">
+     PHP 8.0.0 起，构造器的参数也可以相应提升为类的属性。
+     构造器的参数赋值给类属性的行为很普遍，否则无法操作。
+     而构造器提升的功能则为这种场景提供了便利。
+     因此上面的例子可以用以下方式重写：
+    </p>
+    <div class="example" id="example-458">
+     <p><strong>Example #3 使用构造器属性提升</strong></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">Point </span><span style="color: #007700">{<br />    public function </span><span style="color: #0000BB">__construct</span><span style="color: #007700">(protected </span><span style="color: #0000BB">int $x</span><span style="color: #007700">, protected </span><span style="color: #0000BB">int $y </span><span style="color: #007700">= </span><span style="color: #0000BB">0</span><span style="color: #007700">) {<br />    }<br />}</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+    <p class="para">
+     当构造器参数带访问控制（visibility modifier）时，PHP 会同时把它当作对象属性和构造器参数，
+     并赋值到属性。
+     构造器可以是空的，或者包含其他语句。
+     参数值赋值到相应属性后执行正文中额外的代码语句。
+    </p>
+    <p class="para">
+     并非所有参数都需要提升。可以混合提升或不提升参数作为属性，也不需要按顺序。
+     提升后的参数不影响构造器内代码调用。
+    </p>
+    <blockquote class="note"><p><strong class="note">Note</strong>: 
+     <p class="para">
+     对象属性的类型不能为 <span class="type"><a href="language.types.callable.html" class="type callable">callable</a></span> 以避免为引擎带来混淆。
+     因此提升的参数也不能是 <span class="type"><a href="language.types.callable.html" class="type callable">callable</a></span>。
+     其他任意 <a href="language.types.declarations.html" class="link">类型声明</a> 是允许的。
+     </p>
+    </p></blockquote>
+    <blockquote class="note"><p><strong class="note">Note</strong>: 
+     <p class="para">
+      放在构造方法提升参数里的<a href="language.attributes.html" class="link">属性</a>会同时复制为属性和参数。提升的构造方法的参数默认值将仅复制到参数并且不会复制到属性。
+     </p>
+    </p></blockquote>
+   </div>
+
+   <div class="sect3" id="language.oop5.decon.constructor.new">
+    <h4 class="title">初始化新功能</h4>
+    <p class="para">
+     自 PHP 8.1.0 起，对象可以用于默认参数值，静态变量，全局常量，以及属性参数。<span class="function"><a href="function.define.html" class="function">define()</a></span>
+     现在也接受对象。
+    </p>
+    <blockquote class="note"><p><strong class="note">Note</strong>: 
+     <p class="para">
+      禁止使用动态类名、非字符串类名以及匿名类。禁止使用参数解包。禁止使用不支持的表达式作为参数。
+     </p>
+    </p></blockquote>
+    <div class="example" id="example-460">
+     <p><strong>Example #4 初始化中使用 new</strong></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #FF8000">// 全部允许：<br /></span><span style="color: #007700">static </span><span style="color: #0000BB">$x </span><span style="color: #007700">= new </span><span style="color: #0000BB">Foo</span><span style="color: #007700">;<br /><br />const </span><span style="color: #0000BB">C </span><span style="color: #007700">= new </span><span style="color: #0000BB">Foo</span><span style="color: #007700">;<br /> <br />function </span><span style="color: #0000BB">test</span><span style="color: #007700">(</span><span style="color: #0000BB">$param </span><span style="color: #007700">= new </span><span style="color: #0000BB">Foo</span><span style="color: #007700">) {}<br /> <br />#[</span><span style="color: #0000BB">AnAttribute</span><span style="color: #007700">(new </span><span style="color: #0000BB">Foo</span><span style="color: #007700">)]<br />class </span><span style="color: #0000BB">Test </span><span style="color: #007700">{<br />    public function </span><span style="color: #0000BB">__construct</span><span style="color: #007700">(<br />        public </span><span style="color: #0000BB">$prop </span><span style="color: #007700">= new </span><span style="color: #0000BB">Foo</span><span style="color: #007700">,<br />    ) {}<br />}<br /><br /></span><span style="color: #FF8000">// 全部禁止（编译时错误）:<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">test</span><span style="color: #007700">(<br />    </span><span style="color: #0000BB">$a </span><span style="color: #007700">= new (</span><span style="color: #0000BB">CLASS_NAME_CONSTANT</span><span style="color: #007700">)(), </span><span style="color: #FF8000">// 动态类名<br />    </span><span style="color: #0000BB">$b </span><span style="color: #007700">= new class {}, </span><span style="color: #FF8000">// 匿名类<br />    </span><span style="color: #0000BB">$c </span><span style="color: #007700">= new </span><span style="color: #0000BB">A</span><span style="color: #007700">(...[]), </span><span style="color: #FF8000">// 参数解包<br />    </span><span style="color: #0000BB">$d </span><span style="color: #007700">= new </span><span style="color: #0000BB">B</span><span style="color: #007700">(</span><span style="color: #0000BB">$abc</span><span style="color: #007700">), </span><span style="color: #FF8000">// 不支持的常量表达式<br /></span><span style="color: #007700">) {}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+   </div>
+   
+   <div class="sect3" id="language.oop5.decon.constructor.static">
+    <h4 class="title">Static 创造方法</h4>
+    <p class="para">
+     在 PHP 中每个 class 只能有一个构造器。
+     然而有些情况下，需要用不同的输入实现不同的方式构造对象。
+     这种情况下推荐使用 static 方法包装构造。
+    </p>
+    <div class="example" id="example-462">
+     <p><strong>Example #5 使用 static 创造方法</strong></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">Product </span><span style="color: #007700">{<br /><br />    private ?</span><span style="color: #0000BB">int $id</span><span style="color: #007700">;<br />    private ?</span><span style="color: #0000BB">string $name</span><span style="color: #007700">;<br /><br />    private function </span><span style="color: #0000BB">__construct</span><span style="color: #007700">(?</span><span style="color: #0000BB">int $id </span><span style="color: #007700">= </span><span style="color: #0000BB">null</span><span style="color: #007700">, ?</span><span style="color: #0000BB">string $name </span><span style="color: #007700">= </span><span style="color: #0000BB">null</span><span style="color: #007700">) {<br />        </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">id </span><span style="color: #007700">= </span><span style="color: #0000BB">$id</span><span style="color: #007700">;<br />        </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">name </span><span style="color: #007700">= </span><span style="color: #0000BB">$name</span><span style="color: #007700">;<br />    }<br /><br />    public static function </span><span style="color: #0000BB">fromBasicData</span><span style="color: #007700">(</span><span style="color: #0000BB">int $id</span><span style="color: #007700">, </span><span style="color: #0000BB">string $name</span><span style="color: #007700">): static {<br />        </span><span style="color: #0000BB">$new </span><span style="color: #007700">= new static(</span><span style="color: #0000BB">$id</span><span style="color: #007700">, </span><span style="color: #0000BB">$name</span><span style="color: #007700">);<br />        return </span><span style="color: #0000BB">$new</span><span style="color: #007700">;<br />    }<br /><br />    public static function </span><span style="color: #0000BB">fromJson</span><span style="color: #007700">(</span><span style="color: #0000BB">string $json</span><span style="color: #007700">): static {<br />        </span><span style="color: #0000BB">$data </span><span style="color: #007700">= </span><span style="color: #0000BB">json_decode</span><span style="color: #007700">(</span><span style="color: #0000BB">$json</span><span style="color: #007700">);<br />        return new static(</span><span style="color: #0000BB">$data</span><span style="color: #007700">[</span><span style="color: #DD0000">'id'</span><span style="color: #007700">], </span><span style="color: #0000BB">$data</span><span style="color: #007700">[</span><span style="color: #DD0000">'name'</span><span style="color: #007700">]);<br />    }<br /><br />    public static function </span><span style="color: #0000BB">fromXml</span><span style="color: #007700">(</span><span style="color: #0000BB">string $xml</span><span style="color: #007700">): static {<br />        </span><span style="color: #FF8000">// 自定义代码逻辑。<br />        </span><span style="color: #0000BB">$data </span><span style="color: #007700">= </span><span style="color: #0000BB">convert_xml_to_array</span><span style="color: #007700">(</span><span style="color: #0000BB">$xml</span><span style="color: #007700">);<br />        </span><span style="color: #0000BB">$new </span><span style="color: #007700">= new static();<br />        </span><span style="color: #0000BB">$new</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">id </span><span style="color: #007700">= </span><span style="color: #0000BB">$data</span><span style="color: #007700">[</span><span style="color: #DD0000">'id'</span><span style="color: #007700">];<br />        </span><span style="color: #0000BB">$new</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">name </span><span style="color: #007700">= </span><span style="color: #0000BB">$data</span><span style="color: #007700">[</span><span style="color: #DD0000">'name'</span><span style="color: #007700">];<br />        return </span><span style="color: #0000BB">$new</span><span style="color: #007700">;<br />    }<br />}<br /><br /></span><span style="color: #0000BB">$p1 </span><span style="color: #007700">= </span><span style="color: #0000BB">Product</span><span style="color: #007700">::</span><span style="color: #0000BB">fromBasicData</span><span style="color: #007700">(</span><span style="color: #0000BB">5</span><span style="color: #007700">, </span><span style="color: #DD0000">'Widget'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$p2 </span><span style="color: #007700">= </span><span style="color: #0000BB">Product</span><span style="color: #007700">::</span><span style="color: #0000BB">fromJson</span><span style="color: #007700">(</span><span style="color: #0000BB">$some_json_string</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$p3 </span><span style="color: #007700">= </span><span style="color: #0000BB">Product</span><span style="color: #007700">::</span><span style="color: #0000BB">fromXml</span><span style="color: #007700">(</span><span style="color: #0000BB">$some_xml_string</span><span style="color: #007700">);</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+    <p class="para">
+     可以设置构造器为 private 或 protected，防止自行额外调用。
+     这时只有 static 方法可以实例化一个类。
+     由于它们位于同一个定义的 class 因此可以访问私有方法，也不需要在同一个对象实例中。
+     当然构造器不一定要设置为 private，是否合理取决于实际情况。
+    </p>
+    <p class="para">
+     三个 static 方法展示了对象以不同方式的实例化方式。
+    </p>
+    <ul class="simplelist">
+     <li class="member"><code class="code">fromBasicData()</code> 把所需的全部参数传入构造器，创建对象并返回结果。</li>
+     <li class="member"><code class="code">fromJson()</code> 接受 JSON 字符串，，预处理成构造器所需的格式，然后返回新的对象。</li>
+     <li class="member"><code class="code">fromXml()</code> 接受 XML 字符串并解析，然后创建一个单纯的对象。
+     由于参数都是可选的，使得可以忽略所有参数去调用构造器。然后为对象的属性赋值后返回结果。</li>
+    </ul>
+    <p class="para">
+    在以上三个例子中，<code class="code">static</code> 关键词会被翻译成代码所在类的类名。
+     这个例子中是 <code class="code">Product</code>。
+    </p>
+   </div>
+ </div>
+
+ <div class="sect2" id="language.oop5.decon.destructor">
+  <h3 class="title">析构函数</h3>
+   <div class="methodsynopsis dc-description" id="object.destruct">
+    <span class="methodname"><strong>__destruct</strong></span>(): <span class="type"><span class="type void">void</span></span></div>
+
+  <p class="para">
+   PHP 有析构函数的概念，这类似于其它面向对象的语言，如
+   C++。析构函数会在到某个对象的所有引用都被删除或者当对象被显式销毁时执行。
+  </p>
+  <div class="example" id="example-464">
+   <p><strong>Example #6 析构函数示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">class </span><span style="color: #0000BB">MyDestructableClass <br /></span><span style="color: #007700">{<br />    function </span><span style="color: #0000BB">__construct</span><span style="color: #007700">() {<br />        print </span><span style="color: #DD0000">"In constructor\n"</span><span style="color: #007700">;<br />    }<br /><br />    function </span><span style="color: #0000BB">__destruct</span><span style="color: #007700">() {<br />        print </span><span style="color: #DD0000">"Destroying " </span><span style="color: #007700">. </span><span style="color: #0000BB">__CLASS__ </span><span style="color: #007700">. </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />    }<br />}<br /><br /></span><span style="color: #0000BB">$obj </span><span style="color: #007700">= new </span><span style="color: #0000BB">MyDestructableClass</span><span style="color: #007700">();</span>
+</span>
+</code></div>
+    </div>
+
+  </div>
+  <p class="para">
+   和构造函数一样，父类的析构函数不会被引擎暗中调用。要执行父类的析构函数，必须在子类的析构函数体中显式调用
+   <span class="function"><strong>parent::__destruct()</strong></span>。此外也和构造函数一样，子类如果自己没有定义析构函数则会继承父类的。
+  </p>
+  <p class="para">
+   析构函数即使在使用 <span class="function"><a href="function.exit.html" class="function">exit()</a></span>
+   终止脚本运行时也会被调用。在析构函数中调用
+   <span class="function"><a href="function.exit.html" class="function">exit()</a></span> 将会中止其余关闭操作的运行。
+  </p>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    析构函数在脚本关闭时调用，此时所有的 HTTP
+    头信息已经发出。脚本关闭时的工作目录有可能和在 SAPI（如 apache）中时不同。
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    试图在析构函数（在脚本终止时被调用）中抛出一个异常会导致致命错误。
+   </p>
+  </p></blockquote>
+ </div>
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="127493""></a>
+  <div class="note">
+   <strong class="user">ziggy at start dot dust</strong>
+   <a href="#127493" class="date">16-Aug-2022 09:04</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Please note that constructor argument promotion is kind of half-baked (at least as of 8.1 and it does not look to be changed in 8.2) and you are not allowed to reuse promoted argument with other promoted arguments. For example having "old style" constructor:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">public function </span><span class="default">__construct</span><span class="keyword">(protected </span><span class="default">string $val</span><span class="keyword">, protected </span><span class="default">Foo $foo </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">val </span><span class="keyword">= </span><span class="default">$val</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">foo </span><span class="keyword">= </span><span class="default">$foo </span><span class="keyword">?? new </span><span class="default">Foo</span><span class="keyword">(</span><span class="default">$val</span><span class="keyword">);<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+you will not be able to use argument promotion like this:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">public function </span><span class="default">__construct</span><span class="keyword">(protected </span><span class="default">string $val</span><span class="keyword">, protected </span><span class="default">Foo $foo </span><span class="keyword">= new </span><span class="default">Foo</span><span class="keyword">(</span><span class="default">$val</span><span class="keyword">)) {}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+nor<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">public function </span><span class="default">__construct</span><span class="keyword">(protected </span><span class="default">string $val</span><span class="keyword">, protected </span><span class="default">Foo $foo </span><span class="keyword">= new </span><span class="default">Foo</span><span class="keyword">(</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">val</span><span class="keyword">)) {}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+as in both cases you will face "PHP Fatal error:&nbsp; Constant expression contains invalid operations".</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="126914""></a>
+  <div class="note">
+   <strong class="user">mmulej at gmail dot com</strong>
+   <a href="#126914" class="date">10-Mar-2022 04:56</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+*&lt;Double post&gt; I can't edit my previous note to elaborate on modifiers. Please excuse me.*<br />
+<br />
+If both parent and child classes have a method with the same name defined, and it is called in parent's constructor, using `parent::__construct()` will call the method in the child.<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="keyword">class </span><span class="default">A </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">__construct</span><span class="keyword">() {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">method</span><span class="keyword">();<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">method</span><span class="keyword">() {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">'A' </span><span class="keyword">. </span><span class="default">PHP_EOL</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+class </span><span class="default">B </span><span class="keyword">extends </span><span class="default">A </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">__construct</span><span class="keyword">() {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">parent</span><span class="keyword">::</span><span class="default">__construct</span><span class="keyword">();<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+class </span><span class="default">C </span><span class="keyword">extends </span><span class="default">A </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">__construct</span><span class="keyword">() {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">parent</span><span class="keyword">::</span><span class="default">__construct</span><span class="keyword">();<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">method</span><span class="keyword">() {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">'C' </span><span class="keyword">. </span><span class="default">PHP_EOL</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+</span><span class="default">$b </span><span class="keyword">= new </span><span class="default">B</span><span class="keyword">; </span><span class="comment">// A<br />
+</span><span class="default">$c </span><span class="keyword">= new </span><span class="default">C</span><span class="keyword">; </span><span class="comment">// C<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+In this example both A::method and C::method are public.<br />
+<br />
+You may change A::method to protected, and C::method to protected or public and it will still work the same.<br />
+<br />
+If however you set A::method as private, it doesn't matter whether C::method is private, protected or public. Both $b and $c will echo 'A'.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125863""></a>
+  <div class="note">
+   <strong class="user">instatiendaweb at gmail dot com</strong>
+   <a href="#125863" class="date">27-Feb-2021 10:07</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+/**<br />
+&nbsp;* Haciendo una prueba con dos clases y dos destructores<br />
+&nbsp;* La prueba consta de acceder a la variable global del primer objeto en el segundo<br />
+&nbsp;* objeto el destructor 2<br />
+&nbsp;* Primera clase ==&gt; $GLOBALS['obj']<br />
+&nbsp;* SEgunda clase ==&gt; $GLOBALS['obj2']<br />
+&nbsp;* Se ejecuta construct y todo el codigo....<br />
+&nbsp;* Primer destruct borra el objeto y lo hace null<br />
+&nbsp;* Tratamos de acceder a $GLOBALS['obj'] en el segundo destruct pero <br />
+&nbsp;* ya no esta es un objeto null<br />
+&nbsp;* Warning: Undefined array key "obj" in...<br />
+&nbsp;*/<br />
+<br />
+class MyDestructableClass{<br />
+public $parametro;<br />
+<br />
+&nbsp;&nbsp; &nbsp; function __construct($parametro) {<br />
+echo("&lt;div class=\"div\"&gt;"), "Construyendo ",__CLASS__ , ("&lt;/div&gt;");<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; escribir::verifacionnota($this ,'Antes de guardar la variable&nbsp; ');<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; $this-&gt;parametro = $parametro;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; escribir::verifacionnota($this ,'Despues de guardar la variable&nbsp; ');<br />
+&nbsp;&nbsp; &nbsp; }<br />
+&nbsp;<br />
+&nbsp;&nbsp; <br />
+<br />
+&nbsp;&nbsp; &nbsp; function __destruct() {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; escribir::linea(5); //Separador<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo("&lt;div class=\"div\"&gt;"), "Destruyendo " ,&nbsp; __CLASS__ , ("&lt;/div&gt;");<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; escribir::verifacionnota($this ,'Antes de borrar la variable&nbsp; ');<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; unset($this-&gt;parametro);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; escribir::verifacionnota($this ,'Despues de borrar la variable&nbsp; ');<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; // unset($GLOBALS[$this]);<br />
+&nbsp;&nbsp; &nbsp; }<br />
+&nbsp;}<br />
+&nbsp;<br />
+&nbsp;$obj = new MyDestructableClass('parametroone');<br />
+&nbsp;escribir::verifacionnota($obj ,' Verificar la clase MyDestructableClass, no es necesario<br />
+&nbsp;borrar la clase porque se ejecuta al final del script&nbsp; ');<br />
+&nbsp;escribir::titulosep('Provando ejemplo aqui se puede acceder a la variable global');<br />
+&nbsp;escribir::verificacion($GLOBALS['obj']);<br />
+<br />
+class destructora{<br />
+&nbsp;&nbsp;&nbsp; function __destruct(){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; escribir::titulosep('Sin embargo esta variable muere aqui');<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; escribir::verificacion($GLOBALS['obj']);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+$obj2 = new destructora();</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="124619""></a>
+  <div class="note">
+   <strong class="user">iwwp at outlook dot com</strong>
+   <a href="#124619" class="date">16-Jan-2020 07:58</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+To better understand the __destrust method:<br />
+<br />
+class A {<br />
+&nbsp;&nbsp;&nbsp; protected $id;<br />
+<br />
+&nbsp;&nbsp;&nbsp; public function __construct($id)<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $this-&gt;id = $id;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo "construct {$this-&gt;id}\n";<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; public function __destruct()<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo "destruct {$this-&gt;id}\n";<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+$a = new A(1);<br />
+echo "-------------\n";<br />
+$aa = new A(2);<br />
+echo "=============\n";<br />
+<br />
+The output content:<br />
+<br />
+construct 1<br />
+-------------<br />
+construct 2<br />
+=============<br />
+destruct 2<br />
+destruct 1</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="121521""></a>
+  <div class="note">
+   <strong class="user">domger at freenet dot de</strong>
+   <a href="#121521" class="date">14-Aug-2017 07:53</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+The __destruct magic method must be public. <br />
+<br />
+public function __destruct()<br />
+{<br />
+&nbsp;&nbsp;&nbsp; ;<br />
+}<br />
+<br />
+The method will automatically be called externally to the instance.&nbsp; Declaring __destruct as protected or private will result in a warning and the magic method will not be called. <br />
+<br />
+Note: In PHP 5.3.10 i saw strange side effects while some Destructors were declared as protected.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="113052""></a>
+  <div class="note">
+   <strong class="user">Yousef Ismaeil cliprz[At]gmail[Dot]com</strong>
+   <a href="#113052" class="date">22-Aug-2013 09:06</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="comment">/**<br />
+&nbsp;* a funny example Mobile class<br />
+&nbsp;* <br />
+&nbsp;* @author Yousef Ismaeil Cliprz[At]gmail[Dot]com<br />
+&nbsp;*/<br />
+<br />
+</span><span class="keyword">class </span><span class="default">Mobile </span><span class="keyword">{<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">/**<br />
+&nbsp;&nbsp; &nbsp; * Some device properties<br />
+&nbsp;&nbsp; &nbsp; * <br />
+&nbsp;&nbsp; &nbsp; * @var string<br />
+&nbsp;&nbsp; &nbsp; * @access public<br />
+&nbsp;&nbsp; &nbsp; */<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">public </span><span class="default">$deviceName</span><span class="keyword">,</span><span class="default">$deviceVersion</span><span class="keyword">,</span><span class="default">$deviceColor</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">/**<br />
+&nbsp;&nbsp; &nbsp; * Set some values for Mobile::properties<br />
+&nbsp;&nbsp; &nbsp; * <br />
+&nbsp;&nbsp; &nbsp; * @param string device name<br />
+&nbsp;&nbsp; &nbsp; * @param string device version<br />
+&nbsp;&nbsp; &nbsp; * @param string device color<br />
+&nbsp;&nbsp; &nbsp; */<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">public function </span><span class="default">__construct </span><span class="keyword">(</span><span class="default">$name</span><span class="keyword">,</span><span class="default">$version</span><span class="keyword">,</span><span class="default">$color</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">deviceName </span><span class="keyword">= </span><span class="default">$name</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">deviceVersion </span><span class="keyword">= </span><span class="default">$version</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">deviceColor </span><span class="keyword">= </span><span class="default">$color</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"The "</span><span class="keyword">.</span><span class="default">__CLASS__</span><span class="keyword">.</span><span class="string">" class is stratup.&lt;br /&gt;&lt;br /&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">/**<br />
+&nbsp;&nbsp; &nbsp; * Some Output<br />
+&nbsp;&nbsp; &nbsp; * <br />
+&nbsp;&nbsp; &nbsp; * @access public<br />
+&nbsp;&nbsp; &nbsp; */<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">public function </span><span class="default">printOut </span><span class="keyword">() {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">'I have a '</span><span class="keyword">.</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">deviceName<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">.</span><span class="string">' version '</span><span class="keyword">.</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">deviceVersion<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">.</span><span class="string">' my device color is : '</span><span class="keyword">.</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">deviceColor</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">/**<br />
+&nbsp;&nbsp; &nbsp; * Umm only for example we will remove Mobile::$deviceName Hum not unset only to check how __destruct working <br />
+&nbsp;&nbsp; &nbsp; * <br />
+&nbsp;&nbsp; &nbsp; * @access public<br />
+&nbsp;&nbsp; &nbsp; */<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">public function </span><span class="default">__destruct </span><span class="keyword">() {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">deviceName </span><span class="keyword">= </span><span class="string">'Removed'</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">'&lt;br /&gt;&lt;br /&gt;Dumpping Mobile::deviceName to make sure its removed, Olay :'</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">deviceName</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"&lt;br /&gt;The "</span><span class="keyword">.</span><span class="default">__CLASS__</span><span class="keyword">.</span><span class="string">" class is shutdown."</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+}<br />
+<br />
+</span><span class="comment">// Oh ya instance<br />
+</span><span class="default">$mob </span><span class="keyword">= new </span><span class="default">Mobile</span><span class="keyword">(</span><span class="string">'iPhone'</span><span class="keyword">,</span><span class="string">'5'</span><span class="keyword">,</span><span class="string">'Black'</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">// print output<br />
+</span><span class="default">$mob</span><span class="keyword">-&gt;</span><span class="default">printOut</span><span class="keyword">();<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+The Mobile class is stratup.<br />
+<br />
+I have a iPhone version 5 my device color is : Black<br />
+<br />
+Dumpping Mobile::deviceName to make sure its removed, Olay :<br />
+string 'Removed' (length=7)<br />
+<br />
+The Mobile class is shutdown.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="108598""></a>
+  <div class="note">
+   <strong class="user">Per Persson</strong>
+   <a href="#108598" class="date">09-May-2012 01:57</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+As of PHP 5.3.10 destructors are not run on shutdown caused by fatal errors.<br />
+<br />
+For example:<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">class </span><span class="default">Logger<br />
+</span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; protected </span><span class="default">$rows </span><span class="keyword">= array();<br />
+<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">__destruct</span><span class="keyword">()<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">save</span><span class="keyword">();<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">log</span><span class="keyword">(</span><span class="default">$row</span><span class="keyword">)<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">rows</span><span class="keyword">[] = </span><span class="default">$row</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">save</span><span class="keyword">()<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">'&lt;ul&gt;'</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; foreach (</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">rows </span><span class="keyword">as </span><span class="default">$row</span><span class="keyword">)<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">'&lt;li&gt;'</span><span class="keyword">, </span><span class="default">$row</span><span class="keyword">, </span><span class="string">'&lt;/li&gt;'</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">'&lt;/ul&gt;'</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+</span><span class="default">$logger </span><span class="keyword">= new </span><span class="default">Logger</span><span class="keyword">;<br />
+</span><span class="default">$logger</span><span class="keyword">-&gt;</span><span class="default">log</span><span class="keyword">(</span><span class="string">'Before'</span><span class="keyword">);<br />
+<br />
+</span><span class="default">$nonset</span><span class="keyword">-&gt;</span><span class="default">foo</span><span class="keyword">();<br />
+<br />
+</span><span class="default">$logger</span><span class="keyword">-&gt;</span><span class="default">log</span><span class="keyword">(</span><span class="string">'After'</span><span class="keyword">);<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Without the $nonset-&gt;foo(); line, Before and After will both be printed, but with the line neither will be printed.<br />
+<br />
+One can however register the destructor or another method as a shutdown function:<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">class </span><span class="default">Logger<br />
+</span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; protected </span><span class="default">$rows </span><span class="keyword">= array();<br />
+<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">__construct</span><span class="keyword">()<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">register_shutdown_function</span><span class="keyword">(array(</span><span class="default">$this</span><span class="keyword">, </span><span class="string">'__destruct'</span><span class="keyword">));<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">__destruct</span><span class="keyword">()<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">save</span><span class="keyword">();<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">log</span><span class="keyword">(</span><span class="default">$row</span><span class="keyword">)<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">rows</span><span class="keyword">[] = </span><span class="default">$row</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">save</span><span class="keyword">()<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">'&lt;ul&gt;'</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; foreach (</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">rows </span><span class="keyword">as </span><span class="default">$row</span><span class="keyword">)<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">'&lt;li&gt;'</span><span class="keyword">, </span><span class="default">$row</span><span class="keyword">, </span><span class="string">'&lt;/li&gt;'</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">'&lt;/ul&gt;'</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+</span><span class="default">$logger </span><span class="keyword">= new </span><span class="default">Logger</span><span class="keyword">;<br />
+</span><span class="default">$logger</span><span class="keyword">-&gt;</span><span class="default">log</span><span class="keyword">(</span><span class="string">'Before'</span><span class="keyword">);<br />
+<br />
+</span><span class="default">$nonset</span><span class="keyword">-&gt;</span><span class="default">foo</span><span class="keyword">();<br />
+<br />
+</span><span class="default">$logger</span><span class="keyword">-&gt;</span><span class="default">log</span><span class="keyword">(</span><span class="string">'After'</span><span class="keyword">);<br />
+</span><span class="default">?&gt;<br />
+</span>Now Before will be printed, but not After, so you can see that a shutdown occurred after Before.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="105368""></a>
+  <div class="note">
+   <strong class="user">david dot scourfield at llynfi dot co dot uk</strong>
+   <a href="#105368" class="date">12-Aug-2011 04:17</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Be aware of potential memory leaks caused by circular references within objects.&nbsp; The PHP manual states "[t]he destructor method will be called as soon as all references to a particular object are removed" and this is precisely true: if two objects reference each other (or even if one object has a field that points to itself as in $this-&gt;foo = $this) then this reference will prevent the destructor being called even when there are no other references to the object at all.&nbsp; The programmer can no longer access the objects, but they still stay in memory.<br />
+<br />
+Consider the following example:<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+header</span><span class="keyword">(</span><span class="string">"Content-type: text/plain"</span><span class="keyword">);<br />
+<br />
+class </span><span class="default">Foo </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">/**<br />
+&nbsp;&nbsp; &nbsp; * An indentifier<br />
+&nbsp;&nbsp; &nbsp; * @var string <br />
+&nbsp;&nbsp; &nbsp; */<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">private </span><span class="default">$name</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">/**<br />
+&nbsp;&nbsp; &nbsp; * A reference to another Foo object<br />
+&nbsp;&nbsp; &nbsp; * @var Foo<br />
+&nbsp;&nbsp; &nbsp; */<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">private </span><span class="default">$link</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">__construct</span><span class="keyword">(</span><span class="default">$name</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">name </span><span class="keyword">= </span><span class="default">$name</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">setLink</span><span class="keyword">(</span><span class="default">Foo $link</span><span class="keyword">){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">link </span><span class="keyword">= </span><span class="default">$link</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">__destruct</span><span class="keyword">() {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">'Destroying: '</span><span class="keyword">, </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">name</span><span class="keyword">, </span><span class="default">PHP_EOL</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+</span><span class="comment">// create two Foo objects:<br />
+</span><span class="default">$foo </span><span class="keyword">= new </span><span class="default">Foo</span><span class="keyword">(</span><span class="string">'Foo 1'</span><span class="keyword">);<br />
+</span><span class="default">$bar </span><span class="keyword">= new </span><span class="default">Foo</span><span class="keyword">(</span><span class="string">'Foo 2'</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">// make them point to each other<br />
+</span><span class="default">$foo</span><span class="keyword">-&gt;</span><span class="default">setLink</span><span class="keyword">(</span><span class="default">$bar</span><span class="keyword">);<br />
+</span><span class="default">$bar</span><span class="keyword">-&gt;</span><span class="default">setLink</span><span class="keyword">(</span><span class="default">$foo</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">// destroy the global references to them<br />
+</span><span class="default">$foo </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">;<br />
+</span><span class="default">$bar </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">;<br />
+<br />
+</span><span class="comment">// we now have no way to access Foo 1 or Foo 2, so they OUGHT to be __destruct()ed<br />
+// but they are not, so we get a memory leak as they are still in memory.<br />
+//<br />
+// Uncomment the next line to see the difference when explicitly calling the GC:<br />
+// gc_collect_cycles();<br />
+// <br />
+// see also: <a href="http://www.php.net/manual/en/features.gc.php" rel="nofollow" target="_blank">http://www.php.net/manual/en/features.gc.php</a><br />
+// <br />
+<br />
+// create two more Foo objects, but DO NOT set their internal Foo references<br />
+// so nothing except the vars $foo and $bar point to them:<br />
+</span><span class="default">$foo </span><span class="keyword">= new </span><span class="default">Foo</span><span class="keyword">(</span><span class="string">'Foo 3'</span><span class="keyword">);<br />
+</span><span class="default">$bar </span><span class="keyword">= new </span><span class="default">Foo</span><span class="keyword">(</span><span class="string">'Foo 4'</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">// destroy the global references to them<br />
+</span><span class="default">$foo </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">;<br />
+</span><span class="default">$bar </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">;<br />
+<br />
+</span><span class="comment">// we now have no way to access Foo 3 or Foo 4 and as there are no more references<br />
+// to them anywhere, their __destruct() methods are automatically called here,<br />
+// BEFORE the next line is executed:<br />
+<br />
+</span><span class="keyword">echo </span><span class="string">'End of script'</span><span class="keyword">, </span><span class="default">PHP_EOL</span><span class="keyword">;<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+This will output:<br />
+<br />
+Destroying: Foo 3<br />
+Destroying: Foo 4<br />
+End of script<br />
+Destroying: Foo 1<br />
+Destroying: Foo 2<br />
+<br />
+But if we uncomment the gc_collect_cycles(); function call in the middle of the script, we get:<br />
+<br />
+Destroying: Foo 2<br />
+Destroying: Foo 1<br />
+Destroying: Foo 3<br />
+Destroying: Foo 4<br />
+End of script<br />
+<br />
+As may be desired.<br />
+<br />
+NOTE: calling gc_collect_cycles() does have a speed overhead, so only use it if you feel you need to.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="95569""></a>
+  <div class="note">
+   <strong class="user">Jonathon Hibbard</strong>
+   <a href="#95569" class="date">09-Jan-2010 04:32</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Please be aware of when using __destruct() in which you are unsetting variables...<br />
+<br />
+Consider the following code:<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">class </span><span class="default">my_class </span><span class="keyword">{<br />
+&nbsp; public </span><span class="default">$error_reporting </span><span class="keyword">= </span><span class="default">false</span><span class="keyword">;<br />
+<br />
+&nbsp; function </span><span class="default">__construct</span><span class="keyword">(</span><span class="default">$error_reporting </span><span class="keyword">= </span><span class="default">false</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">error_reporting </span><span class="keyword">= </span><span class="default">$error_reporting</span><span class="keyword">;<br />
+&nbsp; }<br />
+<br />
+&nbsp; function </span><span class="default">__destruct</span><span class="keyword">() {<br />
+&nbsp;&nbsp;&nbsp; if(</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">error_reporting </span><span class="keyword">=== </span><span class="default">true</span><span class="keyword">) </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">show_report</span><span class="keyword">();<br />
+&nbsp;&nbsp;&nbsp; unset(</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">error_reporting</span><span class="keyword">);<br />
+&nbsp; }<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+The above will result in an error:<br />
+Notice: Undefined property: my_class::$error_reporting in my_class.php on line 10<br />
+<br />
+It appears as though the variable will be unset BEFORE it actually can execute the if statement.&nbsp; Removing the unset will fix this.&nbsp; It's not needed anyways as PHP will release everything anyways, but just in case you run across this, you know why ;)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="86423""></a>
+  <div class="note">
+   <strong class="user">spleen</strong>
+   <a href="#86423" class="date">17-Oct-2008 04:35</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+It's always the easy things that get you -<br />
+<br />
+Being new to OOP, it took me quite a while to figure out that there are TWO underscores in front of the word __construct.<br />
+<br />
+It is __construct<br />
+Not _construct<br />
+<br />
+Extremely obvious once you figure it out, but it can be sooo frustrating until you do.<br />
+<br />
+I spent quite a bit of needless time debugging working code.<br />
+<br />
+I even thought about it a few times, thinking it looked a little long in the examples, but at the time that just seemed silly(always thinking "oh somebody would have made that clear if it weren't just a regular underscore...")<br />
+<br />
+All the manuals I looked at, all the tuturials I read, all the examples I browsed through&nbsp; - not once did anybody mention this!&nbsp; <br />
+<br />
+(please don't tell me it's explained somewhere on this page and I just missed it,&nbsp; you'll only add to my pain.)<br />
+<br />
+I hope this helps somebody else!</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="82577""></a>
+  <div class="note">
+   <strong class="user">bolshun at mail dot ru</strong>
+   <a href="#82577" class="date">16-Apr-2008 06:13</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Ensuring that instance of some class will be available in destructor of some other class is easy: just keep a reference to that instance in this other class.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="80107""></a>
+  <div class="note">
+   <strong class="user">david at synatree dot com</strong>
+   <a href="#80107" class="date">29-Dec-2007 01:26</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+When a script is in the process of die()ing, you can't count on the order in which __destruct() will be called.<br />
+<br />
+For a script I have been working on, I wanted to do transparent low-level encryption of any outgoing data.&nbsp; To accomplish this, I used a global singleton class configured like this:<br />
+<br />
+class EncryptedComms<br />
+{<br />
+&nbsp;&nbsp;&nbsp; private $C;<br />
+&nbsp;&nbsp;&nbsp; private $objs = array();<br />
+&nbsp;&nbsp;&nbsp; private static $_me;<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; public static function destroyAfter(&amp;$obj)<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; self::getInstance()-&gt;objs[] =&amp; $obj;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; /*<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Hopefully by forcing a reference to another object to exist <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; inside this class, the referenced object will need to be destroyed<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; before garbage collection can occur on this object.&nbsp; This will force <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; this object's destruct method to be fired AFTER the destructors of<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; all the objects referenced here.<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; */<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; public function __construct($key)<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $this-&gt;C = new SimpleCrypt($key);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; ob_start(array($this,'getBuffer'));<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; public static function &amp;getInstance($key=NULL)<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if(!self::$_me &amp;&amp; $key)<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; self::$_me = new EncryptedComms($key);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; else<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return self::$_me;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; public function __destruct()<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; ob_end_flush();<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; public function getBuffer($str)<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return $this-&gt;C-&gt;encrypt($str);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+}<br />
+<br />
+In this example, I tried to register other objects to always be destroyed just before this object.&nbsp; Like this:<br />
+<br />
+class A<br />
+{<br />
+<br />
+public function __construct()<br />
+{<br />
+&nbsp;&nbsp; &nbsp; EncryptedComms::destroyAfter($this);<br />
+}<br />
+}<br />
+<br />
+One would think that the references to the objects contained in the singleton would be destroyed first, but this is not the case.&nbsp; In fact, this won't work even if you reverse the paradigm and store a reference to EncryptedComms in every object you'd like to be destroyed before it.<br />
+<br />
+In short, when a script die()s, there doesn't seem to be any way to predict the order in which the destructors will fire.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="76710""></a>
+  <div class="note">
+   <strong class="user">prieler at abm dot at</strong>
+   <a href="#76710" class="date">27-Jul-2007 12:42</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+i have written a quick example about the order of destructors and shutdown functions in php 5.2.1:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">class </span><span class="default">destruction </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; var </span><span class="default">$name</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; function </span><span class="default">destruction</span><span class="keyword">(</span><span class="default">$name</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">name </span><span class="keyword">= </span><span class="default">$name</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">register_shutdown_function</span><span class="keyword">(array(&amp;</span><span class="default">$this</span><span class="keyword">, </span><span class="string">"shutdown"</span><span class="keyword">));<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; function </span><span class="default">shutdown</span><span class="keyword">() {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">'shutdown: '</span><span class="keyword">.</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">name</span><span class="keyword">.</span><span class="string">"\n"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; function </span><span class="default">__destruct</span><span class="keyword">() {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">'destruct: '</span><span class="keyword">.</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">name</span><span class="keyword">.</span><span class="string">"\n"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+</span><span class="default">$a </span><span class="keyword">= new </span><span class="default">destruction</span><span class="keyword">(</span><span class="string">'a: global 1'</span><span class="keyword">);<br />
+<br />
+function </span><span class="default">test</span><span class="keyword">() {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$b </span><span class="keyword">= new </span><span class="default">destruction</span><span class="keyword">(</span><span class="string">'b: func 1'</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$c </span><span class="keyword">= new </span><span class="default">destruction</span><span class="keyword">(</span><span class="string">'c: func 2'</span><span class="keyword">);<br />
+}<br />
+</span><span class="default">test</span><span class="keyword">();<br />
+<br />
+</span><span class="default">$d </span><span class="keyword">= new </span><span class="default">destruction</span><span class="keyword">(</span><span class="string">'d: global 2'</span><span class="keyword">);<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+this will output:<br />
+shutdown: a: global 1<br />
+shutdown: b: func 1<br />
+shutdown: c: func 2<br />
+shutdown: d: global 2<br />
+destruct: b: func 1<br />
+destruct: c: func 2<br />
+destruct: d: global 2<br />
+destruct: a: global 1<br />
+<br />
+conclusions:<br />
+destructors are always called on script end.<br />
+destructors are called in order of their "context": first functions, then global objects<br />
+objects in function context are deleted in order as they are set (older objects first).<br />
+objects in global context are deleted in reverse order (older objects last)<br />
+<br />
+shutdown functions are called before the destructors.<br />
+shutdown functions are called in there "register" order. ;)<br />
+<br />
+regards, J</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="68028""></a>
+  <div class="note">
+   <strong class="user">Reza Mahjourian</strong>
+   <a href="#68028" class="date">10-Jul-2006 02:18</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Peter has suggested using static methods to compensate for unavailability of multiple constructors in PHP.&nbsp; This works fine for most purposes, but if you have a class hierarchy and want to delegate parts of initialization to the parent class, you can no longer use this scheme.&nbsp; It is because unlike constructors, in a static method you need to do the instantiation yourself.&nbsp; So if you call the parent static method, you will get an object of parent type which you can't continue to initialize with derived class fields.<br />
+<br />
+Imagine you have an Employee class and a derived HourlyEmployee class and you want to be able to construct these objects out of some XML input too.<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">class </span><span class="default">Employee </span><span class="keyword">{<br />
+&nbsp;&nbsp; public function </span><span class="default">__construct</span><span class="keyword">(</span><span class="default">$inName</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">name </span><span class="keyword">= </span><span class="default">$inName</span><span class="keyword">;<br />
+&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp; public static function </span><span class="default">constructFromDom</span><span class="keyword">(</span><span class="default">$inDom</span><span class="keyword">)<br />
+&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; </span><span class="default">$name </span><span class="keyword">= </span><span class="default">$inDom</span><span class="keyword">-&gt;</span><span class="default">name</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; return new </span><span class="default">Employee</span><span class="keyword">(</span><span class="default">$name</span><span class="keyword">);<br />
+&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp; private </span><span class="default">$name</span><span class="keyword">;<br />
+}<br />
+<br />
+class </span><span class="default">HourlyEmployee </span><span class="keyword">extends </span><span class="default">Employee </span><span class="keyword">{<br />
+&nbsp;&nbsp; public function </span><span class="default">__construct</span><span class="keyword">(</span><span class="default">$inName</span><span class="keyword">, </span><span class="default">$inHourlyRate</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; </span><span class="default">parent</span><span class="keyword">::</span><span class="default">__construct</span><span class="keyword">(</span><span class="default">$inName</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">hourlyRate </span><span class="keyword">= </span><span class="default">$inHourlyRate</span><span class="keyword">;<br />
+&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp; public static function </span><span class="default">constructFromDom</span><span class="keyword">(</span><span class="default">$inDom</span><span class="keyword">)<br />
+&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; </span><span class="comment">// can't call parent::constructFromDom($inDom)<br />
+&nbsp;&nbsp; &nbsp; &nbsp; // need to do all the work here again<br />
+&nbsp;&nbsp; &nbsp; &nbsp; </span><span class="default">$name </span><span class="keyword">= </span><span class="default">$inDom</span><span class="keyword">-&gt;</span><span class="default">name</span><span class="keyword">;&nbsp; </span><span class="comment">// increased coupling<br />
+&nbsp;&nbsp; &nbsp; &nbsp; </span><span class="default">$hourlyRate </span><span class="keyword">= </span><span class="default">$inDom</span><span class="keyword">-&gt;</span><span class="default">hourlyrate</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; return new </span><span class="default">EmployeeHourly</span><span class="keyword">(</span><span class="default">$name</span><span class="keyword">, </span><span class="default">$hourlyRate</span><span class="keyword">);<br />
+&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp; private </span><span class="default">$hourlyRate</span><span class="keyword">;<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+The only solution is to merge the two constructors in one by adding an optional $inDom parameter to every constructor.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

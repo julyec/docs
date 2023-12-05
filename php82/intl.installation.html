@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>安装</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="intl.requirements.html">? 需求</a></li>
+      <li style="float: right;"><a href="intl.configuration.html">运行时配置 ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="intl.setup.html">安装/配置</a></li>
+    <li>安装</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="intl.installation" class="section">
+ <h2 class="title">安装</h2>
+ <p class="para">
+  <strong class="option configure">--enable-intl</strong> will enable the
+  extension while compiling PHP.
+ </p>
+ <p class="para">
+  If your ICU is installed to a non-standard directory then you might want to
+  specify its location in
+  <strong><code>LD_LIBRARY_PATH</code></strong>
+  environment variable so that dynamic linker can find it:
+ </p>
+ <div class="example-contents screen">$ export LD_LIBRARY_PATH=/opt/icu/lib</div>
+ <p class="para">
+  Otherwise, if PHP and ICU are installed to their default locations, then the
+  additional options to <strong class="command">configure</strong> are not needed.
+ </p>
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="128328""></a>
+  <div class="note">
+   <strong class="user">Vichingo455</strong>
+   <a href="#128328" class="date">21-Mar-2023 08:07</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+On XAMPP (Windows) open the php.ini by opening the control panel, selecting config on apache section and selecting PHP<br />
+<br />
+Then add extension=php_intl and restart Apache</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="128091""></a>
+  <div class="note">
+   <strong class="user">Anonymous</strong>
+   <a href="#128091" class="date">06-Jan-2023 12:52</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+ArchLinux:<br />
+<br />
+pacman -S icu php-intl</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="127920""></a>
+  <div class="note">
+   <strong class="user">domagoj dot starcevic1 at gmail dot com</strong>
+   <a href="#127920" class="date">12-Nov-2022 10:51</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+On Windows, with Apache server, it might not be enough to uncomment the extension in the php.ini file. You also need to copy icu****.dll files (about five of them) from PHP folder to Apache /bin folder.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="127318""></a>
+  <div class="note">
+   <strong class="user">Saurabh</strong>
+   <a href="#127318" class="date">21-Jul-2022 11:23</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+For amazon nginx server (CentOs), try the following:<br />
+<br />
+sudo yum install libicu-devel<br />
+sudo yum install php-intl</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125629""></a>
+  <div class="note">
+   <strong class="user">lee dot wp14 at gmail dot com</strong>
+   <a href="#125629" class="date">28-Dec-2020 01:06</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+For ubuntu: apt install php-intl</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="117191""></a>
+  <div class="note">
+   <strong class="user">daniel at danielphenry dot com</strong>
+   <a href="#117191" class="date">29-Apr-2015 04:50</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+To install on windows uncommenting the dll in php.ini is not enough you also need to include several other libraries in your system path (not user path). Found these details here: <a href="http://stackoverflow.com/a/6086991/819883" rel="nofollow" target="_blank">http://stackoverflow.com/a/6086991/819883</a></span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="114933""></a>
+  <div class="note">
+   <strong class="user">jonwebb at tecbiz dot eu</strong>
+   <a href="#114933" class="date">29-Apr-2014 02:41</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+On windows servers, open your php.ini (which should be in Program Files/PHP), and simply uncomment the extension.<br />
+extension=php_intl.dll<br />
+Restart IIS Webserver - done.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="112210""></a>
+  <div class="note">
+   <strong class="user">jltupac at hotmail dot com</strong>
+   <a href="#112210" class="date">17-May-2013 05:03</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Ubuntu:<br />
+sudo apt-get install php5-intl</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

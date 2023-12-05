@@ -1,0 +1,319 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>基础</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="language.variables.html">? 变量</a></li>
+      <li style="float: right;"><a href="language.variables.predefined.html">预定义变量 ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="language.variables.html">变量</a></li>
+    <li>基础</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="language.variables.basics" class="sect1">
+   <h2 class="title">基础</h2>
+
+   <p class="simpara">
+    PHP 中的变量用一个美元符号后面跟变量名来表示。变量名是区分大小写的。
+   </p>
+
+   <p class="para">
+    变量名与 PHP
+    中其它的标签一样遵循相同的规则。一个有效的变量名由字母或者下划线开头，后面跟上任意数量的字母，数字，或者下划线。
+    按照正常的正则表达式，它将被表述为：&#039;<code class="code">^[a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff]*$</code>&#039;。
+   </p>
+
+   <blockquote class="note"><p><strong class="note">Note</strong>: 
+    <span class="simpara">
+     在此所说的字母是 a-z，A-Z，以及 ASCII 字符从 128 到 255（<code class="literal">0x80-0xff</code>）。
+    </span>
+   </p></blockquote>
+   <blockquote class="note"><p><strong class="note">Note</strong>: 
+    <span class="simpara">
+     <code class="literal">$this</code> 是一个特殊的变量，它不能被赋值。
+     PHP 7.1.0 之前，间接赋值（例如通过使用<a href="language.variables.variable.html" class="link">可变变量</a>）是可能的。
+    </span>
+   </p></blockquote>
+   
+   <div class="tip"><strong class="tip">Tip</strong><p class="simpara">请参见<a href="userlandnaming.html" class="xref">用户空间命名指南</a>。</p></div>
+   
+   <p class="para">
+    有关变量的函数信息见<a href="ref.var.html" class="link">变量函数</a>。
+   </p>
+   <p class="para">
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$var </span><span style="color: #007700">= </span><span style="color: #DD0000">'Bob'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$Var </span><span style="color: #007700">= </span><span style="color: #DD0000">'Joe'</span><span style="color: #007700">;<br />echo </span><span style="color: #DD0000">"</span><span style="color: #0000BB">$var</span><span style="color: #DD0000">, </span><span style="color: #0000BB">$Var</span><span style="color: #DD0000">"</span><span style="color: #007700">;      </span><span style="color: #FF8000">// 输出 "Bob, Joe"<br /><br /></span><span style="color: #007700">$</span><span style="color: #0000BB">4site </span><span style="color: #007700">= </span><span style="color: #DD0000">'not yet'</span><span style="color: #007700">;     </span><span style="color: #FF8000">// 非法变量名；以数字开头<br /></span><span style="color: #0000BB">$_4site </span><span style="color: #007700">= </span><span style="color: #DD0000">'not yet'</span><span style="color: #007700">;    </span><span style="color: #FF8000">// 合法变量名；以下划线开头<br /></span><span style="color: #0000BB">$i站点is </span><span style="color: #007700">= </span><span style="color: #DD0000">'mansikka'</span><span style="color: #007700">;  </span><span style="color: #FF8000">// 合法变量名；可以用中文<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+   </p>
+
+   <p class="para">
+    变量默认总是传值赋值。那也就是说，当将一个表达式的值赋予一个变量时，整个原始表达式的值被赋值到目标变量。这意味着，例如，当一个变量的值赋予另外一个变量时，改变其中一个变量的值，将不会影响到另外一个变量。有关这种类型的赋值操作，请参阅<a href="language.expressions.html" class="link">表达式</a>一章。
+   </p>
+   <p class="para">
+    PHP 也提供了另外一种方式给变量赋值：<a href="language.references.html" class="link">引用赋值</a>。这意味着新的变量简单的引用（换言之，"成为其别名" 或者 "指向"）了原始变量。改动新的变量将影响到原始变量，反之亦然。
+   </p>
+   <p class="para">
+    使用引用赋值，简单地将一个 &amp;
+    符号加到将要赋值的变量前（源变量）。例如，下列代码片断将输出"My name is Bob"两次：
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$foo </span><span style="color: #007700">= </span><span style="color: #DD0000">'Bob'</span><span style="color: #007700">;              </span><span style="color: #FF8000">// 将 'Bob' 赋给 $foo<br /></span><span style="color: #0000BB">$bar </span><span style="color: #007700">= &amp;</span><span style="color: #0000BB">$foo</span><span style="color: #007700">;              </span><span style="color: #FF8000">// 通过 $bar 引用 $foo<br /></span><span style="color: #0000BB">$bar </span><span style="color: #007700">= </span><span style="color: #DD0000">"My name is </span><span style="color: #0000BB">$bar</span><span style="color: #DD0000">"</span><span style="color: #007700">;  </span><span style="color: #FF8000">// 修改 $bar 变量<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">$bar</span><span style="color: #007700">;<br />echo </span><span style="color: #0000BB">$foo</span><span style="color: #007700">;                 </span><span style="color: #FF8000">// $foo 的值也被修改<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+   </p>
+
+   <p class="para">
+    有一点重要事项必须指出，那就是只有有名字的变量才可以引用赋值。
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$foo </span><span style="color: #007700">= </span><span style="color: #0000BB">25</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$bar </span><span style="color: #007700">= &amp;</span><span style="color: #0000BB">$foo</span><span style="color: #007700">;      </span><span style="color: #FF8000">// 合法的赋值<br /></span><span style="color: #0000BB">$bar </span><span style="color: #007700">= &amp;(</span><span style="color: #0000BB">24 </span><span style="color: #007700">* </span><span style="color: #0000BB">7</span><span style="color: #007700">);  </span><span style="color: #FF8000">// 非法; 引用没有名字的表达式<br /><br /></span><span style="color: #007700">function </span><span style="color: #0000BB">test</span><span style="color: #007700">()<br />{<br />   return </span><span style="color: #0000BB">25</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">$bar </span><span style="color: #007700">= &amp;</span><span style="color: #0000BB">test</span><span style="color: #007700">();    </span><span style="color: #FF8000">// 非法<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+   </p>
+   <p class="para">
+    虽然在 PHP 中并不需要初始化变量，但对变量进行初始化是个好习惯。未初始化的变量具有其类型的默认值 - 布尔类型的变量默认值是
+    <strong><code>false</code></strong>，整形和浮点型变量默认值是零，字符串型变量（例如用于 <span class="function"><a href="function.echo.html" class="function">echo</a></span> 
+    中）默认值是空字符串以及数组变量的默认值是空数组。
+   </p>
+   <p class="para">
+    <div class="example" id="example-176">
+     <p><strong>Example #1 未初始化变量的默认值</strong></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// 未设置和未引用（不使用上下文）的变量；输出 NULL<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$unset_var</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// Boolean 用法；输出 'false' (See ternary operators for more on this syntax)<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">$unset_bool </span><span style="color: #007700">? </span><span style="color: #DD0000">"true\n" </span><span style="color: #007700">: </span><span style="color: #DD0000">"false\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// String 用法；输出 'string(3) "abc"'<br /></span><span style="color: #0000BB">$unset_str </span><span style="color: #007700">.= </span><span style="color: #DD0000">'abc'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$unset_str</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// Integer 用法；输出 'int(25)'<br /></span><span style="color: #0000BB">$unset_int </span><span style="color: #007700">+= </span><span style="color: #0000BB">25</span><span style="color: #007700">; </span><span style="color: #FF8000">// 0 + 25 =&gt; 25<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$unset_int</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// Float 用法；输出 'float(1.25)'<br /></span><span style="color: #0000BB">$unset_float </span><span style="color: #007700">+= </span><span style="color: #0000BB">1.25</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$unset_float</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// Array 用法；输出 array(1) {  [3]=&gt;  string(3) "def" }<br /></span><span style="color: #0000BB">$unset_arr</span><span style="color: #007700">[</span><span style="color: #0000BB">3</span><span style="color: #007700">] = </span><span style="color: #DD0000">"def"</span><span style="color: #007700">; </span><span style="color: #FF8000">// array() + array(3 =&gt; "def") =&gt; array(3 =&gt; "def")<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$unset_arr</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// Object 用法：创建新 stdClass 对象 (see http://www.php.net/manual/en/reserved.classes.php)<br />// Outputs: object(stdClass)#1 (1) {  ["foo"]=&gt;  string(3) "bar" }<br /></span><span style="color: #0000BB">$unset_obj</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">foo </span><span style="color: #007700">= </span><span style="color: #DD0000">'bar'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$unset_obj</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+   </p>
+   <p class="para">
+    依赖未初始化变量的默认值在某些情况下会有问题，例如把一个文件包含到另一个之中时碰上相同的变量名。
+    使用未初始化的变量会发出
+    <strong><code>E_WARNING</code></strong> （在 PHP 8.0.0 之前是 <strong><code>E_NOTICE</code></strong>）
+    错误，但是在向一个未初始化的数组附加单元时不会。<span class="function"><a href="function.isset.html" class="function">isset()</a></span> 语言结构可以用来检测一个变量是否已被初始化。
+   </p>
+  </div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="126559""></a>
+  <div class="note">
+   <strong class="user">anisgazig at gmail dot com</strong>
+   <a href="#126559" class="date">05-Nov-2021 02:04</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+$this is a special variable so we can not assign it. But before PHP 7.1.0, indirect assignments such as variable variables are allowed.<br />
+<br />
+$bd = "this";<br />
+$$bd = "CountryNickName";<br />
+<br />
+echo $this;//allowed prior to PHP 7.1.0<br />
+<br />
+but from the version of 7.1.0, it was not allowed and throw a fatal error</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125835""></a>
+  <div class="note">
+   <strong class="user">anisgazig at gmail dot com</strong>
+   <a href="#125835" class="date">17-Feb-2021 05:35</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+$this is a special variable so we can not assign it.But Prior to PHP 7.1.0, indirect assignment such as variable variables are allowed.<br />
+<br />
+$bd = "this";<br />
+$$bd = "CountryNickName";<br />
+<br />
+echo $this;//allowed prior to PHP 7.1.0<br />
+<br />
+but from the version of 7.1.0,it was allowed.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125814""></a>
+  <div class="note">
+   <strong class="user">anisgazig at gmail dot com</strong>
+   <a href="#125814" class="date">13-Feb-2021 04:41</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+clear concept of variable declaration rules and classification <br />
+<br />
+variable declaration rules:<br />
+<br />
+1.start with dollar sign($)<br />
+2.first letter of variable name comes from a-zA-z_<br />
+3.next letters of variable name comes from a-zA-Z0-9_<br />
+4.no space,no syntex<br />
+<br />
+classification of variables:<br />
+<br />
+Variable are mainly Two types<br />
+1.Predefined Variable<br />
+2.User Define Variable<br />
+<br />
+Predefined Variable<br />
+There are 12 predefined variables in php 8<br />
+1.$GLOBALS<br />
+2.$_SERVER<br />
+3.$_REQUEST<br />
+4.$_FILES<br />
+5.$_ENV<br />
+6.$_SESSION<br />
+7.$_COOKIE<br />
+8.$_GET<br />
+9.$_POST<br />
+10.$http_response_header<br />
+11.$argc<br />
+12.$argv<br />
+<br />
+User Define Variable<br />
+User Define variable are 3 types<br />
+1.variable scope<br />
+2.variable variables<br />
+3.reference variable<br />
+<br />
+Variable Scope<br />
+variable scope are 3 types<br />
+1.local scope<br />
+2.global scope<br />
+3.static variable</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="120617""></a>
+  <div class="note">
+   <strong class="user">Anonymous</strong>
+   <a href="#120617" class="date">08-Feb-2017 05:21</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I highly recommend to use an editor that can list all variable names in a separate window.<br />
+<br />
+The reason are typing errors in variable names.<br />
+<br />
+<span class="default">&lt;?php<br />
+$somename </span><span class="keyword">= </span><span class="string">"nobody"</span><span class="keyword">;<br />
+</span><span class="comment">// Now we want to use $somename&nbsp; somewhere<br />
+</span><span class="keyword">echo </span><span class="default">$somemane </span><span class="keyword">; <br />
+</span><span class="default">?&gt;<br />
+</span>And wonder why it doesn't print "nobody".<br />
+The reason is simple, we have a typing error in $somename and $somemane is a new variable.<br />
+<br />
+In this example it might be easy to find. But if you use variables to calculate some things, you might hardly find it and ask yourself why your calculation is always wrong.<br />
+With an editor that list all variable names in a separate window such "double" variables but with wrong typing can be easily found.<br />
+<br />
+BTW:<br />
+It would have been better, if the PHP language would require to use some sort of keyword to define a variable the first time.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="99873""></a>
+  <div class="note">
+   <strong class="user">jeff dot phpnet at tanasity dot com</strong>
+   <a href="#99873" class="date">11-Sep-2010 04:11</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+This page should include a note on variable lifecycle:<br />
+<br />
+Before a variable is used, it has no existence. It is unset. It is possible to check if a variable doesn't exist by using isset(). This returns true provided the variable exists and isn't set to null. With the exception of null, the value a variable holds plays no part in determining whether a variable is set. <br />
+<br />
+Setting an existing variable to null is a way of unsetting a variable. Another way is variables may be destroyed by using the unset() construct. <br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">print isset(</span><span class="default">$a</span><span class="keyword">); </span><span class="comment">// $a is not set. Prints false. (Or more accurately prints ''.)<br />
+</span><span class="default">$b </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">; </span><span class="comment">// isset($b) returns true (or more accurately '1')<br />
+</span><span class="default">$c </span><span class="keyword">= array(); </span><span class="comment">// isset($c) returns true<br />
+</span><span class="default">$b </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">; </span><span class="comment">// Now isset($b) returns false;<br />
+</span><span class="keyword">unset(</span><span class="default">$c</span><span class="keyword">); </span><span class="comment">// Now isset($c) returns false;<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+is_null() is an equivalent test to checking that isset() is false.<br />
+<br />
+The first time that a variable is used in a scope, it's automatically created. After this isset is true. At the point at which it is created it also receives a type according to the context.<br />
+<br />
+<span class="default">&lt;?php<br />
+$a_bool </span><span class="keyword">= </span><span class="default">true</span><span class="keyword">;&nbsp;&nbsp; </span><span class="comment">// a boolean<br />
+</span><span class="default">$a_str </span><span class="keyword">= </span><span class="string">'foo'</span><span class="keyword">;&nbsp; &nbsp; </span><span class="comment">// a string<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+If it is used without having been given a value then it is uninitalized and it receives the default value for the type. The default values are the _empty_ values. E.g&nbsp; Booleans default to FALSE, integers and floats default to zero, strings to the empty string '', arrays to the empty array.<br />
+<br />
+A variable can be tested for emptiness using empty();<br />
+<br />
+<span class="default">&lt;?php<br />
+$a </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">; </span><span class="comment">//This isset, but is empty<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Unset variables are also empty.<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">empty(</span><span class="default">$vessel</span><span class="keyword">); </span><span class="comment">// returns true. Also $vessel is unset.<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Everything above applies to array elements too. <br />
+<br />
+<span class="default">&lt;?php<br />
+$item </span><span class="keyword">= array(); <br />
+</span><span class="comment">//Now isset($item) returns true. But isset($item['unicorn']) is false.<br />
+//empty($item) is true, and so is empty($item['unicorn']<br />
+<br />
+</span><span class="default">$item</span><span class="keyword">[</span><span class="string">'unicorn'</span><span class="keyword">] = </span><span class="string">''</span><span class="keyword">;<br />
+</span><span class="comment">//Now isset($item['unicorn']) is true. And empty($item) is false. <br />
+//But empty($item['unicorn']) is still true;<br />
+<br />
+</span><span class="default">$item</span><span class="keyword">[</span><span class="string">'unicorn'</span><span class="keyword">] = </span><span class="string">'Pink unicorn'</span><span class="keyword">;<br />
+</span><span class="comment">//isset($item['unicorn']) is still true. And empty($item) is still false. <br />
+//But now empty($item['unicorn']) is false;<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+For arrays, this is important because accessing a non-existent array item can trigger errors; you may want to test arrays and array items for existence with isset before using them.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

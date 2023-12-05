@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-b3060a80","path":"/tag/seo/","title":"Tag: SEO","lang":"en-US","frontmatter":{"title":"Tag: SEO","dir":{"index":false},"feed":false,"sitemap":false,"blog":{"type":"category","name":"SEO","key":"tag"},"layout":"BlogCategory"},"headers":[],"git":{},"readingTime":{"minutes":0,"words":0},"filePathRelative":null,"excerpt":""}');export{e as data};

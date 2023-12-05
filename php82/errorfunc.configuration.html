@@ -1,0 +1,773 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>运行时配置</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="errorfunc.installation.html">? 安装</a></li>
+      <li style="float: right;"><a href="errorfunc.resources.html">资源类型 ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="errorfunc.setup.html">安装/配置</a></li>
+    <li>运行时配置</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="errorfunc.configuration" class="section">
+ <h2 class="title">运行时配置</h2>
+ <p class="simpara">
+这些函数的行为受 <var class="filename">php.ini</var> 中的设置影响。
+</p>
+ <p class="para">
+  <table class="doctable table">
+   <caption><strong>错误和日志记录配置选项</strong></caption>
+   
+    <thead>
+     <tr>
+      <th>名字</th>
+      <th>默认</th>
+      <th>可修改范围</th>
+      <th>更新日志</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+    <tr>
+     <td><a href="errorfunc.configuration.html#ini.error-reporting" class="link">error_reporting</a></td>
+     <td>NULL</td>
+     <td>PHP_INI_ALL</td>
+     <td class="empty">&nbsp;</td>
+    </tr>
+
+    <tr>
+     <td><a href="errorfunc.configuration.html#ini.display-errors" class="link">display_errors</a></td>
+     <td>&quot;1&quot;</td>
+     <td>PHP_INI_ALL</td>
+     <td class="empty">&nbsp;</td>
+    </tr>
+
+    <tr>
+     <td><a href="errorfunc.configuration.html#ini.display-startup-errors" class="link">display_startup_errors</a></td>
+     <td>&quot;1&quot;</td>
+     <td>PHP_INI_ALL</td>
+     <td>PHP 8.0.0 之前，默认值是 <code class="literal">&quot;0&quot;</code>。</td>
+    </tr>
+
+    <tr>
+     <td><a href="errorfunc.configuration.html#ini.log-errors" class="link">log_errors</a></td>
+     <td>&quot;0&quot;</td>
+     <td>PHP_INI_ALL</td>
+     <td class="empty">&nbsp;</td>
+    </tr>
+
+    <tr>
+     <td><a href="errorfunc.configuration.html#ini.log-errors-max-len" class="link">log_errors_max_len</a></td>
+     <td>&quot;1024&quot;</td>
+     <td>PHP_INI_ALL</td>
+     <td>PHP 8.0.0 起弃用，PHP 8.1.0 起移除。</td>
+    </tr>
+
+    <tr>
+     <td><a href="errorfunc.configuration.html#ini.ignore-repeated-errors" class="link">ignore_repeated_errors</a></td>
+     <td>&quot;0&quot;</td>
+     <td>PHP_INI_ALL</td>
+     <td class="empty">&nbsp;</td>
+    </tr>
+
+    <tr>
+     <td><a href="errorfunc.configuration.html#ini.ignore-repeated-source" class="link">ignore_repeated_source</a></td>
+     <td>&quot;0&quot;</td>
+     <td>PHP_INI_ALL</td>
+     <td class="empty">&nbsp;</td>
+    </tr>
+
+    <tr>
+     <td><a href="errorfunc.configuration.html#ini.report-memleaks" class="link">report_memleaks</a></td>
+     <td>&quot;1&quot;</td>
+     <td>PHP_INI_ALL</td>
+     <td class="empty">&nbsp;</td>
+    </tr>
+
+    <tr>
+     <td><a href="errorfunc.configuration.html#ini.track-errors" class="link">track_errors</a></td>
+     <td>&quot;0&quot;</td>
+     <td>PHP_INI_ALL</td>
+     <td>PHP 7.2.0 起弃用，PHP 8.0.0 起移除</td>
+    </tr>
+
+    <tr>
+     <td><a href="errorfunc.configuration.html#ini.html-errors" class="link">html_errors</a></td>
+     <td>&quot;1&quot;</td>
+     <td>PHP_INI_ALL</td>
+     <td class="empty">&nbsp;</td>
+    </tr>
+
+    <tr>
+     <td><a href="errorfunc.configuration.html#ini.xmlrpc-errors" class="link">xmlrpc_errors</a></td>
+     <td>&quot;0&quot;</td>
+     <td>PHP_INI_SYSTEM</td>
+     <td class="empty">&nbsp;</td>
+    </tr>
+
+    <tr>
+     <td><a href="errorfunc.configuration.html#ini.xmlrpc-error-number" class="link">xmlrpc_error_number</a></td>
+     <td>&quot;0&quot;</td>
+     <td>PHP_INI_ALL</td>
+     <td class="empty">&nbsp;</td>
+    </tr>
+
+    <tr>
+     <td><a href="errorfunc.configuration.html#ini.docref-root" class="link">docref_root</a></td>
+     <td>&quot;&quot;</td>
+     <td>PHP_INI_ALL</td>
+     <td class="empty">&nbsp;</td>
+    </tr>
+
+    <tr>
+     <td><a href="errorfunc.configuration.html#ini.docref-ext" class="link">docref_ext</a></td>
+     <td>&quot;&quot;</td>
+     <td>PHP_INI_ALL</td>
+     <td class="empty">&nbsp;</td>
+    </tr>
+
+    <tr>
+     <td><a href="errorfunc.configuration.html#ini.error-prepend-string" class="link">error_prepend_string</a></td>
+     <td>NULL</td>
+     <td>PHP_INI_ALL</td>
+     <td class="empty">&nbsp;</td>
+    </tr>
+
+    <tr>
+     <td><a href="errorfunc.configuration.html#ini.error-append-string" class="link">error_append_string</a></td>
+     <td>NULL</td>
+     <td>PHP_INI_ALL</td>
+     <td class="empty">&nbsp;</td>
+    </tr>
+
+    <tr>
+     <td><a href="errorfunc.configuration.html#ini.error-log" class="link">error_log</a></td>
+     <td>NULL</td>
+     <td>PHP_INI_ALL</td>
+     <td class="empty">&nbsp;</td>
+    </tr>
+
+    <tr>
+     <td><a href="errorfunc.configuration.html#ini.error-log-mode" class="link">error_log_mode</a></td>
+     <td>0o644</td>
+     <td>PHP_INI_ALL</td>
+     <td>自 PHP 8.2.0 起有效</td>
+    </tr>
+
+    <tr>
+     <td><a href="errorfunc.configuration.html#ini.syslog.facility" class="link">syslog.facility</a></td>
+     <td>&quot;LOG_USER&quot;</td>
+     <td>PHP_INI_SYSTEM</td>
+     <td>自 PHP 7.3.0 起可用。</td>
+    </tr>
+
+    <tr>
+     <td><a href="errorfunc.configuration.html#ini.syslog.filter" class="link">syslog.filter</a></td>
+     <td>&quot;no-ctrl&quot;</td>
+     <td>PHP_INI_ALL</td>
+     <td>自 PHP 7.3.0 起可用。</td>
+    </tr>
+
+    <tr>
+     <td><a href="errorfunc.configuration.html#ini.syslog.ident" class="link">syslog.ident</a></td>
+     <td>&quot;php&quot;</td>
+     <td>PHP_INI_SYSTEM</td>
+     <td>自 PHP 7.3.0 起可用。</td>
+    </tr>
+
+    </tbody>
+   
+  </table>
+
+  有关 PHP_INI_* 样式的更多详情与定义，见 <a href="configuration.changes.modes.html" class="xref">配置可被设定范围</a>。
+ </p>
+
+ <p class="para">这是配置指令的简短说明。</p>
+
+ <p class="para">
+  <dl>
+   
+    <dt id="ini.error-reporting">
+     <code class="parameter">error_reporting</code>
+     <span class="type">int</span>
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      设置错误报告级别。该参数可以是表示二进制位字段的任意整数或者常量名称。error_reporting
+      级别和常量是在<a href="errorfunc.constants.html" class="link">预定义常量</a>和 <var class="filename">php.ini</var>
+      中进行了说明。在程序运行时可以通过 <span class="function"><a href="function.error-reporting.html" class="function">error_reporting()</a></span> 进行设置。另请查看
+      <a href="errorfunc.configuration.html#ini.display-errors" class="link">display_errors</a> 指令。
+     </p>
+     <p class="para">
+      默认值为 <strong><code>E_ALL</code></strong>。
+     </p>
+     <p class="para">
+      PHP 8.0.0 之前，默认值是：<strong class="userinput"><code><strong><code>E_ALL</code></strong> &amp; ~<strong><code>E_NOTICE</code></strong> &amp;
+      ~<strong><code>E_STRICT</code></strong> &amp; ~<strong><code>E_DEPRECATED</code></strong></code></strong>。这意味着不会显示 
+      <strong><code>E_NOTICE</code></strong>、 <strong><code>E_STRICT</code></strong>、<strong><code>E_DEPRECATED</code></strong>
+      级别的错误提示。
+     </p>
+     <blockquote class="note"><p><strong class="note">Note</strong>: 
+      <strong>PHP外的PHP常量</strong><br />
+      <p class="para">
+       在 PHP 以外（如 <var class="filename">httpd.conf</var>）使用 PHP 常量将没有意义，因此在这种情况下需要 <span class="type">int</span>
+       值来取代。由于错误级别会随着时间的推移而增长，错误级别的最大值（<strong><code>E_ALL</code></strong>）可能会改变。所以考虑使用更大的值来代替
+       <strong><code>E_ALL</code></strong> 从而覆盖从现在到未来的所有二进制位字段，例如数值
+       <code class="literal">2147483647</code>（将包含所有错误，而不仅仅是 <strong><code>E_ALL</code></strong>）。
+      </p>
+     </p></blockquote>
+    </dd>
+
+   
+
+   
+    <dt id="ini.display-errors">
+     <code class="parameter">display_errors</code>
+     <span class="type">string</span>
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      该选项设置是否将错误信息作为输出的一部分打印到屏幕，或者对用户隐藏。
+     </p>
+     <p class="para">
+      值 <code class="literal">&quot;stderr&quot;</code> 将错误发送到 <code class="literal">stderr</code>
+      而不是 <code class="literal">stdout</code>。
+     </p>
+     <blockquote class="note"><p><strong class="note">Note</strong>: 
+      <p class="para">
+      这是辅助开发的功能，不应在生产系统中使用 (例如连接到互联网的系统)。
+      </p>
+     </p></blockquote>
+     <blockquote class="note"><p><strong class="note">Note</strong>: 
+      <p class="para">
+       尽管 display_errors 也可以在运行时设置 (使用 <span class="function"><a href="function.ini-set.html" class="function">ini_set()</a></span>)，
+       但是如果脚本出现致命错误，它不会起到任何作用。因为还没执行所需的运行时操作。
+      </p>
+     </p></blockquote>
+    </dd>
+
+   
+
+   
+    <dt id="ini.display-startup-errors">
+     <code class="parameter">display_startup_errors</code>
+     <span class="type">bool</span>
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      即使 display_errors 设置为开启，PHP 也不会显示启动过程中的错误。强烈建议除调试外，都将 display_startup_errors 设置为关闭。
+     </p>
+    </dd>
+
+   
+
+   
+    <dt id="ini.log-errors">
+     <code class="parameter">log_errors</code>
+     <span class="type">bool</span>
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      设置是否将脚本运行的错误信息记录到服务器错误日志或者 <a href="errorfunc.configuration.html#ini.error-log" class="link">error_log</a>。注意，这是与服务器相关的特定配置项。
+     </p>
+     <blockquote class="note"><p><strong class="note">Note</strong>: 
+      <p class="para">
+       在生产环境 web 网站中，强烈建议使用错误日志记录代替错误显示。
+      </p>
+     </p></blockquote>
+    </dd>
+
+   
+
+   
+    <dt id="ini.log-errors-max-len">
+     <code class="parameter">log_errors_max_len</code>
+     <span class="type">int</span>
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      设置 log_errors 的最大字节数. 在 <a href="errorfunc.configuration.html#ini.error-log" class="link">error_log</a>
+      中添加有关错误源的信息。默认值为 1024，如果设置为 0 表示不限长度。该长度适用于记录的错误，显示的错误，以及
+      <var class="varname"><a href="reserved.variables.phperrormsg.html" class="classname">$php_errormsg</a></var>，但不适用于显式调用的函数，例如 <span class="function"><a href="function.error-log.html" class="function">error_log()</a></span>。
+     </p>
+
+     <span class="simpara">当使用 <span class="type">int</span>
+时, 其值以字节来衡量。还可以使用在 <a href="faq.using.html#faq.using.shorthandbytes" class="link">FAQ</a> 中描述的速记符。</span>
+
+    </dd>
+
+   
+
+   
+    <dt id="ini.ignore-repeated-errors">
+     <code class="parameter">ignore_repeated_errors</code>
+     <span class="type">bool</span>
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      不记录重复的信息。重复的错误必须出现在同一个文件中的同一行代码上，除非
+      <a href="errorfunc.configuration.html#ini.ignore-repeated-source" class="link">ignore_repeated_source</a>
+      设置为 true。
+     </p>
+    </dd>
+
+   
+
+   
+    <dt id="ini.ignore-repeated-source">
+     <code class="parameter">ignore_repeated_source</code>
+     <span class="type">bool</span>
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      忽略重复消息时，也忽略消息的来源。当该设置开启时，重复信息将不会记录它是由不同的文件还是不同的源代码行产生的。
+     </p>
+    </dd>
+
+   
+
+   
+    <dt id="ini.report-memleaks">
+     <code class="parameter">report_memleaks</code>
+     <span class="type">bool</span>
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      如果这个参数设置为开启（默认），此参数将会显示 Zend
+      内存管理器检测到的内存泄露报告。此报告将会发送到 Posix 平台上的
+      stderr。在 Windows 上，将使用 OutputDebugString()
+      发送到调试器并可以使用 <a href="http://technet.microsoft.com/en-us/sysinternals/bb896647" class="link external" title="Link : http://technet.microsoft.com/en-us/sysinternals/bb896647">&raquo;&nbsp;DbgView</a>
+      等工具查看。此参数进在调试版本中有效并且需要
+      <a href="errorfunc.configuration.html#ini.error-reporting" class="link">error_reporting</a> 包含
+      <strong><code>E_WARNING</code></strong>。
+     </p>
+    </dd>
+
+   
+
+   
+    <dt id="ini.track-errors">
+     <code class="parameter">track_errors</code>
+     <span class="type">bool</span>
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      如果开启，最后的一个错误将永远存在于变量 <var class="varname"><a href="reserved.variables.phperrormsg.html" class="classname">$php_errormsg</a></var> 中。
+     </p>
+    </dd>
+
+   
+
+   
+    <dt id="ini.html-errors">
+     <code class="parameter">html_errors</code>
+     <span class="type">bool</span>
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      如果启用，错误消息将包含 HTML 标记。HTML 错误格式会生成可点击的消息，将用户引导至描述错误页面或者导致错误的函数。这些引用跟
+      <a href="errorfunc.configuration.html#ini.docref-root" class="link">docref_root</a> 和
+      <a href="errorfunc.configuration.html#ini.docref-ext" class="link">docref_ext</a> 的有关。
+     </p>
+     <p class="para">
+      如果启用，错误消息将完全是纯文本。
+     </p>
+    </dd>
+
+   
+
+   
+    <dt id="ini.xmlrpc-errors">
+     <code class="parameter">xmlrpc_errors</code>
+     <span class="type">bool</span>
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      如果启用，则关闭正常的错误报告，并将错误格式格式化为 XML-RPC 错误信息。
+     </p>
+    </dd>
+
+   
+
+   
+    <dt id="ini.xmlrpc-error-number">
+     <code class="parameter">xmlrpc_error_number</code>
+     <span class="type">int</span>
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      用作 XML-RPC faultCode 元素的值。
+     </p>
+    </dd>
+
+   
+
+   
+    <dt id="ini.docref-root">
+     <code class="parameter">docref_root</code>
+     <span class="type">string</span>
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      新的错误信息格式包含了对描述错误或者导致错误的函数的页面引用。为了提供手册的页面，你可以在 PHP
+      官方站点下载对应语言的手册，并在 ini 中设置网址到本地对应的地址。如果你的本地手册拷贝可以使用
+      <code class="literal">&quot;/manual/&quot;</code> 访问，你就可以简单的设置
+      <strong class="userinput"><code>docref_root=/manual/</code></strong>。另外你还需要设置 docref_ext 匹配你本地文件的后缀名 
+      <strong class="userinput"><code>docref_ext=.html</code></strong>。当然也可以设置一个外部的参考地址。例如你可以设置
+      <strong class="userinput"><code>docref_root=http://manual/en/</code></strong> 或者
+      <strong class="userinput"><code>docref_root=&quot;http://landonize.it/?how=url&amp;theme=classic&amp;filter=Landon
+      &amp;url=http%3A%2F%2Fwww.php.net%2F&quot;</code></strong>
+     </p>
+     <p class="para">
+      通常需要在 docref_root 后面以 <code class="literal">&quot;/&quot;</code>结尾，
+      但是在以上的第二种示例情况中不必这么设置。
+     </p>
+     <blockquote class="note"><p><strong class="note">Note</strong>: 
+      <p class="para">
+       这是辅助开发的功能，因为可以快速定位和查看到函数的说明。不应在生产系统中使用 (例如连接到互联网的系统)。
+      </p>
+     </p></blockquote>
+    </dd>
+
+   
+
+   
+    <dt id="ini.docref-ext">
+     <code class="parameter">docref_ext</code>
+     <span class="type">string</span>
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      参见 <a href="errorfunc.configuration.html#ini.docref-root" class="link">docref_root</a>。
+     </p>
+     <blockquote class="note"><p><strong class="note">Note</strong>: 
+      <p class="para">
+       docref_ext 的值必须以 <code class="literal">&quot;.&quot;</code> 开头。
+      </p>
+     </p></blockquote>
+    </dd>
+
+   
+
+   
+    <dt id="ini.error-prepend-string">
+     <code class="parameter">error_prepend_string</code>
+     <span class="type">string</span>
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      错误信息之前输出的字符串。仅在屏幕上显示错误消息时使用。主要是目的是能够为错误消息添加额带的 HTML 标记。
+     </p>
+    </dd>
+
+   
+
+   
+    <dt id="ini.error-append-string">
+     <code class="parameter">error_append_string</code>
+     <span class="type">string</span>
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      错误信息之后输出的字符串。仅在屏幕上显示错误消息时使用。主要是目的是能够为错误消息添加额带的 HTML 标记。
+     </p>
+    </dd>
+
+   
+
+   
+    <dt id="ini.error-log">
+     <code class="parameter">error_log</code>
+     <span class="type">string</span>
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      设置脚本错误将被记录到的文件名称。该文件应该由 Web 服务器用户写入。如果使用特殊值
+      <code class="literal">syslog</code>，则将错误信息发送到系统日志记录器。在 Unix
+      系统上，使用的是 syslog(3)，而在 Windows 
+      上则为事件日志。参见：<span class="function"><a href="function.syslog.html" class="function">syslog()</a></span>。如果该配置没有设置，则错误信息会被发送到
+      SAPI 错误记录器。例如，出现在 Apache 的错误日志中，或者在 CLI 中的
+      <code class="literal">stderr</code>。参阅 <span class="function"><a href="function.error-log.html" class="function">error_log()</a></span>。
+     </p>
+    </dd>
+
+   
+
+   
+    <dt id="ini.error-log-mode">
+     <code class="parameter">error_log_mode</code>
+     <span class="type">int</span>
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      File mode for the file described set in
+      <a href="errorfunc.configuration.html#ini.error-log" class="link">error_log</a>.
+     </p>
+    </dd>
+
+   
+
+   
+    <dt id="ini.syslog.facility">
+     <code class="parameter">syslog.facility</code>
+     <span class="type">string</span>
+    </dt>
+
+    <dd>
+
+     <p class="para">
+       指定记录日志信息的程序类型，仅在 <a href="errorfunc.configuration.html#ini.error-log" class="link">error_log</a> 设置为 &quot;syslog&quot; 时有效。
+     </p>
+    </dd>
+
+   
+
+   
+    <dt id="ini.syslog.filter">
+     <code class="parameter">syslog.filter</code>
+     <span class="type">string</span>
+    </dt>
+
+    <dd>
+
+     <p class="para">
+      指定过滤器类型以过滤纪录的消息。允许不加修改的传递字符；all others are written in their
+      hexadecimal representation prefixed with <code class="literal">\x</code>.
+      <ul class="itemizedlist">
+       <li class="listitem">
+        <span class="simpara"><code class="literal">all</code>&mdash;&mdash;记录的字符串在换行符处拆分，并且所有字符都原封不动的传递
+        </span>
+       </li>
+       <li class="listitem">
+        <span class="simpara"><code class="literal">ascii</code>&mdash;&mdash;纪录的字符串在换行符处拆分，且转义任何不可打印的 7 位 ASCII 字符
+        </span>
+       </li>
+       <li class="listitem">
+        <span class="simpara"><code class="literal">no-ctrl</code>&mdash;&mdash;纪录的字符串在换行符处拆分，且转义任何不可打印字符
+        </span>
+       </li>
+       <li class="listitem">
+        <span class="simpara"><code class="literal">raw</code>&mdash;&mdash;所有字符都原封不动的传递给系统记录器，换行符处不会拆分 (identical to PHP before 7.3)
+        </span>
+       </li>
+      </ul>
+      此设置通过 <a href="errorfunc.configuration.html#ini.error-log" class="link">error_log</a> 设置为 "syslog" 并调用 <span class="function"><a href="function.syslog.html" class="function">syslog()</a></span> 影响日志记录。
+     </p>
+     <blockquote class="note"><p><strong class="note">Note</strong>: 
+      <p class="para">
+       <code class="literal">raw</code> 过滤器从 PHP 7.3.8 和 PHP 7.4.0 起可以使用。
+      </p>
+     </p></blockquote>
+     <span class="simpara">
+      Windows 上不支持该指令。
+     </span>
+    </dd>
+
+   
+
+   
+    <dt id="ini.syslog.ident">
+     <code class="parameter">syslog.ident</code>
+     <span class="type">string</span>
+    </dt>
+
+    <dd>
+
+     <p class="para">
+       设置每条日志消息前缀的识别字符串（ident string），仅在 <a href="errorfunc.configuration.html#ini.error-log" class="link">error_log</a> 为 &quot;syslog&quot; 时有效。
+     </p>
+    </dd>
+
+   
+  </dl>
+
+ </p>
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="126734""></a>
+  <div class="note">
+   <strong class="user">iio7 at protonmail dot com</strong>
+   <a href="#126734" class="date">31-Dec-2021 09:52</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+It's important to note that when display_errors is "on", PHP will send a HTTP 200 OK status code even when there is an error. This is not a mistake or a wrong behavior, but is because you're asking PHP to output normal HTML, i.e. the error message, to the browser.<br />
+<br />
+When display_errors is set to "off", PHP will send a HTTP 500 Internal Server Error, and let the web server handle it from there. If the web server is setup to intercept FastCGI errors (in case of NGINX), it will display the 500 error page it has setup. If the web server cannot intercept FastCGI errors, or it isn't setup to do it, an empty screen will be displayed in the browser (the famous white screen of death).<br />
+<br />
+If you need a custom error page but cannot intercept PHP errors on the web server you're using, you can use PHPs custom error and exception handling mechanism. If you combine that with output buffering you can prevent any output to reach the client before the error/exception occurs. Just remember that parse errors are compile time errors that cannot be handled by a custom handler, use "php -l foo.php" from the terminal to check for parse errors before putting your files on production.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="124045""></a>
+  <div class="note">
+   <strong class="user">Roger</strong>
+   <a href="#124045" class="date">18-Jul-2019 02:57</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+When `error_log` is set to a file path, log messages will automatically be prefixed with timestamp [DD-MMM-YYYY HH:MM:SS UTC].&nbsp; This appears to be hard-coded, with no formatting options.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="120307""></a>
+  <div class="note">
+   <strong class="user">ohcc at 163 dot com</strong>
+   <a href="#120307" class="date">09-Dec-2016 12:57</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you set the error_log directive to a relative path, it is a path relative to the document root rather than php's containing folder.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="120261""></a>
+  <div class="note">
+   <strong class="user">jaymore at gmail dot com</strong>
+   <a href="#120261" class="date">02-Dec-2016 10:14</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Document says <br />
+So in place of E_ALL consider using a larger value to cover all bit fields from now and well into the future, a numeric value like 2147483647 (includes all errors, not just E_ALL). <br />
+<br />
+But it is better to set "-1" as the E_ALL value.<br />
+For example, in httpd.conf or .htaccess, use <br />
+php_value error_reporting -1<br />
+to report all kind of error without be worried by the PHP version.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="116235""></a>
+  <div class="note">
+   <strong class="user">php dot net at sp-in dot dk</strong>
+   <a href="#116235" class="date">27-Nov-2014 09:59</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+There does not appear to be a way to set a tag / ident / program for log entries in the ini file when using error_log=syslog.&nbsp; When I test locally, "apache2" is used. <br />
+However, calling openlog() with an ident parameter early in your script (or using an auto_prepend_file) will make PHP use that value for all subsequent log entries. closelog() will restore the original tag.<br />
+<br />
+This can be done for setting facility as well, although the original value does not seem to be restored by closelog().</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="89648""></a>
+  <div class="note">
+   <strong class="user">cjakeman at bcs dot org</strong>
+   <a href="#89648" class="date">17-Mar-2009 01:06</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Using 
+<br />
+<span class="default">&lt;?php ini_set</span><span class="keyword">(</span><span class="string">'display_errors'</span><span class="keyword">, </span><span class="default">1</span><span class="keyword">); </span><span class="default">?&gt;</span> 
+<br />
+at the top of your script will not catch any parse errors. A missing ")" or ";" will still lead to a blank page.
+<br />
+
+<br />
+This is because the entire script is parsed before any of it is executed. If you are unable to change php.ini and set
+<br />
+
+<br />
+display_errors On
+<br />
+
+<br />
+then there is a possible solution suggested under error_reporting:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+&nbsp;error_reporting</span><span class="keyword">(</span><span class="default">E_ALL</span><span class="keyword">);
+<br />
+&nbsp;</span><span class="default">ini_set</span><span class="keyword">(</span><span class="string">"display_errors"</span><span class="keyword">, </span><span class="default">1</span><span class="keyword">);
+<br />
+&nbsp;include(</span><span class="string">"file_with_errors.php"</span><span class="keyword">);
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+
+<br />
+[Modified by moderator]
+<br />
+
+<br />
+You should also consider setting error_reporting = -1 in your php.ini and display_errors = On if you are in development mode to see all fatal/parse errors or set error_log to your desired file to log errors instead of display_errors in production (this requires log_errors to be turned on).</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

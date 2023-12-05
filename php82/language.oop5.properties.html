@@ -1,0 +1,531 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>属性</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="language.oop5.basic.html">? 基本概念</a></li>
+      <li style="float: right;"><a href="language.oop5.constants.html">类常量 ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="language.oop5.html">类与对象</a></li>
+    <li>属性</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="language.oop5.properties" class="sect1">
+  <h2 class="title">属性</h2>
+
+  <p class="para">
+   类的变量成员叫做<em class="emphasis">属性</em>，或者叫<em class="emphasis">字段</em>，在本文档统一称为<em class="emphasis">属性</em>。
+   属性开头至少使用一个修饰符（比如 <a href="language.oop5.visibility.html" class="xref">访问控制（可见性）</a>、<a href="language.oop5.static.html" class="xref">静态（static）关键字</a>或者自 PHP 8.1.0 起支持的 <a href="language.oop5.properties.html#language.oop5.properties.readonly-properties" class="link">readonly</a>），
+   除了 <code class="code">readonly</code> 属性之外都是可选的，然后自 PHP 7.4 
+   起可以跟一个类型声明，然后跟一个普通的变量声明来组成。属性中的变量可以初始化，但是初始化的值必须是 <a href="language.constants.html" class="link">常量</a>值。
+  </p>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    另一种过时的声明类属性的方法是使用 <code class="literal">var</code> 关键字，而不是使用修饰符。
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <span class="simpara">
+    没有声明 <a href="language.oop5.visibility.html" class="xref">访问控制（可见性）</a> 修饰符的属性将默认声明为 <code class="literal">public</code>。
+   </span>
+  </p></blockquote>
+  <p class="para">
+   在类的成员方法里面，可以用 <code class="literal">-&gt;</code>（对象运算符）：<var class="varname">$this->property</var>（其中
+   <code class="literal">property</code> 是该属性名）这种方式来访问非静态属性。静态属性则是用
+   <code class="literal">::</code>（双冒号）：<var class="varname">self::$property</var>
+   来访问。更多静态属性与非静态属性的区别参见 <a href="language.oop5.static.html" class="xref">静态（static）关键字</a>。
+  </p>
+  <p class="para">
+   当一个方法在类定义内部被调用时，有一个可用的伪变量
+   <var class="varname">$this</var>。<var class="varname">$this</var>
+   是一个到主叫对象的引用（通常是该方法所从属的对象，但如果是从第二个对象<a href="language.oop5.static.html" class="link">静态</a>调用时也可能是另一个对象）。
+  </p>
+
+  <p class="para">
+   <div class="example" id="example-426">
+    <p><strong>Example #1 属性声明</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">SimpleClass<br /></span><span style="color: #007700">{<br />   public </span><span style="color: #0000BB">$var1 </span><span style="color: #007700">= </span><span style="color: #DD0000">'hello ' </span><span style="color: #007700">. </span><span style="color: #DD0000">'world'</span><span style="color: #007700">;<br />   public </span><span style="color: #0000BB">$var2 </span><span style="color: #007700">= &lt;&lt;&lt;EOD<br /></span><span style="color: #DD0000">hello world<br /></span><span style="color: #007700">EOD;<br />   public </span><span style="color: #0000BB">$var3 </span><span style="color: #007700">= </span><span style="color: #0000BB">1</span><span style="color: #007700">+</span><span style="color: #0000BB">2</span><span style="color: #007700">;<br />   </span><span style="color: #FF8000">// 错误的属性声明<br />   </span><span style="color: #007700">public </span><span style="color: #0000BB">$var4 </span><span style="color: #007700">= </span><span style="color: #0000BB">self</span><span style="color: #007700">::</span><span style="color: #0000BB">myStaticMethod</span><span style="color: #007700">();<br />   public </span><span style="color: #0000BB">$var5 </span><span style="color: #007700">= </span><span style="color: #0000BB">$myVar</span><span style="color: #007700">;<br /><br />   </span><span style="color: #FF8000">// 正确的属性声明<br />   </span><span style="color: #007700">public </span><span style="color: #0000BB">$var6 </span><span style="color: #007700">= </span><span style="color: #0000BB">myConstant</span><span style="color: #007700">;<br />   public </span><span style="color: #0000BB">$var7 </span><span style="color: #007700">= array(</span><span style="color: #0000BB">true</span><span style="color: #007700">, </span><span style="color: #0000BB">false</span><span style="color: #007700">);<br /><br />   public </span><span style="color: #0000BB">$var8 </span><span style="color: #007700">= &lt;&lt;&lt;'EOD'<br /></span><span style="color: #DD0000">hello world<br /></span><span style="color: #007700">EOD;<br /><br />   </span><span style="color: #FF8000">// 没有访问控制修饰符：<br />   </span><span style="color: #007700">static </span><span style="color: #0000BB">$var9</span><span style="color: #007700">;<br />   readonly </span><span style="color: #0000BB">int $var10</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+   
+   </div>
+  </p>
+
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    更多关于类／对象的处理函数，请查看<a href="ref.classobj.html" class="link">类／对象函数</a>。
+   </p>
+  </p></blockquote>
+
+ <div class="sect2" id="language.oop5.properties.typed-properties">
+  <h3 class="title">类型声明</h3>
+  <p class="para">
+   从 PHP 7.4.0 开始，属性定义可以包含<a href="language.types.declarations.html" class="xref">类型声明</a>，但
+   <span class="type"><a href="language.types.callable.html" class="type callable">callable</a></span> 除外。
+   <div class="example" id="example-428">
+    <p><strong>Example #2 类型声明的示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">class </span><span style="color: #0000BB">User<br /></span><span style="color: #007700">{<br />    public </span><span style="color: #0000BB">int $id</span><span style="color: #007700">;<br />    public ?</span><span style="color: #0000BB">string $name</span><span style="color: #007700">;<br /><br />    public function </span><span style="color: #0000BB">__construct</span><span style="color: #007700">(</span><span style="color: #0000BB">int $id</span><span style="color: #007700">, ?</span><span style="color: #0000BB">string $name</span><span style="color: #007700">)<br />    {<br />        </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">id </span><span style="color: #007700">= </span><span style="color: #0000BB">$id</span><span style="color: #007700">;<br />        </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">name </span><span style="color: #007700">= </span><span style="color: #0000BB">$name</span><span style="color: #007700">;<br />    }<br />}<br /><br /></span><span style="color: #0000BB">$user </span><span style="color: #007700">= new </span><span style="color: #0000BB">User</span><span style="color: #007700">(</span><span style="color: #0000BB">1234</span><span style="color: #007700">, </span><span style="color: #0000BB">null</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$user</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">id</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$user</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">name</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+     <div class="cdata"><pre>
+int(1234)
+NULL
+</pre></div>
+    </div>
+   </div>
+  </p>
+
+  <p class="para">
+   类型属性必须在访问前初始化，否则会抛出 <span class="classname"><a href="class.error.html" class="classname">Error</a></span> 。
+   <div class="example" id="example-430">
+    <p><strong>Example #3 访问属性</strong></p>
+    <div class="example-contents">
+     <div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">class </span><span style="color: #0000BB">Shape<br /></span><span style="color: #007700">{<br />    public </span><span style="color: #0000BB">int $numberOfSides</span><span style="color: #007700">;<br />    public </span><span style="color: #0000BB">string $name</span><span style="color: #007700">;<br /><br />    public function </span><span style="color: #0000BB">setNumberOfSides</span><span style="color: #007700">(</span><span style="color: #0000BB">int $numberOfSides</span><span style="color: #007700">): </span><span style="color: #0000BB">void<br />    </span><span style="color: #007700">{<br />        </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">numberOfSides </span><span style="color: #007700">= </span><span style="color: #0000BB">$numberOfSides</span><span style="color: #007700">;<br />    }<br /><br />    public function </span><span style="color: #0000BB">setName</span><span style="color: #007700">(</span><span style="color: #0000BB">string $name</span><span style="color: #007700">): </span><span style="color: #0000BB">void<br />    </span><span style="color: #007700">{<br />        </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">name </span><span style="color: #007700">= </span><span style="color: #0000BB">$name</span><span style="color: #007700">;<br />    }<br /><br />    public function </span><span style="color: #0000BB">getNumberOfSides</span><span style="color: #007700">(): </span><span style="color: #0000BB">int<br />    </span><span style="color: #007700">{<br />        return </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">numberOfSides</span><span style="color: #007700">;<br />    }<br /><br />    public function </span><span style="color: #0000BB">getName</span><span style="color: #007700">(): </span><span style="color: #0000BB">string<br />    </span><span style="color: #007700">{<br />        return </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">name</span><span style="color: #007700">;<br />    }<br />}<br /><br /></span><span style="color: #0000BB">$triangle </span><span style="color: #007700">= new </span><span style="color: #0000BB">Shape</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$triangle</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setName</span><span style="color: #007700">(</span><span style="color: #DD0000">"triangle"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$triangle</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setNumberofSides</span><span style="color: #007700">(</span><span style="color: #0000BB">3</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$triangle</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getName</span><span style="color: #007700">());<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$triangle</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getNumberOfSides</span><span style="color: #007700">());<br /><br /></span><span style="color: #0000BB">$circle </span><span style="color: #007700">= new </span><span style="color: #0000BB">Shape</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$circle</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setName</span><span style="color: #007700">(</span><span style="color: #DD0000">"circle"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$circle</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getName</span><span style="color: #007700">());<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$circle</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getNumberOfSides</span><span style="color: #007700">());<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+     <div class="cdata"><pre>
+string(8) &quot;triangle&quot;
+int(3)
+string(6) &quot;circle&quot;
+
+Fatal error: Uncaught Error: Typed property Shape::$numberOfSides must not be accessed before initialization
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+ <div class="sect2" id="language.oop5.properties.readonly-properties">
+  <h3 class="title">只读属性</h3>
+  <p class="para">
+   自 PHP 8.1.0 起，可以使用 <code class="code">readonly</code> 修饰符声明属性，防止初始化后修改属性。
+   <div class="example" id="example-432">
+    <p><strong>Example #4 只读属性示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">Test </span><span style="color: #007700">{<br />   public readonly </span><span style="color: #0000BB">string $prop</span><span style="color: #007700">;<br />   public function </span><span style="color: #0000BB">__construct</span><span style="color: #007700">(</span><span style="color: #0000BB">string $prop</span><span style="color: #007700">) {<br />       </span><span style="color: #FF8000">// 初始化正常。<br />       </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">prop </span><span style="color: #007700">= </span><span style="color: #0000BB">$prop</span><span style="color: #007700">;<br />   }<br />}<br /></span><span style="color: #0000BB">$test </span><span style="color: #007700">= new </span><span style="color: #0000BB">Test</span><span style="color: #007700">(</span><span style="color: #DD0000">"foobar"</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">// 读取正常。<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$test</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">prop</span><span style="color: #007700">); </span><span style="color: #FF8000">// string(6) "foobar"<br />// 再赋值异常。分配的值是否相同并不重要。<br /></span><span style="color: #0000BB">$test</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">prop </span><span style="color: #007700">= </span><span style="color: #DD0000">"foobar"</span><span style="color: #007700">;<br /></span><span style="color: #FF8000">// Error: Cannot modify readonly property Test::$prop<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+   <blockquote class="note"><p><strong class="note">Note</strong>: 
+    <p class="para">
+     readonly 修饰符只能应用于<a href="language.oop5.properties.html#language.oop5.properties.typed-properties" class="link">类型化属性</a>。可以使用
+     <a href="language.types.mixed.html" class="xref">Mixed</a> 类型创建没有类型约束的只读属性。
+    </p>
+   </p></blockquote>
+   <blockquote class="note"><p><strong class="note">Note</strong>: 
+    <p class="para">
+     不支持对静态属性只读。
+    </p>
+   </p></blockquote>
+  </p>
+  <p class="para">
+   只读属性只能初始化一次，并且只能从声明它的作用域内初始化。对属性的任何赋值和修改都会导致 <span class="classname"><a href="class.error.html" class="classname">Error</a></span> 异常。
+   <div class="example" id="example-434">
+    <p><strong>Example #5 初始化只读属性异常</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">Test1 </span><span style="color: #007700">{<br />    public readonly </span><span style="color: #0000BB">string $prop</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">$test1 </span><span style="color: #007700">= new </span><span style="color: #0000BB">Test1</span><span style="color: #007700">;<br /></span><span style="color: #FF8000">// 私有作用域之外异常初始化。<br /></span><span style="color: #0000BB">$test1</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">prop </span><span style="color: #007700">= </span><span style="color: #DD0000">"foobar"</span><span style="color: #007700">;<br /></span><span style="color: #FF8000">// Error: Cannot initialize readonly property Test1::$prop from global scope<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    禁止在只读属性上指定默认值，因为具有默认值的只读属性等同于常量，因此不是特别有用。
+    <div class="example" id="example-436">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">Test </span><span style="color: #007700">{<br />    </span><span style="color: #FF8000">// Fatal error: Readonly property Test::$prop cannot have default value<br />    </span><span style="color: #007700">public readonly </span><span style="color: #0000BB">int $prop </span><span style="color: #007700">= </span><span style="color: #0000BB">42</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    只读属性一旦初始化就不能 <span class="function"><a href="function.unset.html" class="function">unset()</a></span>。但可以在初始化之前从声明属性的作用域中取消只读属性。
+   </p>
+  </p></blockquote>
+  <p class="para">
+   修改不一定是简单的赋值，以下所有行为也会导致 <span class="classname"><a href="class.error.html" class="classname">Error</a></span> 异常：
+   <div class="example" id="example-438">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">Test </span><span style="color: #007700">{<br />    public function </span><span style="color: #0000BB">__construct</span><span style="color: #007700">(<br />        public readonly </span><span style="color: #0000BB">int $i </span><span style="color: #007700">= </span><span style="color: #0000BB">0</span><span style="color: #007700">,<br />        public readonly array </span><span style="color: #0000BB">$ary </span><span style="color: #007700">= [],<br />    ) {}<br />}<br /></span><span style="color: #0000BB">$test </span><span style="color: #007700">= new </span><span style="color: #0000BB">Test</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$test</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">i </span><span style="color: #007700">+= </span><span style="color: #0000BB">1</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$test</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">i</span><span style="color: #007700">++;<br />++</span><span style="color: #0000BB">$test</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">i</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$test</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">ary</span><span style="color: #007700">[] = </span><span style="color: #0000BB">1</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$test</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">ary</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">][] = </span><span style="color: #0000BB">1</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$ref </span><span style="color: #007700">=&amp; </span><span style="color: #0000BB">$test</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">i</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$test</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">i </span><span style="color: #007700">=&amp; </span><span style="color: #0000BB">$ref</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">byRef</span><span style="color: #007700">(</span><span style="color: #0000BB">$test</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">i</span><span style="color: #007700">);<br />foreach (</span><span style="color: #0000BB">$test </span><span style="color: #007700">as &amp;</span><span style="color: #0000BB">$prop</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   然而，只读属性并不会妨碍内部可变性。存储在只读属性中的对象（或资源）仍然可以在内部修改：
+   <div class="example" id="example-440">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">Test </span><span style="color: #007700">{<br />    public function </span><span style="color: #0000BB">__construct</span><span style="color: #007700">(public readonly </span><span style="color: #0000BB">object $obj</span><span style="color: #007700">) {}<br />}<br /></span><span style="color: #0000BB">$test </span><span style="color: #007700">= new </span><span style="color: #0000BB">Test</span><span style="color: #007700">(new </span><span style="color: #0000BB">stdClass</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">// 内部可变正常。<br /></span><span style="color: #0000BB">$test</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">obj</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">foo </span><span style="color: #007700">= </span><span style="color: #0000BB">1</span><span style="color: #007700">;<br /></span><span style="color: #FF8000">// 赋值异常。<br /></span><span style="color: #0000BB">$test</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">obj </span><span style="color: #007700">= new </span><span style="color: #0000BB">stdClass</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+ <div class="sect2" id="language.oop5.properties.dynamic-properties">
+  <h3 class="title">动态属性</h3>
+  <p class="para">
+   如果尝试在 <span class="type">object</span> 上赋值不存在的属性，PHP
+   将会自动创建相应的属性。动态创建的属性将<em class="emphasis">仅能</em>在此类实例上使用。
+  </p>
+
+  <div class="warning"><strong class="warning">Warning</strong>
+   <p class="simpara">
+    自 PHP 8.2.0 起弃用动态属性。建议更改为属性声明。要处理任意属性名称，类应该实现魔术方法
+    <a href="language.oop5.overloading.html#object.get" class="link">__get()</a> 和 <a href="language.oop5.overloading.html#object.set" class="link">__set()</a>。最后可以使用 <code class="code">#[\AllowDynamicProperties]</code>
+    注解标记此类。
+   </p>
+  </div>
+ </div>
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="127656""></a>
+  <div class="note">
+   <strong class="user">kchlin dot lxy at gmail dot com</strong>
+   <a href="#127656" class="date">20-Sep-2022 03:39</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+From PHP 8.1<br />
+It's easy to create DTO object with readonly properties and promoting constructor<br />
+which easy to pack into a compact string and covert back to a object.<br />
+<span class="default">&lt;?php<br />
+</span><span class="comment"># Conversion functions.<br />
+# Pack object into a compack JSON string.<br />
+</span><span class="keyword">function </span><span class="default">cvtObjectToJson</span><span class="keyword">( </span><span class="default">object $poObject </span><span class="keyword">): </span><span class="default">string<br />
+</span><span class="keyword">{<br />
+&nbsp; return </span><span class="default">json_encode</span><span class="keyword">( </span><span class="default">array_values</span><span class="keyword">( </span><span class="default">get_object_vars</span><span class="keyword">( </span><span class="default">$poObject </span><span class="keyword">)));<br />
+}<br />
+<br />
+</span><span class="comment"># Unpack object from a JSON string.<br />
+</span><span class="keyword">function </span><span class="default">cvtJsonToObject</span><span class="keyword">( </span><span class="default">string $psClass</span><span class="keyword">, </span><span class="default">string $psString </span><span class="keyword">): </span><span class="default">object<br />
+</span><span class="keyword">{<br />
+&nbsp; return new </span><span class="default">$psClass</span><span class="keyword">( ...</span><span class="default">json_decode</span><span class="keyword">( </span><span class="default">$psString </span><span class="keyword">));<br />
+}<br />
+<br />
+</span><span class="comment"># DTO example class.<br />
+</span><span class="keyword">final class </span><span class="default">exampleDto<br />
+</span><span class="keyword">{<br />
+&nbsp; final public function </span><span class="default">__construct</span><span class="keyword">(<br />
+&nbsp;&nbsp;&nbsp; public readonly </span><span class="default">int&nbsp; &nbsp; $piInt</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; public readonly ?</span><span class="default">int&nbsp;&nbsp; $pnNull</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; public readonly </span><span class="default">float&nbsp; $pfFloat</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; public readonly </span><span class="default">string $psString</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; public readonly array&nbsp; </span><span class="default">$paArray</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; public readonly </span><span class="default">object $poObject</span><span class="keyword">,<br />
+&nbsp; ){}<br />
+}<br />
+<br />
+</span><span class="comment"># Example with export only public properties of given object.<br />
+</span><span class="default">$exampleDtoO </span><span class="keyword">= new </span><span class="default">exampleDto</span><span class="keyword">( </span><span class="default">1</span><span class="keyword">, </span><span class="default">null</span><span class="keyword">, </span><span class="default">.3</span><span class="keyword">, </span><span class="string">'string 4'</span><span class="keyword">, [], new </span><span class="default">stdClass</span><span class="keyword">() );<br />
+</span><span class="default">$stringJson&nbsp; </span><span class="keyword">= </span><span class="default">cvtObjectToJson</span><span class="keyword">( </span><span class="default">$exampleDtoO </span><span class="keyword">);</span><span class="comment">// [1,null,0.3,"string 4",[],{}]<br />
+</span><span class="default">$objectO&nbsp; &nbsp;&nbsp; </span><span class="keyword">= </span><span class="default">cvtJsonToObject</span><span class="keyword">( </span><span class="default">exampleDto</span><span class="keyword">::class, </span><span class="default">$stringJson </span><span class="keyword">);<br />
+<br />
+</span><span class="comment"># Check and var_dump variables.<br />
+</span><span class="keyword">echo </span><span class="default">$exampleDtoO </span><span class="keyword">== </span><span class="default">$objectO<br />
+&nbsp; </span><span class="keyword">? </span><span class="string">'Objects equal, but not identical.'</span><span class="keyword">.&nbsp; &nbsp; </span><span class="default">PHP_EOL<br />
+&nbsp; </span><span class="keyword">: </span><span class="string">'Objects not equal neither identical.'</span><span class="keyword">. </span><span class="default">PHP_EOL<br />
+</span><span class="keyword">;<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$exampleDtoO</span><span class="keyword">, </span><span class="default">$stringJson</span><span class="keyword">, </span><span class="default">$objectO</span><span class="keyword">);<br />
+<br />
+</span><span class="comment"># Output<br />
+/*<br />
+&nbsp; Objects equal, but not identical<br />
+&nbsp; object(exampleDto)#6 (6) {<br />
+&nbsp; ["piInt"]=&gt;<br />
+&nbsp;&nbsp;&nbsp; int(1)<br />
+&nbsp;&nbsp;&nbsp; ["pnNull"]=&gt;<br />
+&nbsp;&nbsp;&nbsp; NULL<br />
+&nbsp;&nbsp;&nbsp; ["pfFloat"]=&gt;<br />
+&nbsp;&nbsp;&nbsp; float(0.3)<br />
+&nbsp;&nbsp;&nbsp; ["psString"]=&gt;<br />
+&nbsp;&nbsp;&nbsp; string(8) "string 4"<br />
+&nbsp; ["paArray"]=&gt;<br />
+&nbsp;&nbsp;&nbsp; array(0) {<br />
+&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; ["poObject"]=&gt;<br />
+&nbsp;&nbsp;&nbsp; object(stdClass)#7 (0) {<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp; }<br />
+&nbsp; string(29) "[1,null,0.3,"string 4",[],{}]"<br />
+&nbsp; object(exampleDto)#8 (6) {<br />
+&nbsp; ["piInt"]=&gt;<br />
+&nbsp;&nbsp;&nbsp; int(1)<br />
+&nbsp;&nbsp;&nbsp; ["pnNull"]=&gt;<br />
+&nbsp;&nbsp;&nbsp; NULL<br />
+&nbsp;&nbsp;&nbsp; ["pfFloat"]=&gt;<br />
+&nbsp;&nbsp;&nbsp; float(0.3)<br />
+&nbsp;&nbsp;&nbsp; ["psString"]=&gt;<br />
+&nbsp;&nbsp;&nbsp; string(8) "string 4"<br />
+&nbsp; ["paArray"]=&gt;<br />
+&nbsp;&nbsp;&nbsp; array(0) {<br />
+&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; ["poObject"]=&gt;<br />
+&nbsp;&nbsp;&nbsp; object(stdClass)#9 (0) {<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp; }<br />
+*/</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="117617""></a>
+  <div class="note">
+   <strong class="user">anca at techliminal dot com</strong>
+   <a href="#117617" class="date">08-Jul-2015 11:08</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+You can access property names with dashes in them (for example, because you converted an XML file to an object) in the following way:<br />
+<br />
+<span class="default">&lt;?php<br />
+$ref </span><span class="keyword">= new </span><span class="default">StdClass</span><span class="keyword">();<br />
+</span><span class="default">$ref</span><span class="keyword">-&gt;{</span><span class="string">'ref-type'</span><span class="keyword">} = </span><span class="string">'Journal Article'</span><span class="keyword">;<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$ref</span><span class="keyword">);<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="108320""></a>
+  <div class="note">
+   <strong class="user">Anonymous</strong>
+   <a href="#108320" class="date">17-Apr-2012 09:16</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+In case this saves anyone any time, I spent ages working out why the following didn't work:<br />
+<br />
+class MyClass<br />
+{<br />
+&nbsp;&nbsp;&nbsp; private $foo = FALSE;<br />
+<br />
+&nbsp;&nbsp;&nbsp; public function __construct()<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $this-&gt;$foo = TRUE;<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo($this-&gt;$foo);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+$bar = new MyClass();<br />
+<br />
+giving "Fatal error: Cannot access empty property in ...test_class.php on line 8"<br />
+<br />
+The subtle change of removing the $ before accesses of $foo fixes this:<br />
+<br />
+class MyClass<br />
+{<br />
+&nbsp;&nbsp;&nbsp; private $foo = FALSE;<br />
+<br />
+&nbsp;&nbsp;&nbsp; public function __construct()<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $this-&gt;foo = TRUE;<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo($this-&gt;foo);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+$bar = new MyClass();<br />
+<br />
+I guess because it's treating $foo like a variable in the first example, so trying to call $this-&gt;FALSE (or something along those lines) which makes no sense. It's obvious once you've realised, but there aren't any examples of accessing on this page that show that.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="102880""></a>
+  <div class="note">
+   <strong class="user">Anonymous</strong>
+   <a href="#102880" class="date">11-Mar-2011 03:18</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+$this can be cast to array.&nbsp; But when doing so, it prefixes the property names/new array keys with certain data depending on the property classification.&nbsp; Public property names are not changed.&nbsp; Protected properties are prefixed with a space-padded '*'.&nbsp; Private properties are prefixed with the space-padded class name...
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+
+<br />
+</span><span class="keyword">class </span><span class="default">test
+<br />
+</span><span class="keyword">{
+<br />
+&nbsp;&nbsp;&nbsp; public </span><span class="default">$var1 </span><span class="keyword">= </span><span class="default">1</span><span class="keyword">;
+<br />
+&nbsp;&nbsp;&nbsp; protected </span><span class="default">$var2 </span><span class="keyword">= </span><span class="default">2</span><span class="keyword">;
+<br />
+&nbsp;&nbsp;&nbsp; private </span><span class="default">$var3 </span><span class="keyword">= </span><span class="default">3</span><span class="keyword">;
+<br />
+&nbsp;&nbsp;&nbsp; static </span><span class="default">$var4 </span><span class="keyword">= </span><span class="default">4</span><span class="keyword">;
+<br />
+&nbsp;&nbsp;&nbsp; 
+<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">toArray</span><span class="keyword">()
+<br />
+&nbsp;&nbsp;&nbsp; {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return (array) </span><span class="default">$this</span><span class="keyword">;
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+}
+<br />
+
+<br />
+</span><span class="default">$t </span><span class="keyword">= new </span><span class="default">test</span><span class="keyword">;
+<br />
+</span><span class="default">print_r</span><span class="keyword">(</span><span class="default">$t</span><span class="keyword">-&gt;</span><span class="default">toArray</span><span class="keyword">());
+<br />
+
+<br />
+</span><span class="comment">/* outputs:
+<br />
+
+<br />
+Array
+<br />
+(
+<br />
+&nbsp;&nbsp;&nbsp; [var1] =&gt; 1
+<br />
+&nbsp;&nbsp;&nbsp; [ * var2] =&gt; 2
+<br />
+&nbsp;&nbsp;&nbsp; [ test var3] =&gt; 3
+<br />
+)
+<br />
+
+<br />
+*/
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+This is documented behavior when converting any object to an array (see &lt;/language.types.array.php#language.types.array.casting&gt; PHP manual page).&nbsp; All properties regardless of visibility will be shown when casting an object to array (with exceptions of a few built-in objects).
+<br />
+
+<br />
+To get an array with all property names unaltered, use the 'get_object_vars($this)' function in any method within class scope to retrieve an array of all properties regardless of external visibility, or 'get_object_vars($object)' outside class scope to retrieve an array of only public properties (see: &lt;/function.get-object-vars.php&gt; PHP manual page).</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="98267""></a>
+  <div class="note">
+   <strong class="user">zzzzBov</strong>
+   <a href="#98267" class="date">04-Jun-2010 09:21</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Do not confuse php's version of properties with properties in other languages (C++ for example).&nbsp; In php, properties are the same as attributes, simple variables without functionality.&nbsp; They should be called attributes, not properties.<br />
+<br />
+Properties have implicit accessor and mutator functionality.&nbsp; I've created an abstract class that allows implicit property functionality.<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="keyword">abstract class </span><span class="default">PropertyObject<br />
+</span><span class="keyword">{<br />
+&nbsp; public function </span><span class="default">__get</span><span class="keyword">(</span><span class="default">$name</span><span class="keyword">)<br />
+&nbsp; {<br />
+&nbsp;&nbsp;&nbsp; if (</span><span class="default">method_exists</span><span class="keyword">(</span><span class="default">$this</span><span class="keyword">, (</span><span class="default">$method </span><span class="keyword">= </span><span class="string">'get_'</span><span class="keyword">.</span><span class="default">$name</span><span class="keyword">)))<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp;&nbsp; return </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">$method</span><span class="keyword">();<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; else return;<br />
+&nbsp; }<br />
+&nbsp; <br />
+&nbsp; public function </span><span class="default">__isset</span><span class="keyword">(</span><span class="default">$name</span><span class="keyword">)<br />
+&nbsp; {<br />
+&nbsp;&nbsp;&nbsp; if (</span><span class="default">method_exists</span><span class="keyword">(</span><span class="default">$this</span><span class="keyword">, (</span><span class="default">$method </span><span class="keyword">= </span><span class="string">'isset_'</span><span class="keyword">.</span><span class="default">$name</span><span class="keyword">)))<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp;&nbsp; return </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">$method</span><span class="keyword">();<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; else return;<br />
+&nbsp; }<br />
+&nbsp; <br />
+&nbsp; public function </span><span class="default">__set</span><span class="keyword">(</span><span class="default">$name</span><span class="keyword">, </span><span class="default">$value</span><span class="keyword">)<br />
+&nbsp; {<br />
+&nbsp;&nbsp;&nbsp; if (</span><span class="default">method_exists</span><span class="keyword">(</span><span class="default">$this</span><span class="keyword">, (</span><span class="default">$method </span><span class="keyword">= </span><span class="string">'set_'</span><span class="keyword">.</span><span class="default">$name</span><span class="keyword">)))<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">$method</span><span class="keyword">(</span><span class="default">$value</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp; }<br />
+&nbsp; <br />
+&nbsp; public function </span><span class="default">__unset</span><span class="keyword">(</span><span class="default">$name</span><span class="keyword">)<br />
+&nbsp; {<br />
+&nbsp;&nbsp;&nbsp; if (</span><span class="default">method_exists</span><span class="keyword">(</span><span class="default">$this</span><span class="keyword">, (</span><span class="default">$method </span><span class="keyword">= </span><span class="string">'unset_'</span><span class="keyword">.</span><span class="default">$name</span><span class="keyword">)))<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">$method</span><span class="keyword">();<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp; }<br />
+}<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+after extending this class, you can create accessors and mutators that will be called automagically, using php's magic methods, when the corresponding property is accessed.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

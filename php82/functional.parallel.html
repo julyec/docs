@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>Functional API</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="philosophy.parallel.html">? Philosophy</a></li>
+      <li style="float: right;"><a href="parallel.bootstrap.html">parallel\bootstrap ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="book.parallel.html">parallel</a></li>
+    <li>Functional API</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="functional.parallel" class="reference">
+ <h1 class="title">Functional API</h1>
+ <div class="partintro">
+  <p class="para">
+   The <span class="classname"><a href="class.parallel-runtime.html" class="classname">parallel\Runtime</a></span> API provides a great degree of control to the power PHP programmer, and those intimately familiar with writing applications that use
+   parallel concurrency.
+  </p>
+  <p class="para">
+   The functional API provides less control in exchange for the ability to make decisions for the programmer:
+   <ul class="itemizedlist">
+    <li class="listitem">
+    <p class="para">all executing runtimes are bootstrapped identically</p>
+    </li>
+    <li class="listitem">
+    <p class="para">scheduling is determined by the API, not the programmer</p>
+    </li>
+   </ul>
+   <span class="function"><a href="parallel.run.html" class="function">parallel\run()</a></span> provides the guarantee that the task will begin to execute in parallel as soon as allowed by hardware and operating system constraints, without
+   needlessly creating runtimes. For most applications the functional API should be preferred.
+  </p>
+ </div>
+
+ 
+
+
+
+
+
+ 
+
+
+
+
+
+<h2>Table of Contents</h2><ul class="chunklist chunklist_reference"><li><a href="parallel.bootstrap.html">parallel\bootstrap</a> &mdash; Bootstrapping</li><li><a href="parallel.run.html">parallel\run</a> &mdash; Execution</li></ul>
+</div>
+<div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="128166""></a>
+  <div class="note">
+   <strong class="user">gajowy at agzeta dot pl</strong>
+   <a href="#128166" class="date">30-Jan-2023 01:53</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Consider cost of bootstraping. In the parallel\Runtime API the bootstrap routine is executed each time "new Runtime()" is called. So if you create e.g. 8 Runtimes, the bootstrap code will be executed 8 times and it does not depend on the number of Futures. On the other hand, in the case of Functional API each "parallel\run()" causes the boostrap code to be called again. This can be painfull if your tasks environement is complex (eg. huge datasets that need to be prepared in advance and thausends of relatively small tasks).</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

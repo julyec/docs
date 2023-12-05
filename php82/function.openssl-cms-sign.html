@@ -1,0 +1,232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>Sign a file</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.openssl-cms-read.html">? openssl_cms_read</a></li>
+      <li style="float: right;"><a href="function.openssl-cms-verify.html">openssl_cms_verify ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.openssl.html">OpenSSL 函数</a></li>
+    <li>Sign a file</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.openssl-cms-sign" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">openssl_cms_sign</h1>
+  <p class="verinfo">(PHP 8)</p><p class="refpurpose"><span class="refname">openssl_cms_sign</span> &mdash; <span class="dc-title">Sign a file</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.openssl-cms-sign-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>openssl_cms_sign</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$input_filename</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$output_filename</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><span class="type"><a href="class.opensslcertificate.html" class="type OpenSSLCertificate">OpenSSLCertificate</a></span>|<span class="type">string</span></span> <code class="parameter">$certificate</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><span class="type"><a href="class.opensslasymmetrickey.html" class="type OpenSSLAsymmetricKey">OpenSSLAsymmetricKey</a></span>|<span class="type"><a href="class.opensslcertificate.html" class="type OpenSSLCertificate">OpenSSLCertificate</a></span>|<span class="type">array</span>|<span class="type">string</span></span> <code class="parameter">$private_key</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">array</span><span class="type"></span></span> <code class="parameter">$headers</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$flags</code><span class="initializer"> = 0</span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$encoding</code><span class="initializer"> = <strong><code>OPENSSL_ENCODING_SMIME</code></strong></span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">string</span><span class="type"></span></span> <code class="parameter">$untrusted_certificates_filename</code><span class="initializer"> = <strong><code>null</code></strong></span></span><br>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">
+   This function signs a file with an X.509 certificate and key.
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.openssl-cms-sign-parameters">
+  <h3 class="title">参数</h3>
+  <dl>
+   
+    <dt>
+<code class="parameter">input_filename</code></dt>
+
+    <dd>
+
+     <p class="para">
+      The name of the file to be signed.
+     </p>
+    </dd>
+
+   
+   
+    <dt>
+<code class="parameter">output_filename</code></dt>
+
+    <dd>
+
+     <p class="para">
+      The name of the file to deposit the results.
+     </p>
+    </dd>
+
+   
+   
+    <dt>
+<code class="parameter">certificate</code></dt>
+
+    <dd>
+
+     <p class="para">
+      The signing certificate.
+      See <a href="openssl.certparams.html" class="link">Key/Certificate parameters</a> for a list of valid values.
+     </p>
+    </dd>
+
+   
+   
+    <dt>
+<code class="parameter">private_key</code></dt>
+
+    <dd>
+
+     <p class="para">
+      The key associated with <code class="parameter">certificate</code>.
+      See <a href="openssl.certparams.html" class="link">Key/Certificate parameters</a> for a list of valid values.
+     </p>
+    </dd>
+
+   
+   
+    <dt>
+<code class="parameter">headers</code></dt>
+
+    <dd>
+
+     <p class="para">
+      An array of headers to be included in S/MIME output.
+     </p>
+    </dd>
+
+   
+   
+    <dt>
+<code class="parameter">flags</code></dt>
+
+    <dd>
+
+     <p class="para">
+      Flags to be passed to <span class="function"><strong>cms_sign()</strong></span>.
+     </p>
+    </dd>
+
+   
+   
+    <dt>
+<code class="parameter">encoding</code></dt>
+
+    <dd>
+
+     <p class="para">
+      The encoding of the output file. One of <strong><code>OPENSSL_ENCODING_SMIME</code></strong>,
+      <strong><code>OPENSSL_ENCODING_DER</code></strong> or <strong><code>OPENSSL_ENCODING_PEM</code></strong>.
+     </p>
+    </dd>
+
+   
+   
+    <dt>
+<code class="parameter">untrusted_certificates_filename</code></dt>
+
+    <dd>
+
+     <p class="para">
+      Intermediate certificates to be included in the signature.
+     </p>
+    </dd>
+
+   
+  </dl>
+
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.openssl-cms-sign-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   成功时返回 <strong><code>true</code></strong>， 或者在失败时返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.openssl-cms-sign-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="example-1858">
+    <p><strong>Example #1 <span class="function"><strong>openssl_cms_sign()</strong></span> example</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />openssl_cms_sign</span><span style="color: #007700">(</span><span style="color: #DD0000">'input.txt'</span><span style="color: #007700">, </span><span style="color: #DD0000">'output.txt'</span><span style="color: #007700">, </span><span style="color: #DD0000">'file://cert.pem'</span><span style="color: #007700">, </span><span style="color: #DD0000">'file://privkey.pem'</span><span style="color: #007700">, </span><span style="color: #0000BB">null</span><span style="color: #007700">, </span><span style="color: #0000BB">OPENSSL_CMS_BINARY</span><span style="color: #007700">, </span><span style="color: #0000BB">OPENSSL_ENCODING_DER</span><span style="color: #007700">, </span><span style="color: #DD0000">'chain.pem'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="126047""></a>
+  <div class="note">
+   <strong class="user">miranda dot markmorgan at gmail dot com</strong>
+   <a href="#126047" class="date">01-May-2021 11:30</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Manage to make it work at last.<br />
+<br />
+$dn = array(<br />
+&nbsp;&nbsp;&nbsp; "countryName" =&gt; "XX",<br />
+&nbsp;&nbsp;&nbsp; "stateOrProvinceName" =&gt; "Location",<br />
+&nbsp;&nbsp;&nbsp; "localityName" =&gt; "Local",<br />
+&nbsp;&nbsp;&nbsp; "organizationName" =&gt; "Sample Organization",<br />
+&nbsp;&nbsp;&nbsp; "organizationalUnitName" =&gt; "Organizational Unit",<br />
+&nbsp;&nbsp;&nbsp; "commonName" =&gt; "Sample",<br />
+&nbsp;&nbsp;&nbsp; "emailAddress" =&gt; "contactus@email.com"<br />
+);<br />
+<br />
+// Generate a new private (and public) key pair<br />
+$privkey = openssl_pkey_new(array(<br />
+&nbsp;&nbsp;&nbsp; "private_key_bits" =&gt; 4096,<br />
+&nbsp;&nbsp;&nbsp; "private_key_type" =&gt; OPENSSL_KEYTYPE_RSA,<br />
+));<br />
+<br />
+// Generate a certificate signing request<br />
+$csr = openssl_csr_new($dn, $privkey, array('digest_alg' =&gt; 'sha512'));<br />
+<br />
+// Generate a self-signed cert, valid for 365 days<br />
+$x509 = openssl_csr_sign($csr, null, $privkey, $days=365, array('digest_alg' =&gt; 'sha512'));<br />
+<br />
+// Save your private key, CSR and self-signed cert for later use<br />
+openssl_csr_export($csr, $csrout) and var_dump($csrout); // .csr<br />
+openssl_x509_export($x509, $certout) and var_dump($certout); // .crt.pem<br />
+openssl_pkey_export($privkey, $pkeyout, "user_defined_password") and var_dump($pkeyout); // .key.pem<br />
+<br />
+if(openssl_cms_sign ( "file_to_sign", "Sample.p7m" , $x509 , $privkey, null , 0 , 0 , null )){<br />
+&nbsp;&nbsp;&nbsp; echo "SIGNED SUCCESSFULLY! Sample.p7m created... \r\n";<br />
+}<br />
+else<br />
+{<br />
+&nbsp;&nbsp;&nbsp; echo "SIGNED FAILED!\r\n";<br />
+}</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

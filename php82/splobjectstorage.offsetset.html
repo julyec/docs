@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>Associates data to an object in the storage</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="splobjectstorage.offsetget.html">? SplObjectStorage::offsetGet</a></li>
+      <li style="float: right;"><a href="splobjectstorage.offsetunset.html">SplObjectStorage::offsetUnset ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="class.splobjectstorage.html">SplObjectStorage</a></li>
+    <li>Associates data to an object in the storage</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="splobjectstorage.offsetset" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">SplObjectStorage::offsetSet</h1>
+  <p class="verinfo">(PHP 5 &gt;= 5.3.0, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">SplObjectStorage::offsetSet</span> &mdash; <span class="dc-title">Associates data to an object in the storage</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-splobjectstorage.offsetset-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="modifier">public</span> <span class="methodname"><strong>SplObjectStorage::offsetSet</strong></span>(<span class="methodparam"><span class="type">object</span> <code class="parameter">$object</code></span>, <span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">$info</code><span class="initializer"> = <strong><code>null</code></strong></span></span>): <span class="type"><span class="type void">void</span></span></div>
+
+  <p class="para rdfs-comment">
+   Associate data to an <span class="type">object</span> in the storage.
+  </p>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    <span class="methodname"><strong>SplObjectStorage::offsetSet()</strong></span> is an alias of <span class="methodname"><a href="splobjectstorage.attach.html" class="methodname">SplObjectStorage::attach()</a></span>.
+   </p>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-splobjectstorage.offsetset-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">object</code></dt>
+
+     <dd>
+
+      <p class="para">
+       The <span class="type">object</span> to associate data with.
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">info</code></dt>
+
+     <dd>
+
+      <p class="para">
+       The data to associate with the <span class="type">object</span>.
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-splobjectstorage.offsetset-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   没有返回值。
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-splobjectstorage.offsetset-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #1 <span class="function"><strong>SplObjectStorage::offsetSet()</strong></span> example</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$s </span><span style="color: #007700">= new </span><span style="color: #0000BB">SplObjectStorage</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$o1 </span><span style="color: #007700">= new </span><span style="color: #0000BB">stdClass</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$s</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">offsetSet</span><span style="color: #007700">(</span><span style="color: #0000BB">$o1</span><span style="color: #007700">, </span><span style="color: #DD0000">"hello"</span><span style="color: #007700">); </span><span style="color: #FF8000">// Similar to $s[$o1] = "hello";<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$s</span><span style="color: #007700">[</span><span style="color: #0000BB">$o1</span><span style="color: #007700">]);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例的输出类似于：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+string(5) &quot;hello&quot;
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-splobjectstorage.offsetset-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="methodname"><a href="splobjectstorage.attach.html" class="methodname" rel="rdfs-seeAlso">SplObjectStorage::attach()</a> - Adds an object in the storage</span></li>
+    <li class="member"><span class="methodname"><a href="splobjectstorage.offsetget.html" class="methodname" rel="rdfs-seeAlso">SplObjectStorage::offsetGet()</a> - Returns the data associated with an object</span></li>
+    <li class="member"><span class="methodname"><a href="splobjectstorage.offsetexists.html" class="methodname" rel="rdfs-seeAlso">SplObjectStorage::offsetExists()</a> - Checks whether an object exists in the storage</span></li>
+    <li class="member"><span class="methodname"><a href="splobjectstorage.offsetunset.html" class="methodname" rel="rdfs-seeAlso">SplObjectStorage::offsetUnset()</a> - Removes an object from the storage</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="128662""></a>
+  <div class="note">
+   <strong class="user">aderh</strong>
+   <a href="#128662" class="date">05-Jul-2023 03:48</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Although `offsetSet` is supposed to be an alias to `attach`, real-world results do not indicate that. When extending the SplObjectStorage class, it's expected that a modification to `attach` would also affect `offsetSet`. However, it seems they need to both be extended. Consider the results below...<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="keyword">declare(</span><span class="default">strict_types</span><span class="keyword">=</span><span class="default">1</span><span class="keyword">);<br />
+<br />
+class </span><span class="default">CustomSplObjectStorage </span><span class="keyword">extends </span><span class="default">SplObjectStorage<br />
+</span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">offsetSet</span><span class="keyword">(</span><span class="default">mixed $object</span><span class="keyword">, </span><span class="default">mixed $info </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">): </span><span class="default">void<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">{<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; print(</span><span class="string">"offsetSet called\n"</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">parent</span><span class="keyword">::</span><span class="default">offsetSet</span><span class="keyword">(</span><span class="default">$object</span><span class="keyword">, </span><span class="default">$info</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">attach</span><span class="keyword">(</span><span class="default">mixed $object</span><span class="keyword">, </span><span class="default">mixed $info </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">): </span><span class="default">void<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">{<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; print(</span><span class="string">"attach called\n"</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">parent</span><span class="keyword">::</span><span class="default">attach</span><span class="keyword">(</span><span class="default">$object</span><span class="keyword">, </span><span class="default">$info</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+</span><span class="default">$a </span><span class="keyword">= new </span><span class="default">CustomSplObjectStorage</span><span class="keyword">();<br />
+</span><span class="default">$a</span><span class="keyword">[new </span><span class="default">stdClass</span><span class="keyword">()] = </span><span class="string">'ok'</span><span class="keyword">;<br />
+</span><span class="default">$a</span><span class="keyword">-&gt;</span><span class="default">attach</span><span class="keyword">(new </span><span class="default">stdClass</span><span class="keyword">(), </span><span class="string">'ok'</span><span class="keyword">);<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+This prints:<br />
+```<br />
+offsetSet called<br />
+attach called<br />
+```<br />
+<br />
+While we would expect...<br />
+<br />
+```<br />
+offsetSet called<br />
+attach called<br />
+attach called<br />
+```<br />
+<br />
+... if `offsetSet` was a true alias of `attach`. I'm not sure if this is intentional or not.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

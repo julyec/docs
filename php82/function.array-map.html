@@ -1,0 +1,790 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>为数组的每个元素应用回调函数</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.array-keys.html">? array_keys</a></li>
+      <li style="float: right;"><a href="function.array-merge-recursive.html">array_merge_recursive ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.array.html">数组 函数</a></li>
+    <li>为数组的每个元素应用回调函数</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.array-map" class="refentry">
+   <div class="refnamediv">
+    <h1 class="refname">array_map</h1>
+    <p class="verinfo">(PHP 4 &gt;= 4.0.6, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">array_map</span> &mdash; <span class="dc-title">
+     为数组的每个元素应用回调函数
+    </span></p>
+
+   </div>
+ <div class="refsect1 description" id="refsect1-function.array-map-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>array_map</strong></span>(<span class="methodparam"><span class="type">?</span><span class="type"><span class="type"><a href="language.types.callable.html" class="type callable">callable</a></span><span class="type"></span></span> <code class="parameter">$callback</code></span>, <span class="methodparam"><span class="type">array</span> <code class="parameter">$array</code></span>, <span class="methodparam"><span class="type">array</span> <code class="parameter">...$arrays</code></span>): <span class="type">array</span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>array_map()</strong></span> 返回一个 <span class="type">array</span>，包含将 <code class="parameter">array</code> 的相应值作为回调的参数顺序调用 
+   <code class="parameter">callback</code> 后的结果（如果提供了更多数组，还会利用 <code class="parameter">arrays</code> 
+   传入）。<code class="parameter">callback</code> 函数形参的数量必须匹配 <span class="function"><strong>array_map()</strong></span> 
+   实参中数组的数量。多余的实参数组将会被忽略。如果提供的实参数组的数量不足，将抛出 <span class="classname"><a href="class.argumentcounterror.html" class="classname">ArgumentCountError</a></span>。
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 parameters" id="refsect1-function.array-map-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">callback</code></dt>
+
+     <dd>
+
+      <p class="para">
+       回调函数 <span class="type"><a href="language.types.callable.html" class="type callable">callable</a></span>，应用到每个数组里的每个元素。
+      </p>
+      <p class="para">
+       多个数组操作合并时，<code class="parameter">callback</code> 可以设置为 <strong><code>null</code></strong>。
+       如果只提供了 <code class="parameter">array</code> 一个数组，
+       <span class="methodname"><strong>array_map()</strong></span> 会返回输入的数组。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">array</code></dt>
+
+     <dd>
+
+      <p class="para">
+       数组，遍历运行 <code class="parameter">callback</code> 函数。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">arrays</code></dt>
+
+     <dd>
+
+      <p class="para">
+       额外的数组列表，每个都遍历运行 <code class="parameter">callback</code> 函数。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.array-map-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回数组，包含将 <code class="parameter">array</code> 的相应值作为回调的参数调用 <code class="parameter">callback</code>
+   函数后的结果（如果提供了更多数组，还会利用 <code class="parameter">arrays</code> 传入）。
+  </p>
+  <p class="para">
+   当仅仅传入一个数组时，返回的数组会保留传入参数的键（key）。
+   传入多个数组时，返回的数组键是按顺序的 integer。
+  </p>
+ </div>
+
+
+
+ <div class="refsect1 changelog" id="refsect1-function.array-map-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+ <td>8.0.0</td>
+ <td>
+  如果 <code class="parameter">callback</code> 接受引用传递参数，该方法将会抛出
+  <strong><code>E_WARNING</code></strong>。
+ </td>
+</tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.array-map-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+     <div class="example" id="">
+      <p><strong>Example #1 <span class="function"><strong>array_map()</strong></span> 例子</strong></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">cube</span><span style="color: #007700">(</span><span style="color: #0000BB">$n</span><span style="color: #007700">)<br />{<br />    return (</span><span style="color: #0000BB">$n </span><span style="color: #007700">* </span><span style="color: #0000BB">$n </span><span style="color: #007700">* </span><span style="color: #0000BB">$n</span><span style="color: #007700">);<br />}<br /><br /></span><span style="color: #0000BB">$a </span><span style="color: #007700">= [</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">, </span><span style="color: #0000BB">3</span><span style="color: #007700">, </span><span style="color: #0000BB">4</span><span style="color: #007700">, </span><span style="color: #0000BB">5</span><span style="color: #007700">];<br /></span><span style="color: #0000BB">$b </span><span style="color: #007700">= </span><span style="color: #0000BB">array_map</span><span style="color: #007700">(</span><span style="color: #DD0000">'cube'</span><span style="color: #007700">, </span><span style="color: #0000BB">$a</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$b</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+      <div class="example-contents"><p>
+       这使得 <var class="varname">$b</var> 成为：
+      </p></div>
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+Array
+(
+    [0] =&gt; 1
+    [1] =&gt; 8
+    [2] =&gt; 27
+    [3] =&gt; 64
+    [4] =&gt; 125
+)
+</pre></div>
+      </div>
+     </div>
+  </p>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #2 <span class="function"><strong>array_map()</strong></span> 使用匿名函数</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$func </span><span style="color: #007700">= function(</span><span style="color: #0000BB">int $value</span><span style="color: #007700">): </span><span style="color: #0000BB">int </span><span style="color: #007700">{<br />    return </span><span style="color: #0000BB">$value </span><span style="color: #007700">* </span><span style="color: #0000BB">2</span><span style="color: #007700">;<br />};<br /><br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">array_map</span><span style="color: #007700">(</span><span style="color: #0000BB">$func</span><span style="color: #007700">, </span><span style="color: #0000BB">range</span><span style="color: #007700">(</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">5</span><span style="color: #007700">)));<br /><br /></span><span style="color: #FF8000">// 或者从 PHP 7.4.0 起：<br /><br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">array_map</span><span style="color: #007700">(fn(</span><span style="color: #0000BB">$value</span><span style="color: #007700">): </span><span style="color: #0000BB">int </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">$value </span><span style="color: #007700">* </span><span style="color: #0000BB">2</span><span style="color: #007700">, </span><span style="color: #0000BB">range</span><span style="color: #007700">(</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">5</span><span style="color: #007700">)));<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Array
+(
+    [0] =&gt; 2
+    [1] =&gt; 4
+    [2] =&gt; 6
+    [3] =&gt; 8
+    [4] =&gt; 10
+)
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #3 <span class="function"><strong>array_map()</strong></span>：使用更多的数组</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">show_Spanish</span><span style="color: #007700">(</span><span style="color: #0000BB">int $n</span><span style="color: #007700">, </span><span style="color: #0000BB">string $m</span><span style="color: #007700">): </span><span style="color: #0000BB">string<br /></span><span style="color: #007700">{<br />    return </span><span style="color: #DD0000">"The number </span><span style="color: #007700">{</span><span style="color: #0000BB">$n</span><span style="color: #007700">}</span><span style="color: #DD0000"> is called </span><span style="color: #007700">{</span><span style="color: #0000BB">$m</span><span style="color: #007700">}</span><span style="color: #DD0000"> in Spanish"</span><span style="color: #007700">;<br />}<br /><br />function </span><span style="color: #0000BB">map_Spanish</span><span style="color: #007700">(</span><span style="color: #0000BB">int $n</span><span style="color: #007700">, </span><span style="color: #0000BB">string $m</span><span style="color: #007700">): array<br />{<br />    return [</span><span style="color: #0000BB">$n </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">$m</span><span style="color: #007700">];<br />}<br /><br /></span><span style="color: #0000BB">$a </span><span style="color: #007700">= [</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">, </span><span style="color: #0000BB">3</span><span style="color: #007700">, </span><span style="color: #0000BB">4</span><span style="color: #007700">, </span><span style="color: #0000BB">5</span><span style="color: #007700">];<br /></span><span style="color: #0000BB">$b </span><span style="color: #007700">= [</span><span style="color: #DD0000">'uno'</span><span style="color: #007700">, </span><span style="color: #DD0000">'dos'</span><span style="color: #007700">, </span><span style="color: #DD0000">'tres'</span><span style="color: #007700">, </span><span style="color: #DD0000">'cuatro'</span><span style="color: #007700">, </span><span style="color: #DD0000">'cinco'</span><span style="color: #007700">];<br /><br /></span><span style="color: #0000BB">$c </span><span style="color: #007700">= </span><span style="color: #0000BB">array_map</span><span style="color: #007700">(</span><span style="color: #DD0000">'show_Spanish'</span><span style="color: #007700">, </span><span style="color: #0000BB">$a</span><span style="color: #007700">, </span><span style="color: #0000BB">$b</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$c</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$d </span><span style="color: #007700">= </span><span style="color: #0000BB">array_map</span><span style="color: #007700">(</span><span style="color: #DD0000">'map_Spanish'</span><span style="color: #007700">, </span><span style="color: #0000BB">$a </span><span style="color: #007700">, </span><span style="color: #0000BB">$b</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$d</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+// 打印 $c
+Array
+(
+    [0] =&gt; The number 1 is called uno in Spanish
+    [1] =&gt; The number 2 is called dos in Spanish
+    [2] =&gt; The number 3 is called tres in Spanish
+    [3] =&gt; The number 4 is called cuatro in Spanish
+    [4] =&gt; The number 5 is called cinco in Spanish
+)
+
+// 打印 $d
+Array
+(
+    [0] =&gt; Array
+        (
+            [1] =&gt; uno
+        )
+
+    [1] =&gt; Array
+        (
+            [2] =&gt; dos
+        )
+
+    [2] =&gt; Array
+        (
+            [3] =&gt; tres
+        )
+
+    [3] =&gt; Array
+        (
+            [4] =&gt; cuatro
+        )
+
+    [4] =&gt; Array
+        (
+            [5] =&gt; cinco
+        )
+
+)
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   传入两个及以上的数组时，它们元素数量将会相同。因为回调函数会并行地处理相互对应的元素。
+   如果几个数组的元素数量不一致：空元素会扩展短那个数组，直到长度和最长的数组一样。
+  </p>
+  <p class="para">
+   此函数有个有趣的用法：传入 <strong><code>null</code></strong> 作为回调函数的名称，将创建多维数组（一个数组，内部包含数组。）
+  </p>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #4 多个数组的合并操作</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$a </span><span style="color: #007700">= [</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">, </span><span style="color: #0000BB">3</span><span style="color: #007700">, </span><span style="color: #0000BB">4</span><span style="color: #007700">, </span><span style="color: #0000BB">5</span><span style="color: #007700">];<br /></span><span style="color: #0000BB">$b </span><span style="color: #007700">= [</span><span style="color: #DD0000">'one'</span><span style="color: #007700">, </span><span style="color: #DD0000">'two'</span><span style="color: #007700">, </span><span style="color: #DD0000">'three'</span><span style="color: #007700">, </span><span style="color: #DD0000">'four'</span><span style="color: #007700">, </span><span style="color: #DD0000">'five'</span><span style="color: #007700">];<br /></span><span style="color: #0000BB">$c </span><span style="color: #007700">= [</span><span style="color: #DD0000">'uno'</span><span style="color: #007700">, </span><span style="color: #DD0000">'dos'</span><span style="color: #007700">, </span><span style="color: #DD0000">'tres'</span><span style="color: #007700">, </span><span style="color: #DD0000">'cuatro'</span><span style="color: #007700">, </span><span style="color: #DD0000">'cinco'</span><span style="color: #007700">];<br /><br /></span><span style="color: #0000BB">$d </span><span style="color: #007700">= </span><span style="color: #0000BB">array_map</span><span style="color: #007700">(</span><span style="color: #0000BB">null</span><span style="color: #007700">, </span><span style="color: #0000BB">$a</span><span style="color: #007700">, </span><span style="color: #0000BB">$b</span><span style="color: #007700">, </span><span style="color: #0000BB">$c</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$d</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Array
+(
+    [0] =&gt; Array
+        (
+            [0] =&gt; 1
+            [1] =&gt; one
+            [2] =&gt; uno
+        )
+
+    [1] =&gt; Array
+        (
+            [0] =&gt; 2
+            [1] =&gt; two
+            [2] =&gt; dos
+        )
+
+    [2] =&gt; Array
+        (
+            [0] =&gt; 3
+            [1] =&gt; three
+            [2] =&gt; tres
+        )
+
+    [3] =&gt; Array
+        (
+            [0] =&gt; 4
+            [1] =&gt; four
+            [2] =&gt; cuatro
+        )
+
+    [4] =&gt; Array
+        (
+            [0] =&gt; 5
+            [1] =&gt; five
+            [2] =&gt; cinco
+        )
+
+)
+</pre></div>
+    </div>
+   </div>
+  </p>
+  
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #5 
+     仅有 <code class="parameter">array1</code> 时，<code class="parameter">callback</code> 设置为 <strong><code>null</code></strong>
+    </strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$array </span><span style="color: #007700">= [</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">, </span><span style="color: #0000BB">3</span><span style="color: #007700">];<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">array_map</span><span style="color: #007700">(</span><span style="color: #0000BB">null</span><span style="color: #007700">, </span><span style="color: #0000BB">$array</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+array(3) {
+  [0]=&gt;
+  int(1)
+  [1]=&gt;
+  int(2)
+  [2]=&gt;
+  int(3)
+}
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #6 <span class="function"><strong>array_map()</strong></span> 键（key）是 string</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$arr </span><span style="color: #007700">= array(</span><span style="color: #DD0000">"stringkey" </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">"value"</span><span style="color: #007700">);<br />function </span><span style="color: #0000BB">cb1</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">) {<br />    return [</span><span style="color: #0000BB">$a</span><span style="color: #007700">];<br />}<br />function </span><span style="color: #0000BB">cb2</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">, </span><span style="color: #0000BB">$b</span><span style="color: #007700">) {<br />    return [</span><span style="color: #0000BB">$a</span><span style="color: #007700">, </span><span style="color: #0000BB">$b</span><span style="color: #007700">];<br />}<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">array_map</span><span style="color: #007700">(</span><span style="color: #DD0000">'cb1'</span><span style="color: #007700">, </span><span style="color: #0000BB">$arr</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">array_map</span><span style="color: #007700">(</span><span style="color: #DD0000">'cb2'</span><span style="color: #007700">, </span><span style="color: #0000BB">$arr</span><span style="color: #007700">, </span><span style="color: #0000BB">$arr</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">array_map</span><span style="color: #007700">(</span><span style="color: #0000BB">null</span><span style="color: #007700">,  </span><span style="color: #0000BB">$arr</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">array_map</span><span style="color: #007700">(</span><span style="color: #0000BB">null</span><span style="color: #007700">, </span><span style="color: #0000BB">$arr</span><span style="color: #007700">, </span><span style="color: #0000BB">$arr</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+array(1) {
+  [&quot;stringkey&quot;]=&gt;
+  array(1) {
+    [0]=&gt;
+    string(5) &quot;value&quot;
+  }
+}
+array(1) {
+  [0]=&gt;
+  array(2) {
+    [0]=&gt;
+    string(5) &quot;value&quot;
+    [1]=&gt;
+    string(5) &quot;value&quot;
+  }
+}
+array(1) {
+  [&quot;stringkey&quot;]=&gt;
+  string(5) &quot;value&quot;
+}
+array(1) {
+  [0]=&gt;
+  array(2) {
+    [0]=&gt;
+    string(5) &quot;value&quot;
+    [1]=&gt;
+    string(5) &quot;value&quot;
+  }
+}
+</pre></div>
+    </div>
+   </div>
+   <div class="example" id="">
+    <p><strong>Example #7 <span class="function"><strong>array_map()</strong></span> - 关联数组</strong></p>
+    <div class="example-contents"><p>
+     虽然 <span class="function"><strong>array_map()</strong></span> 不能直接支持使用数组的键（key）作为输入，但可以使用
+     <span class="function"><a href="function.array-keys.html" class="function">array_keys()</a></span> 进行模拟。
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$arr </span><span style="color: #007700">= [<br />    </span><span style="color: #DD0000">'v1' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'First release'</span><span style="color: #007700">,<br />    </span><span style="color: #DD0000">'v2' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'Second release'</span><span style="color: #007700">,<br />    </span><span style="color: #DD0000">'v3' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'Third release'</span><span style="color: #007700">,<br />];<br /><br /></span><span style="color: #FF8000">// 注意： 在 7.4.0 之前，使用较长的语法来代替匿名函数。<br /></span><span style="color: #0000BB">$callback </span><span style="color: #007700">= fn(</span><span style="color: #0000BB">string $k</span><span style="color: #007700">, </span><span style="color: #0000BB">string $v</span><span style="color: #007700">): </span><span style="color: #0000BB">string </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">"</span><span style="color: #0000BB">$k</span><span style="color: #DD0000"> was the </span><span style="color: #0000BB">$v</span><span style="color: #DD0000">"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">array_map</span><span style="color: #007700">(</span><span style="color: #0000BB">$callback</span><span style="color: #007700">, </span><span style="color: #0000BB">array_keys</span><span style="color: #007700">(</span><span style="color: #0000BB">$arr</span><span style="color: #007700">), </span><span style="color: #0000BB">array_values</span><span style="color: #007700">(</span><span style="color: #0000BB">$arr</span><span style="color: #007700">));<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+array(3) {
+  [0]=&gt;
+  string(24) &quot;v1 was the First release&quot;
+  [1]=&gt;
+  string(25) &quot;v2 was the Second release&quot;
+  [2]=&gt;
+  string(24) &quot;v3 was the Third release&quot;
+}
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.array-map-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.array-filter.html" class="function" rel="rdfs-seeAlso">array_filter()</a> - 使用回调函数过滤数组的元素</span></li>
+    <li class="member"><span class="function"><a href="function.array-reduce.html" class="function" rel="rdfs-seeAlso">array_reduce()</a> - 用回调函数迭代地将数组简化为单一的值</span></li>
+    <li class="member"><span class="function"><a href="function.array-walk.html" class="function" rel="rdfs-seeAlso">array_walk()</a> - 使用用户自定义函数对数组中的每个元素做回调处理</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="128742""></a>
+  <div class="note">
+   <strong class="user">s dot kientzler at online dot de</strong>
+   <a href="#128742" class="date">18-Jul-2023 11:57</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If the callback function to be called is a static method from a different namespace, the fully qualified method including namespace must be specified (a use statement is not sufficient to resolve the namespace of the callback function)<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">use </span><span class="default">MyTools</span><span class="keyword">;<br />
+<br />
+</span><span class="default">$arr </span><span class="keyword">= [</span><span class="default">1</span><span class="keyword">, </span><span class="default">2</span><span class="keyword">, </span><span class="default">3</span><span class="keyword">];<br />
+<br />
+</span><span class="default">$arr </span><span class="keyword">= </span><span class="default">array_map</span><span class="keyword">(</span><span class="string">'Tools::myHelper'</span><span class="keyword">, </span><span class="default">$arr</span><span class="keyword">);<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+will cause TypeError: <br />
+array_map() expects parameter 1 to be a valid callback, class 'Tools' not found.<br />
+<br />
+Use the fully qualified name for the callback instead:<br />
+<br />
+<span class="default">&lt;?php<br />
+$arr </span><span class="keyword">= [</span><span class="default">1</span><span class="keyword">, </span><span class="default">2</span><span class="keyword">, </span><span class="default">3</span><span class="keyword">];<br />
+<br />
+</span><span class="default">$arr </span><span class="keyword">= </span><span class="default">array_map</span><span class="keyword">(</span><span class="string">'\MyTools\Tools::myHelper'</span><span class="keyword">, </span><span class="default">$arr</span><span class="keyword">);<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="126954""></a>
+  <div class="note">
+   <strong class="user">Walf</strong>
+   <a href="#126954" class="date">24-Mar-2022 11:48</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+A general solution for the problem of wanting to know the keys in the callback, and/or retain the key association in the returned array:<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="comment">/**<br />
+&nbsp;* Like array_map() but callback also gets passed the current key as the<br />
+&nbsp;* first argument like so:<br />
+&nbsp;* function($key, $val, ...$vals) { ... }<br />
+&nbsp;* ...and returned array always maintains key association, even if multiple<br />
+&nbsp;* array arguments are passed.<br />
+&nbsp;*/<br />
+<br />
+</span><span class="keyword">function </span><span class="default">array_map_assoc</span><span class="keyword">(callable </span><span class="default">$callback</span><span class="keyword">, array </span><span class="default">$array</span><span class="keyword">, array ...</span><span class="default">$arrays</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$keys </span><span class="keyword">= </span><span class="default">array_keys</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">array_unshift</span><span class="keyword">(</span><span class="default">$arrays</span><span class="keyword">, </span><span class="default">$keys</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">array_combine</span><span class="keyword">(</span><span class="default">$keys</span><span class="keyword">, </span><span class="default">array_map</span><span class="keyword">(</span><span class="default">$callback</span><span class="keyword">, ...</span><span class="default">$arrays</span><span class="keyword">));<br />
+}<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Because it uses array_map() directly, it behaves the same way in regard to ignoring the keys of subsequent array arguments. It also has the same variadic signature.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="126689""></a>
+  <div class="note">
+   <strong class="user">anonymous_user</strong>
+   <a href="#126689" class="date">16-Dec-2021 08:15</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+/** <br />
+&nbsp; * Function which recursively applies a callback to all values and also its<br />
+&nbsp; * keys, and returns the resulting array copy with the updated keys and <br />
+&nbsp; * values.<br />
+&nbsp; * PHP's built-in function array_walk_recursive() only applies the passed <br />
+&nbsp; * callback to the array values, not the keys, so this function simply applies<br />
+&nbsp; * the callback to the keys too (hence the need of working with a copy, <br />
+&nbsp; * as also updating the keys would lead to reference loss of the original<br />
+&nbsp; * array). I needed something like this, hence my idea of sharing it here.<br />
+&nbsp; *<br />
+&nbsp; * @param&nbsp; &nbsp; callable&nbsp; &nbsp; $func&nbsp; &nbsp;&nbsp; callback which takes one parameter (value <br />
+&nbsp; *&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; or key to be updated) and returns its <br />
+&nbsp; *&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; updated value<br />
+&nbsp; *<br />
+&nbsp; * @param&nbsp; &nbsp; array&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $arr&nbsp; &nbsp; &nbsp; array of which keys and values shall be <br />
+&nbsp; *&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; get updated <br />
+&nbsp; */<br />
+<br />
+function array_map_recursive(<br />
+&nbsp;&nbsp;&nbsp; callable $func,<br />
+&nbsp;&nbsp;&nbsp; array $arr<br />
+) {<br />
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; // Initiate copied array which will hold all updated keys + values<br />
+&nbsp;&nbsp; &nbsp;&nbsp; $result = [];<br />
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; // Iterate through the key-value pairs of the array<br />
+&nbsp;&nbsp; &nbsp;&nbsp; foreach ( $arr as $key =&gt; $value ) {<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; // Apply the callback to the key to create the updated key value<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $updated_key = $func( $key );<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; // If the iterated value is not an array, that means we have reached the<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; // deepest array level for the iterated key, so in that case, assign<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; // the updated value to the updated key value in the final output array<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if ( ! is_array( $value ) ) {<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $result[$updated_key] = $func( $value );<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; } else {<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; // If the iterated value is an array, call the function recursively,<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; // By taking the currently iterated value as the $arr argument<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $result[$updated_key] = array_map_recursive(<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $func,<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $arr[$key]<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; );<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; } // end of iteration through k-v pairs<br />
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; // And at the very end, return the generated result set<br />
+&nbsp;&nbsp; &nbsp;&nbsp; return $result;<br />
+<br />
+&nbsp;&nbsp;&nbsp; } // end of array_map_recursive() function definition</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="118172""></a>
+  <div class="note">
+   <strong class="user">Mahn</strong>
+   <a href="#118172" class="date">20-Oct-2015 05:10</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+You may be looking for a method to extract values of a multidimensional array on a conditional basis (i.e. a mixture between array_map and array_filter) other than a for/foreach loop. If so, you can take advantage of the fact that 1) the callback method on array_map returns null if no explicit return value is specified (as with everything else) and 2) array_filter with no arguments removes falsy values. <br />
+<br />
+So for example, provided you have:<br />
+<br />
+<span class="default">&lt;?php<br />
+$data </span><span class="keyword">= [<br />
+&nbsp;&nbsp;&nbsp; [<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"name" </span><span class="keyword">=&gt; </span><span class="string">"John"</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"smoker" </span><span class="keyword">=&gt; </span><span class="default">false<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">],<br />
+&nbsp;&nbsp;&nbsp; [<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"name" </span><span class="keyword">=&gt; </span><span class="string">"Mary"</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"smoker" </span><span class="keyword">=&gt; </span><span class="default">true<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">],<br />
+&nbsp;&nbsp;&nbsp; [<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"name" </span><span class="keyword">=&gt; </span><span class="string">"Peter"</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"smoker" </span><span class="keyword">=&gt; </span><span class="default">false<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">],<br />
+&nbsp;&nbsp;&nbsp; [<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"name" </span><span class="keyword">=&gt; </span><span class="string">"Tony"</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"smoker" </span><span class="keyword">=&gt; </span><span class="default">true<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">]<br />
+];<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+You can extract the names of all the non-smokers with the following one-liner:<br />
+<br />
+<span class="default">&lt;?php<br />
+$names </span><span class="keyword">= </span><span class="default">array_filter</span><span class="keyword">(</span><span class="default">array_map</span><span class="keyword">(function(</span><span class="default">$n</span><span class="keyword">) { if(!</span><span class="default">$n</span><span class="keyword">[</span><span class="string">'smoker'</span><span class="keyword">]) return </span><span class="default">$n</span><span class="keyword">[</span><span class="string">'name'</span><span class="keyword">]; }, </span><span class="default">$data</span><span class="keyword">));<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+It's not necessarily better than a for/foreach loop, but the occasional one-liner for trivial tasks can help keep your code cleaner.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="113886""></a>
+  <div class="note">
+   <strong class="user">elfe1021 at gmail dot com</strong>
+   <a href="#113886" class="date">13-Dec-2013 02:44</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Find an interesting thing that in array_map's callable function, late static binding does not work:<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">class </span><span class="default">A </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public static function </span><span class="default">foo</span><span class="keyword">(</span><span class="default">$name</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="string">'In A: '</span><span class="keyword">.</span><span class="default">$name</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; public static function </span><span class="default">test</span><span class="keyword">(</span><span class="default">$names</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">array_map</span><span class="keyword">(function(</span><span class="default">$n</span><span class="keyword">) {return static::</span><span class="default">foo</span><span class="keyword">(</span><span class="default">$n</span><span class="keyword">);}, </span><span class="default">$names</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+class </span><span class="default">B </span><span class="keyword">extends </span><span class="default">A</span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public static function </span><span class="default">foo</span><span class="keyword">(</span><span class="default">$name</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="string">'In B: '</span><span class="keyword">.</span><span class="default">$name</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+</span><span class="default">$result </span><span class="keyword">= </span><span class="default">B</span><span class="keyword">::</span><span class="default">test</span><span class="keyword">([</span><span class="string">'alice'</span><span class="keyword">, </span><span class="string">'bob'</span><span class="keyword">]);<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$result</span><span class="keyword">);<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+the result is:<br />
+array (size=2)<br />
+&nbsp; 0 =&gt; string 'In A: alice' (length=11)<br />
+&nbsp; 1 =&gt; string 'In A: bob' (length=9)<br />
+<br />
+if I change A::test to<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">public static function </span><span class="default">test</span><span class="keyword">(</span><span class="default">$names</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">array_map</span><span class="keyword">([</span><span class="default">get_called_class</span><span class="keyword">(), </span><span class="string">'foo'</span><span class="keyword">], </span><span class="default">$names</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Then the result is as expected:<br />
+array (size=2)<br />
+&nbsp; 0 =&gt; string 'In B: alice' (length=11)<br />
+&nbsp; 1 =&gt; string 'In B: bob' (length=9)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="113795""></a>
+  <div class="note">
+   <strong class="user">lukasz dot mordawski at gmail dot com</strong>
+   <a href="#113795" class="date">03-Dec-2013 10:55</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Let's assume we have following situation:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">class </span><span class="default">MyFilterClass </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">filter</span><span class="keyword">(array </span><span class="default">$arr</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">array_map</span><span class="keyword">(function(</span><span class="default">$value</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">privateFilterMethod</span><span class="keyword">(</span><span class="default">$value</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; });<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; private function </span><span class="default">privateFilterMethod</span><span class="keyword">(</span><span class="default">$value</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">is_numeric</span><span class="keyword">(</span><span class="default">$value</span><span class="keyword">)) </span><span class="default">$value</span><span class="keyword">++;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; else </span><span class="default">$value </span><span class="keyword">.= </span><span class="string">'.'</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+This will work, because $this inside anonymous function (unlike for example javascript) is the instance of MyFilterClass inside which we called it.<br />
+I hope this would be useful for anyone.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="113051""></a>
+  <div class="note">
+   <strong class="user">CertaiN</strong>
+   <a href="#113051" class="date">22-Aug-2013 08:52</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+The most memory-efficient array_map_recursive().<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">array_map_recursive</span><span class="keyword">(callable </span><span class="default">$func</span><span class="keyword">, array </span><span class="default">$arr</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">array_walk_recursive</span><span class="keyword">(</span><span class="default">$arr</span><span class="keyword">, function(&amp;</span><span class="default">$v</span><span class="keyword">) use (</span><span class="default">$func</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$v </span><span class="keyword">= </span><span class="default">$func</span><span class="keyword">(</span><span class="default">$v</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; });<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$arr</span><span class="keyword">;<br />
+}<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="86743""></a>
+  <div class="note">
+   <strong class="user">radist-hack at yandex dot ru</strong>
+   <a href="#86743" class="date">01-Nov-2008 01:37</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+To transpose rectangular two-dimension array, use the following code:<br />
+<br />
+array_unshift($array, null);<br />
+$array = call_user_func_array("array_map", $array);<br />
+<br />
+If you need to rotate rectangular two-dimension array on 90 degree, add the following line before or after (depending on the rotation direction you need) the code above:<br />
+$array = array_reverse($array);<br />
+<br />
+Here is example:<br />
+<br />
+<span class="default">&lt;?php<br />
+$a </span><span class="keyword">= array(<br />
+&nbsp; array(</span><span class="default">1</span><span class="keyword">, </span><span class="default">2</span><span class="keyword">, </span><span class="default">3</span><span class="keyword">),<br />
+&nbsp; array(</span><span class="default">4</span><span class="keyword">, </span><span class="default">5</span><span class="keyword">, </span><span class="default">6</span><span class="keyword">));<br />
+</span><span class="default">array_unshift</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">, </span><span class="default">null</span><span class="keyword">);<br />
+</span><span class="default">$a </span><span class="keyword">= </span><span class="default">call_user_func_array</span><span class="keyword">(</span><span class="string">"array_map"</span><span class="keyword">, </span><span class="default">$a</span><span class="keyword">);<br />
+</span><span class="default">print_r</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">);<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Output:<br />
+<br />
+Array<br />
+(<br />
+&nbsp;&nbsp;&nbsp; [0] =&gt; Array<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; (<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; [0] =&gt; 1<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; [1] =&gt; 4<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; )<br />
+<br />
+&nbsp;&nbsp;&nbsp; [1] =&gt; Array<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; (<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; [0] =&gt; 2<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; [1] =&gt; 5<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; )<br />
+<br />
+&nbsp;&nbsp;&nbsp; [2] =&gt; Array<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; (<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; [0] =&gt; 3<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; [1] =&gt; 6<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; )<br />
+<br />
+)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="84632""></a>
+  <div class="note">
+   <strong class="user">stijnleenknegt at gmail dot com</strong>
+   <a href="#84632" class="date">22-Jul-2008 04:17</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you want to pass an argument like ENT_QUOTES to htmlentities, you can do the follow.<br />
+<br />
+<span class="default">&lt;?php<br />
+$array </span><span class="keyword">= </span><span class="default">array_map</span><span class="keyword">( </span><span class="string">'htmlentities' </span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">, </span><span class="default">array_fill</span><span class="keyword">(</span><span class="default">0 </span><span class="keyword">, </span><span class="default">count</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">) , </span><span class="default">ENT_QUOTES</span><span class="keyword">) );<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+The third argument creates an equal sized array of $array filled with the parameter you want to give with your callback function.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

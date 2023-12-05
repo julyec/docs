@@ -1,0 +1,321 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>Formats an object</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="intldateformatter.format.html">? IntlDateFormatter::format</a></li>
+      <li style="float: right;"><a href="intldateformatter.getcalendar.html">IntlDateFormatter::getCalendar ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="class.intldateformatter.html">IntlDateFormatter</a></li>
+    <li>Formats an object</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="intldateformatter.formatobject" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">IntlDateFormatter::formatObject</h1>
+  <h1 class="refname">datefmt_format_object</h1>
+  <p class="verinfo">(PHP 5 &gt;= 5.5.0, PHP 7, PHP 8, PECL intl &gt;= 3.0.0)</p><p class="refpurpose"><span class="refname">IntlDateFormatter::formatObject</span> -- <span class="refname">datefmt_format_object</span> &mdash; <span class="dc-title">Formats an object</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-intldateformatter.formatobject-description">
+  <h3 class="title">说明</h3>
+  <p class="para">
+   面向对象风格
+  </p>
+  <div class="methodsynopsis dc-description">
+   <span class="modifier">public</span> <span class="modifier">static</span> <span class="methodname"><strong>IntlDateFormatter::formatObject</strong></span>(<span class="methodparam"><span class="type"><span class="type"><a href="class.intlcalendar.html" class="type IntlCalendar">IntlCalendar</a></span>|<span class="type"><a href="class.datetimeinterface.html" class="type DateTimeInterface">DateTimeInterface</a></span></span> <code class="parameter">$datetime</code></span>, <span class="methodparam"><span class="type"><span class="type">array</span>|<span class="type">int</span>|<span class="type">string</span>|<span class="type">null</span></span> <code class="parameter">$format</code><span class="initializer"> = <strong><code>null</code></strong></span></span>, <span class="methodparam"><span class="type">?</span><span class="type"><span class="type">string</span><span class="type"></span></span> <code class="parameter">$locale</code><span class="initializer"> = <strong><code>null</code></strong></span></span>): <span class="type"><span class="type">string</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   过程化风格
+  </p>
+  <div class="methodsynopsis dc-description"><span class="methodname"><strong>datefmt_format_object</strong></span>(<span class="methodparam"><span class="type"><span class="type"><a href="class.intlcalendar.html" class="type IntlCalendar">IntlCalendar</a></span>|<span class="type"><a href="class.datetimeinterface.html" class="type DateTimeInterface">DateTimeInterface</a></span></span> <code class="parameter">$datetime</code></span>, <span class="methodparam"><span class="type"><span class="type">array</span>|<span class="type">int</span>|<span class="type">string</span>|<span class="type">null</span></span> <code class="parameter">$format</code><span class="initializer"> = <strong><code>null</code></strong></span></span>, <span class="methodparam"><span class="type">?</span><span class="type"><span class="type">string</span><span class="type"></span></span> <code class="parameter">$locale</code><span class="initializer"> = <strong><code>null</code></strong></span></span>): <span class="type"><span class="type">string</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  
+  <p class="para rdfs-comment">
+   This function allows formatting an <span class="classname"><a href="class.intlcalendar.html" class="classname">IntlCalendar</a></span> or
+   <span class="classname"><a href="class.datetime.html" class="classname">DateTime</a></span> object without first explicitly creating a
+   <span class="classname"><a href="class.intldateformatter.html" class="classname">IntlDateFormatter</a></span> object.
+  </p>
+  <p class="para">
+   The temporary <span class="classname"><a href="class.intldateformatter.html" class="classname">IntlDateFormatter</a></span> that will be created
+   will take the timezone from the passed in object. The timezone database
+   bundled with PHP will not be used - ICU&#039;s will be used instead. The timezone
+   identifier used in <span class="classname"><a href="class.datetime.html" class="classname">DateTime</a></span> objects must therefore
+   also exist in ICU&#039;s database.
+  </p>
+  
+ </div>
+
+ 
+ <div class="refsect1 parameters" id="refsect1-intldateformatter.formatobject-parameters">
+  <h3 class="title">参数</h3>
+  <dl>
+   
+    <dt>
+<code class="parameter">datetime</code></dt>
+
+    <dd>
+
+     <p class="para">
+      An object of type <span class="classname"><a href="class.intlcalendar.html" class="classname">IntlCalendar</a></span> or
+      <span class="classname"><a href="class.datetime.html" class="classname">DateTime</a></span>. The timezone information in the object
+      will be used.
+     </p>
+    </dd>
+
+   
+   
+    <dt>
+<code class="parameter">format</code></dt>
+
+    <dd>
+
+     <p class="para">
+      How to format the date/time. This can either be an <span class="type">array</span> with
+      two elements (first the date style, then the time style, these being one
+      of the constants <strong><code>IntlDateFormatter::NONE</code></strong>,
+      <strong><code>IntlDateFormatter::SHORT</code></strong>,
+      <strong><code>IntlDateFormatter::MEDIUM</code></strong>,
+      <strong><code>IntlDateFormatter::LONG</code></strong>,
+      <strong><code>IntlDateFormatter::FULL</code></strong>), an <span class="type">int</span> with
+      the value of one of these constants (in which case it will be used both
+      for the time and the date) or a <span class="type">string</span> with the format
+      described in <a href="https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax" class="link external" title="Link : https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax">&raquo;&nbsp;the ICU
+      documentation</a>. If <strong><code>null</code></strong>, the default style will be used.
+     </p>
+    </dd>
+
+   
+   
+    <dt>
+<code class="parameter">locale</code></dt>
+
+    <dd>
+
+     <p class="para">
+      The locale to use, or <strong><code>null</code></strong> to use the <a href="intl.configuration.html#ini.intl.default-locale" class="link">default one</a>.
+     </p>
+    </dd>
+
+   
+  </dl>
+
+ </div>
+
+ 
+ <div class="refsect1 returnvalues" id="refsect1-intldateformatter.formatobject-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   A string with result 或者在失败时返回 <strong><code>false</code></strong>.
+  </p>
+ </div>
+
+ 
+ 
+ <div class="refsect1 examples" id="refsect1-intldateformatter.formatobject-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="example-4970">
+    <p><strong>Example #1 <span class="function"><strong>IntlDateFormatter::formatObject()</strong></span> examples</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">/* default timezone is irrelevant; timezone taken from the object */<br /></span><span style="color: #0000BB">ini_set</span><span style="color: #007700">(</span><span style="color: #DD0000">'date.timezone'</span><span style="color: #007700">, </span><span style="color: #DD0000">'UTC'</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">/* default locale is taken from this ini setting */<br /></span><span style="color: #0000BB">ini_set</span><span style="color: #007700">(</span><span style="color: #DD0000">'intl.default_locale'</span><span style="color: #007700">, </span><span style="color: #DD0000">'fr_FR'</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$cal </span><span style="color: #007700">= </span><span style="color: #0000BB">IntlCalendar</span><span style="color: #007700">::</span><span style="color: #0000BB">fromDateTime</span><span style="color: #007700">(</span><span style="color: #DD0000">"2013-06-06 17:05:06 Europe/Dublin"</span><span style="color: #007700">);<br />echo </span><span style="color: #DD0000">"default:\n\t"</span><span style="color: #007700">,<br />        </span><span style="color: #0000BB">IntlDateFormatter</span><span style="color: #007700">::</span><span style="color: #0000BB">formatObject</span><span style="color: #007700">(</span><span style="color: #0000BB">$cal</span><span style="color: #007700">),<br />        </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br />echo </span><span style="color: #DD0000">"long \$format (full):\n\t"</span><span style="color: #007700">,<br />        </span><span style="color: #0000BB">IntlDateFormatter</span><span style="color: #007700">::</span><span style="color: #0000BB">formatObject</span><span style="color: #007700">(</span><span style="color: #0000BB">$cal</span><span style="color: #007700">, </span><span style="color: #0000BB">IntlDateFormatter</span><span style="color: #007700">::</span><span style="color: #0000BB">FULL</span><span style="color: #007700">),<br />        </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br />echo </span><span style="color: #DD0000">"array \$format (none, full):\n\t"</span><span style="color: #007700">,<br />        </span><span style="color: #0000BB">IntlDateFormatter</span><span style="color: #007700">::</span><span style="color: #0000BB">formatObject</span><span style="color: #007700">(</span><span style="color: #0000BB">$cal</span><span style="color: #007700">, array(<br />                </span><span style="color: #0000BB">IntlDateFormatter</span><span style="color: #007700">::</span><span style="color: #0000BB">NONE</span><span style="color: #007700">,<br />                </span><span style="color: #0000BB">IntlDateFormatter</span><span style="color: #007700">::</span><span style="color: #0000BB">FULL</span><span style="color: #007700">)),<br />        </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br />echo </span><span style="color: #DD0000">"string \$format (d 'of' MMMM y):\n\t"</span><span style="color: #007700">,<br />        </span><span style="color: #0000BB">IntlDateFormatter</span><span style="color: #007700">::</span><span style="color: #0000BB">formatObject</span><span style="color: #007700">(</span><span style="color: #0000BB">$cal</span><span style="color: #007700">, </span><span style="color: #DD0000">"d 'of' MMMM y"</span><span style="color: #007700">, </span><span style="color: #DD0000">'en_US'</span><span style="color: #007700">),<br />        </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br />echo </span><span style="color: #DD0000">"with DateTime:\n\t"</span><span style="color: #007700">,<br />        </span><span style="color: #0000BB">IntlDateFormatter</span><span style="color: #007700">::</span><span style="color: #0000BB">formatObject</span><span style="color: #007700">(<br />                new </span><span style="color: #0000BB">DateTime</span><span style="color: #007700">(</span><span style="color: #DD0000">"2013-09-09 09:09:09 Europe/Madrid"</span><span style="color: #007700">),<br />                </span><span style="color: #0000BB">IntlDateFormatter</span><span style="color: #007700">::</span><span style="color: #0000BB">FULL</span><span style="color: #007700">,<br />                </span><span style="color: #DD0000">'es_ES'</span><span style="color: #007700">),<br />        </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+default:
+    6 juin 2013 17:05:06
+long $format (full):
+    jeudi 6 juin 2013 17:05:06 heure d'été irlandaise
+array $format (none, full):
+    17:05:06 heure d'été irlandaise
+string $format (d &#039;of&#039; MMMM y):
+    6 of June 2013
+with DateTime:
+    lunes, 9 de septiembre de 2013 09:09:09 Hora de verano de Europa central
+
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+ 
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="128379""></a>
+  <div class="note">
+   <strong class="user">Anonymous</strong>
+   <a href="#128379" class="date">08-Apr-2023 10:12</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+`format` vs static `formatObject`<br />
+<br />
+** The `formatObject` is NOT slower!&nbsp; (on PHP 5.5) **<br />
+<br />
+Use either the `format` method or the static `formatObject`.<br />
+<br />
+Since `formatObject` is doing the work of `new IntlDateFormatter` with the provided pattern, the instantiation line must be included in the loop!<br />
+<br />
+Another debunked flawed false test!<br />
+<br />
+php -v<br />
+PHP 5.5.26-1+deb.sury.org~precise+1 (cli) (built: Jun 15 2015 10:04:01)<br />
+Copyright (c) 1997-2015 The PHP Group<br />
+Zend Engine v2.5.0, Copyright (c) 1998-2015 Zend Technologies<br />
+&nbsp;&nbsp;&nbsp; with Zend OPcache v7.0.6-dev, Copyright (c) 1999-2015, by Zend Technologies<br />
+&nbsp;&nbsp;&nbsp; with Xdebug v2.3.2, Copyright (c) 2002-2015, by Derick Rethans<br />
+<br />
+<span class="default">&lt;?php<br />
+date_default_timezone_set</span><span class="keyword">(</span><span class="string">'America/Los_Angeles'</span><span class="keyword">);<br />
+</span><span class="default">$n </span><span class="keyword">= </span><span class="default">3000</span><span class="keyword">;<br />
+<br />
+</span><span class="default">$dt </span><span class="keyword">= new </span><span class="default">DateTime</span><span class="keyword">(</span><span class="string">'2015-01-03 12:32:44'</span><span class="keyword">);<br />
+<br />
+</span><span class="default">$time</span><span class="keyword">[] = </span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);<br />
+for(</span><span class="default">$i</span><span class="keyword">=</span><span class="default">0</span><span class="keyword">;</span><span class="default">$i</span><span class="keyword">&lt;</span><span class="default">$n</span><span class="keyword">;</span><span class="default">$i</span><span class="keyword">++) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$a </span><span class="keyword">= </span><span class="default">IntlDateFormatter</span><span class="keyword">::</span><span class="default">formatObject</span><span class="keyword">(</span><span class="default">$dt</span><span class="keyword">, </span><span class="string">'MMMM dd'</span><span class="keyword">, </span><span class="string">'hu_HU'</span><span class="keyword">);<br />
+}<br />
+echo </span><span class="string">"</span><span class="default">$a</span><span class="string">\n"</span><span class="keyword">;<br />
+</span><span class="default">$time</span><span class="keyword">[] = </span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);<br />
+for(</span><span class="default">$i</span><span class="keyword">=</span><span class="default">0</span><span class="keyword">;</span><span class="default">$i</span><span class="keyword">&lt;</span><span class="default">$n</span><span class="keyword">;</span><span class="default">$i</span><span class="keyword">++) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$df </span><span class="keyword">= new </span><span class="default">IntlDateFormatter</span><span class="keyword">(</span><span class="string">'hu_HU'</span><span class="keyword">, </span><span class="default">IntlDateFormatter</span><span class="keyword">::</span><span class="default">SHORT</span><span class="keyword">, </span><span class="default">IntlDateFormatter</span><span class="keyword">::</span><span class="default">NONE</span><span class="keyword">, </span><span class="default">null</span><span class="keyword">, </span><span class="default">null</span><span class="keyword">, </span><span class="string">'MMMM dd'</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$a </span><span class="keyword">= </span><span class="default">$df</span><span class="keyword">-&gt;</span><span class="default">format</span><span class="keyword">(</span><span class="default">$dt</span><span class="keyword">);<br />
+}<br />
+echo </span><span class="string">"</span><span class="default">$a</span><span class="string">\n"</span><span class="keyword">;<br />
+</span><span class="default">$time</span><span class="keyword">[] = </span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);<br />
+<br />
+for(</span><span class="default">$j</span><span class="keyword">=</span><span class="default">1</span><span class="keyword">;</span><span class="default">$j</span><span class="keyword">&lt;</span><span class="default">count</span><span class="keyword">(</span><span class="default">$time</span><span class="keyword">);</span><span class="default">$j</span><span class="keyword">++) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">printf</span><span class="keyword">(</span><span class="string">"%fs\n"</span><span class="keyword">, </span><span class="default">$time</span><span class="keyword">[</span><span class="default">$j</span><span class="keyword">]-</span><span class="default">$time</span><span class="keyword">[</span><span class="default">$j</span><span class="keyword">-</span><span class="default">1</span><span class="keyword">]);<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+`formatObject` : 0.336579s<br />
+`format` : 0.391158s</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="126973""></a>
+  <div class="note">
+   <strong class="user">raf at sns dot pm</strong>
+   <a href="#126973" class="date">07-Apr-2022 02:44</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you want to format a date according to a specific scheme and in a local language, here is the link to the reference of the formatting codes to use, I did not find it directly in the documentation:<br />
+https://unicode-org.github.io/icu/userguide/format_parse/datetime/#date-field-symbol-table<br />
+&nbsp;Here is a test using a DateTime object :<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="comment">// must be required by the server<br />
+</span><span class="default">date_default_timezone_set</span><span class="keyword">( </span><span class="string">'Europe/Paris' </span><span class="keyword">);<br />
+<br />
+</span><span class="comment">// instantiate a new DateTime object<br />
+</span><span class="default">$dateTimeObj </span><span class="keyword">= new </span><span class="default">DateTime</span><span class="keyword">(</span><span class="string">'now'</span><span class="keyword">, new </span><span class="default">DateTimeZone</span><span class="keyword">(</span><span class="string">'Europe/Paris'</span><span class="keyword">));<br />
+<br />
+</span><span class="comment">// format the date with a specific scheme<br />
+// the 3 parameters are [ DateTimeObject, ICU Scheme, locale code string ]<br />
+</span><span class="default">$dateFromatted </span><span class="keyword">= </span><span class="default">IntlDateFormatter</span><span class="keyword">::</span><span class="default">formatObject</span><span class="keyword">( </span><span class="default">$dateTimeObj</span><span class="keyword">, </span><span class="string">"eee d MMMM y à HH:mm"</span><span class="keyword">, </span><span class="string">'fr' </span><span class="keyword">);<br />
+<br />
+</span><span class="comment">// test :<br />
+</span><span class="keyword">echo </span><span class="default">ucwords</span><span class="keyword">(</span><span class="default">$dateFromatted</span><span class="keyword">);<br />
+</span><span class="comment">// output : Jeu. 7 Avril 2022 à 04:36 // formatted as i want <br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="121223""></a>
+  <div class="note">
+   <strong class="user">sebastian at huehnerhose dot de</strong>
+   <a href="#121223" class="date">14-Jun-2017 12:37</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+It's still slower on php7.1, but not that dramatic anymore, here I got something around 5times slower</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="117814""></a>
+  <div class="note">
+   <strong class="user">ferenczi dot krisztian at gmail dot com</strong>
+   <a href="#117814" class="date">13-Aug-2015 01:56</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+`format` vs static `formatObject`<br />
+<br />
+The `formatObject` is slower! `format` is more then 10-13 times faster! (on PHP 5.5) Use the `format` method instead of the static `formatObject`.<br />
+<br />
+php -v<br />
+PHP 5.5.26-1+deb.sury.org~precise+1 (cli) (built: Jun 15 2015 10:04:01) <br />
+Copyright (c) 1997-2015 The PHP Group<br />
+Zend Engine v2.5.0, Copyright (c) 1998-2015 Zend Technologies<br />
+&nbsp;&nbsp;&nbsp; with Zend OPcache v7.0.6-dev, Copyright (c) 1999-2015, by Zend Technologies<br />
+&nbsp;&nbsp;&nbsp; with Xdebug v2.3.2, Copyright (c) 2002-2015, by Derick Rethans<br />
+<br />
+<span class="default">&lt;?php<br />
+$n </span><span class="keyword">= </span><span class="default">3000</span><span class="keyword">;<br />
+<br />
+</span><span class="default">$dt </span><span class="keyword">= new </span><span class="default">\DateTime</span><span class="keyword">(</span><span class="string">'2015-01-03 12:32:44'</span><span class="keyword">);<br />
+</span><span class="default">$df </span><span class="keyword">= new </span><span class="default">IntlDateFormatter</span><span class="keyword">(</span><span class="string">'hu_HU'</span><span class="keyword">, </span><span class="default">IntlDateFormatter</span><span class="keyword">::</span><span class="default">SHORT</span><span class="keyword">, </span><span class="default">IntlDateFormatter</span><span class="keyword">::</span><span class="default">NONE</span><span class="keyword">);<br />
+</span><span class="default">$df</span><span class="keyword">-&gt;</span><span class="default">setPattern</span><span class="keyword">(</span><span class="string">'MMMM dd'</span><span class="keyword">);<br />
+<br />
+</span><span class="default">$time</span><span class="keyword">[] = </span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);<br />
+for(</span><span class="default">$i</span><span class="keyword">=</span><span class="default">0</span><span class="keyword">;</span><span class="default">$i</span><span class="keyword">&lt;</span><span class="default">$n</span><span class="keyword">;</span><span class="default">$i</span><span class="keyword">++) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$a </span><span class="keyword">= </span><span class="default">IntlDateFormatter</span><span class="keyword">::</span><span class="default">formatObject</span><span class="keyword">(</span><span class="default">$dt</span><span class="keyword">, </span><span class="string">'MMMM dd'</span><span class="keyword">, </span><span class="string">'hu_HU'</span><span class="keyword">);<br />
+}<br />
+echo </span><span class="string">"</span><span class="default">$a</span><span class="string">\n"</span><span class="keyword">;<br />
+</span><span class="default">$time</span><span class="keyword">[] = </span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);<br />
+for(</span><span class="default">$i</span><span class="keyword">=</span><span class="default">0</span><span class="keyword">;</span><span class="default">$i</span><span class="keyword">&lt;</span><span class="default">$n</span><span class="keyword">;</span><span class="default">$i</span><span class="keyword">++) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$a </span><span class="keyword">= </span><span class="default">$df</span><span class="keyword">-&gt;</span><span class="default">format</span><span class="keyword">(</span><span class="default">$dt</span><span class="keyword">);<br />
+}<br />
+echo </span><span class="string">"</span><span class="default">$a</span><span class="string">\n"</span><span class="keyword">;<br />
+</span><span class="default">$time</span><span class="keyword">[] = </span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);<br />
+<br />
+for(</span><span class="default">$j</span><span class="keyword">=</span><span class="default">1</span><span class="keyword">;</span><span class="default">$j</span><span class="keyword">&lt;</span><span class="default">count</span><span class="keyword">(</span><span class="default">$time</span><span class="keyword">);</span><span class="default">$j</span><span class="keyword">++) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">printf</span><span class="keyword">(</span><span class="string">"%fs\n"</span><span class="keyword">, </span><span class="default">$time</span><span class="keyword">[</span><span class="default">$j</span><span class="keyword">]-</span><span class="default">$time</span><span class="keyword">[</span><span class="default">$j</span><span class="keyword">-</span><span class="default">1</span><span class="keyword">]);<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+`formatObject` : 0.458248 s<br />
+`format` : 0.033759 s</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

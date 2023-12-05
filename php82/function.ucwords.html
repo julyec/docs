@@ -1,0 +1,1553 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>将字符串中每个单词的首字母转换为大写</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.ucfirst.html">? ucfirst</a></li>
+      <li style="float: right;"><a href="function.utf8-decode.html">utf8_decode ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.strings.html">字符串 函数</a></li>
+    <li>将字符串中每个单词的首字母转换为大写</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.ucwords" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">ucwords</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">ucwords</span> &mdash; <span class="dc-title">将字符串中每个单词的首字母转换为大写</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.ucwords-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>ucwords</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$string</code></span>, <span class="methodparam"><span class="type">string</span> <code class="parameter">$separators</code><span class="initializer"> = &quot; \t\r\n\f\v&quot;</span></span>): <span class="type">string</span></div>
+
+  <p class="para rdfs-comment">
+   将 <code class="parameter">string</code> 中每个单词的首字符（如果首字符是介于 <code class="literal">&quot;a&quot;</code>（0x61）和
+   <code class="literal">&quot;z&quot;</code>（0x7a）之间的 ASCII 字符）转换为大写字母，并返回这个字符串。
+  </p>
+  <p class="para">
+   对于此函数，单词是未在 <code class="parameter">separators</code>
+   参数列出的字符串。默认情况下，它们是：空格、水平制表符、回车、换行符、换页以及垂直制表符。
+  </p>
+  <p class="para">
+   要对多字节进行类似的转换，请使用带 <strong><code>MB_CASE_TITLE</code></strong> 模式的 <span class="function"><a href="function.mb-convert-case.html" class="function">mb_convert_case()</a></span>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.ucwords-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">string</code></dt>
+
+     <dd>
+
+      <p class="para">
+       输入字符串。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">separators</code></dt>
+
+     <dd>
+
+      <p class="para">
+       可选的 <code class="parameter">separators</code>，包含了单词分割符。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.ucwords-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回转换后的字符串。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.ucwords-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     
+ <tr>
+  <td>8.2.0</td>
+  <td>
+   大小写转换不在依赖于使用 <span class="function"><a href="function.setlocale.html" class="function">setlocale()</a></span> 设置的区域。只会转换 ASCII 字符。
+  </td>
+ </tr>
+
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.ucwords-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #1 <span class="function"><strong>ucwords()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$foo </span><span style="color: #007700">= </span><span style="color: #DD0000">'hello world!'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$foo </span><span style="color: #007700">= </span><span style="color: #0000BB">ucwords</span><span style="color: #007700">(</span><span style="color: #0000BB">$foo</span><span style="color: #007700">);             </span><span style="color: #FF8000">// Hello World!<br /><br /></span><span style="color: #0000BB">$bar </span><span style="color: #007700">= </span><span style="color: #DD0000">'HELLO WORLD!'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$bar </span><span style="color: #007700">= </span><span style="color: #0000BB">ucwords</span><span style="color: #007700">(</span><span style="color: #0000BB">$bar</span><span style="color: #007700">);             </span><span style="color: #FF8000">// HELLO WORLD!<br /></span><span style="color: #0000BB">$bar </span><span style="color: #007700">= </span><span style="color: #0000BB">ucwords</span><span style="color: #007700">(</span><span style="color: #0000BB">strtolower</span><span style="color: #007700">(</span><span style="color: #0000BB">$bar</span><span style="color: #007700">)); </span><span style="color: #FF8000">// Hello World!<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #2 <span class="function"><strong>ucwords()</strong></span> 自定义分隔符的例子</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$foo </span><span style="color: #007700">= </span><span style="color: #DD0000">'hello|world!'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$bar </span><span style="color: #007700">= </span><span style="color: #0000BB">ucwords</span><span style="color: #007700">(</span><span style="color: #0000BB">$foo</span><span style="color: #007700">);             </span><span style="color: #FF8000">// Hello|world!<br /><br /></span><span style="color: #0000BB">$baz </span><span style="color: #007700">= </span><span style="color: #0000BB">ucwords</span><span style="color: #007700">(</span><span style="color: #0000BB">$foo</span><span style="color: #007700">, </span><span style="color: #DD0000">"|"</span><span style="color: #007700">);        </span><span style="color: #FF8000">// Hello|World!<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #3 带附加分隔符的 <span class="function"><strong>ucwords()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+     <div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$foo </span><span style="color: #007700">= </span><span style="color: #DD0000">"mike o'hara"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$bar </span><span style="color: #007700">= </span><span style="color: #0000BB">ucwords</span><span style="color: #007700">(</span><span style="color: #0000BB">$foo</span><span style="color: #007700">);                 </span><span style="color: #FF8000">// Mike O'hara<br /><br /></span><span style="color: #0000BB">$baz </span><span style="color: #007700">= </span><span style="color: #0000BB">ucwords</span><span style="color: #007700">(</span><span style="color: #0000BB">$foo</span><span style="color: #007700">, </span><span style="color: #DD0000">" \t\r\n\f\v'"</span><span style="color: #007700">); </span><span style="color: #FF8000">// Mike O'Hara<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.ucwords-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">Note</strong>: <span class="simpara">此函数可安全用于二进制对象。</span></p></blockquote>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.ucwords-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.strtoupper.html" class="function" rel="rdfs-seeAlso">strtoupper()</a> - 将字符串转化为大写</span></li>
+    <li class="member"><span class="function"><a href="function.strtolower.html" class="function" rel="rdfs-seeAlso">strtolower()</a> - 将字符串转化为小写</span></li>
+    <li class="member"><span class="function"><a href="function.ucfirst.html" class="function" rel="rdfs-seeAlso">ucfirst()</a> - 将字符串的首字母转换为大写</span></li>
+    <li class="member"><span class="function"><a href="function.mb-convert-case.html" class="function" rel="rdfs-seeAlso">mb_convert_case()</a> - 对字符串进行大小写转换</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="125209""></a>
+  <div class="note">
+   <strong class="user">NOSPAM dot php at my dot jrklein dot com</strong>
+   <a href="#125209" class="date">25-Jul-2020 05:08</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Based on code sample originally posted by "Anonymous" on 2005-12-14. The /e modifier is no longer supported by preg_replace(). Rewritten to use preg_replace_callback() instead. Tested with PHP 7.3.<br />
+<br />
+The function below will standardize the capitalization on people's names, addresses, and the titles of reports and essays . Adapt the lists in "$all_uppercase" and "$all_lowercase" to suit the data that you are working with.<br />
+<br />
+function ucwords_title($string, $is_name = false) {<br />
+&nbsp;&nbsp;&nbsp; // Exceptions to standard case conversion<br />
+&nbsp;&nbsp;&nbsp; if ($is_name) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $all_uppercase = '';<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $all_lowercase = 'De La|De Las|Der|Van De|Van Der|Vit De|Von|Or|And';<br />
+&nbsp;&nbsp;&nbsp; } else {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; // Addresses, essay titles ... and anything else<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $all_uppercase = 'Us|Ca|Mx|Po|Rr|Se|Sw|Ne|Nw';<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $all_lowercase = 'A|And|As|By|In|Of|Or|To';<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; $prefixes = 'Mac|Mc';<br />
+&nbsp;&nbsp;&nbsp; $suffixes = "'S";<br />
+<br />
+&nbsp;&nbsp;&nbsp; // Trim whitespace and convert to lowercase<br />
+&nbsp;&nbsp;&nbsp; $str = strtolower(trim($string));<br />
+<br />
+&nbsp;&nbsp;&nbsp; // Capitalize all first letters<br />
+&nbsp;&nbsp;&nbsp; $str = preg_replace_callback('/\\b(\\w)/', function ($m) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return strtoupper($m[1]);<br />
+&nbsp;&nbsp;&nbsp; }, $str);<br />
+<br />
+&nbsp;&nbsp;&nbsp; if ($all_uppercase) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; // Capitalize acronyms and initialisms (e.g. PHP)<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $str = preg_replace_callback('/\\b(' . $all_uppercase . ')\\b/', function ($m) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return strtoupper($m[1]);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }, $str);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; if ($all_lowercase) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; // Decapitalize short words (e.g. and)<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if ($is_name) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; // All occurrences will be changed to lowercase<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $str = preg_replace_callback('/\\b(' . $all_lowercase . ')\\b/', function ($m) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return strtolower($m[1]);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }, $str);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; } else {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; // First and last word will not be changed to lower case (i.e. titles)<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $str = preg_replace_callback('/(?&lt;=\\W)(' . $all_lowercase . ')(?=\\W)/', function ($m) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return strtolower($m[1]);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }, $str);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; if ($prefixes) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; // Capitalize letter after certain name prefixes (e.g 'Mc')<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $str = preg_replace_callback('/\\b(' . $prefixes . ')(\\w)/', function ($m) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return $m[1] . strtoupper($m[2]);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }, $str);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; if ($suffixes) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; // Decapitalize certain word suffixes (e.g. 's)<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $str = preg_replace_callback('/(\\w)(' . $suffixes . ')\\b/', function ($m) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return $m[1] . strtolower($m[2]);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }, $str);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; return $str;<br />
+}<br />
+<br />
+// A name example<br />
+print ucwords_title("MARIE-LOU VAN DER PLANCK-ST.JOHN", true);<br />
+// Output: Marie-Lou van der Planc-St.John<br />
+<br />
+// A title example<br />
+print ucwords_title("to be or not to be");<br />
+// Output: "To Be or Not to Be"</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125047""></a>
+  <div class="note">
+   <strong class="user">ganzales at inbox dot ru</strong>
+   <a href="#125047" class="date">26-May-2020 01:03</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">mb_ucwords</span><span class="keyword">(</span><span class="default">$string</span><span class="keyword">, </span><span class="default">$delimiter </span><span class="keyword">= </span><span class="string">' (-"['</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$result </span><span class="keyword">= </span><span class="default">$upper </span><span class="keyword">= </span><span class="string">''</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; for (</span><span class="default">$i </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">; </span><span class="default">$i </span><span class="keyword">&lt; </span><span class="default">mb_strlen</span><span class="keyword">(</span><span class="default">$string</span><span class="keyword">); </span><span class="default">$i</span><span class="keyword">++) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$letter </span><span class="keyword">= </span><span class="default">mb_substr</span><span class="keyword">(</span><span class="default">$string</span><span class="keyword">, </span><span class="default">$i</span><span class="keyword">, </span><span class="default">1</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$result </span><span class="keyword">.= </span><span class="default">$upper </span><span class="keyword">|| </span><span class="default">$i </span><span class="keyword">== </span><span class="default">0 </span><span class="keyword">? </span><span class="default">mb_convert_case</span><span class="keyword">(</span><span class="default">$letter</span><span class="keyword">, </span><span class="default">MB_CASE_TITLE</span><span class="keyword">) : </span><span class="default">$letter</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$upper </span><span class="keyword">= (</span><span class="default">$i </span><span class="keyword">+ </span><span class="default">1</span><span class="keyword">) &lt; </span><span class="default">mb_strlen</span><span class="keyword">(</span><span class="default">$string</span><span class="keyword">) &amp;&amp; </span><span class="default">mb_strpos</span><span class="keyword">(</span><span class="default">$delimiter</span><span class="keyword">, </span><span class="default">$letter</span><span class="keyword">) !== </span><span class="default">false </span><span class="keyword">? </span><span class="default">1 </span><span class="keyword">: </span><span class="default">0</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$result</span><span class="keyword">;<br />
+}<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="123101""></a>
+  <div class="note">
+   <strong class="user">@manzoorwanijk</strong>
+   <a href="#123101" class="date">04-Sep-2018 09:39</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+for PHP &lt; 5.4.32 with $delimiters<br />
+<br />
+function _ucwords( $str, $delimiters = " \t\r\n\f\v" ) {<br />
+<br />
+&nbsp;&nbsp;&nbsp; $delims = preg_split( '//u', $delimiters, -1, PREG_SPLIT_NO_EMPTY );<br />
+<br />
+&nbsp;&nbsp;&nbsp; foreach ( $delims as $delim ) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if ( false !== strpos( $str, $delim ) ) {<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $str = implode( $delim, array_map( 'ucfirst', explode( $delim, $str ) ) );<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; return $str;<br />
+}</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="118926""></a>
+  <div class="note">
+   <strong class="user">almino dot melo at gmail dot com</strong>
+   <a href="#118926" class="date">29-Feb-2016 08:36</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+ucwords for human names in Brazil.<br />
+ucwords personalizada para nomes próprios brasileiros.<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">/**<br />
+&nbsp;&nbsp; &nbsp; * ucwords for human names in Brazil<br />
+&nbsp;&nbsp; &nbsp; * Edit from <a href="http://php.net/manual/pt_BR/function.ucwords.php#112795" rel="nofollow" target="_blank">http://php.net/manual/pt_BR/function.ucwords.php#112795</a><br />
+&nbsp;&nbsp; &nbsp; * @param string $str<br />
+&nbsp;&nbsp; &nbsp; * @param array $delimiters<br />
+&nbsp;&nbsp; &nbsp; * @param array $exceptions Exceptions are words you don't want converted<br />
+&nbsp;&nbsp; &nbsp; * @return string<br />
+&nbsp;&nbsp; &nbsp; */<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">function </span><span class="default">name</span><span class="keyword">(</span><span class="default">$str</span><span class="keyword">, </span><span class="default">$delimiters </span><span class="keyword">= array(<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">" "</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"-"</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"."</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"'"</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"O'"</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"Mc"</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; ), </span><span class="default">$exceptions </span><span class="keyword">= array(<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"de"</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"do"</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"da"</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"dos"</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"das"</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; )) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$result </span><span class="keyword">= </span><span class="string">''</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; foreach (</span><span class="default">$delimiters </span><span class="keyword">as </span><span class="default">$delimiter</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment"># If string has a delimiter<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">if (</span><span class="default">strstr</span><span class="keyword">(</span><span class="default">$str</span><span class="keyword">, </span><span class="default">$delimiter</span><span class="keyword">)) {<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$ucfirst </span><span class="keyword">= array();<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment"># Apply ucfirst to every word<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">foreach (</span><span class="default">explode</span><span class="keyword">(</span><span class="default">$delimiter</span><span class="keyword">, </span><span class="default">mb_strtolower</span><span class="keyword">(</span><span class="default">$str</span><span class="keyword">)) as </span><span class="default">$word</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$word </span><span class="keyword">= </span><span class="default">mb_convert_case</span><span class="keyword">(</span><span class="default">$word</span><span class="keyword">, </span><span class="default">MB_CASE_TITLE</span><span class="keyword">);<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment"># Working with exceptions<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">if (</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">mb_strtoupper</span><span class="keyword">(</span><span class="default">$word</span><span class="keyword">), </span><span class="default">$exceptions</span><span class="keyword">)) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$word </span><span class="keyword">= </span><span class="default">mb_strtoupper</span><span class="keyword">(</span><span class="default">$word</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; } elseif (</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">mb_strtolower</span><span class="keyword">(</span><span class="default">$word</span><span class="keyword">), </span><span class="default">$exceptions</span><span class="keyword">)) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$word </span><span class="keyword">= </span><span class="default">mb_strtolower</span><span class="keyword">(</span><span class="default">$word</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; } elseif (</span><span class="default">preg_match</span><span class="keyword">(</span><span class="string">'/^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$/'</span><span class="keyword">, </span><span class="default">mb_strtoupper</span><span class="keyword">(</span><span class="default">$word</span><span class="keyword">))) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment"># Is roman numerals? # <a href="http://stackoverflow.com/a/267405/437459" rel="nofollow" target="_blank">http://stackoverflow.com/a/267405/437459</a><br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$word </span><span class="keyword">= </span><span class="default">mb_strtoupper</span><span class="keyword">(</span><span class="default">$word</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$ucfirst</span><span class="keyword">[] = </span><span class="default">$word</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment"># string's first character uppercased<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$result </span><span class="keyword">= </span><span class="default">implode</span><span class="keyword">(</span><span class="default">$delimiter</span><span class="keyword">, </span><span class="default">$ucfirst</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$result</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="117918""></a>
+  <div class="note">
+   <strong class="user">Lech</strong>
+   <a href="#117918" class="date">01-Sep-2015 02:36</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+This will correct capitalisation in names taking note of special capitalisation for Mc..., Mac..., and O'... Other special cases, of which I am not aware, can be added easily.<br />
+<br />
+This is just a slight improvement on "deepdene at email dot com"'s name_case function... Thank you for original function.<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="keyword">function </span><span class="default">name_case</span><span class="keyword">(</span><span class="default">$name</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; if( !</span><span class="default">$name </span><span class="keyword">) return </span><span class="default">$name</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$newname </span><span class="keyword">= </span><span class="default">strtoupper</span><span class="keyword">(</span><span class="default">$name</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">]);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$break </span><span class="keyword">= </span><span class="default">false</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; for( </span><span class="default">$i</span><span class="keyword">=</span><span class="default">1</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">&lt;</span><span class="default">strlen</span><span class="keyword">(</span><span class="default">$name</span><span class="keyword">); ++</span><span class="default">$i </span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$subed </span><span class="keyword">= </span><span class="default">substr</span><span class="keyword">(</span><span class="default">$name</span><span class="keyword">, </span><span class="default">$i</span><span class="keyword">, </span><span class="default">1</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp;&nbsp; if( </span><span class="default">ord</span><span class="keyword">(</span><span class="default">$subed</span><span class="keyword">) &gt; </span><span class="default">64 </span><span class="keyword">&amp;&amp; </span><span class="default">ord</span><span class="keyword">(</span><span class="default">$subed</span><span class="keyword">) &lt; </span><span class="default">123 </span><span class="keyword">|| </span><span class="default">ord</span><span class="keyword">(</span><span class="default">$subed</span><span class="keyword">) &gt; </span><span class="default">48 </span><span class="keyword">&amp;&amp; </span><span class="default">ord</span><span class="keyword">(</span><span class="default">$subed</span><span class="keyword">) &lt; </span><span class="default">58 </span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if( </span><span class="default">$break </span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$newname </span><span class="keyword">.= </span><span class="default">strtoupper</span><span class="keyword">(</span><span class="default">$subed</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; elseif( </span><span class="default">$i </span><span class="keyword">&gt; </span><span class="default">1 </span><span class="keyword">&amp;&amp; </span><span class="default">in_array</span><span class="keyword">(</span><span class="default">substr</span><span class="keyword">(</span><span class="default">$newname</span><span class="keyword">, </span><span class="default">$i</span><span class="keyword">-</span><span class="default">2</span><span class="keyword">, </span><span class="default">2</span><span class="keyword">), array(</span><span class="string">'Mc'</span><span class="keyword">, </span><span class="string">'O\''</span><span class="keyword">)) || </span><span class="default">$i </span><span class="keyword">&gt; </span><span class="default">2 </span><span class="keyword">&amp;&amp; </span><span class="default">in_array</span><span class="keyword">(</span><span class="default">substr</span><span class="keyword">(</span><span class="default">$newname</span><span class="keyword">, </span><span class="default">$i</span><span class="keyword">-</span><span class="default">3</span><span class="keyword">, </span><span class="default">3</span><span class="keyword">), array(</span><span class="string">'Mac'</span><span class="keyword">)) ) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$newname </span><span class="keyword">.= </span><span class="default">strtoupper</span><span class="keyword">(</span><span class="default">$subed</span><span class="keyword">); <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; else {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$newname </span><span class="keyword">.= </span><span class="default">strtolower</span><span class="keyword">(</span><span class="default">$subed</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$break </span><span class="keyword">= </span><span class="default">false</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp;&nbsp; else {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// not a letter - a boundary<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$newname </span><span class="keyword">.= </span><span class="default">$subed</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$break </span><span class="keyword">= </span><span class="default">true</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$newname</span><span class="keyword">;<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="117270""></a>
+  <div class="note">
+   <strong class="user">Alex Milkovskyi</strong>
+   <a href="#117270" class="date">13-May-2015 09:22</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Convert string to in camel-case, useful for class name patterns:<br />
+<span class="default">&lt;?php<br />
+</span><span class="comment">/**<br />
+&nbsp;&nbsp; * Convert string to in camel-case, useful for class name patterns.<br />
+&nbsp;&nbsp; *<br />
+&nbsp;&nbsp; * @param $string<br />
+&nbsp;&nbsp; *&nbsp;&nbsp; Target string.<br />
+&nbsp;&nbsp; *<br />
+&nbsp;&nbsp; * @return string<br />
+&nbsp;&nbsp; *&nbsp;&nbsp; Camel-case string.<br />
+&nbsp;&nbsp; */<br />
+</span><span class="keyword">function </span><span class="default">toCamelCase</span><span class="keyword">(</span><span class="default">$string</span><span class="keyword">){<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$string </span><span class="keyword">= </span><span class="default">str_replace</span><span class="keyword">(</span><span class="string">'-'</span><span class="keyword">, </span><span class="string">' '</span><span class="keyword">, </span><span class="default">$string</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$string </span><span class="keyword">= </span><span class="default">str_replace</span><span class="keyword">(</span><span class="string">'_'</span><span class="keyword">, </span><span class="string">' '</span><span class="keyword">, </span><span class="default">$string</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$string </span><span class="keyword">= </span><span class="default">ucwords</span><span class="keyword">(</span><span class="default">strtolower</span><span class="keyword">(</span><span class="default">$string</span><span class="keyword">));<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$string </span><span class="keyword">= </span><span class="default">str_replace</span><span class="keyword">(</span><span class="string">' '</span><span class="keyword">, </span><span class="string">''</span><span class="keyword">, </span><span class="default">$string</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$string</span><span class="keyword">;<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Example:<br />
+toCamelCase(make_mE camel-case pLEase) will return:<br />
+MakeMeCamelCasePlease</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="116729""></a>
+  <div class="note">
+   <strong class="user">Florian</strong>
+   <a href="#116729" class="date">20-Feb-2015 08:03</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+to convert first letters in a firstname like: "jean-pierre" to "Jean-Pierre":<br />
+<br />
+I simply replace the '-' with a vertical tabulation, because the ucwords() function replace the letter just after it.<br />
+<br />
+so, I use the sentence:<br />
+$result=str_replace(chr(11),'-',ucwords(strtolower(str_replace('-',chr(11),$firstname))));</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="112795""></a>
+  <div class="note">
+   <strong class="user">antoniomax at antoniomax dot com</strong>
+   <a href="#112795" class="date">23-Jul-2013 06:04</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Para formatar nomes em pt-br:<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">function </span><span class="default">titleCase</span><span class="keyword">(</span><span class="default">$string</span><span class="keyword">, </span><span class="default">$delimiters </span><span class="keyword">= array(</span><span class="string">" "</span><span class="keyword">, </span><span class="string">"-"</span><span class="keyword">, </span><span class="string">"."</span><span class="keyword">, </span><span class="string">"'"</span><span class="keyword">, </span><span class="string">"O'"</span><span class="keyword">, </span><span class="string">"Mc"</span><span class="keyword">), </span><span class="default">$exceptions </span><span class="keyword">= array(</span><span class="string">"de"</span><span class="keyword">, </span><span class="string">"da"</span><span class="keyword">, </span><span class="string">"dos"</span><span class="keyword">, </span><span class="string">"das"</span><span class="keyword">, </span><span class="string">"do"</span><span class="keyword">, </span><span class="string">"I"</span><span class="keyword">, </span><span class="string">"II"</span><span class="keyword">, </span><span class="string">"III"</span><span class="keyword">, </span><span class="string">"IV"</span><span class="keyword">, </span><span class="string">"V"</span><span class="keyword">, </span><span class="string">"VI"</span><span class="keyword">))<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">/*<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; * Exceptions in lower case are words you don't want converted<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; * Exceptions all in upper case are any words you don't want converted to title case<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; *&nbsp;&nbsp; but should be converted to upper case, e.g.:<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; *&nbsp;&nbsp; king henry viii or king henry Viii should be King Henry VIII<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; */<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$string </span><span class="keyword">= </span><span class="default">mb_convert_case</span><span class="keyword">(</span><span class="default">$string</span><span class="keyword">, </span><span class="default">MB_CASE_TITLE</span><span class="keyword">, </span><span class="string">"UTF-8"</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; foreach (</span><span class="default">$delimiters </span><span class="keyword">as </span><span class="default">$dlnr </span><span class="keyword">=&gt; </span><span class="default">$delimiter</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$words </span><span class="keyword">= </span><span class="default">explode</span><span class="keyword">(</span><span class="default">$delimiter</span><span class="keyword">, </span><span class="default">$string</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$newwords </span><span class="keyword">= array();<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; foreach (</span><span class="default">$words </span><span class="keyword">as </span><span class="default">$wordnr </span><span class="keyword">=&gt; </span><span class="default">$word</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">mb_strtoupper</span><span class="keyword">(</span><span class="default">$word</span><span class="keyword">, </span><span class="string">"UTF-8"</span><span class="keyword">), </span><span class="default">$exceptions</span><span class="keyword">)) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// check exceptions list for any words that should be in upper case<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$word </span><span class="keyword">= </span><span class="default">mb_strtoupper</span><span class="keyword">(</span><span class="default">$word</span><span class="keyword">, </span><span class="string">"UTF-8"</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; } elseif (</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">mb_strtolower</span><span class="keyword">(</span><span class="default">$word</span><span class="keyword">, </span><span class="string">"UTF-8"</span><span class="keyword">), </span><span class="default">$exceptions</span><span class="keyword">)) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// check exceptions list for any words that should be in upper case<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$word </span><span class="keyword">= </span><span class="default">mb_strtolower</span><span class="keyword">(</span><span class="default">$word</span><span class="keyword">, </span><span class="string">"UTF-8"</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; } elseif (!</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">$word</span><span class="keyword">, </span><span class="default">$exceptions</span><span class="keyword">)) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// convert to uppercase (non-utf8 only)<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$word </span><span class="keyword">= </span><span class="default">ucfirst</span><span class="keyword">(</span><span class="default">$word</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">array_push</span><span class="keyword">(</span><span class="default">$newwords</span><span class="keyword">, </span><span class="default">$word</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$string </span><span class="keyword">= </span><span class="default">join</span><span class="keyword">(</span><span class="default">$delimiter</span><span class="keyword">, </span><span class="default">$newwords</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; }</span><span class="comment">//foreach<br />
+&nbsp;&nbsp; &nbsp; &nbsp; </span><span class="keyword">return </span><span class="default">$string</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Usage:<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; $s </span><span class="keyword">= </span><span class="string">'S?O JO?O DOS SANTOS'</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$v </span><span class="keyword">= </span><span class="default">titleCase</span><span class="keyword">(</span><span class="default">$s</span><span class="keyword">); </span><span class="comment">// 'S?o Jo?o dos Santos' <br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="112079""></a>
+  <div class="note">
+   <strong class="user">hrvoj3e at gmail dot com</strong>
+   <a href="#112079" class="date">30-Apr-2013 02:44</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+UTF-8 Title Case that works for me even with hyphens involved!<br />
+<br />
+$str = '?aa?aa-AAAaaa, BBbb';<br />
+<br />
+$str = mb_convert_case($str, MB_CASE_TITLE, "UTF-8");<br />
+<br />
+echo($str): '?aa?aa-Aaaaaa, Bbbb'</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="110002""></a>
+  <div class="note">
+   <strong class="user">Luca Borrione luca -a email -d c_o_m</strong>
+   <a href="#110002" class="date">10-Sep-2012 03:41</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Features:
+<br />
+- multi byte compatible
+<br />
+- handles multiple delimiters
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="keyword">function </span><span class="default">ucwords_specific </span><span class="keyword">(</span><span class="default">$string</span><span class="keyword">, </span><span class="default">$delimiters </span><span class="keyword">= </span><span class="string">''</span><span class="keyword">, </span><span class="default">$encoding </span><span class="keyword">= </span><span class="default">NULL</span><span class="keyword">)
+<br />
+{
+<br />
+&nbsp;&nbsp;&nbsp; if (</span><span class="default">$encoding </span><span class="keyword">=== </span><span class="default">NULL</span><span class="keyword">) { </span><span class="default">$encoding </span><span class="keyword">= </span><span class="default">mb_internal_encoding</span><span class="keyword">();}
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; if (</span><span class="default">is_string</span><span class="keyword">(</span><span class="default">$delimiters</span><span class="keyword">))
+<br />
+&nbsp;&nbsp;&nbsp; {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$delimiters </span><span class="keyword">=&nbsp; </span><span class="default">str_split</span><span class="keyword">( </span><span class="default">str_replace</span><span class="keyword">(</span><span class="string">' '</span><span class="keyword">, </span><span class="string">''</span><span class="keyword">, </span><span class="default">$delimiters</span><span class="keyword">));
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$delimiters_pattern1 </span><span class="keyword">= array();
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$delimiters_replace1 </span><span class="keyword">= array();
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$delimiters_pattern2 </span><span class="keyword">= array();
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$delimiters_replace2 </span><span class="keyword">= array();
+<br />
+&nbsp;&nbsp;&nbsp; foreach (</span><span class="default">$delimiters </span><span class="keyword">as </span><span class="default">$delimiter</span><span class="keyword">)
+<br />
+&nbsp;&nbsp;&nbsp; {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$uniqid </span><span class="keyword">= </span><span class="default">uniqid</span><span class="keyword">();
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$delimiters_pattern1</span><span class="keyword">[]&nbsp;&nbsp; = </span><span class="string">'/'</span><span class="keyword">. </span><span class="default">preg_quote</span><span class="keyword">(</span><span class="default">$delimiter</span><span class="keyword">) .</span><span class="string">'/'</span><span class="keyword">;
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$delimiters_replace1</span><span class="keyword">[]&nbsp;&nbsp; = </span><span class="default">$delimiter</span><span class="keyword">.</span><span class="default">$uniqid</span><span class="keyword">.</span><span class="string">' '</span><span class="keyword">;
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$delimiters_pattern2</span><span class="keyword">[]&nbsp;&nbsp; = </span><span class="string">'/'</span><span class="keyword">. </span><span class="default">preg_quote</span><span class="keyword">(</span><span class="default">$delimiter</span><span class="keyword">.</span><span class="default">$uniqid</span><span class="keyword">.</span><span class="string">' '</span><span class="keyword">) .</span><span class="string">'/'</span><span class="keyword">;
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$delimiters_replace2</span><span class="keyword">[]&nbsp;&nbsp; = </span><span class="default">$delimiter</span><span class="keyword">;
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// $return_string = mb_strtolower($string, $encoding);
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$return_string </span><span class="keyword">= </span><span class="default">$string</span><span class="keyword">;
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$return_string </span><span class="keyword">= </span><span class="default">preg_replace</span><span class="keyword">(</span><span class="default">$delimiters_pattern1</span><span class="keyword">, </span><span class="default">$delimiters_replace1</span><span class="keyword">, </span><span class="default">$return_string</span><span class="keyword">);
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$words </span><span class="keyword">= </span><span class="default">explode</span><span class="keyword">(</span><span class="string">' '</span><span class="keyword">, </span><span class="default">$return_string</span><span class="keyword">);
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; foreach (</span><span class="default">$words </span><span class="keyword">as </span><span class="default">$index </span><span class="keyword">=&gt; </span><span class="default">$word</span><span class="keyword">)
+<br />
+&nbsp;&nbsp;&nbsp; {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$words</span><span class="keyword">[</span><span class="default">$index</span><span class="keyword">] = </span><span class="default">mb_strtoupper</span><span class="keyword">(</span><span class="default">mb_substr</span><span class="keyword">(</span><span class="default">$word</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">, </span><span class="default">1</span><span class="keyword">, </span><span class="default">$encoding</span><span class="keyword">), </span><span class="default">$encoding</span><span class="keyword">).</span><span class="default">mb_substr</span><span class="keyword">(</span><span class="default">$word</span><span class="keyword">, </span><span class="default">1</span><span class="keyword">, </span><span class="default">mb_strlen</span><span class="keyword">(</span><span class="default">$word</span><span class="keyword">, </span><span class="default">$encoding</span><span class="keyword">), </span><span class="default">$encoding</span><span class="keyword">);
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$return_string </span><span class="keyword">= </span><span class="default">implode</span><span class="keyword">(</span><span class="string">' '</span><span class="keyword">, </span><span class="default">$words</span><span class="keyword">);
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$return_string </span><span class="keyword">= </span><span class="default">preg_replace</span><span class="keyword">(</span><span class="default">$delimiters_pattern2</span><span class="keyword">, </span><span class="default">$delimiters_replace2</span><span class="keyword">, </span><span class="default">$return_string</span><span class="keyword">);
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$return_string</span><span class="keyword">;
+<br />
+}
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+Params:
+<br />
+1. string: The string being converted
+<br />
+2. delimiters: a string with all wanted delimiters written one after the other e.g. "-'"
+<br />
+3. encoding: Is the character encoding. If it is omitted, the internal character encoding value will be used.
+<br />
+
+<br />
+Example Usage:
+<br />
+<span class="default">&lt;?php
+<br />
+mb_internal_encoding</span><span class="keyword">(</span><span class="string">'UTF-8'</span><span class="keyword">);
+<br />
+</span><span class="default">$string </span><span class="keyword">= </span><span class="string">"JEAN-PAUL d'artagnan ??-òà-éì hello - world"</span><span class="keyword">;
+<br />
+echo </span><span class="default">ucwords_specific</span><span class="keyword">( </span><span class="default">mb_strtolower</span><span class="keyword">(</span><span class="default">$string</span><span class="keyword">, </span><span class="string">'UTF-8'</span><span class="keyword">), </span><span class="string">"-'"</span><span class="keyword">);
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+Output:
+<br />
+Jean-Paul D'Artagnan ??-òà-éì Hello - World</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="107701""></a>
+  <div class="note">
+   <strong class="user">qeremy [atta] gmail [dotta] com</strong>
+   <a href="#107701" class="date">27-Feb-2012 05:09</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+A proper Turkish solution;
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="keyword">function </span><span class="default">ucfirst_turkish</span><span class="keyword">(</span><span class="default">$str</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$tmp </span><span class="keyword">= </span><span class="default">preg_split</span><span class="keyword">(</span><span class="string">"//u"</span><span class="keyword">, </span><span class="default">$str</span><span class="keyword">, </span><span class="default">2</span><span class="keyword">, </span><span class="default">PREG_SPLIT_NO_EMPTY</span><span class="keyword">);
+<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">mb_convert_case</span><span class="keyword">(
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">str_replace</span><span class="keyword">(</span><span class="string">"i"</span><span class="keyword">, </span><span class="string">"?"</span><span class="keyword">, </span><span class="default">$tmp</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">]), </span><span class="default">MB_CASE_TITLE</span><span class="keyword">, </span><span class="string">"UTF-8"</span><span class="keyword">).
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$tmp</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">];
+<br />
+}
+<br />
+
+<br />
+function </span><span class="default">ucwords_turkish</span><span class="keyword">(</span><span class="default">$str</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">preg_replace</span><span class="keyword">(</span><span class="string">"/(\\w+)/ue"</span><span class="keyword">, </span><span class="string">"ucfirst_turkish('\\\\1').'$2'"</span><span class="keyword">, </span><span class="default">$str</span><span class="keyword">);
+<br />
+}
+<br />
+
+<br />
+</span><span class="default">$str </span><span class="keyword">= </span><span class="string">"iyilik güzelL?K ?eker "</span><span class="keyword">;
+<br />
+echo </span><span class="default">ucwords</span><span class="keyword">(</span><span class="default">$str</span><span class="keyword">) .</span><span class="string">"\\n"</span><span class="keyword">;&nbsp;&nbsp; </span><span class="comment">// Iyilik GüzelL?K ?eker 
+<br />
+</span><span class="keyword">echo </span><span class="default">ucwords_turkish</span><span class="keyword">(</span><span class="default">$str</span><span class="keyword">); </span><span class="comment">// ?yilik GüzelL?K ?eker 
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="106598""></a>
+  <div class="note">
+   <strong class="user">haijerome at gmail dot com</strong>
+   <a href="#106598" class="date">21-Nov-2011 09:14</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Thanks a lot brother.<br />
+<br />
+I tested it with a few variations. It works perfectly. Its really great and simple usage of the existing functions. It would be glad to all PHP folks and good to PHP if these kind of functions will be in PHP library on upcoming releases.<br />
+<br />
+<span class="default">&lt;?php <br />
+<br />
+$name1 </span><span class="keyword">= </span><span class="string">"mark-yves robert"</span><span class="keyword">;<br />
+</span><span class="default">$name2 </span><span class="keyword">= </span><span class="string">"mark-yves robert-bryan"</span><span class="keyword">;<br />
+<br />
+echo </span><span class="string">'&lt;br/&gt;Name 1 (mark-yves robert) =&gt;'</span><span class="keyword">.<br />
+</span><span class="default">ucwordspecific</span><span class="keyword">(</span><span class="default">$name1</span><span class="keyword">,</span><span class="string">'-'</span><span class="keyword">); </span><span class="comment">//returns Mark-Yves Robert<br />
+<br />
+</span><span class="keyword">echo </span><span class="string">'&lt;br/&gt;Name 2 (mark-yves robert-bryan) <br />
+<br />
+=&gt;'</span><span class="keyword">.</span><span class="default">ucwordspecific</span><span class="keyword">(</span><span class="default">$name2</span><span class="keyword">,</span><span class="string">'-'</span><span class="keyword">); <br />
+</span><span class="comment">//returns Mark-Yves Robert-Bryan<br />
+<br />
+</span><span class="keyword">function </span><span class="default">ucwordspecific</span><span class="keyword">(</span><span class="default">$str</span><span class="keyword">,</span><span class="default">$delimiter</span><span class="keyword">){<br />
+</span><span class="default">$delimiter_space </span><span class="keyword">= </span><span class="string">'- '</span><span class="keyword">;<br />
+return </span><span class="default">str_replace</span><span class="keyword">(</span><span class="default">$delimiter_space</span><span class="keyword">,</span><span class="default">$delimiter</span><span class="keyword">,</span><span class="default">ucwords<br />
+<br />
+</span><span class="keyword">(</span><span class="default">str_replace</span><span class="keyword">(</span><span class="default">$delimiter</span><span class="keyword">,</span><span class="default">$delimiter_space</span><span class="keyword">,</span><span class="default">$str</span><span class="keyword">)));<br />
+}<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Proud to be a PHP enthusiast always :-)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="106174""></a>
+  <div class="note">
+   <strong class="user">ahmet363 at gmail dot com</strong>
+   <a href="#106174" class="date">16-Oct-2011 11:14</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Turkish character with the ucwords function...<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">ucwords_tr</span><span class="keyword">(</span><span class="default">$gelen</span><span class="keyword">){<br />
+<br />
+&nbsp; </span><span class="default">$sonuc</span><span class="keyword">=</span><span class="string">''</span><span class="keyword">;<br />
+<br />
+&nbsp; </span><span class="default">$kelimeler</span><span class="keyword">=</span><span class="default">explode</span><span class="keyword">(</span><span class="string">" "</span><span class="keyword">, </span><span class="default">$gelen</span><span class="keyword">);<br />
+<br />
+&nbsp; foreach (</span><span class="default">$kelimeler </span><span class="keyword">as </span><span class="default">$kelime_duz</span><span class="keyword">){<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$kelime_uzunluk</span><span class="keyword">=</span><span class="default">strlen</span><span class="keyword">(</span><span class="default">$kelime_duz</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$ilk_karakter</span><span class="keyword">=</span><span class="default">mb_substr</span><span class="keyword">(</span><span class="default">$kelime_duz</span><span class="keyword">,</span><span class="default">0</span><span class="keyword">,</span><span class="default">1</span><span class="keyword">,</span><span class="string">'UTF-8'</span><span class="keyword">);<br />
+<br />
+&nbsp;&nbsp;&nbsp; if(</span><span class="default">$ilk_karakter</span><span class="keyword">==</span><span class="string">'?' </span><span class="keyword">or </span><span class="default">$ilk_karakter</span><span class="keyword">==</span><span class="string">'?'</span><span class="keyword">){<br />
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$ilk_karakter</span><span class="keyword">=</span><span class="string">'?'</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; }elseif (</span><span class="default">$ilk_karakter</span><span class="keyword">==</span><span class="string">'?' </span><span class="keyword">or </span><span class="default">$ilk_karakter</span><span class="keyword">==</span><span class="string">'?'</span><span class="keyword">) {<br />
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$ilk_karakter</span><span class="keyword">=</span><span class="string">'?'</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; }elseif(</span><span class="default">$ilk_karakter</span><span class="keyword">==</span><span class="string">'I' </span><span class="keyword">or </span><span class="default">$ilk_karakter</span><span class="keyword">==</span><span class="string">'?'</span><span class="keyword">){<br />
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$ilk_karakter</span><span class="keyword">=</span><span class="string">'I'</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; }elseif (</span><span class="default">$ilk_karakter</span><span class="keyword">==</span><span class="string">'?' </span><span class="keyword">or </span><span class="default">$ilk_karakter</span><span class="keyword">==</span><span class="string">'i'</span><span class="keyword">){<br />
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$ilk_karakter</span><span class="keyword">=</span><span class="string">'?'</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; }elseif (</span><span class="default">$ilk_karakter</span><span class="keyword">==</span><span class="string">'?' </span><span class="keyword">or </span><span class="default">$ilk_karakter</span><span class="keyword">==</span><span class="string">'?'</span><span class="keyword">){<br />
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$ilk_karakter</span><span class="keyword">=</span><span class="string">'?'</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; }elseif (</span><span class="default">$ilk_karakter</span><span class="keyword">==</span><span class="string">'?' </span><span class="keyword">or </span><span class="default">$ilk_karakter</span><span class="keyword">==</span><span class="string">'?'</span><span class="keyword">){<br />
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$ilk_karakter</span><span class="keyword">=</span><span class="string">'?'</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; }elseif (</span><span class="default">$ilk_karakter</span><span class="keyword">==</span><span class="string">'ü' </span><span class="keyword">or </span><span class="default">$ilk_karakter</span><span class="keyword">==</span><span class="string">'ü'</span><span class="keyword">){<br />
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$ilk_karakter</span><span class="keyword">=</span><span class="string">'ü'</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; }else{<br />
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$ilk_karakter</span><span class="keyword">=</span><span class="default">strtoupper</span><span class="keyword">(</span><span class="default">$ilk_karakter</span><span class="keyword">);<br />
+<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$digerleri</span><span class="keyword">=</span><span class="default">mb_substr</span><span class="keyword">(</span><span class="default">$kelime_duz</span><span class="keyword">,</span><span class="default">1</span><span class="keyword">,</span><span class="default">$kelime_uzunluk</span><span class="keyword">,</span><span class="string">'UTF-8'</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$sonuc</span><span class="keyword">.=</span><span class="default">$ilk_karakter</span><span class="keyword">.</span><span class="default">kucuk_yap</span><span class="keyword">(</span><span class="default">$digerleri</span><span class="keyword">).</span><span class="string">' '</span><span class="keyword">;<br />
+<br />
+&nbsp; }<br />
+<br />
+&nbsp; </span><span class="default">$son</span><span class="keyword">=</span><span class="default">trim</span><span class="keyword">(</span><span class="default">str_replace</span><span class="keyword">(</span><span class="string">'&nbsp; '</span><span class="keyword">, </span><span class="string">' '</span><span class="keyword">, </span><span class="default">$sonuc</span><span class="keyword">));<br />
+&nbsp; return </span><span class="default">$son</span><span class="keyword">;<br />
+<br />
+}<br />
+<br />
+function </span><span class="default">kucuk_yap</span><span class="keyword">(</span><span class="default">$gelen</span><span class="keyword">){<br />
+<br />
+&nbsp; </span><span class="default">$gelen</span><span class="keyword">=</span><span class="default">str_replace</span><span class="keyword">(</span><span class="string">'?'</span><span class="keyword">, </span><span class="string">'?'</span><span class="keyword">, </span><span class="default">$gelen</span><span class="keyword">);<br />
+&nbsp; </span><span class="default">$gelen</span><span class="keyword">=</span><span class="default">str_replace</span><span class="keyword">(</span><span class="string">'?'</span><span class="keyword">, </span><span class="string">'?'</span><span class="keyword">, </span><span class="default">$gelen</span><span class="keyword">);<br />
+&nbsp; </span><span class="default">$gelen</span><span class="keyword">=</span><span class="default">str_replace</span><span class="keyword">(</span><span class="string">'I'</span><span class="keyword">, </span><span class="string">'?'</span><span class="keyword">, </span><span class="default">$gelen</span><span class="keyword">);<br />
+&nbsp; </span><span class="default">$gelen</span><span class="keyword">=</span><span class="default">str_replace</span><span class="keyword">(</span><span class="string">'?'</span><span class="keyword">, </span><span class="string">'i'</span><span class="keyword">, </span><span class="default">$gelen</span><span class="keyword">);<br />
+&nbsp; </span><span class="default">$gelen</span><span class="keyword">=</span><span class="default">str_replace</span><span class="keyword">(</span><span class="string">'?'</span><span class="keyword">, </span><span class="string">'?'</span><span class="keyword">, </span><span class="default">$gelen</span><span class="keyword">);<br />
+&nbsp; </span><span class="default">$gelen</span><span class="keyword">=</span><span class="default">str_replace</span><span class="keyword">(</span><span class="string">'?'</span><span class="keyword">, </span><span class="string">'?'</span><span class="keyword">, </span><span class="default">$gelen</span><span class="keyword">);<br />
+&nbsp; </span><span class="default">$gelen</span><span class="keyword">=</span><span class="default">str_replace</span><span class="keyword">(</span><span class="string">'ü'</span><span class="keyword">, </span><span class="string">'ü'</span><span class="keyword">, </span><span class="default">$gelen</span><span class="keyword">);<br />
+&nbsp; </span><span class="default">$gelen</span><span class="keyword">=</span><span class="default">strtolower</span><span class="keyword">(</span><span class="default">$gelen</span><span class="keyword">);<br />
+<br />
+&nbsp; return </span><span class="default">$gelen</span><span class="keyword">;<br />
+}<br />
+<br />
+echo </span><span class="default">ucwords_tr</span><span class="keyword">(</span><span class="string">'?EKardi ?EM??YE ?ELEN? ?MER'</span><span class="keyword">); </span><span class="comment">// ?ekardi ?em?iye ?elen? ?mer<br />
+</span><span class="keyword">echo </span><span class="default">ucwords_tr</span><span class="keyword">(</span><span class="string">'?EKER iMSAK ??LEN'</span><span class="keyword">); </span><span class="comment">// ?eker ?msak ??len</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="96179""></a>
+  <div class="note">
+   <strong class="user">jmarois at ca dot ibm dot com</strong>
+   <a href="#96179" class="date">12-Feb-2010 08:51</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+My quick and dirty ucname (Upper Case Name) function.<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="comment">//FUNCTION<br />
+<br />
+</span><span class="keyword">function </span><span class="default">ucname</span><span class="keyword">(</span><span class="default">$string</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$string </span><span class="keyword">=</span><span class="default">ucwords</span><span class="keyword">(</span><span class="default">strtolower</span><span class="keyword">(</span><span class="default">$string</span><span class="keyword">));<br />
+<br />
+&nbsp;&nbsp;&nbsp; foreach (array(</span><span class="string">'-'</span><span class="keyword">, </span><span class="string">'\''</span><span class="keyword">) as </span><span class="default">$delimiter</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp;&nbsp; if (</span><span class="default">strpos</span><span class="keyword">(</span><span class="default">$string</span><span class="keyword">, </span><span class="default">$delimiter</span><span class="keyword">)!==</span><span class="default">false</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$string </span><span class="keyword">=</span><span class="default">implode</span><span class="keyword">(</span><span class="default">$delimiter</span><span class="keyword">, </span><span class="default">array_map</span><span class="keyword">(</span><span class="string">'ucfirst'</span><span class="keyword">, </span><span class="default">explode</span><span class="keyword">(</span><span class="default">$delimiter</span><span class="keyword">, </span><span class="default">$string</span><span class="keyword">)));<br />
+&nbsp;&nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$string</span><span class="keyword">;<br />
+}<br />
+</span><span class="default">?&gt;<br />
+&lt;?php<br />
+</span><span class="comment">//TEST<br />
+<br />
+</span><span class="default">$names </span><span class="keyword">=array(<br />
+&nbsp; </span><span class="string">'JEAN-LUC PICARD'</span><span class="keyword">,<br />
+&nbsp; </span><span class="string">'MILES O\'BRIEN'</span><span class="keyword">,<br />
+&nbsp; </span><span class="string">'WILLIAM RIKER'</span><span class="keyword">,<br />
+&nbsp; </span><span class="string">'geordi la forge'</span><span class="keyword">,<br />
+&nbsp; </span><span class="string">'bEvErly CRuSHeR'<br />
+</span><span class="keyword">);<br />
+foreach (</span><span class="default">$names </span><span class="keyword">as </span><span class="default">$name</span><span class="keyword">) { print </span><span class="default">ucname</span><span class="keyword">(</span><span class="string">"</span><span class="keyword">{</span><span class="default">$name</span><span class="keyword">}</span><span class="string">\n"</span><span class="keyword">); }<br />
+<br />
+</span><span class="comment">//PRINTS:<br />
+/*<br />
+Jean-Luc Picard<br />
+Miles O'Brien<br />
+William Riker<br />
+Geordi La Forge<br />
+Beverly Crusher<br />
+*/<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+You can add more delimiters in the for-each loop array if you want to handle more characters.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="92092""></a>
+  <div class="note">
+   <strong class="user">robert at broofa dot com</strong>
+   <a href="#92092" class="date">08-Jul-2009 06:42</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Some recipes for switching between underscore and camelcase naming:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="comment">// underscored to upper-camelcase
+<br />
+// e.g. "this_method_name" -&gt; "ThisMethodName"
+<br />
+</span><span class="default">preg_replace</span><span class="keyword">(</span><span class="string">'/(?:^|_)(.?)/e'</span><span class="keyword">,</span><span class="string">"strtoupper('$1')"</span><span class="keyword">,</span><span class="default">$string</span><span class="keyword">);
+<br />
+
+<br />
+</span><span class="comment">// underscored to lower-camelcase
+<br />
+// e.g. "this_method_name" -&gt; "thisMethodName"
+<br />
+</span><span class="default">preg_replace</span><span class="keyword">(</span><span class="string">'/_(.?)/e'</span><span class="keyword">,</span><span class="string">"strtoupper('$1')"</span><span class="keyword">,</span><span class="default">$string</span><span class="keyword">);
+<br />
+
+<br />
+</span><span class="comment">// camelcase (lower or upper) to underscored
+<br />
+// e.g. "thisMethodName" -&gt; "this_method_name"
+<br />
+// e.g. "ThisMethodName" -&gt; "this_method_name"
+<br />
+</span><span class="default">strtolower</span><span class="keyword">(</span><span class="default">preg_replace</span><span class="keyword">(</span><span class="string">'/([^A-Z])([A-Z])/'</span><span class="keyword">, </span><span class="string">"$1_$2"</span><span class="keyword">, </span><span class="default">$string</span><span class="keyword">));
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+Of course these aren't 100% symmetric.&nbsp; For example...
+<br />
+&nbsp; * this_is_a_string -&gt; ThisIsAString -&gt; this_is_astring
+<br />
+&nbsp; * GetURLForString -&gt; get_urlfor_string -&gt; GetUrlforString</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="90521""></a>
+  <div class="note">
+   <strong class="user">Greg S</strong>
+   <a href="#90521" class="date">26-Apr-2009 09:16</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I did the same thing as Catalin, but for French names.
+<br />
+
+<br />
+Here's what I'm doing :
+<br />
+
+<br />
+For each word (not considering the single-quote as a word boundary character) :
+<br />
+- Put the word in lower case
+<br />
+- If the word is "de", return, else, put the first letter in upper-case
+<br />
+- See if the second character of the word is a single-quote
+<br />
+- Yes ? Put the next char in upper case
+<br />
+- And if the char before the single quote is D, put it back to lower case (-&gt; d)
+<br />
+
+<br />
+This complies with the French rules for capitalization in names.
+<br />
+
+<br />
+Sample results :
+<br />
+-d'Afoo Bar
+<br />
+-de Foo Bar
+<br />
+-O'Foo Bar
+<br />
+-Foo'bar
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="keyword">function </span><span class="default">my_ucwords</span><span class="keyword">(</span><span class="default">$s</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$s </span><span class="keyword">= </span><span class="default">preg_replace_callback</span><span class="keyword">(</span><span class="string">"/(\b[\w|']+\b)/s"</span><span class="keyword">, </span><span class="default">fixcase_callback</span><span class="keyword">, </span><span class="default">$s</span><span class="keyword">);
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; 
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$s</span><span class="keyword">;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; 
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; 
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp;&nbsp; 
+<br />
+&nbsp;&nbsp;&nbsp; function </span><span class="default">fixcase_callback</span><span class="keyword">(</span><span class="default">$word</span><span class="keyword">) {
+<br />
+
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$word </span><span class="keyword">= </span><span class="default">$word</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">];
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; 
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$word </span><span class="keyword">= </span><span class="default">strtolower</span><span class="keyword">(</span><span class="default">$word</span><span class="keyword">);
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; 
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if(</span><span class="default">$word </span><span class="keyword">== </span><span class="string">"de"</span><span class="keyword">)
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$word</span><span class="keyword">;
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; 
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$word </span><span class="keyword">= </span><span class="default">ucfirst</span><span class="keyword">(</span><span class="default">$word</span><span class="keyword">);
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; 
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if(</span><span class="default">substr</span><span class="keyword">(</span><span class="default">$word</span><span class="keyword">,</span><span class="default">1</span><span class="keyword">,</span><span class="default">1</span><span class="keyword">) == </span><span class="string">"'"</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if(</span><span class="default">substr</span><span class="keyword">(</span><span class="default">$word</span><span class="keyword">,</span><span class="default">0</span><span class="keyword">,</span><span class="default">1</span><span class="keyword">) == </span><span class="string">"D"</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$word </span><span class="keyword">= </span><span class="default">strtolower</span><span class="keyword">(</span><span class="default">$word</span><span class="keyword">);
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$next </span><span class="keyword">= </span><span class="default">substr</span><span class="keyword">(</span><span class="default">$word</span><span class="keyword">,</span><span class="default">2</span><span class="keyword">,</span><span class="default">1</span><span class="keyword">);
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$next </span><span class="keyword">= </span><span class="default">strtoupper</span><span class="keyword">(</span><span class="default">$next</span><span class="keyword">);
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$word </span><span class="keyword">= </span><span class="default">substr_replace</span><span class="keyword">(</span><span class="default">$word</span><span class="keyword">, </span><span class="default">$next</span><span class="keyword">, </span><span class="default">2</span><span class="keyword">, </span><span class="default">1</span><span class="keyword">);
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; 
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$word</span><span class="keyword">;
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="86732""></a>
+  <div class="note">
+   <strong class="user">strazds at gmail dot com</strong>
+   <a href="#86732" class="date">01-Nov-2008 02:45</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+ucwords for UTF-8 strings:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="keyword">function </span><span class="default">mb_ucwords</span><span class="keyword">(</span><span class="default">$str</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$str </span><span class="keyword">= </span><span class="default">mb_convert_case</span><span class="keyword">(</span><span class="default">$str</span><span class="keyword">, </span><span class="default">MB_CASE_TITLE</span><span class="keyword">, </span><span class="string">"UTF-8"</span><span class="keyword">);
+<br />
+&nbsp;&nbsp;&nbsp; return (</span><span class="default">$str</span><span class="keyword">);
+<br />
+}
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="85372""></a>
+  <div class="note">
+   <strong class="user">Alex</strong>
+   <a href="#85372" class="date">27-Aug-2008 09:43</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+A modified sentenceNormalizer by gregomm<br />
+&nbsp;<br />
+Features:<br />
+1- Removes duplicated question marks, exclamations and periods<br />
+2- Capitalize first letter of a sentence.<br />
+3- Split sentences not only with "." but also with "?" and "!"<br />
+4- Puts a white space at the end of each sentence<br />
+5- Retains newlines<br />
+<br />
+--removed from orginal function--<br />
+undestand the meaning of "?" and "?" in languages like spanish.<br />
+undestand the htmlentitity version of this simbols.<br />
+--removed from orginal function--<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">sentenceNormalizer</span><span class="keyword">(</span><span class="default">$sentence_split</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$sentence_split </span><span class="keyword">= </span><span class="default">preg_replace</span><span class="keyword">(array(</span><span class="string">'/[!]+/'</span><span class="keyword">,</span><span class="string">'/[?]+/'</span><span class="keyword">,</span><span class="string">'/[.]+/'</span><span class="keyword">),<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; array(</span><span class="string">'!'</span><span class="keyword">,</span><span class="string">'?'</span><span class="keyword">,</span><span class="string">'.'</span><span class="keyword">),</span><span class="default">$sentence_split</span><span class="keyword">);&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$textbad </span><span class="keyword">= </span><span class="default">preg_split</span><span class="keyword">(</span><span class="string">"/(\!|\.|\?|\n)/"</span><span class="keyword">, </span><span class="default">$sentence_split</span><span class="keyword">,-</span><span class="default">1</span><span class="keyword">,</span><span class="default">PREG_SPLIT_DELIM_CAPTURE</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$newtext </span><span class="keyword">= array();<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$count </span><span class="keyword">= </span><span class="default">sizeof</span><span class="keyword">(</span><span class="default">$textbad</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; foreach(</span><span class="default">$textbad </span><span class="keyword">as </span><span class="default">$key </span><span class="keyword">=&gt; </span><span class="default">$string</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (!empty(</span><span class="default">$string</span><span class="keyword">)) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$text </span><span class="keyword">= </span><span class="default">trim</span><span class="keyword">(</span><span class="default">$string</span><span class="keyword">, </span><span class="string">' '</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$size </span><span class="keyword">= </span><span class="default">strlen</span><span class="keyword">(</span><span class="default">$text</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">$size </span><span class="keyword">&gt; </span><span class="default">1</span><span class="keyword">){&nbsp; &nbsp;&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$newtext</span><span class="keyword">[] = </span><span class="default">ucfirst</span><span class="keyword">(</span><span class="default">strtolower</span><span class="keyword">(</span><span class="default">$text</span><span class="keyword">));<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; elseif (</span><span class="default">$size </span><span class="keyword">== </span><span class="default">1</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$newtext</span><span class="keyword">[] = (</span><span class="default">$text </span><span class="keyword">== </span><span class="string">"\n"</span><span class="keyword">) ? </span><span class="default">$text </span><span class="keyword">: </span><span class="default">$text </span><span class="keyword">. </span><span class="string">' '</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }&nbsp; &nbsp; &nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">implode</span><span class="keyword">(</span><span class="default">$newtext</span><span class="keyword">);<br />
+}<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="80718""></a>
+  <div class="note">
+   <strong class="user">blake at goinoutwest dot com</strong>
+   <a href="#80718" class="date">29-Jan-2008 05:14</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Relating to the mb_ucwords() function posted by Anonymous.&nbsp; In order for this to actually be multi-byte compliant, you would also need to use mb_substr() and mb_strlen() instead of substr and strlen respectively.<br />
+<br />
+Here it is corrected and extended even further to allow multiple word separators and a list of exceptions to correct after title casing. It's a bit tedious and inelegant, but things frequently are when dealing with human languages.<br />
+<br />
+function mb_ucwords($str) {<br />
+&nbsp;&nbsp;&nbsp; $exceptions = array();<br />
+&nbsp;&nbsp;&nbsp; $exceptions['Hp'] = 'HP';<br />
+&nbsp;&nbsp;&nbsp; $exceptions['Ibm'] = 'IBM';<br />
+&nbsp;&nbsp;&nbsp; $exceptions['Gb'] = 'GB';<br />
+&nbsp;&nbsp;&nbsp; $exceptions['Mb'] = 'MB';<br />
+&nbsp;&nbsp;&nbsp; $exceptions['Cd'] = 'CD';<br />
+&nbsp;&nbsp;&nbsp; $exceptions['Dvd'] = 'DVD';<br />
+&nbsp;&nbsp;&nbsp; $exceptions['Usb'] = 'USB';<br />
+&nbsp;&nbsp;&nbsp; $exceptions['Mm'] = 'mm';<br />
+&nbsp;&nbsp;&nbsp; $exceptions['Cm'] = 'cm';<br />
+&nbsp;&nbsp;&nbsp; //&nbsp; &nbsp; etc.<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; $separator = array(" ","-","+");<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; $str = mb_strtolower(trim($str));<br />
+&nbsp;&nbsp;&nbsp; foreach($separator as $s){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $word = explode($s, $str);<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $return = "";<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; foreach ($word as $val){<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $return .= $s . mb_strtoupper($val{0}) . mb_substr($val,1,mb_strlen($val)-1);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $str = mb_substr($return, 1);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; foreach($exceptions as $find=&gt;$replace){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (mb_strpos($return, $find) !== false){<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $return = str_replace($find, $replace, $return);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; return mb_substr($return, 1);<br />
+}</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="76786""></a>
+  <div class="note">
+   <strong class="user">kendsnyder at gmail dot com</strong>
+   <a href="#76786" class="date">30-Jul-2007 01:02</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Here is a function to capitalize a last name, accounting for hyphens, apostrophes, "Mc" and "Mac":<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">CapitalizeLastName</span><span class="keyword">(</span><span class="default">$name</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$name </span><span class="keyword">= </span><span class="default">strtolower</span><span class="keyword">(</span><span class="default">$name</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$name </span><span class="keyword">= </span><span class="default">join</span><span class="keyword">(</span><span class="string">"'"</span><span class="keyword">, </span><span class="default">array_map</span><span class="keyword">(</span><span class="string">'ucwords'</span><span class="keyword">, </span><span class="default">explode</span><span class="keyword">(</span><span class="string">"'"</span><span class="keyword">, </span><span class="default">$name</span><span class="keyword">)));<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$name </span><span class="keyword">= </span><span class="default">join</span><span class="keyword">(</span><span class="string">"-"</span><span class="keyword">, </span><span class="default">array_map</span><span class="keyword">(</span><span class="string">'ucwords'</span><span class="keyword">, </span><span class="default">explode</span><span class="keyword">(</span><span class="string">"-"</span><span class="keyword">, </span><span class="default">$name</span><span class="keyword">)));<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$name </span><span class="keyword">= </span><span class="default">join</span><span class="keyword">(</span><span class="string">"Mac"</span><span class="keyword">, </span><span class="default">array_map</span><span class="keyword">(</span><span class="string">'ucwords'</span><span class="keyword">, </span><span class="default">explode</span><span class="keyword">(</span><span class="string">"Mac"</span><span class="keyword">, </span><span class="default">$name</span><span class="keyword">)));<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$name </span><span class="keyword">= </span><span class="default">join</span><span class="keyword">(</span><span class="string">"Mc"</span><span class="keyword">, </span><span class="default">array_map</span><span class="keyword">(</span><span class="string">'ucwords'</span><span class="keyword">, </span><span class="default">explode</span><span class="keyword">(</span><span class="string">"Mc"</span><span class="keyword">, </span><span class="default">$name</span><span class="keyword">)));<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$name</span><span class="keyword">;<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+I speed tested it against functions that used preg_replace() with an "e" modifier, preg_replace_callback(), and a character-by-character parsing.&nbsp; Unexpectedly, this function using join(), array_map() and explode() was fastest.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="74938""></a>
+  <div class="note">
+   <strong class="user">Q1712 at online dot ms</strong>
+   <a href="#74938" class="date">05-May-2007 12:49</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+ucwords() only excepts whitespace in front of a word, although some chars like '"' or '(' normally have no space between them and the following word:<br />
+<span class="default">&lt;?php<br />
+$title </span><span class="keyword">= </span><span class="string">'ELVIS "THE KING" PRESLEY - (LET ME BE YOUR) TEDDY BEAR'</span><span class="keyword">;<br />
+echo </span><span class="default">ucwords</span><span class="keyword">(</span><span class="default">strtolower</span><span class="keyword">(</span><span class="default">$title</span><span class="keyword">));<br />
+</span><span class="default">?&gt;<br />
+</span>prints: Elvis "the King" Presley - (let Me Be Your) Teddy Bear<br />
+<br />
+To avoid this i use a small function adding and deleting blanks behind these chars, and using ucwords() in between:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">my_ucwords</span><span class="keyword">(</span><span class="default">$string</span><span class="keyword">)<br />
+&nbsp; { <br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$noletters</span><span class="keyword">=</span><span class="string">'"([/'</span><span class="keyword">; </span><span class="comment">//add more if u need to<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">for(</span><span class="default">$i</span><span class="keyword">=</span><span class="default">0</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">&lt;</span><span class="default">strlen</span><span class="keyword">(</span><span class="default">$noletters</span><span class="keyword">); </span><span class="default">$i</span><span class="keyword">++)<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$string </span><span class="keyword">= </span><span class="default">str_replace</span><span class="keyword">(</span><span class="default">$noletters</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">], </span><span class="default">$noletters</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">].</span><span class="string">' '</span><span class="keyword">, </span><span class="default">$string</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$string</span><span class="keyword">=</span><span class="default">ucwords</span><span class="keyword">(</span><span class="default">$string</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; for(</span><span class="default">$i</span><span class="keyword">=</span><span class="default">0</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">&lt;</span><span class="default">strlen</span><span class="keyword">(</span><span class="default">$noletters</span><span class="keyword">); </span><span class="default">$i</span><span class="keyword">++)<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$string </span><span class="keyword">= </span><span class="default">str_replace</span><span class="keyword">(</span><span class="default">$noletters</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">].</span><span class="string">' '</span><span class="keyword">, </span><span class="default">$noletters</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">], </span><span class="default">$string</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$string</span><span class="keyword">;<br />
+&nbsp; }<br />
+<br />
+</span><span class="default">$title </span><span class="keyword">= </span><span class="string">'ELVIS "THE KING" PRESLEY - (LET ME BE YOUR) TEDDY BEAR'</span><span class="keyword">;<br />
+echo </span><span class="default">my_ucwords</span><span class="keyword">(</span><span class="default">strtolower</span><span class="keyword">(</span><span class="default">$title</span><span class="keyword">));<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+prints: Elvis "The King" Presley - (Let Me Be Your) Teddy Bear</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="72123""></a>
+  <div class="note">
+   <strong class="user">barnaby ritchley at exeye dot co dot uk</strong>
+   <a href="#72123" class="date">03-Jan-2007 08:53</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+A very easy way to convert to title case:<br />
+<br />
+function titleCase($string)<br />
+&nbsp;&nbsp; &nbsp; {<br />
+&nbsp;&nbsp; &nbsp; return ucwords(strtolower($string));<br />
+&nbsp;&nbsp; &nbsp; }<br />
+<br />
+$myString = "SOME TEXT";<br />
+<br />
+echo titleCase($myString);<br />
+<br />
+//will print, "My Text"</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="66845""></a>
+  <div class="note">
+   <strong class="user">Ismet Togay</strong>
+   <a href="#66845" class="date">30-May-2006 05:07</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Response to arif:<br />
+<br />
+We do not need that long functions. In order to make ucwords() worked properly in Turkish words that contain speacial characters, we can use the following command in our php codes:<br />
+<br />
+setlocale(LC_ALL, 'tr_TR');<br />
+<br />
+This will set locale to Turkish.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="65712""></a>
+  <div class="note">
+   <strong class="user">lev at phpfox dot com</strong>
+   <a href="#65712" class="date">06-May-2006 01:44</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+In the function ucsmart() posted by ieure at php dot net on 04-Dec-2005 11:57, I found a similar problem in this function to what he found in igua's.<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">ucsmart</span><span class="keyword">(</span><span class="default">$text</span><span class="keyword">)<br />
+{<br />
+&nbsp;&nbsp; return </span><span class="default">preg_replace</span><span class="keyword">(</span><span class="string">'/([^a-z]|^)([a-z])/e'</span><span class="keyword">, </span><span class="string">'"$1".strtoupper("$2")'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">strtolower</span><span class="keyword">(</span><span class="default">$text</span><span class="keyword">));<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+"igua's code adds a backslash in front of the first single quote for me. This doesn't alter the content in any way other than changing case."<br />
+<br />
+Actually, it did end up changing the content for me (php 5.0.4) in the way that this function escapes a single quotation (apostrophe) in the MIDDLE of a word.<br />
+<br />
+For example:<br />
+<br />
+who's online?<br />
+<br />
+Became:<br />
+<br />
+Who\'s Online?<br />
+<br />
+The fix is simple however, and merely requires fine-tuning the regular expression:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">ucsmart</span><span class="keyword">(</span><span class="default">$text</span><span class="keyword">)<br />
+{<br />
+&nbsp;&nbsp; return </span><span class="default">preg_replace</span><span class="keyword">(</span><span class="string">'/([^a-z\']|^)([a-z])/e'</span><span class="keyword">, </span><span class="string">'"$1".strtoupper("$2")'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">strtolower</span><span class="keyword">(</span><span class="default">$text</span><span class="keyword">));<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+(note: while previewing this note before adding it, I am noticing php's website is not correctly displaying the change I made as I wrote it. After the first a-z in the expression, the single quotation should be escaped... If it isn't you will get a parse error! And apoligies if my text here is colored as php code; not my fault!)<br />
+<br />
+This will not escape a single quotation mark which occurs in the middle of a word... Though, you may find that might need to add other characters inside the regular expression if you use other special characters inside your words and if you get funky output.<br />
+<br />
+It's a great expression though! Simple, yet very powerful. Kudos!</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="60064""></a>
+  <div class="note">
+   
+   <a href="#60064" class="date">24-Dec-2005 07:34</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+"ieure at php dot net", your idea is pure poetry!<br />
+<br />
+The function below will standardize the capitalization on people's names and the titles of reports and essays . You may need to adapt the lists in "$all_uppercase" and "$all_lowercase" to suit the data that you are working with.<br />
+<br />
+function my_ucwords($str, $is_name=false) {<br />
+&nbsp;&nbsp; // exceptions to standard case conversion<br />
+&nbsp;&nbsp; if ($is_name) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; $all_uppercase = '';<br />
+&nbsp;&nbsp; &nbsp; &nbsp; $all_lowercase = 'De La|De Las|Der|Van De|Van Der|Vit De|Von|Or|And';<br />
+&nbsp;&nbsp; } else {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; // addresses, essay titles ... and anything else<br />
+&nbsp;&nbsp; &nbsp; &nbsp; $all_uppercase = 'Po|Rr|Se|Sw|Ne|Nw';<br />
+&nbsp;&nbsp; &nbsp; &nbsp; $all_lowercase = 'A|And|As|By|In|Of|Or|To';<br />
+&nbsp;&nbsp; }<br />
+&nbsp;&nbsp; $prefixes = 'Mc';<br />
+&nbsp;&nbsp; $suffixes = "'S";<br />
+<br />
+&nbsp;&nbsp; // captialize all first letters<br />
+&nbsp;&nbsp; $str = preg_replace('/\\b(\\w)/e', 'strtoupper("$1")', strtolower(trim($str)));<br />
+<br />
+&nbsp;&nbsp; if ($all_uppercase) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; // capitalize acronymns and initialisms e.g. PHP<br />
+&nbsp;&nbsp; &nbsp; &nbsp; $str = preg_replace("/\\b($all_uppercase)\\b/e", 'strtoupper("$1")', $str);<br />
+&nbsp;&nbsp; }<br />
+&nbsp;&nbsp; if ($all_lowercase) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; // decapitalize short words e.g. and<br />
+&nbsp;&nbsp; &nbsp; &nbsp; if ($is_name) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // all occurences will be changed to lowercase<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $str = preg_replace("/\\b($all_lowercase)\\b/e", 'strtolower("$1")', $str);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; } else {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // first and last word will not be changed to lower case (i.e. titles)<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $str = preg_replace("/(?&lt;=\\W)($all_lowercase)(?=\\W)/e", 'strtolower("$1")', $str);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; }<br />
+&nbsp;&nbsp; }<br />
+&nbsp;&nbsp; if ($prefixes) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; // capitalize letter after certain name prefixes e.g 'Mc'<br />
+&nbsp;&nbsp; &nbsp; &nbsp; $str = preg_replace("/\\b($prefixes)(\\w)/e", '"$1".strtoupper("$2")', $str);<br />
+&nbsp;&nbsp; }<br />
+&nbsp;&nbsp; if ($suffixes) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; // decapitalize certain word suffixes e.g. 's<br />
+&nbsp;&nbsp; &nbsp; &nbsp; $str = preg_replace("/(\\w)($suffixes)\\b/e", '"$1".strtolower("$2")', $str);<br />
+&nbsp;&nbsp; }<br />
+&nbsp;&nbsp; return $str;<br />
+}<br />
+<br />
+// A name example<br />
+print my_ucwords("MARIE-LOU VAN DER PLANCK-ST.JOHN", true);<br />
+// Output: Marie-Lou van der Planc-St.John<br />
+<br />
+// A title example<br />
+print my_ucwords("to be or not to be");<br />
+// Output: "To Be or Not to Be"</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="27537""></a>
+  <div class="note">
+   <strong class="user">deepdene at email dot com</strong>
+   <a href="#27537" class="date">09-Dec-2002 11:20</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+A function knowing about name case (i.e. caps on McDonald etc)<br />
+<br />
+function name_case($name)<br />
+{<br />
+&nbsp;&nbsp;&nbsp; $newname = strtoupper($name[0]);&nbsp; &nbsp; <br />
+&nbsp;&nbsp;&nbsp; for ($i=1; $i &lt; strlen($name); $i++) <br />
+&nbsp;&nbsp;&nbsp; { <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $subed = substr($name, $i, 1);&nbsp; &nbsp;&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (((ord($subed) &gt; 64) &amp;&amp; (ord($subed) &lt; 123)) || <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; ((ord($subed) &gt; 48) &amp;&amp; (ord($subed) &lt; 58))) <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; { <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $word_check = substr($name, $i - 2, 2);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if (!strcasecmp($word_check, 'Mc') || !strcasecmp($word_check, "O'")) <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $newname .= strtoupper($subed);&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; else if ($break) <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; { <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $newname .= strtoupper($subed); <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; } <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; else&nbsp; &nbsp; &nbsp;&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; { <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $newname .= strtolower($subed); <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; } <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $break=0; <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; else<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; { <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; // not a letter - a boundary <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $newname .= $subed; <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $break=1; <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }&nbsp; &nbsp; <br />
+&nbsp;&nbsp;&nbsp; return $newname;<br />
+}</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="18341""></a>
+  <div class="note">
+   
+   <a href="#18341" class="date">18-Jan-2002 06:14</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+This seems to be what people want:
+<br />
+
+<br />
+function uc_all($string) {
+<br />
+&nbsp;&nbsp;&nbsp; $temp = preg_split('/(\W)/', $string, -1, PREG_SPLIT_DELIM_CAPTURE );
+<br />
+&nbsp;&nbsp;&nbsp; foreach ($temp as $key=&gt;$word) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $temp[$key] = ucfirst(strtolower($word));
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp;&nbsp; return join ('', $temp);
+<br />
+}
+<br />
+
+<br />
+[ed note: fixed the code to be correct]</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="12063""></a>
+  <div class="note">
+   <strong class="user">neil at no-spam-ents24 dot com</strong>
+   <a href="#12063" class="date">21-Mar-2001 05:10</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+The code posted above by Joerg Krause only works for a string which ends with one of the delimiters. A possible fix is:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+$text </span><span class="keyword">= </span><span class="string">"What?No delimiters,shit happens here.this solves all problems."</span><span class="keyword">; 
+<br />
+</span><span class="default">preg_match_all</span><span class="keyword">(</span><span class="string">"/(\w+[,. ?])+/U"</span><span class="keyword">, </span><span class="default">$text</span><span class="keyword">, </span><span class="default">$words</span><span class="keyword">); 
+<br />
+</span><span class="default">preg_match</span><span class="keyword">(</span><span class="string">"/(\w+)$/"</span><span class="keyword">, </span><span class="default">$text</span><span class="keyword">, </span><span class="default">$lastword</span><span class="keyword">);
+<br />
+</span><span class="default">$words</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">][] = </span><span class="default">$lastword</span><span class="keyword">;
+<br />
+foreach(</span><span class="default">$words</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">] as </span><span class="default">$part</span><span class="keyword">) </span><span class="default">$uwords</span><span class="keyword">[] = </span><span class="default">ucfirst</span><span class="keyword">(</span><span class="default">$part</span><span class="keyword">); 
+<br />
+</span><span class="default">$text </span><span class="keyword">= </span><span class="default">implode</span><span class="keyword">(</span><span class="string">""</span><span class="keyword">, </span><span class="default">$uwords</span><span class="keyword">); 
+<br />
+echo </span><span class="default">$text</span><span class="keyword">;
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>Decrypt a CMS message</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.openssl-cipher-key-length.html">? openssl_cipher_key_length</a></li>
+      <li style="float: right;"><a href="function.openssl-cms-encrypt.html">openssl_cms_encrypt ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.openssl.html">OpenSSL 函数</a></li>
+    <li>Decrypt a CMS message</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.openssl-cms-decrypt" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">openssl_cms_decrypt</h1>
+  <p class="verinfo">(PHP 8)</p><p class="refpurpose"><span class="refname">openssl_cms_decrypt</span> &mdash; <span class="dc-title">Decrypt a CMS message</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.openssl-cms-decrypt-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>openssl_cms_decrypt</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$input_filename</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$output_filename</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><span class="type"><a href="class.opensslcertificate.html" class="type OpenSSLCertificate">OpenSSLCertificate</a></span>|<span class="type">string</span></span> <code class="parameter">$certificate</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><span class="type"><a href="class.opensslasymmetrickey.html" class="type OpenSSLAsymmetricKey">OpenSSLAsymmetricKey</a></span>|<span class="type"><a href="class.opensslcertificate.html" class="type OpenSSLCertificate">OpenSSLCertificate</a></span>|<span class="type">array</span>|<span class="type">string</span>|<span class="type">null</span></span> <code class="parameter">$private_key</code><span class="initializer"> = <strong><code>null</code></strong></span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$encoding</code><span class="initializer"> = <strong><code>OPENSSL_ENCODING_SMIME</code></strong></span></span><br>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">
+   Decrypts a CMS message.
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.openssl-cms-decrypt-parameters">
+  <h3 class="title">参数</h3>
+  <dl>
+   
+    <dt>
+<code class="parameter">input_filename</code></dt>
+
+    <dd>
+
+     <p class="para">
+      The name of a file containing encrypted content.
+     </p>
+    </dd>
+
+   
+   
+    <dt>
+<code class="parameter">output_filename</code></dt>
+
+    <dd>
+
+     <p class="para">
+      The name of the file to deposit the decrypted content.
+     </p>
+    </dd>
+
+   
+   
+    <dt>
+<code class="parameter">certificate</code></dt>
+
+    <dd>
+
+     <p class="para">
+      The name of the file containing a certificate of the recipient.
+     </p>
+    </dd>
+
+   
+   
+    <dt>
+<code class="parameter">private_key</code></dt>
+
+    <dd>
+
+     <p class="para">
+      The name of the file containing a PKCS#8 key.
+     </p>
+    </dd>
+
+   
+   
+    <dt>
+<code class="parameter">encoding</code></dt>
+
+    <dd>
+
+     <p class="para">
+      The encoding of the input file. One of <strong><code>OPENSSL_ENCODING_SMIME</code></strong>,
+      <strong><code>OPENSSL_ENCODING_DER</code></strong> or <strong><code>OPENSSL_ENCODING_PEM</code></strong>.
+     </p>
+    </dd>
+
+   
+  </dl>
+
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.openssl-cms-decrypt-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   成功时返回 <strong><code>true</code></strong>， 或者在失败时返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="125866""></a>
+  <div class="note">
+   <strong class="user">Sebastian</strong>
+   <a href="#125866" class="date">28-Feb-2021 09:25</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+It took me a while to find out the correct way how to decrypt and verify data with these functions.<br />
+I needed that to communicate with German Health Insurance Providers as part of a DiGA. Maybe someone finds that useful.<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">decryptAndVerify</span><span class="keyword">(</span><span class="default">$signedAndEncryptedRawData</span><span class="keyword">): </span><span class="default">string<br />
+</span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$tempDir </span><span class="keyword">= </span><span class="default">__DIR__ </span><span class="keyword">. </span><span class="string">'/tmp'</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$originalFile </span><span class="keyword">= </span><span class="default">tempnam</span><span class="keyword">(</span><span class="default">$tempDir</span><span class="keyword">, </span><span class="string">'original'</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$decryptedFile </span><span class="keyword">= </span><span class="default">tempnam</span><span class="keyword">(</span><span class="default">$tempDir</span><span class="keyword">, </span><span class="string">'decrypted'</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$verifiedFile </span><span class="keyword">= </span><span class="default">tempnam</span><span class="keyword">(</span><span class="default">$tempDir</span><span class="keyword">, </span><span class="string">'verified'</span><span class="keyword">);<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">file_put_contents</span><span class="keyword">(</span><span class="default">$originalFile</span><span class="keyword">, </span><span class="default">$signedAndEncryptedRawData</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// One file with all possible certificates one after the other<br />
+&nbsp;&nbsp;&nbsp; // -----BEGIN CERTIFICATE----- ...-----END CERTIFICATE-----<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$allPossibleSenderCertificates </span><span class="keyword">= </span><span class="default">__DIR__ </span><span class="keyword">. </span><span class="string">'/untrusted.pem'</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// Certificate:<br />
+&nbsp;&nbsp;&nbsp; //&nbsp; &nbsp; Data:<br />
+&nbsp;&nbsp;&nbsp; //&nbsp; &nbsp; &nbsp; &nbsp; Version: 3 (0x2)...<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$myCertificate </span><span class="keyword">= </span><span class="default">file_get_contents</span><span class="keyword">(</span><span class="default">__DIR__ </span><span class="keyword">. </span><span class="string">'/my.crt'</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$myPrivateKey </span><span class="keyword">= </span><span class="default">openssl_pkey_get_private</span><span class="keyword">(<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// -----BEGIN RSA PRIVATE KEY----- ... -----END RSA PRIVATE KEY-----<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">file_get_contents</span><span class="keyword">(</span><span class="default">__DIR__ </span><span class="keyword">. </span><span class="string">'/my.prv.key.pem'</span><span class="keyword">)<br />
+&nbsp;&nbsp;&nbsp; );<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">openssl_cms_decrypt</span><span class="keyword">(<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">input_filename</span><span class="keyword">: </span><span class="default">$originalFile</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">output_filename</span><span class="keyword">: </span><span class="default">$decryptedFile</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">certificate</span><span class="keyword">: </span><span class="default">$myCertificate</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">private_key</span><span class="keyword">: </span><span class="default">$myPrivateKey</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">encoding</span><span class="keyword">: </span><span class="default">OPENSSL_ENCODING_DER<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">);<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">openssl_cms_verify</span><span class="keyword">(<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">input_filename</span><span class="keyword">: </span><span class="default">$decryptedFile</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">flags</span><span class="keyword">: </span><span class="default">OPENSSL_CMS_BINARY </span><span class="keyword">| </span><span class="default">OPENSSL_CMS_NOSIGS </span><span class="keyword">| </span><span class="default">OPENSSL_CMS_NOVERIFY</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">ca_info</span><span class="keyword">: [],<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">untrusted_certificates_filename</span><span class="keyword">: </span><span class="default">$allPossibleSenderCertificates</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">content</span><span class="keyword">: </span><span class="default">$verifiedFile</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">encoding</span><span class="keyword">: </span><span class="default">OPENSSL_ENCODING_DER<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">file_get_contents</span><span class="keyword">(</span><span class="default">$verifiedFile</span><span class="keyword">);<br />
+}</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

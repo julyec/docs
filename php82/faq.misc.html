@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>其他问题</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="faq.com.html">? PHP and COM</a></li>
+      <li style="float: right;"><a href="appendices.html">附录 ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li>其他问题</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="faq.misc" class="chapter">
+  <h1>其他问题</h1>
+
+  
+  <p class="para">有些问题没法归到其它类中，可以在这里找到。</p>
+  <div class="qandaset"><ol class="qandaset_questions"><li><a href="#faq.misc.bz2">
+        在 Windows 中怎样处理 bz2 压缩的文档？
+      </a></li></ol></div>
+    <dl class="qandaentry" id="faq.misc.bz2">
+      <dt><strong>
+        在 Windows 中怎样处理 bz2 压缩的文档？
+      </strong></dt>
+      <dd class="answer">
+        <p class="para">如果没有能处理 bz2 文件的压缩工具，从 Redhat 
+        <a href="https://www.sourceware.org/bzip2/" class="link external" title="Link : https://www.sourceware.org/bzip2/">&raquo;&nbsp;下载</a>一个命令行工具（进一步信息见下面）。</p>
+        <p class="para">如果不喜欢用命令行工具，可以试试免费工具例如 
+        <a href="http://www.stuffit.com/" class="link external" title="Link : http://www.stuffit.com/">&raquo;&nbsp;Stuffit Expander</a>，
+        <a href="http://www.ultimatezip.com/" class="link external" title="Link : http://www.ultimatezip.com/">&raquo;&nbsp;UltimateZip</a>，
+        <a href="http://www.7-zip.org/" class="link external" title="Link : http://www.7-zip.org/">&raquo;&nbsp;7-Zip</a>或者 
+        <a href="http://www.quickzip.org/" class="link external" title="Link : http://www.quickzip.org/">&raquo;&nbsp;Quick Zip</a>。如果有像 
+        <a href="http://www.rarlab.com/" class="link external" title="Link : http://www.rarlab.com/">&raquo;&nbsp;WinRAR</a>或者 
+        <a href="http://www.powerarchiver.com/" class="link external" title="Link : http://www.powerarchiver.com/">&raquo;&nbsp;Power Archiver</a>之类的工具，可以很容易用它解压缩 bz2 文件。如果用 Total Commander（前身为 Windows Commander），可以从 
+        <a href="http://www.ghisler.com/" class="link external" title="Link : http://www.ghisler.com/">&raquo;&nbsp;Total Commander</a>网站免费得到一个 bz2 插件。</p>
+        <p class="para">来自 Redhat 的 bzip2 命令行工具：</p>
+        <p class="para">Win2K Sp2 用户下载最新版本 1.0.2，所有其它 Windows 用户应该用版本 1.00。下载后重命名可执行文件为 bzip2.exe。为方便起见将其放到一个在你路径中的目录，例如 C:\Windows，C 表示你安装 Windows 的盘符。</p>
+        <p class="para">注意：lang 指的是你的语种，x 是想要的格式，例如：pdf。要解压缩 php_manual_lang.x.bz2，按照下面的简单说明进行： 
+        <ul class="itemizedlist">
+          <li class="listitem">
+            <span class="simpara">打开一个命令行窗口</span>
+          </li>
+          <li class="listitem">
+            <span class="simpara">进入存放已下载的 php_manual_lang.x.bz2 的目录</span>
+          </li>
+          <li class="listitem">
+            <span class="simpara">调用 bzip2 -d php_manual_lang.x.bz2，将 php_manual_lang.x 释放到同一个目录</span>
+          </li>
+        </ul></p>
+        <p class="para">在下载了包含很多 html 文件的 php_manual_lang.tar.bz2 的情况下，过程是一样的。唯一区别是得到了一个 php_manual_lang.tar 文件。tar 格式可以被大多数 Windows 下流行的压缩工具所处理，例如 
+        <a href="http://www.winzip.com/" class="link external" title="Link : http://www.winzip.com/">&raquo;&nbsp;WinZip</a>。</p>
+      </dd>
+    </dl>
+  
+</div>
+<div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="101596""></a>
+  <div class="note">
+   <strong class="user">doerr at apkk dot de</strong>
+   <a href="#101596" class="date">28-Dec-2010 05:41</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you only needed register_globals for get/post variables, the effictive solution for 5.3 is:<br />
+&nbsp; import_request_variables("GPC", "");<br />
+<br />
+But if the skripts relied on session_register() you'll have to do more:<br />
+- Replace all variables that appeared after session_register with _SESSION equivalents - so $myvar becomes $_SESSION['myvar']<br />
+- Take care if your variables appeared inside strings - 'Hello $user !' works, but 'Hello $_SESSION['user'] !' not - so you have to concatenate the string: 'Hello '.$_SESSION['user'] .' !'<br />
+- Session variables in function declarations (for whatever purpose) will not work - keeping the old (local) names will work in most cases. <br />
+- Finally, replace the session_register(..) line with session_start()</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="53961""></a>
+  <div class="note">
+   <strong class="user">markus</strong>
+   <a href="#53961" class="date">18-Jun-2005 03:34</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Considering the comment below. I think there's a way to avoid that "problem":<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="comment">//<br />
+// $starttime is an example of a variable that we might need to define,<br />
+// even before, running the "register_globals OFF" emulator below.<br />
+//<br />
+</span><span class="keyword">list(</span><span class="default">$msec</span><span class="keyword">, </span><span class="default">$sec</span><span class="keyword">) = </span><span class="default">explode</span><span class="keyword">(</span><span class="string">' '</span><span class="keyword">, </span><span class="default">microtime</span><span class="keyword">());<br />
+</span><span class="default">$starttime </span><span class="keyword">= ((float)</span><span class="default">$msec </span><span class="keyword">+ (float)</span><span class="default">$sec</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">//<br />
+// If register_globals is ON, ensure no unexpected globals are defined.<br />
+// ie. We'll try to emulate a register_globals OFF environment.<br />
+//<br />
+</span><span class="keyword">if( (bool)@</span><span class="default">ini_get</span><span class="keyword">(</span><span class="string">'register_globals'</span><span class="keyword">) )<br />
+{<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$superglobals </span><span class="keyword">= array(</span><span class="default">$_ENV</span><span class="keyword">, </span><span class="default">$_GET</span><span class="keyword">, </span><span class="default">$_POST</span><span class="keyword">, </span><span class="default">$_COOKIE</span><span class="keyword">, </span><span class="default">$_FILES</span><span class="keyword">, </span><span class="default">$_SERVER</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; if( isset(</span><span class="default">$_SESSION</span><span class="keyword">) )<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">array_unshift</span><span class="keyword">(</span><span class="default">$superglobals</span><span class="keyword">, </span><span class="default">$_SESSION</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$knownglobals </span><span class="keyword">= array(<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">//<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; // Known PHP Reserved globals and superglobals:<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; //<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'_ENV'</span><span class="keyword">,&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="string">'HTTP_ENV_VARS'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'_GET'</span><span class="keyword">,&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="string">'HTTP_GET_VARS'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'_POST'</span><span class="keyword">,&nbsp; &nbsp; </span><span class="string">'HTTP_POST_VARS'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'_COOKIE'</span><span class="keyword">,&nbsp; &nbsp; </span><span class="string">'HTTP_COOKIE_VARS'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'_FILES'</span><span class="keyword">,&nbsp; &nbsp; </span><span class="string">'HTTP_FILES_VARS'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'_SERVER'</span><span class="keyword">,&nbsp; &nbsp; </span><span class="string">'HTTP_SERVER_VARS'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'_SESSION'</span><span class="keyword">,&nbsp; &nbsp; </span><span class="string">'HTTP_SESSION_VARS'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'_REQUEST'</span><span class="keyword">,<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">//<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; // Global variables used by this code snippet:<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; //<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'superglobals'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'knownglobals'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'superglobal'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'global'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'void'</span><span class="keyword">,<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">//<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; // Known global variables defined before this code snippet is reached.<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; //<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'starttime'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; );<br />
+&nbsp;&nbsp;&nbsp; foreach( </span><span class="default">$superglobals </span><span class="keyword">as </span><span class="default">$superglobal </span><span class="keyword">)<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; foreach( </span><span class="default">$superglobal </span><span class="keyword">as </span><span class="default">$global </span><span class="keyword">=&gt; </span><span class="default">$void </span><span class="keyword">)<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if( !</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">$global</span><span class="keyword">, </span><span class="default">$knownglobals</span><span class="keyword">) )<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; unset(</span><span class="default">$GLOBALS</span><span class="keyword">[</span><span class="default">$global</span><span class="keyword">]);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Note the stuff related to the $_SESSION array depends on whether the PHP session has been started or not. You might want to call session_start() before this point (or set session.auto_start ON).<br />
+<br />
+HTH+ :)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="51858""></a>
+  <div class="note">
+   <strong class="user">php at REMOVEMEkennel17 dot co dot uk</strong>
+   <a href="#51858" class="date">12-Apr-2005 08:22</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Regarding simulating register_globals = off, note that it is impossible to adequately prevent $_SESSION variables from being globalised, as the array (and thus the globals) are created on a call to session_start().&nbsp; You would therefore have to 'undo' this when you start a session as using it at the start of your script will have no effect.<br />
+<br />
+To avoid potential problems, use a prefix that is unique for all session variables (e.g. 'SESS_'), and only access them via the $_SESSION array.&nbsp; The prefix ensures that you don't have a naming clash (and therefore a security risk) with any non-session globals.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

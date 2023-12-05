@@ -1,0 +1,363 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>验证值是否可以在当前范围内作为函数调用。</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.is-bool.html">? is_bool</a></li>
+      <li style="float: right;"><a href="function.is-countable.html">is_countable ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.var.html">变量处理函数</a></li>
+    <li>验证值是否可以在当前范围内作为函数调用。</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.is-callable" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">is_callable</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.0.6, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">is_callable</span> &mdash; <span class="dc-title">
+   验证值是否可以在当前范围内作为函数调用。
+  </span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.is-callable-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>is_callable</strong></span>(<span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">$value</code></span>, <span class="methodparam"><span class="type">bool</span> <code class="parameter">$syntax_only</code><span class="initializer"> = <strong><code>false</code></strong></span></span>, <span class="methodparam"><span class="type">string</span> <code class="parameter reference">&$callable_name</code><span class="initializer"> = <strong><code>null</code></strong></span></span>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">
+   验证值是 <span class="type"><a href="language.types.callable.html" class="type callable">callable</a></span>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.is-callable-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">value</code></dt>
+
+     <dd>
+
+      <p class="para">
+       要验证的值
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">syntax_only</code></dt>
+
+     <dd>
+
+      <p class="para">
+       如果设置为 <strong><code>true</code></strong>，则函数仅验证 <code class="parameter">value</code>
+       可能是函数或方法。它仅拒绝不是字符串的简单变量，或者不能用作回调的有效结构的数组。只有
+       2 个条目有效，一个是对象或者字符串，其次是字符串。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">callable_name</code></dt>
+
+     <dd>
+
+      <p class="para">
+       接受"可调用的名称"。下面的例子是"someClass::someMethod"。注意，尽管 
+       someClass::SomeMethod() 暗示是可调用的静态方法，但事实并非如此。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.is-callable-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   如果 <code class="parameter">value</code> 可调用则返回 <strong><code>true</code></strong>，否则返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.is-callable-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #1 <span class="function"><strong>is_callable()</strong></span> 例子</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//  如何检测变量以查看是否可以作为函数调用。<br /><br />//<br />//  包含函数的简单变量<br />//<br /><br /></span><span style="color: #007700">function </span><span style="color: #0000BB">someFunction</span><span style="color: #007700">() <br />{<br />}<br /><br /></span><span style="color: #0000BB">$functionVariable </span><span style="color: #007700">= </span><span style="color: #DD0000">'someFunction'</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">is_callable</span><span style="color: #007700">(</span><span style="color: #0000BB">$functionVariable</span><span style="color: #007700">, </span><span style="color: #0000BB">false</span><span style="color: #007700">, </span><span style="color: #0000BB">$callable_name</span><span style="color: #007700">));  </span><span style="color: #FF8000">// bool(true)<br /><br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">$callable_name</span><span style="color: #007700">, </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;  </span><span style="color: #FF8000">// someFunction<br /><br />//<br />//  包含方法的数组<br />//<br /><br /></span><span style="color: #007700">class </span><span style="color: #0000BB">someClass </span><span style="color: #007700">{<br /><br />  function </span><span style="color: #0000BB">someMethod</span><span style="color: #007700">() <br />  {<br />  }<br /><br />}<br /><br /></span><span style="color: #0000BB">$anObject </span><span style="color: #007700">= new </span><span style="color: #0000BB">someClass</span><span style="color: #007700">();<br /><br /></span><span style="color: #0000BB">$methodVariable </span><span style="color: #007700">= array(</span><span style="color: #0000BB">$anObject</span><span style="color: #007700">, </span><span style="color: #DD0000">'someMethod'</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">is_callable</span><span style="color: #007700">(</span><span style="color: #0000BB">$methodVariable</span><span style="color: #007700">, </span><span style="color: #0000BB">true</span><span style="color: #007700">, </span><span style="color: #0000BB">$callable_name</span><span style="color: #007700">));  </span><span style="color: #FF8000">//  bool(true)<br /><br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">$callable_name</span><span style="color: #007700">, </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;  </span><span style="color: #FF8000">//  someClass::someMethod<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>   
+   <div class="example" id="">
+    <p><strong>Example #2 <span class="function"><strong>is_callable()</strong></span> 和构造函数</strong></p>
+    <div class="example-contents"><p>
+     <span class="function"><strong>is_callable()</strong></span> 报告构造函数不可调用。
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">class </span><span style="color: #0000BB">Foo<br /></span><span style="color: #007700">{<br />    public function </span><span style="color: #0000BB">__construct</span><span style="color: #007700">() {}<br />    public function </span><span style="color: #0000BB">foo</span><span style="color: #007700">() {}<br />}<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(<br />    </span><span style="color: #0000BB">is_callable</span><span style="color: #007700">(array(</span><span style="color: #DD0000">'Foo'</span><span style="color: #007700">, </span><span style="color: #DD0000">'__construct'</span><span style="color: #007700">)),<br />    </span><span style="color: #0000BB">is_callable</span><span style="color: #007700">(array(</span><span style="color: #DD0000">'Foo'</span><span style="color: #007700">, </span><span style="color: #DD0000">'foo'</span><span style="color: #007700">))<br />);</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+bool(false)
+bool(false)
+</pre></div>
+    </div>
+   </div>
+  </p>   
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.is-callable-notes">
+  <h3 class="title">注释</h3>
+  <ul class="simplelist">
+   <li class="member">
+    如果对象实现了 <a href="language.oop5.magic.html#object.invoke" class="link">__invoke()</a> 且该方法在当前作用域可见，则始终可调用。
+   </li>
+   <li class="member">
+    如果类名实现了 <a href="language.oop5.overloading.html#object.callstatic" class="link">__callStatic()</a>，则可调用。
+   </li>
+   <li class="member">
+    如果对象实现 <a href="language.oop5.overloading.html#object.call" class="link">__call()</a>，则此函数对该对象的任何方法将返回
+    <strong><code>true</code></strong>，即使该方法没有定义。
+   </li>
+   <li class="member">
+    如果使用类名调用此函数，则会触发自动加载。
+   </li>
+  </ul>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.is-callable-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.function-exists.html" class="function" rel="rdfs-seeAlso">function_exists()</a> - 如果给定的函数已经被定义就返回 true</span></li>
+    <li class="member"><span class="function"><a href="function.method-exists.html" class="function" rel="rdfs-seeAlso">method_exists()</a> - 检查类的方法是否存在</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="127213""></a>
+  <div class="note">
+   <strong class="user">php dot net at scare dot ca</strong>
+   <a href="#127213" class="date">03-Jul-2022 12:42</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Note that is_callable('_') will return true, since there is a built-in function called "_". It is an alias for gettext().<br />
+<br />
+https://www.php.net/manual/en/function.gettext.php<br />
+<br />
+Searching this site for a function named "_" does not return a result, but it's the first result in a search for "_()".</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="126199""></a>
+  <div class="note">
+   <strong class="user">mohamed dot elidrissi at protonmail dot com</strong>
+   <a href="#126199" class="date">28-Jun-2021 12:26</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Note that -- as mentioned in the migration guide-- starting from PHP 8.0, is_callable() will not work with non-static methods if you use a class name, instead an object of the class should be provided:<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="keyword">class </span><span class="default">Test<br />
+</span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">method1</span><span class="keyword">() { }<br />
+&nbsp;&nbsp;&nbsp; public static function </span><span class="default">method2</span><span class="keyword">() { }<br />
+}<br />
+<br />
+</span><span class="comment">// Pre PHP 8<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">is_callable</span><span class="keyword">(array(</span><span class="string">'Test'</span><span class="keyword">, </span><span class="string">'method1'</span><span class="keyword">))); </span><span class="comment">// bool(true)<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">is_callable</span><span class="keyword">(array(</span><span class="string">'Test'</span><span class="keyword">, </span><span class="string">'method2'</span><span class="keyword">))); </span><span class="comment">// bool(true)<br />
+<br />
+// Post PHP 8<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">is_callable</span><span class="keyword">(array(</span><span class="string">'Test'</span><span class="keyword">, </span><span class="string">'method1'</span><span class="keyword">))); </span><span class="comment">// bool(false)<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">is_callable</span><span class="keyword">(array(</span><span class="string">'Test'</span><span class="keyword">, </span><span class="string">'method2'</span><span class="keyword">))); </span><span class="comment">// bool(true)<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">is_callable</span><span class="keyword">(array(new </span><span class="default">Test</span><span class="keyword">, </span><span class="string">'method1'</span><span class="keyword">))); </span><span class="comment">// bool(true)<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="123716""></a>
+  <div class="note">
+   <strong class="user">jlh</strong>
+   <a href="#123716" class="date">22-Mar-2019 09:28</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+The story about __call() is a bit more complicated unfortunately. It will always return true ONLY if you pass an instance of a class, not if you pass the class name itself:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">class </span><span class="default">MyClass </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">method</span><span class="keyword">() { }<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">__call</span><span class="keyword">(</span><span class="default">$name</span><span class="keyword">, </span><span class="default">$arguments</span><span class="keyword">) { }<br />
+}<br />
+<br />
+</span><span class="default">is_callable</span><span class="keyword">([</span><span class="default">MyClass</span><span class="keyword">::class, </span><span class="string">'method'</span><span class="keyword">]); </span><span class="comment">// true<br />
+</span><span class="default">is_callable</span><span class="keyword">([new </span><span class="default">MyClass</span><span class="keyword">(), </span><span class="string">'method'</span><span class="keyword">]); </span><span class="comment">// true<br />
+</span><span class="default">is_callable</span><span class="keyword">([</span><span class="default">MyClass</span><span class="keyword">::class, </span><span class="string">'other'</span><span class="keyword">]); </span><span class="comment">// false!!!<br />
+</span><span class="default">is_callable</span><span class="keyword">([new </span><span class="default">MyClass</span><span class="keyword">(), </span><span class="string">'other'</span><span class="keyword">])); </span><span class="comment">// true</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="118623""></a>
+  <div class="note">
+   <strong class="user">izharaazmi at gmail dot com</strong>
+   <a href="#118623" class="date">11-Jan-2016 06:50</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If the target class has __call() magic function implemented, then is_callable will ALWAYS return TRUE for whatever method you call it.<br />
+is_callable does not evaluate your internal logic inside __call() implementation (and this is for good).<br />
+Therefore every method name is callable for such classes.<br />
+<br />
+Hence it is WRONG to say (as someone said):<br />
+...is_callable will correctly determine the existence of methods made with __call...<br />
+<br />
+Example:<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">class </span><span class="default">TestCallable<br />
+</span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">testing</span><span class="keyword">()<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="string">"I am called."</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">__call</span><span class="keyword">(</span><span class="default">$name</span><span class="keyword">, </span><span class="default">$args</span><span class="keyword">)<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if(</span><span class="default">$name </span><span class="keyword">== </span><span class="string">'testingOther'</span><span class="keyword">) <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">call_user_func_array</span><span class="keyword">(array(</span><span class="default">$this</span><span class="keyword">, </span><span class="string">'testing'</span><span class="keyword">), </span><span class="default">$args</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+</span><span class="default">$t </span><span class="keyword">= new </span><span class="default">TestCallable</span><span class="keyword">();<br />
+echo </span><span class="default">$t</span><span class="keyword">-&gt;</span><span class="default">testing</span><span class="keyword">();&nbsp; &nbsp; &nbsp; </span><span class="comment">// Output: I am called.<br />
+</span><span class="keyword">echo </span><span class="default">$t</span><span class="keyword">-&gt;</span><span class="default">testingOther</span><span class="keyword">(); </span><span class="comment">// Output: I am called.<br />
+</span><span class="keyword">echo </span><span class="default">$t</span><span class="keyword">-&gt;</span><span class="default">working</span><span class="keyword">();&nbsp; &nbsp; &nbsp; </span><span class="comment">// Output: (null)<br />
+<br />
+</span><span class="keyword">echo </span><span class="default">is_callable</span><span class="keyword">(array(</span><span class="default">$t</span><span class="keyword">, </span><span class="string">'testing'</span><span class="keyword">));&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// Output: TRUE<br />
+</span><span class="keyword">echo </span><span class="default">is_callable</span><span class="keyword">(array(</span><span class="default">$t</span><span class="keyword">, </span><span class="string">'testingOther'</span><span class="keyword">));&nbsp; </span><span class="comment">// Output: TRUE<br />
+</span><span class="keyword">echo </span><span class="default">is_callable</span><span class="keyword">(array(</span><span class="default">$t</span><span class="keyword">, </span><span class="string">'working'</span><span class="keyword">));&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// Output: TRUE, expected: FALSE<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="104633""></a>
+  <div class="note">
+   <strong class="user">fgm at osinet dot fr</strong>
+   <a href="#104633" class="date">27-Jun-2011 05:03</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Note that, for the purpose of this function, an abstract method, although necessarily non-callable since it does not have a body, is still considered to be callable:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">abstract class </span><span class="default">Foo </span><span class="keyword">{ <br />
+&nbsp; abstract function </span><span class="default">bar</span><span class="keyword">(); <br />
+}<br />
+<br />
+echo </span><span class="default">is_callable</span><span class="keyword">(array(</span><span class="string">'Foo'</span><span class="keyword">, </span><span class="string">'bar'</span><span class="keyword">));<br />
+</span><span class="comment">// display: 1<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="81511""></a>
+  <div class="note">
+   <strong class="user">rahadotaboulfethatgmail.com</strong>
+   <a href="#81511" class="date">01-Mar-2008 04:44</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+is_callable generates an [E_STRICT] error if the&nbsp; tested method cannot be called staticly. (and returns the good value)<br />
+<br />
+I used @is_called <br />
+i'm using php 5.2.1</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="79151""></a>
+  <div class="note">
+   <strong class="user">Quis strrev TA omicidio strrev TOD com</strong>
+   <a href="#79151" class="date">13-Nov-2007 03:50</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+is_callable() does _not_ check wheter this function is disabled by php.ini's disable_functions<br />
+<br />
+use:<br />
+<br />
+<span class="default">&lt;?PHP<br />
+</span><span class="keyword">function </span><span class="default">is_disabled</span><span class="keyword">(</span><span class="default">$function</span><span class="keyword">) {<br />
+&nbsp; </span><span class="default">$disabled_functions</span><span class="keyword">=</span><span class="default">explode</span><span class="keyword">(</span><span class="string">','</span><span class="keyword">,</span><span class="default">ini_get</span><span class="keyword">(</span><span class="string">'disable_functions'</span><span class="keyword">));<br />
+&nbsp; return </span><span class="default">in_array</span><span class="keyword">(</span><span class="default">$function</span><span class="keyword">, </span><span class="default">$disabled_functions</span><span class="keyword">);<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+I`m running PHP 5.2.4</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

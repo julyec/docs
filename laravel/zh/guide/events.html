@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content="VuePress 2.0.0-beta.67" />
+    <meta name="theme" content="VuePress Theme Hope" />
+    <script type="text/javascript" async="" src="/laravel/iconify-icon@1.js" data-loaded="true"></script><meta name="keywords" content="php,go,python,c++,nsis"><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?800fce94596cf587cd6a0e80314e5360";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><title>事件系统 | Laravel 10 中文文档</title><meta name="description" content="语法优雅的Web应用框架">
+    <style>
+      html {
+        background: #fff;
+      }
+
+      html[data-theme="dark"] {
+        background: #1d1e1f;
+      }
+
+      body {
+        background: var(--bg-color);
+      }
+    </style>
+    <script>
+      const userMode = localStorage.getItem("vuepress-theme-hope-scheme");
+      const systemDarkMode =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+      if (userMode === "dark" || (userMode !== "light" && systemDarkMode)) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    </script>
+    <link rel="preload" href="/laravel/assets/style-46281858.css" as="style"><link rel="stylesheet" href="/laravel/assets/style-46281858.css">
+    <link rel="modulepreload" href="/laravel/assets/app-8cdff07c.js"><link rel="modulepreload" href="/laravel/assets/events.html-2f99d345.js"><link rel="modulepreload" href="/laravel/assets/plugin-vue_export-helper-c27b6911.js"><link rel="modulepreload" href="/laravel/assets/events.html-5732e8dc.js"><link rel="prefetch" href="/laravel/assets/index.html-f96c0672.js" as="script"><link rel="prefetch" href="/laravel/assets/artisan.html-0e9d03c9.js" as="script"><link rel="prefetch" href="/laravel/assets/authentication.html-38ef59d8.js" as="script"><link rel="prefetch" href="/laravel/assets/authorization.html-313c4047.js" as="script"><link rel="prefetch" href="/laravel/assets/billing.html-ebe1a72a.js" as="script"><link rel="prefetch" href="/laravel/assets/blade.html-5155c6b6.js" as="script"><link rel="prefetch" href="/laravel/assets/broadcasting.html-e3959b4b.js" as="script"><link rel="prefetch" href="/laravel/assets/cache.html-70e1224c.js" as="script"><link rel="prefetch" href="/laravel/assets/cashier-paddle.html-d34b45b1.js" as="script"><link rel="prefetch" href="/laravel/assets/collections.html-1bd259e8.js" as="script"><link rel="prefetch" href="/laravel/assets/configuration.html-b8f3b774.js" as="script"><link rel="prefetch" href="/laravel/assets/console-tests.html-4c60daf9.js" as="script"><link rel="prefetch" href="/laravel/assets/container.html-b94c7ddb.js" as="script"><link rel="prefetch" href="/laravel/assets/contracts.html-c22783be.js" as="script"><link rel="prefetch" href="/laravel/assets/contributions.html-ab50d596.js" as="script"><link rel="prefetch" href="/laravel/assets/controllers.html-ac993460.js" as="script"><link rel="prefetch" href="/laravel/assets/csrf.html-16cf0dfe.js" as="script"><link rel="prefetch" href="/laravel/assets/database-testing.html-2c62b269.js" as="script"><link rel="prefetch" href="/laravel/assets/database.html-b52ec6ec.js" as="script"><link rel="prefetch" href="/laravel/assets/deployment.html-4c508f11.js" as="script"><link rel="prefetch" href="/laravel/assets/documentation.html-91f17157.js" as="script"><link rel="prefetch" href="/laravel/assets/dusk.html-89649ae7.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-collections.html-ac2068d3.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-factories.html-dc84ddb7.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-mutators.html-14654604.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-relationships.html-2aef18f6.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-resources.html-756db712.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-serialization.html-b7d47b88.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent.html-2648a01d.js" as="script"><link rel="prefetch" href="/laravel/assets/encryption.html-5624bd7a.js" as="script"><link rel="prefetch" href="/laravel/assets/envoy.html-151ce29e.js" as="script"><link rel="prefetch" href="/laravel/assets/errors.html-4e830ab6.js" as="script"><link rel="prefetch" href="/laravel/assets/events.html-23967b21.js" as="script"><link rel="prefetch" href="/laravel/assets/facades.html-fac9d294.js" as="script"><link rel="prefetch" href="/laravel/assets/filesystem.html-c5ce7cdd.js" as="script"><link rel="prefetch" href="/laravel/assets/folio.html-0cc287b9.js" as="script"><link rel="prefetch" href="/laravel/assets/fortify.html-eb8b5276.js" as="script"><link rel="prefetch" href="/laravel/assets/frontend.html-cfcef92f.js" as="script"><link rel="prefetch" href="/laravel/assets/hashing.html-e8bbaa17.js" as="script"><link rel="prefetch" href="/laravel/assets/helpers.html-a2bc32eb.js" as="script"><link rel="prefetch" href="/laravel/assets/homestead.html-ad159085.js" as="script"><link rel="prefetch" href="/laravel/assets/horizon.html-8e76a89c.js" as="script"><link rel="prefetch" href="/laravel/assets/http-client.html-5a16d377.js" as="script"><link rel="prefetch" href="/laravel/assets/http-tests.html-03ae925a.js" as="script"><link rel="prefetch" href="/laravel/assets/installation.html-8821556d.js" as="script"><link rel="prefetch" href="/laravel/assets/license.html-bc66f84b.js" as="script"><link rel="prefetch" href="/laravel/assets/lifecycle.html-686bfd8a.js" as="script"><link rel="prefetch" href="/laravel/assets/localization.html-cccfd668.js" as="script"><link rel="prefetch" href="/laravel/assets/logging.html-00676fcd.js" as="script"><link rel="prefetch" href="/laravel/assets/mail.html-9e64e563.js" as="script"><link rel="prefetch" href="/laravel/assets/middleware.html-e48e346e.js" as="script"><link rel="prefetch" href="/laravel/assets/migrations.html-d78bac4a.js" as="script"><link rel="prefetch" href="/laravel/assets/mix.html-2b8bdbfe.js" as="script"><link rel="prefetch" href="/laravel/assets/mocking.html-f1956c22.js" as="script"><link rel="prefetch" href="/laravel/assets/notifications.html-1579c318.js" as="script"><link rel="prefetch" href="/laravel/assets/octane.html-c7fc39fc.js" as="script"><link rel="prefetch" href="/laravel/assets/packages.html-36c879b0.js" as="script"><link rel="prefetch" href="/laravel/assets/pagination.html-1d87fa5b.js" as="script"><link rel="prefetch" href="/laravel/assets/passport.html-5c57ac15.js" as="script"><link rel="prefetch" href="/laravel/assets/passwords.html-8d207cd7.js" as="script"><link rel="prefetch" href="/laravel/assets/pennant.html-69b48e93.js" as="script"><link rel="prefetch" href="/laravel/assets/pint.html-dc08bca4.js" as="script"><link rel="prefetch" href="/laravel/assets/precognition.html-3249a97e.js" as="script"><link rel="prefetch" href="/laravel/assets/processes.html-8a5622d9.js" as="script"><link rel="prefetch" href="/laravel/assets/prompts.html-b6325a9f.js" as="script"><link rel="prefetch" href="/laravel/assets/providers.html-5ea45f09.js" as="script"><link rel="prefetch" href="/laravel/assets/queries.html-10f3290c.js" as="script"><link rel="prefetch" href="/laravel/assets/queues.html-80da253f.js" as="script"><link rel="prefetch" href="/laravel/assets/rate-limiting.html-1c41ec54.js" as="script"><link rel="prefetch" href="/laravel/assets/redirects.html-43482cb9.js" as="script"><link rel="prefetch" href="/laravel/assets/redis.html-a3b5ee4a.js" as="script"><link rel="prefetch" href="/laravel/assets/releases.html-476c8b9c.js" as="script"><link rel="prefetch" href="/laravel/assets/requests.html-be013b84.js" as="script"><link rel="prefetch" href="/laravel/assets/responses.html-9beef5ff.js" as="script"><link rel="prefetch" href="/laravel/assets/routing.html-f8c71973.js" as="script"><link rel="prefetch" href="/laravel/assets/sail.html-47beb292.js" as="script"><link rel="prefetch" href="/laravel/assets/sanctum.html-303fd66c.js" as="script"><link rel="prefetch" href="/laravel/assets/scheduling.html-1b59676e.js" as="script"><link rel="prefetch" href="/laravel/assets/scout.html-7921380f.js" as="script"><link rel="prefetch" href="/laravel/assets/seeding.html-183db364.js" as="script"><link rel="prefetch" href="/laravel/assets/session.html-3244e34a.js" as="script"><link rel="prefetch" href="/laravel/assets/socialite.html-30fef159.js" as="script"><link rel="prefetch" href="/laravel/assets/starter-kits.html-08d43c42.js" as="script"><link rel="prefetch" href="/laravel/assets/strings.html-5caa398e.js" as="script"><link rel="prefetch" href="/laravel/assets/structure.html-d831ad60.js" as="script"><link rel="prefetch" href="/laravel/assets/telescope.html-07644439.js" as="script"><link rel="prefetch" href="/laravel/assets/testing.html-238fa923.js" as="script"><link rel="prefetch" href="/laravel/assets/upgrade.html-2dffc447.js" as="script"><link rel="prefetch" href="/laravel/assets/urls.html-d42d29d2.js" as="script"><link rel="prefetch" href="/laravel/assets/valet.html-895e5076.js" as="script"><link rel="prefetch" href="/laravel/assets/validation.html-c4305591.js" as="script"><link rel="prefetch" href="/laravel/assets/verification.html-dcbd00f1.js" as="script"><link rel="prefetch" href="/laravel/assets/views.html-41709ab9.js" as="script"><link rel="prefetch" href="/laravel/assets/vite.html-d65b641f.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-5631fb16.js" as="script"><link rel="prefetch" href="/laravel/assets/artisan.html-e3f03ec9.js" as="script"><link rel="prefetch" href="/laravel/assets/authentication.html-570e0239.js" as="script"><link rel="prefetch" href="/laravel/assets/authorization.html-4c505770.js" as="script"><link rel="prefetch" href="/laravel/assets/billing.html-88d8885f.js" as="script"><link rel="prefetch" href="/laravel/assets/blade.html-b64aa35f.js" as="script"><link rel="prefetch" href="/laravel/assets/broadcasting.html-12a9e8bc.js" as="script"><link rel="prefetch" href="/laravel/assets/cache.html-bb5c9ae7.js" as="script"><link rel="prefetch" href="/laravel/assets/cashier-paddle.html-d0d72082.js" as="script"><link rel="prefetch" href="/laravel/assets/collections.html-d11860ac.js" as="script"><link rel="prefetch" href="/laravel/assets/configuration.html-ef1b96fe.js" as="script"><link rel="prefetch" href="/laravel/assets/console-tests.html-067056ba.js" as="script"><link rel="prefetch" href="/laravel/assets/container.html-61acca56.js" as="script"><link rel="prefetch" href="/laravel/assets/contracts.html-84cb10c6.js" as="script"><link rel="prefetch" href="/laravel/assets/contributions.html-fce99fc6.js" as="script"><link rel="prefetch" href="/laravel/assets/controllers.html-3e90ab99.js" as="script"><link rel="prefetch" href="/laravel/assets/csrf.html-cca49abf.js" as="script"><link rel="prefetch" href="/laravel/assets/database-testing.html-b1f8d202.js" as="script"><link rel="prefetch" href="/laravel/assets/database.html-56afdfc4.js" as="script"><link rel="prefetch" href="/laravel/assets/deployment.html-4185fda7.js" as="script"><link rel="prefetch" href="/laravel/assets/documentation.html-131ef588.js" as="script"><link rel="prefetch" href="/laravel/assets/dusk.html-a5e6d446.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-collections.html-4b4e2d65.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-factories.html-f932bd31.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-mutators.html-229dc52b.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-relationships.html-e1fe4d70.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-resources.html-3c63a8eb.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-serialization.html-72f70b3a.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent.html-5455c9d2.js" as="script"><link rel="prefetch" href="/laravel/assets/encryption.html-419526ec.js" as="script"><link rel="prefetch" href="/laravel/assets/envoy.html-17270835.js" as="script"><link rel="prefetch" href="/laravel/assets/errors.html-13da2477.js" as="script"><link rel="prefetch" href="/laravel/assets/facades.html-e1c0e131.js" as="script"><link rel="prefetch" href="/laravel/assets/filesystem.html-aae8333b.js" as="script"><link rel="prefetch" href="/laravel/assets/folio.html-5751cd6a.js" as="script"><link rel="prefetch" href="/laravel/assets/fortify.html-de544b50.js" as="script"><link rel="prefetch" href="/laravel/assets/frontend.html-c0546cc4.js" as="script"><link rel="prefetch" href="/laravel/assets/hashing.html-d62b0c77.js" as="script"><link rel="prefetch" href="/laravel/assets/helpers.html-e22a2360.js" as="script"><link rel="prefetch" href="/laravel/assets/homestead.html-d6d4616d.js" as="script"><link rel="prefetch" href="/laravel/assets/horizon.html-8c3589f2.js" as="script"><link rel="prefetch" href="/laravel/assets/http-client.html-3fd134cc.js" as="script"><link rel="prefetch" href="/laravel/assets/http-tests.html-ac17c893.js" as="script"><link rel="prefetch" href="/laravel/assets/installation.html-0300ec90.js" as="script"><link rel="prefetch" href="/laravel/assets/lifecycle.html-42ef0670.js" as="script"><link rel="prefetch" href="/laravel/assets/localization.html-f5186801.js" as="script"><link rel="prefetch" href="/laravel/assets/logging.html-4f779e10.js" as="script"><link rel="prefetch" href="/laravel/assets/mail.html-cd3aaf70.js" as="script"><link rel="prefetch" href="/laravel/assets/middleware.html-df624dbc.js" as="script"><link rel="prefetch" href="/laravel/assets/migrations.html-ba6aabb2.js" as="script"><link rel="prefetch" href="/laravel/assets/mix.html-2ef5bcc9.js" as="script"><link rel="prefetch" href="/laravel/assets/mocking.html-303d8f5d.js" as="script"><link rel="prefetch" href="/laravel/assets/notifications.html-b3122e5b.js" as="script"><link rel="prefetch" href="/laravel/assets/octane.html-33e350ba.js" as="script"><link rel="prefetch" href="/laravel/assets/packages.html-3b6d480b.js" as="script"><link rel="prefetch" href="/laravel/assets/pagination.html-9d7ef5b6.js" as="script"><link rel="prefetch" href="/laravel/assets/passport.html-99fa6d16.js" as="script"><link rel="prefetch" href="/laravel/assets/passwords.html-e112c41c.js" as="script"><link rel="prefetch" href="/laravel/assets/pennant.html-d41a13be.js" as="script"><link rel="prefetch" href="/laravel/assets/pint.html-cd80abc4.js" as="script"><link rel="prefetch" href="/laravel/assets/precognition.html-d6193fa1.js" as="script"><link rel="prefetch" href="/laravel/assets/processes.html-dc160b96.js" as="script"><link rel="prefetch" href="/laravel/assets/prompts.html-43f92ec5.js" as="script"><link rel="prefetch" href="/laravel/assets/providers.html-8113e0c3.js" as="script"><link rel="prefetch" href="/laravel/assets/queries.html-18b3df87.js" as="script"><link rel="prefetch" href="/laravel/assets/queues.html-371e349e.js" as="script"><link rel="prefetch" href="/laravel/assets/rate-limiting.html-eb27bba5.js" as="script"><link rel="prefetch" href="/laravel/assets/redirects.html-a277c696.js" as="script"><link rel="prefetch" href="/laravel/assets/redis.html-3d2e8c35.js" as="script"><link rel="prefetch" href="/laravel/assets/releases.html-20f1c49f.js" as="script"><link rel="prefetch" href="/laravel/assets/requests.html-e7bb39cd.js" as="script"><link rel="prefetch" href="/laravel/assets/responses.html-964d8da8.js" as="script"><link rel="prefetch" href="/laravel/assets/routing.html-cdd5aefe.js" as="script"><link rel="prefetch" href="/laravel/assets/sail.html-edb4e5fb.js" as="script"><link rel="prefetch" href="/laravel/assets/sanctum.html-1acec381.js" as="script"><link rel="prefetch" href="/laravel/assets/scheduling.html-0dfd2863.js" as="script"><link rel="prefetch" href="/laravel/assets/scout.html-dc7b7abb.js" as="script"><link rel="prefetch" href="/laravel/assets/seeding.html-7e6fae04.js" as="script"><link rel="prefetch" href="/laravel/assets/session.html-b1d84cee.js" as="script"><link rel="prefetch" href="/laravel/assets/socialite.html-1924a537.js" as="script"><link rel="prefetch" href="/laravel/assets/starter-kits.html-57960007.js" as="script"><link rel="prefetch" href="/laravel/assets/strings.html-51dbbc47.js" as="script"><link rel="prefetch" href="/laravel/assets/structure.html-cbbae4a7.js" as="script"><link rel="prefetch" href="/laravel/assets/telescope.html-8ed6a181.js" as="script"><link rel="prefetch" href="/laravel/assets/testing.html-85e55a0b.js" as="script"><link rel="prefetch" href="/laravel/assets/upgrade.html-06aeb8f2.js" as="script"><link rel="prefetch" href="/laravel/assets/urls.html-0aa1615d.js" as="script"><link rel="prefetch" href="/laravel/assets/valet.html-dae1469d.js" as="script"><link rel="prefetch" href="/laravel/assets/validation.html-7aba5426.js" as="script"><link rel="prefetch" href="/laravel/assets/verification.html-9d448ce8.js" as="script"><link rel="prefetch" href="/laravel/assets/views.html-44c76116.js" as="script"><link rel="prefetch" href="/laravel/assets/vite.html-2c3c8f9a.js" as="script"><link rel="prefetch" href="/laravel/assets/404.html-fce79bde.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-ebda9a17.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-0dab9b40.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-8048da3d.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-6af0b259.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-0341c66f.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-c4c647eb.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-aa7de2dc.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-7993dca7.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-6c43b2d4.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-ee40829a.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-aed7618a.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-2341e875.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-edc8931d.js" as="script"><link rel="prefetch" href="/laravel/assets/artisan.html-e993b633.js" as="script"><link rel="prefetch" href="/laravel/assets/authentication.html-7da6db12.js" as="script"><link rel="prefetch" href="/laravel/assets/authorization.html-d4c66ac1.js" as="script"><link rel="prefetch" href="/laravel/assets/billing.html-7eb0b79a.js" as="script"><link rel="prefetch" href="/laravel/assets/blade.html-c1cb1dfc.js" as="script"><link rel="prefetch" href="/laravel/assets/broadcasting.html-11edd1a7.js" as="script"><link rel="prefetch" href="/laravel/assets/cache.html-65ddb893.js" as="script"><link rel="prefetch" href="/laravel/assets/cashier-paddle.html-37b20071.js" as="script"><link rel="prefetch" href="/laravel/assets/collections.html-f3d4eec3.js" as="script"><link rel="prefetch" href="/laravel/assets/configuration.html-139c4ce1.js" as="script"><link rel="prefetch" href="/laravel/assets/console-tests.html-f13384fc.js" as="script"><link rel="prefetch" href="/laravel/assets/container.html-3fecf713.js" as="script"><link rel="prefetch" href="/laravel/assets/contracts.html-d2c8d8e2.js" as="script"><link rel="prefetch" href="/laravel/assets/contributions.html-4bc7357e.js" as="script"><link rel="prefetch" href="/laravel/assets/controllers.html-96388c46.js" as="script"><link rel="prefetch" href="/laravel/assets/csrf.html-0aed46d2.js" as="script"><link rel="prefetch" href="/laravel/assets/database-testing.html-d1cea1af.js" as="script"><link rel="prefetch" href="/laravel/assets/database.html-1c324c1e.js" as="script"><link rel="prefetch" href="/laravel/assets/deployment.html-cd42449c.js" as="script"><link rel="prefetch" href="/laravel/assets/documentation.html-6ef98220.js" as="script"><link rel="prefetch" href="/laravel/assets/dusk.html-6327491d.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-collections.html-53d3e276.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-factories.html-426c1e26.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-mutators.html-d9486734.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-relationships.html-c02078c7.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-resources.html-ecb9bcf3.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-serialization.html-34f984bc.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent.html-66438545.js" as="script"><link rel="prefetch" href="/laravel/assets/encryption.html-8d1623ce.js" as="script"><link rel="prefetch" href="/laravel/assets/envoy.html-63d38c3e.js" as="script"><link rel="prefetch" href="/laravel/assets/errors.html-e19b0e13.js" as="script"><link rel="prefetch" href="/laravel/assets/events.html-22c8bd0c.js" as="script"><link rel="prefetch" href="/laravel/assets/facades.html-8e1e5183.js" as="script"><link rel="prefetch" href="/laravel/assets/filesystem.html-53609b73.js" as="script"><link rel="prefetch" href="/laravel/assets/folio.html-ad52a678.js" as="script"><link rel="prefetch" href="/laravel/assets/fortify.html-e45c98c4.js" as="script"><link rel="prefetch" href="/laravel/assets/frontend.html-15391800.js" as="script"><link rel="prefetch" href="/laravel/assets/hashing.html-6da54123.js" as="script"><link rel="prefetch" href="/laravel/assets/helpers.html-e2446946.js" as="script"><link rel="prefetch" href="/laravel/assets/homestead.html-2884a781.js" as="script"><link rel="prefetch" href="/laravel/assets/horizon.html-973e1311.js" as="script"><link rel="prefetch" href="/laravel/assets/http-client.html-d81392ad.js" as="script"><link rel="prefetch" href="/laravel/assets/http-tests.html-a03a5f0c.js" as="script"><link rel="prefetch" href="/laravel/assets/installation.html-95a9c3aa.js" as="script"><link rel="prefetch" href="/laravel/assets/license.html-62430ab5.js" as="script"><link rel="prefetch" href="/laravel/assets/lifecycle.html-18ea8fb3.js" as="script"><link rel="prefetch" href="/laravel/assets/localization.html-922ff115.js" as="script"><link rel="prefetch" href="/laravel/assets/logging.html-050985f2.js" as="script"><link rel="prefetch" href="/laravel/assets/mail.html-47a04f02.js" as="script"><link rel="prefetch" href="/laravel/assets/middleware.html-6453d1cc.js" as="script"><link rel="prefetch" href="/laravel/assets/migrations.html-f1ebff53.js" as="script"><link rel="prefetch" href="/laravel/assets/mix.html-249cd58a.js" as="script"><link rel="prefetch" href="/laravel/assets/mocking.html-e522dfa3.js" as="script"><link rel="prefetch" href="/laravel/assets/notifications.html-269dd42d.js" as="script"><link rel="prefetch" href="/laravel/assets/octane.html-e5187b2c.js" as="script"><link rel="prefetch" href="/laravel/assets/packages.html-4a09b71f.js" as="script"><link rel="prefetch" href="/laravel/assets/pagination.html-f3918ef6.js" as="script"><link rel="prefetch" href="/laravel/assets/passport.html-3a76745f.js" as="script"><link rel="prefetch" href="/laravel/assets/passwords.html-146f6313.js" as="script"><link rel="prefetch" href="/laravel/assets/pennant.html-0709c429.js" as="script"><link rel="prefetch" href="/laravel/assets/pint.html-bd0a9ee4.js" as="script"><link rel="prefetch" href="/laravel/assets/precognition.html-15b4c7aa.js" as="script"><link rel="prefetch" href="/laravel/assets/processes.html-17788aeb.js" as="script"><link rel="prefetch" href="/laravel/assets/prompts.html-10f9437f.js" as="script"><link rel="prefetch" href="/laravel/assets/providers.html-f4c3a729.js" as="script"><link rel="prefetch" href="/laravel/assets/queries.html-85a38561.js" as="script"><link rel="prefetch" href="/laravel/assets/queues.html-57e09fd0.js" as="script"><link rel="prefetch" href="/laravel/assets/rate-limiting.html-85518e10.js" as="script"><link rel="prefetch" href="/laravel/assets/redirects.html-7ee7088a.js" as="script"><link rel="prefetch" href="/laravel/assets/redis.html-fa970b20.js" as="script"><link rel="prefetch" href="/laravel/assets/releases.html-45fa3fe7.js" as="script"><link rel="prefetch" href="/laravel/assets/requests.html-9d100885.js" as="script"><link rel="prefetch" href="/laravel/assets/responses.html-a10133de.js" as="script"><link rel="prefetch" href="/laravel/assets/routing.html-a924b8e7.js" as="script"><link rel="prefetch" href="/laravel/assets/sail.html-bc7fbf87.js" as="script"><link rel="prefetch" href="/laravel/assets/sanctum.html-e527697f.js" as="script"><link rel="prefetch" href="/laravel/assets/scheduling.html-8b344747.js" as="script"><link rel="prefetch" href="/laravel/assets/scout.html-97fcbf47.js" as="script"><link rel="prefetch" href="/laravel/assets/seeding.html-cc731f3b.js" as="script"><link rel="prefetch" href="/laravel/assets/session.html-f238564d.js" as="script"><link rel="prefetch" href="/laravel/assets/socialite.html-b92fde73.js" as="script"><link rel="prefetch" href="/laravel/assets/starter-kits.html-f28c174c.js" as="script"><link rel="prefetch" href="/laravel/assets/strings.html-f042b92f.js" as="script"><link rel="prefetch" href="/laravel/assets/structure.html-1a62269a.js" as="script"><link rel="prefetch" href="/laravel/assets/telescope.html-001dace4.js" as="script"><link rel="prefetch" href="/laravel/assets/testing.html-1102a85d.js" as="script"><link rel="prefetch" href="/laravel/assets/upgrade.html-ba213e40.js" as="script"><link rel="prefetch" href="/laravel/assets/urls.html-1078da29.js" as="script"><link rel="prefetch" href="/laravel/assets/valet.html-59bc6d60.js" as="script"><link rel="prefetch" href="/laravel/assets/validation.html-277792fc.js" as="script"><link rel="prefetch" href="/laravel/assets/verification.html-79793389.js" as="script"><link rel="prefetch" href="/laravel/assets/views.html-9a61add6.js" as="script"><link rel="prefetch" href="/laravel/assets/vite.html-3bbbc50b.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-1144717f.js" as="script"><link rel="prefetch" href="/laravel/assets/artisan.html-dc3c095b.js" as="script"><link rel="prefetch" href="/laravel/assets/authentication.html-62464972.js" as="script"><link rel="prefetch" href="/laravel/assets/authorization.html-7863fce7.js" as="script"><link rel="prefetch" href="/laravel/assets/billing.html-8124e2f1.js" as="script"><link rel="prefetch" href="/laravel/assets/blade.html-ae3b5f0c.js" as="script"><link rel="prefetch" href="/laravel/assets/broadcasting.html-3234c7c8.js" as="script"><link rel="prefetch" href="/laravel/assets/cache.html-3ffdf275.js" as="script"><link rel="prefetch" href="/laravel/assets/cashier-paddle.html-a60fdc5c.js" as="script"><link rel="prefetch" href="/laravel/assets/collections.html-f4e66de6.js" as="script"><link rel="prefetch" href="/laravel/assets/configuration.html-b2ad20ab.js" as="script"><link rel="prefetch" href="/laravel/assets/console-tests.html-3581fee2.js" as="script"><link rel="prefetch" href="/laravel/assets/container.html-7548cb3d.js" as="script"><link rel="prefetch" href="/laravel/assets/contracts.html-6960023d.js" as="script"><link rel="prefetch" href="/laravel/assets/contributions.html-e0dd9987.js" as="script"><link rel="prefetch" href="/laravel/assets/controllers.html-9e1646d8.js" as="script"><link rel="prefetch" href="/laravel/assets/csrf.html-5f4d93e3.js" as="script"><link rel="prefetch" href="/laravel/assets/database-testing.html-4d366885.js" as="script"><link rel="prefetch" href="/laravel/assets/database.html-efce3f76.js" as="script"><link rel="prefetch" href="/laravel/assets/deployment.html-1ed53845.js" as="script"><link rel="prefetch" href="/laravel/assets/documentation.html-5e743689.js" as="script"><link rel="prefetch" href="/laravel/assets/dusk.html-dc4913b2.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-collections.html-2f01a6dc.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-factories.html-580b426f.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-mutators.html-6f353e2d.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-relationships.html-fcc1f4a6.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-resources.html-11415ee4.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-serialization.html-b5478211.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent.html-8beb952b.js" as="script"><link rel="prefetch" href="/laravel/assets/encryption.html-95a90989.js" as="script"><link rel="prefetch" href="/laravel/assets/envoy.html-73c049a2.js" as="script"><link rel="prefetch" href="/laravel/assets/errors.html-1a22224a.js" as="script"><link rel="prefetch" href="/laravel/assets/facades.html-99284915.js" as="script"><link rel="prefetch" href="/laravel/assets/filesystem.html-780bb3a2.js" as="script"><link rel="prefetch" href="/laravel/assets/folio.html-51fb2e3e.js" as="script"><link rel="prefetch" href="/laravel/assets/fortify.html-23142e51.js" as="script"><link rel="prefetch" href="/laravel/assets/frontend.html-3edb75bc.js" as="script"><link rel="prefetch" href="/laravel/assets/hashing.html-3da37589.js" as="script"><link rel="prefetch" href="/laravel/assets/helpers.html-1ea596c9.js" as="script"><link rel="prefetch" href="/laravel/assets/homestead.html-e14b2e40.js" as="script"><link rel="prefetch" href="/laravel/assets/horizon.html-e800222e.js" as="script"><link rel="prefetch" href="/laravel/assets/http-client.html-9f84f500.js" as="script"><link rel="prefetch" href="/laravel/assets/http-tests.html-4dfd35dd.js" as="script"><link rel="prefetch" href="/laravel/assets/installation.html-4d0898a2.js" as="script"><link rel="prefetch" href="/laravel/assets/lifecycle.html-15ea7de1.js" as="script"><link rel="prefetch" href="/laravel/assets/localization.html-26363233.js" as="script"><link rel="prefetch" href="/laravel/assets/logging.html-16ce0923.js" as="script"><link rel="prefetch" href="/laravel/assets/mail.html-c64f7bf0.js" as="script"><link rel="prefetch" href="/laravel/assets/middleware.html-8526e57a.js" as="script"><link rel="prefetch" href="/laravel/assets/migrations.html-5ee0d390.js" as="script"><link rel="prefetch" href="/laravel/assets/mix.html-70a0b4f5.js" as="script"><link rel="prefetch" href="/laravel/assets/mocking.html-418621da.js" as="script"><link rel="prefetch" href="/laravel/assets/notifications.html-66e2a5fc.js" as="script"><link rel="prefetch" href="/laravel/assets/octane.html-b2b376c4.js" as="script"><link rel="prefetch" href="/laravel/assets/packages.html-5480f21e.js" as="script"><link rel="prefetch" href="/laravel/assets/pagination.html-8df8beae.js" as="script"><link rel="prefetch" href="/laravel/assets/passport.html-5759611c.js" as="script"><link rel="prefetch" href="/laravel/assets/passwords.html-628baf17.js" as="script"><link rel="prefetch" href="/laravel/assets/pennant.html-9bf4a700.js" as="script"><link rel="prefetch" href="/laravel/assets/pint.html-8058af0f.js" as="script"><link rel="prefetch" href="/laravel/assets/precognition.html-aab299cd.js" as="script"><link rel="prefetch" href="/laravel/assets/processes.html-e05518ff.js" as="script"><link rel="prefetch" href="/laravel/assets/prompts.html-c65d2d8c.js" as="script"><link rel="prefetch" href="/laravel/assets/providers.html-0f06ed9b.js" as="script"><link rel="prefetch" href="/laravel/assets/queries.html-140df257.js" as="script"><link rel="prefetch" href="/laravel/assets/queues.html-17a5007e.js" as="script"><link rel="prefetch" href="/laravel/assets/rate-limiting.html-8fba0e20.js" as="script"><link rel="prefetch" href="/laravel/assets/redirects.html-e57b8f12.js" as="script"><link rel="prefetch" href="/laravel/assets/redis.html-5bc2e8bb.js" as="script"><link rel="prefetch" href="/laravel/assets/releases.html-628d2abe.js" as="script"><link rel="prefetch" href="/laravel/assets/requests.html-b79d9af6.js" as="script"><link rel="prefetch" href="/laravel/assets/responses.html-4d4a0dc1.js" as="script"><link rel="prefetch" href="/laravel/assets/routing.html-e68366c7.js" as="script"><link rel="prefetch" href="/laravel/assets/sail.html-552b47b1.js" as="script"><link rel="prefetch" href="/laravel/assets/sanctum.html-dcb3ac70.js" as="script"><link rel="prefetch" href="/laravel/assets/scheduling.html-d3d2ec18.js" as="script"><link rel="prefetch" href="/laravel/assets/scout.html-e98efb88.js" as="script"><link rel="prefetch" href="/laravel/assets/seeding.html-9f5f60fd.js" as="script"><link rel="prefetch" href="/laravel/assets/session.html-a723ae74.js" as="script"><link rel="prefetch" href="/laravel/assets/socialite.html-a9eb9bec.js" as="script"><link rel="prefetch" href="/laravel/assets/starter-kits.html-46c2bde4.js" as="script"><link rel="prefetch" href="/laravel/assets/strings.html-13e92edd.js" as="script"><link rel="prefetch" href="/laravel/assets/structure.html-bc88c757.js" as="script"><link rel="prefetch" href="/laravel/assets/telescope.html-655b3988.js" as="script"><link rel="prefetch" href="/laravel/assets/testing.html-d14f83e4.js" as="script"><link rel="prefetch" href="/laravel/assets/upgrade.html-60b44511.js" as="script"><link rel="prefetch" href="/laravel/assets/urls.html-0dc86b38.js" as="script"><link rel="prefetch" href="/laravel/assets/valet.html-21a3010b.js" as="script"><link rel="prefetch" href="/laravel/assets/validation.html-20f706e5.js" as="script"><link rel="prefetch" href="/laravel/assets/verification.html-442b3502.js" as="script"><link rel="prefetch" href="/laravel/assets/views.html-e67ca815.js" as="script"><link rel="prefetch" href="/laravel/assets/vite.html-77f5b90a.js" as="script"><link rel="prefetch" href="/laravel/assets/404.html-ac3192c6.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-708a06d6.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-63a4ec54.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-4fb158bf.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-d82a901a.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-594dce6f.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-f4de053d.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-b3ec4080.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-bb94f28e.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-af772c2f.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-747f1aa7.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-441a99d9.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-280418c1.js" as="script"><link rel="prefetch" href="/laravel/assets/mermaid.core-2ef0f556.js" as="script"><link rel="prefetch" href="/laravel/assets/VuePlayground-2ad5a2b5.js" as="script"><link rel="prefetch" href="/laravel/assets/photoswipe.esm-1464cdb9.js" as="script"><link rel="prefetch" href="/laravel/assets/pageview-d8908c75.js" as="script">
+  </head>
+  <body>
+    <div id="app"><!--[--><!--[--><!--[--><span tabindex="-1"></span><a href="#main-content" class="vp-skip-link sr-only">跳至主要內容</a><!--]--><!--[--><div class="theme-container has-toc"><!--[--><header id="navbar" class="vp-navbar"><div class="vp-navbar-start"><button type="button" class="vp-toggle-sidebar-button" title="Toggle Sidebar"><span class="icon"></span></button><!--[--><!----><!--]--><!--[--><a class="vp-link vp-brand vp-brand" href="/laravel/zh/"><!----><!----><span class="vp-site-name">Laravel 10 中文文档</span></a><!--]--><!--[--><!----><!--]--></div><div class="vp-navbar-center"><!--[--><!----><!--]--><!--[--><nav class="vp-nav-links"><div class="nav-item hide-in-mobile"><a aria-label="前言" class="vp-link nav-link nav-link" href="/laravel/zh/guide/releases.html"><!---->前言<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="入门指南" class="vp-link nav-link nav-link" href="/laravel/zh/guide/installation.html"><!---->入门指南<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="架构思想" class="vp-link nav-link nav-link" href="/laravel/zh/guide/lifecycle.html"><!---->架构思想<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="基础功能" class="vp-link nav-link nav-link" href="/laravel/zh/guide/routing.html"><!---->基础功能<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="深入话题" class="vp-link nav-link nav-link" href="/laravel/zh/guide/artisan.html"><!---->深入话题<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="安全" class="vp-link nav-link nav-link" href="/laravel/zh/guide/authentication.html"><!---->安全<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="数据库" class="vp-link nav-link nav-link" href="/laravel/zh/guide/database.html"><!---->数据库<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="Eloquent ORM" class="vp-link nav-link nav-link" href="/laravel/zh/guide/eloquent.html"><!---->Eloquent ORM<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="测试" class="vp-link nav-link nav-link" href="/laravel/zh/guide/testing.html"><!---->测试<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="官方扩展包" class="vp-link nav-link nav-link" href="/laravel/zh/guide/sanctum.html"><!---->官方扩展包<!----></a></div></nav><!--]--><!--[--><!----><!--]--></div><div class="vp-navbar-end"><!--[--><!----><!--]--><!--[--><div class="nav-item"><div class="dropdown-wrapper i18n-dropdown"><button type="button" class="dropdown-title" aria-label="选择语言"><!--[--><svg xmlns="http://www.w3.org/2000/svg" class="icon i18n-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="i18n icon" style="width:1rem;height:1rem;vertical-align:middle;"><path d="M379.392 460.8 494.08 575.488l-42.496 102.4L307.2 532.48 138.24 701.44l-71.68-72.704L234.496 460.8l-45.056-45.056c-27.136-27.136-51.2-66.56-66.56-108.544h112.64c7.68 14.336 16.896 27.136 26.112 35.84l45.568 46.08 45.056-45.056C382.976 312.32 409.6 247.808 409.6 204.8H0V102.4h256V0h102.4v102.4h256v102.4H512c0 70.144-37.888 161.28-87.04 210.944L378.88 460.8zM576 870.4 512 1024H409.6l256-614.4H768l256 614.4H921.6l-64-153.6H576zM618.496 768h196.608L716.8 532.48 618.496 768z"></path></svg><!--]--><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><a aria-label="English" class="vp-link nav-link nav-link" href="/laravel/guide/events.html"><!---->English<!----></a></li><li class="dropdown-item"><a aria-label="简体中文" class="vp-link nav-link active nav-link active" href="/laravel/zh/guide/events.html"><!---->简体中文<!----></a></li></ul></button></div></div><!----><div class="nav-item hide-in-mobile"><button type="button" id="appearance-switch"><svg xmlns="http://www.w3.org/2000/svg" class="icon auto-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="auto icon" style="display:block;"><path d="M512 992C246.92 992 32 777.08 32 512S246.92 32 512 32s480 214.92 480 480-214.92 480-480 480zm0-840c-198.78 0-360 161.22-360 360 0 198.84 161.22 360 360 360s360-161.16 360-360c0-198.78-161.22-360-360-360zm0 660V212c165.72 0 300 134.34 300 300 0 165.72-134.28 300-300 300z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon dark-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="dark icon" style="display:none;"><path d="M524.8 938.667h-4.267a439.893 439.893 0 0 1-313.173-134.4 446.293 446.293 0 0 1-11.093-597.334A432.213 432.213 0 0 1 366.933 90.027a42.667 42.667 0 0 1 45.227 9.386 42.667 42.667 0 0 1 10.24 42.667 358.4 358.4 0 0 0 82.773 375.893 361.387 361.387 0 0 0 376.747 82.774 42.667 42.667 0 0 1 54.187 55.04 433.493 433.493 0 0 1-99.84 154.88 438.613 438.613 0 0 1-311.467 128z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon light-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="light icon" style="display:none;"><path d="M952 552h-80a40 40 0 0 1 0-80h80a40 40 0 0 1 0 80zM801.88 280.08a41 41 0 0 1-57.96-57.96l57.96-58a41.04 41.04 0 0 1 58 58l-58 57.96zM512 752a240 240 0 1 1 0-480 240 240 0 0 1 0 480zm0-560a40 40 0 0 1-40-40V72a40 40 0 0 1 80 0v80a40 40 0 0 1-40 40zm-289.88 88.08-58-57.96a41.04 41.04 0 0 1 58-58l57.96 58a41 41 0 0 1-57.96 57.96zM192 512a40 40 0 0 1-40 40H72a40 40 0 0 1 0-80h80a40 40 0 0 1 40 40zm30.12 231.92a41 41 0 0 1 57.96 57.96l-57.96 58a41.04 41.04 0 0 1-58-58l58-57.96zM512 832a40 40 0 0 1 40 40v80a40 40 0 0 1-80 0v-80a40 40 0 0 1 40-40zm289.88-88.08 58 57.96a41.04 41.04 0 0 1-58 58l-57.96-58a41 41 0 0 1 57.96-57.96z"></path></svg></button></div><form class="search-box" role="search"><input type="search" placeholder="搜索文档" autocomplete="off" spellcheck="false" value><!----></form><!--]--><!--[--><!----><!--]--><button type="button" class="vp-toggle-navbar-button" aria-label="Toggle Navbar" aria-expanded="false" aria-controls="nav-screen"><span><span class="vp-top"></span><span class="vp-middle"></span><span class="vp-bottom"></span></span></button></div></header><!----><!--]--><!----><div class="toggle-sidebar-wrapper"><span class="arrow start"></span></div><aside id="sidebar" class="vp-sidebar"><!--[--><!----><!--]--><ul class="vp-sidebar-links"><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">前言</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">入门指南</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">架构思想</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">基础功能</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable active" type="button"><!----><span class="vp-sidebar-title">深入话题</span><span class="vp-arrow down"></span></button><ul class="vp-sidebar-links"><li><!--[--><a aria-label="Artisan 命令行" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/artisan.html"><!---->Artisan 命令行<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="广播" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/broadcasting.html"><!---->广播<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="缓存系统" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/cache.html"><!---->缓存系统<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="集合" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/collections.html"><!---->集合<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="Strings" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/strings.html"><!---->Strings<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="契约（Contract）" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/contracts.html"><!---->契约（Contract）<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="事件系统" class="vp-link nav-link active vp-sidebar-link vp-sidebar-page active nav-link active vp-sidebar-link vp-sidebar-page active" href="/laravel/zh/guide/events.html"><!---->事件系统<!----></a><ul class="vp-sidebar-sub-headers"><li class="vp-sidebar-sub-header"><a aria-label="介绍" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/events.html#介绍"><!---->介绍<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="注册事件和监听器" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/events.html#注册事件和监听器"><!---->注册事件和监听器<!----></a><ul class="vp-sidebar-sub-headers"><li class="vp-sidebar-sub-header"><a aria-label="生成事件和监听器" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/events.html#生成事件和监听器"><!---->生成事件和监听器<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="手动注册事件" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/events.html#手动注册事件"><!---->手动注册事件<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="事件的发现" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/events.html#事件的发现"><!---->事件的发现<!----></a><ul class="vp-sidebar-sub-headers"></ul></li></ul></li><li class="vp-sidebar-sub-header"><a aria-label="定义事件" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/events.html#定义事件"><!---->定义事件<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="定义监听器" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/events.html#定义监听器"><!---->定义监听器<!----></a><ul class="vp-sidebar-sub-headers"><li class="vp-sidebar-sub-header"><a aria-label="停止事件传播" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/events.html#停止事件传播"><!---->停止事件传播<!----></a><ul class="vp-sidebar-sub-headers"></ul></li></ul></li><li class="vp-sidebar-sub-header"><a aria-label="队列事件监听器" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/events.html#队列事件监听器"><!---->队列事件监听器<!----></a><ul class="vp-sidebar-sub-headers"><li class="vp-sidebar-sub-header"><a aria-label="自定义队列连接和队列名称" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/events.html#自定义队列连接和队列名称"><!---->自定义队列连接和队列名称<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="有条件地队列监听器" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/events.html#有条件地队列监听器"><!---->有条件地队列监听器<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="手动与队列交互" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/events.html#手动与队列交互"><!---->手动与队列交互<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="队列事件监听器和数据库事务" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/events.html#队列事件监听器和数据库事务"><!---->队列事件监听器和数据库事务<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="处理失败的队列" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/events.html#处理失败的队列"><!---->处理失败的队列<!----></a><ul class="vp-sidebar-sub-headers"></ul></li></ul></li><li class="vp-sidebar-sub-header"><a aria-label="调度事件" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/events.html#调度事件"><!---->调度事件<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="事件订阅者" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/events.html#事件订阅者"><!---->事件订阅者<!----></a><ul class="vp-sidebar-sub-headers"><li class="vp-sidebar-sub-header"><a aria-label="构建事件订阅者" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/events.html#构建事件订阅者"><!---->构建事件订阅者<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="注册事件订阅者" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/events.html#注册事件订阅者"><!---->注册事件订阅者<!----></a><ul class="vp-sidebar-sub-headers"></ul></li></ul></li><li class="vp-sidebar-sub-header"><a aria-label="测试" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/events.html#测试"><!---->测试<!----></a><ul class="vp-sidebar-sub-headers"><li class="vp-sidebar-sub-header"><a aria-label="伪造一部分事件" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/events.html#伪造一部分事件"><!---->伪造一部分事件<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="Fakes 作用域事件" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/events.html#fakes-作用域事件"><!---->Fakes 作用域事件<!----></a><ul class="vp-sidebar-sub-headers"></ul></li></ul></li></ul><!--]--></li><li><!--[--><a aria-label="文件存储" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/filesystem.html"><!---->文件存储<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="辅助函数" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/helpers.html"><!---->辅助函数<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="HTTP Client" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/http-client.html"><!---->HTTP Client<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="本地化" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/localization.html"><!---->本地化<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="邮件" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/mail.html"><!---->邮件<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="消息通知" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/notifications.html"><!---->消息通知<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="包开发" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/packages.html"><!---->包开发<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="进程管理" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/processes.html"><!---->进程管理<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="队列" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/queues.html"><!---->队列<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="限流" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/rate-limiting.html"><!---->限流<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="任务调度" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/scheduling.html"><!---->任务调度<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li></ul></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">安全</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">数据库</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">Eloquent ORM</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">测试</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">官方扩展包</span><span class="vp-arrow end"></span></button><!----></section></li></ul><!--[--><!----><!--]--></aside><!--[--><main id="main-content" class="vp-page"><!--[--><!----><!----><nav class="vp-breadcrumb disable"></nav><div class="vp-page-title"><h1><!---->事件系统</h1><div class="page-info"><span class="page-author-info" aria-label="作者🖊" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon author-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="author icon"><path d="M649.6 633.6c86.4-48 147.2-144 147.2-249.6 0-160-128-288-288-288s-288 128-288 288c0 108.8 57.6 201.6 147.2 249.6-121.6 48-214.4 153.6-240 288-3.2 9.6 0 19.2 6.4 25.6 3.2 9.6 12.8 12.8 22.4 12.8h704c9.6 0 19.2-3.2 25.6-12.8 6.4-6.4 9.6-16 6.4-25.6-25.6-134.4-121.6-240-243.2-288z"></path></svg><span><span class="page-author-item">Moments</span></span><span property="author" content="Moments"></span></span><!----><!----><!----><span class="page-reading-time-info" aria-label="阅读时间⌛" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon timer-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="timer icon"><path d="M799.387 122.15c4.402-2.978 7.38-7.897 7.38-13.463v-1.165c0-8.933-7.38-16.312-16.312-16.312H256.33c-8.933 0-16.311 7.38-16.311 16.312v1.165c0 5.825 2.977 10.874 7.637 13.592 4.143 194.44 97.22 354.963 220.201 392.763-122.204 37.542-214.893 196.511-220.2 389.397-4.661 5.049-7.638 11.651-7.638 19.03v5.825h566.49v-5.825c0-7.379-2.849-13.981-7.509-18.9-5.049-193.016-97.867-351.985-220.2-389.527 123.24-37.67 216.446-198.453 220.588-392.892zM531.16 450.445v352.632c117.674 1.553 211.787 40.778 211.787 88.676H304.097c0-48.286 95.149-87.382 213.728-88.676V450.445c-93.077-3.107-167.901-81.297-167.901-177.093 0-8.803 6.99-15.793 15.793-15.793 8.803 0 15.794 6.99 15.794 15.793 0 80.261 63.69 145.635 142.01 145.635s142.011-65.374 142.011-145.635c0-8.803 6.99-15.793 15.794-15.793s15.793 6.99 15.793 15.793c0 95.019-73.789 172.82-165.96 177.093z"></path></svg><span>大约 16 分钟</span><meta property="timeRequired" content="PT16M"></span><!----><!----></div><hr></div><div class="toc-place-holder"><aside id="toc"><!--[--><!----><!--]--><div class="toc-header">此页内容<!----></div><div class="toc-wrapper"><ul class="toc-list"><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/laravel/#介绍">介绍</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/laravel/#注册事件和监听器">注册事件和监听器</a></li><li><ul class="toc-list"><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#生成事件和监听器">生成事件和监听器</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#手动注册事件">手动注册事件</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#事件的发现">事件的发现</a></li><!----><!--]--></ul></li><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/laravel/#定义事件">定义事件</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/laravel/#定义监听器">定义监听器</a></li><li><ul class="toc-list"><!--[--><li class="toc-item"><a class="vp-link toc-link level4 toc-link level4" href="/laravel/#停止事件传播">停止事件传播</a></li><!----><!--]--></ul></li><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/laravel/#队列事件监听器">队列事件监听器</a></li><li><ul class="toc-list"><!--[--><li class="toc-item"><a class="vp-link toc-link level4 toc-link level4" href="/laravel/#自定义队列连接和队列名称">自定义队列连接和队列名称</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level4 toc-link level4" href="/laravel/#有条件地队列监听器">有条件地队列监听器</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#手动与队列交互">手动与队列交互</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#队列事件监听器和数据库事务">队列事件监听器和数据库事务</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#处理失败的队列">处理失败的队列</a></li><!----><!--]--></ul></li><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/laravel/#调度事件">调度事件</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/laravel/#事件订阅者">事件订阅者</a></li><li><ul class="toc-list"><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#构建事件订阅者">构建事件订阅者</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#注册事件订阅者">注册事件订阅者</a></li><!----><!--]--></ul></li><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/laravel/#测试">测试</a></li><li><ul class="toc-list"><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#伪造一部分事件">伪造一部分事件</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#fakes-作用域事件">Fakes 作用域事件</a></li><!----><!--]--></ul></li><!--]--></ul><div class="toc-marker" style="top:-1.7rem;"></div></div><!--[--><!----><!--]--></aside></div><!----><div class="theme-hope-content"><h1 id="事件系统" tabindex="-1"><a class="header-anchor" href="#事件系统" aria-hidden="true">#</a> 事件系统</h1><ul><li><a href="#introduction">介绍</a></li><li><a href="#registering-events-and-listeners">注册事件和监听器</a><ul><li><a href="#generating-events-and-listeners">生成事件和监听器</a></li><li><a href="#manually-registering-events">手动注册事件</a></li><li><a href="#event-discovery">事件发现</a></li></ul></li><li><a href="#defining-events">定义事件</a></li><li><a href="#defining-listeners">定义监听器</a></li><li><a href="#queued-event-listeners">队列事件监听器</a><ul><li><a href="#manually-interacting-with-the-queue">手动与队列交互</a></li><li><a href="#queued-event-listeners-and-database-transactions">队列事件监听器和数据库事务</a></li><li><a href="#handling-failed-jobs">处理失败的队列</a></li></ul></li><li><a href="#dispatching-events">调度事件</a></li><li><a href="#event-subscribers">事件订阅者</a><ul><li><a href="#writing-event-subscribers">编写事件订阅者</a></li><li><a href="#registering-event-subscribers">注册事件订阅者</a></li></ul></li><li><a href="#testing">测试</a><ul><li><a href="#faking-a-subset-of-events">模拟一部分事件</a></li><li><a href="#scoped-event-fakes">作用域事件模拟</a></li></ul></li></ul><p><a name="introduction"></a></p><h2 id="介绍" tabindex="-1"><a class="header-anchor" href="#介绍" aria-hidden="true">#</a> 介绍</h2><p>Laravel 的事件系统提供了一个简单的观察者模式的实现，允许你能够订阅和监听在你的应用中的发生的各种事件。事件类一般来说存储在 <code>app/Events</code> 目录，监听者的类存储在 <code>app/Listeners</code> 目录。不要担心在你的应用中没有看到这两个目录，因为通过 Artisan 命令行来创建事件和监听者的时候目录会同时被创建。</p><p>事件系统可以作为一个非常棒的方式来解耦你的系统的方方面面，因为一个事件可以有多个完全不相关的监听者。例如，你希望每当有订单发出的时候都给你发送一个 Slack 通知。你大可不必将你的处理订单的代码和发送 slack 消息的代码放在一起，你只需要触发一个 App\Events\OrderShipped 事件，然后事件监听者可以收到这个事件然后发送 slack 通知</p><p><a name="registering-events-and-listeners"></a></p><h2 id="注册事件和监听器" tabindex="-1"><a class="header-anchor" href="#注册事件和监听器" aria-hidden="true">#</a> 注册事件和监听器</h2><p>在系统的服务提供者 <code>App\Providers\EventServiceProvider</code> 中提供了一个简单的方式来注册你所有的事件监听者。属性 <code>listen</code> 包含所有的事件 (作为键) 和对应的监听器 (值)。你可以添加任意多系统需要的监听器在这个数组中，让我们添加一个 <code>OrderShipped</code> 事件：</p><pre><code>use App\Events\OrderShipped;
+use App\Listeners\SendShipmentNotification;
+
+/**
+ * 系统中的事件和监听器的对应关系。
+ *
+ * @var array
+ */
+protected $listen = [
+    OrderShipped::class =&gt; [
+        SendShipmentNotification::class,
+    ],
+];
+</code></pre><blockquote><p><strong>注意</strong> 可以使用 <code>event:list</code> 命令显示应用程序</p></blockquote><p><a name="generating-events-and-listeners"></a></p><h3 id="生成事件和监听器" tabindex="-1"><a class="header-anchor" href="#生成事件和监听器" aria-hidden="true">#</a> 生成事件和监听器</h3><p>当然，为每个事件和监听器手动创建文件是很麻烦的。相反，将监听器和事件添加到 <code>EventServiceProvider</code> 并使用 <code>event:generate</code> Artisan 命令。此命令将生成 <code>EventServiceProvider</code> 中列出的、尚不存在的任何事件或侦听器：</p><div class="language-bash line-numbers-mode" data-ext="sh"><pre class="language-bash"><code>php artisan event:generate
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>或者，你可以使用 <code>make:event</code> 以及 <code>make:listener</code> 用于生成单个事件和监听器的 Artisan 命令：</p><div class="language-bash line-numbers-mode" data-ext="sh"><pre class="language-bash"><code>php artisan make:event PodcastProcessed
+
+php artisan make:listener SendPodcastNotification <span class="token parameter variable">--event</span><span class="token operator">=</span>PodcastProcessed
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><a name="manually-registering-events"></a></p><h3 id="手动注册事件" tabindex="-1"><a class="header-anchor" href="#手动注册事件" aria-hidden="true">#</a> 手动注册事件</h3><p>通常，事件应该通过 <code>EventServiceProvider</code> <code>$listen</code> 数组注册；但是，你也可以在 <code>EventServiceProvider</code> 的 <code>boot</code> 方法中手动注册基于类或闭包的事件监听器：</p><pre><code>use App\Events\PodcastProcessed;
+use App\Listeners\SendPodcastNotification;
+use Illuminate\Support\Facades\Event;
+
+/**
+ * 注册任意的其他事件和监听器。
+ */
+public function boot(): void
+{
+    Event::listen(
+        PodcastProcessed::class,
+        [SendPodcastNotification::class, &#39;handle&#39;]
+    );
+
+    Event::listen(function (PodcastProcessed $event) {
+        // ...
+    });
+}
+</code></pre><p><a name="queuable-anonymous-event-listeners"></a></p><h4 id="可排队匿名事件监听器" tabindex="-1"><a class="header-anchor" href="#可排队匿名事件监听器" aria-hidden="true">#</a> 可排队匿名事件监听器</h4><p>手动注册基于闭包的事件监听器时，可以将监听器闭包包装在 <code>Illuminate\Events\queueable</code> 函数中，以指示 Laravel 使用 <a href="./queues">队列</a> 执行侦听器：</p><pre><code>use App\Events\PodcastProcessed;
+use function Illuminate\Events\queueable;
+use Illuminate\Support\Facades\Event;
+
+/**
+ * 注册任意的其他事件和监听器。
+ */
+public function boot(): void
+{
+    Event::listen(queueable(function (PodcastProcessed $event) {
+        // ...
+    }));
+}
+</code></pre><p>与队列任务一样，可以使用 <code>onConnection</code>、<code>onQueue</code> 和 <code>delay</code> 方法自定义队列监听器的执行：</p><pre><code>Event::listen(queueable(function (PodcastProcessed $event) {
+    // ...
+})-&gt;onConnection(&#39;redis&#39;)-&gt;onQueue(&#39;podcasts&#39;)-&gt;delay(now()-&gt;addSeconds(10)));
+</code></pre><p>如果你想处理匿名队列监听器失败，你可以在定义 <code>queueable</code> 监听器时为 <code>catch</code> 方法提供一个闭包。这个闭包将接收导致监听器失败的事件实例和 <code>Throwable</code> 实例：</p><pre><code>use App\Events\PodcastProcessed;
+use function Illuminate\Events\queueable;
+use Illuminate\Support\Facades\Event;
+use Throwable;
+
+Event::listen(queueable(function (PodcastProcessed $event) {
+    // ...
+})-&gt;catch(function (PodcastProcessed $event, Throwable $e) {
+    // 队列监听器失败了
+}));
+</code></pre><p><a name="wildcard-event-listeners"></a></p><h4 id="通配符事件监听器" tabindex="-1"><a class="header-anchor" href="#通配符事件监听器" aria-hidden="true">#</a> 通配符事件监听器</h4><p>你甚至可以使用 <code>*</code> 作为通配符参数注册监听器，这允许你在同一个监听器上捕获多个事件。通配符监听器接收事件名作为其第一个参数，整个事件数据数组作为其第二个参数：</p><pre><code>Event::listen(&#39;event.*&#39;, function (string $eventName, array $data) {
+    // ...
+});
+</code></pre><p><a name="event-discovery"></a></p><h3 id="事件的发现" tabindex="-1"><a class="header-anchor" href="#事件的发现" aria-hidden="true">#</a> 事件的发现</h3><p>你可以启用自动事件发现，而不是在 <code>EventServiceProvider</code> 的 <code>$listen</code> 数组中手动注册事件和侦听器。当事件发现启用，Laravel 将通过扫描你的应用程序的 <code>Listeners</code> 目录自动发现和注册你的事件和监听器。此外，在 <code>EventServiceProvider</code> 中列出的任何显式定义的事件仍将被注册。</p><p>Laravel 通过使用 PHP 的反射服务扫描监听器类来查找事件监听器。当 Laravel 发现任何以 <code>handle</code> 或 <code>__invoke</code> 开头的监听器类方法时，Laravel 会将这些方法注册为该方法签名中类型暗示的事件的事件监听器：</p><pre><code>use App\Events\PodcastProcessed;
+
+class SendPodcastNotification
+{
+    /**
+     * 处理给定的事件
+     */
+    public function handle(PodcastProcessed $event): void
+    {
+        // ...
+    }
+}
+</code></pre><p>事件发现在默认情况下是禁用的，但你可以通过重写应用程序的 <code>EventServiceProvider</code> 的 <code>shouldDiscoverEvents</code> 方法来启用它：</p><pre><code>/**
+ * 确定是否应用自动发现事件和监听器。
+ */
+public function shouldDiscoverEvents(): bool
+{
+    return true;
+}
+</code></pre><p>默认情况下，应用程序 <code>app/listeners</code> 目录中的所有监听器都将被扫描。如果你想要定义更多的目录来扫描，你可以重写 <code>EventServiceProvider</code> 中的 <code>discoverEventsWithin</code> 方法：</p><pre><code>/**
+ * 获取应用于发现事件的监听器目录。
+ *
+ * @return array&lt;int, string&gt;
+ */
+protected function discoverEventsWithin(): array
+{
+    return [
+        $this-&gt;app-&gt;path(&#39;Listeners&#39;),
+    ];
+}
+</code></pre><p><a name="event-discovery-in-production"></a></p><h4 id="生产中的事件发现" tabindex="-1"><a class="header-anchor" href="#生产中的事件发现" aria-hidden="true">#</a> 生产中的事件发现</h4><p>在生产环境中，框架在每个请求上扫描所有监听器的效率并不高。因此，在你的部署过程中，你应该运行 <code>event:cache</code> Artisan 命令来缓存你的应用程序的所有事件和监听器清单。框架将使用该清单来加速事件注册过程。<code>event:clear</code> 命令可以用来销毁缓存。</p><p><a name="defining-events"></a></p><h2 id="定义事件" tabindex="-1"><a class="header-anchor" href="#定义事件" aria-hidden="true">#</a> 定义事件</h2><p>事件类本质上是一个数据容器，它保存与事件相关的信息。例如，让我们假设一个 <code>App\Events\OrderShipped</code> 事件接收到一个 <a href="./eloquent">Eloquent ORM</a> 对象：</p><pre><code>&lt;?php
+
+namespace App\Events;
+
+use App\Models\Order;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
+
+class OrderShipped
+{
+    use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    /**
+     * 创建一个新的事件实例。
+     */
+    public function __construct(
+        public Order $order,
+    ) {}
+}
+</code></pre><p>如你所见，这个事件类不包含逻辑。它是一个被购买的 <code>App\Models\Order</code> 实例容器。 如果事件对象是使用 PHP 的 <code>SerializesModels</code> 函数序列化的，事件使用的 <code>SerializesModels</code> trait 将会优雅地序列化任何 Eloquent 模型，比如在使用 <a href="#queued-event-listeners">队列侦听器</a>。</p><p><a name="defining-listeners"></a></p><h2 id="定义监听器" tabindex="-1"><a class="header-anchor" href="#定义监听器" aria-hidden="true">#</a> 定义监听器</h2><p>接下来，让我们看一下示例事件的监听器。事件监听器在其 <code>handle</code> 方法中接收事件实例。Artisan 命令 <code>event:generate</code> 和 <code>make:listener</code> 会自动导入正确的事件类，并在 <code>handle</code> 方法上对事件进行类型提示。在 <code>handle</code> 方法中，你可以执行任何必要的操作来响应事件：</p><pre><code>&lt;?php
+
+namespace App\Listeners;
+
+use App\Events\OrderShipped;
+
+class SendShipmentNotification
+{
+    /**
+     * 创建事件监听器
+     */
+    public function __construct()
+    {
+        // ...
+    }
+
+    /**
+     * 处理事件
+     */
+    public function handle(OrderShipped $event): void
+    {
+        // 使用 $event-&gt;order 来访问订单 ...
+    }
+}
+</code></pre><blockquote><p><strong>技巧</strong> 事件监听器还可以在构造函数中加入任何依赖关系的类型提示。所有的事件监听器都是通过 Laravel 的 <a href="./container">服务容器</a> 解析的，因此所有的依赖都将会被自动注入。</p></blockquote><p><a name="stopping-the-propagation-of-an-event"></a></p><h4 id="停止事件传播" tabindex="-1"><a class="header-anchor" href="#停止事件传播" aria-hidden="true">#</a> 停止事件传播</h4><p>有时，你可能希望停止将事件传播到其他监听器。你可以通过从监听器的 <code>handle</code> 方法中返回 <code>false</code> 来做到这一点。</p><p><a name="queued-event-listeners"></a></p><h2 id="队列事件监听器" tabindex="-1"><a class="header-anchor" href="#队列事件监听器" aria-hidden="true">#</a> 队列事件监听器</h2><p>如果你的监听器要执行一个缓慢的任务，如发送电子邮件或进行 HTTP 请求，那么队列化监听器就很有用了。在使用队列监听器之前，请确保 <a href="./queues">配置你的队列</a> 并在你的服务器或本地开发环境中启动一个队列 worker。</p><p>要指定监听器启动队列，请将 <code>ShouldQueue</code> 接口添加到监听器类。 由 Artisan 命令 <code>event:generate</code> 和 <code>make:listener</code> 生成的监听器已经将此接口导入当前命名空间，因此你可以直接使用：</p><pre><code>&lt;?php
+
+namespace App\Listeners;
+
+use App\Events\OrderShipped;
+use Illuminate\Contracts\Queue\ShouldQueue;
+
+class SendShipmentNotification implements ShouldQueue
+{
+    // ...
+}
+</code></pre><p>就是这样！ 现在，当此监听器处理的事件被调度时，监听器将使用 Laravel 的 <a href="./queues">队列系统</a> 自动由事件调度器排队。 如果监听器被队列执行时没有抛出异常，队列中的任务处理完成后会自动删除。</p><p><a name="customizing-the-queue-connection-queue-name"></a></p><h4 id="自定义队列连接和队列名称" tabindex="-1"><a class="header-anchor" href="#自定义队列连接和队列名称" aria-hidden="true">#</a> 自定义队列连接和队列名称</h4><p>如果你想自定义事件监听器的队列连接、队列名称或队列延迟时间，可以在监听器类上定义 <code>$connection</code>、<code>$queue</code> 或 <code>$delay</code> 属性：</p><pre><code>&lt;?php
+
+namespace App\Listeners;
+
+use App\Events\OrderShipped;
+use Illuminate\Contracts\Queue\ShouldQueue;
+
+class SendShipmentNotification implements ShouldQueue
+{
+    /**
+     * 任务发送到的连接的名称。
+     *
+     * @var string|null
+     */
+    public $connection = &#39;sqs&#39;;
+
+    /**
+     * 任务发送到的队列的名称。
+     *
+     * @var string|null
+     */
+    public $queue = &#39;listeners&#39;;
+
+    /**
+     * 处理作业前的时间（秒）。
+     *
+     * @var int
+     */
+    public $delay = 60;
+}
+</code></pre><p>如果你想在运行时定义监听器的队列连接或队列名称，可以在监听器上定义 <code>viaConnection</code> 或 <code>viaQueue</code> 方法：</p><pre><code>/**
+ * 获取侦听器的队列连接的名称。
+ */
+public function viaConnection(): string
+{
+    return &#39;sqs&#39;;
+}
+
+/**
+ * 获取侦听器队列的名称。
+ */
+public function viaQueue(): string
+{
+    return &#39;listeners&#39;;
+}
+</code></pre><p><a name="conditionally-queueing-listeners"></a></p><h4 id="有条件地队列监听器" tabindex="-1"><a class="header-anchor" href="#有条件地队列监听器" aria-hidden="true">#</a> 有条件地队列监听器</h4><p>有时，你可能需要根据一些仅在运行时可用的数据来确定是否应将侦听器排队。 为此，可以将「shouldQueue」方法添加到侦听器以确定是否应将侦听器排队。 如果 <code>shouldQueue</code> 方法返回 <code>false</code>，监听器将不会被执行：</p><pre><code>&lt;?php
+
+namespace App\Listeners;
+
+use App\Events\OrderCreated;
+use Illuminate\Contracts\Queue\ShouldQueue;
+
+class RewardGiftCard implements ShouldQueue
+{
+    /**
+     * 奖励客户一张礼品卡。
+     */
+    public function handle(OrderCreated $event): void
+    {
+        // ...
+    }
+
+    /**
+     * 确定侦听器是否应排队。
+     */
+    public function shouldQueue(OrderCreated $event): bool
+    {
+        return $event-&gt;order-&gt;subtotal &gt;= 5000;
+    }
+}
+</code></pre><p><a name="manually-interacting-with-the-queue"></a></p><h3 id="手动与队列交互" tabindex="-1"><a class="header-anchor" href="#手动与队列交互" aria-hidden="true">#</a> 手动与队列交互</h3><p>如果你需要手动访问侦听器的底层队列作业的 delete 和 release 方法，可以使用 <code>Illuminate\Queue\InteractsWithQueue</code> 特性来实现。 这个 trait 默认导入生成的侦听器并提供对这些方法的访问：</p><pre><code>&lt;?php
+
+namespace App\Listeners;
+
+use App\Events\OrderShipped;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+
+class SendShipmentNotification implements ShouldQueue
+{
+    use InteractsWithQueue;
+
+    /**
+     * Handle the event.
+     */
+    public function handle(OrderShipped $event): void
+    {
+        if (true) {
+            $this-&gt;release(30);
+        }
+    }
+}
+</code></pre><p><a name="queued-event-listeners-and-database-transactions"></a></p><h3 id="队列事件监听器和数据库事务" tabindex="-1"><a class="header-anchor" href="#队列事件监听器和数据库事务" aria-hidden="true">#</a> 队列事件监听器和数据库事务</h3><p>当排队的侦听器在数据库事务中被分派时，它们可能在数据库事务提交之前由队列处理。 发生这种情况时，在数据库事务期间对模型或数据库记录所做的任何更新可能尚未反映在数据库中。 此外，在事务中创建的任何模型或数据库记录可能不存在于数据库中。 如果你的侦听器依赖于这些模型，则在处理调度排队侦听器的作业时可能会发生意外错误。</p><p>如果你的队列连接的 <code>after_commit</code> 配置选项设置为 <code>false</code>，你仍然可以通过在侦听器类上定义 <code>$afterCommit</code> 属性来指示在提交所有打开的数据库事务后应该调度特定的排队侦听器：</p><pre><code>&lt;?php
+
+namespace App\Listeners;
+
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+
+class SendShipmentNotification implements ShouldQueue
+{
+    use InteractsWithQueue;
+
+    public $afterCommit = true;
+}
+</code></pre><blockquote><p><strong>注意</strong> 要了解有关解决这些问题的更多信息，请查看有关<a href="./queues#jobs-and-database-transactions">队列作业和数据库事务</a> 的文档。</p></blockquote><p><a name="handling-failed-jobs"></a></p><h3 id="处理失败的队列" tabindex="-1"><a class="header-anchor" href="#处理失败的队列" aria-hidden="true">#</a> 处理失败的队列</h3><p>有时队列的事件监听器可能会失败。如果排队的监听器超过了队列工作者定义的最大尝试次数，则将对监听器调用 <code>failed</code> 方法。<code>failed</code> 方法接收导致失败的事件实例和 <code>Throwable</code>：</p><pre><code>&lt;?php
+
+namespace App\Listeners;
+
+use App\Events\OrderShipped;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+use Throwable;
+
+class SendShipmentNotification implements ShouldQueue
+{
+    use InteractsWithQueue;
+
+    /**
+     * 事件处理。
+     */
+    public function handle(OrderShipped $event): void
+    {
+        // ...
+    }
+
+    /**
+     * 处理失败任务。
+     */
+    public function failed(OrderShipped $event, Throwable $exception): void
+    {
+        // ...
+    }
+}
+</code></pre><p><a name="specifying-queued-listener-maximum-attempts"></a></p><h4 id="指定队列监听器的最大尝试次数" tabindex="-1"><a class="header-anchor" href="#指定队列监听器的最大尝试次数" aria-hidden="true">#</a> 指定队列监听器的最大尝试次数</h4><p>如果队列中的某个监听器遇到错误，你可能不希望它无限期地重试。因此，Laravel 提供了各种方法来指定监听器的尝试次数或尝试时间。</p><p>你可以在监听器类上定义 <code>$tries</code> 属性，以指定监听器在被认为失败之前可能尝试了多少次：</p><pre><code>&lt;?php
+
+namespace App\Listeners;
+
+use App\Events\OrderShipped;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+
+class SendShipmentNotification implements ShouldQueue
+{
+    use InteractsWithQueue;
+
+    /**
+     * 尝试队列监听器的次数。
+     *
+     * @var int
+     */
+    public $tries = 5;
+}
+</code></pre><p>作为定义侦听器在失败之前可以尝试多少次的替代方法，你可以定义不再尝试侦听器的时间。这允许在给定的时间范围内尝试多次监听。若要定义不再尝试监听器的时间，请在你的监听器类中添加 <code>retryUntil</code> 方法。此方法应返回一个 <code>DateTime</code> 实例：</p><pre><code>use DateTime;
+
+/**
+ * 确定监听器应该超时的时间。
+ */
+public function retryUntil(): DateTime
+{
+    return now()-&gt;addMinutes(5);
+}
+</code></pre><p><a name="dispatching-events"></a></p><h2 id="调度事件" tabindex="-1"><a class="header-anchor" href="#调度事件" aria-hidden="true">#</a> 调度事件</h2><p>要分派一个事件，你可以在事件上调用静态的 <code>dispatch</code> 方法。这个方法是通过 <code>Illuminate\Foundation\Events\Dispatchable</code> 特性提供给事件的。 传递给 <code>dispatch</code> 方法的任何参数都将被传递给事件的构造函数：</p><pre><code>&lt;?php
+
+namespace App\Http\Controllers;
+
+use App\Events\OrderShipped;
+use App\Http\Controllers\Controller;
+use App\Models\Order;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+
+class OrderShipmentController extends Controller
+{
+    /**
+     * 运送给定的订单。
+     */
+    public function store(Request $request): RedirectResponse
+    {
+        $order = Order::findOrFail($request-&gt;order_id);
+
+        // 订单出货逻辑...
+
+        OrderShipped::dispatch($order);
+
+        return redirect(&#39;/orders&#39;);
+    }
+}
+</code></pre><p>你可以使用 <code>dispatchIf</code> 和 <code>dispatchUnless</code> 方法根据条件分派事件：</p><pre><code>OrderShipped::dispatchIf($condition, $order);
+
+OrderShipped::dispatchUnless($condition, $order);
+</code></pre><blockquote><p><strong>提示</strong><br> 在测试时，断言某些事件是在没有实际触发其侦听器的情况下被分派的，这可能会有所帮助。 Laravel 的 <a href="#testing">内置助手</a> 让它变得很简单。</p></blockquote><p><a name="event-subscribers"></a></p><h2 id="事件订阅者" tabindex="-1"><a class="header-anchor" href="#事件订阅者" aria-hidden="true">#</a> 事件订阅者</h2><p><a name="writing-event-subscribers"></a></p><h3 id="构建事件订阅者" tabindex="-1"><a class="header-anchor" href="#构建事件订阅者" aria-hidden="true">#</a> 构建事件订阅者</h3><p>事件订阅者是可以从订阅者类本身中订阅多个事件的类，允许你在单个类中定义多个事件处理程序。订阅者应该定义一个 <code>subscribe</code> 方法，它将被传递一个事件分派器实例。你可以在给定的分派器上调用 <code>listen</code> 方法来注册事件监听器：</p><pre><code>&lt;?php
+
+namespace App\Listeners;
+
+use Illuminate\Auth\Events\Login;
+use Illuminate\Auth\Events\Logout;
+use Illuminate\Events\Dispatcher;
+
+class UserEventSubscriber
+{
+    /**
+     * 处理用户登录事件。
+     */
+    public function handleUserLogin(string $event): void {}
+
+    /**
+     * 处理用户退出事件。
+     */
+    public function handleUserLogout(string $event): void {}
+
+    /**
+     * 为订阅者注册侦听器。
+     */
+    public function subscribe(Dispatcher $events): void
+    {
+        $events-&gt;listen(
+            Login::class,
+            [UserEventSubscriber::class, &#39;handleUserLogin&#39;]
+        );
+
+        $events-&gt;listen(
+            Logout::class,
+            [UserEventSubscriber::class, &#39;handleUserLogout&#39;]
+        );
+    }
+}
+</code></pre><p>如果你的事件侦听器方法是在订阅者本身中定义的，你可能会发现从订阅者的「订阅」方法返回一组事件和方法名称会更方便。 Laravel 会在注册事件监听器时自动判断订阅者的类名：</p><pre><code>&lt;?php
+
+namespace App\Listeners;
+
+use Illuminate\Auth\Events\Login;
+use Illuminate\Auth\Events\Logout;
+use Illuminate\Events\Dispatcher;
+
+class UserEventSubscriber
+{
+    /**
+     * 处理用户登录事件。
+     */
+    public function handleUserLogin(string $event): void {}
+
+    /**
+     * 处理用户注销事件。
+     */
+    public function handleUserLogout(string $event): void {}
+
+    /**
+     * 为订阅者注册监听器。
+     *
+     * @return array&lt;string, string&gt;
+     */
+    public function subscribe(Dispatcher $events): array
+    {
+        return [
+            Login::class =&gt; &#39;handleUserLogin&#39;,
+            Logout::class =&gt; &#39;handleUserLogout&#39;,
+        ];
+    }
+}
+</code></pre><p><a name="registering-event-subscribers"></a></p><h3 id="注册事件订阅者" tabindex="-1"><a class="header-anchor" href="#注册事件订阅者" aria-hidden="true">#</a> 注册事件订阅者</h3><p>编写订阅者后，你就可以将其注册到事件调度程序。 可以使用 <code>EventServiceProvider</code> 上的 <code>$subscribe</code> 属性注册订阅者。 例如，让我们将 <code>UserEventSubscriber</code> 添加到列表中：</p><pre><code>&lt;?php
+
+namespace App\Providers;
+
+use App\Listeners\UserEventSubscriber;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+
+class EventServiceProvider extends ServiceProvider
+{
+    /**
+     * The event listener mappings for the application.
+     *
+     * @var array
+     */
+    protected $listen = [
+        // ...
+    ];
+
+    /**
+     * The subscriber classes to register.
+     *
+     * @var array
+     */
+    protected $subscribe = [
+        UserEventSubscriber::class,
+    ];
+}
+</code></pre><p><a name="testing"></a></p><h2 id="测试" tabindex="-1"><a class="header-anchor" href="#测试" aria-hidden="true">#</a> 测试</h2><p>当测试分发事件的代码时，你可能希望指示 Laravel 不要实际执行事件的监听器，因为监听器的代码可以直接和分发相应事件的代码分开测试。 当然，要测试监听器本身，你可以实例化一个监听器实例并直接在测试中调用 handle 方法。</p><p>使用 <code>Event</code> 门面的 <code>fake</code> 方法，你可以阻止侦听器执行，执行测试代码，然后使用 <code>assertDispatched</code>、<code>assertNotDispatched</code> 和 <code>assertNothingDispatched</code> 方法断言你的应用程序分派了哪些事件：</p><pre><code>&lt;?php
+
+namespace Tests\Feature;
+
+use App\Events\OrderFailedToShip;
+use App\Events\OrderShipped;
+use Illuminate\Support\Facades\Event;
+use Tests\TestCase;
+
+class ExampleTest extends TestCase
+{
+    /**
+     * 测试订单发货。
+     */
+    public function test_orders_can_be_shipped(): void
+    {
+        Event::fake();
+
+        // 执行订单发货...
+
+        // 断言事件已发送...
+        Event::assertDispatched(OrderShipped::class);
+
+        // 断言一个事件被发送了两次......
+        Event::assertDispatched(OrderShipped::class, 2);
+
+        // 断言事件未被发送...
+        Event::assertNotDispatched(OrderFailedToShip::class);
+
+        // 断言没有事件被发送...
+        Event::assertNothingDispatched();
+    }
+}
+</code></pre><p>你可以将闭包传递给 <code>assertDispatched</code> 或 <code>assertNotDispatched</code> 方法，以断言已派发的事件通过了给定的「真实性测试」。 如果至少发送了一个通过给定真值测试的事件，则断言将成功：</p><pre><code>Event::assertDispatched(function (OrderShipped $event) use ($order) {
+    return $event-&gt;order-&gt;id === $order-&gt;id;
+});
+</code></pre><p>如果你只想断言事件侦听器正在侦听给定事件，可以使用 <code>assertListening</code> 方法：</p><pre><code>Event::assertListening(
+    OrderShipped::class,
+    SendShipmentNotification::class
+);
+</code></pre><blockquote><p><strong>警告</strong> 调用 <code>Event::fake()</code> 后，不会执行任何事件侦听器。 因此，如果你的测试使用依赖于事件的模型工厂，例如在模型的「创建」事件期间创建 UUID，则您应该在使用您的工厂<strong>之后</strong>调用“Event::fake()”。</p></blockquote><p><a name="faking-a-subset-of-events"></a></p><h3 id="伪造一部分事件" tabindex="-1"><a class="header-anchor" href="#伪造一部分事件" aria-hidden="true">#</a> 伪造一部分事件</h3><p>如果你只想为一组特定的事件伪造事件监听器，你可以将它们传递给 <code>fake</code> 或 <code>fakeFor</code> 方法：</p><pre><code>/**
+ * 测试订单流程。
+ */
+public function test_orders_can_be_processed(): void
+{
+    Event::fake([
+        OrderCreated::class,
+    ]);
+
+    $order = Order::factory()-&gt;create();
+
+    Event::assertDispatched(OrderCreated::class);
+
+    // 其他事件正常发送...
+    $order-&gt;update([...]);
+}
+</code></pre><p>你可以使用 <code>except</code> 方法排除指定事件：</p><pre><code>Event::fake()-&gt;except([
+    OrderCreated::class,
+]);
+</code></pre><p><a name="scoped-event-fakes"></a></p><h3 id="fakes-作用域事件" tabindex="-1"><a class="header-anchor" href="#fakes-作用域事件" aria-hidden="true">#</a> Fakes 作用域事件</h3><p>如果你只想为测试的一部分创建事件侦听器，你可以使用 <code>fakeFor</code> 方法：</p><pre><code>&lt;?php
+
+namespace Tests\Feature;
+
+use App\Events\OrderCreated;
+use App\Models\Order;
+use Illuminate\Support\Facades\Event;
+use Tests\TestCase;
+
+class ExampleTest extends TestCase
+{
+    /**
+     * 测试订单程序
+     */
+    public function test_orders_can_be_processed(): void
+    {
+        $order = Event::fakeFor(function () {
+            $order = Order::factory()-&gt;create();
+
+            Event::assertDispatched(OrderCreated::class);
+
+            return $order;
+        });
+
+        // 事件按正常方式调度，观察者将会运行...
+        $order-&gt;update([...]);
+    }
+}
+</code></pre></div><!----><footer class="page-meta"><!----><div class="meta-item git-info"><!----><!----></div></footer><nav class="vp-page-nav"><a aria-label="契约（Contract）" class="vp-link nav-link prev nav-link prev" href="/laravel/zh/guide/contracts.html"><div class="hint"><span class="arrow start"></span>上一页</div><div class="link"><!---->契约（Contract）</div></a><a aria-label="文件存储" class="vp-link nav-link next nav-link next" href="/laravel/zh/guide/filesystem.html"><div class="hint">下一页<span class="arrow end"></span></div><div class="link">文件存储<!----></div></a></nav><!----><!----><!--]--></main><!--]--><footer class="vp-footer-wrapper"><!----><div class="vp-copyright">Copyright © 2023 Moments</div></footer></div><!--]--><!--]--><!----><!--]--></div>
+    <script type="module" src="/laravel/assets/app-8cdff07c.js" defer></script>
+  </body>
+</html>

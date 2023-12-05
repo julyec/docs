@@ -1,0 +1,383 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>检测变量是否为数字或数字字符串</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.is-null.html">? is_null</a></li>
+      <li style="float: right;"><a href="function.is-object.html">is_object ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.var.html">变量处理函数</a></li>
+    <li>检测变量是否为数字或数字字符串</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.is-numeric" class="refentry">
+ <div class="refnamediv">
+     <h1 class="refname">is_numeric</h1>
+     <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">is_numeric</span> &mdash; <span class="dc-title">
+      检测变量是否为数字或数字字符串
+     </span></p>
+
+ </div>
+
+  <div class="refsect1 description" id="refsect1-function.is-numeric-description">
+    <h3 class="title">说明</h3>
+    <div class="methodsynopsis dc-description">
+     <span class="methodname"><strong>is_numeric</strong></span>(<span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">$value</code></span>): <span class="type">bool</span></div>
+
+    <p class="para rdfs-comment">
+     检测指定的变量是否为数字或<a href="language.types.numeric-strings.html" class="link">数字字符串</a>。
+    </p>
+  </div>
+
+
+  <div class="refsect1 parameters" id="refsect1-function.is-numeric-parameters">
+   <h3 class="title">参数</h3>
+   <p class="para">
+    <dl>
+     
+      <dt>
+<code class="parameter">value</code></dt>
+
+      <dd>
+
+       <p class="para">
+        需要检测的变量。
+       </p>
+      </dd>
+
+     
+    </dl>
+
+   </p>
+  </div>
+
+
+  <div class="refsect1 returnvalues" id="refsect1-function.is-numeric-returnvalues">
+   <h3 class="title">返回值</h3>
+   <p class="para">
+    如果 <code class="parameter">value</code> 是数字或<a href="language.types.numeric-strings.html" class="link">数字字符串</a>，
+    返回 <strong><code>true</code></strong>，否则返回 <strong><code>false</code></strong>。
+   </p>
+  </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.is-numeric-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       以空格结尾的数字字符串（<code class="literal">&quot;42 &quot;</code>）现在将返回 <strong><code>true</code></strong>。以前，会返回 <strong><code>false</code></strong>。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.is-numeric-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #1 <span class="function"><strong>is_numeric()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+     <div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$tests </span><span style="color: #007700">= array(<br />    </span><span style="color: #DD0000">"42"</span><span style="color: #007700">,<br />    </span><span style="color: #0000BB">1337</span><span style="color: #007700">,<br />    </span><span style="color: #0000BB">0x539</span><span style="color: #007700">,<br />    </span><span style="color: #0000BB">02471</span><span style="color: #007700">,<br />    </span><span style="color: #0000BB">0b10100111001</span><span style="color: #007700">,<br />    </span><span style="color: #0000BB">1337e0</span><span style="color: #007700">,<br />    </span><span style="color: #DD0000">"0x539"</span><span style="color: #007700">,<br />    </span><span style="color: #DD0000">"02471"</span><span style="color: #007700">,<br />    </span><span style="color: #DD0000">"0b10100111001"</span><span style="color: #007700">,<br />    </span><span style="color: #DD0000">"1337e0"</span><span style="color: #007700">,<br />    </span><span style="color: #DD0000">"not numeric"</span><span style="color: #007700">,<br />    array(),<br />    </span><span style="color: #0000BB">9.1</span><span style="color: #007700">,<br />    </span><span style="color: #0000BB">null</span><span style="color: #007700">,<br />    </span><span style="color: #DD0000">''</span><span style="color: #007700">,<br />);<br /><br />foreach (</span><span style="color: #0000BB">$tests </span><span style="color: #007700">as </span><span style="color: #0000BB">$element</span><span style="color: #007700">) {<br />    if (</span><span style="color: #0000BB">is_numeric</span><span style="color: #007700">(</span><span style="color: #0000BB">$element</span><span style="color: #007700">)) {<br />        echo </span><span style="color: #0000BB">var_export</span><span style="color: #007700">(</span><span style="color: #0000BB">$element</span><span style="color: #007700">, </span><span style="color: #0000BB">true</span><span style="color: #007700">) . </span><span style="color: #DD0000">" is numeric"</span><span style="color: #007700">, </span><span style="color: #0000BB">PHP_EOL</span><span style="color: #007700">;<br />    } else {<br />        echo </span><span style="color: #0000BB">var_export</span><span style="color: #007700">(</span><span style="color: #0000BB">$element</span><span style="color: #007700">, </span><span style="color: #0000BB">true</span><span style="color: #007700">) . </span><span style="color: #DD0000">" is NOT numeric"</span><span style="color: #007700">, </span><span style="color: #0000BB">PHP_EOL</span><span style="color: #007700">;<br />    }<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+     <div class="cdata"><pre>
+&#039;42&#039; is numeric
+1337 is numeric
+1337 is numeric
+1337 is numeric
+1337 is numeric
+1337.0 is numeric
+&#039;0x539&#039; is NOT numeric
+&#039;02471&#039; is numeric
+&#039;0b10100111001&#039; is NOT numeric
+&#039;1337e0&#039; is numeric
+&#039;not numeric&#039; is NOT numeric
+array (
+) is NOT numeric
+9.1 is numeric
+NULL is NOT numeric
+&#039;&#039; is NOT numeric
+</pre></div>
+    </div>
+   </div>
+  </p>
+
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #2 带有空格的 <span class="function"><strong>is_numeric()</strong></span></strong></p>
+    <div class="example-contents">
+     <div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$tests </span><span style="color: #007700">= [<br />    </span><span style="color: #DD0000">" 42"</span><span style="color: #007700">,<br />    </span><span style="color: #DD0000">"42 "</span><span style="color: #007700">,<br />    </span><span style="color: #DD0000">"\u{A0}9001"</span><span style="color: #007700">, </span><span style="color: #FF8000">// non-breaking space<br />    </span><span style="color: #DD0000">"9001\u{A0}"</span><span style="color: #007700">, </span><span style="color: #FF8000">// non-breaking space<br /></span><span style="color: #007700">];<br />foreach (</span><span style="color: #0000BB">$tests </span><span style="color: #007700">as </span><span style="color: #0000BB">$element</span><span style="color: #007700">) {<br />    if (</span><span style="color: #0000BB">is_numeric</span><span style="color: #007700">(</span><span style="color: #0000BB">$element</span><span style="color: #007700">)) {<br />        echo </span><span style="color: #0000BB">var_export</span><span style="color: #007700">(</span><span style="color: #0000BB">$element</span><span style="color: #007700">, </span><span style="color: #0000BB">true</span><span style="color: #007700">) . </span><span style="color: #DD0000">" is numeric"</span><span style="color: #007700">, </span><span style="color: #0000BB">PHP_EOL</span><span style="color: #007700">;<br />    } else {<br />        echo </span><span style="color: #0000BB">var_export</span><span style="color: #007700">(</span><span style="color: #0000BB">$element</span><span style="color: #007700">, </span><span style="color: #0000BB">true</span><span style="color: #007700">) . </span><span style="color: #DD0000">" is NOT numeric"</span><span style="color: #007700">, </span><span style="color: #0000BB">PHP_EOL</span><span style="color: #007700">;<br />    }<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例在 PHP 8 中的输出：</p></div>
+    <div class="example-contents screen">
+     <div class="cdata"><pre>
+&#039; 42&#039; is numeric
+&#039;42 &#039; is numeric
+&#039; 9001&#039; is NOT numeric
+&#039;9001 &#039; is NOT numeric
+</pre></div>
+    </div>
+    <div class="example-contents"><p>以上示例在 PHP 7 中的输出：</p></div>
+    <div class="example-contents screen">
+     <div class="cdata"><pre>
+&#039; 42&#039; is numeric
+&#039;42 &#039; is NOT numeric
+&#039; 9001&#039; is NOT numeric
+&#039;9001 &#039; is NOT numeric
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.is-numeric-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><a href="language.types.numeric-strings.html" class="link">数字字符串</a></li>
+    <li class="member"><span class="function"><a href="function.ctype-digit.html" class="function" rel="rdfs-seeAlso">ctype_digit()</a> - 检测数字字符</span></li>
+    <li class="member"><span class="function"><a href="function.is-bool.html" class="function" rel="rdfs-seeAlso">is_bool()</a> - 检测变量是否是布尔值</span></li>
+    <li class="member"><span class="function"><a href="function.is-null.html" class="function" rel="rdfs-seeAlso">is_null()</a> - 检测变量是否是 null</span></li>
+    <li class="member"><span class="function"><a href="function.is-float.html" class="function" rel="rdfs-seeAlso">is_float()</a> - 查找变量的类型是否是浮点型</span></li>
+    <li class="member"><span class="function"><a href="function.is-int.html" class="function" rel="rdfs-seeAlso">is_int()</a> - 检测变量是否是整数</span></li>
+    <li class="member"><span class="function"><a href="function.is-string.html" class="function" rel="rdfs-seeAlso">is_string()</a> - 查找变量的类型是否是字符串</span></li>
+    <li class="member"><span class="function"><a href="function.is-object.html" class="function" rel="rdfs-seeAlso">is_object()</a> - 查找变量是否是对象</span></li>
+    <li class="member"><span class="function"><a href="function.is-array.html" class="function" rel="rdfs-seeAlso">is_array()</a> - 检测变量是否是数组</span></li>
+    <li class="member"><span class="function"><a href="function.filter-var.html" class="function" rel="rdfs-seeAlso">filter_var()</a> - 使用特定的过滤器过滤一个变量</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="127989""></a>
+  <div class="note">
+   <strong class="user">Katrina Kizenbach</strong>
+   <a href="#127989" class="date">07-Dec-2022 08:44</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Note that is_numeric() will evaluate to false for number strings using decimal commas.<br />
+<br />
+is_numeric('0.11');<br />
+Output: true<br />
+<br />
+is_numeric('0,11');<br />
+Output: false</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="127521""></a>
+  <div class="note">
+   <strong class="user">anantkumarsingh03101988 at gmail dot com</strong>
+   <a href="#127521" class="date">22-Aug-2022 05:16</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Example #2<br />
+<br />
+Output: <br />
+<br />
+'9001 ' is NOT numeric<br />
+<br />
+is incorrect for PHP8, it's numeric.<br />
+<br />
+So please correct this.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="120584""></a>
+  <div class="note">
+   <strong class="user">tanguy_barsik at hotmail dot com</strong>
+   <a href="#120584" class="date">03-Feb-2017 03:22</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+for strings, it return true only if float number has a dot<br />
+<br />
+is_numeric( '42.1' )//true<br />
+is_numeric( '42,1' )//false</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="114061""></a>
+  <div class="note">
+   <strong class="user">ben at chico dot com</strong>
+   <a href="#114061" class="date">07-Jan-2014 11:20</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Apparently NAN (Not A Number) is a number for the sake of is_numeric(). <br />
+<br />
+<span class="default">&lt;?php <br />
+</span><span class="keyword">echo </span><span class="string">"is "</span><span class="keyword">; <br />
+if (!</span><span class="default">is_numeric</span><span class="keyword">(</span><span class="default">NAN</span><span class="keyword">)) <br />
+&nbsp;echo </span><span class="string">"not "</span><span class="keyword">; <br />
+&nbsp;echo </span><span class="string">"a number"</span><span class="keyword">; <br />
+</span><span class="default">?&gt;</span> <br />
+<br />
+Outputs "is a number". So something that is NOT a number (by defintion) is a number...</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="102011""></a>
+  <div class="note">
+   <strong class="user">sobolanx at gmail dot com</strong>
+   <a href="#102011" class="date">22-Jan-2011 03:55</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Note that the function accepts extremely big numbers and correctly evaluates them.<br />
+<br />
+For example:<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; $v </span><span class="keyword">= </span><span class="default">is_numeric </span><span class="keyword">(</span><span class="string">'58635272821786587286382824657568871098287278276543219876543'</span><span class="keyword">) ? </span><span class="default">true </span><span class="keyword">: </span><span class="default">false</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">var_dump </span><span class="keyword">(</span><span class="default">$v</span><span class="keyword">);<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+The above script will output:<br />
+<br />
+bool(true)<br />
+<br />
+So this function is not intimidated by super-big numbers. I hope this helps someone.<br />
+<br />
+PS: Also note that if you write is_numeric (45thg), this will generate a parse error (since the parameter is not enclosed between apostrophes or double quotes). Keep this in mind when you use this function.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="88041""></a>
+  <div class="note">
+   <strong class="user">Magnus Deininger, dma05 at web dot de</strong>
+   <a href="#88041" class="date">07-Jan-2009 06:01</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+regarding the global vs. american numeral notations, it should be noted that at least in japanese, numbers aren't grouped with an extra symbol every three digits, but rather every four digits (for example 1,0000 instead of 10.000). also nadim's regexen are slightly suboptimal at one point having an unescaped '.' operator, and the whole thing could easily be combined into a single regex (speed and all).
+<br />
+
+<br />
+adjustments:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+$eng_or_world </span><span class="keyword">= </span><span class="default">preg_match
+<br />
+&nbsp; </span><span class="keyword">(</span><span class="string">'/^[+-]?'</span><span class="keyword">. </span><span class="comment">// start marker and sign prefix
+<br />
+&nbsp; </span><span class="string">'(((([0-9]+)|([0-9]{1,4}(,[0-9]{3,4})+)))?(\\.[0-9])?([0-9]*)|'</span><span class="keyword">. </span><span class="comment">// american
+<br />
+&nbsp; </span><span class="string">'((([0-9]+)|([0-9]{1,4}(\\.[0-9]{3,4})+)))?(,[0-9])?([0-9]*))'</span><span class="keyword">. </span><span class="comment">// world
+<br />
+&nbsp; </span><span class="string">'(e[0-9]+)?'</span><span class="keyword">. </span><span class="comment">// exponent
+<br />
+&nbsp; </span><span class="string">'$/'</span><span class="keyword">, </span><span class="comment">// end marker
+<br />
+&nbsp; </span><span class="default">$str</span><span class="keyword">) == </span><span class="default">1</span><span class="keyword">;
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+i'm sure this still isn't optimal, but it should also cover japanese-style numerals and it fixed a couple of other issues with the other regexen. it also allows for an exponent suffix, the pre-decimal digits are optional and it enforces using either grouped or ungrouped integer parts. should be easier to trim to your liking too.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="69053""></a>
+  <div class="note">
+   <strong class="user">moskalyuk at gmail dot com</strong>
+   <a href="#69053" class="date">21-Aug-2006 10:18</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+is_numeric fails on the hex values greater than LONG_MAX, so having a large hex value parsed through is_numeric would result in FALSE being returned even though the value is a valid hex number</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="37717""></a>
+  <div class="note">
+   <strong class="user">kouber at saparev dot com</strong>
+   <a href="#37717" class="date">24-Nov-2003 03:05</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Note that this function is not appropriate to check if "is_numeric" for very long strings. In fact, everything passed to this function is converted to long and then to a double. Anything greater than approximately 1.8e308 is too large for a double, so it becomes infinity, i.e. FALSE. What that means is that, for each string with more than 308 characters, is_numeric() will return FALSE, even if all chars are digits.<br />
+<br />
+However, this behaviour is platform-specific.<br />
+<br />
+<a href="http://www.php.net/manual/en/language.types.float.php" rel="nofollow" target="_blank">http://www.php.net/manual/en/language.types.float.php</a><br />
+<br />
+In such a case, it is suitable to use regular expressions:<br />
+<br />
+function is_numeric_big($s=0) {<br />
+&nbsp; return preg_match('/^-?\d+$/', $s);<br />
+}</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

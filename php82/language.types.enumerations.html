@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>Enum 枚举</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="language.types.object.html">? Object 对象</a></li>
+      <li style="float: right;"><a href="language.types.resource.html">Resource 资源类型 ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="language.types.html">类型</a></li>
+    <li>Enum 枚举</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="language.types.enumerations" class="sect1">
+ <h2 class="title">Enum 枚举</h2>
+ <p class="verinfo">(PHP 8 &gt;= 8.1.0)</p>
+
+ <div class="sect2" id="language.types.enumerations.basics">
+  <h3 class="title">枚举基础</h3>
+
+  <p class="para">
+   枚举是在类、类常量基础上的约束层，
+   目标是提供一种能力：定义包含可能值的封闭集合类型。
+  </p>
+
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">enum </span><span style="color: #0000BB">Suit<br /></span><span style="color: #007700">{<br />    case </span><span style="color: #0000BB">Hearts</span><span style="color: #007700">;<br />    case </span><span style="color: #0000BB">Diamonds</span><span style="color: #007700">;<br />    case </span><span style="color: #0000BB">Clubs</span><span style="color: #007700">;<br />    case </span><span style="color: #0000BB">Spades</span><span style="color: #007700">;<br />}<br /><br />function </span><span style="color: #0000BB">do_stuff</span><span style="color: #007700">(</span><span style="color: #0000BB">Suit $s</span><span style="color: #007700">)<br />{<br />    </span><span style="color: #FF8000">// ...<br /></span><span style="color: #007700">}<br /><br /></span><span style="color: #0000BB">do_stuff</span><span style="color: #007700">(</span><span style="color: #0000BB">Suit</span><span style="color: #007700">::</span><span style="color: #0000BB">Spades</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+
+  <p class="simpara">
+   详情参阅<a href="language.enumerations.html" class="link">枚举</a>章节。
+  </p>
+
+ </div>
+ 
+ <div class="sect2" id="language.types.enumerations.casting">
+  <h3 class="title">类型转换</h3>
+  
+  <p class="para">
+   将 <span class="type"><span class="type enum">enum</span></span> 转换为 <span class="type">object</span> 不会有变化。
+   将 <span class="type"><span class="type enum">enum</span></span> 转换为 <span class="type">array</span>，
+   纯粹枚举会创建单个 <code class="literal">name</code> 键的数组；
+   回退枚举创建带 <code class="literal">name</code> 和 <code class="literal">value</code> 键的数组。
+   其他类型转换都会导致错误。
+  </p>
+ </div>
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="127105""></a>
+  <div class="note">
+   <strong class="user">esdras-schonevald</strong>
+   <a href="#127105" class="date">16-May-2022 02:07</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+https://gist.github.com/esdras-schonevald/71a6730e6191c5e9c053e2f65b839eec<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="keyword">declare(</span><span class="default">strict_types</span><span class="keyword">=</span><span class="default">1</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">/**<br />
+&nbsp;* This is a sample<br />
+&nbsp;* How to use Enum to create a custom exception cases<br />
+&nbsp;* PHP 8.1^<br />
+&nbsp;*/<br />
+<br />
+</span><span class="keyword">enum </span><span class="default">MyExceptionCase </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; case </span><span class="default">InvalidMethod</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; case </span><span class="default">InvalidProperty</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; case </span><span class="default">Timeout</span><span class="keyword">;<br />
+}<br />
+<br />
+class </span><span class="default">MyException </span><span class="keyword">extends </span><span class="default">Exception </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; function </span><span class="default">__construct</span><span class="keyword">(private </span><span class="default">MyExceptionCase $case</span><span class="keyword">){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; match(</span><span class="default">$case</span><span class="keyword">){<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">MyExceptionCase</span><span class="keyword">::</span><span class="default">InvalidMethod&nbsp; &nbsp; &nbsp; </span><span class="keyword">=&gt;&nbsp; &nbsp; </span><span class="default">parent</span><span class="keyword">::</span><span class="default">__construct</span><span class="keyword">(</span><span class="string">"Bad Request - Invalid Method"</span><span class="keyword">, </span><span class="default">400</span><span class="keyword">),<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">MyExceptionCase</span><span class="keyword">::</span><span class="default">InvalidProperty&nbsp; &nbsp; </span><span class="keyword">=&gt;&nbsp; &nbsp; </span><span class="default">parent</span><span class="keyword">::</span><span class="default">__construct</span><span class="keyword">(</span><span class="string">"Bad Request - Invalid Property"</span><span class="keyword">, </span><span class="default">400</span><span class="keyword">),<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">MyExceptionCase</span><span class="keyword">::</span><span class="default">Timeout&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">=&gt;&nbsp; &nbsp; </span><span class="default">parent</span><span class="keyword">::</span><span class="default">__construct</span><span class="keyword">(</span><span class="string">"Bad Request - Timeout"</span><span class="keyword">, </span><span class="default">400</span><span class="keyword">)<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; };<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+</span><span class="comment">// Testing my custom exception class<br />
+</span><span class="keyword">try {<br />
+&nbsp;&nbsp;&nbsp; throw new </span><span class="default">MyException</span><span class="keyword">(</span><span class="default">MyExceptionCase</span><span class="keyword">::</span><span class="default">InvalidMethod</span><span class="keyword">);<br />
+} catch (</span><span class="default">MyException $myE</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="default">$myE</span><span class="keyword">-&gt;</span><span class="default">getMessage</span><span class="keyword">();&nbsp; </span><span class="comment">// Bad Request - Invalid Method<br />
+</span><span class="keyword">}</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

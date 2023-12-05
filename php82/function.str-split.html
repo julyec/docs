@@ -1,0 +1,374 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>将字符串转换为数组</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.str-shuffle.html">? str_shuffle</a></li>
+      <li style="float: right;"><a href="function.str-starts-with.html">str_starts_with ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.strings.html">字符串 函数</a></li>
+    <li>将字符串转换为数组</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.str-split" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">str_split</h1>
+  <p class="verinfo">(PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">str_split</span> &mdash; <span class="dc-title">将字符串转换为数组</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.str-split-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>str_split</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$string</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$length</code><span class="initializer"> = 1</span></span>): <span class="type">array</span></div>
+
+  <p class="para rdfs-comment">
+   将一个字符串转换为数组。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.str-split-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">string</code></dt>
+
+     <dd>
+
+      <p class="para">
+       输入字符串。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">length</code></dt>
+
+     <dd>
+
+      <p class="para">
+       每一段的长度。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.str-split-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   如果指定了可选的 <code class="parameter">length</code> 参数，返回数组中的每个元素长度均为 <code class="parameter">length</code>
+   的块，除了最后一个块，如果字符串不是均匀划分，则可能会更短。默认 <code class="parameter">length</code> 是
+   <code class="literal">1</code>，这意味着每个块的大小是一个字节。
+  </p>
+ </div>
+
+
+ <div class="refsect1 errors" id="refsect1-function.str-split-errors">
+  <h3 class="title">错误／异常</h3>
+  <p class="para">
+   如果 <code class="parameter">length</code> 小于 <code class="literal">1</code>，将会抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.str-split-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>8.2.0</td>
+      <td>
+       如果 <code class="parameter">string</code> 为空，现在返回空 <span class="type">array</span>。之前返回的 <span class="type">array</span> 包含单个空字符串。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       如果 <code class="parameter">length</code> 小于 <code class="literal">1</code>，现在会抛出
+       <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>；之前会触发 <strong><code>E_WARNING</code></strong>
+       级别的错误且函数会返回 <strong><code>false</code></strong>。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.str-split-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #1 <span class="function"><strong>str_split()</strong></span> 使用示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />$str </span><span style="color: #007700">= </span><span style="color: #DD0000">"Hello Friend"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$arr1 </span><span style="color: #007700">= </span><span style="color: #0000BB">str_split</span><span style="color: #007700">(</span><span style="color: #0000BB">$str</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$arr2 </span><span style="color: #007700">= </span><span style="color: #0000BB">str_split</span><span style="color: #007700">(</span><span style="color: #0000BB">$str</span><span style="color: #007700">, </span><span style="color: #0000BB">3</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$arr1</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$arr2</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Array
+(
+    [0] =&gt; H
+    [1] =&gt; e
+    [2] =&gt; l
+    [3] =&gt; l
+    [4] =&gt; o
+    [5] =&gt;
+    [6] =&gt; F
+    [7] =&gt; r
+    [8] =&gt; i
+    [9] =&gt; e
+    [10] =&gt; n
+    [11] =&gt; d
+)
+
+Array
+(
+    [0] =&gt; Hel
+    [1] =&gt; lo
+    [2] =&gt; Fri
+    [3] =&gt; end
+)
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.str-split-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    在处理多字节字符时，<span class="function"><strong>str_split()</strong></span>
+    会按字节数转换，而非字符数。使用 <span class="function"><a href="function.mb-str-split.html" class="function">mb_str_split()</a></span>
+    将字符串拆分为码点。
+   </p>
+  </p></blockquote>
+ </div>
+
+ 
+ <div class="refsect1 seealso" id="refsect1-function.str-split-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.mb-str-split.html" class="function" rel="rdfs-seeAlso">mb_str_split()</a> - 指定多字节字符串，返回其字符数组</span></li>
+    <li class="member"><span class="function"><a href="function.chunk-split.html" class="function" rel="rdfs-seeAlso">chunk_split()</a> - 将字符串分割成小块</span></li>
+    <li class="member"><span class="function"><a href="function.preg-split.html" class="function" rel="rdfs-seeAlso">preg_split()</a> - 通过一个正则表达式分隔字符串</span></li>
+    <li class="member"><span class="function"><a href="function.explode.html" class="function" rel="rdfs-seeAlso">explode()</a> - 使用一个字符串分割另一个字符串</span></li>
+    <li class="member"><span class="function"><a href="function.count-chars.html" class="function" rel="rdfs-seeAlso">count_chars()</a> - 返回字符串所用字符的信息</span></li>
+    <li class="member"><span class="function"><a href="function.str-word-count.html" class="function" rel="rdfs-seeAlso">str_word_count()</a> - 返回字符串中单词的使用情况</span></li>
+    <li class="member"><a href="control-structures.for.html" class="link">for</a></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="128219""></a>
+  <div class="note">
+   <strong class="user">Julian</strong>
+   <a href="#128219" class="date">14-Feb-2023 09:41</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+The function str_split() is not 'aware' of words. Here is an adaptation of str_split() that is 'word-aware'.<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+$array </span><span class="keyword">=&nbsp; </span><span class="default">str_split_word_aware</span><span class="keyword">(<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'In the beginning God created the heaven and the earth. And the earth was without form, and void; and darkness was upon the face of the deep.'</span><span class="keyword">, <br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">32<br />
+</span><span class="keyword">);<br />
+<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">/**<br />
+&nbsp; * This function is similar to str_split() but this function keeps words intact; it never splits through a word. <br />
+&nbsp; *<br />
+&nbsp; * @return array&lt;int, string&gt;<br />
+&nbsp; */<br />
+</span><span class="keyword">function </span><span class="default">str_split_word_aware</span><span class="keyword">(</span><span class="default">string $string</span><span class="keyword">, </span><span class="default">int $maxLengthOfLine</span><span class="keyword">): array<br />
+{<br />
+&nbsp;&nbsp;&nbsp; if (</span><span class="default">$maxLengthOfLine </span><span class="keyword">&lt;= </span><span class="default">0</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; throw new </span><span class="default">RuntimeException</span><span class="keyword">(</span><span class="default">sprintf</span><span class="keyword">(</span><span class="string">'The function %s() must have a max length of line at least greater than one'</span><span class="keyword">, </span><span class="default">__FUNCTION__</span><span class="keyword">));<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$lines </span><span class="keyword">= [];<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$words </span><span class="keyword">= </span><span class="default">explode</span><span class="keyword">(</span><span class="string">' '</span><span class="keyword">, </span><span class="default">$string</span><span class="keyword">);<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$currentLine </span><span class="keyword">= </span><span class="string">''</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$lineAccumulator </span><span class="keyword">= </span><span class="string">''</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; foreach (</span><span class="default">$words </span><span class="keyword">as </span><span class="default">$currentWord</span><span class="keyword">) {<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$currentWordWithSpace </span><span class="keyword">= </span><span class="default">sprintf</span><span class="keyword">(</span><span class="string">'%s '</span><span class="keyword">, </span><span class="default">$currentWord</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$lineAccumulator </span><span class="keyword">.= </span><span class="default">$currentWordWithSpace</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">strlen</span><span class="keyword">(</span><span class="default">$lineAccumulator</span><span class="keyword">) &lt; </span><span class="default">$maxLengthOfLine</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$currentLine </span><span class="keyword">= </span><span class="default">$lineAccumulator</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; continue;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$lines</span><span class="keyword">[] = </span><span class="default">$currentLine</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// Overwrite the current line and accumulator with the current word<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$currentLine </span><span class="keyword">= </span><span class="default">$currentWordWithSpace</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$lineAccumulator </span><span class="keyword">= </span><span class="default">$currentWordWithSpace</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; if (</span><span class="default">$currentLine </span><span class="keyword">!== </span><span class="string">''</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$lines</span><span class="keyword">[] = </span><span class="default">$currentLine</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$lines</span><span class="keyword">;<br />
+}<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+OUTPUT: <br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="keyword">array(</span><span class="default">5</span><span class="keyword">) {<br />
+&nbsp; [</span><span class="default">0</span><span class="keyword">]=&gt; </span><span class="default">string</span><span class="keyword">(</span><span class="default">29</span><span class="keyword">) </span><span class="string">"In the beginning God created "<br />
+&nbsp; </span><span class="keyword">[</span><span class="default">1</span><span class="keyword">]=&gt; </span><span class="default">string</span><span class="keyword">(</span><span class="default">30</span><span class="keyword">) </span><span class="string">"the heaven and the earth. And "<br />
+&nbsp; </span><span class="keyword">[</span><span class="default">2</span><span class="keyword">]=&gt; </span><span class="default">string</span><span class="keyword">(</span><span class="default">28</span><span class="keyword">) </span><span class="string">"the earth was without form, "<br />
+&nbsp; </span><span class="keyword">[</span><span class="default">3</span><span class="keyword">]=&gt; </span><span class="default">string</span><span class="keyword">(</span><span class="default">27</span><span class="keyword">) </span><span class="string">"and void; and darkness was "<br />
+&nbsp; </span><span class="keyword">[</span><span class="default">4</span><span class="keyword">]=&gt; </span><span class="default">string</span><span class="keyword">(</span><span class="default">27</span><span class="keyword">) </span><span class="string">"upon the face of the deep. "<br />
+</span><span class="keyword">}<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="128079""></a>
+  <div class="note">
+   <strong class="user">alex-glebe at mail dot ru</strong>
+   <a href="#128079" class="date">03-Jan-2023 11:44</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Empty string Does'n returns Empty array!<br />
+<br />
+$arr0 = str_split("");<br />
+print_r($arr0);<br />
+<br />
+&nbsp;Array<br />
+(<br />
+&nbsp;&nbsp;&nbsp; [0] =&gt; <br />
+)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="83034""></a>
+  <div class="note">
+   <strong class="user">lskatz at gmail dot com</strong>
+   <a href="#83034" class="date">07-May-2008 11:42</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+A good use of str_split is reverse translating an amino acid sequence.
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="comment">/* reverse translate an aa sequence using its dna counterpart */
+<br />
+</span><span class="keyword">function </span><span class="default">reverseTranslate</span><span class="keyword">(</span><span class="default">$aaSeq</span><span class="keyword">,</span><span class="default">$ntSeq</span><span class="keyword">){
+<br />
+&nbsp; </span><span class="default">$nt</span><span class="keyword">=</span><span class="default">str_split</span><span class="keyword">(</span><span class="default">$ntSeq</span><span class="keyword">,</span><span class="default">3</span><span class="keyword">);
+<br />
+&nbsp; </span><span class="default">$aa</span><span class="keyword">=</span><span class="default">str_split</span><span class="keyword">(</span><span class="default">$aaSeq</span><span class="keyword">,</span><span class="default">1</span><span class="keyword">);
+<br />
+&nbsp; </span><span class="default">$gapChar</span><span class="keyword">=array(</span><span class="string">'*'</span><span class="keyword">,</span><span class="string">'-'</span><span class="keyword">);
+<br />
+
+<br />
+&nbsp; </span><span class="default">$numAa</span><span class="keyword">=</span><span class="default">count</span><span class="keyword">(</span><span class="default">$aa</span><span class="keyword">);
+<br />
+&nbsp; </span><span class="default">$ntIndex</span><span class="keyword">=</span><span class="default">0</span><span class="keyword">;
+<br />
+&nbsp; </span><span class="default">$newNtSeq</span><span class="keyword">=</span><span class="string">""</span><span class="keyword">;
+<br />
+&nbsp; for(</span><span class="default">$i</span><span class="keyword">=</span><span class="default">0</span><span class="keyword">;</span><span class="default">$i</span><span class="keyword">&lt;</span><span class="default">$numAa</span><span class="keyword">;</span><span class="default">$i</span><span class="keyword">++){
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// if the aa is a gap, then just put on a gap character
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">if(</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">$aa</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">],</span><span class="default">$gapChar</span><span class="keyword">)){
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$newNtSeq</span><span class="keyword">.=</span><span class="string">'---'</span><span class="keyword">;
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp;&nbsp; else{
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$newNtSeq</span><span class="keyword">.=</span><span class="default">$nt</span><span class="keyword">[</span><span class="default">$ntIndex</span><span class="keyword">];
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$ntIndex</span><span class="keyword">++;
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+&nbsp; }
+<br />
+&nbsp; return </span><span class="default">$newNtSeq</span><span class="keyword">;
+<br />
+}
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

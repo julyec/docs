@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>The UnderflowException class</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="class.runtimeexception.html">? RuntimeException</a></li>
+      <li style="float: right;"><a href="class.unexpectedvalueexception.html">UnexpectedValueException ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="spl.exceptions.html">异常</a></li>
+    <li>The UnderflowException class</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="class.underflowexception" class="reference">
+ <h1 class="title">The UnderflowException class</h1>
+ 
+ 
+ <div class="partintro"><p class="verinfo">(PHP 5 &gt;= 5.1.0, PHP 7, PHP 8)</p>
+ 
+
+  <div class="section" id="underflowexception.intro">
+   <h2 class="title">简介</h2>
+   <p class="para">
+    Exception thrown when performing an invalid operation on an empty
+    container, such as removing an element.
+   </p>
+  </div>
+
+ 
+  <div class="section" id="underflowexception.synopsis">
+   <h2 class="title">类摘要</h2>
+ 
+
+   <div class="classsynopsis">
+    <span class="ooclass">
+     <strong class="classname"></strong>
+    </span>
+
+    <div class="classsynopsisinfo">
+     <span class="ooclass">
+      <span class="modifier">class</span> <strong class="classname">UnderflowException</strong>
+     </span>
+
+     <span class="ooclass">
+      <span class="modifier">extends</span>
+       <a href="class.runtimeexception.html" class="classname">RuntimeException</a>
+     </span>
+     {</div>
+
+    <div class="classsynopsisinfo classsynopsisinfo_comment">/* 继承的属性 */</div>
+    <div class="fieldsynopsis">
+     <span class="modifier">protected</span>
+     <span class="type">string</span>
+      <var class="varname"><a href="class.exception.html#exception.props.message">$<var class="varname">message</var></a></var><span class="initializer"> = &quot;&quot;</span>;</div>
+<div class="fieldsynopsis"><span class="modifier">private</span>
+     <span class="type">string</span>
+      <var class="varname"><a href="class.exception.html#exception.props.string">$<var class="varname">string</var></a></var><span class="initializer"> = &quot;&quot;</span>;</div>
+<div class="fieldsynopsis"><span class="modifier">protected</span>
+     <span class="type">int</span>
+      <var class="varname"><a href="class.exception.html#exception.props.code">$<var class="varname">code</var></a></var>;</div>
+<div class="fieldsynopsis"><span class="modifier">protected</span>
+     <span class="type">string</span>
+      <var class="varname"><a href="class.exception.html#exception.props.file">$<var class="varname">file</var></a></var><span class="initializer"> = &quot;&quot;</span>;</div>
+<div class="fieldsynopsis"><span class="modifier">protected</span>
+     <span class="type">int</span>
+      <var class="varname"><a href="class.exception.html#exception.props.line">$<var class="varname">line</var></a></var>;</div>
+<div class="fieldsynopsis"><span class="modifier">private</span>
+     <span class="type">array</span>
+      <var class="varname"><a href="class.exception.html#exception.props.trace">$<var class="varname">trace</var></a></var><span class="initializer"> = []</span>;</div>
+<div class="fieldsynopsis"><span class="modifier">private</span>
+     <span class="type">?</span><span class="type"><span class="type"><a href="class.throwable.html" class="type Throwable">Throwable</a></span><span class="type"></span></span>
+      <var class="varname"><a href="class.exception.html#exception.props.previous">$<var class="varname">previous</var></a></var><span class="initializer"> = null</span>;</div>
+
+
+    <div class="classsynopsisinfo classsynopsisinfo_comment">/* 继承的方法 */</div>
+    <div class="constructorsynopsis dc-description">
+   <span class="modifier">public</span> <span class="methodname"><a href="exception.construct.html" class="methodname">Exception::__construct</a></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$message</code><span class="initializer"> = &quot;&quot;</span></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$code</code><span class="initializer"> = 0</span></span>, <span class="methodparam"><span class="type">?</span><span class="type"><span class="type"><a href="class.throwable.html" class="type Throwable">Throwable</a></span><span class="type"></span></span> <code class="parameter">$previous</code><span class="initializer"> = <strong><code>null</code></strong></span></span>)</div>
+
+    <div class="methodsynopsis dc-description"><span class="modifier">final</span> <span class="modifier">public</span> <span class="methodname"><a href="exception.getmessage.html" class="methodname">Exception::getMessage</a></span>(): <span class="type">string</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">final</span> <span class="modifier">public</span> <span class="methodname"><a href="exception.getprevious.html" class="methodname">Exception::getPrevious</a></span>(): <span class="type"><span class="type">?</span><span class="type"><a href="class.throwable.html" class="type Throwable">Throwable</a></span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">final</span> <span class="modifier">public</span> <span class="methodname"><a href="exception.getcode.html" class="methodname">Exception::getCode</a></span>(): <span class="type">int</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">final</span> <span class="modifier">public</span> <span class="methodname"><a href="exception.getfile.html" class="methodname">Exception::getFile</a></span>(): <span class="type">string</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">final</span> <span class="modifier">public</span> <span class="methodname"><a href="exception.getline.html" class="methodname">Exception::getLine</a></span>(): <span class="type">int</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">final</span> <span class="modifier">public</span> <span class="methodname"><a href="exception.gettrace.html" class="methodname">Exception::getTrace</a></span>(): <span class="type">array</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">final</span> <span class="modifier">public</span> <span class="methodname"><a href="exception.gettraceasstring.html" class="methodname">Exception::getTraceAsString</a></span>(): <span class="type">string</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="exception.tostring.html" class="methodname">Exception::__toString</a></span>(): <span class="type">string</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">private</span> <span class="methodname"><a href="exception.clone.html" class="methodname">Exception::__clone</a></span>(): <span class="type"><span class="type void">void</span></span></div>
+
+   }</div>
+
+ 
+  </div>
+ 
+ </div>
+ 
+ 
+ 
+</div>
+<div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="127255""></a>
+  <div class="note">
+   <strong class="user">Jakub Adamczyk</strong>
+   <a href="#127255" class="date">11-Jul-2022 11:01</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+The most typical usage is with stack, queue or collection, for example when you queue tasks, make call stack or manipulate JSON, XML, etc. elements.<br />
+<br />
+As other exepctions of RuntimeException class, this type of error can't be detected in (for example) your IDE or compiler.<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="comment">// Functions declared above <br />
+</span><span class="default">$f1 </span><span class="keyword">= function() { </span><span class="default">setTypeControl</span><span class="keyword">(</span><span class="string">'username'</span><span class="keyword">);};<br />
+</span><span class="default">$f2 </span><span class="keyword">= function() { </span><span class="default">setTypeControl</span><span class="keyword">(</span><span class="string">'userpass'</span><span class="keyword">);};<br />
+</span><span class="default">$f3 </span><span class="keyword">= function() { </span><span class="default">setButton</span><span class="keyword">(</span><span class="string">'Add'</span><span class="keyword">);};<br />
+</span><span class="default">$f4 </span><span class="keyword">= function() { </span><span class="default">setButton</span><span class="keyword">(</span><span class="string">'OK'</span><span class="keyword">);};<br />
+<br />
+</span><span class="default">$tasks </span><span class="keyword">= new class {<br />
+&nbsp;&nbsp;&nbsp; private </span><span class="default">$list</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// Create internal queue<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">public function </span><span class="default">__construct</span><span class="keyword">() {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">list </span><span class="keyword">= new </span><span class="default">SplQueue</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// Add to queue<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">public function </span><span class="default">add</span><span class="keyword">(callable </span><span class="default">$func</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">list</span><span class="keyword">-&gt;</span><span class="default">enqueue</span><span class="keyword">(</span><span class="default">$func</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// Delete from queue and execute<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">public function do() {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">list</span><span class="keyword">-&gt;</span><span class="default">isEmpty</span><span class="keyword">()) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; throw new </span><span class="default">UnderflowException</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; } else {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">call_user_func</span><span class="keyword">(</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">list</span><span class="keyword">-&gt;</span><span class="default">dequeue</span><span class="keyword">());<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+};<br />
+<br />
+</span><span class="default">$tasks</span><span class="keyword">-&gt;</span><span class="default">add</span><span class="keyword">(</span><span class="default">$f1</span><span class="keyword">);<br />
+</span><span class="default">$tasks</span><span class="keyword">-&gt;</span><span class="default">add</span><span class="keyword">(</span><span class="default">$f2</span><span class="keyword">);<br />
+</span><span class="default">$tasks</span><span class="keyword">-&gt;</span><span class="default">add</span><span class="keyword">(</span><span class="default">$f3</span><span class="keyword">);<br />
+</span><span class="default">$tasks</span><span class="keyword">-&gt;</span><span class="default">add</span><span class="keyword">(</span><span class="default">$f4</span><span class="keyword">);<br />
+<br />
+</span><span class="default">$tasks</span><span class="keyword">-&gt;</span><span class="default">do</span><span class="keyword">(); </span><span class="comment">// Field username is created<br />
+</span><span class="default">$tasks</span><span class="keyword">-&gt;</span><span class="default">do</span><span class="keyword">(); </span><span class="comment">// Field userpass is created<br />
+</span><span class="default">$tasks</span><span class="keyword">-&gt;</span><span class="default">do</span><span class="keyword">(); </span><span class="comment">// Button Add is created<br />
+</span><span class="default">$tasks</span><span class="keyword">-&gt;</span><span class="default">do</span><span class="keyword">(); </span><span class="comment">// Button OK is created<br />
+</span><span class="default">$tasks</span><span class="keyword">-&gt;</span><span class="default">do</span><span class="keyword">(); </span><span class="comment">// Fatal error: Uncaught UnderflowException in ...</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="120536""></a>
+  <div class="note">
+   <strong class="user">evguenia dot chagnon at gmail dot com</strong>
+   <a href="#120536" class="date">26-Jan-2017 01:40</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+UnderflowException handles exceptions due to a value being too small to maintain precision, resulting in loss of accuracy. In PHP, this can occurs when using floats:<br />
+<br />
+echo (1-0.9) // 0.1<br />
+echo (1-0.99) // 0.01<br />
+echo (1-0.999) // 0.001<br />
+echo (1-0.9999) // 9.9999999999989E-05<br />
+echo (1-0.99999) // 9.9999999999545E-06<br />
+echo (1-0.999999) // 1.0000000000288E-06</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

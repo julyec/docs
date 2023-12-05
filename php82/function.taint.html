@@ -1,0 +1,524 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>Taint a string</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.is-tainted.html">? is_tainted</a></li>
+      <li style="float: right;"><a href="function.untaint.html">untaint ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.taint.html">Taint 函数</a></li>
+    <li>Taint a string</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.taint" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">taint</h1>
+  <p class="verinfo">(PECL taint &gt;=0.1.0)</p><p class="refpurpose"><span class="refname">taint</span> &mdash; <span class="dc-title">Taint a string</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.taint-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>taint</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter reference">&$string</code></span>, <span class="methodparam"><span class="type">string</span> <code class="parameter">...$strings</code></span>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">
+   Make a string tainted. This is used for testing purpose only.
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.taint-parameters">
+  <h3 class="title">参数</h3>
+  <dl>
+   
+    <dt>
+<code class="parameter">string</code></dt>
+
+    <dd>
+
+     <p class="para">
+      
+     </p>
+    </dd>
+
+   
+   
+    <dt>
+<code class="parameter">strings</code></dt>
+
+    <dd>
+
+     <p class="para">
+     </p>
+    </dd>
+
+   
+  </dl>
+
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.taint-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+      Return TRUE if the transformation is done. Always return TRUE if the taint
+      extension is not enabled.    
+  </p>
+ </div>
+
+
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="125887""></a>
+  <div class="note">
+   <strong class="user">else_2do at gmail dot com</strong>
+   <a href="#125887" class="date">07-Mar-2021 09:36</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="keyword">class </span><span class="default">nave </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; private </span><span class="default">$nome</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; private </span><span class="default">$prezoDiario</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; private </span><span class="default">$alugado</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; private </span><span class="default">$nomeImaxe</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; function </span><span class="default">__construct</span><span class="keyword">(</span><span class="default">$nome</span><span class="keyword">,</span><span class="default">$prezoDiario</span><span class="keyword">,</span><span class="default">$nomeImaxe</span><span class="keyword">){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">nome</span><span class="keyword">=</span><span class="default">$nome</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">prezoDiario</span><span class="keyword">=</span><span class="default">$prezoDiario</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">alugado</span><span class="keyword">=</span><span class="string">"no"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">nomeImaxe</span><span class="keyword">=</span><span class="default">$nomeImaxe</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; function </span><span class="default">getNome</span><span class="keyword">(){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">nome</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; function </span><span class="default">getPrezodiario</span><span class="keyword">(){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">prezoDiario</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; function </span><span class="default">getAlugado</span><span class="keyword">(){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">alugado</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; function </span><span class="default">getNomeimaxe</span><span class="keyword">(){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">nomeImaxe</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; function </span><span class="default">alugar</span><span class="keyword">(){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">alugado</span><span class="keyword">=</span><span class="string">"si"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; function </span><span class="default">desalugar</span><span class="keyword">(){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">alugado</span><span class="keyword">=</span><span class="string">"no"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125886""></a>
+  <div class="note">
+   <strong class="user">primerito_carlos at gmail dot com</strong>
+   <a href="#125886" class="date">07-Mar-2021 09:26</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+&lt;!DOCTYPE html&gt;<br />
+&lt;html&gt;<br />
+&lt;head&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;title&gt;&lt;/title&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;form method="GET" action="opcions.php"&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &lt;p&gt;Usuario&lt;/p&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &lt;input type="text" name="usu"&gt;&lt;br&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &lt;p&gt;Contrase?a&lt;/p&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &lt;input type="password" name="con"&gt;&lt;br&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &lt;input type="submit" name="enviar" value="Enviar"&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;/form&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">@</span><span class="default">session_start</span><span class="keyword">();<br />
+</span><span class="default">?&gt;<br />
+</span>&lt;!DOCTYPE html&gt;<br />
+&lt;html&gt;<br />
+&lt;head&gt;<br />
+&lt;meta charset="utf-8"&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;title&gt;&lt;/title&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+<span class="default">&lt;?php<br />
+$usu</span><span class="keyword">=</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">"usu"</span><span class="keyword">];<br />
+</span><span class="default">$con</span><span class="keyword">=</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">"con"</span><span class="keyword">];<br />
+if ((</span><span class="default">$usu</span><span class="keyword">==</span><span class="string">"Xan" </span><span class="keyword">&amp;&amp; </span><span class="default">$con</span><span class="keyword">==</span><span class="string">"abc123."</span><span class="keyword">) OR (</span><span class="default">$usu</span><span class="keyword">==</span><span class="string">"Ana" </span><span class="keyword">&amp;&amp; </span><span class="default">$con</span><span class="keyword">==</span><span class="string">"abc123."</span><span class="keyword">)){<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$SESSION</span><span class="keyword">[</span><span class="string">"usu"</span><span class="keyword">]=</span><span class="default">$usu</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"Usuario correcto&lt;br&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$conexion</span><span class="keyword">=</span><span class="default">mysqli_connect</span><span class="keyword">(</span><span class="string">"192.168.2.201"</span><span class="keyword">,</span><span class="string">"exame"</span><span class="keyword">,</span><span class="string">"abc123."</span><span class="keyword">,</span><span class="string">"musica"</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; if (</span><span class="default">$conexion </span><span class="keyword">!= </span><span class="default">FALSE</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"Conexion a BD establecida"</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;form method='GET' action='lista.php'&gt;&lt;br&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &lt;input type='submit' name='completo' value='Listar todos os discos'&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &lt;input type='submit' name='orden_titulo' value='Listar por titulo'&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &lt;input type='submit' name='orden_autor' value='Listar por autor'&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &lt;select name='Autor'&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &lt;option&gt;Beatles&lt;/option&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &lt;option&gt;Rolling&lt;/option&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &lt;option&gt;xxx&lt;/option&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &lt;input type='submit' name='Enviar'&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &lt;/select&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &lt;/form&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if(</span><span class="default">$usu</span><span class="keyword">==</span><span class="string">"Ana"</span><span class="keyword">){<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"&lt;br&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &lt;input type='submit'name='engadir' value='Engadir rexistro'&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &lt;input type='submit'name='editar' value='Editar rexistro'&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &lt;input type='submit'name='eliminar' value='Eliminar rexistro'&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &lt;/form&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}else{<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"Usuario erroneo"</span><span class="keyword">;<br />
+}<br />
+echo </span><span class="string">"&lt;form method='GET' action='login.php'&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &lt;input type='submit' name='volver' value='Volver al login'"</span><span class="keyword">;<br />
+</span><span class="default">?&gt;<br />
+</span>&lt;/body&gt;<br />
+&lt;/html&gt;<br />
+--------------<br />
+&lt;article id="contenedor"&gt;<br />
+<span class="default">&lt;?php<br />
+$conexion</span><span class="keyword">=</span><span class="default">mysqli_connect</span><span class="keyword">(</span><span class="string">"192.168.2.201"</span><span class="keyword">,</span><span class="string">"exame"</span><span class="keyword">,</span><span class="string">"abc123."</span><span class="keyword">,</span><span class="string">"musica"</span><span class="keyword">);<br />
+if (</span><span class="default">$conexion</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; if (isset(</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">'completo'</span><span class="keyword">])) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$consulta</span><span class="keyword">=</span><span class="string">"SELECT * FROM tema"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; elseif (isset(</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">'orden_titulo'</span><span class="keyword">])) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$consulta</span><span class="keyword">=</span><span class="string">"SELECT * FROM tema ORDER BY Titulo"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; elseif (isset(</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">'orden_autor'</span><span class="keyword">])) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$consulta</span><span class="keyword">=</span><span class="string">"SELECT * FROM tema ORDER BY Autor"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; elseif (isset(</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">'Autor'</span><span class="keyword">])) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">'Autor'</span><span class="keyword">]==</span><span class="string">"The Beatles"</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$consulta</span><span class="keyword">=</span><span class="string">"SELECT * FROM tema WHERE Autor='The Beatles'"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$resultado</span><span class="keyword">=</span><span class="default">mysqli_query</span><span class="keyword">(</span><span class="default">$conexion</span><span class="keyword">,</span><span class="default">$consulta</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; if (</span><span class="default">$resultado</span><span class="keyword">!=</span><span class="default">FALSE</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; while (</span><span class="default">$fila</span><span class="keyword">=</span><span class="default">mysqli_fetch_array</span><span class="keyword">(</span><span class="default">$resultado</span><span class="keyword">)) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"&lt;div class='produto'&gt;&lt;img src='imaxes/</span><span class="default">$fila</span><span class="keyword">[</span><span class="default">Imaxe</span><span class="keyword">]</span><span class="string">.jpg'&gt;&lt;br&gt;</span><span class="default">$fila</span><span class="keyword">[</span><span class="default">Titulo</span><span class="keyword">]</span><span class="string">&gt;&lt;br&gt;</span><span class="default">$fila</span><span class="keyword">[</span><span class="default">Autor</span><span class="keyword">]</span><span class="string">&lt;br&gt;</span><span class="default">$fila</span><span class="keyword">[</span><span class="default">Ano</span><span class="keyword">]</span><span class="string">&lt;br&gt;&lt;/div&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;form method='GET' action='opcions.php'&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &lt;input type='submit' value='volver'/&gt;"</span><span class="keyword">;<br />
+</span><span class="default">?&gt;<br />
+</span>&lt;/article&gt;<br />
+}<br />
+?&gt;</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125799""></a>
+  <div class="note">
+   <strong class="user">ramon dot vanidoso at gmail dot com</strong>
+   <a href="#125799" class="date">08-Feb-2021 04:32</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+if (isset($_GET['aluga'])) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; foreach ($_SESSION['flota'] as $id=&gt;$vehiculo) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if($vehiculo-&gt;getMatricula()==($_GET['mat'])){<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $indice=$id;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $dias=$_GET['dias'];<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $_SESSION['flota'][$indice]-&gt;aluga($dias);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; foreach ($_SESSION['flota'] as $id=&gt;$vehiculo) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if($vehiculo-&gt;getDiasAlugado() &gt; 1 ){<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; echo "O vehículo ".$vehiculo-&gt;getModelo()." con matrícula ".$vehiculo-&gt;getMatricula()." foi alugado durante ".$vehiculo-&gt;getDiasAlugado()." días &lt;br&gt;Imaxe: &lt;br&gt;&lt;img width='200' height='100' src='imaxes/".$vehiculo-&gt;getImaxe().".jpg'&gt;&lt;br&gt;";<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; if (isset($_GET['desalugar'])) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; foreach ($_SESSION['flota'] as $id=&gt;$vehiculo) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if($vehiculo-&gt;getMatricula()==($_GET['mat'])){<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $indice=$id;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $kms=$_GET['kms'];<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $_SESSION['flota'][$indice]-&gt;devolveAlugado($kms);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; foreach ($_SESSION['flota'] as $id=&gt;$vehiculo) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if($_GET['mat'])<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; echo "O vehículo ".$vehiculo-&gt;getModelo()." con matrícula ".$vehiculo-&gt;getMatricula()." terminou o período de alugamento con un total de ".$vehiculo-&gt;getKms()." kms&lt;br&gt;Imaxe: &lt;br&gt;&lt;img width='200' height='100' src='imaxes/".$vehiculo-&gt;getImaxe().".jpg'&gt;&lt;br&gt;";<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; if (isset($_GET['garda'])) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $fich=fopen('flota.txt',"w");<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $XD=serialize($_SESSION['flota']);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; fwrite($fich,$XD);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; fclose($fich);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; if (isset($_GET['ler'])) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $fich=fopen('flota.txt',"r");<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $lerarray=fread($fich,filesize('flota.txt'));<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $_SESSION['flota']=unserialize($lerarray);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; foreach ($_SESSION['flota'] as $key =&gt; $coche) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; echo "Matrícula: ".$coche-&gt;getMatricula()."&lt;br&gt;Modelo: ".$coche-&gt;getModelo()."&lt;br&gt;KMS: ".$coche-&gt;getKms()." km &lt;br&gt;";<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; fclose($fich);<br />
+<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; if (isset($_GET['del'])) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; unset($_SESSION['flota']);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; session_destroy();<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;?&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125798""></a>
+  <div class="note">
+   <strong class="user">ramon dot vanidoso at gmail dot com</strong>
+   <a href="#125798" class="date">08-Feb-2021 04:31</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I think the real problem u have is the use of bucle for:<br />
+<br />
+<span class="default">&lt;?php <br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">require </span><span class="string">'vehiculos.class.php'</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; </span><span class="default">session_start</span><span class="keyword">();<br />
+</span><span class="default">?&gt;<br />
+</span>&lt;!DOCTYPE html&gt;<br />
+&lt;html&gt;<br />
+&lt;head&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;title&gt;&lt;/title&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+<br />
+<span class="default">&lt;?php <br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">echo </span><span class="string">"&lt;form action='introducir.php' method='GET'&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;input type='submit' value='Introducir un coche'&gt;&lt;br&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;/form&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;form action='borrar.php' method='GET'&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;input type='submit' value='Borrar un coche'&gt;&lt;br&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;/form&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;form action='alugar.php' method='GET'&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;input type='submit' value='Alugar un coche'&gt;&lt;br&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;/form&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;form action='desaluga.php' method='GET'&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;input type='submit' value='Desalugar un coche'&gt;&lt;br&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;/form&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;form action='xestionFlota.php' method='GET'&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;input type='submit' name='garda' value='Gardar o array nun ficheiro'&gt;&lt;br&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;/form&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;form action='xestionFlota.php' method='GET'&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;input type='submit' name='ler' value='Ler o array dun ficheiro'&gt;&lt;br&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;/form&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;form action='xestionFlota.php' method='GET'&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;input type='submit' name='del' value='Borrar e saír'&gt;&lt;br&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;/form&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"Hai un total de "</span><span class="keyword">.</span><span class="default">vehiculo</span><span class="keyword">::</span><span class="default">$numVehiculos</span><span class="keyword">.</span><span class="string">" vehículos en total na empresa, e un total de "</span><span class="keyword">.</span><span class="default">vehiculo</span><span class="keyword">::</span><span class="default">$numVehiculosAlugados</span><span class="keyword">.</span><span class="string">" alugados&lt;br&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; if(! isset(</span><span class="default">$_SESSION</span><span class="keyword">[</span><span class="string">'flota'</span><span class="keyword">])){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$flota </span><span class="keyword">= array();<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$_SESSION</span><span class="keyword">[</span><span class="string">'flota'</span><span class="keyword">]=</span><span class="default">$flota</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; if (isset(</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">'intro'</span><span class="keyword">])) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$novoVehiculo </span><span class="keyword">= new </span><span class="default">vehiculo </span><span class="keyword">(</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">'mat'</span><span class="keyword">],</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">'mod'</span><span class="keyword">],</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">'kms'</span><span class="keyword">],</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">'imaxe'</span><span class="keyword">]);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$_SESSION</span><span class="keyword">[</span><span class="string">'flota'</span><span class="keyword">][]=</span><span class="default">$novoVehiculo</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; foreach (</span><span class="default">$_SESSION</span><span class="keyword">[</span><span class="string">'flota'</span><span class="keyword">] as </span><span class="default">$id</span><span class="keyword">=&gt;</span><span class="default">$vehiculo</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"O vehículo "</span><span class="keyword">.</span><span class="default">$vehiculo</span><span class="keyword">-&gt;</span><span class="default">getModelo</span><span class="keyword">().</span><span class="string">" con matrícula "</span><span class="keyword">.</span><span class="default">$vehiculo</span><span class="keyword">-&gt;</span><span class="default">getMatricula</span><span class="keyword">().</span><span class="string">" e "</span><span class="keyword">.</span><span class="default">$vehiculo</span><span class="keyword">-&gt;</span><span class="default">getKms</span><span class="keyword">().</span><span class="string">" kms&lt;br&gt;Imaxe: &lt;br&gt;&lt;img width='200' height='100' src='imaxes/"</span><span class="keyword">.</span><span class="default">$vehiculo</span><span class="keyword">-&gt;</span><span class="default">getImaxe</span><span class="keyword">().</span><span class="string">".jpg'&gt;&lt;br&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; if (isset(</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">'borrar'</span><span class="keyword">])) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; foreach (</span><span class="default">$_SESSION</span><span class="keyword">[</span><span class="string">'flota'</span><span class="keyword">] as </span><span class="default">$id</span><span class="keyword">=&gt;</span><span class="default">$vehiculo</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if(</span><span class="default">$vehiculos</span><span class="keyword">-&gt;</span><span class="default">getMatricula</span><span class="keyword">()==(</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">'mat'</span><span class="keyword">])){<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$indice</span><span class="keyword">=</span><span class="default">$id</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; unset(</span><span class="default">$_SESSION</span><span class="keyword">[</span><span class="string">'flota'</span><span class="keyword">][</span><span class="default">$indice</span><span class="keyword">]);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$_SESSION</span><span class="keyword">[</span><span class="string">'flota'</span><span class="keyword">]=</span><span class="default">array_values</span><span class="keyword">(</span><span class="default">$_SESSION</span><span class="keyword">[</span><span class="string">'flota'</span><span class="keyword">]);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; foreach (</span><span class="default">$_SESSION</span><span class="keyword">[</span><span class="string">'flota'</span><span class="keyword">] as </span><span class="default">$id</span><span class="keyword">=&gt;</span><span class="default">$vehiculo</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"O vehículo "</span><span class="keyword">.</span><span class="default">$vehiculo</span><span class="keyword">-&gt;</span><span class="default">getModelo</span><span class="keyword">().</span><span class="string">" con matrícula "</span><span class="keyword">.</span><span class="default">$vehiculo</span><span class="keyword">-&gt;</span><span class="default">getMatricula</span><span class="keyword">().</span><span class="string">" e "</span><span class="keyword">.</span><span class="default">$vehiculo</span><span class="keyword">-&gt;</span><span class="default">getKms</span><span class="keyword">().</span><span class="string">" kms&lt;br&gt;Imaxe: &lt;br&gt;&lt;img width='200' height='100' src='imaxes/"</span><span class="keyword">.</span><span class="default">$vehiculo</span><span class="keyword">-&gt;</span><span class="default">getImaxe</span><span class="keyword">().</span><span class="string">".jpg'&gt;&lt;br&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125797""></a>
+  <div class="note">
+   <strong class="user">ramon dot vanidoso at gmail dot com</strong>
+   <a href="#125797" class="date">08-Feb-2021 04:31</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I think the real problem u have is the use of bucle for:<br />
+<br />
+<span class="default">&lt;?php <br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">require </span><span class="string">'vehiculos.class.php'</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; </span><span class="default">session_start</span><span class="keyword">();<br />
+</span><span class="default">?&gt;<br />
+</span>&lt;!DOCTYPE html&gt;<br />
+&lt;html&gt;<br />
+&lt;head&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;title&gt;&lt;/title&gt;<br />
+&lt;/head&gt;<br />
+&lt;body&gt;<br />
+<br />
+<span class="default">&lt;?php <br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">echo </span><span class="string">"&lt;form action='introducir.php' method='GET'&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;input type='submit' value='Introducir un coche'&gt;&lt;br&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;/form&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;form action='borrar.php' method='GET'&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;input type='submit' value='Borrar un coche'&gt;&lt;br&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;/form&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;form action='alugar.php' method='GET'&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;input type='submit' value='Alugar un coche'&gt;&lt;br&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;/form&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;form action='desaluga.php' method='GET'&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;input type='submit' value='Desalugar un coche'&gt;&lt;br&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;/form&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;form action='xestionFlota.php' method='GET'&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;input type='submit' name='garda' value='Gardar o array nun ficheiro'&gt;&lt;br&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;/form&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;form action='xestionFlota.php' method='GET'&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;input type='submit' name='ler' value='Ler o array dun ficheiro'&gt;&lt;br&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;/form&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;form action='xestionFlota.php' method='GET'&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;input type='submit' name='del' value='Borrar e saír'&gt;&lt;br&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;/form&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"Hai un total de "</span><span class="keyword">.</span><span class="default">vehiculo</span><span class="keyword">::</span><span class="default">$numVehiculos</span><span class="keyword">.</span><span class="string">" vehículos en total na empresa, e un total de "</span><span class="keyword">.</span><span class="default">vehiculo</span><span class="keyword">::</span><span class="default">$numVehiculosAlugados</span><span class="keyword">.</span><span class="string">" alugados&lt;br&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; if(! isset(</span><span class="default">$_SESSION</span><span class="keyword">[</span><span class="string">'flota'</span><span class="keyword">])){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$flota </span><span class="keyword">= array();<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$_SESSION</span><span class="keyword">[</span><span class="string">'flota'</span><span class="keyword">]=</span><span class="default">$flota</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; if (isset(</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">'intro'</span><span class="keyword">])) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$novoVehiculo </span><span class="keyword">= new </span><span class="default">vehiculo </span><span class="keyword">(</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">'mat'</span><span class="keyword">],</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">'mod'</span><span class="keyword">],</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">'kms'</span><span class="keyword">],</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">'imaxe'</span><span class="keyword">]);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$_SESSION</span><span class="keyword">[</span><span class="string">'flota'</span><span class="keyword">][]=</span><span class="default">$novoVehiculo</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; foreach (</span><span class="default">$_SESSION</span><span class="keyword">[</span><span class="string">'flota'</span><span class="keyword">] as </span><span class="default">$id</span><span class="keyword">=&gt;</span><span class="default">$vehiculo</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"O vehículo "</span><span class="keyword">.</span><span class="default">$vehiculo</span><span class="keyword">-&gt;</span><span class="default">getModelo</span><span class="keyword">().</span><span class="string">" con matrícula "</span><span class="keyword">.</span><span class="default">$vehiculo</span><span class="keyword">-&gt;</span><span class="default">getMatricula</span><span class="keyword">().</span><span class="string">" e "</span><span class="keyword">.</span><span class="default">$vehiculo</span><span class="keyword">-&gt;</span><span class="default">getKms</span><span class="keyword">().</span><span class="string">" kms&lt;br&gt;Imaxe: &lt;br&gt;&lt;img width='200' height='100' src='imaxes/"</span><span class="keyword">.</span><span class="default">$vehiculo</span><span class="keyword">-&gt;</span><span class="default">getImaxe</span><span class="keyword">().</span><span class="string">".jpg'&gt;&lt;br&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; if (isset(</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">'borrar'</span><span class="keyword">])) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; foreach (</span><span class="default">$_SESSION</span><span class="keyword">[</span><span class="string">'flota'</span><span class="keyword">] as </span><span class="default">$id</span><span class="keyword">=&gt;</span><span class="default">$vehiculo</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if(</span><span class="default">$vehiculos</span><span class="keyword">-&gt;</span><span class="default">getMatricula</span><span class="keyword">()==(</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">'mat'</span><span class="keyword">])){<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$indice</span><span class="keyword">=</span><span class="default">$id</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; unset(</span><span class="default">$_SESSION</span><span class="keyword">[</span><span class="string">'flota'</span><span class="keyword">][</span><span class="default">$indice</span><span class="keyword">]);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$_SESSION</span><span class="keyword">[</span><span class="string">'flota'</span><span class="keyword">]=</span><span class="default">array_values</span><span class="keyword">(</span><span class="default">$_SESSION</span><span class="keyword">[</span><span class="string">'flota'</span><span class="keyword">]);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; foreach (</span><span class="default">$_SESSION</span><span class="keyword">[</span><span class="string">'flota'</span><span class="keyword">] as </span><span class="default">$id</span><span class="keyword">=&gt;</span><span class="default">$vehiculo</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"O vehículo "</span><span class="keyword">.</span><span class="default">$vehiculo</span><span class="keyword">-&gt;</span><span class="default">getModelo</span><span class="keyword">().</span><span class="string">" con matrícula "</span><span class="keyword">.</span><span class="default">$vehiculo</span><span class="keyword">-&gt;</span><span class="default">getMatricula</span><span class="keyword">().</span><span class="string">" e "</span><span class="keyword">.</span><span class="default">$vehiculo</span><span class="keyword">-&gt;</span><span class="default">getKms</span><span class="keyword">().</span><span class="string">" kms&lt;br&gt;Imaxe: &lt;br&gt;&lt;img width='200' height='100' src='imaxes/"</span><span class="keyword">.</span><span class="default">$vehiculo</span><span class="keyword">-&gt;</span><span class="default">getImaxe</span><span class="keyword">().</span><span class="string">".jpg'&gt;&lt;br&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125599""></a>
+  <div class="note">
+   <strong class="user">Anonymous</strong>
+   <a href="#125599" class="date">13-Dec-2020 05:58</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+The answer of your question is:<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; session_start</span><span class="keyword">();<br />
+</span><span class="default">session_destroy</span><span class="keyword">();<br />
+</span><span class="default">?&gt;<br />
+</span>&lt;meta charset="UTF-8"&gt;<br />
+&lt;html&gt;<br />
+&lt;form method="GET" action="datos.php"&gt;<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp; </span><span class="keyword">if(isset(</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">'usuario'</span><span class="keyword">])){<br />
+&nbsp;&nbsp;&nbsp; if(</span><span class="default">strcmp</span><span class="keyword">(</span><span class="string">"ana"</span><span class="keyword">,</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">'usuario'</span><span class="keyword">])==</span><span class="default">0</span><span class="keyword">){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if(</span><span class="default">strcmp</span><span class="keyword">(</span><span class="string">"abc123."</span><span class="keyword">,</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">'contrase?a'</span><span class="keyword">])==</span><span class="default">0</span><span class="keyword">){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$_SESSION</span><span class="keyword">[</span><span class="string">'usuario'</span><span class="keyword">]=</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">'usuario'</span><span class="keyword">];<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; else{<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; echo</span><span class="string">"<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &lt;script&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; alert ('Usuario o contrase?a incorrectos');<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; window.location='login.php';&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &lt;/script&gt;"<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">;}<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp; if(</span><span class="default">strcmp</span><span class="keyword">(</span><span class="string">"xan"</span><span class="keyword">,</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">'usuario'</span><span class="keyword">])==</span><span class="default">0</span><span class="keyword">){<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(</span><span class="default">strcmp</span><span class="keyword">(</span><span class="string">"abc123."</span><span class="keyword">,</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">'contrase?a'</span><span class="keyword">])==</span><span class="default">0</span><span class="keyword">){<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$_SESSION</span><span class="keyword">[</span><span class="string">'usuario'</span><span class="keyword">]=</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">'usuario'</span><span class="keyword">];<br />
+&nbsp;&nbsp; &nbsp; &nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; else{<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; echo</span><span class="string">"<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &lt;script&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; alert ('Usuario o contrase?a incorrectos');<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; window.location='login.php';&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &lt;/script&gt;"<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">;}<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; if(isset(</span><span class="default">$_SESSION</span><span class="keyword">[</span><span class="string">'usuario'</span><span class="keyword">])){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">//lo que se muestra na la pagina.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$conexion</span><span class="keyword">=</span><span class="default">mysqli_connect</span><span class="keyword">(</span><span class="string">"localhost"</span><span class="keyword">,</span><span class="string">"root"</span><span class="keyword">,</span><span class="string">""</span><span class="keyword">,</span><span class="string">"folla14"</span><span class="keyword">)or die(</span><span class="default">mysqli_error</span><span class="keyword">());&nbsp;&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; if(</span><span class="default">$conexion</span><span class="keyword">){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">mysqli_set_charset</span><span class="keyword">(</span><span class="default">$conexion</span><span class="keyword">,</span><span class="string">"UTF8"</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &lt;input type='submit' value='Lista completa' name='listac'&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; "<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">;}<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; else{<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; echo</span><span class="string">"<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &lt;script&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; alert ('Usuario o contrase?a incorrectos');<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; window.location='login.php';&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &lt;/script&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; }<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

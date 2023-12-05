@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>Gets the size of C data or types</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="ffi.scope.html">? FFI::scope</a></li>
+      <li style="float: right;"><a href="ffi.string.html">FFI::string ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="class.ffi.html">FFI</a></li>
+    <li>Gets the size of C data or types</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="ffi.sizeof" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">FFI::sizeof</h1>
+  <p class="verinfo">(PHP 7 &gt;= 7.4.0, PHP 8)</p><p class="refpurpose"><span class="refname">FFI::sizeof</span> &mdash; <span class="dc-title">Gets the size of C data or types</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-ffi.sizeof-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="modifier">public</span> <span class="modifier">static</span> <span class="methodname"><strong>FFI::sizeof</strong></span>(<span class="methodparam"><span class="type"><span class="type"><a href="class.ffi-cdata.html" class="type FFI\CData">FFI\CData</a></span>|<span class="type"><a href="class.ffi-ctype.html" class="type FFI\CType">FFI\CType</a></span></span> <code class="parameter reference">&$ptr</code></span>): <span class="type">int</span></div>
+
+  <p class="para rdfs-comment">
+   Returns the size of the given <span class="classname"><a href="class.ffi-cdata.html" class="classname">FFI\CData</a></span> or
+   <span class="classname"><a href="class.ffi-ctype.html" class="classname">FFI\CType</a></span> object.
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-ffi.sizeof-parameters">
+  <h3 class="title">参数</h3>
+  <dl>
+   
+    <dt>
+<code class="parameter">ptr</code></dt>
+
+    <dd>
+
+     <p class="para">
+      The handle of the C data or type.
+     </p>
+    </dd>
+
+   
+  </dl>
+
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-ffi.sizeof-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   The size of the memory area pointed at by <code class="parameter">ptr</code>.
+  </p>
+ </div>
+
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="125596""></a>
+  <div class="note">
+   <strong class="user">wowabbs+php at gmail dot com</strong>
+   <a href="#125596" class="date">12-Dec-2020 03:17</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+<span class="default">&lt;?php </span><span class="comment">// Sample using sizeof<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">Function </span><span class="default">_Win_Ffi_GlobalMemoryStatus</span><span class="keyword">()<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp;&nbsp; static </span><span class="default">$Kernel32</span><span class="keyword">, </span><span class="default">$a</span><span class="keyword">, </span><span class="default">$r</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$Kernel32</span><span class="keyword">??=</span><span class="default">FFI</span><span class="keyword">::</span><span class="default">cdef</span><span class="keyword">(&lt;&lt;&lt;'IDL'<br />
+</span><span class="string">&nbsp; &nbsp; &nbsp; &nbsp; typedef struct _MemoryStatus {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; uint32_t Length&nbsp; &nbsp; &nbsp; &nbsp; ;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; uint32_t MemoryLoad&nbsp; &nbsp; ;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; uint64_t TotalPhys&nbsp; &nbsp;&nbsp; ;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; uint64_t AvailPhys&nbsp; &nbsp;&nbsp; ;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; uint64_t TotalPageFile ;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; uint64_t AvailPageFile ;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; uint64_t TotalVirtual&nbsp; ;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; uint64_t AvailVirtual&nbsp; ;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; } MemoryStatus;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; void GlobalMemoryStatus(MemoryStatus* buf);<br />
+</span><span class="keyword">&nbsp; &nbsp; &nbsp;&nbsp; IDL, </span><span class="string">'Kernel32.dll'</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$a</span><span class="keyword">??=</span><span class="default">$Kernel32</span><span class="keyword">-&gt;</span><span class="default">new</span><span class="keyword">(</span><span class="string">'MemoryStatus'</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$a</span><span class="keyword">-&gt;</span><span class="default">Length </span><span class="keyword">=</span><span class="default">$Kernel32</span><span class="keyword">::</span><span class="default">sizeof</span><span class="keyword">(</span><span class="default">$Kernel32</span><span class="keyword">-&gt;</span><span class="default">type</span><span class="keyword">(</span><span class="string">'MemoryStatus'</span><span class="keyword">));<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$r</span><span class="keyword">??=</span><span class="default">FFI</span><span class="keyword">::</span><span class="default">addr</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$Kernel32</span><span class="keyword">-&gt;</span><span class="default">GlobalMemoryStatus</span><span class="keyword">(</span><span class="default">$r</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp;&nbsp; return [<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'Total' </span><span class="keyword">=&gt;</span><span class="default">$a</span><span class="keyword">-&gt;</span><span class="default">TotalPhys</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'Free'&nbsp; </span><span class="keyword">=&gt;</span><span class="default">$a</span><span class="keyword">-&gt;</span><span class="default">TotalPhys</span><span class="keyword">-</span><span class="default">$a</span><span class="keyword">-&gt;</span><span class="default">AvailPhys</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'Load'&nbsp; </span><span class="keyword">=&gt;</span><span class="default">$a</span><span class="keyword">-&gt;</span><span class="default">MemoryLoad</span><span class="keyword">*</span><span class="default">0.01</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp;&nbsp; ];<br />
+&nbsp;&nbsp;&nbsp; }<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

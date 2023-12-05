@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-28949148","path":"/tag/icon/","title":"Tag: Icon","lang":"en-US","frontmatter":{"title":"Tag: Icon","dir":{"index":false},"feed":false,"sitemap":false,"blog":{"type":"category","name":"Icon","key":"tag"},"layout":"BlogCategory"},"headers":[],"git":{},"readingTime":{"minutes":0,"words":0},"filePathRelative":null,"excerpt":""}');export{e as data};

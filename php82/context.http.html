@@ -1,0 +1,597 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>HTTP context 的选项列表</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="context.socket.html">? 套接字上下文选项</a></li>
+      <li style="float: right;"><a href="context.ftp.html">FTP 上下文选项 ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="context.html">上下文（Context）选项和参数</a></li>
+    <li>HTTP context 的选项列表</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="context.http" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">HTTP context 选项</h1>
+  <p class="refpurpose"><span class="refname">HTTP context 选项</span> &mdash; <span class="dc-title">HTTP context 的选项列表</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-context.http-description">
+  <h3 class="title">说明</h3>
+  <p class="para">
+   提供给 <code class="literal">http://</code> 和 <code class="literal">https://</code> 传输协议的 context 选项。
+   transports.
+  </p>
+ </div>
+
+
+ <div class="refsect1 options" id="refsect1-context.http-options">
+  <h3 class="title">可选项</h3>
+  <p class="para">
+   <dl>
+    
+     <dt id="context.http.method">
+      <code class="parameter">method</code>
+      <span class="type">string</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       远程服务器支持的 <strong><code>GET</code></strong>，<strong><code>POST</code></strong> 或其它 HTTP 方法。
+      </p>
+      <p class="para">
+       默认值是 <strong><code>GET</code></strong>。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="context.http.header">
+      <code class="parameter">header</code>
+      <span class="type">array</span> 或 <span class="type">string</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       请求期间发送的附加 header 。此选项中的值将覆盖其他值
+       （如 <code class="literal">User-agent:</code>， <code class="literal">Host:</code> 和 
+        <code class="literal">Authentication:</code>)，
+        即使在执行 <code class="literal">Location:</code> 重定向时也是如此。
+        所以，如果启用了 <code class="parameter">follow_location</code>
+        就不建议设置 <code class="literal">Host:</code> header。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="context.http.user-agent">
+      <code class="parameter">user_agent</code>
+      <span class="type">string</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       要发送的 header <code class="literal">User-Agent:</code> 的值。如果在上面的 
+       <code class="literal">header</code> context 选项中没有指定 user-agent，此值将被使用。
+      </p>
+      <p class="para">
+       默认使用 <var class="filename">php.ini</var>  中设置的 <a href="filesystem.configuration.html#ini.user-agent" class="link">user_agent</a>。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="context.http.content">
+      <code class="parameter">content</code>
+      <span class="type">string</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       在 header 后面要发送的额外数据。通常使用POST或PUT请求。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="context.http.proxy">
+      <code class="parameter">proxy</code>
+      <span class="type">string</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       URI 指定的代理服务器的地址。(e.g.
+       <code class="literal">tcp://proxy.example.com:5100</code>).
+      </p>
+     </dd>
+
+    
+    
+     <dt id="context.http.request-fulluri">
+      <code class="parameter">request_fulluri</code>
+      <span class="type">bool</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       当设置为 <strong><code>true</code></strong> 时，在构建请求时将使用整个 URI 。(例如：
+       <code class="literal">GET http://www.example.com/path/to/file.html HTTP/1.0</code>)。
+       虽然这是一个非标准的请求格式，但某些代理服务器需要它。
+      </p>
+      <p class="para">
+       默认值是 <strong><code>false</code></strong>.
+      </p>
+     </dd>
+
+    
+    
+     <dt id="context.http.follow-location">
+      <code class="parameter">follow_location</code>
+      <span class="type">int</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       跟随 <code class="literal">Location</code> header 的重定向。设置为 <code class="literal">0</code> 以禁用。
+      </p>
+      <p class="para">
+       默认值是 <code class="literal">1</code>。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="context.http.max-redirects">
+      <code class="parameter">max_redirects</code>
+      <span class="type">int</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       跟随重定向的最大次数。值为 <code class="literal">1</code> 或更少则意味不跟随重定向。
+      </p>
+      <p class="para">
+       默认值是 <code class="literal">20</code>。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="context.http.protocol-version">
+      <code class="parameter">protocol_version</code>
+      <span class="type">float</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       HTTP 协议版本。
+      </p>
+      <p class="para">
+       PHP 8.0.0 起默认值是 <code class="literal">1.1</code>。在此之前默认值是 <code class="literal">1.0</code>。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="context.http.timeout">
+      <code class="parameter">timeout</code>
+      <span class="type">float</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       读取超时时间，单位为秒（s），用 <span class="type">float</span> 指定(e.g. <code class="literal">10.5</code>)。
+      </p>
+      <p class="para">
+       默认使用 <var class="filename">php.ini</var> 中设置的 <a href="filesystem.configuration.html#ini.default-socket-timeout" class="link">default_socket_timeout</a>。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="context.http.ignore-errors">
+      <code class="parameter">ignore_errors</code>
+      <span class="type">bool</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       即使是故障状态码依然获取内容。
+      </p>
+      <p class="para">
+       默认值为 <strong><code>false</code></strong>.
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-context.http-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="example-828">
+    <p><strong>Example #1 获取一个页面并发送 POST 数据</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />$postdata </span><span style="color: #007700">= </span><span style="color: #0000BB">http_build_query</span><span style="color: #007700">(<br />    array(<br />        </span><span style="color: #DD0000">'var1' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'some content'</span><span style="color: #007700">,<br />        </span><span style="color: #DD0000">'var2' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'doh'<br />    </span><span style="color: #007700">)<br />);<br /><br /></span><span style="color: #0000BB">$opts </span><span style="color: #007700">= array(</span><span style="color: #DD0000">'http' </span><span style="color: #007700">=&gt;<br />    array(<br />        </span><span style="color: #DD0000">'method'  </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'POST'</span><span style="color: #007700">,<br />        </span><span style="color: #DD0000">'header'  </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'Content-type: application/x-www-form-urlencoded'</span><span style="color: #007700">,<br />        </span><span style="color: #DD0000">'content' </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">$postdata<br />    </span><span style="color: #007700">)<br />);<br /><br /></span><span style="color: #0000BB">$context </span><span style="color: #007700">= </span><span style="color: #0000BB">stream_context_create</span><span style="color: #007700">(</span><span style="color: #0000BB">$opts</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">file_get_contents</span><span style="color: #007700">(</span><span style="color: #DD0000">'http://example.com/submit.php'</span><span style="color: #007700">, </span><span style="color: #0000BB">false</span><span style="color: #007700">, </span><span style="color: #0000BB">$context</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="example-830">
+    <p><strong>Example #2 忽略重定向并获取 header 和内容</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />$url </span><span style="color: #007700">= </span><span style="color: #DD0000">"http://www.example.org/header.php"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$opts </span><span style="color: #007700">= array(</span><span style="color: #DD0000">'http' </span><span style="color: #007700">=&gt;<br />    array(<br />        </span><span style="color: #DD0000">'method' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'GET'</span><span style="color: #007700">,<br />        </span><span style="color: #DD0000">'max_redirects' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'0'</span><span style="color: #007700">,<br />        </span><span style="color: #DD0000">'ignore_errors' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'1'<br />    </span><span style="color: #007700">)<br />);<br /><br /></span><span style="color: #0000BB">$context </span><span style="color: #007700">= </span><span style="color: #0000BB">stream_context_create</span><span style="color: #007700">(</span><span style="color: #0000BB">$opts</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$stream </span><span style="color: #007700">= </span><span style="color: #0000BB">fopen</span><span style="color: #007700">(</span><span style="color: #0000BB">$url</span><span style="color: #007700">, </span><span style="color: #DD0000">'r'</span><span style="color: #007700">, </span><span style="color: #0000BB">false</span><span style="color: #007700">, </span><span style="color: #0000BB">$context</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// header 信息和 stream 的元数据一样<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">stream_get_meta_data</span><span style="color: #007700">(</span><span style="color: #0000BB">$stream</span><span style="color: #007700">));<br /><br /></span><span style="color: #FF8000">// $url 的实际数据<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">stream_get_contents</span><span style="color: #007700">(</span><span style="color: #0000BB">$stream</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">fclose</span><span style="color: #007700">(</span><span style="color: #0000BB">$stream</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-context.http-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <strong>底层 socket stream 上下文选项</strong><br />
+   <span class="simpara">
+    Additional context options may be supported by the
+    <a href="transports.inet.html" class="link">underlying transport</a>
+    For <code class="literal">http://</code> streams, refer to context
+    options for the <code class="literal">tcp://</code> transport.  For
+    <code class="literal">https://</code> streams, refer to context options
+    for the <code class="literal">ssl://</code> transport.
+   </span>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <strong>HTTP 状态行</strong><br />
+   <span class="simpara">
+    When this stream wrapper follows a redirect, the
+    <code class="literal">wrapper_data</code> returned by
+    <span class="function"><a href="function.stream-get-meta-data.html" class="function">stream_get_meta_data()</a></span> might not necessarily contain
+    the HTTP status line that actually applies to the content data at index
+    <code class="literal">0</code>.
+   </span>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+array (
+  &#039;wrapper_data&#039; =&gt;
+  array (
+    0 =&gt; &#039;HTTP/1.0 301 Moved Permanently&#039;,
+    1 =&gt; &#039;Cache-Control: no-cache&#039;,
+    2 =&gt; &#039;Connection: close&#039;,
+    3 =&gt; &#039;Location: http://example.com/foo.jpg&#039;,
+    4 =&gt; &#039;HTTP/1.1 200 OK&#039;,
+    ...
+</pre></div>
+   </div>
+   <span class="simpara">
+    第一个请求返回 <code class="literal">301</code> （永久重定向），
+    因此 stream 包装器自动跟随重定向到获得 <code class="literal">200</code> 
+    响应（index = <code class="literal">4</code>）。
+   </span>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-context.http-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><a href="wrappers.http.html" class="xref">http://</a></li>
+    <li class="member"><a href="context.socket.html" class="xref">套接字上下文选项</a></li>
+    <li class="member"><a href="context.ssl.html" class="xref">SSL 上下文选项</a></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="125832""></a>
+  <div class="note">
+   <strong class="user">ASchmidt at Anamera dot net</strong>
+   <a href="#125832" class="date">16-Feb-2021 02:51</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+With the default of <br />
+<br />
+&nbsp;&nbsp;&nbsp; 'follow_location'&nbsp;&nbsp; =&gt;&nbsp; 1<br />
+<br />
+be certain NEVER include a "Host:" header in the 'header' array.<br />
+<br />
+If the host is set to "mydomain.com", and that web site has a (quite common) redirect to "www.mydomain.com", then the initial request to "<a href="http://mydomain.com" rel="nofollow" target="_blank">http://mydomain.com</a>" will get the expected response of:<br />
+<br />
+HTTP/1.1 301 Moved Permanently<br />
+Location: <a href="http://www.mydomain.com/" rel="nofollow" target="_blank">http://www.mydomain.com/</a><br />
+<br />
+However, the follow-up request does NOT replace the original "host" header with the new "location" value, as one would expect. Consequently each "follow-location" request will again be served by the original host of "<a href="http://mydomain.com" rel="nofollow" target="_blank">http://mydomain.com</a>", and continue the redirect loop until 'max_redirects' has been exhausted.<br />
+<br />
+(For details: https://bugs.php.net/bug.php?id=77889)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="121763""></a>
+  <div class="note">
+   <strong class="user">daniel.peder (a) gmail.com</strong>
+   <a href="#121763" class="date">16-Oct-2017 06:55</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+note that both http and https transports require the same context name http<br />
+<br />
+// OK example:<br />
+// this will work as expected<br />
+// note the url with https but context with http<br />
+$correct_data = file_get_contents('https://example.com', false, stream_context_create(array('http' =&gt; array(...))));<br />
+<br />
+// INVALID example:<br />
+// this will not work, the context will be ignored<br />
+// note the url with https also context with https<br />
+$correct_data = file_get_contents('https://example.com', false, stream_context_create(array('https' =&gt; array(...))));</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="121762""></a>
+  <div class="note">
+   <strong class="user">daniel dot peder at gmail dot com</strong>
+   <a href="#121762" class="date">16-Oct-2017 06:50</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+note that for both http and https protocols require the same 'http' context keyword:<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="comment">// CORRECT example:<br />
+// this will work as expected<br />
+// note the url with https but context with http<br />
+</span><span class="default">$correct_data </span><span class="keyword">= </span><span class="default">file_get_contents</span><span class="keyword">(</span><span class="string">'https://example.com'</span><span class="keyword">, </span><span class="default">false</span><span class="keyword">, </span><span class="default">stream_context_create</span><span class="keyword">(array(</span><span class="string">'http' </span><span class="keyword">=&gt; array(...))));<br />
+<br />
+</span><span class="comment">// INVALID example:<br />
+// this will not work, the context will be ignored<br />
+// note the url with https also context with https<br />
+</span><span class="default">$correct_data </span><span class="keyword">= </span><span class="default">file_get_contents</span><span class="keyword">(</span><span class="string">'https://example.com'</span><span class="keyword">, </span><span class="default">false</span><span class="keyword">, </span><span class="default">stream_context_create</span><span class="keyword">(array(</span><span class="string">'https' </span><span class="keyword">=&gt; array(...))));</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="121671""></a>
+  <div class="note">
+   <strong class="user">aruntechguy at outlook dot com</strong>
+   <a href="#121671" class="date">22-Sep-2017 02:50</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you want to use Basic Auth while using get_headers(), use stream_context options below. <br />
+<br />
+I am using HEAD method here, but please feel free to use GET also.<br />
+<br />
+<span class="default">&lt;?php<br />
+$targetUrl </span><span class="keyword">= </span><span class="string">'http or https target url here'</span><span class="keyword">;<br />
+</span><span class="default">$basicAuth </span><span class="keyword">= </span><span class="default">base64_encode</span><span class="keyword">(</span><span class="string">'username:password'</span><span class="keyword">);<br />
+<br />
+</span><span class="default">stream_context_set_default</span><span class="keyword">(<br />
+&nbsp;&nbsp;&nbsp; [<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'http' </span><span class="keyword">=&gt; [<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'method' </span><span class="keyword">=&gt; </span><span class="string">'HEAD'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'header' </span><span class="keyword">=&gt; </span><span class="string">'Authorization: Basic ' </span><span class="keyword">. </span><span class="default">$basicAuth<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">]<br />
+&nbsp;&nbsp;&nbsp; ]<br />
+);<br />
+</span><span class="default">$result </span><span class="keyword">= </span><span class="default">get_headers</span><span class="keyword">(</span><span class="default">$targetUrl</span><span class="keyword">);<br />
+<br />
+</span><span class="default">print_r</span><span class="keyword">(</span><span class="default">$result</span><span class="keyword">);</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="121470""></a>
+  <div class="note">
+   <strong class="user">ywarnier at beeznest dot org</strong>
+   <a href="#121470" class="date">02-Aug-2017 08:39</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Note that setting request_fulluri to true will *change* the value of $_SERVER['REQUEST_URI] on the receiving end (from /abc.php to <a href="http://domain.com/abc.php" rel="nofollow" target="_blank">http://domain.com/abc.php</a>).</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="117092""></a>
+  <div class="note">
+   <strong class="user">jay</strong>
+   <a href="#117092" class="date">14-Apr-2015 01:32</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Remember to match content with Content-type:<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+$data </span><span class="keyword">= array(<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'var1' </span><span class="keyword">=&gt; </span><span class="string">'some content'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'var2' </span><span class="keyword">=&gt; </span><span class="string">'doh'<br />
+</span><span class="keyword">);<br />
+<br />
+</span><span class="default">$opts </span><span class="keyword">= array(</span><span class="string">'http' </span><span class="keyword">=&gt;<br />
+&nbsp;&nbsp;&nbsp; array(<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'method'&nbsp; </span><span class="keyword">=&gt; </span><span class="string">'POST'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'header'&nbsp; </span><span class="keyword">=&gt; </span><span class="string">'Content-type: application/json'</span><span class="keyword">,&nbsp; </span><span class="comment">// here...<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'content' </span><span class="keyword">=&gt; </span><span class="default">json_encode</span><span class="keyword">(</span><span class="default">$data</span><span class="keyword">)&nbsp; </span><span class="comment">// and here.<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">)<br />
+);<br />
+<br />
+. . .<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="114867""></a>
+  <div class="note">
+   <strong class="user">nate</strong>
+   <a href="#114867" class="date">17-Apr-2014 03:19</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Note that if you set the protocol_version option to 1.1 and the server you are requesting from is configured to use keep-alive connections, the function (fopen, file_get_contents, etc.) will "be slow" and take a long time to complete. This is a feature of the HTTP 1.1 protocol you are unlikely to use with stream contexts in PHP.<br />
+<br />
+Simply add a "Connection: close" header to the request to eliminate the keep-alive timeout:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="comment">// php 5.4 : array syntax and header option with array value<br />
+</span><span class="default">$data </span><span class="keyword">= </span><span class="default">file_get_contents</span><span class="keyword">(</span><span class="string">'<a href="http://www.example.com/" rel="nofollow" target="_blank">http://www.example.com/</a>'</span><span class="keyword">, </span><span class="default">null</span><span class="keyword">, </span><span class="default">stream_context_create</span><span class="keyword">([<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'http' </span><span class="keyword">=&gt; [<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'protocol_version' </span><span class="keyword">=&gt; </span><span class="default">1.1</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'header'&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">=&gt; [<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'Connection: close'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; ],<br />
+&nbsp;&nbsp;&nbsp; ],<br />
+]));<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="114314""></a>
+  <div class="note">
+   <strong class="user">chris</strong>
+   <a href="#114314" class="date">06-Feb-2014 06:14</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I had quite a bit of trouble trying to make a request with fopen through a proxy to a secure url.&nbsp; I kept getting a 400 Bad Request back from the remote host.&nbsp; It was receiving the proxy url as the SNI host.&nbsp; In order to get around this I had to explicity set the SNI host to the domain I was trying to reach.&nbsp; It's apparently the issue outlined in this bug: <br />
+<br />
+https://bugs.php.net/bug.php?id=63519<br />
+<br />
+<span class="default">&lt;?php<br />
+$domain </span><span class="keyword">= </span><span class="default">parse_url</span><span class="keyword">(</span><span class="default">$file</span><span class="keyword">, </span><span class="default">PHP_URL_HOST</span><span class="keyword">);<br />
+</span><span class="default">$proxy_string </span><span class="keyword">= </span><span class="string">"tcp://" </span><span class="keyword">. </span><span class="default">WP_PROXY_HOST&nbsp; </span><span class="keyword">. </span><span class="string">":" </span><span class="keyword">. </span><span class="default">WP_PROXY_PORT</span><span class="keyword">;<br />
+</span><span class="default">$opts </span><span class="keyword">= array( <br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'http' </span><span class="keyword">=&gt; array( </span><span class="string">'proxy' </span><span class="keyword">=&gt; </span><span class="default">$proxy_string </span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'ssl' </span><span class="keyword">=&gt; array( </span><span class="string">'SNI_enabled' </span><span class="keyword">=&gt; </span><span class="default">true</span><span class="keyword">, </span><span class="string">'SNI_server_name' </span><span class="keyword">=&gt; </span><span class="default">$domain</span><span class="keyword">));<br />
+</span><span class="default">$context </span><span class="keyword">= </span><span class="default">stream_context_create</span><span class="keyword">(</span><span class="default">$opts</span><span class="keyword">);<br />
+</span><span class="default">$handle </span><span class="keyword">= </span><span class="default">fopen</span><span class="keyword">( </span><span class="default">$file</span><span class="keyword">, </span><span class="string">'r'</span><span class="keyword">, </span><span class="default">false</span><span class="keyword">, </span><span class="default">$context </span><span class="keyword">);<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="110449""></a>
+  <div class="note">
+   <strong class="user">vchampion at gmail dot com</strong>
+   <a href="#110449" class="date">23-Oct-2012 01:41</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you use the proxy server and encounter an error "fopen(<a href="http://example.com" rel="nofollow" target="_blank">http://example.com</a>): failed to open stream: HTTP request failed! HTTP/1.0 400 Bad Request" note that in many situations you need also set the parameter "request_fulluri" to "true" in your stream options. Without this option the php script sends the empty request to the server as "GET / HTTP/0.0" and the proxy server replies to it with the "HTTP 400" error. 
+<br />
+
+<br />
+For example (working sample): 
+<br />
+<span class="default">&lt;?php
+<br />
+$stream </span><span class="keyword">= </span><span class="default">stream_context_create</span><span class="keyword">(Array(</span><span class="string">"http" </span><span class="keyword">=&gt; Array(</span><span class="string">"method"&nbsp; </span><span class="keyword">=&gt; </span><span class="string">"GET"</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"timeout" </span><span class="keyword">=&gt; </span><span class="default">20</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"header"&nbsp; </span><span class="keyword">=&gt; </span><span class="string">"User-agent: Myagent"</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"proxy"&nbsp;&nbsp; </span><span class="keyword">=&gt; </span><span class="string">"tcp://my-proxy.localnet:3128"</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'request_fulluri' </span><span class="keyword">=&gt; </span><span class="default">True </span><span class="comment">/* without this option we get an HTTP error! */
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">)));
+<br />
+
+<br />
+if ( </span><span class="default">$fp </span><span class="keyword">= </span><span class="default">fopen</span><span class="keyword">(</span><span class="string">"<a href="http://example.com" rel="nofollow" target="_blank">http://example.com</a>"</span><span class="keyword">, </span><span class="string">'r'</span><span class="keyword">, </span><span class="default">false</span><span class="keyword">, </span><span class="default">$stream</span><span class="keyword">) ) {
+<br />
+&nbsp;&nbsp;&nbsp; print </span><span class="string">"well done"</span><span class="keyword">;
+<br />
+}
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+P&gt;S&gt; PHP 5.3.17</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="101933""></a>
+  <div class="note">
+   <strong class="user">gourav sarkar</strong>
+   <a href="#101933" class="date">18-Jan-2011 08:09</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+watch your case when using methods (POST and GET)...it must be always uppercase. in case of you write it in lower case it wont work.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

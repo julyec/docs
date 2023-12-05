@@ -1,0 +1,413 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>将数组中的记录插入到表</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.pg-convert.html">? pg_convert</a></li>
+      <li style="float: right;"><a href="function.pg-copy-to.html">pg_copy_to ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.pgsql.html">PostgreSQL 函数</a></li>
+    <li>将数组中的记录插入到表</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.pg-copy-from" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">pg_copy_from</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.2.0, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">pg_copy_from</span> &mdash; <span class="dc-title">
+   将数组中的记录插入到表
+  </span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.pg-copy-from-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>pg_copy_from</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><a href="class.pgsql-connection.html" class="type PgSql\Connection">PgSql\Connection</a></span> <code class="parameter">$connection</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$table_name</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">array</span> <code class="parameter">$rows</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$separator</code><span class="initializer"> = &quot;\t&quot;</span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">string</span> <code class="parameter">$null_as</code><span class="initializer"> = &quot;\\\\N&quot;</span></span><br>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>pg_copy_from()</strong></span> 将 <code class="parameter">rows</code> 插入记录到表中。在内部发出
+   <code class="literal">COPY FROM</code> 命令以插入记录。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.pg-copy-from-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">connection</code></dt>
+
+     <dd>
+
+      <p class="para"><span class="classname"><a href="class.pgsql-connection.html" class="classname">PgSql\Connection</a></span> 实例。</p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">table_name</code></dt>
+
+     <dd>
+
+      <p class="para">
+       复制 <code class="parameter">rows</code> 到其中的表名。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">rows</code></dt>
+
+     <dd>
+
+      <p class="para">
+       要复制 <span class="type">array</span> 中的数据到 <code class="parameter">table_name</code>。<code class="parameter">rows</code>
+       中的每个值都成为 <code class="parameter">table_name</code> 中的一行。<code class="parameter">rows</code>
+       中的每个值都应该用字符串分割以插入到每个字段。值应该换行终止。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">separator</code></dt>
+
+     <dd>
+
+      <p class="para">
+       <code class="parameter">rows</code> 的每个元素分割为每个字段的值的标记。默认为 <code class="literal">\t</code>。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">null_as</code></dt>
+
+     <dd>
+
+      <p class="para">
+       SQL <code class="literal">NULL</code> 值在 <code class="parameter">rows</code> 中的表示方式。默认为 <code class="literal">\\N</code>（<code class="literal">&quot;\\\\N&quot;</code>）。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.pg-copy-from-returnvalues">
+  <h3 class="title">返回值</h3>
+   <p class="para">
+    成功时返回 <strong><code>true</code></strong>， 或者在失败时返回 <strong><code>false</code></strong>。
+   </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.pg-copy-from-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+ <td>8.1.0</td>
+ <td>
+  现在 <code class="parameter">connection</code> 参数接受 <span class="classname"><a href="class.pgsql-connection.html" class="classname">PgSql\Connection</a></span>
+  实例，之前接受 <a href="language.types.resource.html" class="link">资源(resource)</a>。
+ </td>
+</tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.pg-copy-from-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="example-3834">
+    <p><strong>Example #1 <span class="function"><strong>pg_copy_from()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />   $db </span><span style="color: #007700">= </span><span style="color: #0000BB">pg_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">"dbname=publisher"</span><span style="color: #007700">) or die(</span><span style="color: #DD0000">"Could not connect"</span><span style="color: #007700">);<br />   <br />   </span><span style="color: #0000BB">$rows </span><span style="color: #007700">= </span><span style="color: #0000BB">pg_copy_to</span><span style="color: #007700">(</span><span style="color: #0000BB">$db</span><span style="color: #007700">, </span><span style="color: #0000BB">$table_name</span><span style="color: #007700">);<br />   <br />   </span><span style="color: #0000BB">pg_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$db</span><span style="color: #007700">, </span><span style="color: #DD0000">"DELETE FROM </span><span style="color: #0000BB">$table_name</span><span style="color: #DD0000">"</span><span style="color: #007700">);<br />   <br />   </span><span style="color: #0000BB">pg_copy_from</span><span style="color: #007700">(</span><span style="color: #0000BB">$db</span><span style="color: #007700">, </span><span style="color: #0000BB">$table_name</span><span style="color: #007700">, </span><span style="color: #0000BB">$rows</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div> 
+  </p>
+ </div>
+
+  
+ <div class="refsect1 seealso" id="refsect1-function.pg-copy-from-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.pg-copy-to.html" class="function" rel="rdfs-seeAlso">pg_copy_to()</a> - 将表复制到数组</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="128100""></a>
+  <div class="note">
+   <strong class="user">Rainer Perske</strong>
+   <a href="#128100" class="date">08-Jan-2023 09:25</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+To solve the problem of how many backslashes to use for the parameters $separator and $null_as: The backslashes are interpreted twice, first by PHP and then by PostgreSQL. So write four backslashes to indicate one backslash in the input data. So both '\\\\N' and as "\\\\N" become NULL AS E'\\N' meaning the same as NULL AS '\N' in the internally used SQL statement.<br />
+<br />
+The loaded input data must be backslash-escaped. According to the PostgreSQL documentation, you can use the following escape sequences:<br />
+<br />
+\\ = Backslash (ASCII 92)<br />
+\b = Backspace (ASCII 8)<br />
+\t = Tab (ASCII 9)<br />
+\n = Newline (ASCII 10)<br />
+\v = Vertical tab (ASCII 11)<br />
+\f = Form feed (ASCII 12)<br />
+\r = Carriage return (ASCII 13)<br />
+\000 (Backslash followed by one to three octal digits) = the byte with that numeric code<br />
+\x00 (Backslash x followed by one or two hex digits) = the byte with that numeric code<br />
+<br />
+With the default setting, a data field containing only \N (one non-escaped backslash and an N) indicates a NULL value. This default value \N has been chosen because it does not collide with properly encoded data.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125228""></a>
+  <div class="note">
+   <strong class="user">smcbride at msn dot com</strong>
+   <a href="#125228" class="date">29-Jul-2020 05:03</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+When using this function, don't get bit by the double quote (") vs. single quote (') differences.&nbsp; It is a small thing, but the error messaging is misleading.&nbsp; If you use a single quote, you will see the \t separated values all try to be inserted into the first field.<br />
+<br />
+Small consideration, but will save someone who is working late and can't get these functions to work.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="124002""></a>
+  <div class="note">
+   <strong class="user">karlo dot petravic at hotmail dot com</strong>
+   <a href="#124002" class="date">02-Jul-2019 08:20</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+As table name you can also specify columns you want imported.<br />
+<br />
+Will import all columns:<br />
+<span class="default">&lt;?php<br />
+pg_copy_from</span><span class="keyword">(</span><span class="default">$db</span><span class="keyword">, </span><span class="string">'cpm.ics'</span><span class="keyword">, </span><span class="default">$rows</span><span class="keyword">);<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Will import only specified columns:<br />
+<span class="default">&lt;?php<br />
+pg_copy_from</span><span class="keyword">(</span><span class="default">$db</span><span class="keyword">, </span><span class="string">'cpm.ics (type, product, date, count, amount)'</span><span class="keyword">, </span><span class="default">$rows</span><span class="keyword">);<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="114479""></a>
+  <div class="note">
+   <strong class="user">Dave</strong>
+   <a href="#114479" class="date">25-Feb-2014 08:26</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Default is "\\\N" not "\\N" at least in php 5.4<br />
+<br />
+pg_copy_from($db, $table_name, "\t", "\\\N")</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="107266""></a>
+  <div class="note">
+   <strong class="user">Dave</strong>
+   <a href="#107266" class="date">26-Jan-2012 10:40</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+As of postgresql 9.1 "standard_conforming_strings" is set to on<br />
+<br />
+This will not work anymore<br />
+<span class="default">&lt;?php<br />
+$copy_message </span><span class="keyword">= </span><span class="string">"1\t\\N\t300"</span><span class="keyword">;<br />
+</span><span class="default">pg_copy_from</span><span class="keyword">(</span><span class="default">$db</span><span class="keyword">, </span><span class="string">"message"</span><span class="keyword">, </span><span class="default">$copy_message</span><span class="keyword">);<br />
+</span><span class="default">?&gt;<br />
+</span>result will be a "N" in that field. if the field allow text that is else it will fail to insert the post.<br />
+<br />
+simple fix<br />
+<span class="default">&lt;?php<br />
+$copy_message </span><span class="keyword">= </span><span class="string">"1\t\\NULL\t300"</span><span class="keyword">;<br />
+</span><span class="default">pg_copy_from</span><span class="keyword">(</span><span class="default">$db</span><span class="keyword">, </span><span class="string">"message"</span><span class="keyword">, </span><span class="default">$copy_message</span><span class="keyword">, </span><span class="string">"\t"</span><span class="keyword">,</span><span class="string">"\\NULL"</span><span class="keyword">);<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="102508""></a>
+  <div class="note">
+   <strong class="user">Dave</strong>
+   <a href="#102508" class="date">18-Feb-2011 02:39</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Fix for "Copy command failed: ERROR: literal carriage return
+<br />
+found in data" or 
+<br />
+"Copy command failed: ERROR: missing data for column
+<br />
+"message" CONTEXT: COPY message, line 1:"
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+$message </span><span class="keyword">= </span><span class="string">"HEJ\rHEJ\nHEJ\r\nHEJ\n\rHEJ\tHELLO\\"</span><span class="keyword">;
+<br />
+
+<br />
+</span><span class="default">$message </span><span class="keyword">= </span><span class="default">addslashes</span><span class="keyword">(</span><span class="default">$message</span><span class="keyword">);
+<br />
+
+<br />
+</span><span class="default">$message </span><span class="keyword">= </span><span class="default">str_replace</span><span class="keyword">(
+<br />
+&nbsp; array(</span><span class="string">"\n"</span><span class="keyword">,</span><span class="string">"\r"</span><span class="keyword">,</span><span class="string">"\t"</span><span class="keyword">),
+<br />
+&nbsp; array(</span><span class="string">"\\n"</span><span class="keyword">,</span><span class="string">"\\r"</span><span class="keyword">,</span><span class="string">"\\t"</span><span class="keyword">),
+<br />
+&nbsp; </span><span class="default">$message</span><span class="keyword">);
+<br />
+
+<br />
+</span><span class="default">$copy_message </span><span class="keyword">= </span><span class="string">"1\t"</span><span class="keyword">. </span><span class="default">$message </span><span class="keyword">.</span><span class="string">"\t300"</span><span class="keyword">;
+<br />
+
+<br />
+</span><span class="default">pg_copy_from</span><span class="keyword">(</span><span class="default">$db</span><span class="keyword">, </span><span class="string">"message"</span><span class="keyword">, </span><span class="default">$copy_message</span><span class="keyword">);
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="91466""></a>
+  <div class="note">
+   <strong class="user">Anonymous</strong>
+   <a href="#91466" class="date">11-Jun-2009 03:08</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+see also: pg_put_line for a solution that does not require buffering of all the data to be copied,</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="77371""></a>
+  <div class="note">
+   <strong class="user">kapouer_php at melix dot org</strong>
+   <a href="#77371" class="date">26-Aug-2007 02:24</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+pg syntax is :<br />
+COPY test (cola, colb, colc) FROM stdin;<br />
+...<br />
+<br />
+this function doesn't let you in which order the columns are !</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="30487""></a>
+  <div class="note">
+   <strong class="user">vlad at php dot net</strong>
+   <a href="#30487" class="date">19-Mar-2003 01:38</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+By default NULL values are a backslash followed with capital N ("\\N"). <br />
+<br />
+Also, you can't insert entries with OIDs (I've added it to my TODO list though)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="25078""></a>
+  <div class="note">
+   <strong class="user">carl at thep.lu.se</strong>
+   <a href="#25078" class="date">10-Sep-2002 03:06</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Something needs to be said about the format of the array.<br />
+Judging by what I've seen, it's pretty much what you get<br />
+from loading a tab-separated file with file(). That is, the<br />
+lines are linefeed-terminated and there's no need to have<br />
+an extra line with "\.". On the other hand, when I try using this<br />
+command the connection to the server ends up in some odd<br />
+state and is then lost:<br />
+PHP Warning:&nbsp; U?S?o() query failed: server closed the connection unexpectedly<br />
+<br />
+I think it might be safer to use the lower-level function<br />
+pg_put_line() for now.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

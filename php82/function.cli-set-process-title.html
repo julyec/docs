@@ -1,0 +1,232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>Sets the process title</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.cli-get-process-title.html">? cli_get_process_title</a></li>
+      <li style="float: right;"><a href="function.dl.html">dl ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.info.html">PHP 选项/信息 函数</a></li>
+    <li>Sets the process title</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.cli-set-process-title" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">cli_set_process_title</h1>
+  <p class="verinfo">(PHP 5 &gt;= 5.5.0, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">cli_set_process_title</span> &mdash; <span class="dc-title">Sets the process title</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.cli-set-process-title-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>cli_set_process_title</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$title</code></span>): <span class="type">bool</span></div>
+
+
+  <p class="para rdfs-comment">
+   Sets the process title visible in tools such as <strong class="command">top</strong> and
+   <strong class="command">ps</strong>. This function is available only in
+   <a href="features.commandline.html" class="link">CLI</a> mode.
+  </p>
+
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.cli-set-process-title-parameters">
+  <h3 class="title">参数</h3>
+  <dl>
+   
+    <dt>
+<code class="parameter">title</code></dt>
+
+    <dd>
+
+     <p class="para">
+      The new title.
+     </p>
+    </dd>
+
+   
+  </dl>
+
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.cli-set-process-title-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   成功时返回 <strong><code>true</code></strong>， 或者在失败时返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 errors" id="refsect1-function.cli-set-process-title-errors">
+  <h3 class="title">错误／异常</h3>
+   
+  <p class="para">
+   An <strong><code>E_WARNING</code></strong> will be generated if the operating system
+   is unsupported.
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.cli-set-process-title-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="example-1106">
+    <p><strong>Example #1 <span class="function"><strong>cli_set_process_title()</strong></span> example</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$title </span><span style="color: #007700">= </span><span style="color: #DD0000">"My Amazing PHP Script"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$pid </span><span style="color: #007700">= </span><span style="color: #0000BB">getmypid</span><span style="color: #007700">(); </span><span style="color: #FF8000">// you can use this to see your process title in ps<br /><br /></span><span style="color: #007700">if (!</span><span style="color: #0000BB">cli_set_process_title</span><span style="color: #007700">(</span><span style="color: #0000BB">$title</span><span style="color: #007700">)) {<br />    echo </span><span style="color: #DD0000">"Unable to set process title for PID </span><span style="color: #0000BB">$pid</span><span style="color: #DD0000">...\n"</span><span style="color: #007700">;<br />    exit(</span><span style="color: #0000BB">1</span><span style="color: #007700">);<br />} else {<br />    echo </span><span style="color: #DD0000">"The process title '</span><span style="color: #0000BB">$title</span><span style="color: #DD0000">' for PID </span><span style="color: #0000BB">$pid</span><span style="color: #DD0000"> has been set for your process!\n"</span><span style="color: #007700">;<br />    </span><span style="color: #0000BB">sleep</span><span style="color: #007700">(</span><span style="color: #0000BB">5</span><span style="color: #007700">);<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 seealso" id="refsect1-function.cli-set-process-title-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.cli-get-process-title.html" class="function" rel="rdfs-seeAlso">cli_get_process_title()</a> - Returns the current process title</span></li>
+    <li class="member"><span class="function"><strong>setproctitle()</strong></span></li>
+   </ul>
+  </p>
+ </div>
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="126802""></a>
+  <div class="note">
+   <strong class="user">martin dot kratochvil at altnet dot cz</strong>
+   <a href="#126802" class="date">25-Jan-2022 10:12</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+cli_set_process_title() change name only for some process manager in linux. In fact this function change value appear in /proc/self/cmdline and not value in /proc/self/comm. This value in comm file is used as name in #ps or #pstree and other process manager.<br />
+<br />
+For changing proccess name completly in linux you could add after cli_set_process_title() this code:<br />
+<br />
+$f = fopen('/proc/self/comm','w');<br />
+if ($f) { fwrite($f, 'my-new-app-name'); fclose($f);</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125937""></a>
+  <div class="note">
+   <strong class="user">pitpat</strong>
+   <a href="#125937" class="date">17-Mar-2021 10:04</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+In Linux this command changes the title for commands like 'ps -a' it doesn't seem to work with 'top' or 'pkill'<br />
+<br />
+To change the short name (eg PHP) to something else you can use the below:<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+$strNewName</span><span class="keyword">=</span><span class="string">'myscript'</span><span class="keyword">;<br />
+<br />
+</span><span class="default">cli_set_process_name</span><span class="keyword">(</span><span class="default">$strNewName</span><span class="keyword">);<br />
+</span><span class="default">cli_set_process_title</span><span class="keyword">(</span><span class="default">$strNewName</span><span class="keyword">);<br />
+<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">cli_get_process_name</span><span class="keyword">());<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">cli_get_process_title</span><span class="keyword">());<br />
+<br />
+function </span><span class="default">cli_set_process_name</span><span class="keyword">(</span><span class="default">$strName</span><span class="keyword">)<br />
+{<br />
+&nbsp;&nbsp; </span><span class="default">file_put_contents</span><span class="keyword">(</span><span class="string">"/proc/"</span><span class="keyword">.</span><span class="default">getmypid</span><span class="keyword">().</span><span class="string">"/comm"</span><span class="keyword">,</span><span class="default">$strName</span><span class="keyword">);<br />
+}<br />
+<br />
+function </span><span class="default">cli_get_process_name</span><span class="keyword">()<br />
+{<br />
+&nbsp; return(</span><span class="default">trim</span><span class="keyword">(</span><span class="default">file_get_contents</span><span class="keyword">(</span><span class="string">"/proc/"</span><span class="keyword">.</span><span class="default">getmypid</span><span class="keyword">().</span><span class="string">"/comm"</span><span class="keyword">),</span><span class="string">"\r\n"</span><span class="keyword">));<br />
+}<br />
+<br />
+</span><span class="default">Note</span><span class="keyword">: </span><span class="default">The above will NOT work in Windows </span><span class="keyword">and </span><span class="default">may not work in all flavours of linux </span><span class="keyword">(</span><span class="default">I </span><span class="keyword">use </span><span class="default">Debian</span><span class="keyword">).</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="124360""></a>
+  <div class="note">
+   <strong class="user">Aurelien Marchand</strong>
+   <a href="#124360" class="date">01-Nov-2019 01:24</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Please note that the function might be inconsistent depending on your system.<br />
+<br />
+On 2 of my systems (CentOS 7.7 and Linux Mint 18.3), setting the title will work for ps but not for top.<br />
+<br />
+<span class="default">&lt;?php<br />
+cli_set_process_title</span><span class="keyword">(</span><span class="string">"sleeping-daemon"</span><span class="keyword">);<br />
+</span><span class="default">sleep</span><span class="keyword">(</span><span class="default">100</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">/*<br />
+&nbsp;*ps* returns<br />
+25072 pts/2&nbsp; S&nbsp; 0:00&nbsp;&nbsp; sleeping-daemon<br />
+<br />
+*top*&nbsp; returns<br />
+25072 aurelien&nbsp; 20&nbsp;&nbsp; 0&nbsp; 285848&nbsp; 23256&nbsp; 16856 S&nbsp;&nbsp; 0.0&nbsp; 0.3&nbsp;&nbsp; 0:00.01 php<br />
+<br />
+*/</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="121493""></a>
+  <div class="note">
+   <strong class="user">aaron dot mason+php at thats-too-much dot info</strong>
+   <a href="#121493" class="date">08-Aug-2017 04:07</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+In Windows, this function will set the Command Prompt window title, which is restored to the previous setting once the script finishes.&nbsp; If you need to do this in 5.5.X and below, you'll need to use system() to run the title command.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="114617""></a>
+  <div class="note">
+   <strong class="user">code at edoceo dot com</strong>
+   <a href="#114617" class="date">12-Mar-2014 07:14</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Setting proc title on PHP based daemons is pretty sweet.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

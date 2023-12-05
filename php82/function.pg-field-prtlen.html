@@ -1,0 +1,285 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>返回打印的长度</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.pg-field-num.html">? pg_field_num</a></li>
+      <li style="float: right;"><a href="function.pg-field-size.html">pg_field_size ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.pgsql.html">PostgreSQL 函数</a></li>
+    <li>返回打印的长度</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.pg-field-prtlen" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">pg_field_prtlen</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.2.0, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">pg_field_prtlen</span> &mdash; <span class="dc-title">返回打印的长度</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.pg-field-prtlen-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>pg_field_prtlen</strong></span>(<span class="methodparam"><span class="type"><a href="class.pgsql-result.html" class="type PgSql\Result">PgSql\Result</a></span> <code class="parameter">$result</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$row_number</code></span>, <span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">$field_name_or_number</code></span>): <span class="type">int</span></div>
+
+  <div class="methodsynopsis dc-description"><span class="methodname"><strong>pg_field_prtlen</strong></span>(<span class="methodparam"><span class="type"><a href="class.pgsql-result.html" class="type PgSql\Result">PgSql\Result</a></span> <code class="parameter">$result</code></span>, <span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">$field_name_or_number</code></span>): <span class="type">int</span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>pg_field_prtlen()</strong></span> 返回 PostgreSQL <code class="parameter">result</code>
+   中特定值的实际打印长度（字符数）。行编号从 0 开始。此函数将在出错时返回 <strong><code>false</code></strong>。
+  </p>
+  <p class="para">
+   <code class="parameter">field_name_or_number</code> 可以传递 <span class="type">int</span> 或 <span class="type">string</span>。如果它作为
+   <span class="type">int</span> 传递，PHP 将其视为字段号，否则视为字段名。
+  </p>
+  <p class="para">
+   请参阅 <span class="function"><a href="function.pg-field-name.html" class="function">pg_field_name()</a></span> 页面中给出的示例。
+  </p>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    本函数以前的名字为 <span class="function"><strong>pg_fieldprtlen()</strong></span>。
+   </p>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.pg-field-prtlen-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">result</code></dt>
+
+     <dd>
+
+      <p class="para"><span class="classname"><a href="class.pgsql-result.html" class="classname">PgSql\Result</a></span> 实例，由
+<span class="function"><a href="function.pg-query.html" class="function">pg_query()</a></span>、<span class="function"><a href="function.pg-query-params.html" class="function">pg_query_params()</a></span> 或者 <span class="function"><a href="function.pg-execute.html" class="function">pg_execute()</a></span>（等）返回。</p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">row</code></dt>
+
+     <dd>
+
+      <p class="para">
+       结果中的行号。行从 0 向上编号。如果省略，则获取当前行。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.pg-field-prtlen-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   字段打印的长度。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.pg-field-prtlen-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+ <td>8.1.0</td>
+ <td>
+  现在 <code class="parameter">result</code> 参数接受 <span class="classname"><a href="class.pgsql-result.html" class="classname">PgSql\Result</a></span>
+  实例，之前接受 <a href="language.types.resource.html" class="link">资源(resource)</a>。
+ </td>
+</tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.pg-field-prtlen-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="example-3874">
+    <p><strong>Example #1 获取字段的信息</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />  $dbconn </span><span style="color: #007700">= </span><span style="color: #0000BB">pg_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">"dbname=publisher"</span><span style="color: #007700">) or die(</span><span style="color: #DD0000">"Could not connect"</span><span style="color: #007700">);<br /><br />  </span><span style="color: #0000BB">$res </span><span style="color: #007700">= </span><span style="color: #0000BB">pg_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$dbconn</span><span style="color: #007700">, </span><span style="color: #DD0000">"select * from authors where author = 'Orwell'"</span><span style="color: #007700">);<br />  </span><span style="color: #0000BB">$i </span><span style="color: #007700">= </span><span style="color: #0000BB">pg_num_fields</span><span style="color: #007700">(</span><span style="color: #0000BB">$res</span><span style="color: #007700">);<br />  for (</span><span style="color: #0000BB">$j </span><span style="color: #007700">= </span><span style="color: #0000BB">0</span><span style="color: #007700">; </span><span style="color: #0000BB">$j </span><span style="color: #007700">&lt; </span><span style="color: #0000BB">$i</span><span style="color: #007700">; </span><span style="color: #0000BB">$j</span><span style="color: #007700">++) {<br />      echo </span><span style="color: #DD0000">"column </span><span style="color: #0000BB">$j</span><span style="color: #DD0000">\n"</span><span style="color: #007700">;<br />      </span><span style="color: #0000BB">$fieldname </span><span style="color: #007700">= </span><span style="color: #0000BB">pg_field_name</span><span style="color: #007700">(</span><span style="color: #0000BB">$res</span><span style="color: #007700">, </span><span style="color: #0000BB">$j</span><span style="color: #007700">);<br />      echo </span><span style="color: #DD0000">"fieldname: </span><span style="color: #0000BB">$fieldname</span><span style="color: #DD0000">\n"</span><span style="color: #007700">;<br />      echo </span><span style="color: #DD0000">"printed length: " </span><span style="color: #007700">. </span><span style="color: #0000BB">pg_field_prtlen</span><span style="color: #007700">(</span><span style="color: #0000BB">$res</span><span style="color: #007700">, </span><span style="color: #0000BB">$fieldname</span><span style="color: #007700">) . </span><span style="color: #DD0000">" characters\n"</span><span style="color: #007700">;<br />      echo </span><span style="color: #DD0000">"storage length: " </span><span style="color: #007700">. </span><span style="color: #0000BB">pg_field_size</span><span style="color: #007700">(</span><span style="color: #0000BB">$res</span><span style="color: #007700">, </span><span style="color: #0000BB">$j</span><span style="color: #007700">) . </span><span style="color: #DD0000">" bytes\n"</span><span style="color: #007700">;<br />      echo </span><span style="color: #DD0000">"field type: " </span><span style="color: #007700">. </span><span style="color: #0000BB">pg_field_type</span><span style="color: #007700">(</span><span style="color: #0000BB">$res</span><span style="color: #007700">, </span><span style="color: #0000BB">$j</span><span style="color: #007700">) . </span><span style="color: #DD0000">" \n\n"</span><span style="color: #007700">;<br />  }<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+column 0
+fieldname: author
+printed length: 6 characters
+storage length: -1 bytes
+field type: varchar 
+
+column 1
+fieldname: year
+printed length: 4 characters
+storage length: 2 bytes
+field type: int2 
+
+column 2
+fieldname: title
+printed length: 24 characters
+storage length: -1 bytes
+field type: varchar 
+</pre></div>
+    </div>
+   </div> 
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.pg-field-prtlen-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.pg-field-size.html" class="function" rel="rdfs-seeAlso">pg_field_size()</a> - 返回指定字段的内部存储大小</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="77347""></a>
+  <div class="note">
+   <strong class="user">djmaze@moocms</strong>
+   <a href="#77347" class="date">25-Aug-2007 05:01</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Or even easier to keep things simple on fetching<br />
+<br />
+SELECT a.attname AS name, t.typname AS type, a.attstorage AS i,<br />
+&nbsp;&nbsp;&nbsp; CASE WHEN a.attlen = -1 THEN a.atttypmod ELSE a.attlen END AS size<br />
+&nbsp;&nbsp;&nbsp; FROM pg_attribute a , pg_class c, pg_type t<br />
+&nbsp;&nbsp;&nbsp; WHERE c.relname = 'moo_members'<br />
+&nbsp;&nbsp;&nbsp; AND a.attrelid = c.oid AND a.atttypid = t.oid and a.attnum &gt; 0 and not a.attisdropped</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="73182""></a>
+  <div class="note">
+   <strong class="user">gregm at gxsnmp dot org</strong>
+   <a href="#73182" class="date">12-Feb-2007 08:11</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you update the query to this:<br />
+<br />
+$s = "SELECT a.attname AS name, t.typname AS type, a.attlen AS size, a.atttypmod AS len, a.attstorage AS i<br />
+&nbsp;&nbsp; FROM pg_attribute a , pg_class c, pg_type t<br />
+&nbsp;&nbsp; WHERE c.relname = '$TABLE'<br />
+&nbsp;&nbsp; AND a.attrelid = c.oid AND a.atttypid = t.oid and a.attnum &gt; 0 and not a.attisdropped";<br />
+<br />
+You get postgres to filter out the 'postgres' columns and get only your columns back.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="52016""></a>
+  <div class="note">
+   <strong class="user">r dot galovic at r-3 dot at</strong>
+   <a href="#52016" class="date">18-Apr-2005 01:54</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+mysql_field_len () function and more for postgres ...<br />
+<br />
+problems ...<br />
+* pg_field_prtlen ... gives the actual size of the field back (it shows the count of the content allready inside the field - not the possible max-len)<br />
+* pg_filed_size ... can't be used for varchar or bpchar fields <br />
+<br />
+...but there is a way to get the real-max-length of a field in postgreSQL via the system tables:<br />
+<br />
+//returns an array with infos of every field in the table (name, type, length, size)<br />
+function SQLConstructFieldsInfo($TABLE, $DBCON)<br />
+{<br />
+&nbsp;&nbsp;&nbsp; $s="SELECT a.attname AS name, t.typname AS type, a.attlen AS size, a.atttypmod AS len, a.attstorage AS i <br />
+&nbsp;&nbsp;&nbsp; FROM pg_attribute a , pg_class c, pg_type t <br />
+&nbsp;&nbsp;&nbsp; WHERE c.relname = '$TABLE'&nbsp; <br />
+&nbsp;&nbsp;&nbsp; AND a.attrelid = c.oid AND a.atttypid = t.oid";<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; if ($r = pg_query($DBCON,$s))<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $i=0;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; while ($q = pg_fetch_assoc($r))<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $a[$i]["type"]=$q["type"];<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $a[$i]["name"]=$q["name"];<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if($q["len"]&lt;0 &amp;&amp; $q["i"]!="x")<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // in case of digits if needed ... (+1 for negative values)<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $a[$i]["len"]=(strlen(pow(2,($q["size"]*8)))+1);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; else<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $a[$i]["len"]=$q["len"];<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; $a[$i]["size"]=$q["size"];<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $i++;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return $a;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; return null;<br />
+}<br />
+<br />
+// usage<br />
+$DBCON=pg_connect("host=YOUR-HOST port=YOUR-PORT dbname=YOUR-DB user=YOUR-USER password=YOUR-PASS");<br />
+$TABLE="YOUR-TABLENAME";<br />
+$RET=SQLConstructFieldsInfo($TABLE, $DBCON);<br />
+<br />
+$j = count($RET);<br />
+for ($i=0; $i &lt; $j; $i++)<br />
+{<br />
+&nbsp;&nbsp;&nbsp; echo "&lt;br&gt;$i name=".$RET[$i]["name"]." type=".$RET[$i]["type"]." length=".$RET[$i]["len"]." size=".$RET[$i]["size"]." bytes";<br />
+}</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

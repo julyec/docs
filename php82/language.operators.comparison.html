@@ -1,0 +1,845 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>比较运算符</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="language.operators.bitwise.html">? 位运算符</a></li>
+      <li style="float: right;"><a href="language.operators.errorcontrol.html">错误控制运算符 ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="language.operators.html">运算符</a></li>
+    <li>比较运算符</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="language.operators.comparison" class="sect1">
+   <h2 class="title">比较运算符</h2>
+   <p class="simpara">
+    比较运算符，如同它们名称所暗示的，允许对两个值进行比较。还可以参考
+    <a href="types.comparisons.html" class="link">PHP 类型比较表</a>看不同类型相互比较的例子。
+   </p>
+   <table class="doctable table">
+    <caption><strong>比较运算符</strong></caption>
+    
+     <thead>
+      <tr>
+       <th>例子</th>
+       <th>名称</th>
+       <th>结果</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>$a == $b</td>
+       <td>等于</td>
+       <td><strong><code>true</code></strong>，如果类型转换后 <var class="varname">$a</var> 等于 <var class="varname">$b</var>。</td>
+      </tr>
+
+      <tr>
+       <td>$a === $b</td>
+       <td>全等</td>
+       <td><strong><code>true</code></strong>，如果 <var class="varname">$a</var> 等于 <var class="varname">$b</var>，并且它们的类型也相同。</td>
+      </tr>
+
+      <tr>
+       <td>$a != $b</td>
+       <td>不等</td>
+       <td><strong><code>true</code></strong>，如果类型转换后 <var class="varname">$a</var> 不等于 <var class="varname">$b</var>。</td>
+      </tr>
+
+      <tr>
+       <td>$a &lt;&gt; $b</td>
+       <td>不等</td>
+       <td><strong><code>true</code></strong>，如果类型转换后 <var class="varname">$a</var> 不等于 <var class="varname">$b</var>。</td>
+      </tr>
+
+      <tr>
+       <td>$a !== $b</td>
+       <td>不全等</td>
+       <td><strong><code>true</code></strong>，如果 <var class="varname">$a</var> 不等于 <var class="varname">$b</var>，或者它们的类型不同。</td>
+      </tr>
+
+      <tr>
+       <td>$a &lt; $b</td>
+       <td>小与</td>
+       <td><strong><code>true</code></strong>，如果 <var class="varname">$a</var> 严格小于 <var class="varname">$b</var>。</td>
+      </tr>
+
+      <tr>
+       <td>$a &gt; $b</td>
+       <td>大于</td>
+       <td><strong><code>true</code></strong>，如果 <var class="varname">$a</var> 严格大于 <var class="varname">$b</var>。</td>
+      </tr>
+
+      <tr>
+       <td>$a &lt;= $b</td>
+       <td>小于等于</td>
+       <td><strong><code>true</code></strong>，如果 <var class="varname">$a</var> 小于或者等于 <var class="varname">$b</var>。</td>
+      </tr>
+
+      <tr>
+       <td>$a &gt;= $b</td>
+       <td>大于等于</td>
+       <td><strong><code>true</code></strong>，如果 <var class="varname">$a</var> 大于或者等于 <var class="varname">$b</var>。</td>
+      </tr>
+
+      <tr>
+       <td>$a &lt;=&gt; $b</td>
+       <td>太空船运算符（组合比较符）</td>
+       <td>
+        当<var class="varname">$a</var>小于、等于、大于 <var class="varname">$b</var>时
+        分别返回一个小于、等于、大于0的 <span class="type">int</span> 值。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+   <p class="para">
+    当两个操作对象都是
+    <a href="language.types.numeric-strings.html" class="link">数字字符串</a>，
+    或一个是数字另一个是
+    <a href="language.types.numeric-strings.html" class="link">数字字符串</a>，
+    就会自动按照数值进行比较。
+    此规则也适用于
+    <a href="control-structures.switch.html" class="link">switch</a> 语句。
+    当比较时用的是 <code class="literal">===</code> 或 <code class="literal">!==</code>，
+    则不会进行类型转换&mdash;&mdash;因为不仅要对比数值，还要对比类型。
+   </p>
+   <div class="warning"><strong class="warning">Warning</strong>
+   <p class="para">
+   PHP 8.0.0 之前，如果 <span class="type">string</span> 与数字或者数字字符串进行比较，
+   则在比较前会将 <span class="type">string</span> 转化为数字。
+   在如下示例中会出现不可预料的结果：
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">0 </span><span style="color: #007700">== </span><span style="color: #DD0000">"a"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #DD0000">"1" </span><span style="color: #007700">== </span><span style="color: #DD0000">"01"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #DD0000">"10" </span><span style="color: #007700">== </span><span style="color: #DD0000">"1e1"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">100 </span><span style="color: #007700">== </span><span style="color: #DD0000">"1e2"</span><span style="color: #007700">);<br /><br />switch (</span><span style="color: #DD0000">"a"</span><span style="color: #007700">) {<br />case </span><span style="color: #0000BB">0</span><span style="color: #007700">:<br />    echo </span><span style="color: #DD0000">"0"</span><span style="color: #007700">;<br />    break;<br />case </span><span style="color: #DD0000">"a"</span><span style="color: #007700">:<br />    echo </span><span style="color: #DD0000">"a"</span><span style="color: #007700">;<br />    break;<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+      <p class="para">以上示例在 PHP 7 中的输出：</p>
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+bool(true)
+bool(true)
+bool(true)
+bool(true)
+0
+</pre></div>
+      </div>
+      <p class="para">以上示例在 PHP 8 中的输出：</p>
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+bool(false)
+bool(true)
+bool(true)
+bool(true)
+a
+</pre></div>
+      </div>   
+     </div>
+    </p>
+   </div>
+
+   <p class="para">
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// 整数<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">1 </span><span style="color: #007700">&lt;=&gt; </span><span style="color: #0000BB">1</span><span style="color: #007700">; </span><span style="color: #FF8000">// 0<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">1 </span><span style="color: #007700">&lt;=&gt; </span><span style="color: #0000BB">2</span><span style="color: #007700">; </span><span style="color: #FF8000">// -1<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">2 </span><span style="color: #007700">&lt;=&gt; </span><span style="color: #0000BB">1</span><span style="color: #007700">; </span><span style="color: #FF8000">// 1<br /><br />// 浮点数<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">1.5 </span><span style="color: #007700">&lt;=&gt; </span><span style="color: #0000BB">1.5</span><span style="color: #007700">; </span><span style="color: #FF8000">// 0<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">1.5 </span><span style="color: #007700">&lt;=&gt; </span><span style="color: #0000BB">2.5</span><span style="color: #007700">; </span><span style="color: #FF8000">// -1<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">2.5 </span><span style="color: #007700">&lt;=&gt; </span><span style="color: #0000BB">1.5</span><span style="color: #007700">; </span><span style="color: #FF8000">// 1<br /><br />// 字符串<br /></span><span style="color: #007700">echo </span><span style="color: #DD0000">"a" </span><span style="color: #007700">&lt;=&gt; </span><span style="color: #DD0000">"a"</span><span style="color: #007700">; </span><span style="color: #FF8000">// 0<br /></span><span style="color: #007700">echo </span><span style="color: #DD0000">"a" </span><span style="color: #007700">&lt;=&gt; </span><span style="color: #DD0000">"b"</span><span style="color: #007700">; </span><span style="color: #FF8000">// -1<br /></span><span style="color: #007700">echo </span><span style="color: #DD0000">"b" </span><span style="color: #007700">&lt;=&gt; </span><span style="color: #DD0000">"a"</span><span style="color: #007700">; </span><span style="color: #FF8000">// 1<br /><br /></span><span style="color: #007700">echo </span><span style="color: #DD0000">"a" </span><span style="color: #007700">&lt;=&gt; </span><span style="color: #DD0000">"aa"</span><span style="color: #007700">; </span><span style="color: #FF8000">// -1<br /></span><span style="color: #007700">echo </span><span style="color: #DD0000">"zz" </span><span style="color: #007700">&lt;=&gt; </span><span style="color: #DD0000">"aa"</span><span style="color: #007700">; </span><span style="color: #FF8000">// 1<br /><br />// 数组<br /></span><span style="color: #007700">echo [] &lt;=&gt; []; </span><span style="color: #FF8000">// 0<br /></span><span style="color: #007700">echo [</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">, </span><span style="color: #0000BB">3</span><span style="color: #007700">] &lt;=&gt; [</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">, </span><span style="color: #0000BB">3</span><span style="color: #007700">]; </span><span style="color: #FF8000">// 0<br /></span><span style="color: #007700">echo [</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">, </span><span style="color: #0000BB">3</span><span style="color: #007700">] &lt;=&gt; []; </span><span style="color: #FF8000">// 1<br /></span><span style="color: #007700">echo [</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">, </span><span style="color: #0000BB">3</span><span style="color: #007700">] &lt;=&gt; [</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">, </span><span style="color: #0000BB">1</span><span style="color: #007700">]; </span><span style="color: #FF8000">// 1<br /></span><span style="color: #007700">echo [</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">, </span><span style="color: #0000BB">3</span><span style="color: #007700">] &lt;=&gt; [</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">, </span><span style="color: #0000BB">4</span><span style="color: #007700">]; </span><span style="color: #FF8000">// -1<br /><br />// 对象<br /></span><span style="color: #0000BB">$a </span><span style="color: #007700">= (object) [</span><span style="color: #DD0000">"a" </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">"b"</span><span style="color: #007700">];<br /></span><span style="color: #0000BB">$b </span><span style="color: #007700">= (object) [</span><span style="color: #DD0000">"a" </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">"b"</span><span style="color: #007700">];<br />echo </span><span style="color: #0000BB">$a </span><span style="color: #007700">&lt;=&gt; </span><span style="color: #0000BB">$b</span><span style="color: #007700">; </span><span style="color: #FF8000">// 0<br /><br /></span><span style="color: #0000BB">$a </span><span style="color: #007700">= (object) [</span><span style="color: #DD0000">"a" </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">"b"</span><span style="color: #007700">];<br /></span><span style="color: #0000BB">$b </span><span style="color: #007700">= (object) [</span><span style="color: #DD0000">"a" </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">"c"</span><span style="color: #007700">];<br />echo </span><span style="color: #0000BB">$a </span><span style="color: #007700">&lt;=&gt; </span><span style="color: #0000BB">$b</span><span style="color: #007700">; </span><span style="color: #FF8000">// -1<br /><br /></span><span style="color: #0000BB">$a </span><span style="color: #007700">= (object) [</span><span style="color: #DD0000">"a" </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">"c"</span><span style="color: #007700">];<br /></span><span style="color: #0000BB">$b </span><span style="color: #007700">= (object) [</span><span style="color: #DD0000">"a" </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">"b"</span><span style="color: #007700">];<br />echo </span><span style="color: #0000BB">$a </span><span style="color: #007700">&lt;=&gt; </span><span style="color: #0000BB">$b</span><span style="color: #007700">; </span><span style="color: #FF8000">// 1<br /><br />// 不仅仅比较值，而且也会匹配键<br /></span><span style="color: #0000BB">$a </span><span style="color: #007700">= (object) [</span><span style="color: #DD0000">"a" </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">"b"</span><span style="color: #007700">];<br /></span><span style="color: #0000BB">$b </span><span style="color: #007700">= (object) [</span><span style="color: #DD0000">"b" </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">"b"</span><span style="color: #007700">];<br />echo </span><span style="color: #0000BB">$a </span><span style="color: #007700">&lt;=&gt; </span><span style="color: #0000BB">$b</span><span style="color: #007700">; </span><span style="color: #FF8000">// 1<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+
+     </div>
+
+    </div>
+   </p>
+
+   <p class="para">
+    对于多种类型，比较运算符根据下表比较（按顺序）。
+   </p>
+   <table id="language.operators.comparison.types" class="doctable table">
+    <caption><strong>比较多种类型</strong></caption>
+    
+     <thead>
+      <tr>
+       <th>运算数 1 类型</th>
+       <th>运算数 2 类型</th>
+       <th>结果</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td><span class="type">null</span> 或 <span class="type">string</span></td>
+       <td><span class="type">string</span></td>
+       <td>将 <strong><code>null</code></strong> 转换为 &quot;&quot;，进行数字或词汇比较</td>
+      </tr>
+
+      <tr>
+       <td><span class="type">bool</span> 或 <span class="type">null</span></td>
+       <td>任何其它类型</td>
+       <td>转换为 <span class="type">bool</span>，<strong><code>false</code></strong> &lt; <strong><code>true</code></strong></td>
+      </tr>
+
+      <tr>
+       <td><span class="type">object</span></td>
+       <td><span class="type">object</span></td>
+       <td>
+        内置类可以定义自己的比较，不同类不能比较，相同的类查看<a href="language.oop5.object-comparison.html" class="link">对象比较</a>
+       </td>
+      </tr>
+
+      <tr>
+       <td><span class="type">string</span>、<span class="type">resource</span>、<span class="type">int</span>、<span class="type">float</span></td>
+       <td><span class="type">string</span>、<span class="type">resource</span>、<span class="type">int</span>、<span class="type">float</span></td>
+       <td>将字符串和资源转换成数字，按普通数学比较</td>
+      </tr>
+
+      <tr>
+       <td><span class="type">array</span></td>
+       <td><span class="type">array</span></td>
+       <td>
+        成员越少的数组越小，如果运算数 1 中的键不存在于运算数
+        2 中则数组无法比较，否则挨个值比较（见下例）
+       </td>
+      </tr>
+
+      <tr>
+       <td><span class="type">object</span></td>
+       <td>任何其它类型</td>
+       <td><span class="type">object</span> 总是更大</td>
+      </tr>
+
+      <tr>
+       <td><span class="type">array</span></td>
+       <td>任何其它类型</td>
+       <td><span class="type">array</span> 总是更大</td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+
+   <p class="para">
+    <div class="example" id="example-224">
+     <p><strong>Example #1 Boolean/null comparison</strong></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// Bool 和 null 总是作为 bool 比较<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">1 </span><span style="color: #007700">== </span><span style="color: #0000BB">TRUE</span><span style="color: #007700">);  </span><span style="color: #FF8000">// TRUE - same as (bool)1 == TRUE<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">0 </span><span style="color: #007700">== </span><span style="color: #0000BB">FALSE</span><span style="color: #007700">); </span><span style="color: #FF8000">// TRUE - same as (bool)0 == FALSE<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">100 </span><span style="color: #007700">&lt; </span><span style="color: #0000BB">TRUE</span><span style="color: #007700">); </span><span style="color: #FF8000">// FALSE - same as (bool)100 &lt; TRUE<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(-</span><span style="color: #0000BB">10 </span><span style="color: #007700">&lt; </span><span style="color: #0000BB">FALSE</span><span style="color: #007700">);</span><span style="color: #FF8000">// FALSE - same as (bool)-10 &lt; FALSE<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">min</span><span style="color: #007700">(-</span><span style="color: #0000BB">100</span><span style="color: #007700">, -</span><span style="color: #0000BB">10</span><span style="color: #007700">, </span><span style="color: #0000BB">NULL</span><span style="color: #007700">, </span><span style="color: #0000BB">10</span><span style="color: #007700">, </span><span style="color: #0000BB">100</span><span style="color: #007700">)); </span><span style="color: #FF8000">// NULL - (bool)NULL &lt; (bool)-100 is FALSE &lt; TRUE<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+   </p>
+
+   <p class="para">
+    <div class="example" id="example-226">
+     <p><strong>Example #2 标准数组比较代码</strong></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// 数组是用标准比较运算符或者太空船运算符进行比较的<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">standard_array_compare</span><span style="color: #007700">(</span><span style="color: #0000BB">$op1</span><span style="color: #007700">, </span><span style="color: #0000BB">$op2</span><span style="color: #007700">)<br />{<br />    if (</span><span style="color: #0000BB">count</span><span style="color: #007700">(</span><span style="color: #0000BB">$op1</span><span style="color: #007700">) &lt; </span><span style="color: #0000BB">count</span><span style="color: #007700">(</span><span style="color: #0000BB">$op2</span><span style="color: #007700">)) {<br />        return -</span><span style="color: #0000BB">1</span><span style="color: #007700">; </span><span style="color: #FF8000">// $op1 &lt; $op2<br />    </span><span style="color: #007700">} elseif (</span><span style="color: #0000BB">count</span><span style="color: #007700">(</span><span style="color: #0000BB">$op1</span><span style="color: #007700">) &gt; </span><span style="color: #0000BB">count</span><span style="color: #007700">(</span><span style="color: #0000BB">$op2</span><span style="color: #007700">)) {<br />        return </span><span style="color: #0000BB">1</span><span style="color: #007700">; </span><span style="color: #FF8000">// $op1 &gt; $op2<br />    </span><span style="color: #007700">}<br />    foreach (</span><span style="color: #0000BB">$op1 </span><span style="color: #007700">as </span><span style="color: #0000BB">$key </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">$val</span><span style="color: #007700">) {<br />        if (!</span><span style="color: #0000BB">array_key_exists</span><span style="color: #007700">(</span><span style="color: #0000BB">$key</span><span style="color: #007700">, </span><span style="color: #0000BB">$op2</span><span style="color: #007700">)) {<br />            return </span><span style="color: #0000BB">1</span><span style="color: #007700">;<br />        } elseif (</span><span style="color: #0000BB">$val </span><span style="color: #007700">&lt; </span><span style="color: #0000BB">$op2</span><span style="color: #007700">[</span><span style="color: #0000BB">$key</span><span style="color: #007700">]) {<br />            return -</span><span style="color: #0000BB">1</span><span style="color: #007700">;<br />        } elseif (</span><span style="color: #0000BB">$val </span><span style="color: #007700">&gt; </span><span style="color: #0000BB">$op2</span><span style="color: #007700">[</span><span style="color: #0000BB">$key</span><span style="color: #007700">]) {<br />            return </span><span style="color: #0000BB">1</span><span style="color: #007700">;<br />        }<br />    }<br />    return </span><span style="color: #0000BB">0</span><span style="color: #007700">; </span><span style="color: #FF8000">// $op1 == $op2<br /></span><span style="color: #007700">}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+   </p>
+
+   <div class="warning"><strong class="warning">Warning</strong>
+    <h1 class="title">比较浮点数</h1>
+
+    <p class="para">
+     由于浮点数 <span class="type">float</span> 的内部表达方式，不应比较两个浮点数<span class="type">float</span>是否相等。
+    </p>
+
+    <p class="para">
+     更多信息参见 <span class="type">float</span>。
+    </p>
+   </div>
+
+   <blockquote class="note"><p><strong class="note">Note</strong>: 
+    <span class="simpara">
+     请注意，在比较不同类型的值时，类型转换并不总是很明显，尤其是比较 <span class="type">int</span> 与 <span class="type">bool</span> 或者
+     <span class="type">int</span> 与 <span class="type">string</span>。因此，在大多数情况下，通常建议使用 <code class="literal">===</code> 和
+     <code class="literal">!==</code> 进行比较而不是 <code class="literal">==</code> 和 <code class="literal">!=</code>。
+    </span>
+   </p></blockquote>
+
+   <div class="sect2" id="language.operators.comparison.incomparable">
+    <h3 class="title">不能比较的值</h3>
+    <p class="simpara">
+     虽然恒等比较（<code class="literal">===</code> 和
+     <code class="literal">!==</code>）可以应用于任意值，其它比较运算符应该仅用于可比较的值。不能比较的值的比较的结果是不确定的，不应依赖。
+    </p>
+   </div>
+
+   <div class="sect2">
+    <h3 class="title">参见</h3>
+    <p class="para">
+     <ul class="simplelist">
+      <li class="member"><span class="function"><a href="function.strcasecmp.html" class="function">strcasecmp()</a></span></li>
+      <li class="member"><span class="function"><a href="function.strcmp.html" class="function">strcmp()</a></span></li>
+      <li class="member"><a href="language.operators.array.html" class="link">数组运算符</a></li>
+      <li class="member"><a href="language.types.html" class="link">类型</a></li>
+     </ul>
+    </p>
+   </div>
+
+  <div class="sect2" id="language.operators.comparison.ternary">
+    <h3 class="title">三元运算符</h3>
+    <p class="para">
+     另一个条件运算符是"?:"（或三元）运算符 。
+     <div class="example" id="example-228">
+      <p><strong>Example #3 赋默认值</strong></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// 三元运算符的例子<br /></span><span style="color: #0000BB">$action </span><span style="color: #007700">= (empty(</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'action'</span><span style="color: #007700">])) ? </span><span style="color: #DD0000">'default' </span><span style="color: #007700">: </span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'action'</span><span style="color: #007700">];<br /><br /></span><span style="color: #FF8000">// 以上等同于以下的  if/else 语句<br /></span><span style="color: #007700">if (empty(</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'action'</span><span style="color: #007700">])) {<br />    </span><span style="color: #0000BB">$action </span><span style="color: #007700">= </span><span style="color: #DD0000">'default'</span><span style="color: #007700">;<br />} else {<br />    </span><span style="color: #0000BB">$action </span><span style="color: #007700">= </span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'action'</span><span style="color: #007700">];<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+     </div>
+     表达式 <code class="literal">(expr1) ? (expr2) : (expr3)</code> 在
+     <span class="replaceable">expr1</span> 求值为 <strong><code>true</code></strong>
+     时的值为 <span class="replaceable">expr2</span>，在
+     <span class="replaceable">expr1</span> 求值为 <strong><code>false</code></strong> 时的值为
+     <span class="replaceable">expr3</span>。
+    </p>
+    <p class="para">
+     可以省略三元运算符中间那部分。表达式
+     <code class="literal">expr1 ?: expr3</code> 等同于如果
+     <span class="replaceable">expr1</span> 求值为 <strong><code>true</code></strong> 时返回
+     <span class="replaceable">expr1</span> 的结果，否则返回
+     <span class="replaceable">expr3</span>。<span class="replaceable">expr1</span> 在这里仅执行一次。
+    </p>
+    <blockquote class="note"><p><strong class="note">Note</strong>: 
+     <span class="simpara">
+      注意三元运算符是个语句，因此其求值不是变量，而是语句的结果。如果想通过引用返回一个变量这点就很重要。在一个通过引用返回的函数中语句
+      <code class="literal">return $var == 42 ? $a : $b;</code> 将不起作用，以后的 PHP
+      版本会为此发出一条警告。
+     </span>
+    </p></blockquote>
+    <blockquote class="note"><p><strong class="note">Note</strong>: 
+     <p class="para">
+      建议避免将三元运算符堆积在一起使用。和其他语言相比，
+      当在单个表达式中使用多个未加括号的三元运算符时会造成
+      PHP 运算结果不清晰。
+      甚至在 PHP 8.0.0 之前，三元运算符是从左到右执行的，
+      而大多数其他编程语言是从右到左的。
+      自 PHP 7.4.0 起，弃用依靠左联。
+      PHP 8.0.0 起，三元运算符是非关联的。
+      <div class="example" id="example-230">
+       <p><strong>Example #4 不清晰的三元运算符行为</strong></p>
+       <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// 乍看起来下面的输出是 'true'<br /></span><span style="color: #007700">echo (</span><span style="color: #0000BB">true </span><span style="color: #007700">? </span><span style="color: #DD0000">'true' </span><span style="color: #007700">: </span><span style="color: #0000BB">false </span><span style="color: #007700">? </span><span style="color: #DD0000">'t' </span><span style="color: #007700">: </span><span style="color: #DD0000">'f'</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 然而，上面语句的实际输出是't'，因为在 PHP 8.0.0 之前三元运算符是左联的<br /><br />// 下面是与上面等价的语句，但更清晰<br /></span><span style="color: #007700">echo ((</span><span style="color: #0000BB">true </span><span style="color: #007700">? </span><span style="color: #DD0000">'true' </span><span style="color: #007700">: </span><span style="color: #DD0000">'false'</span><span style="color: #007700">) ? </span><span style="color: #DD0000">'t' </span><span style="color: #007700">: </span><span style="color: #DD0000">'f'</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 这里可以看到第一个表达式的计算结果是 "true"，第二个表达式的计算结果为 (bool)true，<br />// 因此返回第二个三元表达式的 true 分支。<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+       </div>
+
+      </div>
+     </p>
+    </p></blockquote>
+    <blockquote class="note"><p><strong class="note">Note</strong>: 
+     <p class="para">
+      然而，短三元运算符（<code class="literal">?:</code>）的链接是稳定且合理的。他将第一个参数进行求值，结果为非假值。注意，未定义的值将会引发警告。
+      <div class="example" id="example-232">
+       <p><strong>Example #5 Short-ternary chaining</strong></p>
+       <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">0 </span><span style="color: #007700">?: </span><span style="color: #0000BB">1 </span><span style="color: #007700">?: </span><span style="color: #0000BB">2 </span><span style="color: #007700">?: </span><span style="color: #0000BB">3</span><span style="color: #007700">, </span><span style="color: #0000BB">PHP_EOL</span><span style="color: #007700">; </span><span style="color: #FF8000">//1<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">0 </span><span style="color: #007700">?: </span><span style="color: #0000BB">0 </span><span style="color: #007700">?: </span><span style="color: #0000BB">2 </span><span style="color: #007700">?: </span><span style="color: #0000BB">3</span><span style="color: #007700">, </span><span style="color: #0000BB">PHP_EOL</span><span style="color: #007700">; </span><span style="color: #FF8000">//2<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">0 </span><span style="color: #007700">?: </span><span style="color: #0000BB">0 </span><span style="color: #007700">?: </span><span style="color: #0000BB">0 </span><span style="color: #007700">?: </span><span style="color: #0000BB">3</span><span style="color: #007700">, </span><span style="color: #0000BB">PHP_EOL</span><span style="color: #007700">; </span><span style="color: #FF8000">//3<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+       </div>
+
+      </div>
+     </p>
+    </p></blockquote>
+   </div>
+
+   <div class="sect2" id="language.operators.comparison.coalesce">
+    <h3 class="title">NULL 合并运算符</h3>
+    <p class="para">
+     另一个简略运算符是 &quot;??&quot; （NULL 合并）运算符。
+     <div class="example" id="example-234">
+      <p><strong>Example #6 设置默认值</strong></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// NULL 合并运算符的例子<br /></span><span style="color: #0000BB">$action </span><span style="color: #007700">= </span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'action'</span><span style="color: #007700">] ?? </span><span style="color: #DD0000">'default'</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// 以上例子等同于于以下 if/else 语句<br /></span><span style="color: #007700">if (isset(</span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'action'</span><span style="color: #007700">])) {<br />    </span><span style="color: #0000BB">$action </span><span style="color: #007700">= </span><span style="color: #0000BB">$_POST</span><span style="color: #007700">[</span><span style="color: #DD0000">'action'</span><span style="color: #007700">];<br />} else {<br />    </span><span style="color: #0000BB">$action </span><span style="color: #007700">= </span><span style="color: #DD0000">'default'</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+     </div>
+     当 <span class="replaceable">expr1</span> 为  <strong><code>null</code></strong>，表达式 <code class="literal">(expr1) ?? (expr2)</code> 等同于
+     <span class="replaceable">expr2</span>，否则为 <span class="replaceable">expr1</span>。
+    </p>
+    <p class="para">
+     尤其要注意，当不存在左侧的值时，此运算符也和 <span class="function"><a href="function.isset.html" class="function">isset()</a></span> 一样不会产生警告。
+     对于 array 键尤其有用。
+    </p>
+    <blockquote class="note"><p><strong class="note">Note</strong>: 
+     <span class="simpara">
+      请注意：NULL 合并运算符是一个表达式，产生的也是表达式结果，而不是变量。
+      返回引用变量时需要强调这一点。
+      因此，在返回引用的函数里就无法使用这样的语句：<code class="literal">return $foo ?? $bar;</code>，还会提示警告。
+     </span>
+    </p></blockquote>
+    <blockquote class="note"><p><strong class="note">Note</strong>: 
+     <p class="para">
+      null 合并运算符的优先级较低。这意味着如果将它与其它运算符（比如字符串链接或者算术运算符）混合使用，可能需要括号。
+     </p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// $name 未定义，引发警告。<br /></span><span style="color: #007700">print </span><span style="color: #DD0000">'Mr. ' </span><span style="color: #007700">. </span><span style="color: #0000BB">$name </span><span style="color: #007700">?? </span><span style="color: #DD0000">'Anonymous'</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// 打印 "Mr. Anonymous"<br /></span><span style="color: #007700">print </span><span style="color: #DD0000">'Mr. ' </span><span style="color: #007700">. (</span><span style="color: #0000BB">$name </span><span style="color: #007700">?? </span><span style="color: #DD0000">'Anonymous'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </p></blockquote>
+    <blockquote class="note"><p><strong class="note">Note</strong>: 
+     <p class="para">
+      请注意，NULL 合并运算符支持简单的嵌套：
+      <div class="example" id="example-236">
+       <p><strong>Example #7 嵌套 NULL 合并运算符</strong></p>
+       <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />$foo </span><span style="color: #007700">= </span><span style="color: #0000BB">null</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$bar </span><span style="color: #007700">= </span><span style="color: #0000BB">null</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$baz </span><span style="color: #007700">= </span><span style="color: #0000BB">1</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$qux </span><span style="color: #007700">= </span><span style="color: #0000BB">2</span><span style="color: #007700">;<br /><br />echo </span><span style="color: #0000BB">$foo </span><span style="color: #007700">?? </span><span style="color: #0000BB">$bar </span><span style="color: #007700">?? </span><span style="color: #0000BB">$baz </span><span style="color: #007700">?? </span><span style="color: #0000BB">$qux</span><span style="color: #007700">; </span><span style="color: #FF8000">// 输出 1<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+       </div>
+
+      </div>
+     </p>
+    </p></blockquote>
+   </div>
+  </div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="128337""></a>
+  <div class="note">
+   <strong class="user">gfilippakis at sleed dot gr</strong>
+   <a href="#128337" class="date">24-Mar-2023 09:50</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Please note that using the null coalescing operator to check properties on a class that has the __get magic method (without an __isset magic method) invokes the magic method. <br />
+<br />
+For example:<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="keyword">class </span><span class="default">A<br />
+</span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">__get</span><span class="keyword">(</span><span class="default">$property</span><span class="keyword">)<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">'Called __get for ' </span><span class="keyword">. </span><span class="default">$property </span><span class="keyword">. </span><span class="default">PHP_EOL</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+</span><span class="default">$a </span><span class="keyword">= new </span><span class="default">A</span><span class="keyword">();<br />
+<br />
+echo </span><span class="string">'Trying null coalescing operator' </span><span class="keyword">. </span><span class="default">PHP_EOL</span><span class="keyword">;<br />
+</span><span class="default">$b </span><span class="keyword">= </span><span class="default">$a</span><span class="keyword">-&gt;</span><span class="default">test </span><span class="keyword">?? </span><span class="default">5</span><span class="keyword">;<br />
+<br />
+echo </span><span class="string">'Trying isset()' </span><span class="keyword">. </span><span class="default">PHP_EOL</span><span class="keyword">;<br />
+if (isset(</span><span class="default">$a</span><span class="keyword">-&gt;</span><span class="default">test</span><span class="keyword">)) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$b </span><span class="keyword">= </span><span class="default">$a</span><span class="keyword">-&gt;</span><span class="default">test</span><span class="keyword">;<br />
+} else {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$b </span><span class="keyword">= </span><span class="default">5</span><span class="keyword">;<br />
+}<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="127428""></a>
+  <div class="note">
+   <strong class="user">admin at zeros dot co dot id</strong>
+   <a href="#127428" class="date">06-Aug-2022 01:05</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Please be careful when you try to compare strings that have a plus sign `+` at the beginning (such as phone number, etc). When you use the Equal operator `==` PHP will ignore the plus sign. Use Identical operator `===` instead<br />
+<br />
+Example:<br />
+<br />
+$str1 = "62";<br />
+$str2 = "+62";<br />
+<br />
+var_dump($str1 == $str2); // bool(true)<br />
+var_dump($str1 === $str2); // bool(false)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="126040""></a>
+  <div class="note">
+   <strong class="user">Tahazzot</strong>
+   <a href="#126040" class="date">25-Apr-2021 10:56</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Very careful when reading PHP documentation, Here's a lot of miss information. <br />
+<br />
+According to documentation, They say's (int) 0 == (string) "a" is true. But it is not in PHP 8.<br />
+<br />
+var_dump(0 == "a"); // 0 == 0 -&gt; true<br />
+<br />
+Now In PHP 8 it's False.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="124639""></a>
+  <div class="note">
+   <strong class="user">Sumon Mahmud</strong>
+   <a href="#124639" class="date">23-Jan-2020 06:59</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Extending from here: https://www.php.net/manual/en/language.operators.comparison.php#121907<br />
+<br />
+$a = ['a' =&gt; 1, 'b' =&gt; 2, 'c' =&gt; 3, 'e' =&gt; 4]; <br />
+$b = ['a' =&gt; 1, 'b' =&gt; 2, 'd' =&gt; 3, 'e' =&gt; 4];<br />
+<br />
+echo $a &gt; $b; // 0<br />
+echo $b &gt; $a; // 0<br />
+echo $a &lt;$b; // 0<br />
+echo $b &lt; $a; // 0<br />
+<br />
+If using spaceship operator then it is returning true like : <br />
+<br />
+echo $a &lt;=&gt; $b; //1<br />
+echo $b &lt;=&gt; $a; //1<br />
+echo $a &lt;=&gt; $b; //1<br />
+echo $b &lt;=&gt; $a; //1</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="124201""></a>
+  <div class="note">
+   <strong class="user">Ryan Mott</strong>
+   <a href="#124201" class="date">16-Sep-2019 05:00</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Searching for "double question mark" operator should find this page (and hopefully after this comment the crawlers will agree)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="121907""></a>
+  <div class="note">
+   <strong class="user">niall at maranelda dot org</strong>
+   <a href="#121907" class="date">23-Nov-2017 12:16</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Care must be taken when using the spaceship operator with arrays that do not have the same keys:<br />
+<br />
+- Contrary to the notes above ("Example #2 Transcription of standard array comparison"), it does *not* return null if the left-hand array contains a key that the right-hand array does not.<br />
+- Because of this, the result depends on the order you do the comparison in.<br />
+<br />
+For example:<br />
+<br />
+<span class="default">&lt;?php<br />
+$a </span><span class="keyword">= [</span><span class="string">'a' </span><span class="keyword">=&gt; </span><span class="default">1</span><span class="keyword">, </span><span class="string">'b' </span><span class="keyword">=&gt; </span><span class="default">2</span><span class="keyword">, </span><span class="string">'c' </span><span class="keyword">=&gt; </span><span class="default">3</span><span class="keyword">, </span><span class="string">'e' </span><span class="keyword">=&gt; </span><span class="default">4</span><span class="keyword">];<br />
+</span><span class="default">$b </span><span class="keyword">= [</span><span class="string">'a' </span><span class="keyword">=&gt; </span><span class="default">1</span><span class="keyword">, </span><span class="string">'b' </span><span class="keyword">=&gt; </span><span class="default">2</span><span class="keyword">, </span><span class="string">'d' </span><span class="keyword">=&gt; </span><span class="default">3</span><span class="keyword">, </span><span class="string">'e' </span><span class="keyword">=&gt; </span><span class="default">4</span><span class="keyword">];<br />
+<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$a </span><span class="keyword">&lt;=&gt; </span><span class="default">$b</span><span class="keyword">);&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// int(1) : $a &gt; $b because $a has the 'c' key and $b doesn't.<br />
+<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$b </span><span class="keyword">&lt;=&gt; </span><span class="default">$a</span><span class="keyword">);&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// int(1) : $b &gt; $a because $b has the 'd' key and $a doesn't.<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="117511""></a>
+  <div class="note">
+   <strong class="user">Marcin Kuzawiski</strong>
+   <a href="#117511" class="date">21-Jun-2015 08:12</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+A &lt; B and still B &lt; A...<br />
+<br />
+$A = [1 =&gt; 1, 2 =&gt; 0, 3 =&gt; 1];<br />
+$B = [1 =&gt; 1, 3 =&gt; 0, 2 =&gt; 1];<br />
+<br />
+var_dump($A &lt; $B);&nbsp; // TRUE<br />
+var_dump($B &lt; $A);&nbsp; // TRUE<br />
+<br />
+var_dump($A &gt; $B);&nbsp; // TRUE<br />
+var_dump($B &gt; $A);&nbsp; // TRUE<br />
+<br />
+Next - C and D are comparable, but neither C &lt; D nor D &lt; C (and still C != D)...<br />
+<br />
+$C = [1 =&gt; 1, 2 =&gt; 1, 3 =&gt; 0];<br />
+$D = [1 =&gt; 1, 3 =&gt; 1, 2 =&gt; 0];<br />
+<br />
+var_dump($C &lt; $D); // FALSE<br />
+var_dump($D &lt; $C); // FALSE<br />
+<br />
+var_dump($C &gt; $D); // FALSE<br />
+var_dump($D &gt; $C); // FALSE<br />
+<br />
+var_dump($D == $C); // FALSE</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="104840""></a>
+  <div class="note">
+   <strong class="user">Cuong Huy To</strong>
+   <a href="#104840" class="date">10-Jul-2011 07:48</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+In the table "Comparison with Various Types", please move the last line about "Object" to be above the line about "Array", since Object is considered to be greater than Array (tested on 5.3.3)<br />
+<br />
+(Please remove my "Anonymous" post of the same content before. You could check IP to see that I forgot to type my name)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="95997""></a>
+  <div class="note">
+   <strong class="user">crazy888s at hotmail dot com</strong>
+   <a href="#95997" class="date">01-Feb-2010 10:32</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I couldn't find much info on stacking the new ternary operator, so I ran some tests:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">echo </span><span class="default">0 </span><span class="keyword">?: </span><span class="default">1 </span><span class="keyword">?: </span><span class="default">2 </span><span class="keyword">?: </span><span class="default">3</span><span class="keyword">; </span><span class="comment">//1<br />
+</span><span class="keyword">echo </span><span class="default">1 </span><span class="keyword">?: </span><span class="default">0 </span><span class="keyword">?: </span><span class="default">3 </span><span class="keyword">?: </span><span class="default">2</span><span class="keyword">; </span><span class="comment">//1<br />
+</span><span class="keyword">echo </span><span class="default">2 </span><span class="keyword">?: </span><span class="default">1 </span><span class="keyword">?: </span><span class="default">0 </span><span class="keyword">?: </span><span class="default">3</span><span class="keyword">; </span><span class="comment">//2<br />
+</span><span class="keyword">echo </span><span class="default">3 </span><span class="keyword">?: </span><span class="default">2 </span><span class="keyword">?: </span><span class="default">1 </span><span class="keyword">?: </span><span class="default">0</span><span class="keyword">; </span><span class="comment">//3<br />
+<br />
+</span><span class="keyword">echo </span><span class="default">0 </span><span class="keyword">?: </span><span class="default">1 </span><span class="keyword">?: </span><span class="default">2 </span><span class="keyword">?: </span><span class="default">3</span><span class="keyword">; </span><span class="comment">//1<br />
+</span><span class="keyword">echo </span><span class="default">0 </span><span class="keyword">?: </span><span class="default">0 </span><span class="keyword">?: </span><span class="default">2 </span><span class="keyword">?: </span><span class="default">3</span><span class="keyword">; </span><span class="comment">//2<br />
+</span><span class="keyword">echo </span><span class="default">0 </span><span class="keyword">?: </span><span class="default">0 </span><span class="keyword">?: </span><span class="default">0 </span><span class="keyword">?: </span><span class="default">3</span><span class="keyword">; </span><span class="comment">//3<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+It works just as expected, returning the first non-false value within a group of expressions.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="70762""></a>
+  <div class="note">
+   <strong class="user">bishop</strong>
+   <a href="#70762" class="date">26-Oct-2006 03:49</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+When you want to know if two arrays contain the same values, regardless of the values' order, you cannot use "==" or "===".&nbsp; In other words:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">(array(</span><span class="default">1</span><span class="keyword">,</span><span class="default">2</span><span class="keyword">) == array(</span><span class="default">2</span><span class="keyword">,</span><span class="default">1</span><span class="keyword">)) === </span><span class="default">false</span><span class="keyword">;<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+To answer that question, use:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">array_equal</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">, </span><span class="default">$b</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; return (</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">) &amp;&amp; </span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$b</span><span class="keyword">) &amp;&amp; </span><span class="default">array_diff</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">, </span><span class="default">$b</span><span class="keyword">) === </span><span class="default">array_diff</span><span class="keyword">(</span><span class="default">$b</span><span class="keyword">, </span><span class="default">$a</span><span class="keyword">));<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+A related, but more strict problem, is if you need to ensure that two arrays contain the same key=&gt;value pairs, regardless of the order of the pairs.&nbsp; In that case, use:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">array_identical</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">, </span><span class="default">$b</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; return (</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">) &amp;&amp; </span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$b</span><span class="keyword">) &amp;&amp; </span><span class="default">array_diff_assoc</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">, </span><span class="default">$b</span><span class="keyword">) === </span><span class="default">array_diff_assoc</span><span class="keyword">(</span><span class="default">$b</span><span class="keyword">, </span><span class="default">$a</span><span class="keyword">));<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Example:<br />
+<span class="default">&lt;?php<br />
+$a </span><span class="keyword">= array (</span><span class="default">2</span><span class="keyword">, </span><span class="default">1</span><span class="keyword">);<br />
+</span><span class="default">$b </span><span class="keyword">= array (</span><span class="default">1</span><span class="keyword">, </span><span class="default">2</span><span class="keyword">);<br />
+</span><span class="comment">// true === array_equal($a, $b);<br />
+// false === array_identical($a, $b);<br />
+<br />
+</span><span class="default">$a </span><span class="keyword">= array (</span><span class="string">'a' </span><span class="keyword">=&gt; </span><span class="default">2</span><span class="keyword">, </span><span class="string">'b' </span><span class="keyword">=&gt; </span><span class="default">1</span><span class="keyword">);<br />
+</span><span class="default">$b </span><span class="keyword">= array (</span><span class="string">'b' </span><span class="keyword">=&gt; </span><span class="default">1</span><span class="keyword">, </span><span class="string">'a' </span><span class="keyword">=&gt; </span><span class="default">2</span><span class="keyword">);<br />
+</span><span class="comment">// true === array_identical($a, $b)<br />
+// true === array_equal($a, $b)<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+(See also the solution "rshawiii at yahoo dot com" posted)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="65863""></a>
+  <div class="note">
+   <strong class="user">adam at caucho dot com</strong>
+   <a href="#65863" class="date">08-May-2006 10:49</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Note: according to the spec, PHP's comparison operators are not transitive.&nbsp; For example, the following are all true in PHP5:
+<br />
+
+<br />
+"11" &lt; "a" &lt; 2 &lt; "11"
+<br />
+
+<br />
+As a result, the outcome of sorting an array depends on the order the elements appear in the pre-sort array.&nbsp; The following code will dump out two arrays with *different* orderings:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+$a </span><span class="keyword">= array(</span><span class="default">2</span><span class="keyword">,&nbsp; &nbsp; </span><span class="string">"a"</span><span class="keyword">,&nbsp; </span><span class="string">"11"</span><span class="keyword">, </span><span class="default">2</span><span class="keyword">);
+<br />
+</span><span class="default">$b </span><span class="keyword">= array(</span><span class="default">2</span><span class="keyword">,&nbsp; &nbsp; </span><span class="string">"11"</span><span class="keyword">, </span><span class="string">"a"</span><span class="keyword">,&nbsp; </span><span class="default">2</span><span class="keyword">);
+<br />
+</span><span class="default">sort</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">);
+<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">);
+<br />
+</span><span class="default">sort</span><span class="keyword">(</span><span class="default">$b</span><span class="keyword">);
+<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$b</span><span class="keyword">);
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+This is not a bug report -- given the spec on this documentation page, what PHP does is "correct".&nbsp; But that may not be what was intended...</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="60866""></a>
+  <div class="note">
+   <strong class="user">rshawiii at yahoo dot com</strong>
+   <a href="#60866" class="date">18-Jan-2006 11:36</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+You can't just compare two arrays with the === operator
+<br />
+like you would think to find out if they are equal or not.&nbsp; This is more complicated when you have multi-dimensional arrays.&nbsp; Here is a recursive comparison function.
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="comment">/**
+<br />
+&nbsp;* Compares two arrays to see if they contain the same values.&nbsp; Returns TRUE or FALSE.
+<br />
+&nbsp;* usefull for determining if a record or block of data was modified (perhaps by user input)
+<br />
+&nbsp;* prior to setting a "date_last_updated" or skipping updating the db in the case of no change.
+<br />
+&nbsp;*
+<br />
+&nbsp;* @param array $a1
+<br />
+&nbsp;* @param array $a2
+<br />
+&nbsp;* @return boolean
+<br />
+&nbsp;*/
+<br />
+</span><span class="keyword">function </span><span class="default">array_compare_recursive</span><span class="keyword">(</span><span class="default">$a1</span><span class="keyword">, </span><span class="default">$a2</span><span class="keyword">)
+<br />
+{
+<br />
+&nbsp;&nbsp; if (!(</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$a1</span><span class="keyword">) and (</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$a2</span><span class="keyword">)))) { return </span><span class="default">FALSE</span><span class="keyword">;}&nbsp; &nbsp; 
+<br />
+&nbsp;&nbsp;&nbsp; 
+<br />
+&nbsp;&nbsp; if (!</span><span class="default">count</span><span class="keyword">(</span><span class="default">$a1</span><span class="keyword">) == </span><span class="default">count</span><span class="keyword">(</span><span class="default">$a2</span><span class="keyword">)) 
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; return </span><span class="default">FALSE</span><span class="keyword">; </span><span class="comment">// arrays don't have same number of entries
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="keyword">}
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; 
+<br />
+&nbsp;&nbsp; foreach (</span><span class="default">$a1 </span><span class="keyword">as </span><span class="default">$key </span><span class="keyword">=&gt; </span><span class="default">$val</span><span class="keyword">) 
+<br />
+&nbsp;&nbsp; {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; if (!</span><span class="default">array_key_exists</span><span class="keyword">(</span><span class="default">$key</span><span class="keyword">, </span><span class="default">$a2</span><span class="keyword">)) 
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {return </span><span class="default">FALSE</span><span class="keyword">; </span><span class="comment">// uncomparable array keys don't match
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">} 
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; elseif (</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$val</span><span class="keyword">) and </span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$a2</span><span class="keyword">[</span><span class="default">$key</span><span class="keyword">]))&nbsp; </span><span class="comment">// if both entries are arrays then compare recursive 
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">{if (!</span><span class="default">array_compare_recursive</span><span class="keyword">(</span><span class="default">$val</span><span class="keyword">,</span><span class="default">$a2</span><span class="keyword">[</span><span class="default">$key</span><span class="keyword">])) return </span><span class="default">FALSE</span><span class="keyword">;
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } 
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; elseif (!(</span><span class="default">$val </span><span class="keyword">=== </span><span class="default">$a2</span><span class="keyword">[</span><span class="default">$key</span><span class="keyword">])) </span><span class="comment">// compare entries must be of same type.
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="keyword">{return </span><span class="default">FALSE</span><span class="keyword">;
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+<br />
+&nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp; return </span><span class="default">TRUE</span><span class="keyword">; </span><span class="comment">// $a1 === $a2
+<br />
+</span><span class="keyword">}
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

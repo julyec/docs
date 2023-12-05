@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>Suggest spellings of a word</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.pspell-store-replacement.html">? pspell_store_replacement</a></li>
+      <li style="float: right;"><a href="class.pspell-dictionary.html">PSpell\Dictionary ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.pspell.html">Pspell 函数</a></li>
+    <li>Suggest spellings of a word</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.pspell-suggest" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">pspell_suggest</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.0.2, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">pspell_suggest</span> &mdash; <span class="dc-title">Suggest spellings of a word</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.pspell-suggest-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>pspell_suggest</strong></span>(<span class="methodparam"><span class="type"><a href="class.pspell-dictionary.html" class="type PSpell\Dictionary">PSpell\Dictionary</a></span> <code class="parameter">$dictionary</code></span>, <span class="methodparam"><span class="type">string</span> <code class="parameter">$word</code></span>): <span class="type"><span class="type">array</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="simpara">
+   <span class="function"><strong>pspell_suggest()</strong></span> returns an array of possible
+   spellings for the given word.
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.pspell-suggest-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">dictionary</code></dt>
+
+     <dd>
+
+      <p class="para">An <span class="classname"><a href="class.pspell-dictionary.html" class="classname">PSpell\Dictionary</a></span> instance.</p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">word</code></dt>
+
+     <dd>
+
+      <p class="para">
+       The tested word.
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.pspell-suggest-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   Returns an array of possible spellings.
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.pspell-suggest-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+ <td>8.1.0</td>
+ <td>
+  The <code class="parameter">dictionary</code> parameter expects an <span class="classname"><a href="class.pspell-dictionary.html" class="classname">PSpell\Dictionary</a></span>
+  instance now; previously, a <a href="language.types.resource.html" class="link">资源(resource)</a> was expected.
+ </td>
+</tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.pspell-suggest-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="example-5326">
+    <p><strong>Example #1 <span class="function"><strong>pspell_suggest()</strong></span> example</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$pspell </span><span style="color: #007700">= </span><span style="color: #0000BB">pspell_new</span><span style="color: #007700">(</span><span style="color: #DD0000">"en"</span><span style="color: #007700">);<br /><br />if (!</span><span style="color: #0000BB">pspell_check</span><span style="color: #007700">(</span><span style="color: #0000BB">$pspell</span><span style="color: #007700">, </span><span style="color: #DD0000">"testt"</span><span style="color: #007700">)) {<br />    </span><span style="color: #0000BB">$suggestions </span><span style="color: #007700">= </span><span style="color: #0000BB">pspell_suggest</span><span style="color: #007700">(</span><span style="color: #0000BB">$pspell</span><span style="color: #007700">, </span><span style="color: #DD0000">"testt"</span><span style="color: #007700">);<br /><br />    foreach (</span><span style="color: #0000BB">$suggestions </span><span style="color: #007700">as </span><span style="color: #0000BB">$suggestion</span><span style="color: #007700">) {<br />        echo </span><span style="color: #DD0000">"Possible spelling: </span><span style="color: #0000BB">$suggestion</span><span style="color: #DD0000">&lt;br /&gt;"</span><span style="color: #007700">;<br />    }<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="41503""></a>
+  <div class="note">
+   <strong class="user">webmaster at hostpure dot com</strong>
+   <a href="#41503" class="date">12-Apr-2004 05:42</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+It seems if you are trying to do something similar to the Google 'Did you mean:' suggestions and are selecting the first word given by the pspell_suggest() function, then it will not work well with custom dictionaries and replacements. Take the following code for example:<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; $pspell_config </span><span class="keyword">= </span><span class="default">pspell_config_create</span><span class="keyword">(</span><span class="string">"en"</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">pspell_config_personal</span><span class="keyword">(</span><span class="default">$pspell_config</span><span class="keyword">, </span><span class="string">"/home/user/public_html/custom.pws"</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">pspell_config_repl</span><span class="keyword">(</span><span class="default">$pspell_config</span><span class="keyword">, </span><span class="string">"/home/user/public_html/custom.repl"</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$pspell_link </span><span class="keyword">= </span><span class="default">pspell_new_config</span><span class="keyword">(</span><span class="default">$pspell_config</span><span class="keyword">);<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$words </span><span class="keyword">= </span><span class="default">preg_split </span><span class="keyword">(</span><span class="string">"/\s+/"</span><span class="keyword">, </span><span class="default">$query</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$ii </span><span class="keyword">= </span><span class="default">count</span><span class="keyword">(</span><span class="default">$words</span><span class="keyword">);<br />
+<br />
+&nbsp;&nbsp;&nbsp; global </span><span class="default">$spellchecked</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$spellchecked </span><span class="keyword">= </span><span class="string">""</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; for(</span><span class="default">$i</span><span class="keyword">=</span><span class="default">0</span><span class="keyword">;</span><span class="default">$i</span><span class="keyword">&lt;</span><span class="default">$ii</span><span class="keyword">;</span><span class="default">$i</span><span class="keyword">++){<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">pspell_check</span><span class="keyword">(</span><span class="default">$pspell_link</span><span class="keyword">, </span><span class="default">$words</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">]))<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$spellchecked </span><span class="keyword">.= </span><span class="default">$words</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">].</span><span class="string">" "</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; else<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$erroneous </span><span class="keyword">= </span><span class="string">"yes"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$suggestions </span><span class="keyword">= </span><span class="default">pspell_suggest</span><span class="keyword">(</span><span class="default">$pspell_link</span><span class="keyword">, </span><span class="default">$words</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">]);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$spellchecked </span><span class="keyword">.= </span><span class="default">$suggestions</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">].</span><span class="string">" "</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; if(</span><span class="default">$erroneous </span><span class="keyword">== </span><span class="string">"yes"</span><span class="keyword">)<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"Did you mean: &lt;i&gt;"</span><span class="keyword">.</span><span class="default">$spellchecked</span><span class="keyword">.</span><span class="string">"?"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; else<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="default">$spellchecked </span><span class="keyword">. </span><span class="string">" is a valid word/phrase"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+This works fine most of the time, and gives suggestions to what you meant when inserting a spelling mistake with most inputs. However, if you specify a custom replacement and then search for the misspelt word that you specified, then if it is not the first returned suggestion it wont be used in the 'Did you mean' end result. What you need to do is open up the custom dictionary using fopen and fread, and then for each of the suggested words, check if they are in the dictionary. If the suggested word is in the custom dictionary then use it in the 'Did you mean' part, if not, discard it and try the next. Hope this helps anyone who comes across this problem with trying to get more accurate suggestions.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

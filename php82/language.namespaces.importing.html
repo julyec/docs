@@ -1,0 +1,720 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>使用命名空间：别名/导入</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="language.namespaces.nsconstants.html">? namespace 关键字和 __NAMESPACE__ 常量</a></li>
+      <li style="float: right;"><a href="language.namespaces.global.html">全局空间 ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="language.namespaces.html">命名空间</a></li>
+    <li>使用命名空间：别名/导入</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="language.namespaces.importing" class="sect1">
+  <h2 class="title">使用命名空间：别名/导入</h2>
+  <p class="verinfo">(PHP 5 &gt;= 5.3.0, PHP 7, PHP 8)</p>
+  <p class="para">
+   允许通过别名引用或导入外部的完全限定名称，是命名空间的一个重要特征。这有点类似于在类
+   unix 文件系统中可以创建对其它的文件或目录的符号连接。
+  </p>
+  <p class="para">
+   PHP 可以为这些项目导入或设置别名：
+   常量、函数、类、接口、trait、枚举和命名空间。
+  </p>
+  <p class="para">
+   别名是通过操作符 <code class="literal">use</code> 来实现的。下面是五种导入方式的例子：
+   <div class="example" id="example-616">
+    <p><strong>Example #1 使用 use 操作符导入/使用别名</strong></p>
+    <div class="example-contents">
+     <div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">namespace </span><span style="color: #0000BB">foo</span><span style="color: #007700">;<br />use </span><span style="color: #0000BB">My\Full\Classname </span><span style="color: #007700">as </span><span style="color: #0000BB">Another</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// 下面的例子与 use My\Full\NSname as NSname 相同<br /></span><span style="color: #007700">use </span><span style="color: #0000BB">My\Full\NSname</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// 导入一个全局类<br /></span><span style="color: #007700">use </span><span style="color: #0000BB">ArrayObject</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// 导入函数<br /></span><span style="color: #007700">use function </span><span style="color: #0000BB">My\Full\functionName</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// 为函数设置别名<br /></span><span style="color: #007700">use function </span><span style="color: #0000BB">My\Full\functionName </span><span style="color: #007700">as </span><span style="color: #0000BB">func</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// 导入常量<br /></span><span style="color: #007700">use const </span><span style="color: #0000BB">My\Full\CONSTANT</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$obj </span><span style="color: #007700">= new </span><span style="color: #0000BB">namespace\Another</span><span style="color: #007700">; </span><span style="color: #FF8000">// 实例化 foo\Another 对象<br /></span><span style="color: #0000BB">$obj </span><span style="color: #007700">= new </span><span style="color: #0000BB">Another</span><span style="color: #007700">; </span><span style="color: #FF8000">// 实例化 My\Full\Classname　对象<br /></span><span style="color: #0000BB">NSname\subns\func</span><span style="color: #007700">(); </span><span style="color: #FF8000">// 调用函数 My\Full\NSname\subns\func<br /></span><span style="color: #0000BB">$a </span><span style="color: #007700">= new </span><span style="color: #0000BB">ArrayObject</span><span style="color: #007700">(array(</span><span style="color: #0000BB">1</span><span style="color: #007700">)); </span><span style="color: #FF8000">// 实例化 ArrayObject 对象<br />// 如果不使用 "use \ArrayObject" ，则实例化一个 foo\ArrayObject 对象<br /></span><span style="color: #0000BB">func</span><span style="color: #007700">(); </span><span style="color: #FF8000">// 调用函数 My\Full\functionName<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">CONSTANT</span><span style="color: #007700">; </span><span style="color: #FF8000">// 输出 My\Full\CONSTANT 的值<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+   注意对命名空间中的名称（包含命名空间分隔符的完全限定名称如 
+   <code class="literal">Foo\Bar</code> 以及相对的不包含命名空间分隔符的全局名称如 
+   <code class="literal">FooBar</code>）来说，前导的反斜杠是不必要的也不推荐的，因为导入的名称必须是完全限定的，不会根据当前的命名空间作相对解析。
+  </p>
+  <p class="para">
+   为了简化操作，PHP 还支持在一行中使用多个 use 语句
+   <div class="example" id="example-618">
+    <p><strong>Example #2 通过 use 操作符导入/使用别名，一行中包含多个 use 语句</strong></p>
+    <div class="example-contents">
+     <div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">use </span><span style="color: #0000BB">My\Full\Classname </span><span style="color: #007700">as </span><span style="color: #0000BB">Another</span><span style="color: #007700">, </span><span style="color: #0000BB">My\Full\NSname</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$obj </span><span style="color: #007700">= new </span><span style="color: #0000BB">Another</span><span style="color: #007700">; </span><span style="color: #FF8000">// 实例化 My\Full\Classname 对象<br /></span><span style="color: #0000BB">NSname\subns\func</span><span style="color: #007700">(); </span><span style="color: #FF8000">// 调用函数 My\Full\NSname\subns\func<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   导入操作是在编译执行的，但动态的类名称、函数名称或常量名称则不是。
+   <div class="example" id="example-620">
+    <p><strong>Example #3 导入和动态名称</strong></p>
+    <div class="example-contents">
+     <div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">use </span><span style="color: #0000BB">My\Full\Classname </span><span style="color: #007700">as </span><span style="color: #0000BB">Another</span><span style="color: #007700">, </span><span style="color: #0000BB">My\Full\NSname</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$obj </span><span style="color: #007700">= new </span><span style="color: #0000BB">Another</span><span style="color: #007700">; </span><span style="color: #FF8000">// 实例化一个 My\Full\Classname 对象<br /></span><span style="color: #0000BB">$a </span><span style="color: #007700">= </span><span style="color: #DD0000">'Another'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$obj </span><span style="color: #007700">= new </span><span style="color: #0000BB">$a</span><span style="color: #007700">;      </span><span style="color: #FF8000">// 实际化一个 Another 对象<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   另外，导入操作只影响非限定名称和限定名称。完全限定名称由于是确定的，故不受导入的影响。
+   <div class="example" id="example-622">
+    <p><strong>Example #4 导入和完全限定名称</strong></p>
+    <div class="example-contents">
+     <div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">use </span><span style="color: #0000BB">My\Full\Classname </span><span style="color: #007700">as </span><span style="color: #0000BB">Another</span><span style="color: #007700">, </span><span style="color: #0000BB">My\Full\NSname</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$obj </span><span style="color: #007700">= new </span><span style="color: #0000BB">Another</span><span style="color: #007700">; </span><span style="color: #FF8000">// class My\Full\Classname 的实例对象<br /></span><span style="color: #0000BB">$obj </span><span style="color: #007700">= new </span><span style="color: #0000BB">\Another</span><span style="color: #007700">; </span><span style="color: #FF8000">// class Another 的实例对象<br /></span><span style="color: #0000BB">$obj </span><span style="color: #007700">= new </span><span style="color: #0000BB">Another\thing</span><span style="color: #007700">; </span><span style="color: #FF8000">// class My\Full\Classname\thing 的实例对象<br /></span><span style="color: #0000BB">$obj </span><span style="color: #007700">= new </span><span style="color: #0000BB">\Another\thing</span><span style="color: #007700">; </span><span style="color: #FF8000">// class Another\thing 的实例对象<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <div class="sect2" id="language.namespaces.importing.scope">
+   <h3 class="title">导入规则的范围</h3>
+   <p class="para">
+    <code class="literal">use</code> 关键词必须在文件最外层范围
+    （全局作用域）或在命名空间声明内。
+    由于导入发生在编译时，而不是运行时，所以不能放入块作用域。
+    以下例子展示了不合规则的 <code class="literal">use</code> 关键词使用示例：
+   </p>
+   <p class="para">
+    <div class="example" id="uopz-get-hook.example.basic">
+     <p><strong>Example #5 不合规的导入规则</strong></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">namespace </span><span style="color: #0000BB">Languages</span><span style="color: #007700">;<br /><br />function </span><span style="color: #0000BB">toGreenlandic</span><span style="color: #007700">()<br />{<br />    use </span><span style="color: #0000BB">Languages\Danish</span><span style="color: #007700">;<br /><br />    </span><span style="color: #FF8000">// ...<br /></span><span style="color: #007700">}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+   </p>
+   <blockquote class="note"><p><strong class="note">Note</strong>: 
+    <p class="para">
+     导入规则独立于每个文件，意味着包含的文件
+     <em class="emphasis">不会</em>继承父文件的导入规则。
+    </p>
+   </p></blockquote>
+  </div>
+  <div class="sect2" id="language.namespaces.importing.group">
+   <h3 class="title"><code class="literal">use</code> 声明编组</h3>
+   <p class="para">
+    通过单个 <a href="language.namespaces.importing.html" class="link"><code class="literal">use</code></a> 语句，可以将来自同一个 <a href="language.namespaces.definition.html" class="link"><code class="literal">namespace</code></a> 的
+    类、函数、常量一起编组导入。
+   </p>
+   <div class="informalexample">
+    <div class="example-contents">
+     <div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">use </span><span style="color: #0000BB">some\namespace\ClassA</span><span style="color: #007700">;<br />use </span><span style="color: #0000BB">some\namespace\ClassB</span><span style="color: #007700">;<br />use </span><span style="color: #0000BB">some\namespace\ClassC </span><span style="color: #007700">as </span><span style="color: #0000BB">C</span><span style="color: #007700">;<br /><br />use function </span><span style="color: #0000BB">some\namespace\fn_a</span><span style="color: #007700">;<br />use function </span><span style="color: #0000BB">some\namespace\fn_b</span><span style="color: #007700">;<br />use function </span><span style="color: #0000BB">some\namespace\fn_c</span><span style="color: #007700">;<br /><br />use const </span><span style="color: #0000BB">some\namespace\ConstA</span><span style="color: #007700">;<br />use const </span><span style="color: #0000BB">some\namespace\ConstB</span><span style="color: #007700">;<br />use const </span><span style="color: #0000BB">some\namespace\ConstC</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// 等同于以下编组的 use 声明<br /></span><span style="color: #007700">use </span><span style="color: #0000BB">some\namespace</span><span style="color: #007700">\{</span><span style="color: #0000BB">ClassA</span><span style="color: #007700">, </span><span style="color: #0000BB">ClassB</span><span style="color: #007700">, </span><span style="color: #0000BB">ClassC </span><span style="color: #007700">as </span><span style="color: #0000BB">C</span><span style="color: #007700">};<br />use function </span><span style="color: #0000BB">some\namespace</span><span style="color: #007700">\{</span><span style="color: #0000BB">fn_a</span><span style="color: #007700">, </span><span style="color: #0000BB">fn_b</span><span style="color: #007700">, </span><span style="color: #0000BB">fn_c</span><span style="color: #007700">};<br />use const </span><span style="color: #0000BB">some\namespace</span><span style="color: #007700">\{</span><span style="color: #0000BB">ConstA</span><span style="color: #007700">, </span><span style="color: #0000BB">ConstB</span><span style="color: #007700">, </span><span style="color: #0000BB">ConstC</span><span style="color: #007700">};</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </div>
+ </div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="127140""></a>
+  <div class="note">
+   <strong class="user">tuxedobob</strong>
+   <a href="#127140" class="date">27-May-2022 04:32</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Note that because this is processed at compile time, this doesn't work when running PHP in interactive mode. use commands won't throw an error, but they won't do anything, either.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125931""></a>
+  <div class="note">
+   <strong class="user">eithed at google mail</strong>
+   <a href="#125931" class="date">14-Mar-2021 05:14</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Bear in mind that it's perfectly fine to alias namespaces, ie:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">use </span><span class="default">A\B\C\D\E\User</span><span class="keyword">;<br />
+<br />
+new </span><span class="default">User</span><span class="keyword">();<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+can be also written as:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">use </span><span class="default">A\B\C\D\E </span><span class="keyword">as </span><span class="default">ENamespace</span><span class="keyword">;<br />
+<br />
+new </span><span class="default">ENamespace\User</span><span class="keyword">();<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+however following will not work:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">use </span><span class="default">A\B\C\D\E </span><span class="keyword">as </span><span class="default">ENamespace</span><span class="keyword">;<br />
+use </span><span class="default">ENamespace\User</span><span class="keyword">;<br />
+<br />
+new </span><span class="default">User</span><span class="keyword">();<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+&gt; PHP Error:&nbsp; Class "ENamespace\User" not found</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125337""></a>
+  <div class="note">
+   <strong class="user">info at ensostudio dot ru</strong>
+   <a href="#125337" class="date">05-Sep-2020 10:48</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Note: you can import not existed items without errors:<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">use </span><span class="default">UndefinedClass</span><span class="keyword">;<br />
+use function </span><span class="default">undefined_fn</span><span class="keyword">;<br />
+use const </span><span class="default">UNDEFINED_CONST</span><span class="keyword">;<br />
+</span><span class="default">?&gt;<br />
+</span>but you cant use/call they:<br />
+<span class="default">&lt;?php<br />
+$new UndefinedClass</span><span class="keyword">; </span><span class="comment">// Error: Use of undefined class<br />
+</span><span class="keyword">use function </span><span class="default">undefined_fn</span><span class="keyword">; </span><span class="comment">// Error: Use of undefined function<br />
+</span><span class="keyword">use const </span><span class="default">UNDEFINED_CONST</span><span class="keyword">; </span><span class="comment">// Error: Use of undefined constant<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="124075""></a>
+  <div class="note">
+   <strong class="user">Dhairya Lakhera</strong>
+   <a href="#124075" class="date">27-Jul-2019 01:41</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+namespace test{<br />
+<br />
+&nbsp;&nbsp;&nbsp; use test\xyz\tikku;<br />
+&nbsp;&nbsp;&nbsp; use test\xyz\tikku as class_alias;<br />
+&nbsp;&nbsp;&nbsp; use function test\xyz\tikku\foo;<br />
+&nbsp;&nbsp;&nbsp; use function test\xyz\tikku\foo as func_alias;<br />
+&nbsp;&nbsp;&nbsp; use const test\xyz\tikku\ABC;<br />
+&nbsp;&nbsp;&nbsp; use const test\xyz\tikku\ABC as const_alias;<br />
+&nbsp;&nbsp;&nbsp; <br />
+<br />
+&nbsp;&nbsp;&nbsp; <br />
+<br />
+&nbsp;&nbsp;&nbsp; $obj=new tikku;<br />
+&nbsp;&nbsp;&nbsp; $obj-&gt;Display();&nbsp; // I am in&nbsp; test\xyz namespace<br />
+<br />
+&nbsp;&nbsp;&nbsp; $obj=new tikku\dhairya;<br />
+&nbsp;&nbsp;&nbsp; $obj-&gt;Display();&nbsp;&nbsp; // I am in test\xyz\tikku namespace<br />
+<br />
+&nbsp;&nbsp;&nbsp; $obj=new class_alias\dhairya;<br />
+&nbsp;&nbsp;&nbsp; $obj-&gt;Display();&nbsp;&nbsp; // I am in test\xyz\tikku namespace<br />
+<br />
+&nbsp;&nbsp;&nbsp; $obj=new \class_alias\dhairya;<br />
+&nbsp;&nbsp;&nbsp; $obj-&gt;Display();&nbsp; // I am in class_alias namespace<br />
+<br />
+}<br />
+<br />
+namespace test\xyz{<br />
+<br />
+&nbsp;&nbsp; class tikku{<br />
+&nbsp;&nbsp;&nbsp; function Display(){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo "I am in ".__namespace__." namespace&lt;br/&gt;&lt;hr/&gt;"; <br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp; }<br />
+}<br />
+<br />
+namespace test\xyz\tikku{<br />
+<br />
+&nbsp;&nbsp; class dhairya{<br />
+&nbsp;&nbsp;&nbsp; function Display(){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo "I am in ".__namespace__." namespace&lt;br/&gt;&lt;hr/&gt;"; <br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp; }<br />
+}<br />
+<br />
+namespace class_alias{<br />
+<br />
+&nbsp;&nbsp; class dhairya{<br />
+&nbsp;&nbsp;&nbsp; function Display(){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo "I am in ".__namespace__." namespace&lt;br/&gt;&lt;hr/&gt;"; <br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp; }<br />
+}</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="123912""></a>
+  <div class="note">
+   <strong class="user">www.codewars.com</strong>
+   <a href="#123912" class="date">07-Jun-2019 01:59</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+amazing!!<br />
+<br />
+use function strval as numberToString;<br />
+<br />
+var_dump(numberToString(123));<br />
+<br />
+//print<br />
+//string(3) "123"</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="122566""></a>
+  <div class="note">
+   <strong class="user">Joey</strong>
+   <a href="#122566" class="date">29-Mar-2018 02:25</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+For those hoping for an easy fix of DRY with {} unfortunately you can't nest it or do anything cool with it. In case you can only have one per use and if you don't have one then the whole use is assumed to be wrapped in brackets. That means if you do have one you can't use , as normal with use!<br />
+<br />
+Not possible:<br />
+<br />
+&nbsp;&nbsp;&nbsp; use A\B\C\{<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; D, E,<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; F\{X, Y, Z}<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; },<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; X\Y\Z,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; H\{<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; I\{<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Y\Y\Y\Y\Y,<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; Z, H, E<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; },<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; J\{<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; A\{<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; G\H\J<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; B\N<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; },<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; G\H\J<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; };</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="121785""></a>
+  <div class="note">
+   <strong class="user">Mawia HL</strong>
+   <a href="#121785" class="date">21-Oct-2017 05:03</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Here is a handy way of importing classes, functions and conts using a single use keyword:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">use </span><span class="default">Mizo\Web</span><span class="keyword">\ {<br />
+&nbsp;&nbsp; </span><span class="default">Php\WebSite</span><span class="keyword">,<br />
+&nbsp;&nbsp; </span><span class="default">Php\KeyWord</span><span class="keyword">,<br />
+&nbsp;&nbsp; </span><span class="default">Php\UnicodePrint</span><span class="keyword">,<br />
+&nbsp;&nbsp; </span><span class="default">JS\JavaScript</span><span class="keyword">, <br />
+&nbsp;&nbsp; function </span><span class="default">JS\printTotal</span><span class="keyword">, <br />
+&nbsp;&nbsp; function </span><span class="default">JS\printList</span><span class="keyword">, <br />
+&nbsp;&nbsp; const </span><span class="default">JS\BUAIKUM</span><span class="keyword">, <br />
+&nbsp;&nbsp; const </span><span class="default">JS\MAUTAM<br />
+</span><span class="keyword">};<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="121045""></a>
+  <div class="note">
+   <strong class="user">xzero at elite7hackers dot net</strong>
+   <a href="#121045" class="date">04-May-2017 11:13</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I couldn't find answer to this question so I tested myself. <br />
+I think it's worth noting:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">use </span><span class="default">ExistingNamespace\NonExsistingClass</span><span class="keyword">;<br />
+use </span><span class="default">ExistingNamespace\NonExsistingClass </span><span class="keyword">as </span><span class="default">whatever</span><span class="keyword">;<br />
+use </span><span class="default">NonExistingNamespace\NonExsistingClass</span><span class="keyword">;<br />
+use </span><span class="default">NonExistingNamespace\NonExsistingClass </span><span class="keyword">as </span><span class="default">whatever</span><span class="keyword">;<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+None of above will actually cause errors unless you actually try to use class you tried to import. <br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="comment">// And this code will issue standard PHP error for non existing class.<br />
+</span><span class="keyword">use </span><span class="default">ExistingNamespace\NonExsistingClass </span><span class="keyword">as </span><span class="default">whatever</span><span class="keyword">;<br />
+</span><span class="default">$whatever </span><span class="keyword">= new </span><span class="default">whatever</span><span class="keyword">();<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="120644""></a>
+  <div class="note">
+   <strong class="user">ZhangLiang</strong>
+   <a href="#120644" class="date">15-Feb-2017 06:16</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+In Chinese,there is an error in translation:<br />
+// 如果不使用 "use \ArrayObject" ，则实例化一个 foo\ArrayObject 对象<br />
+it should be<br />
+// 如果不使用 "use ArrayObject" ，则实例化一个 foo\ArrayObject 对象<br />
+<br />
+/*********************************************/<br />
+中文下翻译有错误<br />
+// 如果不使用 "use \ArrayObject" ，则实例化一个 foo\ArrayObject 对象<br />
+这句话应该是<br />
+// 如果不使用 "use ArrayObject" ，则实例化一个 foo\ArrayObject 对象</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="119970""></a>
+  <div class="note">
+   <strong class="user">ultimater at gmail dot com</strong>
+   <a href="#119970" class="date">30-Sep-2016 10:53</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Note that "use" importing/aliasing only applies to the current namespace block.<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="keyword">namespace </span><span class="default">SuperCoolLibrary<br />
+</span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; class </span><span class="default">Meta<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">{<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; static public function </span><span class="default">getVersion</span><span class="keyword">()<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="string">'2.7.1'</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+namespace<br />
+{<br />
+&nbsp;&nbsp;&nbsp; use </span><span class="default">SuperCoolLibrary\Meta</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="default">Meta</span><span class="keyword">::</span><span class="default">getVersion</span><span class="keyword">();</span><span class="comment">//outputs 2.7.1<br />
+</span><span class="keyword">}<br />
+<br />
+namespace<br />
+{<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="default">Meta</span><span class="keyword">::</span><span class="default">getVersion</span><span class="keyword">();</span><span class="comment">//fatal error<br />
+</span><span class="keyword">}<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+To get the expected behavior, you'd use:<br />
+class_alias('SuperCoolLibrary\Meta','Meta');</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="119920""></a>
+  <div class="note">
+   <strong class="user">dominic_mayers at yahoo dot com</strong>
+   <a href="#119920" class="date">20-Sep-2016 11:18</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+To clarify the distinction between inserting a trait in a class and importing a trait in a namespace, here is an example where we first import and then insert a trait. <br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">namespace </span><span class="default">ns1</span><span class="keyword">;<br />
+trait </span><span class="default">T </span><span class="keyword">{<br />
+&nbsp; static </span><span class="default">$a </span><span class="keyword">= </span><span class="string">"In T"</span><span class="keyword">;<br />
+}<br />
+<br />
+namespace </span><span class="default">ns2</span><span class="keyword">;<br />
+use </span><span class="default">ns1\T</span><span class="keyword">; </span><span class="comment">// Importing the name of trait ns1\T&nbsp; in the namespace ns2<br />
+</span><span class="keyword">class </span><span class="default">C </span><span class="keyword">{ <br />
+&nbsp; use </span><span class="default">T</span><span class="keyword">; </span><span class="comment">// Inserting trait T in the class C, making use of the imported name. <br />
+</span><span class="keyword">}&nbsp; <br />
+<br />
+namespace </span><span class="default">main</span><span class="keyword">;<br />
+use </span><span class="default">ns2\C</span><span class="keyword">;<br />
+echo </span><span class="default">C</span><span class="keyword">::</span><span class="default">$a</span><span class="keyword">; </span><span class="comment">// In T;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="119919""></a>
+  <div class="note">
+   <strong class="user">dominic_mayers at yahoo dot com</strong>
+   <a href="#119919" class="date">20-Sep-2016 10:50</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+The keyword "use" has been recycled for three distinct applications: <br />
+1- to import/alias classes, traits, constants, etc. in namespaces, <br />
+2- to insert traits in classes, <br />
+3- to inherit variables in closures. <br />
+This page is only about the first application: importing/aliasing. Traits can be inserted in classes, but this is different from importing a trait in a namespace, which cannot be done in a block scope, as pointed out in example 5. This can be confusing, especially since all searches for the keyword "use" are directed to the documentation here on importing/aliasing.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="119091""></a>
+  <div class="note">
+   <strong class="user">me at ruslanbes dot com</strong>
+   <a href="#119091" class="date">31-Mar-2016 07:34</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Note the code `use ns1\c1` may refer to importing class `c1` from namespace `ns1` as well as importing whole namespace `ns1\c1` or even import both of them in one line. Example:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">namespace </span><span class="default">ns1</span><span class="keyword">;<br />
+<br />
+class </span><span class="default">c1</span><span class="keyword">{}<br />
+<br />
+namespace </span><span class="default">ns1\c1</span><span class="keyword">;<br />
+<br />
+class </span><span class="default">c11</span><span class="keyword">{}<br />
+<br />
+namespace </span><span class="default">main</span><span class="keyword">;<br />
+<br />
+use </span><span class="default">ns1\c1</span><span class="keyword">;<br />
+<br />
+</span><span class="default">$c1 </span><span class="keyword">= new </span><span class="default">c1</span><span class="keyword">();<br />
+</span><span class="default">$c11 </span><span class="keyword">= new </span><span class="default">c1\c11</span><span class="keyword">();<br />
+<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$c1</span><span class="keyword">); </span><span class="comment">// object(ns1\c1)#1 (0) { }<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$c11</span><span class="keyword">); </span><span class="comment">// object(ns1\c1\c11)#2 (0) { }</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="116852""></a>
+  <div class="note">
+   <strong class="user">kelerest123 at gmail dot com</strong>
+   <a href="#116852" class="date">10-Mar-2015 05:50</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+For the fifth example (example #5):<br />
+<br />
+When in block scope, it is not an illegal use of use keyword, because it is used for sharing things with traits.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="114265""></a>
+  <div class="note">
+   <strong class="user">anon</strong>
+   <a href="#114265" class="date">30-Jan-2014 09:08</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+The <span class="default">&lt;?php </span><span class="keyword">use </span><span class="default">?&gt;</span> statement does not load the class file. You have to do this with the <span class="default">&lt;?php </span><span class="keyword">require </span><span class="default">?&gt;</span> statement or by using an autoload function.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="111874""></a>
+  <div class="note">
+   <strong class="user">k at webnfo dot com</strong>
+   <a href="#111874" class="date">07-Apr-2013 01:32</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Note that you can not alias global namespace:<br />
+<br />
+use \ as test;<br />
+<br />
+echo test\strlen('');<br />
+<br />
+won't work.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="111835""></a>
+  <div class="note">
+   <strong class="user">Anonymous</strong>
+   <a href="#111835" class="date">03-Apr-2013 10:02</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+The last example on this page shows a possibly incorrect attempt of aliasing, but it is totally correct to import a trait \Languages\Languages\Danish.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="111634""></a>
+  <div class="note">
+   <strong class="user">cl</strong>
+   <a href="#111634" class="date">11-Mar-2013 12:59</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Something that is not immediately obvious, particular with PHP 5.3, is that namespace resolutions within an import are not resolved recursively.&nbsp; i.e.: if you alias an import and then use that alias in another import then this latter import will not be fully resolved with the former import.<br />
+<br />
+For example:<br />
+use \Controllers as C;<br />
+use C\First;<br />
+use C\Last;<br />
+<br />
+Both the First and Last namespaces are NOT resolved as \Controllers\First or \Controllers\Last as one might intend.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="110978""></a>
+  <div class="note">
+   <strong class="user">x at d dot a dot r dot k dot REMOVEDOTSANDTHIS dot gray dot org</strong>
+   <a href="#110978" class="date">02-Jan-2013 05:13</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+You are allowed to "use" the same resource multiple times as long as it is imported under a different alias at each invocation.<br />
+<br />
+For example:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">use </span><span class="default">Lend</span><span class="keyword">;<br />
+use </span><span class="default">Lend\l1</span><span class="keyword">;<br />
+use </span><span class="default">Lend\l1 </span><span class="keyword">as </span><span class="default">l3</span><span class="keyword">;<br />
+use </span><span class="default">Lend\l2</span><span class="keyword">;<br />
+use </span><span class="default">Lend\l1\Keller</span><span class="keyword">;<br />
+use </span><span class="default">Lend\l1\Keller </span><span class="keyword">as </span><span class="default">Stellar</span><span class="keyword">;<br />
+use </span><span class="default">Lend\l1\Keller </span><span class="keyword">as </span><span class="default">Zellar</span><span class="keyword">;<br />
+use </span><span class="default">Lend\l2\Keller </span><span class="keyword">as </span><span class="default">Dellar</span><span class="keyword">;<br />
+<br />
+...<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+In the above example, "Keller", "Stellar", and "Zellar" are all references to "\Lend\l1\Keller", as are "Lend\l1\Keller", "l1\Keller", and "l3\Keller".</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="105394""></a>
+  <div class="note">
+   <strong class="user">c dot 1 at smithies dot org</strong>
+   <a href="#105394" class="date">14-Aug-2011 03:26</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you are testing your code at the CLI, note that namespace aliases do not work!<br />
+<br />
+(Before I go on, all the backslashes in this example are changed to percent signs because I cannot get sensible results to display in the posting preview otherwise. Please mentally translate all percent signs henceforth as backslashes.)<br />
+<br />
+Suppose you have a class you want to test in myclass.php:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">namespace </span><span class="default">my</span><span class="keyword">%</span><span class="default">space</span><span class="keyword">;<br />
+class </span><span class="default">myclass </span><span class="keyword">{<br />
+&nbsp;</span><span class="comment">// ...<br />
+</span><span class="keyword">}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+and you then go into the CLI to test it. You would like to think that this would work, as you type it line by line:<br />
+<br />
+require 'myclass.php';<br />
+use my%space%myclass; // should set 'myclass' as alias for 'my%space%myclass'<br />
+$x = new myclass; // FATAL ERROR<br />
+<br />
+I believe that this is because aliases are only resolved at compile time, whereas the CLI simply evaluates statements; so use statements are ineffective in the CLI.<br />
+<br />
+If you put your test code into test.php:<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">require </span><span class="string">'myclass.php'</span><span class="keyword">;<br />
+use </span><span class="default">my</span><span class="keyword">%</span><span class="default">space</span><span class="keyword">%</span><span class="default">myclass</span><span class="keyword">;<br />
+</span><span class="default">$x </span><span class="keyword">= new </span><span class="default">myclass</span><span class="keyword">;<br />
+</span><span class="comment">//...<br />
+</span><span class="default">?&gt;<br />
+</span>it will work fine.<br />
+<br />
+I hope this reduces the number of prematurely bald people.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="101199""></a>
+  <div class="note">
+   <strong class="user">thinice at gmail.com</strong>
+   <a href="#101199" class="date">01-Dec-2010 10:07</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Because imports happen at compile time, there's no polymorphism potential by embedding the use keyword in a conditonal.<br />
+<br />
+e.g.:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">if (</span><span class="default">$objType </span><span class="keyword">== </span><span class="string">'canine'</span><span class="keyword">) {<br />
+&nbsp; use </span><span class="default">Animal\Canine </span><span class="keyword">as </span><span class="default">Beast</span><span class="keyword">;<br />
+}<br />
+if (</span><span class="default">$objType </span><span class="keyword">== </span><span class="string">'bovine'</span><span class="keyword">) {<br />
+&nbsp; use </span><span class="default">Animal\Bovine </span><span class="keyword">as </span><span class="default">Beast</span><span class="keyword">;<br />
+}<br />
+<br />
+</span><span class="default">$oBeast </span><span class="keyword">= new </span><span class="default">Beast</span><span class="keyword">;<br />
+</span><span class="default">$oBeast</span><span class="keyword">-&gt;</span><span class="default">feed</span><span class="keyword">();<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

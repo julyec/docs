@@ -1,0 +1,375 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>返回相应字段编号的类型名称</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.pg-field-type-oid.html">? pg_field_type_oid</a></li>
+      <li style="float: right;"><a href="function.pg-flush.html">pg_flush ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.pgsql.html">PostgreSQL 函数</a></li>
+    <li>返回相应字段编号的类型名称</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.pg-field-type" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">pg_field_type</h1> 
+  <p class="verinfo">(PHP 4 &gt;= 4.2.0, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">pg_field_type</span> &mdash; <span class="dc-title">
+   返回相应字段编号的类型名称
+  </span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.pg-field-type-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>pg_field_type</strong></span>(<span class="methodparam"><span class="type"><a href="class.pgsql-result.html" class="type PgSql\Result">PgSql\Result</a></span> <code class="parameter">$result</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$field</code></span>): <span class="type">string</span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>pg_field_type()</strong></span> 返回字符串，其中包含指定 <code class="parameter">result</code> 实例中指定 <code class="parameter">field</code> 的基本类型名称。
+  </p>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    如果字段使用 PostgreSQL domain（而不是基本类型），则返回的是 domain 的底层类型名称，而不是 domain 本身的名称。
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    本函数以前的名字为 <span class="function"><strong>pg_fieldtype()</strong></span>。
+   </p>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.pg-field-type-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">result</code></dt>
+
+     <dd>
+
+      <p class="para"><span class="classname"><a href="class.pgsql-result.html" class="classname">PgSql\Result</a></span> 实例，由
+<span class="function"><a href="function.pg-query.html" class="function">pg_query()</a></span>、<span class="function"><a href="function.pg-query-params.html" class="function">pg_query_params()</a></span> 或者 <span class="function"><a href="function.pg-execute.html" class="function">pg_execute()</a></span>（等）返回。</p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">field</code></dt>
+
+      <dd>
+
+       <p class="para">
+        字段编号，从 0 开始。
+       </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.pg-field-type-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   包含字段类型的基本名称的 <span class="type">string</span>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.pg-field-type-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+ <td>8.1.0</td>
+ <td>
+  现在 <code class="parameter">result</code> 参数接受 <span class="classname"><a href="class.pgsql-result.html" class="classname">PgSql\Result</a></span>
+  实例，之前接受 <a href="language.types.resource.html" class="link">资源(resource)</a>。
+ </td>
+</tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+ 
+ <div class="refsect1 examples" id="refsect1-function.pg-field-type-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="example-3882">
+    <p><strong>Example #1 获取字段信息</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />  $dbconn </span><span style="color: #007700">= </span><span style="color: #0000BB">pg_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">"dbname=publisher"</span><span style="color: #007700">) or die(</span><span style="color: #DD0000">"Could not connect"</span><span style="color: #007700">);<br /><br />  </span><span style="color: #FF8000">// 假设 'title' 是 varchar 类型<br />  </span><span style="color: #0000BB">$res </span><span style="color: #007700">= </span><span style="color: #0000BB">pg_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$dbconn</span><span style="color: #007700">, </span><span style="color: #DD0000">"select title from authors where author = 'Orwell'"</span><span style="color: #007700">);<br /><br />  echo </span><span style="color: #DD0000">"Title field type: "</span><span style="color: #007700">, </span><span style="color: #0000BB">pg_field_type</span><span style="color: #007700">(</span><span style="color: #0000BB">$res</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Title field type: varchar
+</pre></div>
+    </div>
+   </div> 
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 seealso" id="refsect1-function.pg-field-type-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.pg-field-prtlen.html" class="function" rel="rdfs-seeAlso">pg_field_prtlen()</a> - 返回打印的长度</span></li>
+    <li class="member"><span class="function"><a href="function.pg-field-name.html" class="function" rel="rdfs-seeAlso">pg_field_name()</a> - 返回字段名</span></li>
+    <li class="member"><span class="function"><a href="function.pg-field-type-oid.html" class="function" rel="rdfs-seeAlso">pg_field_type_oid()</a> - Returns the type ID (OID) for the corresponding field number</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="111540""></a>
+  <div class="note">
+   <strong class="user">Joshua Burns</strong>
+   <a href="#111540" class="date">01-Mar-2013 10:29</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Here is an updated list of nearly every PostgreSQL data type, and PHP's internal C-type equivalent, updated for PostgreSQL 9.2. The first array maps PHP's internal data type to PostgreSQL's equivalents. The second maps PostgreSQL's data-types to PHP's equivalents.<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+$php_to_pg </span><span class="keyword">= array(<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'bit' </span><span class="keyword">=&gt; array(</span><span class="string">'bit'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'bool' </span><span class="keyword">=&gt; array(</span><span class="string">'boolean'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'box' </span><span class="keyword">=&gt; array(</span><span class="string">'box'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'bpchar' </span><span class="keyword">=&gt; array(</span><span class="string">'character'</span><span class="keyword">,</span><span class="string">'char'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'bytea' </span><span class="keyword">=&gt; array(</span><span class="string">'bytea'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'cidr' </span><span class="keyword">=&gt; array(</span><span class="string">'cidr'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'circle' </span><span class="keyword">=&gt; array(</span><span class="string">'circle'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'date' </span><span class="keyword">=&gt; array(</span><span class="string">'date'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'daterange' </span><span class="keyword">=&gt; array(</span><span class="string">'daterange'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'float4' </span><span class="keyword">=&gt; array(</span><span class="string">'real'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'float8' </span><span class="keyword">=&gt; array(</span><span class="string">'double precision'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'inet' </span><span class="keyword">=&gt; array(</span><span class="string">'inet'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'int2' </span><span class="keyword">=&gt; array(</span><span class="string">'smallint'</span><span class="keyword">, </span><span class="string">'smallserial'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'int4' </span><span class="keyword">=&gt; array(</span><span class="string">'integer'</span><span class="keyword">, </span><span class="string">'serial'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'int4range' </span><span class="keyword">=&gt; array(</span><span class="string">'int4range'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'int8' </span><span class="keyword">=&gt; array(</span><span class="string">'bigint'</span><span class="keyword">, </span><span class="string">'bigserial'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'int8range' </span><span class="keyword">=&gt; array(</span><span class="string">'int8range'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'interval' </span><span class="keyword">=&gt; array(</span><span class="string">'interval'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'json' </span><span class="keyword">=&gt; array(</span><span class="string">'json'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'lseg' </span><span class="keyword">=&gt; array(</span><span class="string">'lseg'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'macaddr' </span><span class="keyword">=&gt; array(</span><span class="string">'macaddr'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'money' </span><span class="keyword">=&gt; array(</span><span class="string">'money'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'numeric' </span><span class="keyword">=&gt; array(</span><span class="string">'decimal'</span><span class="keyword">, </span><span class="string">'numeric'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'numrange' </span><span class="keyword">=&gt; array(</span><span class="string">'numrange'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'path' </span><span class="keyword">=&gt; array(</span><span class="string">'path'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'point' </span><span class="keyword">=&gt; array(</span><span class="string">'point'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'polygon' </span><span class="keyword">=&gt; array(</span><span class="string">'polygon'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'text' </span><span class="keyword">=&gt; array(</span><span class="string">'text'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'time' </span><span class="keyword">=&gt; array(</span><span class="string">'time'</span><span class="keyword">, </span><span class="string">'time without time zone'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'timestamp' </span><span class="keyword">=&gt; array(</span><span class="string">'timestamp'</span><span class="keyword">, </span><span class="string">'timestamp without time zone'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'timestamptz' </span><span class="keyword">=&gt; array(</span><span class="string">'timestamp with time zone'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'timetz' </span><span class="keyword">=&gt; array(</span><span class="string">'time with time zone'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'tsquery' </span><span class="keyword">=&gt; array(</span><span class="string">'tsquery'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'tsrange' </span><span class="keyword">=&gt; array(</span><span class="string">'tsrange'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'tsvector' </span><span class="keyword">=&gt; array(</span><span class="string">'tsvector'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'uuid' </span><span class="keyword">=&gt; array(</span><span class="string">'uuid'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'varbit' </span><span class="keyword">=&gt; array(</span><span class="string">'bit varying'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'varchar' </span><span class="keyword">=&gt; array(</span><span class="string">'character varying'</span><span class="keyword">, </span><span class="string">'varchar'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'xml' </span><span class="keyword">=&gt; array(</span><span class="string">'xml'</span><span class="keyword">),<br />
+);<br />
+<br />
+</span><span class="default">$pg_to_php </span><span class="keyword">= array(<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'bit' </span><span class="keyword">=&gt; </span><span class="string">'bit'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'boolean' </span><span class="keyword">=&gt; </span><span class="string">'bool'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'box' </span><span class="keyword">=&gt; </span><span class="string">'box'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'character' </span><span class="keyword">=&gt; </span><span class="string">'bpchar'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'char' </span><span class="keyword">=&gt; </span><span class="string">'bpchar'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'bytea' </span><span class="keyword">=&gt; </span><span class="string">'bytea'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'cidr' </span><span class="keyword">=&gt; </span><span class="string">'cidr'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'circle' </span><span class="keyword">=&gt; </span><span class="string">'circle'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'date' </span><span class="keyword">=&gt; </span><span class="string">'date'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'daterange' </span><span class="keyword">=&gt; </span><span class="string">'daterange'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'real' </span><span class="keyword">=&gt; </span><span class="string">'float4'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'double precision' </span><span class="keyword">=&gt; </span><span class="string">'float8'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'inet' </span><span class="keyword">=&gt; </span><span class="string">'inet'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'smallint' </span><span class="keyword">=&gt; </span><span class="string">'int2'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'smallserial' </span><span class="keyword">=&gt; </span><span class="string">'int2'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'integer' </span><span class="keyword">=&gt; </span><span class="string">'int4'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'serial' </span><span class="keyword">=&gt; </span><span class="string">'int4'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'int4range' </span><span class="keyword">=&gt; </span><span class="string">'int4range'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'bigint' </span><span class="keyword">=&gt; </span><span class="string">'int8'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'bigserial' </span><span class="keyword">=&gt; </span><span class="string">'int8'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'int8range' </span><span class="keyword">=&gt; </span><span class="string">'int8range'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'interval' </span><span class="keyword">=&gt; </span><span class="string">'interval'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'json' </span><span class="keyword">=&gt; </span><span class="string">'json'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'lseg' </span><span class="keyword">=&gt; </span><span class="string">'lseg'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'macaddr' </span><span class="keyword">=&gt; </span><span class="string">'macaddr'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'money' </span><span class="keyword">=&gt; </span><span class="string">'money'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'decimal' </span><span class="keyword">=&gt; </span><span class="string">'numeric'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'numeric' </span><span class="keyword">=&gt; </span><span class="string">'numeric'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'numrange' </span><span class="keyword">=&gt; </span><span class="string">'numrange'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'path' </span><span class="keyword">=&gt; </span><span class="string">'path'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'point' </span><span class="keyword">=&gt; </span><span class="string">'point'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'polygon' </span><span class="keyword">=&gt; </span><span class="string">'polygon'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'text' </span><span class="keyword">=&gt; </span><span class="string">'text'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'time' </span><span class="keyword">=&gt; </span><span class="string">'time'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'time without time zone' </span><span class="keyword">=&gt; </span><span class="string">'time'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'timestamp' </span><span class="keyword">=&gt; </span><span class="string">'timestamp'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'timestamp without time zone' </span><span class="keyword">=&gt; </span><span class="string">'timestamp'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'timestamp with time zone' </span><span class="keyword">=&gt; </span><span class="string">'timestamptz'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'time with time zone' </span><span class="keyword">=&gt; </span><span class="string">'timetz'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'tsquery' </span><span class="keyword">=&gt; </span><span class="string">'tsquery'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'tsrange' </span><span class="keyword">=&gt; </span><span class="string">'tsrange'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'tstzrange' </span><span class="keyword">=&gt; </span><span class="string">'tstzrange'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'tsvector' </span><span class="keyword">=&gt; </span><span class="string">'tsvector'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'uuid' </span><span class="keyword">=&gt; </span><span class="string">'uuid'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'bit varying' </span><span class="keyword">=&gt; </span><span class="string">'varbit'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'character varying' </span><span class="keyword">=&gt; </span><span class="string">'varchar'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'varchar' </span><span class="keyword">=&gt; </span><span class="string">'varchar'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'xml' </span><span class="keyword">=&gt; </span><span class="string">'xml'<br />
+</span><span class="keyword">);<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="95704""></a>
+  <div class="note">
+   <strong class="user">Anonymous</strong>
+   <a href="#95704" class="date">16-Jan-2010 07:18</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Also be aware that postgreSQL array fields will prefix the type name with an underscore (e.g. "_int4" or "_text"), while composite a.k.a. row-type fields will return type "record".</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="60297""></a>
+  <div class="note">
+   <strong class="user">marxarelli</strong>
+   <a href="#60297" class="date">02-Jan-2006 02:34</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Because complete documentation is always helpful, here are all the PostgreSQL general purpose types as they are listed in the 8.1 documentation, and each corresponding string returned by pg_field_type().<br />
+<br />
+bigint =&gt; int8<br />
+bigserial =&gt; int8<br />
+bit =&gt; bit<br />
+bit varying =&gt; varbit<br />
+boolean =&gt; bool<br />
+box =&gt; box<br />
+bytea =&gt; bytea<br />
+character varying =&gt; varchar<br />
+character =&gt; bpchar<br />
+cidr =&gt; cidr<br />
+circle =&gt; circle<br />
+date =&gt; date<br />
+double precision =&gt; float8<br />
+inet =&gt; inet<br />
+integer =&gt; int4<br />
+interval =&gt; interval<br />
+line =&gt; line<br />
+lseg =&gt; lseg<br />
+macaddr =&gt; macaddr<br />
+money =&gt; money<br />
+numeric =&gt; numeric<br />
+path =&gt; path<br />
+point =&gt; point<br />
+polygon =&gt; polygon<br />
+real =&gt; float4<br />
+smallint =&gt; int2<br />
+serial =&gt; int4<br />
+text =&gt; text<br />
+time =&gt; time<br />
+time with time zone =&gt; timetz<br />
+timestamp =&gt; timestamp<br />
+timestamp with time zone =&gt; timestamptz<br />
+<br />
+And for the record... (note the 7.4 client lib)<br />
+# postmaster --version<br />
+postmaster (PostgreSQL) 8.0.4<br />
+<br />
+# ldd libphp4.so<br />
+...<br />
+libpq.so.3 =&gt; /usr/lib/libpq.so.3 (0xb7ac8000)<br />
+...</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="31784""></a>
+  <div class="note">
+   <strong class="user">andy at a 2 h d dot com</strong>
+   <a href="#31784" class="date">03-May-2003 12:09</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+The types returned are:<br />
+&nbsp; bool<br />
+&nbsp; int2 (smallint)<br />
+&nbsp; int4<br />
+&nbsp; int8 (bigint)<br />
+&nbsp; numeric<br />
+&nbsp; float4 (real / float)<br />
+&nbsp; float8 (double)<br />
+&nbsp; timestamp<br />
+&nbsp; date<br />
+&nbsp; time<br />
+&nbsp; varchar<br />
+&nbsp; bpchar (fixed leng string, 'blank padded char')<br />
+&nbsp; inet (ip address)<br />
+&nbsp; money<br />
+<br />
+There are some other more esoteric types, e.g. 'circle', but these are the most common.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

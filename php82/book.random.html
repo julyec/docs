@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>随机数生成器和相关随机函数</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="changelog.misc.html">? 更新日志</a></li>
+      <li style="float: right;"><a href="intro.random.html">简介 ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="refs.basic.other.html">其它基本扩展</a></li>
+    <li>随机数生成器和相关随机函数</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="book.random" class="book">
+ 
+ <h1 class="title">随机数生成器和相关随机函数</h1>
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+
+ 
+
+
+
+
+ 
+
+
+
+ 
+
+
+
+
+ 
+
+
+
+ 
+
+
+
+
+ 
+
+
+
+ 
+
+
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+
+<ul class="chunklist chunklist_book"><li><a href="intro.random.html">简介</a></li><li><a href="random.setup.html">安装/配置</a><ul class="chunklist chunklist_book chunklist_children"><li><a href="random.requirements.html">需求</a></li><li><a href="random.installation.html">安装</a></li><li><a href="random.configuration.html">运行时配置</a></li><li><a href="random.resources.html">资源类型</a></li></ul></li><li><a href="random.constants.html">预定义常量</a></li><li><a href="random.examples.html">示例</a></li><li><a href="ref.random.html">Random 函数</a><ul class="chunklist chunklist_book chunklist_children"><li><a href="function.getrandmax.html">getrandmax</a> &mdash; 显示随机数最大的可能值</li><li><a href="function.lcg-value.html">lcg_value</a> &mdash; 组合线性同余发生器</li><li><a href="function.mt-getrandmax.html">mt_getrandmax</a> &mdash; 显示随机数的最大可能值</li><li><a href="function.mt-rand.html">mt_rand</a> &mdash; 通过梅森旋转（Mersenne Twister）随机数生成器生成随机值</li><li><a href="function.mt-srand.html">mt_srand</a> &mdash; 播下一个更好的随机数发生器种子</li><li><a href="function.rand.html">rand</a> &mdash; 产生一个随机整数</li><li><a href="function.random-bytes.html">random_bytes</a> &mdash; Get cryptographically secure random bytes</li><li><a href="function.random-int.html">random_int</a> &mdash; 获取生成加密安全、均匀分布的整数</li><li><a href="function.srand.html">srand</a> &mdash; 播下随机数发生器种子</li></ul></li><li><a href="class.random-randomizer.html">Random\Randomizer</a> &mdash; The Random\Randomizer class<ul class="chunklist chunklist_book chunklist_children"><li><a href="random-randomizer.construct.html">Random\Randomizer::__construct</a> &mdash; Constructs a new Randomizer</li><li><a href="random-randomizer.getbytes.html">Random\Randomizer::getBytes</a> &mdash; Get random bytes</li><li><a href="random-randomizer.getint.html">Random\Randomizer::getInt</a> &mdash; Get a uniformly selected integer</li><li><a href="random-randomizer.nextint.html">Random\Randomizer::nextInt</a> &mdash; Get a positive integer</li><li><a href="random-randomizer.pickarraykeys.html">Random\Randomizer::pickArrayKeys</a> &mdash; Select random array keys</li><li><a href="random-randomizer.serialize.html">Random\Randomizer::__serialize</a> &mdash; Serializes the Randomizer object</li><li><a href="random-randomizer.shufflearray.html">Random\Randomizer::shuffleArray</a> &mdash; Get a permutation of an array</li><li><a href="random-randomizer.shufflebytes.html">Random\Randomizer::shuffleBytes</a> &mdash; Get a byte-wise permutation of a string</li><li><a href="random-randomizer.unserialize.html">Random\Randomizer::__unserialize</a> &mdash; Deserializes the data parameter into a Randomizer object</li></ul></li><li><a href="class.random-engine.html">Random\Engine</a> &mdash; The Random\Engine interface<ul class="chunklist chunklist_book chunklist_children"><li><a href="random-engine.generate.html">Random\Engine::generate</a> &mdash; Generates randomness</li></ul></li><li><a href="class.random-cryptosafeengine.html">Random\CryptoSafeEngine</a> &mdash; The Random\CryptoSafeEngine interface</li><li><a href="class.random-engine-secure.html">Random\Engine\Secure</a> &mdash; The Random\Engine\Secure class<ul class="chunklist chunklist_book chunklist_children"><li><a href="random-engine-secure.generate.html">Random\Engine\Secure::generate</a> &mdash; Generate cryptographically secure randomness</li></ul></li><li><a href="class.random-engine-mt19937.html">Random\Engine\Mt19937</a> &mdash; Random\Engine\Mt19937 类<ul class="chunklist chunklist_book chunklist_children"><li><a href="random-engine-mt19937.construct.html">Random\Engine\Mt19937::__construct</a> &mdash; Constructs a new Mt19937 engine</li><li><a href="random-engine-mt19937.debuginfo.html">Random\Engine\Mt19937::__debugInfo</a> &mdash; Returns the internal state of the engine</li><li><a href="random-engine-mt19937.generate.html">Random\Engine\Mt19937::generate</a> &mdash; Generate 32 bits of randomness</li><li><a href="random-engine-mt19937.serialize.html">Random\Engine\Mt19937::__serialize</a> &mdash; Serializes the Mt19937 object</li><li><a href="random-engine-mt19937.unserialize.html">Random\Engine\Mt19937::__unserialize</a> &mdash; Deserializes the data parameter into a Mt19937 object</li></ul></li><li><a href="class.random-engine-pcgoneseq128xslrr64.html">Random\Engine\PcgOneseq128XslRr64</a> &mdash; The Random\Engine\PcgOneseq128XslRr64 class<ul class="chunklist chunklist_book chunklist_children"><li><a href="random-engine-pcgoneseq128xslrr64.construct.html">Random\Engine\PcgOneseq128XslRr64::__construct</a> &mdash; Constructs a new PCG Oneseq 128 XSL RR 64 engine</li><li><a href="random-engine-pcgoneseq128xslrr64.debuginfo.html">Random\Engine\PcgOneseq128XslRr64::__debugInfo</a> &mdash; Returns the internal state of the engine</li><li><a href="random-engine-pcgoneseq128xslrr64.generate.html">Random\Engine\PcgOneseq128XslRr64::generate</a> &mdash; Generate 64 bits of randomness</li><li><a href="random-engine-pcgoneseq128xslrr64.jump.html">Random\Engine\PcgOneseq128XslRr64::jump</a> &mdash; Efficiently move the engine ahead multiple steps</li><li><a href="random-engine-pcgoneseq128xslrr64.serialize.html">Random\Engine\PcgOneseq128XslRr64::__serialize</a> &mdash; Serializes the PcgOneseq128XslRr64 object</li><li><a href="random-engine-pcgoneseq128xslrr64.unserialize.html">Random\Engine\PcgOneseq128XslRr64::__unserialize</a> &mdash; Deserializes the data parameter into a PcgOneseq128XslRr64 object</li></ul></li><li><a href="class.random-engine-xoshiro256starstar.html">Random\Engine\Xoshiro256StarStar</a> &mdash; Random\Engine\Xoshiro256StarStar 类<ul class="chunklist chunklist_book chunklist_children"><li><a href="random-engine-xoshiro256starstar.construct.html">Random\Engine\Xoshiro256StarStar::__construct</a> &mdash; Constructs a new xoshiro256** engine</li><li><a href="random-engine-xoshiro256starstar.debuginfo.html">Random\Engine\Xoshiro256StarStar::__debugInfo</a> &mdash; Returns the internal state of the engine</li><li><a href="random-engine-xoshiro256starstar.generate.html">Random\Engine\Xoshiro256StarStar::generate</a> &mdash; Generate 64 bits of randomness</li><li><a href="random-engine-xoshiro256starstar.jump.html">Random\Engine\Xoshiro256StarStar::jump</a> &mdash; Efficiently move the engine ahead by 2^128 steps</li><li><a href="random-engine-xoshiro256starstar.jumplong.html">Random\Engine\Xoshiro256StarStar::jumpLong</a> &mdash; Efficiently move the engine ahead by 2^192 steps</li><li><a href="random-engine-xoshiro256starstar.serialize.html">Random\Engine\Xoshiro256StarStar::__serialize</a> &mdash; Serializes the Xoshiro256StarStar object</li><li><a href="random-engine-xoshiro256starstar.unserialize.html">Random\Engine\Xoshiro256StarStar::__unserialize</a> &mdash; Deserializes the data parameter into a Xoshiro256StarStar object</li></ul></li><li><a href="class.random-randomerror.html">Random\RandomError</a> &mdash; The Random\RandomError class</li><li><a href="class.random-brokenrandomengineerror.html">Random\BrokenRandomEngineError</a> &mdash; The Random\BrokenRandomEngineError class</li><li><a href="class.random-randomexception.html">Random\RandomException</a> &mdash; The Random\RandomException class</li></ul></div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+ <div class="note">There are no user contributed notes for this page.</div>
+</div>
+</div></div></body></html>

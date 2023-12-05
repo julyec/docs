@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>需求</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="oci8.setup.html">? 安装/配置</a></li>
+      <li style="float: right;"><a href="oci8.installation.html">安装 ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="oci8.setup.html">安装/配置</a></li>
+    <li>需求</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="oci8.requirements" class="section">
+  <h2 class="title">需求</h2>
+  <p class="para">
+   OCI8 3.0 is included with PHP 8. It is also available from <a href="https://pecl.php.net/" class="link external" title="Link : https://pecl.php.net/">&raquo;&nbsp;PECL</a>. For
+   PHP 7, use OCI8 2.2 from <a href="https://pecl.php.net/" class="link external" title="Link : https://pecl.php.net/">&raquo;&nbsp;PECL</a>. OCI8 requires Oracle
+   10<em class="emphasis">g</em> or later Oracle client libraries.
+  </p>
+  <p class="para">
+   If the Oracle Database is on the same machine as PHP, the database software
+   already contains the necessary libraries and header files.  When PHP is on a
+   different machine, use the free
+   <a href="https://www.oracle.com/database/technologies/instant-client.html" class="link external" title="Link : https://www.oracle.com/database/technologies/instant-client.html">&raquo;&nbsp;Oracle Instant Client</a> libraries.
+  </p>
+  <p class="para">
+   To use Oracle Instant Client, install the <code class="literal">Basic</code>
+   or <code class="literal">Basic Light</code> Oracle Instant Client ZIP file, RPM
+   package, or DMG package.  When building OCI8 from source code, also install
+   the Instant Client <code class="literal">SDK</code>.
+  </p>
+  <p class="para">
+   You must run PHP with the same, or a more recent, version of the
+   Oracle libraries that OCI8 was built with.
+  </p>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    Oracle&#039;s standard client-server network interoperability allows connections
+    between different versions of Oracle Client and Oracle Database.  For
+    certified configurations see Oracle Support&#039;s Doc ID 207303.1.  In
+    summary, Oracle Client 19, 18 and 12.2 can connect to Oracle Database 11.2
+    or greater. Oracle Client 12.1 can connect to Oracle Database 10.2 or
+    greater. Oracle Client 11.2 can connect to Oracle Database 9.2 or greater.
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    Full OCI8 feature support is only available when using the most
+    recent versions of the Oracle client libraries and database.
+   </p>
+  </p></blockquote>
+ </div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="127237""></a>
+  <div class="note">
+   <strong class="user">Wilber</strong>
+   <a href="#127237" class="date">09-Jul-2022 03:00</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+The OCI8 extension lets you access Oracle Database.<br />
+<br />
+Use 'pecl install oci8' to install for PHP 8.1.<br />
+<br />
+Use 'pecl install oci8-3.0.1' to install for PHP 8.0.<br />
+<br />
+Use 'pecl install oci8-2.2.0' to install for PHP 7.<br />
+<br />
+Use 'pecl install oci8-2.0.12' to install for PHP 5.2 - PHP 5.6.<br />
+<br />
+Use 'pecl install oci8-1.4.10' to install for PHP 4.3.9 - PHP 5.1.<br />
+<br />
+[username@hostname ~]# php -v<br />
+^ To see PHP version</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="124548""></a>
+  <div class="note">
+   <strong class="user">charles dot fisher at arconic dot com</strong>
+   <a href="#124548" class="date">27-Dec-2019 05:00</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Oracle's development package includes an ldap.h file that causes compilation attempts of PHP to fail.<br />
+<br />
+For the oracle-instantclient12.2-devel 64-bit RPM, this file is found in the following path:<br />
+<br />
+/usr/include/oracle/12.2/client64/ldap.h<br />
+<br />
+Rename this file to ldap.h-oracle.<br />
+<br />
+After doing so, and assuming there are no other build problems, PHP will compile (even when ldap and oci are configured in the build).</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="122686""></a>
+  <div class="note">
+   <strong class="user">Andi,post at rueckauer dot nospam dot ch</strong>
+   <a href="#122686" class="date">01-May-2018 12:14</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+The provided link to the Oracle Instant Client is not valid anymore. Visit <a href="http://www.oracle.com/technetwork/database/database-technologies/instant-client/downloads/index.html instead." rel="nofollow" target="_blank">http://www.oracle.com/technetwork/database/database-technologies/instant-client/downloads/index.html instead.</a></span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="121694""></a>
+  <div class="note">
+   <strong class="user">sgfan at gmx dot net</strong>
+   <a href="#121694" class="date">27-Sep-2017 09:31</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I can confirm Rainer's observations and this not limited to PHP. One cannot link libopenldap with C with Oracle driver without crashing the app at runtime. Same here on HP-UX. Both won't play nice at all.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="121285""></a>
+  <div class="note">
+   <strong class="user">Rainer Perske</strong>
+   <a href="#121285" class="date">28-Jun-2017 06:16</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Oracle Instant Client provides its own LDAP library that may be incompatible to the LDAP library provided by the operating system.<br />
+<br />
+Segmentation faults and other errors can happen if you load an OCI8 extension into a PHP containing LDAP support or if you load a PHP module with OCI8 into an Apache server with LDAP support.<br />
+<br />
+But this depends heavily on the exact versions of operating system, system LDAP library, PHP,&nbsp; OCI8, and other pieces of software involved.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

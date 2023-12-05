@@ -1,0 +1,1252 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>PHP 的命令行模式</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="features.persistent-connections.html">? 持久数据库连接</a></li>
+      <li style="float: right;"><a href="features.commandline.introduction.html">如何得知自己使用的是哪个 SAPI？ ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="features.html">特点</a></li>
+    <li>PHP 的命令行模式</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="features.commandline" class="chapter">
+ <h1>PHP 的命令行模式</h1>
+<h2>Table of Contents</h2><ul class="chunklist chunklist_chapter"><li><a href="features.commandline.introduction.html">如何得知自己使用的是哪个 SAPI？</a></li><li><a href="features.commandline.differences.html">和其它 SAPI 模块的区别</a></li><li><a href="features.commandline.options.html">选项</a></li><li><a href="features.commandline.usage.html">用法</a></li><li><a href="features.commandline.io-streams.html">I/O 流</a></li><li><a href="features.commandline.interactive.html">交互式 shell</a></li><li><a href="features.commandline.webserver.html">内置Web Server</a></li><li><a href="features.commandline.ini.html">INI 配置</a></li></ul>
+
+
+ 
+ 
+ 
+
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+  
+
+</div>
+<div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="125955""></a>
+  <div class="note">
+   <strong class="user">Anonymous</strong>
+   <a href="#125955" class="date">24-Mar-2021 12:49</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+We can pass many arguments directly into the hashbang line.<br />
+As example many ini setting via the -d parameter of php.<br />
+---<br />
+#!/usr/bin/php -d memory_limit=2048M -d post_max_size=0<br />
+phpinfo();<br />
+exit;<br />
+---<br />
+./script | grep memory<br />
+memory_limit =&gt; 2048M =&gt; 2048M<br />
+---<br />
+But we can also use this behaviour into a second script, so it call the first as an interpreter, via the hashbang:<br />
+---<br />
+#!./script arg1 arg2 arg3 <br />
+---<br />
+However the parameters are dispatched in a different way into $argv<br />
+<br />
+All the parameters are in $argv[1], $argv[0] is the interpreter script name, and $argv[1] is the caller script name.<br />
+<br />
+To get back the parameters into $argv, we can simply test if $argv[1] contains spaces, and then dispatch again as normal: <br />
+<br />
+#!/usr/bin/php -d memory_limit=2048M -d post_max_size=0<br />
+<span class="default">&lt;?php<br />
+var_dump</span><span class="keyword">(</span><span class="default">$argv</span><span class="keyword">);<br />
+if (</span><span class="default">strpos</span><span class="keyword">(</span><span class="default">$argv</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">], </span><span class="string">' '</span><span class="keyword">) !== </span><span class="default">false</span><span class="keyword">){<br />
+&nbsp; </span><span class="default">$argw </span><span class="keyword">= </span><span class="default">explode</span><span class="keyword">(</span><span class="string">" "</span><span class="keyword">, </span><span class="default">$argv</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">]);<br />
+&nbsp; </span><span class="default">array_unshift</span><span class="keyword">(</span><span class="default">$argw</span><span class="keyword">, </span><span class="default">$argv</span><span class="keyword">[</span><span class="default">2</span><span class="keyword">]);<br />
+&nbsp; </span><span class="default">$argv </span><span class="keyword">= </span><span class="default">$argw</span><span class="keyword">;<br />
+}<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$argv</span><span class="keyword">); </span><span class="default">?&gt;<br />
+</span>---<br />
+array(3) {<br />
+&nbsp; [0]=&gt;<br />
+&nbsp; string(8) "./script"<br />
+&nbsp; [1]=&gt;<br />
+&nbsp; string(15) "arg1 arg2 arg3 "<br />
+&nbsp; [2]=&gt;<br />
+&nbsp; string(14) "./other_script"<br />
+}<br />
+array(4) {<br />
+&nbsp; [0]=&gt;<br />
+&nbsp; string(8) "./other_script"<br />
+&nbsp; [1]=&gt;<br />
+&nbsp; string(4) "arg1"<br />
+&nbsp; [2]=&gt;<br />
+&nbsp; string(4) "arg2"<br />
+&nbsp; [3]=&gt;<br />
+&nbsp; string(4) "arg3"<br />
+}<br />
+---<br />
+This will maintain the same behaviour in all cases and allow to even double click a script to call both parameters of another script, and even make a full interpreter language layer.&nbsp; The other script doesn't has to be php. Take care of paths.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="123606""></a>
+  <div class="note">
+   <strong class="user">sam marshall</strong>
+   <a href="#123606" class="date">12-Feb-2019 04:13</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+When using the -R flag, the name of the variable containing the content of the current line (not including the LF) is $argn.<br />
+<br />
+For example you can do this code:<br />
+<br />
+cat file.txt | php -R 'echo $argn . "\n";'<br />
+<br />
+This will just output each line of the input file without doing anything to it.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="121914""></a>
+  <div class="note">
+   <strong class="user">apmuthu at usa dot net</strong>
+   <a href="#121914" class="date">26-Nov-2017 05:17</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Adding a pause() function to PHP waiting for any user input returning it:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">pause</span><span class="keyword">() {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$handle </span><span class="keyword">= </span><span class="default">fopen </span><span class="keyword">(</span><span class="string">"php://stdin"</span><span class="keyword">,</span><span class="string">"r"</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; do { </span><span class="default">$line </span><span class="keyword">= </span><span class="default">fgets</span><span class="keyword">(</span><span class="default">$handle</span><span class="keyword">); } while (</span><span class="default">$line </span><span class="keyword">== </span><span class="string">''</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">fclose</span><span class="keyword">(</span><span class="default">$handle</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$line</span><span class="keyword">;<br />
+}<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="119901""></a>
+  <div class="note">
+   <strong class="user">ohcc at 163 dot com</strong>
+   <a href="#119901" class="date">17-Sep-2016 06:26</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+use " instead of ' on windows when using the cli version with -r<br />
+<br />
+php -r "echo 1" <br />
+-- correct<br />
+<br />
+php -r 'echo 1'<br />
+&nbsp; PHP Parse error:&nbsp; syntax error, unexpected ''echo' (T_ENCAPSED_AND_WHITESPACE), expecting end of file in Command line code on line 1</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="116023""></a>
+  <div class="note">
+   <strong class="user">frankNospamwanted at. toppoint dot. de</strong>
+   <a href="#116023" class="date">30-Oct-2014 03:37</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Parsing commandline argument GET String without changing the PHP script (linux shell):<br />
+URL: index.php?a=1&amp;b=2<br />
+Result: output.html<br />
+<br />
+echo "" | php -R 'include("index.php");' -B 'parse_str($argv[1], $_GET);' 'a=1&amp;b=2' &gt;output.html<br />
+<br />
+(no need to change php.ini)<br />
+<br />
+You can put this <br />
+&nbsp; echo "" | php -R 'include("'$1'");' -B 'parse_str($argv[1], $_GET);' "$2"<br />
+in a bash script "php_get" to use it like this:<br />
+&nbsp; php_get index.php 'a=1&amp;b=2' &gt;output.html<br />
+or directed to text browser...<br />
+&nbsp; php_get index.php 'a=1&amp;b=2' |w3m -T text/html</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="113224""></a>
+  <div class="note">
+   <strong class="user">PSIKYO at mail dot dlut dot edu dot cn</strong>
+   <a href="#113224" class="date">14-Sep-2013 03:19</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you edit a php file in windows, upload and run it on linux with command line method. You may encounter a running problem probably like that:<br />
+<br />
+[root@ItsCloud02 wsdl]# ./lnxcli.php<br />
+Extension './lnxcli.php' not present.<br />
+<br />
+Or you may encounter some other strange problem.<br />
+Care the enter key. In windows environment, enter key generate two binary characters '0D0A'. But in Linux, enter key generate just only a 'OA'.<br />
+I wish it can help someone if you are using windows to code php and run it as a command line program on linux.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="108883""></a>
+  <div class="note">
+   <strong class="user">sep16 at psu dot edu</strong>
+   <a href="#108883" class="date">01-Jun-2012 01:17</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+You can easily parse command line arguments into the $_GET variable by using the parse_str() function.<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+parse_str</span><span class="keyword">(</span><span class="default">implode</span><span class="keyword">(</span><span class="string">'&amp;'</span><span class="keyword">, </span><span class="default">array_slice</span><span class="keyword">(</span><span class="default">$argv</span><span class="keyword">, </span><span class="default">1</span><span class="keyword">)), </span><span class="default">$_GET</span><span class="keyword">);<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+It behaves exactly like you'd expect with cgi-php.<br />
+<br />
+$ php -f somefile.php a=1 b[]=2 b[]=3<br />
+<br />
+This will set $_GET['a'] to '1' and $_GET['b'] to array('2', '3').<br />
+<br />
+Even better, instead of putting that line in every file, take advantage of PHP's auto_prepend_file directive.&nbsp; Put that line in its own file and set the auto_prepend_file directive in your cli-specific php.ini like so:<br />
+<br />
+auto_prepend_file = "/etc/php/cli-php5.3/local.prepend.php"<br />
+<br />
+It will be automatically prepended to any PHP file run from the command line.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="105568""></a>
+  <div class="note">
+   <strong class="user">Kodeart</strong>
+   <a href="#105568" class="date">29-Aug-2011 02:03</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Check directly without calling functions:
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="keyword">if (</span><span class="default">PHP_SAPI </span><span class="keyword">=== </span><span class="string">'cli'</span><span class="keyword">)
+<br />
+{
+<br />
+&nbsp;&nbsp; </span><span class="comment">// ...
+<br />
+</span><span class="keyword">}
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+You can define a constant to use it elsewhere
+<br />
+<span class="default">&lt;?php
+<br />
+define</span><span class="keyword">(</span><span class="string">'ISCLI'</span><span class="keyword">, </span><span class="default">PHP_SAPI </span><span class="keyword">=== </span><span class="string">'cli'</span><span class="keyword">);
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="98647""></a>
+  <div class="note">
+   <strong class="user">Anonymous</strong>
+   <a href="#98647" class="date">28-Jun-2010 07:41</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Using CLI (on WIN at least), some INI paths are relative to the current working directory.&nbsp; For example, if your error_log = "php_errors.log", then php_errors.log will be created (or appended to if already exists) in whatever directory you happen to be in at the moment if you have write access there.&nbsp; Instead of having random error logs all over the place because of this behavior, you may want to set error_log to a full path, perhaps to the php.exe directory.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="94924""></a>
+  <div class="note">
+   <strong class="user">notreallyanaddress at somerandomaddr dot com</strong>
+   <a href="#94924" class="date">02-Dec-2009 05:34</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you want to be interactive with the user and accept user input, all you need to do is read from stdin.&nbsp; <br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">echo </span><span class="string">"Are you sure you want to do this?&nbsp; Type 'yes' to continue: "</span><span class="keyword">;<br />
+</span><span class="default">$handle </span><span class="keyword">= </span><span class="default">fopen </span><span class="keyword">(</span><span class="string">"php://stdin"</span><span class="keyword">,</span><span class="string">"r"</span><span class="keyword">);<br />
+</span><span class="default">$line </span><span class="keyword">= </span><span class="default">fgets</span><span class="keyword">(</span><span class="default">$handle</span><span class="keyword">);<br />
+if(</span><span class="default">trim</span><span class="keyword">(</span><span class="default">$line</span><span class="keyword">) != </span><span class="string">'yes'</span><span class="keyword">){<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"ABORTING!\n"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; exit;<br />
+}<br />
+echo </span><span class="string">"\n"</span><span class="keyword">;<br />
+echo </span><span class="string">"Thank you, continuing...\n"</span><span class="keyword">;<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="83843""></a>
+  <div class="note">
+   <strong class="user">thomas dot harding at laposte dot net</strong>
+   <a href="#83843" class="date">14-Jun-2008 03:08</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Parsing command line: optimization is evil!<br />
+<br />
+One thing all contributors on this page forgotten is that you can suround an argv with single or double quotes. So the join coupled together with the preg_match_all will always break that :)<br />
+<br />
+Here is a proposal:<br />
+<br />
+#!/usr/bin/php<br />
+<span class="default">&lt;?php<br />
+print_r</span><span class="keyword">(</span><span class="default">arguments</span><span class="keyword">(</span><span class="default">$argv</span><span class="keyword">));<br />
+<br />
+function </span><span class="default">arguments </span><span class="keyword">( </span><span class="default">$args </span><span class="keyword">)<br />
+{<br />
+&nbsp; </span><span class="default">array_shift</span><span class="keyword">( </span><span class="default">$args </span><span class="keyword">);<br />
+&nbsp; </span><span class="default">$endofoptions </span><span class="keyword">= </span><span class="default">false</span><span class="keyword">;<br />
+<br />
+&nbsp; </span><span class="default">$ret </span><span class="keyword">= array<br />
+&nbsp;&nbsp;&nbsp; (<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'commands' </span><span class="keyword">=&gt; array(),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'options' </span><span class="keyword">=&gt; array(),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'flags'&nbsp; &nbsp; </span><span class="keyword">=&gt; array(),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'arguments' </span><span class="keyword">=&gt; array(),<br />
+&nbsp;&nbsp;&nbsp; );<br />
+<br />
+&nbsp; while ( </span><span class="default">$arg </span><span class="keyword">= </span><span class="default">array_shift</span><span class="keyword">(</span><span class="default">$args</span><span class="keyword">) )<br />
+&nbsp; {<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// if we have reached end of options,<br />
+&nbsp;&nbsp;&nbsp; //we cast all remaining argvs as arguments<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">if (</span><span class="default">$endofoptions</span><span class="keyword">)<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$ret</span><span class="keyword">[</span><span class="string">'arguments'</span><span class="keyword">][] = </span><span class="default">$arg</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp;&nbsp; continue;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// Is it a command? (prefixed with --)<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">if ( </span><span class="default">substr</span><span class="keyword">( </span><span class="default">$arg</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">, </span><span class="default">2 </span><span class="keyword">) === </span><span class="string">'--' </span><span class="keyword">)<br />
+&nbsp;&nbsp;&nbsp; {<br />
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="comment">// is it the end of options flag?<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="keyword">if (!isset (</span><span class="default">$arg</span><span class="keyword">[</span><span class="default">3</span><span class="keyword">]))<br />
+&nbsp;&nbsp; &nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$endofoptions </span><span class="keyword">= </span><span class="default">true</span><span class="keyword">;; </span><span class="comment">// end of options;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">continue;<br />
+&nbsp;&nbsp; &nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$value </span><span class="keyword">= </span><span class="string">""</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$com&nbsp;&nbsp; </span><span class="keyword">= </span><span class="default">substr</span><span class="keyword">( </span><span class="default">$arg</span><span class="keyword">, </span><span class="default">2 </span><span class="keyword">);<br />
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="comment">// is it the syntax '--option=argument'?<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="keyword">if (</span><span class="default">strpos</span><span class="keyword">(</span><span class="default">$com</span><span class="keyword">,</span><span class="string">'='</span><span class="keyword">))<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; list(</span><span class="default">$com</span><span class="keyword">,</span><span class="default">$value</span><span class="keyword">) = </span><span class="default">split</span><span class="keyword">(</span><span class="string">"="</span><span class="keyword">,</span><span class="default">$com</span><span class="keyword">,</span><span class="default">2</span><span class="keyword">);<br />
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="comment">// is the option not followed by another option but by arguments<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="keyword">elseif (</span><span class="default">strpos</span><span class="keyword">(</span><span class="default">$args</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">],</span><span class="string">'-'</span><span class="keyword">) !== </span><span class="default">0</span><span class="keyword">)<br />
+&nbsp;&nbsp; &nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; while (</span><span class="default">strpos</span><span class="keyword">(</span><span class="default">$args</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">],</span><span class="string">'-'</span><span class="keyword">) !== </span><span class="default">0</span><span class="keyword">)<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$value </span><span class="keyword">.= </span><span class="default">array_shift</span><span class="keyword">(</span><span class="default">$args</span><span class="keyword">).</span><span class="string">' '</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$value </span><span class="keyword">= </span><span class="default">rtrim</span><span class="keyword">(</span><span class="default">$value</span><span class="keyword">,</span><span class="string">' '</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$ret</span><span class="keyword">[</span><span class="string">'options'</span><span class="keyword">][</span><span class="default">$com</span><span class="keyword">] = !empty(</span><span class="default">$value</span><span class="keyword">) ? </span><span class="default">$value </span><span class="keyword">: </span><span class="default">true</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp;&nbsp; continue;<br />
+<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// Is it a flag or a serial of flags? (prefixed with -)<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">if ( </span><span class="default">substr</span><span class="keyword">( </span><span class="default">$arg</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">, </span><span class="default">1 </span><span class="keyword">) === </span><span class="string">'-' </span><span class="keyword">)<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp;&nbsp; for (</span><span class="default">$i </span><span class="keyword">= </span><span class="default">1</span><span class="keyword">; isset(</span><span class="default">$arg</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">]) ; </span><span class="default">$i</span><span class="keyword">++)<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$ret</span><span class="keyword">[</span><span class="string">'flags'</span><span class="keyword">][] = </span><span class="default">$arg</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">];<br />
+&nbsp;&nbsp; &nbsp;&nbsp; continue;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// finally, it is not option, nor flag, nor argument<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$ret</span><span class="keyword">[</span><span class="string">'commands'</span><span class="keyword">][] = </span><span class="default">$arg</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; continue;<br />
+&nbsp; }<br />
+<br />
+&nbsp; if (!</span><span class="default">count</span><span class="keyword">(</span><span class="default">$ret</span><span class="keyword">[</span><span class="string">'options'</span><span class="keyword">]) &amp;&amp; !</span><span class="default">count</span><span class="keyword">(</span><span class="default">$ret</span><span class="keyword">[</span><span class="string">'flags'</span><span class="keyword">]))<br />
+&nbsp; {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$ret</span><span class="keyword">[</span><span class="string">'arguments'</span><span class="keyword">] = </span><span class="default">array_merge</span><span class="keyword">(</span><span class="default">$ret</span><span class="keyword">[</span><span class="string">'commands'</span><span class="keyword">], </span><span class="default">$ret</span><span class="keyword">[</span><span class="string">'arguments'</span><span class="keyword">]);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$ret</span><span class="keyword">[</span><span class="string">'commands'</span><span class="keyword">] = array();<br />
+&nbsp; }<br />
+return </span><span class="default">$ret</span><span class="keyword">;<br />
+}<br />
+<br />
+exit (</span><span class="default">0</span><span class="keyword">)<br />
+<br />
+</span><span class="comment">/* vim: set expandtab tabstop=2 shiftwidth=2: */<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="78672""></a>
+  <div class="note">
+   <strong class="user">james_s2010 at NOSPAM dot hotmail dot com</strong>
+   <a href="#78672" class="date">22-Oct-2007 02:11</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I was looking for a way to interactively get a single character response from user. Using STDIN with fread, fgets and such will only work after pressing enter. So I came up with this instead:
+<br />
+
+<br />
+#!/usr/bin/php -q
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="keyword">function </span><span class="default">inKey</span><span class="keyword">(</span><span class="default">$vals</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$inKey </span><span class="keyword">= </span><span class="string">""</span><span class="keyword">;
+<br />
+&nbsp;&nbsp;&nbsp; While(!</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">$inKey</span><span class="keyword">,</span><span class="default">$vals</span><span class="keyword">)) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$inKey </span><span class="keyword">= </span><span class="default">trim</span><span class="keyword">(`</span><span class="string">read -s -n1 valu;echo \$valu</span><span class="keyword">`);
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$inKey</span><span class="keyword">;
+<br />
+}
+<br />
+function </span><span class="default">echoAT</span><span class="keyword">(</span><span class="default">$Row</span><span class="keyword">,</span><span class="default">$Col</span><span class="keyword">,</span><span class="default">$prompt</span><span class="keyword">=</span><span class="string">""</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// Display prompt at specific screen coords
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">echo </span><span class="string">"\033["</span><span class="keyword">.</span><span class="default">$Row</span><span class="keyword">.</span><span class="string">";"</span><span class="keyword">.</span><span class="default">$Col</span><span class="keyword">.</span><span class="string">"H"</span><span class="keyword">.</span><span class="default">$prompt</span><span class="keyword">;
+<br />
+}
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// Display prompt at position 10,10
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">echoAT</span><span class="keyword">(</span><span class="default">10</span><span class="keyword">,</span><span class="default">10</span><span class="keyword">,</span><span class="string">"Opt : "</span><span class="keyword">);
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// Define acceptable responses
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$options </span><span class="keyword">= array(</span><span class="string">"1"</span><span class="keyword">,</span><span class="string">"2"</span><span class="keyword">,</span><span class="string">"3"</span><span class="keyword">,</span><span class="string">"4"</span><span class="keyword">,</span><span class="string">"X"</span><span class="keyword">);
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// Get user response
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$key </span><span class="keyword">= </span><span class="default">inKey</span><span class="keyword">(</span><span class="default">$options</span><span class="keyword">);
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// Display user response &amp; exit
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">echoAT</span><span class="keyword">(</span><span class="default">12</span><span class="keyword">,</span><span class="default">10</span><span class="keyword">,</span><span class="string">"Pressed : </span><span class="default">$key</span><span class="string">\n"</span><span class="keyword">);
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+Hope this helps someone.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="78093""></a>
+  <div class="note">
+   <strong class="user">losbrutos at free dot fr</strong>
+   <a href="#78093" class="date">27-Sep-2007 05:54</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+an another "another variant" :<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">arguments</span><span class="keyword">(</span><span class="default">$argv</span><span class="keyword">)<br />
+{<br />
+&nbsp; </span><span class="default">$_ARG </span><span class="keyword">= array();<br />
+&nbsp; foreach (</span><span class="default">$argv </span><span class="keyword">as </span><span class="default">$arg</span><span class="keyword">)<br />
+&nbsp; {<br />
+&nbsp;&nbsp;&nbsp; if (</span><span class="default">preg_match</span><span class="keyword">(</span><span class="string">'#^-{1,2}([a-zA-Z0-9]*)=?(.*)$#'</span><span class="keyword">, </span><span class="default">$arg</span><span class="keyword">, </span><span class="default">$matches</span><span class="keyword">))<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$key </span><span class="keyword">= </span><span class="default">$matches</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">];<br />
+&nbsp;&nbsp; &nbsp;&nbsp; switch (</span><span class="default">$matches</span><span class="keyword">[</span><span class="default">2</span><span class="keyword">])<br />
+&nbsp;&nbsp; &nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; case </span><span class="string">''</span><span class="keyword">:<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; case </span><span class="string">'true'</span><span class="keyword">:<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$arg </span><span class="keyword">= </span><span class="default">true</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; break;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; case </span><span class="string">'false'</span><span class="keyword">:<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$arg </span><span class="keyword">= </span><span class="default">false</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; break;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; default:<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$arg </span><span class="keyword">= </span><span class="default">$matches</span><span class="keyword">[</span><span class="default">2</span><span class="keyword">];<br />
+&nbsp;&nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$_ARG</span><span class="keyword">[</span><span class="default">$key</span><span class="keyword">] = </span><span class="default">$arg</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; else<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$_ARG</span><span class="keyword">[</span><span class="string">'input'</span><span class="keyword">][] = </span><span class="default">$arg</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp; }<br />
+&nbsp; return </span><span class="default">$_ARG</span><span class="keyword">;<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+$php myscript.php arg1 -arg2=val2 --arg3=arg3 -arg4 --arg5 -arg6=false<br />
+<br />
+Array<br />
+(<br />
+&nbsp;&nbsp;&nbsp; [input] =&gt; Array<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; (<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; [0] =&gt; myscript.php<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; [1] =&gt; arg1<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; )<br />
+<br />
+&nbsp;&nbsp;&nbsp; [arg2] =&gt; val2<br />
+&nbsp;&nbsp;&nbsp; [arg3] =&gt; arg3<br />
+&nbsp;&nbsp;&nbsp; [arg4] =&gt; true<br />
+&nbsp;&nbsp;&nbsp; [arg5] =&gt; true<br />
+&nbsp;&nbsp;&nbsp; [arg5] =&gt; false<br />
+)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="76606""></a>
+  <div class="note">
+   <strong class="user">lucas dot vasconcelos at gmail dot com</strong>
+   <a href="#76606" class="date">22-Jul-2007 11:04</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Just another variant of previous script that group arguments doesn't starts with '-' or '--'
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="keyword">function </span><span class="default">arguments</span><span class="keyword">(</span><span class="default">$argv</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$_ARG </span><span class="keyword">= array();
+<br />
+&nbsp;&nbsp;&nbsp; foreach (</span><span class="default">$argv </span><span class="keyword">as </span><span class="default">$arg</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; if (</span><span class="default">ereg</span><span class="keyword">(</span><span class="string">'--([^=]+)=(.*)'</span><span class="keyword">,</span><span class="default">$arg</span><span class="keyword">,</span><span class="default">$reg</span><span class="keyword">)) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$_ARG</span><span class="keyword">[</span><span class="default">$reg</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">]] = </span><span class="default">$reg</span><span class="keyword">[</span><span class="default">2</span><span class="keyword">];
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; } elseif(</span><span class="default">ereg</span><span class="keyword">(</span><span class="string">'^-([a-zA-Z0-9])'</span><span class="keyword">,</span><span class="default">$arg</span><span class="keyword">,</span><span class="default">$reg</span><span class="keyword">)) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$_ARG</span><span class="keyword">[</span><span class="default">$reg</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">]] = </span><span class="string">'true'</span><span class="keyword">;
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; } else {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$_ARG</span><span class="keyword">[</span><span class="string">'input'</span><span class="keyword">][]=</span><span class="default">$arg</span><span class="keyword">;
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+&nbsp; return </span><span class="default">$_ARG</span><span class="keyword">;
+<br />
+}
+<br />
+
+<br />
+</span><span class="default">print_r</span><span class="keyword">(</span><span class="default">arguments</span><span class="keyword">(</span><span class="default">$argv</span><span class="keyword">));
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+$ php myscript.php --user=nobody /etc/apache2/*
+<br />
+Array
+<br />
+(
+<br />
+&nbsp;&nbsp;&nbsp; [input] =&gt; Array
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; (
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; [0] =&gt; myscript.php
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; [1] =&gt; /etc/apache2/apache2.conf
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; [2] =&gt; /etc/apache2/conf.d
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; [3] =&gt; /etc/apache2/envvars
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; [4] =&gt; /etc/apache2/httpd.conf
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; [5] =&gt; /etc/apache2/mods-available
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; [6] =&gt; /etc/apache2/mods-enabled
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; [7] =&gt; /etc/apache2/ports.conf
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; [8] =&gt; /etc/apache2/sites-available
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; [9] =&gt; /etc/apache2/sites-enabled
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; )
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; [user] =&gt; nobody
+<br />
+)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="75985""></a>
+  <div class="note">
+   <strong class="user">bluej100@gmail</strong>
+   <a href="#75985" class="date">25-Jun-2007 11:02</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+In 5.1.2 (and others, I assume), the -f form silently drops the first argument after the script name from $_SERVER['argv']. I'd suggest avoiding it unless you need it for a special case.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="75532""></a>
+  <div class="note">
+   <strong class="user">eric dot brison at anakeen dot com</strong>
+   <a href="#75532" class="date">04-Jun-2007 05:16</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Just a variant of previous script to accept arguments with '=' also<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">arguments</span><span class="keyword">(</span><span class="default">$argv</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$_ARG </span><span class="keyword">= array();<br />
+&nbsp;&nbsp;&nbsp; foreach (</span><span class="default">$argv </span><span class="keyword">as </span><span class="default">$arg</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp;&nbsp; if (</span><span class="default">ereg</span><span class="keyword">(</span><span class="string">'--([^=]+)=(.*)'</span><span class="keyword">,</span><span class="default">$arg</span><span class="keyword">,</span><span class="default">$reg</span><span class="keyword">)) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$_ARG</span><span class="keyword">[</span><span class="default">$reg</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">]] = </span><span class="default">$reg</span><span class="keyword">[</span><span class="default">2</span><span class="keyword">];<br />
+&nbsp;&nbsp; &nbsp;&nbsp; } elseif(</span><span class="default">ereg</span><span class="keyword">(</span><span class="string">'-([a-zA-Z0-9])'</span><span class="keyword">,</span><span class="default">$arg</span><span class="keyword">,</span><span class="default">$reg</span><span class="keyword">)) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$_ARG</span><span class="keyword">[</span><span class="default">$reg</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">]] = </span><span class="string">'true'</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp; return </span><span class="default">$_ARG</span><span class="keyword">;<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span>$ php myscript.php --user=nobody --password=secret -p --access="host=127.0.0.1 port=456" <br />
+Array<br />
+(<br />
+&nbsp;&nbsp;&nbsp; [user] =&gt; nobody<br />
+&nbsp;&nbsp;&nbsp; [password] =&gt; secret<br />
+&nbsp;&nbsp;&nbsp; [p] =&gt; true<br />
+&nbsp;&nbsp;&nbsp; [access] =&gt; host=127.0.0.1 port=456<br />
+)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="74088""></a>
+  <div class="note">
+   <strong class="user">rob</strong>
+   <a href="#74088" class="date">23-Mar-2007 11:48</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+i use emacs in c-mode for editing.&nbsp; in 4.3, starting a cli script like so:<br />
+<br />
+#!/usr/bin/php -q /* -*- c -*- */<br />
+<span class="default">&lt;?php<br />
+<br />
+told emacs to drop into c</span><span class="keyword">-</span><span class="default">mode automatically when i loaded the file </span><span class="keyword">for </span><span class="default">editing</span><span class="keyword">.&nbsp; </span><span class="default">the </span><span class="string">'-q' </span><span class="default">flag didn</span><span class="string">'t actually do anything (in the older cgi versions, it suppressed html output when the script was run) but it caused the commented mode line to be ignored by php.<br />
+<br />
+in 5.2, '</span><span class="keyword">-</span><span class="default">q</span><span class="string">' has apparently been deprecated.&nbsp; replace it with '</span><span class="keyword">--</span><span class="string">' to achieve the 4.3 invocation-with-emacs-mode-line behavior:<br />
+<br />
+#!/usr/bin/php -- /* -*- c -*- */<br />
+&lt;?php<br />
+<br />
+don'</span><span class="default">t go back to your 4.3 system </span><span class="keyword">and </span><span class="default">replace </span><span class="string">'-q' </span><span class="default">with </span><span class="string">'--'</span><span class="keyword">; </span><span class="default">it seems to cause php to hang waiting on STDIN</span><span class="keyword">...</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="73765""></a>
+  <div class="note">
+   <strong class="user">djcassis at gmail</strong>
+   <a href="#73765" class="date">09-Mar-2007 07:14</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+To display colored text when it is actually supported :<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">echo </span><span class="string">"\033[31m"</span><span class="keyword">.</span><span class="default">$myvar</span><span class="keyword">; </span><span class="comment">// red foreground<br />
+</span><span class="keyword">echo </span><span class="string">"\033[41m"</span><span class="keyword">.</span><span class="default">$myvar</span><span class="keyword">; </span><span class="comment">// red background<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+To reset these settings : <br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">echo </span><span class="string">"\033[0m"</span><span class="keyword">;<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+More fun :<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">echo </span><span class="string">"\033[5;30m;\033[48mWARNING !"</span><span class="keyword">; </span><span class="comment">// black blinking text over red background<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+More info here : <a href="http://www.tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html" rel="nofollow" target="_blank">http://www.tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html</a></span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="71154""></a>
+  <div class="note">
+   <strong class="user">goalain eat gmail dont com</strong>
+   <a href="#71154" class="date">14-Nov-2006 12:57</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If your php script doesn't run with shebang (#!/usr/bin/php),
+<br />
+and it issues the beautifull and informative error message:
+<br />
+"Command not found."&nbsp; just dos2unix yourscript.php
+<br />
+et voila.
+<br />
+
+<br />
+If you still get the "Command not found." 
+<br />
+Just try to run it as ./myscript.php , with the "./"
+<br />
+if it works - it means your current directory is not in the executable search path.
+<br />
+
+<br />
+If your php script doesn't run with shebang (#/usr/bin/php),
+<br />
+and it issues the beautifull and informative message:
+<br />
+"Invalid null command." it's probably because the "!" is missing in the the shebang line (like what's above) or something else in that area.
+<br />
+
+<br />
+\Alon</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="62162""></a>
+  <div class="note">
+   <strong class="user">stromdotcom at hotmail dot com</strong>
+   <a href="#62162" class="date">21-Feb-2006 10:27</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Spawning php-win.exe as a child process to handle scripting in Windows applications has a few quirks (all having to do with pipes between Windows apps and console apps).<br />
+<br />
+To do this in C++:<br />
+<br />
+// We will run php.exe as a child process after creating<br />
+// two pipes and attaching them to stdin and stdout<br />
+// of the child process<br />
+// Define sa struct such that child inherits our handles<br />
+<br />
+SECURITY_ATTRIBUTES sa = { sizeof(SECURITY_ATTRIBUTES) };<br />
+sa.bInheritHandle = TRUE;<br />
+sa.lpSecurityDescriptor = NULL;<br />
+<br />
+// Create the handles for our two pipes (two handles per pipe, one for each end)<br />
+// We will have one pipe for stdin, and one for stdout, each with a READ and WRITE end<br />
+HANDLE hStdoutRd, hStdoutWr, hStdinRd, hStdinWr;<br />
+<br />
+// Now create the pipes, and make them inheritable<br />
+CreatePipe (&amp;hStdoutRd, &amp;hStdoutWr, &amp;sa, 0))<br />
+SetHandleInformation(hStdoutRd, HANDLE_FLAG_INHERIT, 0);<br />
+CreatePipe (&amp;hStdinRd, &amp;hStdinWr, &amp;sa, 0)<br />
+SetHandleInformation(hStdinWr, HANDLE_FLAG_INHERIT, 0);<br />
+<br />
+// Now we have two pipes, we can create the process<br />
+// First, fill out the usage structs<br />
+STARTUPINFO si = { sizeof(STARTUPINFO) };<br />
+PROCESS_INFORMATION pi;<br />
+si.dwFlags = STARTF_USESTDHANDLES;<br />
+si.hStdOutput = hStdoutWr;<br />
+si.hStdInput&nbsp; = hStdinRd;<br />
+<br />
+// And finally, create the process<br />
+CreateProcess (NULL, "c:\\php\\php-win.exe", NULL, NULL, TRUE, NORMAL_PRIORITY_CLASS, NULL, NULL, &amp;si, &amp;pi);<br />
+<br />
+// Close the handles we aren't using<br />
+CloseHandle(hStdoutWr);<br />
+CloseHandle(hStdinRd);<br />
+<br />
+// Now that we have the process running, we can start pushing PHP at it<br />
+WriteFile(hStdinWr, "<span class="default">&lt;?php </span><span class="keyword">echo </span><span class="string">'test'</span><span class="keyword">; </span><span class="default">?&gt;</span>", 9, &amp;dwWritten, NULL);<br />
+<br />
+// When we're done writing to stdin, we close that pipe<br />
+CloseHandle(hStdinWr);<br />
+<br />
+// Reading from stdout is only slightly more complicated<br />
+int i;<br />
+<br />
+std::string processed("");<br />
+char buf[128];<br />
+<br />
+while ( (ReadFile(hStdoutRd, buf, 128, &amp;dwRead, NULL) &amp;&amp; (dwRead != 0)) ) {<br />
+&nbsp;&nbsp;&nbsp; for (i = 0; i &lt; dwRead; i++)<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; processed += buf[i];<br />
+}&nbsp; &nbsp; <br />
+<br />
+// Done reading, so close this handle too<br />
+CloseHandle(hStdoutRd);<br />
+<br />
+A full implementation (implemented as a C++ class) is available at <a href="http://www.stromcode.com" rel="nofollow" target="_blank">http://www.stromcode.com</a></span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="57143""></a>
+  <div class="note">
+   <strong class="user">drewish at katherinehouse dot com</strong>
+   <a href="#57143" class="date">25-Sep-2005 12:08</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+When you're writing one line php scripts remember that 'php://stdin' is your friend. Here's a simple program I use to format PHP code for inclusion on my blog:<br />
+<br />
+UNIX:<br />
+&nbsp; cat test.php | php -r "print htmlentities(file_get_contents('php://stdin'));"<br />
+<br />
+DOS/Windows:<br />
+&nbsp; type test.php | php -r "print htmlentities(file_get_contents('php://stdin'));"</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="56928""></a>
+  <div class="note">
+   <strong class="user">OverFlow636 at gmail dot com</strong>
+   <a href="#56928" class="date">19-Sep-2005 12:27</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I needed this, you proly wont tho.
+<br />
+puts the exicution args into $_GET
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="keyword">if (</span><span class="default">$argv</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp;&nbsp; foreach (</span><span class="default">$argv </span><span class="keyword">as </span><span class="default">$k</span><span class="keyword">=&gt;</span><span class="default">$v</span><span class="keyword">)
+<br />
+&nbsp;&nbsp;&nbsp; {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">$k</span><span class="keyword">==</span><span class="default">0</span><span class="keyword">) continue;
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$it </span><span class="keyword">= </span><span class="default">explode</span><span class="keyword">(</span><span class="string">"="</span><span class="keyword">,</span><span class="default">$argv</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">]);
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (isset(</span><span class="default">$it</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">])) </span><span class="default">$_GET</span><span class="keyword">[</span><span class="default">$it</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">]] = </span><span class="default">$it</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">];
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+}
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="54756""></a>
+  <div class="note">
+   <strong class="user">docey</strong>
+   <a href="#54756" class="date">14-Jul-2005 05:44</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+dunno if this is on linux the same but on windows evertime<br />
+you send somthing to the console screen php is waiting for<br />
+the console to return. therefor if you send a lot of small <br />
+short amounts of text, the console is starting to be using <br />
+more cpu-cycles then php and thus slowing the script.<br />
+<br />
+take a look at this sheme:<br />
+cpu-cycle:1 -&gt;php: print("a");<br />
+cpu-cycle:2 -&gt;cmd: output("a");<br />
+cpu-cycle:3 -&gt;php: print("b");<br />
+cpu-cycle:4 -&gt;cmd: output("b");<br />
+cpu-cycle:5 -&gt;php: print("c");<br />
+cpu-cycle:6 -&gt;cmd: output("c"); <br />
+cpu-cylce:7 -&gt;php: print("d");<br />
+cpu-cycle:8 -&gt;cmd: output("d"); <br />
+cpu-cylce:9 -&gt;php: print("e");<br />
+cpu-cycle:0 -&gt;cmd: output("e"); <br />
+<br />
+on the screen just appears "abcde". but if you write <br />
+your script this way it will be far more faster:<br />
+cpu-cycle:1 -&gt;php: ob_start();<br />
+cpu-cycle:2 -&gt;php: print("abc");<br />
+cpu-cycle:3 -&gt;php: print("de");<br />
+cpu-cycle:4 -&gt;php: $data = ob_get_contents();<br />
+cpu-cycle:5 -&gt;php: ob_end_clean();<br />
+cpu-cycle:6 -&gt;php: print($data);<br />
+cpu-cycle:7 -&gt;cmd: output("abcde");<br />
+<br />
+now this is just a small example but if you are writing an<br />
+app that is outputting a lot to the console, i.e. a text<br />
+based screen with frequent updates, then its much better <br />
+to first cach all output, and output is as one big chunk of<br />
+text instead of one char a the time. <br />
+<br />
+ouput buffering is ideal for this. in my script i outputted<br />
+almost 4000chars of info and just by caching it first, it<br />
+speeded up by almost 400% and dropped cpu-usage.<br />
+<br />
+because what is being displayed doesn't matter, be it 2<br />
+chars or 40.0000 chars, just the call to output takes a <br />
+great deal of time. remeber that.<br />
+<br />
+maybe someone can test if this is the same on unix-based<br />
+systems. it seems that the STDOUT stream just waits for <br />
+the console to report ready, before continueing execution.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="53252""></a>
+  <div class="note">
+   <strong class="user">roberto dot dimas at gmail dot com</strong>
+   <a href="#53252" class="date">26-May-2005 01:52</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+One of the things I like about perl and vbscripts, is the fact that I can name a file e.g. 'test.pl' and just have to type 'test, without the .pl extension' on the windows command line and the command processor knows that it is a perl file and executes it using the perl command interpreter.<br />
+<br />
+I did the same with the file extension .php3 (I will use php3 exclusivelly for command line php scripts, I'm doing this because my text editor VIM 6.3 already has the correct syntax highlighting for .php3 files ).<br />
+<br />
+I modified the PATHEXT environment variable in Windows XP, from the " 'system' control panel applet-&gt;'Advanced' tab-&gt;'Environment Variables' button-&gt; 'System variables' text area".<br />
+<br />
+Then from control panel "Folder Options" applet-&gt; 'File Types' tab, I added a new file extention (php3), using the button 'New'&nbsp; and typing php3 in the window that pops up.<br />
+<br />
+Then in the 'Details for php3 extention' area I used the 'Change' button to look for the Php.exe executable so that the php3 file extentions are associated with the php executable.<br />
+<br />
+You have to modify also the 'PATH' environment variable, pointing to the folder where the php executable is installed<br />
+<br />
+Hope this is useful to somebody</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="50358""></a>
+  <div class="note">
+   <strong class="user">obfuscated at emailaddress dot com</strong>
+   <a href="#50358" class="date">25-Feb-2005 08:15</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+This posting is not a php-only problem, but hopefully will save someone a few hours of headaches.&nbsp; Running on MacOS (although this could happen on any *nix I suppose), I was unable to get the script to execute without specifically envoking php from the command line:<br />
+<br />
+[macg4:valencia/jobs] tim% test.php<br />
+./test.php: Command not found.<br />
+<br />
+However, it worked just fine when php was envoked on the command line:<br />
+<br />
+[macg4:valencia/jobs] tim% php test.php<br />
+Well, here we are...&nbsp; Now what?<br />
+<br />
+Was file access mode set for executable?&nbsp; Yup.<br />
+<br />
+[macg4:valencia/jobs] tim% ls -l <br />
+total 16<br />
+-rwxr-xr-x&nbsp; 1 tim&nbsp; staff&nbsp;&nbsp; 242 Feb 24 17:23 test.php<br />
+<br />
+And you did, of course, remember to add the php command as the first line of your script, yeah?&nbsp; Of course.<br />
+<br />
+#!/usr/bin/php<br />
+<span class="default">&lt;?php </span><span class="keyword">print </span><span class="string">"Well, here we are...&nbsp; Now what?\n"</span><span class="keyword">; </span><span class="default">?&gt;<br />
+</span><br />
+So why dudn't it work?&nbsp; Well, like I said... on a Mac.... but I also occasionally edit the files on my Windows portable (i.e. when I'm travelling and don't have my trusty Mac available)...&nbsp; Using, say, WordPad on Windows... and BBEdit on the Mac...<br />
+<br />
+Aaahhh... in BBEdit check how the file is being saved!&nbsp; Mac?&nbsp; Unix?&nbsp; or Dos?&nbsp; Bingo.&nbsp; It had been saved as Dos format.&nbsp; Change it to Unix:<br />
+<br />
+[macg4:valencia/jobs] tim% ./test.php<br />
+Well, here we are...&nbsp; Now what?<br />
+[macg4:valencia/jobs] tim% <br />
+<br />
+NB: If you're editing your php files on multiple platforms (i.e. Windows and Linux), make sure you double check the files are saved in a Unix format...&nbsp; those \r's and \n's 'll bite cha!</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="39655""></a>
+  <div class="note">
+   <strong class="user">linn at backendmedia dot com</strong>
+   <a href="#39655" class="date">06-Feb-2004 06:12</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+For those of you who want the old CGI behaviour that changes to the actual directory of the script use:<br />
+chdir(dirname($_SERVER['argv'][0]));<br />
+<br />
+at the beginning of your scripts.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="39576""></a>
+  <div class="note">
+   <strong class="user">ben at slax0rnet dot com</strong>
+   <a href="#39576" class="date">02-Feb-2004 07:34</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Just a note for people trying to use interactive mode from the commandline.<br />
+<br />
+The purpose of interactive mode is to parse code snippits without actually leaving php, and it works like this:<br />
+<br />
+[root@localhost php-4.3.4]# php -a<br />
+Interactive mode enabled<br />
+<br />
+<span class="default">&lt;?php </span><span class="keyword">echo </span><span class="string">"hi!"</span><span class="keyword">; </span><span class="default">?&gt;<br />
+</span>&lt;note, here we would press CTRL-D to parse everything we've entered so far&gt;<br />
+hi!<br />
+<span class="default">&lt;?php </span><span class="keyword">exit(); </span><span class="default">?&gt;<br />
+</span>&lt;ctrl-d here again&gt;<br />
+[root@localhost php-4.3.4]#<br />
+<br />
+I noticed this somehow got ommited from the docs, hope it helps someone!</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="33119""></a>
+  <div class="note">
+   <strong class="user">Adam, php(at)getwebspace.com</strong>
+   <a href="#33119" class="date">17-Jun-2003 04:12</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Ok, I've had a heck of a time with PHP &gt; 4.3.x and whether to use CLI vs CGI. The CGI version of 4.3.2 would return (in browser):<br />
+---<br />
+No input file specified.<br />
+---<br />
+<br />
+And the CLI version would return:<br />
+---<br />
+500 Internal Server Error<br />
+---<br />
+<br />
+It appears that in CGI mode, PHP looks at the environment variable PATH_TRANSLATED to determine the script to execute and ignores command line. That is why in the absensce of this environment variable, you get "No input file specified." However, in CLI mode the HTTP headers are not printed. I believe this is intended behavior for both situations but creates a problem when you have a CGI wrapper that sends environment variables but passes the actual script name on the command line.<br />
+<br />
+By modifying my CGI wrapper to create this PATH_TRANSLATED environment variable, it solved my problem, and I was able to run the CGI build of 4.3.2</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="32701""></a>
+  <div class="note">
+   <strong class="user">monte at ispi dot net</strong>
+   <a href="#32701" class="date">04-Jun-2003 03:47</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I had a problem with the $argv values getting split up when they contained plus (+) signs. Be sure to use the CLI version, not CGI to get around it.<br />
+<br />
+Monte</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="31360""></a>
+  <div class="note">
+   <strong class="user">Popeye at P-t-B dot com</strong>
+   <a href="#31360" class="date">18-Apr-2003 08:15</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+In *nix systems, use the WHICH command to show the location of the php binary executable. This is the path to use as the first line in your php shell script file. (#!/path/to/php -q) And execute php from the command line with the -v switch to see what version you are running.<br />
+<br />
+example:<br />
+<br />
+# which php<br />
+/usr/local/bin/php<br />
+# php -v<br />
+PHP 4.3.1 (cli) (built: Mar 27 2003 14:41:51)<br />
+Copyright (c) 1997-2002 The PHP Group<br />
+Zend Engine v1.3.0, Copyright (c) 1998-2002 Zend Technologies<br />
+<br />
+In the above example, you would use: #!/usr/local/bin/php<br />
+<br />
+Also note that, if you do not have the current/default directory in your PATH (.), you will have to use ./scriptfilename to execute your script file from the command line (or you will receive a "command not found" error). Use the ENV command to show your PATH environment variable value.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="29663""></a>
+  <div class="note">
+   <strong class="user">volkany at celiknet dot com</strong>
+   <a href="#29663" class="date">20-Feb-2003 01:44</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Here goes a very simple clrscr function for newbies...<br />
+function clrscr() { system("clear"); }</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="29468""></a>
+  <div class="note">
+   <strong class="user">Alexander Plakidin</strong>
+   <a href="#29468" class="date">14-Feb-2003 05:34</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+How to change current directory in PHP script to script's directory when running it from command line using PHP 4.3.0?<br />
+(you'll probably need to add this to older scripts when running them under PHP 4.3.0 for backwards compatibility)<br />
+<br />
+Here's what I am using:<br />
+chdir(preg_replace('/\\/[^\\/]+$/',"",$PHP_SELF));<br />
+<br />
+Note: documentation says that "PHP_SELF" is not available in command-line PHP scripts. Though, it IS available. Probably this will be changed in future version, so don't rely on this line of code...<br />
+<br />
+Use $_SERVER['PHP_SELF'] instead of just $PHP_SELF if you have register_globals=Off</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="26201""></a>
+  <div class="note">
+   <strong class="user">phpnotes at ssilk dot de</strong>
+   <a href="#26201" class="date">22-Oct-2002 03:36</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+To hand over the GET-variables in interactive mode like in HTTP-Mode (e.g. your URI is myprog.html?hugo=bla&amp;bla=hugo), you have to call<br />
+<br />
+php myprog.html '&amp;hugo=bla&amp;bla=hugo'<br />
+<br />
+(two &amp; instead of ? and &amp;!)<br />
+<br />
+There just a little difference in the $ARGC, $ARGV values, but I think this is in those cases not relevant.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="24970""></a>
+  <div class="note">
+   <strong class="user">jeff at noSpam[] dot genhex dot net</strong>
+   <a href="#24970" class="date">06-Sep-2002 05:13</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+You can also call the script from the command line after chmod'ing the file (ie: chmod 755 file.php).<br />
+<br />
+On your first line of the file, enter "#!/usr/bin/php" (or to wherever your php executable is located).&nbsp; If you want to suppress the PHP headers, use the line of "#!/usr/bin/php -q" for your path.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="19167""></a>
+  <div class="note">
+   <strong class="user">pyxl at jerrell dot com</strong>
+   <a href="#19167" class="date">18-Feb-2002 11:52</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Assuming --prefix=/usr/local/php, it's better to create a symlink from /usr/bin/php or /usr/local/bin/php to target /usr/local/php/bin/php so that it's both in your path and automatically correct every time you rebuild.&nbsp; If you forgot to do that copy of the binary after a rebuild, you can do all kinds of wild goose chasing when things break.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

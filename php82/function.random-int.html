@@ -1,0 +1,377 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>获取生成加密安全、均匀分布的整数</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.random-bytes.html">? random_bytes</a></li>
+      <li style="float: right;"><a href="function.srand.html">srand ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.random.html">Random 函数</a></li>
+    <li>获取生成加密安全、均匀分布的整数</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.random-int" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">random_int</h1>
+  <p class="verinfo">(PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">random_int</span> &mdash; <span class="dc-title">获取生成加密安全、均匀分布的整数</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.random-int-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>random_int</strong></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$min</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$max</code></span>): <span class="type">int</span></div>
+
+  <p class="para rdfs-comment">
+   生成在指定最小值和最大值之间均匀分布的整数。
+  </p>
+  <p class="para">
+   该函数生成的随机性适用于所有应用，包括生成长期秘密，如加密密钥。
+  </p>
+  
+<p class="para">
+ 此函数使用的随机性来源先后顺序如下：
+</p>
+<ul class="itemizedlist">
+ <li class="listitem">
+  <p class="para">
+   Linux：<a href="http://man7.org/linux/man-pages/man2/getrandom.2.html" class="link external" title="Link : http://man7.org/linux/man-pages/man2/getrandom.2.html">&raquo;&nbsp;getrandom()</a>、<var class="filename">/dev/urandom</var>
+  </p>
+ </li>
+ <li class="listitem">
+  <p class="para">
+   FreeBSD &gt;= 12（PHP &gt;= 7.3）：<a href="http://man7.org/linux/man-pages/man2/getrandom.2.html" class="link external" title="Link : http://man7.org/linux/man-pages/man2/getrandom.2.html">&raquo;&nbsp;getrandom()</a>、<var class="filename">/dev/urandom</var>
+  </p>
+ </li>
+ <li class="listitem">
+  <p class="para">
+   Windows（PHP &gt;= 7.2）：<a href="https://docs.microsoft.com/en-us/windows/desktop/SecCNG/cng-portal" class="link external" title="Link : https://docs.microsoft.com/en-us/windows/desktop/SecCNG/cng-portal">&raquo;&nbsp;CNG-API</a>
+  </p>
+  <p class="para">
+   Windows：<a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa379942(v=vs.85).aspx" class="link external" title="Link : https://msdn.microsoft.com/en-us/library/windows/desktop/aa379942(v=vs.85).aspx">&raquo;&nbsp;CryptGenRandom</a>
+  </p>
+ </li>
+ <li class="listitem">
+  <p class="para">
+   macOS（PHP &gt;= 8.2；&gt;= 8.1.9；&gt;= 8.0.22 如果 CCRandomGenerateBytes 在编译时可用）：CCRandomGenerateBytes()
+  </p>
+  <p class="para">
+   macOS（PHP &gt;= 8.1；&gt;= 8.0.2）：arc4random_buf()、<var class="filename">/dev/urandom</var>
+  </p>
+ </li>
+ <li class="listitem">
+  <p class="para">
+   NetBSD &gt;= 7（PHP &gt;= 7.1；&gt;= 7.0.1）：arc4random_buf()、<var class="filename">/dev/urandom</var>
+  </p>
+ </li>
+ <li class="listitem">
+  <p class="para">
+   OpenBSD &gt;= 5.5（PHP &gt;= 7.1；&gt;= 7.0.1）：arc4random_buf()、<var class="filename">/dev/urandom</var>
+  </p>
+ </li>
+ <li class="listitem">
+  <p class="para">
+   DragonflyBSD（PHP &gt;= 8.1）：<a href="http://man7.org/linux/man-pages/man2/getrandom.2.html" class="link external" title="Link : http://man7.org/linux/man-pages/man2/getrandom.2.html">&raquo;&nbsp;getrandom()</a>、<var class="filename">/dev/urandom</var>
+  </p>
+ </li>
+ <li class="listitem">
+  <p class="para">
+   Solaris（PHP &gt;= 8.1）：<a href="http://man7.org/linux/man-pages/man2/getrandom.2.html" class="link external" title="Link : http://man7.org/linux/man-pages/man2/getrandom.2.html">&raquo;&nbsp;getrandom()</a>、<var class="filename">/dev/urandom</var>
+  </p>
+ </li>
+ <li class="listitem">
+  <span class="simpara">
+   未提及的 PHP 版本和操作系统的组合：<var class="filename">/dev/urandom</var>
+  </span>
+ </li>
+ <li class="listitem">
+  <span class="simpara">
+   如果没有可用的来源或它们都无法生成随机性，则将抛出 <span class="classname"><a href="class.random-randomexception.html" class="classname">Random\RandomException</a></span>。
+  </span>
+ </li>
+</ul>
+
+  
+ <blockquote class="note"><p><strong class="note">Note</strong>: 
+  <span class="simpara">
+   虽然此函数是 PHP 7.0 添加到 PHP 中，但是从 PHP 5.2 到
+   PHP 5.6 都可以用 <a href="https://github.com/paragonie/random_compat" class="link external" title="Link : https://github.com/paragonie/random_compat">&raquo;&nbsp;用户级实现</a>。
+  </span>
+ </p></blockquote>
+
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.random-int-parameters">
+  <h3 class="title">参数</h3>
+  <dl>
+   
+    <dt>
+<code class="parameter">min</code></dt>
+
+    <dd>
+
+     <p class="para">
+      要返回的最小值。
+     </p>
+    </dd>
+
+   
+   
+    <dt>
+<code class="parameter">max</code></dt>
+
+    <dd>
+
+     <p class="para">
+      要返回的最大值。
+     </p>
+    </dd>
+
+   
+  </dl>
+
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.random-int-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   从闭合区间 [<code class="parameter">min</code>, <code class="parameter">max</code>]
+   返回加密安全、均匀分布的整数。<code class="parameter">min</code> 和 <code class="parameter">max</code>
+   都有可能返回。
+  </p>
+ </div>
+
+
+ <div class="refsect1 errors" id="refsect1-function.random-int-errors">
+  <h3 class="title">错误／异常</h3>
+  <ul class="itemizedlist">
+   
+ <li class="listitem">
+  <span class="simpara">
+   如果没有找到合适的随机性来源，将会抛出 <span class="classname"><a href="class.random-randomexception.html" class="classname">Random\RandomException</a></span>。
+  </span>
+ </li>
+
+   <li class="listitem">
+    <span class="simpara">
+     如果 <code class="parameter">max</code> 小于 <code class="parameter">min</code>，将会抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>。
+    </span>
+   </li>
+  </ul>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.random-int-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>8.2.0</td>
+      <td>
+       <abbr title="Cryptographically Secure PseudoRandom Number Generator">CSPRNG</abbr> 失败时，此函数现在将抛出 <span class="classname"><a href="class.random-randomexception.html" class="classname">Random\RandomException</a></span>。之前抛出普通的
+       <span class="classname"><a href="class.exception.html" class="classname">Exception</a></span>。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.random-int-examples">
+  <h3 class="title">示例</h3>
+  <div class="example" id="">
+   <p><strong>Example #1 <span class="function"><strong>random_int()</strong></span> 示例</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">random_int</span><span style="color: #007700">(</span><span style="color: #0000BB">100</span><span style="color: #007700">, </span><span style="color: #0000BB">999</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">random_int</span><span style="color: #007700">(-</span><span style="color: #0000BB">1000</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例的输出类似于：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+int(248)
+int(-898)
+</pre></div>
+   </div>
+  </div>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.random-int-seealso">
+  <h3 class="title">参见</h3>
+  <ul class="simplelist">
+   <li class="member"><span class="function"><a href="random-randomizer.getint.html" class="function" rel="rdfs-seeAlso">Random\Randomizer::getInt()</a> - Get a uniformly selected integer</span></li>
+   <li class="member"><span class="function"><a href="function.random-bytes.html" class="function" rel="rdfs-seeAlso">random_bytes()</a> - Get cryptographically secure random bytes</span></li>
+  </ul>
+ </div>
+
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="125333""></a>
+  <div class="note">
+   <strong class="user">bens at effortlessis dot com</strong>
+   <a href="#125333" class="date">05-Sep-2020 04:21</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+On my system (5th gen i7) random_int() takes about 14x longer to do the same number of calculations than rand(). <br />
+<br />
+for ($i=0; $i&lt;10000000; $i++)<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $x = rand(1, PHP_INT_MAX);<br />
+<br />
+Takes 0.86 seconds for rand(), 12.29 seconds for random_int(). So use random_int() somewhat sparingly. <br />
+<br />
+If it's not really important to be truly random, use rand() instead, especially in a tight loop.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="124010""></a>
+  <div class="note">
+   <strong class="user">ccb_bc at hotmail dot com</strong>
+   <a href="#124010" class="date">04-Jul-2019 03:02</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+<span class="default">&lt;?php <br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// PHP &gt;= 7<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">function </span><span class="default">str_rand</span><span class="keyword">(</span><span class="default">int $length </span><span class="keyword">= </span><span class="default">16</span><span class="keyword">){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$x </span><span class="keyword">= </span><span class="string">''</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; for(</span><span class="default">$i </span><span class="keyword">= </span><span class="default">1</span><span class="keyword">; </span><span class="default">$i </span><span class="keyword">&lt;= </span><span class="default">$length</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">++){<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$x </span><span class="keyword">.= </span><span class="default">dechex</span><span class="keyword">(</span><span class="default">random_int</span><span class="keyword">(</span><span class="default">0</span><span class="keyword">,</span><span class="default">255</span><span class="keyword">));<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">substr</span><span class="keyword">(</span><span class="default">$x</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">, </span><span class="default">$length</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">str_rand</span><span class="keyword">());<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="119670""></a>
+  <div class="note">
+   <strong class="user">s rotondo90 at gmail com</strong>
+   <a href="#119670" class="date">30-Jul-2016 01:11</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Here is a simple backporting function, it works for PHP &gt;= 5.1<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">if (!</span><span class="default">function_exists</span><span class="keyword">(</span><span class="string">'random_int'</span><span class="keyword">)) {<br />
+&nbsp;&nbsp;&nbsp; function </span><span class="default">random_int</span><span class="keyword">(</span><span class="default">$min</span><span class="keyword">, </span><span class="default">$max</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (!</span><span class="default">function_exists</span><span class="keyword">(</span><span class="string">'mcrypt_create_iv'</span><span class="keyword">)) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">trigger_error</span><span class="keyword">(<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'mcrypt must be loaded for random_int to work'</span><span class="keyword">, <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">E_USER_WARNING<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">null</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (!</span><span class="default">is_int</span><span class="keyword">(</span><span class="default">$min</span><span class="keyword">) || !</span><span class="default">is_int</span><span class="keyword">(</span><span class="default">$max</span><span class="keyword">)) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">trigger_error</span><span class="keyword">(</span><span class="string">'$min and $max must be integer values'</span><span class="keyword">, </span><span class="default">E_USER_NOTICE</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$min </span><span class="keyword">= (int)</span><span class="default">$min</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$max </span><span class="keyword">= (int)</span><span class="default">$max</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">$min </span><span class="keyword">&gt; </span><span class="default">$max</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">trigger_error</span><span class="keyword">(</span><span class="string">'$max can\'t be lesser than $min'</span><span class="keyword">, </span><span class="default">E_USER_WARNING</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">null</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$range </span><span class="keyword">= </span><span class="default">$counter </span><span class="keyword">= </span><span class="default">$max </span><span class="keyword">- </span><span class="default">$min</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$bits </span><span class="keyword">= </span><span class="default">1</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; while (</span><span class="default">$counter </span><span class="keyword">&gt;&gt;= </span><span class="default">1</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; ++</span><span class="default">$bits</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$bytes </span><span class="keyword">= (int)</span><span class="default">max</span><span class="keyword">(</span><span class="default">ceil</span><span class="keyword">(</span><span class="default">$bits</span><span class="keyword">/</span><span class="default">8</span><span class="keyword">), </span><span class="default">1</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$bitmask </span><span class="keyword">= </span><span class="default">pow</span><span class="keyword">(</span><span class="default">2</span><span class="keyword">, </span><span class="default">$bits</span><span class="keyword">) - </span><span class="default">1</span><span class="keyword">;<br />
+&nbsp;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">$bitmask </span><span class="keyword">&gt;= </span><span class="default">PHP_INT_MAX</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$bitmask </span><span class="keyword">= </span><span class="default">PHP_INT_MAX</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; do {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$result </span><span class="keyword">= </span><span class="default">hexdec</span><span class="keyword">(<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">bin2hex</span><span class="keyword">(<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">mcrypt_create_iv</span><span class="keyword">(</span><span class="default">$bytes</span><span class="keyword">, </span><span class="default">MCRYPT_DEV_URANDOM</span><span class="keyword">)<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; )<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; ) &amp; </span><span class="default">$bitmask</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; } while (</span><span class="default">$result </span><span class="keyword">&gt; </span><span class="default">$range</span><span class="keyword">);<br />
+&nbsp;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$result </span><span class="keyword">+ </span><span class="default">$min</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Randomness test<br />
+<br />
+<span class="default">&lt;?php<br />
+$max </span><span class="keyword">= </span><span class="default">100</span><span class="keyword">; </span><span class="comment">// number of random values<br />
+</span><span class="default">$test </span><span class="keyword">= </span><span class="default">1000000</span><span class="keyword">;<br />
+<br />
+</span><span class="default">$array </span><span class="keyword">= </span><span class="default">array_fill</span><span class="keyword">(</span><span class="default">0</span><span class="keyword">, </span><span class="default">$max</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">);<br />
+<br />
+for (</span><span class="default">$i </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">; </span><span class="default">$i </span><span class="keyword">&lt; </span><span class="default">$test</span><span class="keyword">; ++</span><span class="default">$i</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; ++</span><span class="default">$array</span><span class="keyword">[</span><span class="default">random_int</span><span class="keyword">(</span><span class="default">0</span><span class="keyword">, </span><span class="default">$max</span><span class="keyword">-</span><span class="default">1</span><span class="keyword">)];<br />
+}<br />
+<br />
+function </span><span class="default">arrayFormatResult</span><span class="keyword">(&amp;</span><span class="default">$item</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; global </span><span class="default">$test</span><span class="keyword">, </span><span class="default">$max</span><span class="keyword">; </span><span class="comment">// try to avoid this nowdays ;)<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$perc </span><span class="keyword">= (</span><span class="default">$item</span><span class="keyword">/(</span><span class="default">$test</span><span class="keyword">/</span><span class="default">$max</span><span class="keyword">))-</span><span class="default">1</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$item </span><span class="keyword">.= </span><span class="string">' '</span><span class="keyword">. </span><span class="default">number_format</span><span class="keyword">(</span><span class="default">$perc</span><span class="keyword">, </span><span class="default">4</span><span class="keyword">, </span><span class="string">'.'</span><span class="keyword">, </span><span class="string">''</span><span class="keyword">) .</span><span class="string">'%'</span><span class="keyword">;<br />
+}<br />
+<br />
+</span><span class="default">array_walk</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">, </span><span class="string">'arrayFormatResult'</span><span class="keyword">);<br />
+<br />
+</span><span class="default">print_r</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">);<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-6dea22b2","path":"/zh/tag/pwa/","title":"标签: PWA","lang":"en-US","frontmatter":{"title":"标签: PWA","dir":{"index":false},"feed":false,"sitemap":false,"blog":{"type":"category","name":"PWA","key":"tag"},"layout":"BlogCategory"},"headers":[],"git":{},"readingTime":{"minutes":0,"words":0},"filePathRelative":null,"excerpt":""}');export{e as data};

@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>实例化由 ReflectionAttribute 类和参数表示的属性类</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="reflectionattribute.isrepeated.html">? ReflectionAttribute::isRepeated</a></li>
+      <li style="float: right;"><a href="class.reflector.html">Reflector ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="class.reflectionattribute.html">ReflectionAttribute</a></li>
+    <li>实例化由 ReflectionAttribute 类和参数表示的属性类</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="reflectionattribute.newinstance" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">ReflectionAttribute::newInstance</h1>
+  <p class="verinfo">(PHP 8)</p><p class="refpurpose"><span class="refname">ReflectionAttribute::newInstance</span> &mdash; <span class="dc-title">实例化由 ReflectionAttribute 类和参数表示的属性类</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-reflectionattribute.newinstance-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="modifier">public</span> <span class="methodname"><strong>ReflectionAttribute::newInstance</strong></span>(): <span class="type">object</span></div>
+
+  <p class="para rdfs-comment">
+   实例化由 ReflectionAttribute 类和参数表示的属性类。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-reflectionattribute.newinstance-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">此函数没有参数。</p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-reflectionattribute.newinstance-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   属性的新实例。
+  </p>
+ </div>
+
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="128172""></a>
+  <div class="note">
+   <strong class="user">baptiste at pillot dot fr</strong>
+   <a href="#128172" class="date">30-Jan-2023 11:07</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Calling ReflectionAttribute::newInstance() using an attribute name that has a matching class without #[Attribute] will result in an error.<br />
+<br />
+Example :<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">class </span><span class="default">FakeAttribute </span><span class="keyword">{}<br />
+<br />
+#[</span><span class="default">FakeAttribute</span><span class="keyword">]<br />
+class </span><span class="default">Test </span><span class="keyword">{}<br />
+<br />
+try {<br />
+&nbsp;&nbsp;&nbsp; (new </span><span class="default">ReflectionClass</span><span class="keyword">(</span><span class="default">Test</span><span class="keyword">::class))-&gt;</span><span class="default">getAttributes</span><span class="keyword">()[</span><span class="default">0</span><span class="keyword">]-&gt;</span><span class="default">newInstance</span><span class="keyword">();<br />
+}<br />
+catch (</span><span class="default">Error $error</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">'Throwed error ' </span><span class="keyword">. </span><span class="default">get_class</span><span class="keyword">(</span><span class="default">$error</span><span class="keyword">) . </span><span class="string">' with message : ' </span><span class="keyword">. </span><span class="default">$error</span><span class="keyword">-&gt;</span><span class="default">getMessage</span><span class="keyword">();<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+This will output :<br />
+<br />
+Throwed error Error with message : Attempting to use non-attribute class "FakeAttribute" as attribute</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="128171""></a>
+  <div class="note">
+   <strong class="user">baptiste at pillot dot fr</strong>
+   <a href="#128171" class="date">30-Jan-2023 11:06</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Calling ReflectionAttribute::newInstance() using an attribute name that does not have a corresponding class will result in an error.<br />
+<br />
+Example :<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">#[</span><span class="default">FakeAttribute</span><span class="keyword">]<br />
+class </span><span class="default">Test </span><span class="keyword">{}<br />
+<br />
+try {<br />
+&nbsp; (new </span><span class="default">ReflectionClass</span><span class="keyword">(</span><span class="default">Test</span><span class="keyword">::class))-&gt;</span><span class="default">getAttributes</span><span class="keyword">()[</span><span class="default">0</span><span class="keyword">]-&gt;</span><span class="default">newInstance</span><span class="keyword">();<br />
+}<br />
+catch (</span><span class="default">Error $error</span><span class="keyword">) {<br />
+&nbsp; echo </span><span class="string">'Throwed error ' </span><span class="keyword">. </span><span class="default">get_class</span><span class="keyword">(</span><span class="default">$error</span><span class="keyword">) . </span><span class="string">' with message : ' </span><span class="keyword">. </span><span class="default">$error</span><span class="keyword">-&gt;</span><span class="default">getMessage</span><span class="keyword">();<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+This will output :<br />
+<br />
+Throwed error Error with message : Attribute class "FakeAttribute" not found</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

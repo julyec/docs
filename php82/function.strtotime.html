@@ -1,0 +1,442 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>将任何英文文本日期时间描述解析为 Unix 时间戳</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.strptime.html">? strptime</a></li>
+      <li style="float: right;"><a href="function.time.html">time ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.datetime.html">Date/Time 函数</a></li>
+    <li>将任何英文文本日期时间描述解析为 Unix 时间戳</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.strtotime" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">strtotime</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">strtotime</span> &mdash; <span class="dc-title">将任何英文文本日期时间描述解析为 Unix 时间戳</span></p>
+
+ </div>
+ <div class="refsect1 description" id="refsect1-function.strtotime-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>strtotime</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$datetime</code></span>, <span class="methodparam"><span class="type">?</span><span class="type"><span class="type">int</span><span class="type"></span></span> <code class="parameter">$baseTimestamp</code><span class="initializer"> = <strong><code>null</code></strong></span></span>): <span class="type"><span class="type">int</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="simpara">
+   本函数期望接受包含英文日期格式的字符串并尝试将其解析为
+   Unix 时间戳（自 January 1 1970 00:00:00 UTC 起的秒数），其值跟
+   <code class="parameter">baseTimestamp</code> 参数给出的时间相关，如果没有提供
+   <code class="parameter">baseTimestamp</code> 参数则为当前时间。在<a href="datetime.formats.html" class="link">日期和时间格式</a>中定义了日期字符串解析，并且有几个微秒的注意事项，强烈建议查看完整详细信息。
+  </p>
+  <div class="warning"><strong class="warning">Warning</strong>
+   <p class="para">
+    本函数返回的 Unix 时间戳不包含时区信息，为了实现对日期/时间信息进行计算，推荐使用功能更强大的
+    <span class="classname"><a href="class.datetimeimmutable.html" class="classname">DateTimeImmutable</a></span>。
+   </p>
+  </div>
+  <p class="para">
+   本函数的每个参数都使用默认时区，除非在该参数指定了时区。注意不要在每个参数中使用不同的时区，除非是故意的。参考
+   <span class="function"><a href="function.date-default-timezone-get.html" class="function">date_default_timezone_get()</a></span> 获取定义默认时区的各种方法。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.strtotime-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">datetime</code></dt>
+
+     <dd>
+
+      <p class="para">日期/时间字符串。正确格式的说明详见 <a href="datetime.formats.html" class="link">日期与时间格式</a>。</p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">baseTimestamp</code></dt>
+
+     <dd>
+
+      <p class="para">
+       时间戳，用作计算相对日期的基础。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.strtotime-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   成功则返回时间戳，否则返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 errors" id="refsect1-function.strtotime-errors">
+  <h3 class="title">错误／异常</h3>
+   
+   <p class="para">
+在每次调用日期/时间函数时，如果时区无效则会引发 <strong><code>E_NOTICE</code></strong> 错误。参见
+<span class="function"><a href="function.date-default-timezone-set.html" class="function">date_default_timezone_set()</a></span>。</p>
+ 
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.strtotime-changelog">
+  <h3 class="title">更新日志</h3>
+  <p class="para">
+   <table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>版本</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>8.0.0</td>
+       <td>
+        现在 <code class="parameter">baseTimestamp</code> 允许为 null。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.strtotime-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="example-4340">
+    <p><strong>Example #1 <span class="function"><strong>strtotime()</strong></span> 例子</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">strtotime</span><span style="color: #007700">(</span><span style="color: #DD0000">"now"</span><span style="color: #007700">), </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />echo </span><span style="color: #0000BB">strtotime</span><span style="color: #007700">(</span><span style="color: #DD0000">"10 September 2000"</span><span style="color: #007700">), </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />echo </span><span style="color: #0000BB">strtotime</span><span style="color: #007700">(</span><span style="color: #DD0000">"+1 day"</span><span style="color: #007700">), </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />echo </span><span style="color: #0000BB">strtotime</span><span style="color: #007700">(</span><span style="color: #DD0000">"+1 week"</span><span style="color: #007700">), </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />echo </span><span style="color: #0000BB">strtotime</span><span style="color: #007700">(</span><span style="color: #DD0000">"+1 week 2 days 4 hours 2 seconds"</span><span style="color: #007700">), </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />echo </span><span style="color: #0000BB">strtotime</span><span style="color: #007700">(</span><span style="color: #DD0000">"next Thursday"</span><span style="color: #007700">), </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />echo </span><span style="color: #0000BB">strtotime</span><span style="color: #007700">(</span><span style="color: #DD0000">"last Monday"</span><span style="color: #007700">), </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="example-4342">
+    <p><strong>Example #2 失败检查</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$str </span><span style="color: #007700">= </span><span style="color: #DD0000">'Not Good'</span><span style="color: #007700">;<br /><br />if ((</span><span style="color: #0000BB">$timestamp </span><span style="color: #007700">= </span><span style="color: #0000BB">strtotime</span><span style="color: #007700">(</span><span style="color: #0000BB">$str</span><span style="color: #007700">)) === </span><span style="color: #0000BB">false</span><span style="color: #007700">) {<br />    echo </span><span style="color: #DD0000">"The string (</span><span style="color: #0000BB">$str</span><span style="color: #DD0000">) is bogus"</span><span style="color: #007700">;<br />} else {<br />    echo </span><span style="color: #DD0000">"</span><span style="color: #0000BB">$str</span><span style="color: #DD0000"> == " </span><span style="color: #007700">. </span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">'l dS \o\f F Y h:i:s A'</span><span style="color: #007700">, </span><span style="color: #0000BB">$timestamp</span><span style="color: #007700">);<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.strtotime-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    在这种情况下，"相对"日期还意味着，如果未提供日期/时间的特定组成部分，则将从 <code class="parameter">baseTimestamp</code>
+    逐字获取。也就是说如果在 2022 年 5 月 31 日运行 <code class="code">strtotime(&#039;February&#039;)</code>，将被解释为
+    <code class="literal">31 February 2022</code>，它将溢出到 <code class="literal">3 March</code> 的时间戳。（在闰年，应该是
+    <code class="literal">2 March</code>。）使用 <code class="code">strtotime(&#039;1 February&#039;)</code> 或者
+    <code class="code">strtotime(&#039;first day of February&#039;)</code> 可以避免这个问题。
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    如果指定的年份位数是两位数字，则其值 0-69 表示 2000-2069，70-99 表示 1970-1999。参阅下面的注释了解
+    32 位系统上可能的差异（结束日期可能是 2038-01-19 03:14:07）。
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    时间戳的有效范围通常从 Fri, 13 Dec 1901 20:45:54 UTC
+    到 Tue, 19 Jan 2038 03:14:07 UTC（这些日期对应 32
+    位有符号整数的最小值和最大值）。
+   </p>
+   <p class="para">
+    在 64 位的 PHP 版本中，时间戳的有效范围实际上是无限的，因为
+    64 位在任一方向上都可以代表大约 2930 亿年。
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    不建议使用此函数对日期进行数学运算。推荐使用
+    <span class="methodname"><a href="datetime.add.html" class="methodname">DateTime::add()</a></span> 和
+    <span class="methodname"><a href="datetime.sub.html" class="methodname">DateTime::sub()</a></span> 函数。
+   </p>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.strtotime-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="classname"><a href="class.datetimeimmutable.html" class="classname">DateTimeImmutable</a></span></li>
+    <li class="member"><span class="methodname"><a href="datetimeimmutable.createfromformat.html" class="methodname" rel="rdfs-seeAlso">DateTimeImmutable::createFromFormat()</a> - Parses a time string according to a specified format</span></li>
+    <li class="member"><a href="datetime.formats.html" class="link">日期和时间格式</a></li>
+    <li class="member"><span class="function"><a href="function.checkdate.html" class="function" rel="rdfs-seeAlso">checkdate()</a> - 验证一个格里高里日期</span></li>
+    <li class="member"><span class="function"><a href="function.strptime.html" class="function" rel="rdfs-seeAlso">strptime()</a> - 解析由 strftime 生成的日期／时间</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="128580""></a>
+  <div class="note">
+   <strong class="user">cesarfrisa at yahoo dot es</strong>
+   <a href="#128580" class="date">01-Jun-2023 08:29</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+This is the link to the relative formats that can be used in this function. It's not easy to find in the documentation.<br />
+<br />
+https://www.php.net/manual/en/datetime.formats.relative.php<br />
+<br />
+Here some examples:<br />
+<span class="default">&lt;?php <br />
+$today </span><span class="keyword">= </span><span class="default">date</span><span class="keyword">( </span><span class="string">'Y-m-d'</span><span class="keyword">, </span><span class="default">strtotime</span><span class="keyword">( </span><span class="string">'today' </span><span class="keyword">) );<br />
+echo </span><span class="string">"Today: " </span><span class="keyword">. </span><span class="default">$today</span><span class="keyword">;<br />
+<br />
+</span><span class="comment">// Print: Today: 2023-06-01<br />
+<br />
+//Basic Example <br />
+</span><span class="default">$tomorrow </span><span class="keyword">= </span><span class="default">date</span><span class="keyword">( </span><span class="string">'Y-m-d'</span><span class="keyword">, </span><span class="default">strtotime</span><span class="keyword">( </span><span class="string">'tomorrow' </span><span class="keyword">) );<br />
+echo </span><span class="string">"\n\nTomorrow: " </span><span class="keyword">. </span><span class="default">$tomorrow</span><span class="keyword">;<br />
+<br />
+</span><span class="comment">// Print: Tomorrow: 2023-06-02<br />
+<br />
+</span><span class="default">$yesterday </span><span class="keyword">= </span><span class="default">date</span><span class="keyword">( </span><span class="string">'Y-m-d'</span><span class="keyword">, </span><span class="default">strtotime</span><span class="keyword">( </span><span class="string">'yesterday' </span><span class="keyword">) );<br />
+echo </span><span class="string">"\n\nYesterday: " </span><span class="keyword">. </span><span class="default">$yesterday</span><span class="keyword">;<br />
+<br />
+</span><span class="comment">// Print: Yesterday: 2023-05-31<br />
+<br />
+// Add o subtract Month<br />
+</span><span class="default">$variable </span><span class="keyword">= </span><span class="default">date</span><span class="keyword">( </span><span class="string">'Y-m-d'</span><span class="keyword">, </span><span class="default">strtotime</span><span class="keyword">( </span><span class="string">'+1 month' </span><span class="keyword">) );<br />
+echo </span><span class="string">"\n\nAdd one month: " </span><span class="keyword">. </span><span class="default">$variable</span><span class="keyword">;<br />
+<br />
+</span><span class="comment">// Print: Add one month: 2023-07-01<br />
+<br />
+</span><span class="default">$variable </span><span class="keyword">= </span><span class="default">date</span><span class="keyword">( </span><span class="string">'Y-m-d'</span><span class="keyword">, </span><span class="default">strtotime</span><span class="keyword">( </span><span class="string">'-1 month' </span><span class="keyword">) );<br />
+echo </span><span class="string">"\n\nSubstract one month: " </span><span class="keyword">. </span><span class="default">$variable</span><span class="keyword">;<br />
+<br />
+</span><span class="comment">// Print: Substract one month: 2023-05-01<br />
+<br />
+// More complex formats:<br />
+// ERROR / BUG: If today is the last day of the month. This examples can be one error or bug. <br />
+// If you are looking el first day of previous or next month you dont must use last Relative Format. <br />
+// You must use 'first day of 2 months ago' or 'first day of previous month'<br />
+// See you: <br />
+// https://bugs.php.net/bug.php?id=22486<br />
+// https://bugs.php.net/bug.php?id=44073<br />
+// strtotime("+1 Month")<br />
+// produces the wrong result on the 31st day of the month.<br />
+// on January 31, date("m",strtotime("+1 Month")) will return 03 instead of 02<br />
+<br />
+// Another example:<br />
+</span><span class="default">$dt1 </span><span class="keyword">= </span><span class="default">strtotime</span><span class="keyword">(</span><span class="string">"2023-01-30"</span><span class="keyword">);<br />
+</span><span class="default">$month </span><span class="keyword">= </span><span class="default">strtotime</span><span class="keyword">(</span><span class="string">"+1 month"</span><span class="keyword">, </span><span class="default">$dt1</span><span class="keyword">);<br />
+echo </span><span class="string">"\n\nToday is: " </span><span class="keyword">. </span><span class="default">date</span><span class="keyword">( </span><span class="string">'Y-m-d'</span><span class="keyword">, </span><span class="default">$dt1 </span><span class="keyword">);<br />
+echo&nbsp; </span><span class="string">"\nBUG add month: " </span><span class="keyword">. </span><span class="default">date</span><span class="keyword">(</span><span class="string">"Y-m-d"</span><span class="keyword">, </span><span class="default">$month</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">// Print:<br />
+// Today is: 2023-01-30<br />
+// BUG add month: 2023-03-02<br />
+<br />
+</span><span class="default">$dt1 </span><span class="keyword">= </span><span class="default">strtotime</span><span class="keyword">(</span><span class="string">"2023-02-28"</span><span class="keyword">);<br />
+</span><span class="default">$month </span><span class="keyword">= </span><span class="default">strtotime</span><span class="keyword">(</span><span class="string">"-1 month"</span><span class="keyword">, </span><span class="default">$dt1</span><span class="keyword">);<br />
+echo </span><span class="string">"\n\nToday is: " </span><span class="keyword">. </span><span class="default">date</span><span class="keyword">( </span><span class="string">'Y-m-d'</span><span class="keyword">, </span><span class="default">$dt1 </span><span class="keyword">);<br />
+echo&nbsp; </span><span class="string">"\nBUG substract month: " </span><span class="keyword">. </span><span class="default">date</span><span class="keyword">(</span><span class="string">"Y-m-d"</span><span class="keyword">, </span><span class="default">$month</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">// Print:<br />
+// Today is: 2023-02-28<br />
+// BUG substract month: 2023-01-28<br />
+<br />
+</span><span class="default">$dt1 </span><span class="keyword">= </span><span class="default">strtotime</span><span class="keyword">(</span><span class="string">"2023-01-30"</span><span class="keyword">);<br />
+</span><span class="default">$month </span><span class="keyword">= </span><span class="default">strtotime</span><span class="keyword">(</span><span class="string">"first day of next month"</span><span class="keyword">, </span><span class="default">$dt1</span><span class="keyword">);<br />
+echo </span><span class="string">"\n\nToday is: " </span><span class="keyword">. </span><span class="default">date</span><span class="keyword">( </span><span class="string">'Y-m-d'</span><span class="keyword">, </span><span class="default">$dt1 </span><span class="keyword">);<br />
+echo&nbsp; </span><span class="string">"\nFirst day of next month: " </span><span class="keyword">. </span><span class="default">date</span><span class="keyword">(</span><span class="string">"Y-m-d"</span><span class="keyword">, </span><span class="default">$month</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">// Print:<br />
+// Today is: 2023-01-30<br />
+// First day of next month: 2023-02-01<br />
+<br />
+</span><span class="default">$dt1 </span><span class="keyword">= </span><span class="default">strtotime</span><span class="keyword">(</span><span class="string">"2023-02-28"</span><span class="keyword">);<br />
+</span><span class="default">$month </span><span class="keyword">= </span><span class="default">strtotime</span><span class="keyword">(</span><span class="string">"last day of last month"</span><span class="keyword">, </span><span class="default">$dt1</span><span class="keyword">);<br />
+echo </span><span class="string">"\n\nToday is: " </span><span class="keyword">. </span><span class="default">date</span><span class="keyword">( </span><span class="string">'Y-m-d'</span><span class="keyword">, </span><span class="default">$dt1 </span><span class="keyword">);<br />
+echo&nbsp; </span><span class="string">"\nLast day of last month: " </span><span class="keyword">. </span><span class="default">date</span><span class="keyword">(</span><span class="string">"Y-m-d"</span><span class="keyword">, </span><span class="default">$month</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">// Print:<br />
+// Today is: 2023-02-28<br />
+// Last day of last month: 2023-01-31<br />
+<br />
+</span><span class="default">$dt1 </span><span class="keyword">= </span><span class="default">strtotime</span><span class="keyword">(</span><span class="string">"2023-02-28"</span><span class="keyword">);<br />
+</span><span class="default">$month </span><span class="keyword">= </span><span class="default">strtotime</span><span class="keyword">(</span><span class="string">"first day of 2 months ago"</span><span class="keyword">, </span><span class="default">$dt1</span><span class="keyword">);<br />
+echo </span><span class="string">"\n\nToday is: " </span><span class="keyword">. </span><span class="default">date</span><span class="keyword">( </span><span class="string">'Y-m-d'</span><span class="keyword">, </span><span class="default">$dt1 </span><span class="keyword">);<br />
+echo&nbsp; </span><span class="string">"\nFirst day of 2 months ago: " </span><span class="keyword">. </span><span class="default">date</span><span class="keyword">(</span><span class="string">"Y-m-d"</span><span class="keyword">, </span><span class="default">$month</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">// Print:<br />
+// Today is: 2023-02-28<br />
+// First day of 2 months ago: 2022-12-01<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="128577""></a>
+  <div class="note">
+   <strong class="user">info at pipasjourney dot com</strong>
+   <a href="#128577" class="date">31-May-2023 10:02</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Be aware of this: 1 month before the 31st day, it will return the same month:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">echo </span><span class="default">date</span><span class="keyword">(</span><span class="string">'m'</span><span class="keyword">, </span><span class="default">strtotime</span><span class="keyword">(</span><span class="string">'2023-05-30 -1 month'</span><span class="keyword">)) ; </span><span class="comment">//returns 04<br />
+</span><span class="keyword">echo </span><span class="default">date</span><span class="keyword">(</span><span class="string">'m'</span><span class="keyword">, </span><span class="default">strtotime</span><span class="keyword">(</span><span class="string">'2023-05-31 -1 month'</span><span class="keyword">)) ; </span><span class="comment">//returns 05, not 04<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+So, don't use this to operate on the month of the result.<br />
+A better way to know what month was the previous month would be:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="comment">//considering today is 2023-05-31...<br />
+<br />
+</span><span class="default">$firstOfThisMonth </span><span class="keyword">= </span><span class="default">date</span><span class="keyword">(</span><span class="string">'Y-m'</span><span class="keyword">) . </span><span class="string">'-01'</span><span class="keyword">; </span><span class="comment">//returns 2023-05-01<br />
+</span><span class="keyword">echo </span><span class="default">date</span><span class="keyword">(</span><span class="string">'m'</span><span class="keyword">, </span><span class="default">strtotime</span><span class="keyword">(</span><span class="default">$firstOfThisMonth </span><span class="keyword">. </span><span class="string">' -1 month'</span><span class="keyword">)) ; </span><span class="comment">//returns 04<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="128463""></a>
+  <div class="note">
+   <strong class="user">MarkAgius at markagius dot co dot uk</strong>
+   <a href="#128463" class="date">08-May-2023 10:21</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Note:<br />
+If day of month is 12 or less, or year is entered as a two digit number and less than 31 or 12 then you may get the wrong time value.<br />
+If you know the format used with the date string, then use the following code: (PHP version 5.5 or later)<br />
+[code]<br />
+function getStrtotime($timeDateStr, $formatOfStr="j/m/Y"){<br />
+&nbsp; // Same as strtotime() but using the format $formatOfStr.<br />
+&nbsp; // Works with PHP version 5.5 and later.<br />
+&nbsp; // On error reading the time string, returns a date that never existed. 3/09/1752 Julian/Gregorian calendar switch.<br />
+&nbsp; $timeStamp = DateTimeImmutable::createFromFormat($formatOfStr,$timeDateStr);<br />
+&nbsp; if($timeStamp===false){<br />
+&nbsp;&nbsp;&nbsp; // Bad date string or format string.<br />
+&nbsp;&nbsp;&nbsp; return -6858133619; // 3/09/1752<br />
+&nbsp; } else {<br />
+&nbsp;&nbsp;&nbsp; // Date string and format ok.<br />
+&nbsp;&nbsp;&nbsp; return $timeStamp-&gt;format("U"); // UNIX timestamp from 1/01/1970,&nbsp; 0:00:00 gmt<br />
+&nbsp; }<br />
+}<br />
+<br />
+print date("j/m/Y", getStrtotime("1/02/2022", "j/m/Y"))." Standard format. (j)&lt;BR&gt;\n";<br />
+print date("j/m/Y", getStrtotime("1/02/2022", "d/m/Y"))." Standard format. (d)&lt;BR&gt;\n";<br />
+print date("j/m/Y", getStrtotime("1/02/2022", "j/m/y"))." Standard format. (y) &amp;lt;-- Bad date as 2022 is not two digits.&lt;BR&gt;\n";<br />
+print date("j/m/Y", getStrtotime("21/02/2022", "j/m/Y"))." Standard format. (j)&lt;BR&gt;\n";<br />
+print date("j/m/Y", getStrtotime("21/02/2022", "d/m/Y"))." Standard format. (d)&lt;BR&gt;\n";<br />
+print date("j/m/Y", getStrtotime("2/01/2022", "m/j/Y"))." US format.&lt;BR&gt;\n";<br />
+print date("j/m/Y", getStrtotime("2-01-22", "m-j-y"))." Two digit year, US format. (Y)&lt;BR&gt;\n";<br />
+print date("j/m/Y", getStrtotime("2-01-22", "m-j-Y"))." Two digit year, US format. (y) &amp;lt;-- Wrong year if two digits.&lt;BR&gt;\n";<br />
+print date("j/m/Y", getStrtotime("3/09/1752", "j/m/Y"))." No such date.&lt;BR&gt;\n";<br />
+print date("j/m/Y", getStrtotime("50/00/19999", "j/m/Y"))." Bad date string.&lt;BR&gt;\n";<br />
+print date("j/m/Y", getStrtotime("1-02-2022", "j/m/Y"))." Wrong - or / used.&lt;BR&gt;\n";<br />
+[/code]<br />
+Output:<br />
+1/02/2022 Standard format. (j)<br />
+1/02/2022 Standard format. (d)<br />
+3/09/1752 Standard format. (y) &lt;-- Bad date as 2022 is not two digits.<br />
+21/02/2022 Standard format. (j)<br />
+21/02/2022 Standard format. (d)<br />
+1/02/2022 US format.<br />
+1/02/2022 Two digit year, US format. (Y)<br />
+1/02/0022 Two digit year, US format. (y) &lt;-- Wrong year if two digits.<br />
+3/09/1752 No such date.<br />
+3/09/1752 Bad date string.<br />
+3/09/1752 Wrong - or / used.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="128319""></a>
+  <div class="note">
+   <strong class="user">Vyacheslav Belchuk</strong>
+   <a href="#128319" class="date">17-Mar-2023 03:39</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Be careful when using two numbers as the year. I came across this situation:<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="keyword">echo </span><span class="default">strtotime</span><span class="keyword">(</span><span class="string">'24.11.22'</span><span class="keyword">);<br />
+echo </span><span class="default">date</span><span class="keyword">(</span><span class="string">'d.m.Y H:i:s'</span><span class="keyword">, </span><span class="default">1669324282</span><span class="keyword">)&nbsp; .&nbsp; </span><span class="string">"\n\n"</span><span class="keyword">;<br />
+<br />
+</span><span class="comment">// But<br />
+</span><span class="keyword">echo </span><span class="default">strtotime</span><span class="keyword">(</span><span class="string">'24.11.2022'</span><span class="keyword">);<br />
+echo </span><span class="default">date</span><span class="keyword">(</span><span class="string">'d.m.Y H:i:s'</span><span class="keyword">, </span><span class="default">1669237200</span><span class="keyword">);<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Output:<br />
+<br />
+1669324282<br />
+25.11.2022 00:11:22<br />
+<br />
+1669237200<br />
+24.11.2022 00:00:00</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

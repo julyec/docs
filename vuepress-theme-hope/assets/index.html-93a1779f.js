@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-6b34e031","path":"/zh/guide/interface/","title":"界面","lang":"zh-CN","frontmatter":{"title":"界面","icon":"palette","index":false,"dir":{"order":2}},"headers":[],"git":{"createdTime":null,"updatedTime":null,"contributors":[]},"readingTime":{"minutes":0.04,"words":12},"filePathRelative":"zh/guide/interface/README.md","excerpt":""}');export{e as data};

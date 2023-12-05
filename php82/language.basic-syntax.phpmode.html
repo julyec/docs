@@ -1,0 +1,408 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>从 HTML 中分离</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="language.basic-syntax.phptags.html">? PHP 标记</a></li>
+      <li style="float: right;"><a href="language.basic-syntax.instruction-separation.html">指令分隔符 ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="language.basic-syntax.html">基本语法</a></li>
+    <li>从 HTML 中分离</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="language.basic-syntax.phpmode" class="sect1">
+   <h2 class="title">从 HTML 中分离</h2>
+   <p class="para">
+    凡是在一对开始和结束标记之外的内容都会被
+    PHP 解析器忽略，这使得 PHP 文件可以具备混合内容。 可以使 PHP
+    嵌入到 HTML 文档中去，如下例所示。
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+&lt;p&gt;This is going to be ignored by PHP and displayed by the browser.&lt;/p&gt;<br /><span style="color: #0000BB">&lt;?php </span><span style="color: #007700">echo </span><span style="color: #DD0000">'While this is going to be parsed.'</span><span style="color: #007700">; </span><span style="color: #0000BB">?&gt;<br /></span>&lt;p&gt;This will also be ignored by PHP and displayed by the browser.&lt;/p&gt;</span>
+</code></div>
+     </div>
+
+    </div>
+    这将如预期中的运行，因为当 PHP 解释器碰到 ?&gt;
+    结束标记时就简单地将其后内容原样输出（除非马上紧接换行 - 见
+    <a href="language.basic-syntax.instruction-separation.html" class="link">指令分隔符</a>）直到碰到下一个开始标记；例外是处于条件语句中间时，此时
+    PHP 解释器会根据条件判断来决定哪些输出，哪些跳过。见下例。
+   </p>
+   <p class="para">
+   使用条件结构：
+    <div class="example" id="example-62">
+     <p><strong>Example #1 使用条件的高级分离术</strong></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php </span><span style="color: #007700">if (</span><span style="color: #0000BB">$expression </span><span style="color: #007700">== </span><span style="color: #0000BB">true</span><span style="color: #007700">): </span><span style="color: #0000BB">?&gt;<br /></span>  This will show if the expression is true.<br /><span style="color: #0000BB">&lt;?php </span><span style="color: #007700">else: </span><span style="color: #0000BB">?&gt;<br /></span>  Otherwise this will show.<br /><span style="color: #0000BB">&lt;?php </span><span style="color: #007700">endif; </span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+    上例中 PHP 将跳过条件语句未达成的段落，即使该段落位于 PHP 开始和结束标记之外。由于
+    PHP 解释器会在条件未达成时直接跳过该段条件语句块，因此 PHP 会根据条件来忽略之。
+  </p>
+  <p class="para">
+   要输出大段文本时，跳出 PHP 解析模式通常比将文本通过
+   <span class="function"><a href="function.echo.html" class="function">echo</a></span> 或 <span class="function"><a href="function.print.html" class="function">print</a></span> 输出更有效率。
+  </p>
+  <p class="para">
+    <blockquote class="note"><p><strong class="note">Note</strong>: 
+     <p class="para">
+      此外注意如果将 PHP 嵌入到 XML 或 XHTML 中则需要使用
+      <code class="code">&lt;?php ?&gt;</code> 标记以保持符合标准。
+     </p>
+    </p></blockquote>
+   </p>
+  </div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="128355""></a>
+  <div class="note">
+   <strong class="user">gazianis005 at gmail dot com</strong>
+   <a href="#128355" class="date">31-Mar-2023 01:18</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+There are two types of escaping from HTML.<br />
+1.Normal escaping of using&nbsp; outside of a pair of opening and closing tag<br />
+2.Advance escaping of&nbsp; using conditions.<br />
+<br />
+Example of normal escaping<br />
+<br />
+&lt;p&gt;This is&nbsp; going to be ignored by the php parser and displayed by the browser&lt;/p&gt;<br />
+<span class="default">&lt;?php </span><span class="keyword">echo </span><span class="string">'This is going to be parsed'</span><span class="keyword">;</span><span class="default">?&gt;<br />
+</span>&lt;&gt;This will also ignored by the php parser and displayed by the browser&lt;/&gt; <br />
+<br />
+Example of&nbsp; advanced escaping <br />
+<br />
+<span class="default">&lt;?php </span><span class="keyword">if(</span><span class="default">$expression </span><span class="keyword">== </span><span class="default">true</span><span class="keyword">): </span><span class="default">?&gt;<br />
+</span>This will show if expression is true<br />
+<span class="default">&lt;?php </span><span class="keyword">else : </span><span class="default">?&gt;<br />
+</span>Otherwise&nbsp; this will show<br />
+<span class="default">&lt;?php </span><span class="keyword">endif ;</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="126855""></a>
+  <div class="note">
+   <strong class="user">bryanrojasq.wordpress.com</strong>
+   <a href="#126855" class="date">15-Feb-2022 10:39</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Example for a basic implementation of ternary operator to validate and print a class in the layout.<br />
+<br />
+&lt;!DOCTYPE html&gt;<br />
+&lt;html&gt;<br />
+&lt;head&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;meta charset="utf-8"&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;title&gt;<span class="default">&lt;?= $page_title ?&gt;</span>&lt;/title&gt;<br />
+&lt;/head&gt;<br />
+&lt;body <span class="default">&lt;?= strtolower</span><span class="keyword">(</span><span class="default">$page_slug</span><span class="keyword">) === </span><span class="string">'homepage' </span><span class="keyword">? </span><span class="string">'class="page-homepage"' </span><span class="keyword">: </span><span class="string">''</span><span class="keyword">; </span><span class="default">?&gt;</span>&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;section&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &lt;h1&gt;<span class="default">&lt;?= $page_title ?&gt;</span>&lt;/h1&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &lt;p&gt;This is a paragraph.&lt;/p&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;/section&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125679""></a>
+  <div class="note">
+   <strong class="user">Anonymous</strong>
+   <a href="#125679" class="date">14-Jan-2021 01:10</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Since it's not documented (AFAICT) and it might cause confusion: a single line break immediately after ?&gt; is ignored. Since whitespace is hard to see, whitespace is replaced with _ and the following code<br />
+<br />
+<span class="default">&lt;?php </span><span class="keyword">echo </span><span class="string">'1'</span><span class="keyword">; </span><span class="default">?&gt;<br />
+&lt;?php </span><span class="keyword">echo </span><span class="string">'2'</span><span class="keyword">; </span><span class="default">?&gt;</span>_<br />
+<span class="default">&lt;?php </span><span class="keyword">echo </span><span class="string">'3'</span><span class="keyword">; </span><span class="default">?&gt;<br />
+</span>_<span class="default">&lt;?php </span><span class="keyword">echo </span><span class="string">'4'</span><span class="keyword">; </span><span class="default">?&gt;</span>_<span class="default">&lt;?php </span><span class="keyword">echo </span><span class="string">'5'</span><span class="keyword">; </span><span class="default">?&gt;<br />
+</span><br />
+will produce<br />
+<br />
+12_<br />
+3_4_5</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125355""></a>
+  <div class="note">
+   <strong class="user">anisgazig.com</strong>
+   <a href="#125355" class="date">12-Sep-2020 11:26</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+&lt;p&gt;This is ignore by the php parser and displayed by the browser &lt;/p&gt;<br />
+<br />
+&nbsp;<span class="default">&lt;?php </span><span class="keyword">echo </span><span class="string">"While this is going to be parsed"</span><span class="keyword">; </span><span class="default">?&gt;<br />
+</span><br />
+&nbsp;<span class="default">&lt;?php <br />
+<br />
+when php interpreter hits the closing tag it start to outputing everything whatever it finds until it hit another opening tag</span><span class="keyword">.If </span><span class="default">php interpreter find a conditional statement in the middle of a block then php interpreter decided which block skip&nbsp; <br />
+<br />
+&nbsp;Advanced escaping using conditions<br />
+<br />
+&nbsp; </span><span class="keyword">&lt;?</span><span class="default">php $a </span><span class="keyword">= </span><span class="default">10</span><span class="keyword">; if(</span><span class="default">$a</span><span class="keyword">&lt;</span><span class="default">100</span><span class="keyword">): </span><span class="default">?&gt;<br />
+</span>&nbsp; This conditional block is executed<br />
+&nbsp; <span class="default">&lt;?php </span><span class="keyword">else: </span><span class="default">?&gt;<br />
+</span>&nbsp; &nbsp; &nbsp; otherwise this will be executed<br />
+&nbsp;&nbsp; &nbsp;&nbsp; <span class="default">&lt;?php </span><span class="keyword">endif; </span><span class="default">?&gt;<br />
+</span><br />
+In php 5 version,there are 5 opening and closing tags.<br />
+1.<span class="default">&lt;?php </span><span class="keyword">echo </span><span class="string">"standard long form php tag and if you use xml with php this tag will be use"</span><span class="keyword">;</span><span class="default">?&gt;<br />
+</span><br />
+2.<span class="default">&lt;?= </span><span class="string">"short echo tag and alwayes available from 5.4.0"</span><span class="keyword">;</span><span class="default">?&gt;<br />
+</span><br />
+3.&lt;? echo "short open tag which is available if short_open_tag is enable in php ini configuration file directive or php was configured with --enable-short-tags.This tag has discoursed from php 7.If you want to use xml with php,then short_open_tag in php ini will be disabled";?&gt;<br />
+<br />
+4.&lt;script language="php"&gt;<br />
+echo "Some editor do not like processing the code within this tag and this tag is removed from php 7.0.0 version";<br />
+<br />
+&lt;/script&gt;<br />
+<br />
+5.&lt;% echo "asp style tag and asp_tags should be enabled but now php 7.0.0 version,this tag is removed";%&gt;</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125335""></a>
+  <div class="note">
+   <strong class="user">davidhcefx</strong>
+   <a href="#125335" class="date">05-Sep-2020 07:15</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+When the PHP interpreter hits the ?&gt; closing tags, it WON'T output right away if it's inside of a conditional statement:<br />
+(no matter if it's an Alternative Syntax or not)<br />
+<br />
+&lt;html&gt;<br />
+<span class="default">&lt;?php<br />
+$a </span><span class="keyword">= </span><span class="default">1</span><span class="keyword">;<br />
+</span><span class="default">$b </span><span class="keyword">= </span><span class="default">2</span><span class="keyword">;<br />
+if (</span><span class="default">$a </span><span class="keyword">=== </span><span class="default">1</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; if (</span><span class="default">$b </span><span class="keyword">== </span><span class="default">2</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">?&gt;</span>&lt;head&gt;&lt;/head&gt;<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">} else {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">?&gt;</span>&lt;body&gt;&lt;/body&gt;<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">}<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span>&lt;/html&gt;<br />
+<br />
+This would output `&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;/html&gt;`.<br />
+Aside from conditional statements, the PHP interpreter also skip over functions! What a surprise!<br />
+<br />
+&lt;html&gt;<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">show</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">?&gt;<br />
+</span>&nbsp; &nbsp; &lt;a href="https://www.<span class="default">&lt;?php </span><span class="keyword">echo </span><span class="default">$a ?&gt;</span>.com"&gt;<br />
+&nbsp;&nbsp;&nbsp; Link<br />
+&nbsp;&nbsp;&nbsp; &lt;/a&gt;<br />
+&nbsp;&nbsp;&nbsp; <span class="default">&lt;?php<br />
+</span><span class="keyword">}<br />
+</span><span class="default">?&gt;<br />
+</span>&lt;body&gt;<br />
+&nbsp;&nbsp;&nbsp; <span class="default">&lt;?php show</span><span class="keyword">(</span><span class="string">"google"</span><span class="keyword">) </span><span class="default">?&gt;<br />
+</span>&lt;/body&gt;<br />
+&lt;/html&gt;<br />
+<br />
+This gives `&lt;html&gt;&lt;body&gt;&lt;a href="https://www.google.com"&gt;Link&lt;/a&gt;&lt;/body&gt;&lt;/html&gt;`.<br />
+These really confused me, because at first I thought it would output any HTML code right away, except for Alternative Syntaxes (https://www.php.net/manual/en/control-structures.alternative-syntax.php). There are more strange cases than I thought.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="124221""></a>
+  <div class="note">
+   <strong class="user">anisgazig at gmail dot com</strong>
+   <a href="#124221" class="date">22-Sep-2019 06:57</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Version of&nbsp; 7.0.0,3 tags are available in php.<br />
+1.long form tag (<span class="default">&lt;?php ?&gt;</span>)<br />
+2.short echo tag(<span class="default">&lt;?= ?&gt;</span>)<br />
+3.short_open_tag(? ?)<br />
+You can use short_open_tag when you start xml with php.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="122644""></a>
+  <div class="note">
+   <strong class="user">Emil Cataranciuc</strong>
+   <a href="#122644" class="date">19-Apr-2018 08:30</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+"&lt;script language="php"&gt; &lt;/script&gt;, are always available." since PHP 7.0.0 is no longer true. These are removed along the ASP "&lt;%, %&gt;, &lt;%=" tags.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="114589""></a>
+  <div class="note">
+   <strong class="user">sgurukrupa at gmail dot com</strong>
+   <a href="#114589" class="date">10-Mar-2014 07:01</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Although not specifically pointed out in the main text, escaping from HTML also applies to other control statements:<br />
+<br />
+<span class="default">&lt;?php </span><span class="keyword">for (</span><span class="default">$i </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">; </span><span class="default">$i </span><span class="keyword">&lt; </span><span class="default">5</span><span class="keyword">; ++</span><span class="default">$i</span><span class="keyword">): </span><span class="default">?&gt;<br />
+</span>Hello, there!<br />
+<span class="default">&lt;?php </span><span class="keyword">endfor; </span><span class="default">?&gt;<br />
+</span><br />
+When the above code snippet is executed we get the following output:<br />
+<br />
+Hello, there!<br />
+Hello, there!<br />
+Hello, there!<br />
+Hello, there!</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="101166""></a>
+  <div class="note">
+   <strong class="user">mike at clove dot com</strong>
+   <a href="#101166" class="date">30-Nov-2010 10:30</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+It's possible to write code to create php escapes which can be processed later by substituting \x3f for '?' - as in echo "&lt;\x3fphp echo 'foo'; \x3f&gt;";<br />
+<br />
+This is useful for creating a template parser which later is rendered by PHP.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="99083""></a>
+  <div class="note">
+   <strong class="user">quickfur at quickfur dot ath dot cx</strong>
+   <a href="#99083" class="date">26-Jul-2010 02:40</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+When the documentation says that the PHP parser ignores everything outside the <span class="default">&lt;?php </span><span class="keyword">... </span><span class="default">?&gt;</span> tags, it means literally EVERYTHING. Including things you normally wouldn't consider "valid", such as the following:<br />
+<br />
+&lt;html&gt;&lt;body&gt;<br />
+&lt;p<span class="default">&lt;?php </span><span class="keyword">if (</span><span class="default">$highlight</span><span class="keyword">): </span><span class="default">?&gt;</span> class="highlight"<span class="default">&lt;?php </span><span class="keyword">endif;</span><span class="default">?&gt;</span>&gt;This is a paragraph.&lt;/p&gt;<br />
+&lt;/body&gt;&lt;/html&gt;<br />
+<br />
+Notice how the PHP code is embedded in the middle of an HTML opening tag. The PHP parser doesn't care that it's in the middle of an opening tag, and doesn't require that it be closed. It also doesn't care that after the closing ?&gt; tag is the end of the HTML opening tag. So, if $highlight is true, then the output will be:<br />
+<br />
+&lt;html&gt;&lt;body&gt;<br />
+&lt;p class="highlight"&gt;This is a paragraph.&lt;/p&gt;<br />
+&lt;/body&gt;&lt;/html&gt;<br />
+<br />
+Otherwise, it will be:<br />
+<br />
+&lt;html&gt;&lt;body&gt;<br />
+&lt;p&gt;This is a paragraph.&lt;/p&gt;<br />
+&lt;/body&gt;&lt;/html&gt;<br />
+<br />
+Using this method, you can have HTML tags with optional attributes, depending on some PHP condition. Extremely flexible and useful!</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="97113""></a>
+  <div class="note">
+   <strong class="user">snor_007 at hotmail dot com</strong>
+   <a href="#97113" class="date">01-Apr-2010 04:28</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Playing around with different open and close tags I discovered you can actually mix different style open/close tags<br />
+<br />
+some examples<br />
+<br />
+&lt;%<br />
+//your php code here<br />
+?&gt;<br />
+<br />
+or<br />
+<br />
+&lt;script language="php"&gt;<br />
+//php code here<br />
+%&gt;</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="92643""></a>
+  <div class="note">
+   <strong class="user">ravenswd at gmail dot com</strong>
+   <a href="#92643" class="date">01-Aug-2009 05:08</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+One aspect of PHP that you need to be careful of, is that ?&gt; will drop you out of PHP code and into HTML even if it appears inside a // comment. (This does not apply to /* */ comments.) This can lead to unexpected results. For example, take this line:<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp; $file_contents&nbsp; </span><span class="keyword">= </span><span class="string">'&lt;?php die(); ?&gt;' </span><span class="keyword">. </span><span class="string">"\n"</span><span class="keyword">;<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+If you try to remove it by turning it into a comment, you get this:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="comment">//&nbsp; $file_contents&nbsp; = '&lt;?php die(); </span><span class="default">?&gt;</span>' . "\n";<br />
+?&gt;<br />
+<br />
+Which results in ' . "\n"; (and whatever is in the lines following it) to be output to your HTML page.<br />
+<br />
+The cure is to either comment it out using /* */ tags, or re-write the line as:<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp; $file_contents&nbsp; </span><span class="keyword">= </span><span class="string">'&lt;' </span><span class="keyword">. </span><span class="string">'?php die(); ?' </span><span class="keyword">. </span><span class="string">'&gt;' </span><span class="keyword">. </span><span class="string">"\n"</span><span class="keyword">;<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>空字符（Null bytes）相关问题</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="security.filesystem.html">? 文件系统安全</a></li>
+      <li style="float: right;"><a href="security.database.html">数据库安全 ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="security.filesystem.html">文件系统安全</a></li>
+    <li>空字符（Null bytes）相关问题</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="security.filesystem.nullbytes" class="sect1">
+    <h2 class="title">空字符（Null bytes）相关问题</h2>
+    <p class="simpara">
+     由于 <abbr title="PHP: Hypertext Preprocessor">PHP</abbr> 使用底层 C 函数进行文件系统相关操作，因此它可能会以完全意想不到的方式处理空字符。
+     在 C 语言中空字符标识字符串的结束，所以一个完整的字符串是从其开头到遇见空字符为止。
+
+     下面的示例展示了易受攻击的代码，演示了这个问题：
+    </p>
+    <div class="example" id="example-868">
+     <p><strong>Example #1 会被空字符攻击的代码</strong></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$file </span><span style="color: #007700">= </span><span style="color: #0000BB">$_GET</span><span style="color: #007700">[</span><span style="color: #DD0000">'file'</span><span style="color: #007700">]; </span><span style="color: #FF8000">// "../../etc/passwd\0"<br /></span><span style="color: #007700">if (</span><span style="color: #0000BB">file_exists</span><span style="color: #007700">(</span><span style="color: #DD0000">'/home/wwwrun/'</span><span style="color: #007700">.</span><span style="color: #0000BB">$file</span><span style="color: #007700">.</span><span style="color: #DD0000">'.php'</span><span style="color: #007700">)) {<br />    </span><span style="color: #FF8000">// 当 /home/wwwrun/../../etc/passwd 文件存在的时候 file_exists 将会返回 true<br />    </span><span style="color: #007700">include </span><span style="color: #DD0000">'/home/wwwrun/'</span><span style="color: #007700">.</span><span style="color: #0000BB">$file</span><span style="color: #007700">.</span><span style="color: #DD0000">'.php'</span><span style="color: #007700">;<br />    </span><span style="color: #FF8000">// 将会加载 /etc/passwd 文件<br /></span><span style="color: #007700">}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+    <p class="para">
+     因此，在文件系统操作中都应该正确检查任何被污染的字符串。这是上个示例的改进版本：
+    </p>
+    <div class="example" id="example-870">
+     <p><strong>Example #2 验证输入的正确性</strong></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$file </span><span style="color: #007700">= </span><span style="color: #0000BB">$_GET</span><span style="color: #007700">[</span><span style="color: #DD0000">'file'</span><span style="color: #007700">]; <br /><br /></span><span style="color: #FF8000">// 对值进行白名单检查<br /></span><span style="color: #007700">switch (</span><span style="color: #0000BB">$file</span><span style="color: #007700">) {<br />    case </span><span style="color: #DD0000">'main'</span><span style="color: #007700">:<br />    case </span><span style="color: #DD0000">'foo'</span><span style="color: #007700">:<br />    case </span><span style="color: #DD0000">'bar'</span><span style="color: #007700">:<br />        include </span><span style="color: #DD0000">'/home/wwwrun/include/'</span><span style="color: #007700">.</span><span style="color: #0000BB">$file</span><span style="color: #007700">.</span><span style="color: #DD0000">'.php'</span><span style="color: #007700">;<br />        break;<br />    default:<br />        include </span><span style="color: #DD0000">'/home/wwwrun/include/main.php'</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+   </div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="117139""></a>
+  <div class="note">
+   <strong class="user">cornernote [at] gmail.com</strong>
+   <a href="#117139" class="date">21-Apr-2015 04:26</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+clean input of null bytes:<br />
+<br />
+<span class="default">&lt;?php<br />
+$clean </span><span class="keyword">= </span><span class="default">str_replace</span><span class="keyword">(</span><span class="default">chr</span><span class="keyword">(</span><span class="default">0</span><span class="keyword">), </span><span class="string">''</span><span class="keyword">, </span><span class="default">$input</span><span class="keyword">);<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="114987""></a>
+  <div class="note">
+   <strong class="user">Anonymous</strong>
+   <a href="#114987" class="date">09-May-2014 02:51</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Looks like this issue was fixed in PHP 5.3 https://bugs.php.net/bug.php?id=39863</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

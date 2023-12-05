@@ -1,0 +1,245 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>goto</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.include-once.html">? include_once</a></li>
+      <li style="float: right;"><a href="language.functions.html">函数 ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="language.control-structures.html">流程控制</a></li>
+    <li>goto</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="control-structures.goto" class="sect1">
+ <h2 class="title">goto</h2>
+ <p class="verinfo">(PHP 5 &gt;= 5.3.0, PHP 7, PHP 8)</p>
+ <p class="para">
+  <div class="mediaobject">
+   
+   <div class="imageobject">
+    <img src="images/0baa1b9fae6aec55bbb73037f3016001-xkcd-goto.png" alt="What's the worse thing that could happen if you use goto?" width="740" height="201" />
+   </div>
+  </div>
+  此漫画鸣谢 <a href="http://xkcd.com/292" class="link external" title="Link : http://xkcd.com/292">&raquo;&nbsp;xkcd</a>
+ </p>
+ <p class="para">
+  <code class="literal">goto</code>
+  操作符可以用来跳转到程序中的另一位置。该目标位置可以用 <em class="emphasis">区分大小写</em> 的目标名称加上冒号来标记，而跳转指令是
+  <code class="literal">goto</code> 之后接上目标位置的标记。PHP 中的 <code class="literal">goto</code>
+  有一定限制，目标位置只能位于同一个文件和作用域，也就是说无法跳出一个函数或类方法，也无法跳入到另一个函数。也无法跳入到任何循环或者
+  switch 结构中。可以跳出循环或者 switch，通常的用法是用 <code class="literal">goto</code>
+  代替多层的 <code class="literal">break</code>。
+ </p>
+ <p class="para">
+  <div class="example" id="example-288">
+   <p><strong>Example #1 <code class="literal">goto</code> 示例</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">goto </span><span style="color: #0000BB">a</span><span style="color: #007700">;<br />echo </span><span style="color: #DD0000">'Foo'</span><span style="color: #007700">;<br /> <br /></span><span style="color: #0000BB">a</span><span style="color: #007700">:<br />echo </span><span style="color: #DD0000">'Bar'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例会输出：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+Bar
+</pre></div>
+   </div>
+  </div>
+ </p>
+ <p class="para">
+  <div class="example" id="example-290">
+   <p><strong>Example #2 <code class="literal">goto</code> 跳出循环示例</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">for(</span><span style="color: #0000BB">$i</span><span style="color: #007700">=</span><span style="color: #0000BB">0</span><span style="color: #007700">,</span><span style="color: #0000BB">$j</span><span style="color: #007700">=</span><span style="color: #0000BB">50</span><span style="color: #007700">; </span><span style="color: #0000BB">$i</span><span style="color: #007700">&lt;</span><span style="color: #0000BB">100</span><span style="color: #007700">; </span><span style="color: #0000BB">$i</span><span style="color: #007700">++) {<br />  while(</span><span style="color: #0000BB">$j</span><span style="color: #007700">--) {<br />    if(</span><span style="color: #0000BB">$j</span><span style="color: #007700">==</span><span style="color: #0000BB">17</span><span style="color: #007700">) goto </span><span style="color: #0000BB">end</span><span style="color: #007700">; <br />  }  <br />}<br />echo </span><span style="color: #DD0000">"i = </span><span style="color: #0000BB">$i</span><span style="color: #DD0000">"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">end</span><span style="color: #007700">:<br />echo </span><span style="color: #DD0000">'j hit 17'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例会输出：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+j hit 17
+</pre></div>
+   </div>
+  </div>
+ </p>
+ <p class="para">
+  <div class="example" id="example-292">
+   <p><strong>Example #3 以下写法无效</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">goto </span><span style="color: #0000BB">loop</span><span style="color: #007700">;<br />for(</span><span style="color: #0000BB">$i</span><span style="color: #007700">=</span><span style="color: #0000BB">0</span><span style="color: #007700">,</span><span style="color: #0000BB">$j</span><span style="color: #007700">=</span><span style="color: #0000BB">50</span><span style="color: #007700">; </span><span style="color: #0000BB">$i</span><span style="color: #007700">&lt;</span><span style="color: #0000BB">100</span><span style="color: #007700">; </span><span style="color: #0000BB">$i</span><span style="color: #007700">++) {<br />  while(</span><span style="color: #0000BB">$j</span><span style="color: #007700">--) {<br />    </span><span style="color: #0000BB">loop</span><span style="color: #007700">:<br />  }<br />}<br />echo </span><span style="color: #DD0000">"</span><span style="color: #0000BB">$i</span><span style="color: #DD0000"> = </span><span style="color: #0000BB">$i</span><span style="color: #DD0000">"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例会输出：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+Fatal error: &#039;goto&#039; into loop or switch statement is disallowed in
+script on line 2
+</pre></div>
+   </div>
+  </div>
+ </p>
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="127678""></a>
+  <div class="note">
+   <strong class="user">BPI</strong>
+   <a href="#127678" class="date">28-Sep-2022 11:37</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+You can jump inside the same switch. This can be usefull to jump to default<br />
+<span class="default">&lt;?php<br />
+$x</span><span class="keyword">=</span><span class="default">3</span><span class="keyword">;<br />
+switch(</span><span class="default">$x</span><span class="keyword">){<br />
+&nbsp;&nbsp;&nbsp; case </span><span class="default">0</span><span class="keyword">:<br />
+&nbsp;&nbsp;&nbsp; case </span><span class="default">3</span><span class="keyword">:<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; print(</span><span class="default">$x</span><span class="keyword">);&nbsp; &nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if(</span><span class="default">$x</span><span class="keyword">)<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; goto </span><span class="default">def</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; case </span><span class="default">5</span><span class="keyword">:<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$x</span><span class="keyword">=</span><span class="default">6</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; default:<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">def</span><span class="keyword">:<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; print(</span><span class="default">$x</span><span class="keyword">);<br />
+}<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="126874""></a>
+  <div class="note">
+   <strong class="user">firstbitrix at ya dot ru</strong>
+   <a href="#126874" class="date">24-Feb-2022 09:52</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I found a good way to use goto for walking through a foreach iteration one another time in order not to walk through whole array once again or not to use special and mostly complex if...else constructions. <br />
+<br />
+But don't forget to make an exit from the goto loop if the iteration of rewalking reaches to many attemptions.<br />
+<br />
+Brief example: <br />
+<br />
+foreach ($fooArray as $foo) {<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; $attemptionLimit = 0;<br />
+&nbsp;&nbsp;&nbsp; restartIteration:<br />
+&nbsp;&nbsp;&nbsp; if (++$attemptionLimit &gt; 10) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; continue;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; $result = $foo-&gt;doSomething();<br />
+&nbsp;&nbsp;&nbsp; if (!$result) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $foo-&gt;doSomethingElse($attemptionLimit);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; goto restartIteration;<br />
+&nbsp;&nbsp;&nbsp; } else {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo "Done!";<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="126824""></a>
+  <div class="note">
+   <strong class="user">devbyjesus at example dot com</strong>
+   <a href="#126824" class="date">03-Feb-2022 06:58</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+the problem of goto is that it is a good feature but in a large codebase it reduces the readability of the code . that's all . i try to not use it to think about the person who is going to read after me .</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125935""></a>
+  <div class="note">
+   <strong class="user">PHP_is_still_great</strong>
+   <a href="#125935" class="date">17-Mar-2021 01:09</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+// goto is STILL a good feature if you know how to use it.<br />
+// Just don't use it in loops.<br />
+// Example:<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $sql = "DELETE FROM sometable WHERE id=?;";<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $stmt = $conn-&gt;prepare($sql);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (!$stmt) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; echo "ERR prepare_fail";<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; goto End;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $bind = $stmt-&gt;bind_param('i', $id);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (!$bind) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; echo "ERR bind_fail";<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; goto End;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $exec = $stmt-&gt;execute();<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (!$exec) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; echo "ERR exec_fail";<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; goto End;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (isset($_POST['file'])) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $file = "../" . $_POST['file'];<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if (is_file($file)) { unlink($file); }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo "OK delete_success" ;<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; End:<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $stmt-&gt;close();<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $conn-&gt;close();<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; exit;<br />
+<br />
+/*<br />
+&nbsp;&nbsp;&nbsp; instead of repeating the $stmt-&gt;close() and $conn-&gt;close(),<br />
+&nbsp;&nbsp;&nbsp; we save a few lines by adding a goto and just close everything at the end.<br />
+*/</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125656""></a>
+  <div class="note">
+   <strong class="user">Lollo</strong>
+   <a href="#125656" class="date">05-Jan-2021 02:00</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+You should mention the label can't be a variable</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

@@ -1,0 +1,375 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>返回数组中所有的值</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.array-unshift.html">? array_unshift</a></li>
+      <li style="float: right;"><a href="function.array-walk-recursive.html">array_walk_recursive ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.array.html">数组 函数</a></li>
+    <li>返回数组中所有的值</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.array-values" class="refentry">
+   <div class="refnamediv">
+    <h1 class="refname">array_values</h1>
+    <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">array_values</span> &mdash; <span class="dc-title">返回数组中所有的值</span></p>
+
+   </div>
+ <div class="refsect1 description" id="refsect1-function.array-values-description">
+  <h3 class="title">说明</h3>
+     <div class="methodsynopsis dc-description">
+      <span class="methodname"><strong>array_values</strong></span>(<span class="methodparam"><span class="type">array</span> <code class="parameter">$array</code></span>): <span class="type">array</span></div>
+
+    <p class="para rdfs-comment">
+     <span class="function"><strong>array_values()</strong></span> 返回
+     <code class="parameter">input</code> 数组中所有的值并给其建立数字索引。
+    </p>
+   </div>
+
+ <div class="refsect1 parameters" id="refsect1-function.array-values-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">array</code></dt>
+
+     <dd>
+
+      <p class="para">
+       数组。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+ <div class="refsect1 returnvalues" id="refsect1-function.array-values-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回含所有值的索引数组。
+  </p>
+ </div>
+
+ <div class="refsect1 examples" id="refsect1-function.array-values-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #1 <span class="function"><strong>array_values()</strong></span> 例子</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$array </span><span style="color: #007700">= array(</span><span style="color: #DD0000">"size" </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">"XL"</span><span style="color: #007700">, </span><span style="color: #DD0000">"color" </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">"gold"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">array_values</span><span style="color: #007700">(</span><span style="color: #0000BB">$array</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Array
+(
+    [0] =&gt; XL
+    [1] =&gt; gold
+)
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+ <div class="refsect1 seealso" id="refsect1-function.array-values-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.array-keys.html" class="function" rel="rdfs-seeAlso">array_keys()</a> - 返回数组中部分的或所有的键名</span></li>
+    <li class="member"><span class="function"><a href="function.array-combine.html" class="function" rel="rdfs-seeAlso">array_combine()</a> - 创建一个数组，用一个数组的值作为其键名，另一个数组的值作为其值</span></li>
+   </ul>
+  </p>
+ </div>
+
+  </div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="114941""></a>
+  <div class="note">
+   <strong class="user">biziclop at vipmail dot hu</strong>
+   <a href="#114941" class="date">01-May-2014 11:47</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Remember, array_values() will ignore your beautiful numeric indexes, it will renumber them according tho the 'foreach' ordering:<br />
+<br />
+<span class="default">&lt;?php<br />
+$a </span><span class="keyword">= array(<br />
+&nbsp;</span><span class="default">3 </span><span class="keyword">=&gt; </span><span class="default">11</span><span class="keyword">,<br />
+&nbsp;</span><span class="default">1 </span><span class="keyword">=&gt; </span><span class="default">22</span><span class="keyword">,<br />
+&nbsp;</span><span class="default">2 </span><span class="keyword">=&gt; </span><span class="default">33</span><span class="keyword">,<br />
+);<br />
+</span><span class="default">$a</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">] = </span><span class="default">44</span><span class="keyword">;<br />
+<br />
+</span><span class="default">print_r</span><span class="keyword">( </span><span class="default">array_values</span><span class="keyword">( </span><span class="default">$a </span><span class="keyword">));<br />
+==&gt;<br />
+Array(<br />
+&nbsp; [</span><span class="default">0</span><span class="keyword">] =&gt; </span><span class="default">11<br />
+&nbsp; </span><span class="keyword">[</span><span class="default">1</span><span class="keyword">] =&gt; </span><span class="default">22<br />
+&nbsp; </span><span class="keyword">[</span><span class="default">2</span><span class="keyword">] =&gt; </span><span class="default">33<br />
+&nbsp; </span><span class="keyword">[</span><span class="default">3</span><span class="keyword">] =&gt; </span><span class="default">44<br />
+</span><span class="keyword">)<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="103905""></a>
+  <div class="note">
+   <strong class="user">abimaelrc</strong>
+   <a href="#103905" class="date">10-May-2011 05:39</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+This is another way to get value from a multidimensional array, but for versions of php &gt;= 5.3.x<br />
+<span class="default">&lt;?php<br />
+</span><span class="comment">/**<br />
+&nbsp;* Get all values from specific key in a multidimensional array<br />
+&nbsp;*<br />
+&nbsp;* @param $key string<br />
+&nbsp;* @param $arr array<br />
+&nbsp;* @return null|string|array<br />
+&nbsp;*/<br />
+</span><span class="keyword">function </span><span class="default">array_value_recursive</span><span class="keyword">(</span><span class="default">$key</span><span class="keyword">, array </span><span class="default">$arr</span><span class="keyword">){<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$val </span><span class="keyword">= array();<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">array_walk_recursive</span><span class="keyword">(</span><span class="default">$arr</span><span class="keyword">, function(</span><span class="default">$v</span><span class="keyword">, </span><span class="default">$k</span><span class="keyword">) use(</span><span class="default">$key</span><span class="keyword">, &amp;</span><span class="default">$val</span><span class="keyword">){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if(</span><span class="default">$k </span><span class="keyword">== </span><span class="default">$key</span><span class="keyword">) </span><span class="default">array_push</span><span class="keyword">(</span><span class="default">$val</span><span class="keyword">, </span><span class="default">$v</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; });<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">count</span><span class="keyword">(</span><span class="default">$val</span><span class="keyword">) &gt; </span><span class="default">1 </span><span class="keyword">? </span><span class="default">$val </span><span class="keyword">: </span><span class="default">array_pop</span><span class="keyword">(</span><span class="default">$val</span><span class="keyword">);<br />
+}<br />
+<br />
+</span><span class="default">$arr </span><span class="keyword">= array(<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'foo' </span><span class="keyword">=&gt; </span><span class="string">'foo'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'bar' </span><span class="keyword">=&gt; array(<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'baz' </span><span class="keyword">=&gt; </span><span class="string">'baz'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'candy' </span><span class="keyword">=&gt; </span><span class="string">'candy'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'vegetable' </span><span class="keyword">=&gt; array(<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'carrot' </span><span class="keyword">=&gt; </span><span class="string">'carrot'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; )<br />
+&nbsp;&nbsp;&nbsp; ),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'vegetable' </span><span class="keyword">=&gt; array(<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'carrot' </span><span class="keyword">=&gt; </span><span class="string">'carrot2'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; ),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'fruits' </span><span class="keyword">=&gt; </span><span class="string">'fruits'</span><span class="keyword">,<br />
+);<br />
+<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">array_value_recursive</span><span class="keyword">(</span><span class="string">'carrot'</span><span class="keyword">, </span><span class="default">$arr</span><span class="keyword">)); </span><span class="comment">// array(2) { [0]=&gt; string(6) "carrot" [1]=&gt; string(7) "carrot2" }<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">array_value_recursive</span><span class="keyword">(</span><span class="string">'apple'</span><span class="keyword">, </span><span class="default">$arr</span><span class="keyword">)); </span><span class="comment">// null<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">array_value_recursive</span><span class="keyword">(</span><span class="string">'baz'</span><span class="keyword">, </span><span class="default">$arr</span><span class="keyword">)); </span><span class="comment">// string(3) "baz"<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">array_value_recursive</span><span class="keyword">(</span><span class="string">'candy'</span><span class="keyword">, </span><span class="default">$arr</span><span class="keyword">)); </span><span class="comment">// string(5) "candy"<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">array_value_recursive</span><span class="keyword">(</span><span class="string">'pear'</span><span class="keyword">, </span><span class="default">$arr</span><span class="keyword">)); </span><span class="comment">// null<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="85924""></a>
+  <div class="note">
+   <strong class="user">chrysb at gmail dot com</strong>
+   <a href="#85924" class="date">24-Sep-2008 12:34</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you are looking for a way to count the total number of times a specific value appears in array, use this function:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="keyword">function </span><span class="default">array_value_count </span><span class="keyword">(</span><span class="default">$match</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">)
+<br />
+{
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$count </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;
+<br />
+&nbsp;&nbsp;&nbsp; 
+<br />
+&nbsp;&nbsp;&nbsp; foreach (</span><span class="default">$array </span><span class="keyword">as </span><span class="default">$key </span><span class="keyword">=&gt; </span><span class="default">$value</span><span class="keyword">)
+<br />
+&nbsp;&nbsp;&nbsp; {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">$value </span><span class="keyword">== </span><span class="default">$match</span><span class="keyword">)
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$count</span><span class="keyword">++;
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp;&nbsp; 
+<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$count</span><span class="keyword">;
+<br />
+}
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+This should really be a native function of PHP.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="77671""></a>
+  <div class="note">
+   <strong class="user">bluej100 at gmail dot com</strong>
+   <a href="#77671" class="date">07-Sep-2007 10:10</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Most of the array_flatten functions don't allow preservation of keys. Mine allows preserve, don't preserve, and preserve only strings (default).<br />
+<br />
+&lt;?<br />
+// recursively reduces deep arrays to single-dimensional arrays<br />
+// $preserve_keys: (0=&gt;never, 1=&gt;strings, 2=&gt;always)<br />
+function array_flatten($array, $preserve_keys = 1, &amp;$newArray = Array()) {<br />
+&nbsp; foreach ($array as $key =&gt; $child) {<br />
+&nbsp;&nbsp;&nbsp; if (is_array($child)) {<br />
+&nbsp;&nbsp; &nbsp;&nbsp; $newArray =&amp; array_flatten($child, $preserve_keys, $newArray);<br />
+&nbsp;&nbsp;&nbsp; } elseif ($preserve_keys + is_string($key) &gt; 1) {<br />
+&nbsp;&nbsp; &nbsp;&nbsp; $newArray[$key] = $child;<br />
+&nbsp;&nbsp;&nbsp; } else {<br />
+&nbsp;&nbsp; &nbsp;&nbsp; $newArray[] = $child;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp; }<br />
+&nbsp; return $newArray;<br />
+}<br />
+<br />
+// Tests<br />
+<br />
+$array = Array(<br />
+&nbsp; 'A' =&gt; Array(<br />
+&nbsp;&nbsp;&nbsp; 1 =&gt; 'foo',<br />
+&nbsp;&nbsp;&nbsp; 2 =&gt; Array(<br />
+&nbsp;&nbsp; &nbsp;&nbsp; 'a' =&gt; 'bar'<br />
+&nbsp;&nbsp;&nbsp; )<br />
+&nbsp; ),<br />
+&nbsp; 'B' =&gt; 'baz'<br />
+);<br />
+<br />
+echo 'var_dump($array);'."\n";<br />
+var_dump($array);<br />
+echo 'var_dump(array_flatten($array, 0));'."\n";<br />
+var_dump(array_flatten($array, 0));<br />
+echo 'var_dump(array_flatten($array, 1));'."\n";<br />
+var_dump(array_flatten($array, 1));<br />
+echo 'var_dump(array_flatten($array, 2));'."\n";<br />
+var_dump(array_flatten($array, 2));<br />
+?&gt;</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="41967""></a>
+  <div class="note">
+   
+   <a href="#41967" class="date">27-Apr-2004 06:47</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+<span class="default">&lt;?php <br />
+</span><span class="comment">/**<br />
+&nbsp;&nbsp; flatten an arbitrarily deep multidimensional array <br />
+&nbsp;&nbsp; into a list of its scalar values<br />
+&nbsp;&nbsp; (may be inefficient for large structures)<br />
+&nbsp;&nbsp; (will infinite recurse on self-referential structures)<br />
+&nbsp;&nbsp; (could be extended to handle objects)<br />
+*/<br />
+</span><span class="keyword">function </span><span class="default">array_values_recursive</span><span class="keyword">(</span><span class="default">$ary</span><span class="keyword">)<br />
+{<br />
+&nbsp;&nbsp; </span><span class="default">$lst </span><span class="keyword">= array();<br />
+&nbsp;&nbsp; foreach( </span><span class="default">array_keys</span><span class="keyword">(</span><span class="default">$ary</span><span class="keyword">) as </span><span class="default">$k </span><span class="keyword">){<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$v </span><span class="keyword">= </span><span class="default">$ary</span><span class="keyword">[</span><span class="default">$k</span><span class="keyword">];<br />
+&nbsp;&nbsp; &nbsp;&nbsp; if (</span><span class="default">is_scalar</span><span class="keyword">(</span><span class="default">$v</span><span class="keyword">)) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$lst</span><span class="keyword">[] = </span><span class="default">$v</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp;&nbsp; } elseif (</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$v</span><span class="keyword">)) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$lst </span><span class="keyword">= </span><span class="default">array_merge</span><span class="keyword">( </span><span class="default">$lst</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">array_values_recursive</span><span class="keyword">(</span><span class="default">$v</span><span class="keyword">)<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; );<br />
+&nbsp;&nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; }<br />
+&nbsp;&nbsp; return </span><span class="default">$lst</span><span class="keyword">;<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+code till dawn!&nbsp; -mark meves!</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="36837""></a>
+  <div class="note">
+   <strong class="user">nopy at users dot sourceforge dot net</strong>
+   <a href="#36837" class="date">24-Oct-2003 03:36</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Just a warning that re-indexing an array by array_values() may cause you to reach the memory limit unexpectly.
+<br />
+
+<br />
+For example, if your PHP momory_limits is 8MB,
+<br />
+&nbsp;and says there's a BIG array $bigArray which allocate 5MB of memory.
+<br />
+
+<br />
+Doing this will cause PHP exceeds the momory limits:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+&nbsp; $bigArray </span><span class="keyword">= </span><span class="default">array_values</span><span class="keyword">( </span><span class="default">$bigArray </span><span class="keyword">);
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+It's because array_values() does not re-index $bigArray directly,
+<br />
+it just re-index it into another array, and assign to itself later.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

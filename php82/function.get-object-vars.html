@@ -1,0 +1,499 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>获取指定对象的属性</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.get-mangled-object-vars.html">? get_mangled_object_vars</a></li>
+      <li style="float: right;"><a href="function.get-parent-class.html">get_parent_class ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.classobj.html">类/对象 函数</a></li>
+    <li>获取指定对象的属性</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.get-object-vars" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">get_object_vars</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">get_object_vars</span> &mdash; <span class="dc-title">获取指定对象的属性</span></p>
+
+ </div>
+ <div class="refsect1 description" id="refsect1-function.get-object-vars-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>get_object_vars</strong></span>(<span class="methodparam"><span class="type">object</span> <code class="parameter">$object</code></span>): <span class="type">array</span></div>
+
+  <p class="para rdfs-comment">
+   根据作用域获取指定 <code class="parameter">object</code>
+   的可访问非静态属性。
+  </p>
+ </div>
+
+ <div class="refsect1 parameters" id="refsect1-function.get-object-vars-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">object</code></dt>
+
+     <dd>
+
+      <p class="para">
+       对象实例。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+ <div class="refsect1 returnvalues" id="refsect1-function.get-object-vars-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回指定 <code class="parameter">object</code> 在当前作用域的属性组成的关联数组，属性为已定义、非静态、可访问。
+  </p>
+ </div>
+
+ <div class="refsect1 examples" id="refsect1-function.get-object-vars-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #1 <span class="function"><strong>get_object_vars()</strong></span> 使用</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">class </span><span style="color: #0000BB">foo </span><span style="color: #007700">{<br />    private </span><span style="color: #0000BB">$a</span><span style="color: #007700">;<br />    public </span><span style="color: #0000BB">$b </span><span style="color: #007700">= </span><span style="color: #0000BB">1</span><span style="color: #007700">;<br />    public </span><span style="color: #0000BB">$c</span><span style="color: #007700">;<br />    private </span><span style="color: #0000BB">$d</span><span style="color: #007700">;<br />    static </span><span style="color: #0000BB">$e</span><span style="color: #007700">;<br />   <br />    public function </span><span style="color: #0000BB">test</span><span style="color: #007700">() {<br />        </span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">get_object_vars</span><span style="color: #007700">(</span><span style="color: #0000BB">$this</span><span style="color: #007700">));<br />    }<br />}<br /><br /></span><span style="color: #0000BB">$test </span><span style="color: #007700">= new </span><span style="color: #0000BB">foo</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">get_object_vars</span><span style="color: #007700">(</span><span style="color: #0000BB">$test</span><span style="color: #007700">));<br /><br /></span><span style="color: #0000BB">$test</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">test</span><span style="color: #007700">();<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+array(2) {
+  [&quot;b&quot;]=&gt;
+  int(1)
+  [&quot;c&quot;]=&gt;
+  NULL
+}
+array(4) {
+  [&quot;a&quot;]=&gt;
+  NULL
+  [&quot;b&quot;]=&gt;
+  int(1)
+  [&quot;c&quot;]=&gt;
+  NULL
+  [&quot;d&quot;]=&gt;
+  NULL
+}
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    未初始化的属性认为是不可访问的，因此不会包含在数组中。
+   </p>
+  </p></blockquote>
+ </div>
+
+ <div class="refsect1 seealso" id="refsect1-function.get-object-vars-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.get-class-methods.html" class="function" rel="rdfs-seeAlso">get_class_methods()</a> - 返回由类的方法名组成的数组</span></li>
+    <li class="member"><span class="function"><a href="function.get-class-vars.html" class="function" rel="rdfs-seeAlso">get_class_vars()</a> - 获取类的默认属性</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="127940""></a>
+  <div class="note">
+   <strong class="user">Trismegiste</strong>
+   <a href="#127940" class="date">16-Nov-2022 03:34</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Please be aware of hidden behaviors with uninitialised properties. The note explains : ? Uninitialized properties are considered inaccessible, and thus will not be included in the array. ? but that's not entirely true in PHP 8.1. It depends if the property is type-hinted or not.<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="keyword">class </span><span class="default">Example <br />
+</span><span class="keyword">{<br />
+&nbsp; public </span><span class="default">$untyped</span><span class="keyword">;<br />
+&nbsp; public </span><span class="default">string $typedButNotInitialized</span><span class="keyword">;<br />
+&nbsp; public ?</span><span class="default">string $typedOrNullNotInitialized</span><span class="keyword">;<br />
+&nbsp; public ?</span><span class="default">string $typedOrNullWithDefaultNull </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">;<br />
+}<br />
+<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">get_object_vars</span><span class="keyword">(new </span><span class="default">Example</span><span class="keyword">()));<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+will print :<br />
+<br />
+array(2) {<br />
+&nbsp; ["untyped"]=&gt;<br />
+&nbsp; NULL<br />
+&nbsp; ["typedOrNullWithDefaultNull"]=&gt;<br />
+&nbsp; NULL<br />
+}<br />
+<br />
+As you can see, only "untyped" and "typedOrNullWithDefaultNull" properties are dumped with get_object_vars(). You may encounter problems when migrating old source code and adds carelessly types everywhere without proper initialisation (or default) and assuming it defaults to NULL like old code does.<br />
+<br />
+Hope this helps</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125993""></a>
+  <div class="note">
+   <strong class="user">marcus at marcusball dot me</strong>
+   <a href="#125993" class="date">08-Apr-2021 10:54</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+When dealing with a very large quantity of objects, it is worth noting that using `get_object_vars()` may drastically increase memory usage. <br />
+<br />
+If instantiated objects only use predefined properties from a class then PHP can use a single hashtable for the class properties, and small memory-efficient arrays for the object properties: <br />
+<br />
+If a class is defined with three properties ($foo, $bar, and $baz), "PHP no longer has to store the data in a hashtable, but instead can say that $foo is proprety 0, $bar is proprety 1, $baz is property 2 and then just store the properties in a three-element C array. This means that PHP only needs one hashtable in the class that does the property-name to offset mapping and uses a memory-efficient C-array in the individual objects."<br />
+<br />
+However, if you call `get_object_vars()` on an object like this, then PHP WILL build a hashtable for the individual object. If you have a large quantity of objects, and you call `get_object_vars()` on all of them, then a hashtable will be built for each object, resulting in a lot more memory usage. This can be seen in this bug report: https://bugs.php.net/bug.php?id=79392<br />
+<br />
+The effects of this can be seen in this example:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">class </span><span class="default">Example </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public </span><span class="default">$foo</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; public </span><span class="default">$bar</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; public </span><span class="default">$baz</span><span class="keyword">;<br />
+}<br />
+<br />
+function </span><span class="default">printMem</span><span class="keyword">(</span><span class="default">$label</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$usage </span><span class="keyword">= </span><span class="default">memory_get_usage</span><span class="keyword">();<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="default">sprintf</span><span class="keyword">(</span><span class="string">'%s: %d (%.2f MB)'</span><span class="keyword">, </span><span class="default">$label</span><span class="keyword">, </span><span class="default">$usage</span><span class="keyword">, </span><span class="default">$usage </span><span class="keyword">/ </span><span class="default">1000000</span><span class="keyword">) . </span><span class="default">PHP_EOL</span><span class="keyword">;<br />
+}<br />
+<br />
+</span><span class="default">printMem</span><span class="keyword">(</span><span class="string">'start'</span><span class="keyword">);<br />
+<br />
+</span><span class="default">$objects </span><span class="keyword">= [];<br />
+for (</span><span class="default">$i </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">; </span><span class="default">$i </span><span class="keyword">&lt; </span><span class="default">20000</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">++) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$obj </span><span class="keyword">= new </span><span class="default">Example</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$obj</span><span class="keyword">-&gt;</span><span class="default">foo </span><span class="keyword">= </span><span class="default">bin2hex</span><span class="keyword">(</span><span class="default">random_bytes</span><span class="keyword">(</span><span class="default">5</span><span class="keyword">));<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$obj</span><span class="keyword">-&gt;</span><span class="default">bar </span><span class="keyword">= </span><span class="default">bin2hex</span><span class="keyword">(</span><span class="default">random_bytes</span><span class="keyword">(</span><span class="default">5</span><span class="keyword">));<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$obj</span><span class="keyword">-&gt;</span><span class="default">baz </span><span class="keyword">= </span><span class="default">bin2hex</span><span class="keyword">(</span><span class="default">random_bytes</span><span class="keyword">(</span><span class="default">5</span><span class="keyword">));<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$objects</span><span class="keyword">[] = </span><span class="default">$obj</span><span class="keyword">;<br />
+}<br />
+<br />
+</span><span class="default">printMem</span><span class="keyword">(</span><span class="string">'before get_object_vars'</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">// Clone each object, and get the vars on the clone<br />
+</span><span class="keyword">foreach (</span><span class="default">$objects </span><span class="keyword">as </span><span class="default">$obj</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$c </span><span class="keyword">= clone </span><span class="default">$obj</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$vars </span><span class="keyword">= </span><span class="default">get_object_vars</span><span class="keyword">(</span><span class="default">$c</span><span class="keyword">);<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// Accessing and modifying the original object is fine. <br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">foreach (</span><span class="default">$vars </span><span class="keyword">as </span><span class="default">$var </span><span class="keyword">=&gt; </span><span class="default">$val</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$obj</span><span class="keyword">-&gt;{</span><span class="default">$var</span><span class="keyword">} = </span><span class="default">strrev</span><span class="keyword">(</span><span class="default">$val</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+</span><span class="default">printMem</span><span class="keyword">(</span><span class="string">'get_object_vars using clone'</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">// Get the vars on each object directly<br />
+</span><span class="keyword">foreach (</span><span class="default">$objects </span><span class="keyword">as </span><span class="default">$obj</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$vars </span><span class="keyword">= </span><span class="default">get_object_vars</span><span class="keyword">(</span><span class="default">$obj</span><span class="keyword">);<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// The memory is used even if you do not modify the object.<br />
+</span><span class="keyword">}<br />
+<br />
+</span><span class="default">printMem</span><span class="keyword">(</span><span class="string">'get_object_vars direct access'</span><span class="keyword">);<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+The output of this is:<br />
+<br />
+&nbsp;&nbsp;&nbsp; start: 405704 (0.41 MB)<br />
+&nbsp;&nbsp;&nbsp; before get_object_vars: 6512416 (6.51 MB)<br />
+&nbsp;&nbsp;&nbsp; get_object_vars using clone: 6033408 (6.03 MB)<br />
+&nbsp;&nbsp;&nbsp; get_object_vars direct access: 13553408 (13.55 MB)<br />
+<br />
+In short, if you are using classes to avoid additional memory usage associated with hashtables (like in associative arrays), be aware that `get_object_vars()` will create a hashtable for any object passed to it. <br />
+<br />
+This appears to be present in all versions of PHP; I've tested it on PHP 5, 7, and 8. <br />
+<br />
+Quotes are from Nikic's blog posts on arrays and hashtable memory usage, and Github gist "Why objects (usually) use less memory than arrays in PHP".</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125648""></a>
+  <div class="note">
+   <strong class="user">niemans at pbsolo dot nl</strong>
+   <a href="#125648" class="date">02-Jan-2021 04:47</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+You can use an anonymous class to return public variables from inside the class:<br />
+<br />
+public function getPublicVars () {<br />
+&nbsp;&nbsp;&nbsp; $me = new class {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; function getPublicVars($object) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return get_object_vars($object);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }; <br />
+&nbsp;&nbsp;&nbsp; return $me-&gt;getPublicVars($this);<br />
+}<br />
+<br />
+Test script:<br />
+<br />
+class Test {<br />
+&nbsp;&nbsp;&nbsp; protected $protected;<br />
+&nbsp;&nbsp;&nbsp; public&nbsp; &nbsp; $public;<br />
+&nbsp;&nbsp;&nbsp; private&nbsp;&nbsp; $private;<br />
+&nbsp;&nbsp;&nbsp; public function getAllVars () {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return call_user_func('get_object_vars', $this);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; public function getPublicVars () {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $me = new class {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; function getPublicVars($object) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return get_object_vars($object);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }; <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return $me-&gt;getPublicVars($this);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+$test = new Test();<br />
+print_r(get_object_vars($test)); // array("public" =&gt; NULL)<br />
+print_r($test-&gt;getAllVars());&nbsp;&nbsp; // array("protected" =&gt; NULL, "public" =&gt; NULL, "private" =&gt; NULL)<br />
+print_r($test-&gt;getPublicVars()); // array("public" =&gt; NULL)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="108846""></a>
+  <div class="note">
+   <strong class="user">Fabien Haddadi</strong>
+   <a href="#108846" class="date">30-May-2012 09:42</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+It seems like there's no function that determines all the *static* variables of a class.
+<br />
+
+<br />
+I've come out with this one as I needed it in a project:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="keyword">function </span><span class="default">get_class_static_vars</span><span class="keyword">(</span><span class="default">$object</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp; &nbsp; return </span><span class="default">array_diff</span><span class="keyword">(</span><span class="default">get_class_vars</span><span class="keyword">(</span><span class="default">get_class</span><span class="keyword">(</span><span class="default">$object</span><span class="keyword">)), </span><span class="default">get_object_vars</span><span class="keyword">(</span><span class="default">$object</span><span class="keyword">));
+<br />
+}
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+It relies on an interesting property: the fact that get_object_vars only returns the non-static variables of an object.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="47075""></a>
+  <div class="note">
+   <strong class="user">fmmarzoa at librexpresion dot org</strong>
+   <a href="#47075" class="date">01-Nov-2004 11:53</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+You can still cast the object to an array to get all its members and see its visibility. Example:<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="keyword">class </span><span class="default">Potatoe </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public </span><span class="default">$skin</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; protected </span><span class="default">$meat</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; private </span><span class="default">$roots</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; function </span><span class="default">__construct </span><span class="keyword">( </span><span class="default">$s</span><span class="keyword">, </span><span class="default">$m</span><span class="keyword">, </span><span class="default">$r </span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">skin </span><span class="keyword">= </span><span class="default">$s</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">meat </span><span class="keyword">= </span><span class="default">$m</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">roots </span><span class="keyword">= </span><span class="default">$r</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+</span><span class="default">$Obj </span><span class="keyword">= new </span><span class="default">Potatoe </span><span class="keyword">( </span><span class="default">1</span><span class="keyword">, </span><span class="default">2</span><span class="keyword">, </span><span class="default">3 </span><span class="keyword">);<br />
+<br />
+echo </span><span class="string">"&lt;pre&gt;\n"</span><span class="keyword">;<br />
+echo </span><span class="string">"Using get_object_vars:\n"</span><span class="keyword">;<br />
+<br />
+</span><span class="default">$vars </span><span class="keyword">= </span><span class="default">get_object_vars </span><span class="keyword">( </span><span class="default">$Obj </span><span class="keyword">);<br />
+</span><span class="default">print_r </span><span class="keyword">( </span><span class="default">$vars </span><span class="keyword">);<br />
+<br />
+echo </span><span class="string">"\n\nUsing array cast:\n"</span><span class="keyword">;<br />
+<br />
+</span><span class="default">$Arr </span><span class="keyword">= (array)</span><span class="default">$Obj</span><span class="keyword">;<br />
+</span><span class="default">print_r </span><span class="keyword">( </span><span class="default">$Arr </span><span class="keyword">);<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+This will returns:<br />
+<br />
+Using get_object_vars:<br />
+Array<br />
+(<br />
+&nbsp;&nbsp;&nbsp; [skin] =&gt; 1<br />
+)<br />
+<br />
+Using array cast:<br />
+Array<br />
+(<br />
+&nbsp;&nbsp;&nbsp; [skin] =&gt; 1<br />
+&nbsp;&nbsp;&nbsp; [ * meat] =&gt; 2<br />
+&nbsp;&nbsp;&nbsp; [ Potatoe roots] =&gt; 3<br />
+)<br />
+<br />
+As you can see, you can obtain the visibility for each member from this cast. That which seems to be spaces into array keys are '\0' characters, so the general rule to parse keys seems to be:<br />
+<br />
+Public members: member_name<br />
+Protected memebers: \0*\0member_name<br />
+Private members: \0Class_name\0member_name<br />
+<br />
+I've wroten a obj2array function that creates entries without visibility for each key, so you can handle them into the array as it were within the object:<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="keyword">function </span><span class="default">obj2array </span><span class="keyword">( &amp;</span><span class="default">$Instance </span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$clone </span><span class="keyword">= (array) </span><span class="default">$Instance</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$rtn </span><span class="keyword">= array ();<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$rtn</span><span class="keyword">[</span><span class="string">'___SOURCE_KEYS_'</span><span class="keyword">] = </span><span class="default">$clone</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; while ( list (</span><span class="default">$key</span><span class="keyword">, </span><span class="default">$value</span><span class="keyword">) = </span><span class="default">each </span><span class="keyword">(</span><span class="default">$clone</span><span class="keyword">) ) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$aux </span><span class="keyword">= </span><span class="default">explode </span><span class="keyword">(</span><span class="string">"\0"</span><span class="keyword">, </span><span class="default">$key</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$newkey </span><span class="keyword">= </span><span class="default">$aux</span><span class="keyword">[</span><span class="default">count</span><span class="keyword">(</span><span class="default">$aux</span><span class="keyword">)-</span><span class="default">1</span><span class="keyword">];<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$rtn</span><span class="keyword">[</span><span class="default">$newkey</span><span class="keyword">] = &amp;</span><span class="default">$rtn</span><span class="keyword">[</span><span class="string">'___SOURCE_KEYS_'</span><span class="keyword">][</span><span class="default">$key</span><span class="keyword">];<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$rtn</span><span class="keyword">;<br />
+}<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+I've created also a &lt;i&gt;bless&lt;/i&gt; function that works similar to Perl's bless, so you can further recast the array converting it in an object of an specific class:<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="keyword">function </span><span class="default">bless </span><span class="keyword">( &amp;</span><span class="default">$Instance</span><span class="keyword">, </span><span class="default">$Class </span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; if ( ! (</span><span class="default">is_array </span><span class="keyword">(</span><span class="default">$Instance</span><span class="keyword">) ) ) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">NULL</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// First get source keys if available<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">if ( isset (</span><span class="default">$Instance</span><span class="keyword">[</span><span class="string">'___SOURCE_KEYS_'</span><span class="keyword">])) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$Instance </span><span class="keyword">= </span><span class="default">$Instance</span><span class="keyword">[</span><span class="string">'___SOURCE_KEYS_'</span><span class="keyword">];<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// Get serialization data from array<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$serdata </span><span class="keyword">= </span><span class="default">serialize </span><span class="keyword">( </span><span class="default">$Instance </span><span class="keyword">);<br />
+<br />
+&nbsp;&nbsp;&nbsp; list (</span><span class="default">$array_params</span><span class="keyword">, </span><span class="default">$array_elems</span><span class="keyword">) = </span><span class="default">explode </span><span class="keyword">(</span><span class="string">'{'</span><span class="keyword">, </span><span class="default">$serdata</span><span class="keyword">, </span><span class="default">2</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; list (</span><span class="default">$array_tag</span><span class="keyword">, </span><span class="default">$array_count</span><span class="keyword">) = </span><span class="default">explode </span><span class="keyword">(</span><span class="string">':'</span><span class="keyword">, </span><span class="default">$array_params</span><span class="keyword">, </span><span class="default">3 </span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$serdata </span><span class="keyword">= </span><span class="string">"O:"</span><span class="keyword">.</span><span class="default">strlen </span><span class="keyword">(</span><span class="default">$Class</span><span class="keyword">).</span><span class="string">":\"</span><span class="default">$Class</span><span class="string">\":</span><span class="default">$array_count</span><span class="string">:{"</span><span class="keyword">.</span><span class="default">$array_elems</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$Instance </span><span class="keyword">= </span><span class="default">unserialize </span><span class="keyword">( </span><span class="default">$serdata </span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$Instance</span><span class="keyword">;<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+With these ones you can do things like:<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+define</span><span class="keyword">(</span><span class="string">"SFCMS_DIR"</span><span class="keyword">, </span><span class="default">dirname</span><span class="keyword">(</span><span class="default">__FILE__</span><span class="keyword">).</span><span class="string">"/.."</span><span class="keyword">);<br />
+require_once (</span><span class="default">SFCMS_DIR</span><span class="keyword">.</span><span class="string">"/Misc/bless.php"</span><span class="keyword">);<br />
+<br />
+class </span><span class="default">Potatoe </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public </span><span class="default">$skin</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; protected </span><span class="default">$meat</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; private </span><span class="default">$roots</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; function </span><span class="default">__construct </span><span class="keyword">( </span><span class="default">$s</span><span class="keyword">, </span><span class="default">$m</span><span class="keyword">, </span><span class="default">$r </span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">skin </span><span class="keyword">= </span><span class="default">$s</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">meat </span><span class="keyword">= </span><span class="default">$m</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">roots </span><span class="keyword">= </span><span class="default">$r</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; function </span><span class="default">PrintAll </span><span class="keyword">() {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"skin = "</span><span class="keyword">.</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">skin</span><span class="keyword">.</span><span class="string">"\n"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"meat = "</span><span class="keyword">.</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">meat</span><span class="keyword">.</span><span class="string">"\n"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"roots = "</span><span class="keyword">.</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">roots</span><span class="keyword">.</span><span class="string">"\n"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+</span><span class="default">$Obj </span><span class="keyword">= new </span><span class="default">Potatoe </span><span class="keyword">( </span><span class="default">1</span><span class="keyword">, </span><span class="default">2</span><span class="keyword">, </span><span class="default">3 </span><span class="keyword">);<br />
+<br />
+echo </span><span class="string">"&lt;pre&gt;\n"</span><span class="keyword">;<br />
+echo </span><span class="string">"Using get_object_vars:\n"</span><span class="keyword">;<br />
+<br />
+</span><span class="default">$vars </span><span class="keyword">= </span><span class="default">get_object_vars </span><span class="keyword">( </span><span class="default">$Obj </span><span class="keyword">);<br />
+</span><span class="default">print_r </span><span class="keyword">( </span><span class="default">$vars </span><span class="keyword">);<br />
+<br />
+echo </span><span class="string">"\n\nUsing obj2array func:\n"</span><span class="keyword">;<br />
+<br />
+</span><span class="default">$Arr </span><span class="keyword">= </span><span class="default">obj2array</span><span class="keyword">(</span><span class="default">$Obj</span><span class="keyword">);<br />
+</span><span class="default">print_r </span><span class="keyword">( </span><span class="default">$Arr </span><span class="keyword">);<br />
+<br />
+echo </span><span class="string">"\n\nSetting all members to 0.\n"</span><span class="keyword">;<br />
+</span><span class="default">$Arr</span><span class="keyword">[</span><span class="string">'skin'</span><span class="keyword">]=</span><span class="default">0</span><span class="keyword">;<br />
+</span><span class="default">$Arr</span><span class="keyword">[</span><span class="string">'meat'</span><span class="keyword">]=</span><span class="default">0</span><span class="keyword">;<br />
+</span><span class="default">$Arr</span><span class="keyword">[</span><span class="string">'roots'</span><span class="keyword">]=</span><span class="default">0</span><span class="keyword">;<br />
+<br />
+echo </span><span class="string">"Converting the array into an instance of the original class.\n"</span><span class="keyword">;<br />
+</span><span class="default">bless </span><span class="keyword">( </span><span class="default">$Arr</span><span class="keyword">, </span><span class="default">Potatoe </span><span class="keyword">);<br />
+<br />
+if ( </span><span class="default">is_object </span><span class="keyword">(</span><span class="default">$Arr</span><span class="keyword">) ) {<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"\$Arr is now an object.\n"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; if ( </span><span class="default">$Arr </span><span class="keyword">instanceof </span><span class="default">Potatoe </span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"\$Arr is an instance of Potatoe class.\n"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+</span><span class="default">$Arr</span><span class="keyword">-&gt;</span><span class="default">PrintAll</span><span class="keyword">();<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

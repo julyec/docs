@@ -1,0 +1,582 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>注册在关闭时执行的函数</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.get-defined-functions.html">? get_defined_functions</a></li>
+      <li style="float: right;"><a href="function.register-tick-function.html">register_tick_function ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.funchand.html">函数处理 函数</a></li>
+    <li>注册在关闭时执行的函数</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.register-shutdown-function" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">register_shutdown_function</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">register_shutdown_function</span> &mdash; <span class="dc-title">注册在关闭时执行的函数</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.register-shutdown-function-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>register_shutdown_function</strong></span>(<span class="methodparam"><span class="type"><a href="language.types.callable.html" class="type callable">callable</a></span> <code class="parameter">$callback</code></span>, <span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">...$args</code></span>): <span class="type"><span class="type void">void</span></span></div>
+
+  <p class="para rdfs-comment">
+   注册一个 <code class="parameter">callback</code> ，它会在脚本执行完成或者 <span class="function"><a href="function.exit.html" class="function">exit()</a></span> 后被调用。
+  </p>
+  <p class="para">
+   可以多次调用
+   <span class="function"><strong>register_shutdown_function()</strong></span>，这些被注册的回调会按照他们注册时的顺序被依次调用。如果你在注册的方法内部调用
+   <span class="function"><a href="function.exit.html" class="function">exit()</a></span>，那么所有处理会被中止，并且其他注册的中止回调也不会再被调用。
+  </p>
+  <p class="para">
+   关闭函数也可以调用 <span class="function"><strong>register_shutdown_function()</strong></span> 来将关闭函数添加到队列的末尾。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.register-shutdown-function-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">callback</code></dt>
+
+     <dd>
+
+      <p class="para">
+       待注册的中止回调。
+      </p>
+      <p class="para">
+       中止回调是作为请求的一部分被执行的，因此可以在它们中进行输出或者读取输出缓冲区。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">args</code></dt>
+
+     <dd>
+
+      <p class="para">
+       可以通过传入额外的参数来将参数传给中止函数。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.register-shutdown-function-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   没有返回值。
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.register-shutdown-function-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #1 <span class="function"><strong>register_shutdown_function()</strong></span> 例子</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">shutdown</span><span style="color: #007700">()<br />{<br />    </span><span style="color: #FF8000">// 这是关闭函数，在脚本完成前可以进行任何最后的操作。<br /><br />    </span><span style="color: #007700">echo </span><span style="color: #DD0000">'Script executed with success'</span><span style="color: #007700">, </span><span style="color: #0000BB">PHP_EOL</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">register_shutdown_function</span><span style="color: #007700">(</span><span style="color: #DD0000">'shutdown'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.register-shutdown-function-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    在某些 web 服务器（如 Apache）上，可以在中止函数内对脚本的工作目录进行修改。
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    如果进程被信号 SIGTERM 或 SIGKILL 杀死，那么中止函数将不会被调用。尽管你无法中断
+    SIGKILL，但你可以通过 <span class="function"><a href="function.pcntl-signal.html" class="function">pcntl_signal()</a></span> 来捕获
+    SIGTERM，通过在其中调用 <span class="function"><a href="function.exit.html" class="function">exit()</a></span> 来进行一个正常的中止。
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    关闭函数与 <a href="info.configuration.html#ini.max-execution-time" class="link">max_execution_time</a>
+    追踪的时间分开运行。这意味着即使进程因为运行时间过长而终止，仍会调用关闭函数。此外，如果关闭函数运行时正好
+    <code class="literal">max_execution_time</code> 用完，也会被终止。
+   </p>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.register-shutdown-function-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><a href="ini.core.html#ini.auto-append-file" class="link">auto_append_file</a></li>
+    <li class="member"><span class="function"><a href="function.exit.html" class="function" rel="rdfs-seeAlso">exit()</a> - 输出一个消息并且退出当前脚本</span></li>
+    <li class="member"><span class="function"><a href="function.fastcgi-finish-request.html" class="function" rel="rdfs-seeAlso">fastcgi_finish_request()</a> - 冲刷(flush)所有响应的数据给客户端</span></li>
+    <li class="member"><a href="features.connection-handling.html" class="link">连接处理</a>节</li>
+   </ul>
+  </p>
+ </div>
+
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="123696""></a>
+  <div class="note">
+   <strong class="user">Anonymous</strong>
+   <a href="#123696" class="date">16-Mar-2019 10:08</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+warning: in addition to SIGTERM and SIGKILL, the shutdown functions won't run in response to SIGINT either. (observed on php 7.1.16 on windows 7 SP1 x64 + cygwin&nbsp; and php 7.2.15 on Ubuntu 18.04)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="120620""></a>
+  <div class="note">
+   <strong class="user">raat1979 at gmail dot com</strong>
+   <a href="#120620" class="date">08-Feb-2017 07:31</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I wanted to set the exit code for a CLI application from a shutdown function by using a class property, <br />
+<br />
+Unfortunataly (as per manual)&nbsp; "If you call exit() within one registered shutdown function, processing will stop completely and no other registered shutdown functions will be called."&nbsp; <br />
+<br />
+As a result if I call exit in my shutdown function I will break other shutdown functions (like one that logs fatal errors to syslog)&nbsp; <br />
+<br />
+However! (as per manual)&nbsp; "Multiple calls to register_shutdown_function() can be made, and each will be called in the same order as they were registered."<br />
+<br />
+As luck would have it you are also able to register a shutdown function from within a shutdown function (at least in PHP 7.0.15 and 5.6.30) <br />
+<br />
+in other words if you register a shutdown function inside a shutdown function it is appended to the shutdown function queue.<br />
+<br />
+<span class="default">&lt;?php <br />
+</span><span class="keyword">class </span><span class="default">SomeApplication</span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; private </span><span class="default">$exitCode </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">__construct</span><span class="keyword">(){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">register_shutdown_function</span><span class="keyword">(function(){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"some registered shutdown function"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">register_shutdown_function</span><span class="keyword">(function(){<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"last registered shutdown function"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// one might even consider another register shutdown_function if one expects other shutdown functions to do the same...&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">exit(</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">exitCode </span><span class="keyword">=== </span><span class="default">null </span><span class="keyword">? </span><span class="default">0 </span><span class="keyword">: </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">exitCode</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; });<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; });<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="108212""></a>
+  <div class="note">
+   <strong class="user">alexyam at live dot com</strong>
+   <a href="#108212" class="date">08-Apr-2012 03:50</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+When using php-fpm, fastcgi_finish_request() should be used instead of register_shutdown_function() and exit()<br />
+<br />
+For example, under nginx and php-fpm 5.3+, this will make browsers wait 10 seconds to show output:<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">echo </span><span class="string">"You have to wait 10 seconds to see this.&lt;br&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">register_shutdown_function</span><span class="keyword">(</span><span class="string">'shutdown'</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; exit;<br />
+&nbsp;&nbsp;&nbsp; function </span><span class="default">shutdown</span><span class="keyword">(){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">sleep</span><span class="keyword">(</span><span class="default">10</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"Because exit() doesn't terminate php-fpm calls immediately.&lt;br&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+This doesn't:<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">echo </span><span class="string">"You can see this from the browser immediately.&lt;br&gt;"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">fastcgi_finish_request</span><span class="keyword">();<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">sleep</span><span class="keyword">(</span><span class="default">10</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"You can't see this form the browser."</span><span class="keyword">;<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="100000""></a>
+  <div class="note">
+   <strong class="user">emanueledelgrande ad email dot it</strong>
+   <a href="#100000" class="date">19-Sep-2010 07:53</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+A lot of useful services may be delegated to this useful trigger.<br />
+It is very effective because it is executed at the end of the script but before any object destruction, so all instantiations are still alive.<br />
+<br />
+Here's a simple shutdown events manager class which allows to manage either functions or static/dynamic methods, with an indefinite number of arguments without using any reflection, availing on a internal handling through func_get_args() and call_user_func_array() specific functions:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="comment">// managing the shutdown callback events:<br />
+</span><span class="keyword">class </span><span class="default">shutdownScheduler </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; private </span><span class="default">$callbacks</span><span class="keyword">; </span><span class="comment">// array to store user callbacks<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">public function </span><span class="default">__construct</span><span class="keyword">() {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">callbacks </span><span class="keyword">= array();<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">register_shutdown_function</span><span class="keyword">(array(</span><span class="default">$this</span><span class="keyword">, </span><span class="string">'callRegisteredShutdown'</span><span class="keyword">));<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">registerShutdownEvent</span><span class="keyword">() {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$callback </span><span class="keyword">= </span><span class="default">func_get_args</span><span class="keyword">();<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (empty(</span><span class="default">$callback</span><span class="keyword">)) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">trigger_error</span><span class="keyword">(</span><span class="string">'No callback passed to '</span><span class="keyword">.</span><span class="default">__FUNCTION__</span><span class="keyword">.</span><span class="string">' method'</span><span class="keyword">, </span><span class="default">E_USER_ERROR</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">false</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (!</span><span class="default">is_callable</span><span class="keyword">(</span><span class="default">$callback</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">])) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">trigger_error</span><span class="keyword">(</span><span class="string">'Invalid callback passed to the '</span><span class="keyword">.</span><span class="default">__FUNCTION__</span><span class="keyword">.</span><span class="string">' method'</span><span class="keyword">, </span><span class="default">E_USER_ERROR</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">false</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">callbacks</span><span class="keyword">[] = </span><span class="default">$callback</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">true</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">callRegisteredShutdown</span><span class="keyword">() {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; foreach (</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">callbacks </span><span class="keyword">as </span><span class="default">$arguments</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$callback </span><span class="keyword">= </span><span class="default">array_shift</span><span class="keyword">(</span><span class="default">$arguments</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">call_user_func_array</span><span class="keyword">(</span><span class="default">$callback</span><span class="keyword">, </span><span class="default">$arguments</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// test methods:<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">public function </span><span class="default">dynamicTest</span><span class="keyword">() {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">'_REQUEST array is '</span><span class="keyword">.</span><span class="default">count</span><span class="keyword">(</span><span class="default">$_REQUEST</span><span class="keyword">).</span><span class="string">' elements long.&lt;br /&gt;'</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; public static function </span><span class="default">staticTest</span><span class="keyword">() {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">'_SERVER array is '</span><span class="keyword">.</span><span class="default">count</span><span class="keyword">(</span><span class="default">$_SERVER</span><span class="keyword">).</span><span class="string">' elements long.&lt;br /&gt;'</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+A simple application:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="comment">// a generic function<br />
+</span><span class="keyword">function </span><span class="default">say</span><span class="keyword">(</span><span class="default">$a </span><span class="keyword">= </span><span class="string">'a generic greeting'</span><span class="keyword">, </span><span class="default">$b </span><span class="keyword">= </span><span class="string">''</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"Saying </span><span class="keyword">{</span><span class="default">$a</span><span class="keyword">}</span><span class="string"> </span><span class="keyword">{</span><span class="default">$b</span><span class="keyword">}</span><span class="string">&lt;br /&gt;"</span><span class="keyword">;<br />
+}<br />
+<br />
+</span><span class="default">$scheduler </span><span class="keyword">= new </span><span class="default">shutdownScheduler</span><span class="keyword">();<br />
+<br />
+</span><span class="comment">// schedule a global scope function:<br />
+</span><span class="default">$scheduler</span><span class="keyword">-&gt;</span><span class="default">registerShutdownEvent</span><span class="keyword">(</span><span class="string">'say'</span><span class="keyword">, </span><span class="string">'hello!'</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">// try to schedule a dyamic method:<br />
+</span><span class="default">$scheduler</span><span class="keyword">-&gt;</span><span class="default">registerShutdownEvent</span><span class="keyword">(array(</span><span class="default">$scheduler</span><span class="keyword">, </span><span class="string">'dynamicTest'</span><span class="keyword">));<br />
+</span><span class="comment">// try with a static call:<br />
+</span><span class="default">$scheduler</span><span class="keyword">-&gt;</span><span class="default">registerShutdownEvent</span><span class="keyword">(</span><span class="string">'scheduler::staticTest'</span><span class="keyword">);<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+It is easy to guess how to extend this example in a more complex context in which user defined functions and methods should be handled according to the priority depending on specific variables.<br />
+<br />
+Hope it may help somebody.<br />
+Happy coding!</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="97447""></a>
+  <div class="note">
+   <strong class="user">jawsper at aximax dot nl</strong>
+   <a href="#97447" class="date">20-Apr-2010 05:21</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Something found out during testing:<br />
+<br />
+the ini auto_append_file will be included BEFORE the registered function(s) will be called.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="95256""></a>
+  <div class="note">
+   <strong class="user">ravenswd at gmail dot com</strong>
+   <a href="#95256" class="date">21-Dec-2009 01:43</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+You may get the idea to call debug_backtrace or debug_print_backtrace from inside a shutdown function, to trace where a fatal error occurred. Unfortunately, these functions will not work inside a shutdown function.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="92657""></a>
+  <div class="note">
+   <strong class="user">pgl at yoyo dot org</strong>
+   <a href="#92657" class="date">02-Aug-2009 02:25</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+You definitely need to be careful about using relative paths in after the shutdown function has been called, but the current working directory doesn't (necessarily) get changed to the web server's ServerRoot - I've tested on two different servers and they both have their CWD changed to '/' (which isn't the ServerRoot).
+<br />
+
+<br />
+This demonstrates the behaviour:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="keyword">function </span><span class="default">echocwd</span><span class="keyword">() { echo </span><span class="string">'cwd: '</span><span class="keyword">, </span><span class="default">getcwd</span><span class="keyword">(), </span><span class="string">"\n"</span><span class="keyword">; }
+<br />
+
+<br />
+</span><span class="default">register_shutdown_function</span><span class="keyword">(</span><span class="string">'echocwd'</span><span class="keyword">);
+<br />
+</span><span class="default">echocwd</span><span class="keyword">() and exit;
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+Outputs:
+<br />
+
+<br />
+cwd: /path/to/my/site/docroot/test
+<br />
+cwd: /
+<br />
+
+<br />
+NB: CLI scripts are unaffected, and keep their CWD as the directory the script was called from.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="85727""></a>
+  <div class="note">
+   <strong class="user">RLK</strong>
+   <a href="#85727" class="date">14-Sep-2008 02:26</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Contrary to the the note that "headers are always sent" and some of the comments below - You CAN use header() inside of a shutdown function as you would anywhere else; when headers_sent() is false. You can do custom fatal handling this way:<br />
+<br />
+<span class="default">&lt;?php<br />
+ini_set</span><span class="keyword">(</span><span class="string">'display_errors'</span><span class="keyword">,</span><span class="default">0</span><span class="keyword">);<br />
+</span><span class="default">register_shutdown_function</span><span class="keyword">(</span><span class="string">'shutdown'</span><span class="keyword">);<br />
+<br />
+</span><span class="default">$obj </span><span class="keyword">= new </span><span class="default">stdClass</span><span class="keyword">();<br />
+</span><span class="default">$obj</span><span class="keyword">-&gt;</span><span class="default">method</span><span class="keyword">();<br />
+<br />
+function </span><span class="default">shutdown</span><span class="keyword">()<br />
+{<br />
+&nbsp; if(!</span><span class="default">is_null</span><span class="keyword">(</span><span class="default">$e </span><span class="keyword">= </span><span class="default">error_get_last</span><span class="keyword">()))<br />
+&nbsp; {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">header</span><span class="keyword">(</span><span class="string">'content-type: text/plain'</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; print </span><span class="string">"this is not html:\n\n"</span><span class="keyword">. </span><span class="default">print_r</span><span class="keyword">(</span><span class="default">$e</span><span class="keyword">,</span><span class="default">true</span><span class="keyword">);<br />
+&nbsp; }<br />
+}<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="63104""></a>
+  <div class="note">
+   <strong class="user">dweingart at pobox dot com</strong>
+   <a href="#63104" class="date">13-Mar-2006 08:53</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I have discovered a change in behavior from PHP 5.0.4 to PHP 5.1.2 when using a shutdown function in conjunction with an output buffering callback.<br />
+<br />
+In PHP 5.0.4 (and earlier versions I believe) the shutdown function is called after the output buffering callback.<br />
+<br />
+In PHP 5.1.2 (not sure when the change occurred) the shutdown function is called before the output buffering callback.<br />
+<br />
+Test code:<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">ob_callback</span><span class="keyword">(</span><span class="default">$buf</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$buf </span><span class="keyword">.= </span><span class="string">'&lt;li&gt;' </span><span class="keyword">. </span><span class="default">__FUNCTION__ </span><span class="keyword">.</span><span class="string">'&lt;/li&gt;'</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$buf</span><span class="keyword">;<br />
+}<br />
+<br />
+function </span><span class="default">shutdown_func</span><span class="keyword">() {<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">'&lt;li&gt;' </span><span class="keyword">. </span><span class="default">__FUNCTION__ </span><span class="keyword">.</span><span class="string">'&lt;/li&gt;'</span><span class="keyword">;<br />
+}<br />
+<br />
+</span><span class="default">ob_start</span><span class="keyword">(</span><span class="string">'ob_callback'</span><span class="keyword">);<br />
+</span><span class="default">register_shutdown_function</span><span class="keyword">(</span><span class="string">'shutdown_func'</span><span class="keyword">);<br />
+echo </span><span class="string">'&lt;ol&gt;'</span><span class="keyword">;<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+PHP 5.0.4:<br />
+<br />
+1. ob_callback<br />
+2. shutdown_func<br />
+<br />
+PHP 5.1.2:<br />
+<br />
+1. shutdown_func<br />
+2. ob_callback</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="61185""></a>
+  <div class="note">
+   <strong class="user">kenneth dot kalmer at gmail dot com</strong>
+   <a href="#61185" class="date">27-Jan-2006 09:26</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I performed two tests on the register_shutdown_function() to see under what conditions it was called, and if a can call a static method from a class. Here are the results:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="comment">/**<br />
+&nbsp;* Tests the shutdown function being able to call a static methods<br />
+&nbsp;*/<br />
+</span><span class="keyword">class </span><span class="default">Shutdown<br />
+</span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public static function </span><span class="default">Method </span><span class="keyword">(</span><span class="default">$mixed </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">)<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// we need absolute<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$ap </span><span class="keyword">= </span><span class="default">dirname </span><span class="keyword">(</span><span class="default">__FILE__</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$mixed </span><span class="keyword">= </span><span class="default">time </span><span class="keyword">() . </span><span class="string">" - </span><span class="default">$mixed</span><span class="string">\n"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">file_put_contents </span><span class="keyword">(</span><span class="string">"</span><span class="default">$ap</span><span class="string">/shutdown.log"</span><span class="keyword">, </span><span class="default">$mixed</span><span class="keyword">, </span><span class="default">FILE_APPEND</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+</span><span class="comment">// 3. Throw an exception<br />
+</span><span class="default">register_shutdown_function </span><span class="keyword">(array (</span><span class="string">'Shutdown'</span><span class="keyword">, </span><span class="string">'Method'</span><span class="keyword">), </span><span class="string">'throw'</span><span class="keyword">);<br />
+throw new </span><span class="default">Exception </span><span class="keyword">(</span><span class="string">'bla bla'</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">// 2. Use the exit command<br />
+//register_shutdown_function (array ('Shutdown', 'Method'), 'exit');<br />
+//exit ('exiting here...')<br />
+<br />
+// 1. Exit normally<br />
+//register_shutdown_function (array ('Shutdown', 'Method'));<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+To test simply leave one of the three test lines uncommented and execute. Executing bottom-up yielded:<br />
+<br />
+1138382480 - 0<br />
+1138382503 - exit<br />
+1138382564 - throw<br />
+<br />
+HTH</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="59300""></a>
+  <div class="note">
+   <strong class="user">http://livejournal.com/~sinde1/</strong>
+   <a href="#59300" class="date">02-Dec-2005 04:49</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you want to do something with files in function, that registered in register_shutdown_function(), use ABSOLUTE paths to files instead of relative. Because when script processing is complete current working directory chages to ServerRoot (see httpd.conf)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="40815""></a>
+  <div class="note">
+   <strong class="user">sts at mail dot xubion dot hu</strong>
+   <a href="#40815" class="date">15-Mar-2004 02:56</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you need the old (&lt;4.1) behavior of register_shutdown_function you can achieve the same with "Connection: close" and "Content-Length: xxxx" headers if you know the exact size of the sent data (which can be easily caught with output buffering).<br />
+An example:<br />
+<span class="default">&lt;?php<br />
+header</span><span class="keyword">(</span><span class="string">"Connection: close"</span><span class="keyword">);<br />
+</span><span class="default">ob_start</span><span class="keyword">();<br />
+</span><span class="default">phpinfo</span><span class="keyword">();<br />
+</span><span class="default">$size</span><span class="keyword">=</span><span class="default">ob_get_length</span><span class="keyword">(); <br />
+</span><span class="default">header</span><span class="keyword">(</span><span class="string">"Content-Length: </span><span class="default">$size</span><span class="string">"</span><span class="keyword">);<br />
+</span><span class="default">ob_end_flush</span><span class="keyword">();<br />
+</span><span class="default">flush</span><span class="keyword">();<br />
+</span><span class="default">sleep</span><span class="keyword">(</span><span class="default">13</span><span class="keyword">);<br />
+</span><span class="default">error_log</span><span class="keyword">(</span><span class="string">"do something in the background"</span><span class="keyword">);<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+The same will work with registered functions.<br />
+According to http spec, browsers should close the connection when they got the amount of data specified in Content-Length header. At least it works fine for me in IE6 and Opera7.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="33575""></a>
+  <div class="note">
+   <strong class="user">jules at sitepointAASASZZ dot com</strong>
+   <a href="#33575" class="date">01-Jul-2003 12:41</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If your script exceeds the maximum execution time, and terminates thusly:<br />
+<br />
+Fatal error: Maximum execution time of 20 seconds exceeded in - on line 12<br />
+<br />
+The registered shutdown functions will still be executed.<br />
+<br />
+I figured it was important that this be made clear!</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

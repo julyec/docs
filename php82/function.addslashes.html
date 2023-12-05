@@ -1,0 +1,691 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>使用反斜线引用字符串</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.addcslashes.html">? addcslashes</a></li>
+      <li style="float: right;"><a href="function.bin2hex.html">bin2hex ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.strings.html">字符串 函数</a></li>
+    <li>使用反斜线引用字符串</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.addslashes" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">addslashes</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">addslashes</span> &mdash; <span class="dc-title">使用反斜线引用字符串</span></p>
+
+ </div>
+ 
+  <div class="refsect1 description" id="refsect1-function.addslashes-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>addslashes</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$string</code></span>): <span class="type">string</span></div>
+
+  <p class="para rdfs-comment">
+   返回需要在转义字符之前添加反斜线的字符串。这些字符是：
+   <ul class="simplelist">
+    <li class="member">单引号（<code class="literal">&#039;</code>）</li>
+    <li class="member">双引号（<code class="literal">&quot;</code>）</li>
+    <li class="member">反斜线（<code class="literal">\</code>）</li>
+    <li class="member">NUL（NUL 字节）</li>
+   </ul>
+  </p>
+  <p class="para">
+   <span class="function"><strong>addslashes()</strong></span> 的一个用法就是转义由 PHP 执行字符串中的上述字符：
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$str </span><span style="color: #007700">= </span><span style="color: #DD0000">"O'Reilly?"</span><span style="color: #007700">;<br />eval(</span><span style="color: #DD0000">"echo '" </span><span style="color: #007700">. </span><span style="color: #0000BB">addslashes</span><span style="color: #007700">(</span><span style="color: #0000BB">$str</span><span style="color: #007700">) . </span><span style="color: #DD0000">"';"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   有时会错误的使用 <span class="function"><strong>addslashes()</strong></span> 来防止 <a href="security.database.sql-injection.html" class="link">SQL 注入</a>。相反，应该使用数据库特定函数和/或预处理语句。
+  </p>
+ </div>
+
+
+  <div class="refsect1 parameters" id="refsect1-function.addslashes-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">string</code></dt>
+
+     <dd>
+
+      <p class="para">
+       要转义的字符。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+ 
+ 
+  <div class="refsect1 returnvalues" id="refsect1-function.addslashes-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回转义后的字符。
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 examples" id="refsect1-function.addslashes-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #1 一个 <span class="function"><strong>addslashes()</strong></span> 例子</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$str </span><span style="color: #007700">= </span><span style="color: #DD0000">"Is your name O'Reilly?"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// 输出： Is your name O\'Reilly?<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">addslashes</span><span style="color: #007700">(</span><span style="color: #0000BB">$str</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.addslashes-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.stripcslashes.html" class="function" rel="rdfs-seeAlso">stripcslashes()</a> - 反引用一个使用 addcslashes 转义的字符串</span></li>
+    <li class="member"><span class="function"><a href="function.stripslashes.html" class="function" rel="rdfs-seeAlso">stripslashes()</a> - 反引用一个引用字符串</span></li>
+    <li class="member"><span class="function"><a href="function.addcslashes.html" class="function" rel="rdfs-seeAlso">addcslashes()</a> - 以 C 语言风格使用反斜线转义字符串中的字符</span></li>
+    <li class="member"><span class="function"><a href="function.htmlspecialchars.html" class="function" rel="rdfs-seeAlso">htmlspecialchars()</a> - 将特殊字符转换为 HTML 实体</span></li>
+    <li class="member"><span class="function"><a href="function.quotemeta.html" class="function" rel="rdfs-seeAlso">quotemeta()</a> - 转义元字符集</span></li>
+    <li class="member"><span class="function"><a href="function.get-magic-quotes-gpc.html" class="function" rel="rdfs-seeAlso">get_magic_quotes_gpc()</a> - 获取当前 magic_quotes_gpc 的配置选项设置</span></li>
+   </ul>
+  </p>
+ </div>
+
+ 
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="126895""></a>
+  <div class="note">
+   <strong class="user">divinity76 at gmail dot com</strong>
+   <a href="#126895" class="date">02-Mar-2022 04:08</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Addslashes is *never* the right answer, it's (ab)use can lead to security exploits!<br />
+<br />
+if you need to escape HTML, it's (unfortunately)<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">echo </span><span class="default">htmlentities</span><span class="keyword">(</span><span class="default">$html</span><span class="keyword">, </span><span class="default">ENT_QUOTES</span><span class="keyword">|</span><span class="default">ENT_SUBSTITUTE</span><span class="keyword">|</span><span class="default">ENT_DISALLOWED</span><span class="keyword">);<br />
+</span><span class="default">?&gt;<br />
+</span>if you need to quote shell arguments, it's<br />
+<span class="default">&lt;?php<br />
+$cmd</span><span class="keyword">.= </span><span class="string">" --file=" </span><span class="keyword">. </span><span class="default">escapeshellarg</span><span class="keyword">(</span><span class="default">$arg</span><span class="keyword">);<br />
+</span><span class="default">?&gt;<br />
+</span>if you need to quote SQL strings it's<br />
+<span class="default">&lt;?php<br />
+$sql</span><span class="keyword">.= </span><span class="string">"WHERE col = '"</span><span class="keyword">.</span><span class="default">$mysqli</span><span class="keyword">-&gt;</span><span class="default">real_escape_string</span><span class="keyword">(</span><span class="default">$str</span><span class="keyword">).</span><span class="string">"'"</span><span class="keyword">;<br />
+</span><span class="default">?&gt;<br />
+</span>or<br />
+<span class="default">&lt;?php<br />
+$sql</span><span class="keyword">.= </span><span class="string">"WHERE col = " </span><span class="keyword">. </span><span class="default">$pdo</span><span class="keyword">-&gt;</span><span class="default">quote</span><span class="keyword">(</span><span class="default">$str</span><span class="keyword">);<br />
+</span><span class="default">?&gt;<br />
+</span>if you need to quote javascript/json strings its<br />
+<span class="default">&lt;?php<br />
+let str </span><span class="keyword">= &lt;?=</span><span class="default">json_encode</span><span class="keyword">(</span><span class="default">$str</span><span class="keyword">, </span><span class="default">JSON_THROW_ON_ERROR</span><span class="keyword">);</span><span class="default">?&gt;</span>;<br />
+?&gt;<br />
+<br />
+if you need to quote a string in xpath it's<br />
+<span class="default">&lt;?php<br />
+</span><span class="comment">//based on https://stackoverflow.com/a/1352556/1067003<br />
+</span><span class="keyword">function </span><span class="default">xpath_quote</span><span class="keyword">(</span><span class="default">string $value</span><span class="keyword">):</span><span class="default">string</span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; if(</span><span class="default">false</span><span class="keyword">===</span><span class="default">strpos</span><span class="keyword">(</span><span class="default">$value</span><span class="keyword">,</span><span class="string">'"'</span><span class="keyword">)){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="string">'"'</span><span class="keyword">.</span><span class="default">$value</span><span class="keyword">.</span><span class="string">'"'</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; if(</span><span class="default">false</span><span class="keyword">===</span><span class="default">strpos</span><span class="keyword">(</span><span class="default">$value</span><span class="keyword">,</span><span class="string">'\''</span><span class="keyword">)){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="string">'\''</span><span class="keyword">.</span><span class="default">$value</span><span class="keyword">.</span><span class="string">'\''</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// if the value contains both single and double quotes, construct an<br />
+&nbsp;&nbsp;&nbsp; // expression that concatenates all non-double-quote substrings with<br />
+&nbsp;&nbsp;&nbsp; // the quotes, e.g.:<br />
+&nbsp;&nbsp;&nbsp; //<br />
+&nbsp;&nbsp;&nbsp; //&nbsp; &nbsp; concat("'foo'", '"', "bar")<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$sb</span><span class="keyword">=</span><span class="string">'concat('</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$substrings</span><span class="keyword">=</span><span class="default">explode</span><span class="keyword">(</span><span class="string">'"'</span><span class="keyword">,</span><span class="default">$value</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; for(</span><span class="default">$i</span><span class="keyword">=</span><span class="default">0</span><span class="keyword">;</span><span class="default">$i</span><span class="keyword">&lt;</span><span class="default">count</span><span class="keyword">(</span><span class="default">$substrings</span><span class="keyword">);++</span><span class="default">$i</span><span class="keyword">){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$needComma</span><span class="keyword">=(</span><span class="default">$i</span><span class="keyword">&gt;</span><span class="default">0</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if(</span><span class="default">$substrings</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">]!==</span><span class="string">''</span><span class="keyword">){<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if(</span><span class="default">$i</span><span class="keyword">&gt;</span><span class="default">0</span><span class="keyword">){<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$sb</span><span class="keyword">.=</span><span class="string">', '</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$sb</span><span class="keyword">.=</span><span class="string">'"'</span><span class="keyword">.</span><span class="default">$substrings</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">].</span><span class="string">'"'</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$needComma</span><span class="keyword">=</span><span class="default">true</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if(</span><span class="default">$i </span><span class="keyword">&lt; (</span><span class="default">count</span><span class="keyword">(</span><span class="default">$substrings</span><span class="keyword">) -</span><span class="default">1</span><span class="keyword">)){<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if(</span><span class="default">$needComma</span><span class="keyword">){<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$sb</span><span class="keyword">.=</span><span class="string">', '</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$sb</span><span class="keyword">.=</span><span class="string">"'\"'"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$sb</span><span class="keyword">.=</span><span class="string">')'</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$sb</span><span class="keyword">;<br />
+}<br />
+</span><span class="default">$xp</span><span class="keyword">-&gt;</span><span class="default">query</span><span class="keyword">(</span><span class="string">'/catalog/items/item[title='</span><span class="keyword">.</span><span class="default">xpath_quote</span><span class="keyword">(</span><span class="default">$var</span><span class="keyword">).</span><span class="string">']'</span><span class="keyword">);<br />
+</span><span class="default">?&gt;<br />
+</span>if you need to quote strings in CSS its<br />
+<span class="default">&lt;?php<br />
+</span><span class="comment">// CSS escape code ripped from Zend Framework ( https://github.com/zendframework/zf2/blob/master/library/Zend/Escaper/Escaper.php )<br />
+</span><span class="keyword">function </span><span class="default">css_escape_string</span><span class="keyword">(</span><span class="default">$string</span><span class="keyword">)<br />
+{<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$cssMatcher </span><span class="keyword">= function (</span><span class="default">$matches</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$chr </span><span class="keyword">= </span><span class="default">$matches</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">];<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">strlen</span><span class="keyword">(</span><span class="default">$chr</span><span class="keyword">) == </span><span class="default">1</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$ord </span><span class="keyword">= </span><span class="default">ord</span><span class="keyword">(</span><span class="default">$chr</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; } else {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$chr </span><span class="keyword">= </span><span class="default">mb_convert_encoding</span><span class="keyword">(</span><span class="default">$chr</span><span class="keyword">, </span><span class="string">'UTF-16BE'</span><span class="keyword">, </span><span class="string">'UTF-8'</span><span class="keyword">); </span><span class="comment">// $this-&gt;convertEncoding($chr, 'UTF-16BE', 'UTF-8');<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$ord </span><span class="keyword">= </span><span class="default">hexdec</span><span class="keyword">(</span><span class="default">bin2hex</span><span class="keyword">(</span><span class="default">$chr</span><span class="keyword">));<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">sprintf</span><span class="keyword">(</span><span class="string">'\\%X '</span><span class="keyword">, </span><span class="default">$ord</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; };<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$originalEncoding </span><span class="keyword">= </span><span class="default">mb_detect_encoding</span><span class="keyword">(</span><span class="default">$string</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; if (</span><span class="default">$originalEncoding </span><span class="keyword">=== </span><span class="default">false</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$originalEncoding </span><span class="keyword">= </span><span class="string">'UTF-8'</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; ;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$string </span><span class="keyword">= </span><span class="default">mb_convert_encoding</span><span class="keyword">(</span><span class="default">$string</span><span class="keyword">, </span><span class="string">'UTF-8'</span><span class="keyword">, </span><span class="default">$originalEncoding</span><span class="keyword">); </span><span class="comment">// $this-&gt;toUtf8($string);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; // throw new Exception('mb_convert_encoding(\''.$string.'\',\'UTF-8\',\''.$originalEncoding.'\');');<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">if (</span><span class="default">$string </span><span class="keyword">=== </span><span class="string">'' </span><span class="keyword">|| </span><span class="default">ctype_digit</span><span class="keyword">(</span><span class="default">$string</span><span class="keyword">)) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$string</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$result </span><span class="keyword">= </span><span class="default">preg_replace_callback</span><span class="keyword">(</span><span class="string">'/[^a-z0-9]/iSu'</span><span class="keyword">, </span><span class="comment">/*$this-&gt;*/</span><span class="default">$cssMatcher</span><span class="keyword">, </span><span class="default">$string</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// var_dump($result);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">return </span><span class="default">mb_convert_encoding</span><span class="keyword">(</span><span class="default">$result</span><span class="keyword">, </span><span class="default">$originalEncoding</span><span class="keyword">, </span><span class="string">'UTF-8'</span><span class="keyword">); </span><span class="comment">// $this-&gt;fromUtf8($result);<br />
+</span><span class="keyword">}<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+- but never addslashes.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125260""></a>
+  <div class="note">
+   <strong class="user">baburaj dot ambalam at gmail dot com</strong>
+   <a href="#125260" class="date">12-Aug-2020 03:22</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+escape '$'&nbsp; using backslash '\$'<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+&nbsp; $evalStr </span><span class="keyword">= </span><span class="string">"5 + 3"</span><span class="keyword">;<br />
+&nbsp; </span><span class="default">$sum </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;&nbsp; <br />
+&nbsp; </span><span class="default">$evalStr </span><span class="keyword">= </span><span class="string">" \$sum = "</span><span class="keyword">. </span><span class="default">$evalStr</span><span class="keyword">.</span><span class="string">";"</span><span class="keyword">;&nbsp; <br />
+&nbsp; eval( </span><span class="default">$evalStr</span><span class="keyword">);<br />
+&nbsp; print (</span><span class="string">"sum "</span><span class="keyword">.</span><span class="default">$sum</span><span class="keyword">);<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="124051""></a>
+  <div class="note">
+   <strong class="user">geekcom</strong>
+   <a href="#124051" class="date">19-Jul-2019 04:41</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+For PHP 7.3.* use FILTER_SANITIZE_ADD_SLASHES.<br />
+<br />
+<span class="default">&lt;?php<br />
+$str </span><span class="keyword">= </span><span class="string">"Is your name O'Reilly?"</span><span class="keyword">;<br />
+</span><span class="default">$strWithSlashes </span><span class="keyword">= </span><span class="default">filter_var</span><span class="keyword">(</span><span class="default">$str</span><span class="keyword">, </span><span class="default">FILTER_SANITIZE_ADD_SLASHES</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">// Outputs: Is your name O\'Reilly?<br />
+</span><span class="keyword">echo </span><span class="default">$strWithSlashes</span><span class="keyword">;<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="113386""></a>
+  <div class="note">
+   <strong class="user">David Spector</strong>
+   <a href="#113386" class="date">04-Oct-2013 02:30</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If all you want to do is quote a string as you would normally do in PHP (for example, when returning an Ajax result, inside a json string value, or when building a URL with args), don't use addslashes (you don't want both " and ' escaped at the same time). Instead, just use this function:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">Quote</span><span class="keyword">(</span><span class="default">$Str</span><span class="keyword">) </span><span class="comment">// Double-quoting only<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$Str</span><span class="keyword">=</span><span class="default">str_replace</span><span class="keyword">(</span><span class="string">'"'</span><span class="keyword">,</span><span class="string">'\"'</span><span class="keyword">,</span><span class="default">$Str</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="string">'"'</span><span class="keyword">.</span><span class="default">$Str</span><span class="keyword">.</span><span class="string">'"'</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; } </span><span class="comment">// Quote<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Modify this easily to get a single-quoting function.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="108155""></a>
+  <div class="note">
+   <strong class="user">Lars</strong>
+   <a href="#108155" class="date">03-Apr-2012 08:51</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Even for simple json string backslash encodings, do not use this function. Some tests may work fine, but in json the single quote (') must not be escaped.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="102188""></a>
+  <div class="note">
+   <strong class="user">svenr at selfhtml dot org</strong>
+   <a href="#102188" class="date">01-Feb-2011 08:45</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+To output a PHP variable to Javascript, use json_encode().<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+$var </span><span class="keyword">= </span><span class="string">"He said \"Hello O'Reilly\" &amp; disappeared.\nNext line..."</span><span class="keyword">;<br />
+echo </span><span class="string">"alert("</span><span class="keyword">.</span><span class="default">json_encode</span><span class="keyword">(</span><span class="default">$var</span><span class="keyword">).</span><span class="string">");\n"</span><span class="keyword">;<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Output:<br />
+alert("He said \"Hello O'Reilly\" &amp; disappeared.\nNext line...") ;</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="98488""></a>
+  <div class="note">
+   <strong class="user">roysimke at microsoftsfirstmailprovider dot com</strong>
+   <a href="#98488" class="date">18-Jun-2010 01:35</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Never use addslashes function to escape values you are going to send to mysql. use mysql_real_escape_string or pg_escape at least if you are not using prepared queries yet.<br />
+<br />
+keep in mind that single quote is not the only special character that can break your sql query. and quotes are the only thing which addslashes care.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="93139""></a>
+  <div class="note">
+   <strong class="user">DarkHunterj</strong>
+   <a href="#93139" class="date">25-Aug-2009 05:11</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Based on:<br />
+Danijel Pticar<br />
+05-Aug-2009 05:22<br />
+I recommend this extended version, to replace addslashes altogether(works for both strings and arrays):<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">addslashesextended</span><span class="keyword">(&amp;</span><span class="default">$arr_r</span><span class="keyword">)<br />
+{<br />
+&nbsp;&nbsp;&nbsp; if(</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$arr_r</span><span class="keyword">))<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; foreach (</span><span class="default">$arr_r </span><span class="keyword">as &amp;</span><span class="default">$val</span><span class="keyword">)<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$val</span><span class="keyword">) ? </span><span class="default">addslashesextended</span><span class="keyword">(</span><span class="default">$val</span><span class="keyword">):</span><span class="default">$val</span><span class="keyword">=</span><span class="default">addslashes</span><span class="keyword">(</span><span class="default">$val</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; unset(</span><span class="default">$val</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; else<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$arr_r</span><span class="keyword">=</span><span class="default">addslashes</span><span class="keyword">(</span><span class="default">$arr_r</span><span class="keyword">);<br />
+}<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="87577""></a>
+  <div class="note">
+   <strong class="user">stuart at horuskol dot co dot uk</strong>
+   <a href="#87577" class="date">11-Dec-2008 02:44</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Be careful on whether you use double or single quotes when creating the string to be escaped:<br />
+<br />
+$test = 'This is one line\r\nand this is another\r\nand this line has\ta tab';<br />
+<br />
+echo $test;<br />
+echo "\r\n\r\n";<br />
+echo addslashes($test);<br />
+<br />
+$test = "This is one line\r\nand this is another\r\nand this line has\ta tab";<br />
+<br />
+echo $test;<br />
+echo "\r\n\r\n";<br />
+echo addslashes($test);</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="75347""></a>
+  <div class="note">
+   <strong class="user">Nate from RuggFamily.com</strong>
+   <a href="#75347" class="date">24-May-2007 07:19</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you want to add slashes to special symbols that would interfere with a regular expression (i.e., . \ + * ? [ ^ ] $ ( ) { } = ! &lt; &gt; | :), you should use the preg_quote() function.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="73605""></a>
+  <div class="note">
+   <strong class="user">Adrian C</strong>
+   <a href="#73605" class="date">02-Mar-2007 06:06</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+What happends when you add addslashes(addslashes($str))? This is not a good thing and it may be fixed:<br />
+<br />
+function checkaddslashes($str){&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp;&nbsp;&nbsp; if(strpos(str_replace("\'",""," $str"),"'")!=false)<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return addslashes($str);<br />
+&nbsp;&nbsp;&nbsp; else<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return $str;<br />
+}<br />
+<br />
+checkaddslashes("aa'bb");&nbsp; =&gt; aa\'bb<br />
+checkaddslashes("aa\'bb"); =&gt; aa\'bb<br />
+checkaddslashes("\'"); =&gt; \'<br />
+checkaddslashes("'");&nbsp; =&gt; \'<br />
+<br />
+Hope this will help you</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="69020""></a>
+  <div class="note">
+   <strong class="user">joechrz at gmail dot com</strong>
+   <a href="#69020" class="date">19-Aug-2006 05:36</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Here's an example of a function that prevents double-quoting, I'm surprised noone has put something like this up yet... (also works on arrays)<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">escape_quotes</span><span class="keyword">(</span><span class="default">$receive</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; if (!</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$receive</span><span class="keyword">))<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$thearray </span><span class="keyword">= array(</span><span class="default">$receive</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; else<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$thearray </span><span class="keyword">= </span><span class="default">$receive</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; foreach (</span><span class="default">array_keys</span><span class="keyword">(</span><span class="default">$thearray</span><span class="keyword">) as </span><span class="default">$string</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$thearray</span><span class="keyword">[</span><span class="default">$string</span><span class="keyword">] = </span><span class="default">addslashes</span><span class="keyword">(</span><span class="default">$thearray</span><span class="keyword">[</span><span class="default">$string</span><span class="keyword">]);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$thearray</span><span class="keyword">[</span><span class="default">$string</span><span class="keyword">] = </span><span class="default">preg_replace</span><span class="keyword">(</span><span class="string">"/[\\/]+/"</span><span class="keyword">,</span><span class="string">"/"</span><span class="keyword">,</span><span class="default">$thearray</span><span class="keyword">[</span><span class="default">$string</span><span class="keyword">]);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; if (!</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$receive</span><span class="keyword">)) <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$thearray</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">];<br />
+&nbsp;&nbsp;&nbsp; else<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$thearray</span><span class="keyword">;<br />
+}<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="66509""></a>
+  <div class="note">
+   <strong class="user">Picky</strong>
+   <a href="#66509" class="date">24-May-2006 12:55</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+This function is deprecated in PHP 4.0, according to this article:<br />
+<br />
+<a href="http://www.newsforge.com/article.pl?sid=06/05/23/2141246" rel="nofollow" target="_blank">http://www.newsforge.com/article.pl?sid=06/05/23/2141246</a><br />
+<br />
+Also, it is worth mentioning that PostgreSQL will soon start to block queries involving escaped single quotes using \ as the escape character, for some cases, which depends on the string's encoding.&nbsp; The standard way to escape quotes in SQL (not all SQL databases, mind you) is by changing single quotes into two single quotes (e.g, ' ' ' becomes ' '' ' for queries).<br />
+<br />
+You should look into other ways for escaping strings, such as "mysql_real_escape_string" (see the comment below), and other such database specific escape functions.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="58315""></a>
+  <div class="note">
+   <strong class="user">luciano at vittoretti dot com dot br</strong>
+   <a href="#58315" class="date">31-Oct-2005 03:18</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Note, this function wont work with mssql or access queries.<br />
+Use the function above (work with arrays too).<br />
+<br />
+function addslashes_mssql($str){<br />
+&nbsp;&nbsp;&nbsp; if (is_array($str)) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; foreach($str AS $id =&gt; $value) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $str[$id] = addslashes_mssql($value);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; } else {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $str = str_replace("'", "''", $str);&nbsp; &nbsp; <br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; return $str;<br />
+}<br />
+<br />
+function stripslashes_mssql($str){<br />
+&nbsp;&nbsp;&nbsp; if (is_array($str)) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; foreach($str AS $id =&gt; $value) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $str[$id] = stripslashes_mssql($value);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; } else {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $str = str_replace("''", "'", $str);&nbsp; &nbsp; <br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; return $str;<br />
+}</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="52435""></a>
+  <div class="note">
+   <strong class="user">unsafed</strong>
+   <a href="#52435" class="date">30-Apr-2005 08:23</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+addslashes does NOT make your input safe for use in a database query! It only escapes according to what PHP defines, not what your database driver defines. Any use of this function to escape strings for use in a database is likely an error - mysql_real_escape_string, pg_escape_string, etc, should be used depending on your underlying database as each database has different escaping requirements. In particular, MySQL wants \n, \r and \x1a escaped which addslashes does NOT do. Therefore relying on addslashes is not a good idea at all and may make your code vulnerable to security risks. I really don't see what this function is supposed to do.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="33975""></a>
+  <div class="note">
+   <strong class="user">hazy underscore fakie at ringwraith dot org</strong>
+   <a href="#33975" class="date">12-Jul-2003 11:23</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Note that when using addslashes() on a string that includes cyrillic characters, addslashes() totally mixes up the string, rendering it unusable.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="26782""></a>
+  <div class="note">
+   <strong class="user">hoskerr at nukote dot com</strong>
+   <a href="#26782" class="date">12-Nov-2002 03:16</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Beware of using addslashes() on input to the serialize() function.&nbsp;&nbsp; serialize() stores strings with their length; the length must match the stored string or unserialize() will fail.&nbsp; 
+<br />
+
+<br />
+Such a mismatch can occur if you serialize the result of addslashes() and store it in a database; some databases (definitely including PostgreSQL) automagically strip backslashes from "special" chars in SELECT results, causing the returned string to be shorter than it was when it was serialized.
+<br />
+
+<br />
+In other words, do this...
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+$string</span><span class="keyword">=</span><span class="string">"O'Reilly"</span><span class="keyword">;
+<br />
+</span><span class="default">$ser</span><span class="keyword">=</span><span class="default">serialize</span><span class="keyword">(</span><span class="default">$string</span><span class="keyword">);&nbsp; &nbsp; </span><span class="comment"># safe -- won't count the slash
+<br />
+</span><span class="default">$result</span><span class="keyword">=</span><span class="default">addslashes</span><span class="keyword">(</span><span class="default">$ser</span><span class="keyword">); 
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+...and not this...
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+$string</span><span class="keyword">=</span><span class="string">"O'Reilly"</span><span class="keyword">;
+<br />
+</span><span class="default">$add</span><span class="keyword">=</span><span class="default">addslashes</span><span class="keyword">(</span><span class="default">$string</span><span class="keyword">);&nbsp;&nbsp; </span><span class="comment"># RISKY!&nbsp; -- will count the slash
+<br />
+</span><span class="default">$result</span><span class="keyword">=</span><span class="default">serialize</span><span class="keyword">(</span><span class="default">$add</span><span class="keyword">);
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+In both cases, a backslash will be added after the apostrophe in "O'Reilly"; only in the second case will the backslash be included in the string length as recorded by serialize().
+<br />
+
+<br />
+[Note to the maintainers: You may, at your option, want to link this note to serialize() as well as to addslashes().&nbsp; I'll refrain from doing such cross-posting myself...]</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="26432""></a>
+  <div class="note">
+   <strong class="user">php at slamb dot org</strong>
+   <a href="#26432" class="date">30-Oct-2002 10:48</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+spamdunk at home dot com, your way is dangerous on PostgreSQL (and presumably MySQL). You're quite correct that ANSI SQL specifies using ' to escape, but those databases also support \ for escaping (in violation of the standard, I think). Which means that if they pass in a string that includes a "\'", you expand it to "\'''" (an escaped quote followed by a non-escaped quote. WRONG! Attackers can execute arbitrary SQL to drop your tables, make themselves administrators, whatever they want.)
+<br />
+
+<br />
+The best way to be safe and correct is to:
+<br />
+
+<br />
+- don't use magic quotes; this approach is bad. For starters, that's making the assumption that you will be using your input in a database query, which is arbitrary. (Why not escape all "&lt;"s with "&amp;lt;"s instead? Cross-site scripting attacks are quite common as well.) It's better to set up a way that does whatever escaping is correct for you when you use it, as below:
+<br />
+
+<br />
+- when inserting into the database, use prepared statements with placeholders. For example, when using PEAR DB:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+&nbsp;&nbsp;&nbsp; $stmt </span><span class="keyword">= </span><span class="default">$dbh</span><span class="keyword">-&gt;</span><span class="default">prepare</span><span class="keyword">(</span><span class="string">'update mb_users set password = ? where username = ?'</span><span class="keyword">);
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$dbh</span><span class="keyword">-&gt;</span><span class="default">execute</span><span class="keyword">(</span><span class="default">$stmt</span><span class="keyword">, array(</span><span class="string">'12345'</span><span class="keyword">, </span><span class="string">'bob'</span><span class="keyword">));
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+Notice that there are no quotes around the ?s. It handles that for you automatically. It's guaranteed to be safe for your database. (Just ' on oracle, \ and ' on PostgreSQL, but you don't even have to think about it.)
+<br />
+
+<br />
+Plus, if the database supports prepared statements (the soon-to-be-released PostgreSQL 7.3, Oracle, etc), several executes on the same prepare can be faster, since it can reuse the same query plan. If it doesn't (MySQL, etc), this way falls back to quoting code that's specifically written for your database, avoiding the problem I mentioned above.
+<br />
+
+<br />
+(Pardon my syntax if it's off. I'm not really a PHP programmer; this is something I know from similar things in Java, Perl, PL/SQL, Python, Visual Basic, etc.)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="12810""></a>
+  <div class="note">
+   <strong class="user">hybrid at n0spam dot pearlmagik dot com</strong>
+   <a href="#12810" class="date">08-May-2001 10:46</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Remember to slash underscores (_) and percent signs (%), too, if you're going use the LIKE operator on the variable or you'll get some unexpected results.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

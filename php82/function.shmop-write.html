@@ -1,0 +1,252 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>Write data into shared memory block</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.shmop-size.html">? shmop_size</a></li>
+      <li style="float: right;"><a href="class.shmop.html">Shmop ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.shmop.html">Shared Memory 函数</a></li>
+    <li>Write data into shared memory block</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.shmop-write" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">shmop_write</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.0.4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">shmop_write</span> &mdash; <span class="dc-title">Write data into shared memory block</span></p>
+
+ </div>
+ <div class="refsect1 description" id="refsect1-function.shmop-write-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>shmop_write</strong></span>(<span class="methodparam"><span class="type"><a href="class.shmop.html" class="type Shmop">Shmop</a></span> <code class="parameter">$shmop</code></span>, <span class="methodparam"><span class="type">string</span> <code class="parameter">$data</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$offset</code></span>): <span class="type">int</span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>shmop_write()</strong></span> will write a string into shared memory block.
+  </p>
+ </div>
+
+ <div class="refsect1 parameters" id="refsect1-function.shmop-write-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">shmop</code></dt>
+
+     <dd>
+
+      <p class="para">
+       The shared memory block identifier created by 
+       <span class="function"><a href="function.shmop-open.html" class="function">shmop_open()</a></span>
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">data</code></dt>
+
+     <dd>
+
+      <p class="para">
+       A string to write into shared memory block 
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">offset</code></dt>
+
+     <dd>
+
+      <p class="para">
+       Specifies where to start writing data inside the shared memory
+       segment. The offset must be greater than or equal to zero
+       and less than or equal to the actual size of the shared memory segment.
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+ <div class="refsect1 returnvalues" id="refsect1-function.shmop-write-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   The size of the written <code class="parameter">data</code>.
+  </p>
+ </div>
+
+
+ <div class="refsect1 errors" id="refsect1-function.shmop-write-errors">
+  <h3 class="title">错误／异常</h3>
+  <p class="para">
+   If <code class="parameter">offset</code> is out of range, or a read-only shared memory segment
+   should be written to, a <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span> is thrown.
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.shmop-write-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       Prior to PHP 8.0.0, <strong><code>false</code></strong> was returned on failure.
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       <code class="parameter">shmop</code> expects a <span class="classname"><a href="class.shmop.html" class="classname">Shmop</a></span>
+       instance now; previously, a <span class="type">resource</span> was expected.
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.shmop-write-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #1 Writing to shared memory block</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$shm_bytes_written </span><span style="color: #007700">= </span><span style="color: #0000BB">shmop_write</span><span style="color: #007700">(</span><span style="color: #0000BB">$shm_id</span><span style="color: #007700">, </span><span style="color: #0000BB">$my_string</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   This example will write data inside <code class="literal">$my_string</code> into
+   shared memory block, <code class="literal">$shm_bytes_written</code> will contain
+   the number of bytes written.
+  </p>
+ </div>
+
+ <div class="refsect1 seealso" id="refsect1-function.shmop-write-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.shmop-read.html" class="function" rel="rdfs-seeAlso">shmop_read()</a> - Read data from shared memory block</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="127988""></a>
+  <div class="note">
+   <strong class="user">mark at manngo dot net</strong>
+   <a href="#127988" class="date">07-Dec-2022 07:55</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+On thing you might want to do is replace an old string with a shorter one, or to clear out the string altogether.<br />
+<br />
+To replace the string, you can zero-byte pad the string you are writing:<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">//&nbsp; &nbsp; $shmid is from shmop_open()<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$size </span><span class="keyword">= </span><span class="default">128</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$string </span><span class="keyword">= </span><span class="string">'something'</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">//&nbsp; &nbsp; write<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$string </span><span class="keyword">= </span><span class="default">str_pad</span><span class="keyword">(</span><span class="default">string</span><span class="keyword">, </span><span class="default">$size</span><span class="keyword">, </span><span class="string">"\0"</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">shmop_write</span><span class="keyword">(</span><span class="default">$shmid</span><span class="keyword">, </span><span class="default">$string</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">);<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">//&nbsp; &nbsp; read<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">print </span><span class="default">rtrim</span><span class="keyword">(</span><span class="default">shmop</span><span class="keyword">(</span><span class="default">$shmid</span><span class="keyword">,</span><span class="default">0</span><span class="keyword">,</span><span class="default">0</span><span class="keyword">),,</span><span class="string">"\0"</span><span class="keyword">);<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">//&nbsp; &nbsp; clear<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$string </span><span class="keyword">= </span><span class="default">str_repeat</span><span class="keyword">(</span><span class="string">"\0"</span><span class="keyword">,</span><span class="default">$size</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">shmop_write</span><span class="keyword">(</span><span class="default">$shmid</span><span class="keyword">, </span><span class="default">$string</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">);<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125555""></a>
+  <div class="note">
+   <strong class="user">radupb at yahoo dot com</strong>
+   <a href="#125555" class="date">30-Nov-2020 09:13</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I guess pack-unpack are the handy functions for encoding/decoding data as/from a binary string for shmop_write/shmop_read. Example:<br />
+<br />
+$format='LLLLSSCCCC';&nbsp; //data format for pack<br />
+$key=1; <br />
+if( !($shmid=shmop_open($key,'n',0660,30)) )<br />
+&nbsp; die('shmop_open failed.'); <br />
+<br />
+//my data to encode:<br />
+$hd=array('ALIVE1'=&gt;1,'ALIVE2'=&gt;2,'ALIVE3'=&gt;3,'ALIVE4'=&gt;4,<br />
+&nbsp;&nbsp; &nbsp;&nbsp; 'CRTPTR'=&gt;5,'CRTSEQ'=&gt;6,<br />
+&nbsp;&nbsp; &nbsp;&nbsp; 'CTW'=&gt;7,'LOCK'=&gt;8,'PLAY'=&gt;9,'MISS'=&gt;10<br />
+);<br />
+<br />
+$tmp=pack( $format, $hd['ALIVE1'],$hd['ALIVE2'],$hd['ALIVE3'],$hd['ALIVE4'],&nbsp; $hd['CRTPTR'],$hd['CRTSEQ'],$hd['CTW'],$hd['LOCK'],$hd['PLAY'],$hd['MISS'] );<br />
+<br />
+if( ($w=shmop_write($shmid,$tmp,0))!=24 )<br />
+&nbsp; die('write error $w='.$w);<br />
+<br />
+And reading from some other process:<br />
+$key=1; <br />
+if( !($shmid=shmop_open($key,'w',0,0)) )<br />
+&nbsp; die('shmop_open failed.'); <br />
+<br />
+$formatR='L4ALIVE/SCRTPTR/SCRTSEQ/CCTW/CLOCK/CPLAY/CMISS'; //data format for unpack<br />
+<br />
+$hd=unpack( $formatR, shmop_read( $shmid,0,24) );<br />
+echo'hd:&lt;pre&gt;';print_r($hd);echo'&lt;/pre&gt;';</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

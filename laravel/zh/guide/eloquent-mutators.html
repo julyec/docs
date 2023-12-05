@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content="VuePress 2.0.0-beta.67" />
+    <meta name="theme" content="VuePress Theme Hope" />
+    <script type="text/javascript" async="" src="/laravel/iconify-icon@1.js" data-loaded="true"></script><meta name="keywords" content="php,go,python,c++,nsis"><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?800fce94596cf587cd6a0e80314e5360";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><title>Eloquent: 修改器 & 类型转换 | Laravel 10 中文文档</title><meta name="description" content="语法优雅的Web应用框架">
+    <style>
+      html {
+        background: #fff;
+      }
+
+      html[data-theme="dark"] {
+        background: #1d1e1f;
+      }
+
+      body {
+        background: var(--bg-color);
+      }
+    </style>
+    <script>
+      const userMode = localStorage.getItem("vuepress-theme-hope-scheme");
+      const systemDarkMode =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+      if (userMode === "dark" || (userMode !== "light" && systemDarkMode)) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    </script>
+    <link rel="preload" href="/laravel/assets/style-46281858.css" as="style"><link rel="stylesheet" href="/laravel/assets/style-46281858.css">
+    <link rel="modulepreload" href="/laravel/assets/app-8cdff07c.js"><link rel="modulepreload" href="/laravel/assets/eloquent-mutators.html-229dc52b.js"><link rel="modulepreload" href="/laravel/assets/eloquent-mutators.html-6f353e2d.js"><link rel="modulepreload" href="/laravel/assets/plugin-vue_export-helper-c27b6911.js"><link rel="prefetch" href="/laravel/assets/index.html-f96c0672.js" as="script"><link rel="prefetch" href="/laravel/assets/artisan.html-0e9d03c9.js" as="script"><link rel="prefetch" href="/laravel/assets/authentication.html-38ef59d8.js" as="script"><link rel="prefetch" href="/laravel/assets/authorization.html-313c4047.js" as="script"><link rel="prefetch" href="/laravel/assets/billing.html-ebe1a72a.js" as="script"><link rel="prefetch" href="/laravel/assets/blade.html-5155c6b6.js" as="script"><link rel="prefetch" href="/laravel/assets/broadcasting.html-e3959b4b.js" as="script"><link rel="prefetch" href="/laravel/assets/cache.html-70e1224c.js" as="script"><link rel="prefetch" href="/laravel/assets/cashier-paddle.html-d34b45b1.js" as="script"><link rel="prefetch" href="/laravel/assets/collections.html-1bd259e8.js" as="script"><link rel="prefetch" href="/laravel/assets/configuration.html-b8f3b774.js" as="script"><link rel="prefetch" href="/laravel/assets/console-tests.html-4c60daf9.js" as="script"><link rel="prefetch" href="/laravel/assets/container.html-b94c7ddb.js" as="script"><link rel="prefetch" href="/laravel/assets/contracts.html-c22783be.js" as="script"><link rel="prefetch" href="/laravel/assets/contributions.html-ab50d596.js" as="script"><link rel="prefetch" href="/laravel/assets/controllers.html-ac993460.js" as="script"><link rel="prefetch" href="/laravel/assets/csrf.html-16cf0dfe.js" as="script"><link rel="prefetch" href="/laravel/assets/database-testing.html-2c62b269.js" as="script"><link rel="prefetch" href="/laravel/assets/database.html-b52ec6ec.js" as="script"><link rel="prefetch" href="/laravel/assets/deployment.html-4c508f11.js" as="script"><link rel="prefetch" href="/laravel/assets/documentation.html-91f17157.js" as="script"><link rel="prefetch" href="/laravel/assets/dusk.html-89649ae7.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-collections.html-ac2068d3.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-factories.html-dc84ddb7.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-mutators.html-14654604.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-relationships.html-2aef18f6.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-resources.html-756db712.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-serialization.html-b7d47b88.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent.html-2648a01d.js" as="script"><link rel="prefetch" href="/laravel/assets/encryption.html-5624bd7a.js" as="script"><link rel="prefetch" href="/laravel/assets/envoy.html-151ce29e.js" as="script"><link rel="prefetch" href="/laravel/assets/errors.html-4e830ab6.js" as="script"><link rel="prefetch" href="/laravel/assets/events.html-23967b21.js" as="script"><link rel="prefetch" href="/laravel/assets/facades.html-fac9d294.js" as="script"><link rel="prefetch" href="/laravel/assets/filesystem.html-c5ce7cdd.js" as="script"><link rel="prefetch" href="/laravel/assets/folio.html-0cc287b9.js" as="script"><link rel="prefetch" href="/laravel/assets/fortify.html-eb8b5276.js" as="script"><link rel="prefetch" href="/laravel/assets/frontend.html-cfcef92f.js" as="script"><link rel="prefetch" href="/laravel/assets/hashing.html-e8bbaa17.js" as="script"><link rel="prefetch" href="/laravel/assets/helpers.html-a2bc32eb.js" as="script"><link rel="prefetch" href="/laravel/assets/homestead.html-ad159085.js" as="script"><link rel="prefetch" href="/laravel/assets/horizon.html-8e76a89c.js" as="script"><link rel="prefetch" href="/laravel/assets/http-client.html-5a16d377.js" as="script"><link rel="prefetch" href="/laravel/assets/http-tests.html-03ae925a.js" as="script"><link rel="prefetch" href="/laravel/assets/installation.html-8821556d.js" as="script"><link rel="prefetch" href="/laravel/assets/license.html-bc66f84b.js" as="script"><link rel="prefetch" href="/laravel/assets/lifecycle.html-686bfd8a.js" as="script"><link rel="prefetch" href="/laravel/assets/localization.html-cccfd668.js" as="script"><link rel="prefetch" href="/laravel/assets/logging.html-00676fcd.js" as="script"><link rel="prefetch" href="/laravel/assets/mail.html-9e64e563.js" as="script"><link rel="prefetch" href="/laravel/assets/middleware.html-e48e346e.js" as="script"><link rel="prefetch" href="/laravel/assets/migrations.html-d78bac4a.js" as="script"><link rel="prefetch" href="/laravel/assets/mix.html-2b8bdbfe.js" as="script"><link rel="prefetch" href="/laravel/assets/mocking.html-f1956c22.js" as="script"><link rel="prefetch" href="/laravel/assets/notifications.html-1579c318.js" as="script"><link rel="prefetch" href="/laravel/assets/octane.html-c7fc39fc.js" as="script"><link rel="prefetch" href="/laravel/assets/packages.html-36c879b0.js" as="script"><link rel="prefetch" href="/laravel/assets/pagination.html-1d87fa5b.js" as="script"><link rel="prefetch" href="/laravel/assets/passport.html-5c57ac15.js" as="script"><link rel="prefetch" href="/laravel/assets/passwords.html-8d207cd7.js" as="script"><link rel="prefetch" href="/laravel/assets/pennant.html-69b48e93.js" as="script"><link rel="prefetch" href="/laravel/assets/pint.html-dc08bca4.js" as="script"><link rel="prefetch" href="/laravel/assets/precognition.html-3249a97e.js" as="script"><link rel="prefetch" href="/laravel/assets/processes.html-8a5622d9.js" as="script"><link rel="prefetch" href="/laravel/assets/prompts.html-b6325a9f.js" as="script"><link rel="prefetch" href="/laravel/assets/providers.html-5ea45f09.js" as="script"><link rel="prefetch" href="/laravel/assets/queries.html-10f3290c.js" as="script"><link rel="prefetch" href="/laravel/assets/queues.html-80da253f.js" as="script"><link rel="prefetch" href="/laravel/assets/rate-limiting.html-1c41ec54.js" as="script"><link rel="prefetch" href="/laravel/assets/redirects.html-43482cb9.js" as="script"><link rel="prefetch" href="/laravel/assets/redis.html-a3b5ee4a.js" as="script"><link rel="prefetch" href="/laravel/assets/releases.html-476c8b9c.js" as="script"><link rel="prefetch" href="/laravel/assets/requests.html-be013b84.js" as="script"><link rel="prefetch" href="/laravel/assets/responses.html-9beef5ff.js" as="script"><link rel="prefetch" href="/laravel/assets/routing.html-f8c71973.js" as="script"><link rel="prefetch" href="/laravel/assets/sail.html-47beb292.js" as="script"><link rel="prefetch" href="/laravel/assets/sanctum.html-303fd66c.js" as="script"><link rel="prefetch" href="/laravel/assets/scheduling.html-1b59676e.js" as="script"><link rel="prefetch" href="/laravel/assets/scout.html-7921380f.js" as="script"><link rel="prefetch" href="/laravel/assets/seeding.html-183db364.js" as="script"><link rel="prefetch" href="/laravel/assets/session.html-3244e34a.js" as="script"><link rel="prefetch" href="/laravel/assets/socialite.html-30fef159.js" as="script"><link rel="prefetch" href="/laravel/assets/starter-kits.html-08d43c42.js" as="script"><link rel="prefetch" href="/laravel/assets/strings.html-5caa398e.js" as="script"><link rel="prefetch" href="/laravel/assets/structure.html-d831ad60.js" as="script"><link rel="prefetch" href="/laravel/assets/telescope.html-07644439.js" as="script"><link rel="prefetch" href="/laravel/assets/testing.html-238fa923.js" as="script"><link rel="prefetch" href="/laravel/assets/upgrade.html-2dffc447.js" as="script"><link rel="prefetch" href="/laravel/assets/urls.html-d42d29d2.js" as="script"><link rel="prefetch" href="/laravel/assets/valet.html-895e5076.js" as="script"><link rel="prefetch" href="/laravel/assets/validation.html-c4305591.js" as="script"><link rel="prefetch" href="/laravel/assets/verification.html-dcbd00f1.js" as="script"><link rel="prefetch" href="/laravel/assets/views.html-41709ab9.js" as="script"><link rel="prefetch" href="/laravel/assets/vite.html-d65b641f.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-5631fb16.js" as="script"><link rel="prefetch" href="/laravel/assets/artisan.html-e3f03ec9.js" as="script"><link rel="prefetch" href="/laravel/assets/authentication.html-570e0239.js" as="script"><link rel="prefetch" href="/laravel/assets/authorization.html-4c505770.js" as="script"><link rel="prefetch" href="/laravel/assets/billing.html-88d8885f.js" as="script"><link rel="prefetch" href="/laravel/assets/blade.html-b64aa35f.js" as="script"><link rel="prefetch" href="/laravel/assets/broadcasting.html-12a9e8bc.js" as="script"><link rel="prefetch" href="/laravel/assets/cache.html-bb5c9ae7.js" as="script"><link rel="prefetch" href="/laravel/assets/cashier-paddle.html-d0d72082.js" as="script"><link rel="prefetch" href="/laravel/assets/collections.html-d11860ac.js" as="script"><link rel="prefetch" href="/laravel/assets/configuration.html-ef1b96fe.js" as="script"><link rel="prefetch" href="/laravel/assets/console-tests.html-067056ba.js" as="script"><link rel="prefetch" href="/laravel/assets/container.html-61acca56.js" as="script"><link rel="prefetch" href="/laravel/assets/contracts.html-84cb10c6.js" as="script"><link rel="prefetch" href="/laravel/assets/contributions.html-fce99fc6.js" as="script"><link rel="prefetch" href="/laravel/assets/controllers.html-3e90ab99.js" as="script"><link rel="prefetch" href="/laravel/assets/csrf.html-cca49abf.js" as="script"><link rel="prefetch" href="/laravel/assets/database-testing.html-b1f8d202.js" as="script"><link rel="prefetch" href="/laravel/assets/database.html-56afdfc4.js" as="script"><link rel="prefetch" href="/laravel/assets/deployment.html-4185fda7.js" as="script"><link rel="prefetch" href="/laravel/assets/documentation.html-131ef588.js" as="script"><link rel="prefetch" href="/laravel/assets/dusk.html-a5e6d446.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-collections.html-4b4e2d65.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-factories.html-f932bd31.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-relationships.html-e1fe4d70.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-resources.html-3c63a8eb.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-serialization.html-72f70b3a.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent.html-5455c9d2.js" as="script"><link rel="prefetch" href="/laravel/assets/encryption.html-419526ec.js" as="script"><link rel="prefetch" href="/laravel/assets/envoy.html-17270835.js" as="script"><link rel="prefetch" href="/laravel/assets/errors.html-13da2477.js" as="script"><link rel="prefetch" href="/laravel/assets/events.html-5732e8dc.js" as="script"><link rel="prefetch" href="/laravel/assets/facades.html-e1c0e131.js" as="script"><link rel="prefetch" href="/laravel/assets/filesystem.html-aae8333b.js" as="script"><link rel="prefetch" href="/laravel/assets/folio.html-5751cd6a.js" as="script"><link rel="prefetch" href="/laravel/assets/fortify.html-de544b50.js" as="script"><link rel="prefetch" href="/laravel/assets/frontend.html-c0546cc4.js" as="script"><link rel="prefetch" href="/laravel/assets/hashing.html-d62b0c77.js" as="script"><link rel="prefetch" href="/laravel/assets/helpers.html-e22a2360.js" as="script"><link rel="prefetch" href="/laravel/assets/homestead.html-d6d4616d.js" as="script"><link rel="prefetch" href="/laravel/assets/horizon.html-8c3589f2.js" as="script"><link rel="prefetch" href="/laravel/assets/http-client.html-3fd134cc.js" as="script"><link rel="prefetch" href="/laravel/assets/http-tests.html-ac17c893.js" as="script"><link rel="prefetch" href="/laravel/assets/installation.html-0300ec90.js" as="script"><link rel="prefetch" href="/laravel/assets/lifecycle.html-42ef0670.js" as="script"><link rel="prefetch" href="/laravel/assets/localization.html-f5186801.js" as="script"><link rel="prefetch" href="/laravel/assets/logging.html-4f779e10.js" as="script"><link rel="prefetch" href="/laravel/assets/mail.html-cd3aaf70.js" as="script"><link rel="prefetch" href="/laravel/assets/middleware.html-df624dbc.js" as="script"><link rel="prefetch" href="/laravel/assets/migrations.html-ba6aabb2.js" as="script"><link rel="prefetch" href="/laravel/assets/mix.html-2ef5bcc9.js" as="script"><link rel="prefetch" href="/laravel/assets/mocking.html-303d8f5d.js" as="script"><link rel="prefetch" href="/laravel/assets/notifications.html-b3122e5b.js" as="script"><link rel="prefetch" href="/laravel/assets/octane.html-33e350ba.js" as="script"><link rel="prefetch" href="/laravel/assets/packages.html-3b6d480b.js" as="script"><link rel="prefetch" href="/laravel/assets/pagination.html-9d7ef5b6.js" as="script"><link rel="prefetch" href="/laravel/assets/passport.html-99fa6d16.js" as="script"><link rel="prefetch" href="/laravel/assets/passwords.html-e112c41c.js" as="script"><link rel="prefetch" href="/laravel/assets/pennant.html-d41a13be.js" as="script"><link rel="prefetch" href="/laravel/assets/pint.html-cd80abc4.js" as="script"><link rel="prefetch" href="/laravel/assets/precognition.html-d6193fa1.js" as="script"><link rel="prefetch" href="/laravel/assets/processes.html-dc160b96.js" as="script"><link rel="prefetch" href="/laravel/assets/prompts.html-43f92ec5.js" as="script"><link rel="prefetch" href="/laravel/assets/providers.html-8113e0c3.js" as="script"><link rel="prefetch" href="/laravel/assets/queries.html-18b3df87.js" as="script"><link rel="prefetch" href="/laravel/assets/queues.html-371e349e.js" as="script"><link rel="prefetch" href="/laravel/assets/rate-limiting.html-eb27bba5.js" as="script"><link rel="prefetch" href="/laravel/assets/redirects.html-a277c696.js" as="script"><link rel="prefetch" href="/laravel/assets/redis.html-3d2e8c35.js" as="script"><link rel="prefetch" href="/laravel/assets/releases.html-20f1c49f.js" as="script"><link rel="prefetch" href="/laravel/assets/requests.html-e7bb39cd.js" as="script"><link rel="prefetch" href="/laravel/assets/responses.html-964d8da8.js" as="script"><link rel="prefetch" href="/laravel/assets/routing.html-cdd5aefe.js" as="script"><link rel="prefetch" href="/laravel/assets/sail.html-edb4e5fb.js" as="script"><link rel="prefetch" href="/laravel/assets/sanctum.html-1acec381.js" as="script"><link rel="prefetch" href="/laravel/assets/scheduling.html-0dfd2863.js" as="script"><link rel="prefetch" href="/laravel/assets/scout.html-dc7b7abb.js" as="script"><link rel="prefetch" href="/laravel/assets/seeding.html-7e6fae04.js" as="script"><link rel="prefetch" href="/laravel/assets/session.html-b1d84cee.js" as="script"><link rel="prefetch" href="/laravel/assets/socialite.html-1924a537.js" as="script"><link rel="prefetch" href="/laravel/assets/starter-kits.html-57960007.js" as="script"><link rel="prefetch" href="/laravel/assets/strings.html-51dbbc47.js" as="script"><link rel="prefetch" href="/laravel/assets/structure.html-cbbae4a7.js" as="script"><link rel="prefetch" href="/laravel/assets/telescope.html-8ed6a181.js" as="script"><link rel="prefetch" href="/laravel/assets/testing.html-85e55a0b.js" as="script"><link rel="prefetch" href="/laravel/assets/upgrade.html-06aeb8f2.js" as="script"><link rel="prefetch" href="/laravel/assets/urls.html-0aa1615d.js" as="script"><link rel="prefetch" href="/laravel/assets/valet.html-dae1469d.js" as="script"><link rel="prefetch" href="/laravel/assets/validation.html-7aba5426.js" as="script"><link rel="prefetch" href="/laravel/assets/verification.html-9d448ce8.js" as="script"><link rel="prefetch" href="/laravel/assets/views.html-44c76116.js" as="script"><link rel="prefetch" href="/laravel/assets/vite.html-2c3c8f9a.js" as="script"><link rel="prefetch" href="/laravel/assets/404.html-fce79bde.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-ebda9a17.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-0dab9b40.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-8048da3d.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-6af0b259.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-0341c66f.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-c4c647eb.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-aa7de2dc.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-7993dca7.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-6c43b2d4.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-ee40829a.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-aed7618a.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-2341e875.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-edc8931d.js" as="script"><link rel="prefetch" href="/laravel/assets/artisan.html-e993b633.js" as="script"><link rel="prefetch" href="/laravel/assets/authentication.html-7da6db12.js" as="script"><link rel="prefetch" href="/laravel/assets/authorization.html-d4c66ac1.js" as="script"><link rel="prefetch" href="/laravel/assets/billing.html-7eb0b79a.js" as="script"><link rel="prefetch" href="/laravel/assets/blade.html-c1cb1dfc.js" as="script"><link rel="prefetch" href="/laravel/assets/broadcasting.html-11edd1a7.js" as="script"><link rel="prefetch" href="/laravel/assets/cache.html-65ddb893.js" as="script"><link rel="prefetch" href="/laravel/assets/cashier-paddle.html-37b20071.js" as="script"><link rel="prefetch" href="/laravel/assets/collections.html-f3d4eec3.js" as="script"><link rel="prefetch" href="/laravel/assets/configuration.html-139c4ce1.js" as="script"><link rel="prefetch" href="/laravel/assets/console-tests.html-f13384fc.js" as="script"><link rel="prefetch" href="/laravel/assets/container.html-3fecf713.js" as="script"><link rel="prefetch" href="/laravel/assets/contracts.html-d2c8d8e2.js" as="script"><link rel="prefetch" href="/laravel/assets/contributions.html-4bc7357e.js" as="script"><link rel="prefetch" href="/laravel/assets/controllers.html-96388c46.js" as="script"><link rel="prefetch" href="/laravel/assets/csrf.html-0aed46d2.js" as="script"><link rel="prefetch" href="/laravel/assets/database-testing.html-d1cea1af.js" as="script"><link rel="prefetch" href="/laravel/assets/database.html-1c324c1e.js" as="script"><link rel="prefetch" href="/laravel/assets/deployment.html-cd42449c.js" as="script"><link rel="prefetch" href="/laravel/assets/documentation.html-6ef98220.js" as="script"><link rel="prefetch" href="/laravel/assets/dusk.html-6327491d.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-collections.html-53d3e276.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-factories.html-426c1e26.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-mutators.html-d9486734.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-relationships.html-c02078c7.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-resources.html-ecb9bcf3.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-serialization.html-34f984bc.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent.html-66438545.js" as="script"><link rel="prefetch" href="/laravel/assets/encryption.html-8d1623ce.js" as="script"><link rel="prefetch" href="/laravel/assets/envoy.html-63d38c3e.js" as="script"><link rel="prefetch" href="/laravel/assets/errors.html-e19b0e13.js" as="script"><link rel="prefetch" href="/laravel/assets/events.html-22c8bd0c.js" as="script"><link rel="prefetch" href="/laravel/assets/facades.html-8e1e5183.js" as="script"><link rel="prefetch" href="/laravel/assets/filesystem.html-53609b73.js" as="script"><link rel="prefetch" href="/laravel/assets/folio.html-ad52a678.js" as="script"><link rel="prefetch" href="/laravel/assets/fortify.html-e45c98c4.js" as="script"><link rel="prefetch" href="/laravel/assets/frontend.html-15391800.js" as="script"><link rel="prefetch" href="/laravel/assets/hashing.html-6da54123.js" as="script"><link rel="prefetch" href="/laravel/assets/helpers.html-e2446946.js" as="script"><link rel="prefetch" href="/laravel/assets/homestead.html-2884a781.js" as="script"><link rel="prefetch" href="/laravel/assets/horizon.html-973e1311.js" as="script"><link rel="prefetch" href="/laravel/assets/http-client.html-d81392ad.js" as="script"><link rel="prefetch" href="/laravel/assets/http-tests.html-a03a5f0c.js" as="script"><link rel="prefetch" href="/laravel/assets/installation.html-95a9c3aa.js" as="script"><link rel="prefetch" href="/laravel/assets/license.html-62430ab5.js" as="script"><link rel="prefetch" href="/laravel/assets/lifecycle.html-18ea8fb3.js" as="script"><link rel="prefetch" href="/laravel/assets/localization.html-922ff115.js" as="script"><link rel="prefetch" href="/laravel/assets/logging.html-050985f2.js" as="script"><link rel="prefetch" href="/laravel/assets/mail.html-47a04f02.js" as="script"><link rel="prefetch" href="/laravel/assets/middleware.html-6453d1cc.js" as="script"><link rel="prefetch" href="/laravel/assets/migrations.html-f1ebff53.js" as="script"><link rel="prefetch" href="/laravel/assets/mix.html-249cd58a.js" as="script"><link rel="prefetch" href="/laravel/assets/mocking.html-e522dfa3.js" as="script"><link rel="prefetch" href="/laravel/assets/notifications.html-269dd42d.js" as="script"><link rel="prefetch" href="/laravel/assets/octane.html-e5187b2c.js" as="script"><link rel="prefetch" href="/laravel/assets/packages.html-4a09b71f.js" as="script"><link rel="prefetch" href="/laravel/assets/pagination.html-f3918ef6.js" as="script"><link rel="prefetch" href="/laravel/assets/passport.html-3a76745f.js" as="script"><link rel="prefetch" href="/laravel/assets/passwords.html-146f6313.js" as="script"><link rel="prefetch" href="/laravel/assets/pennant.html-0709c429.js" as="script"><link rel="prefetch" href="/laravel/assets/pint.html-bd0a9ee4.js" as="script"><link rel="prefetch" href="/laravel/assets/precognition.html-15b4c7aa.js" as="script"><link rel="prefetch" href="/laravel/assets/processes.html-17788aeb.js" as="script"><link rel="prefetch" href="/laravel/assets/prompts.html-10f9437f.js" as="script"><link rel="prefetch" href="/laravel/assets/providers.html-f4c3a729.js" as="script"><link rel="prefetch" href="/laravel/assets/queries.html-85a38561.js" as="script"><link rel="prefetch" href="/laravel/assets/queues.html-57e09fd0.js" as="script"><link rel="prefetch" href="/laravel/assets/rate-limiting.html-85518e10.js" as="script"><link rel="prefetch" href="/laravel/assets/redirects.html-7ee7088a.js" as="script"><link rel="prefetch" href="/laravel/assets/redis.html-fa970b20.js" as="script"><link rel="prefetch" href="/laravel/assets/releases.html-45fa3fe7.js" as="script"><link rel="prefetch" href="/laravel/assets/requests.html-9d100885.js" as="script"><link rel="prefetch" href="/laravel/assets/responses.html-a10133de.js" as="script"><link rel="prefetch" href="/laravel/assets/routing.html-a924b8e7.js" as="script"><link rel="prefetch" href="/laravel/assets/sail.html-bc7fbf87.js" as="script"><link rel="prefetch" href="/laravel/assets/sanctum.html-e527697f.js" as="script"><link rel="prefetch" href="/laravel/assets/scheduling.html-8b344747.js" as="script"><link rel="prefetch" href="/laravel/assets/scout.html-97fcbf47.js" as="script"><link rel="prefetch" href="/laravel/assets/seeding.html-cc731f3b.js" as="script"><link rel="prefetch" href="/laravel/assets/session.html-f238564d.js" as="script"><link rel="prefetch" href="/laravel/assets/socialite.html-b92fde73.js" as="script"><link rel="prefetch" href="/laravel/assets/starter-kits.html-f28c174c.js" as="script"><link rel="prefetch" href="/laravel/assets/strings.html-f042b92f.js" as="script"><link rel="prefetch" href="/laravel/assets/structure.html-1a62269a.js" as="script"><link rel="prefetch" href="/laravel/assets/telescope.html-001dace4.js" as="script"><link rel="prefetch" href="/laravel/assets/testing.html-1102a85d.js" as="script"><link rel="prefetch" href="/laravel/assets/upgrade.html-ba213e40.js" as="script"><link rel="prefetch" href="/laravel/assets/urls.html-1078da29.js" as="script"><link rel="prefetch" href="/laravel/assets/valet.html-59bc6d60.js" as="script"><link rel="prefetch" href="/laravel/assets/validation.html-277792fc.js" as="script"><link rel="prefetch" href="/laravel/assets/verification.html-79793389.js" as="script"><link rel="prefetch" href="/laravel/assets/views.html-9a61add6.js" as="script"><link rel="prefetch" href="/laravel/assets/vite.html-3bbbc50b.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-1144717f.js" as="script"><link rel="prefetch" href="/laravel/assets/artisan.html-dc3c095b.js" as="script"><link rel="prefetch" href="/laravel/assets/authentication.html-62464972.js" as="script"><link rel="prefetch" href="/laravel/assets/authorization.html-7863fce7.js" as="script"><link rel="prefetch" href="/laravel/assets/billing.html-8124e2f1.js" as="script"><link rel="prefetch" href="/laravel/assets/blade.html-ae3b5f0c.js" as="script"><link rel="prefetch" href="/laravel/assets/broadcasting.html-3234c7c8.js" as="script"><link rel="prefetch" href="/laravel/assets/cache.html-3ffdf275.js" as="script"><link rel="prefetch" href="/laravel/assets/cashier-paddle.html-a60fdc5c.js" as="script"><link rel="prefetch" href="/laravel/assets/collections.html-f4e66de6.js" as="script"><link rel="prefetch" href="/laravel/assets/configuration.html-b2ad20ab.js" as="script"><link rel="prefetch" href="/laravel/assets/console-tests.html-3581fee2.js" as="script"><link rel="prefetch" href="/laravel/assets/container.html-7548cb3d.js" as="script"><link rel="prefetch" href="/laravel/assets/contracts.html-6960023d.js" as="script"><link rel="prefetch" href="/laravel/assets/contributions.html-e0dd9987.js" as="script"><link rel="prefetch" href="/laravel/assets/controllers.html-9e1646d8.js" as="script"><link rel="prefetch" href="/laravel/assets/csrf.html-5f4d93e3.js" as="script"><link rel="prefetch" href="/laravel/assets/database-testing.html-4d366885.js" as="script"><link rel="prefetch" href="/laravel/assets/database.html-efce3f76.js" as="script"><link rel="prefetch" href="/laravel/assets/deployment.html-1ed53845.js" as="script"><link rel="prefetch" href="/laravel/assets/documentation.html-5e743689.js" as="script"><link rel="prefetch" href="/laravel/assets/dusk.html-dc4913b2.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-collections.html-2f01a6dc.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-factories.html-580b426f.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-relationships.html-fcc1f4a6.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-resources.html-11415ee4.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-serialization.html-b5478211.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent.html-8beb952b.js" as="script"><link rel="prefetch" href="/laravel/assets/encryption.html-95a90989.js" as="script"><link rel="prefetch" href="/laravel/assets/envoy.html-73c049a2.js" as="script"><link rel="prefetch" href="/laravel/assets/errors.html-1a22224a.js" as="script"><link rel="prefetch" href="/laravel/assets/events.html-2f99d345.js" as="script"><link rel="prefetch" href="/laravel/assets/facades.html-99284915.js" as="script"><link rel="prefetch" href="/laravel/assets/filesystem.html-780bb3a2.js" as="script"><link rel="prefetch" href="/laravel/assets/folio.html-51fb2e3e.js" as="script"><link rel="prefetch" href="/laravel/assets/fortify.html-23142e51.js" as="script"><link rel="prefetch" href="/laravel/assets/frontend.html-3edb75bc.js" as="script"><link rel="prefetch" href="/laravel/assets/hashing.html-3da37589.js" as="script"><link rel="prefetch" href="/laravel/assets/helpers.html-1ea596c9.js" as="script"><link rel="prefetch" href="/laravel/assets/homestead.html-e14b2e40.js" as="script"><link rel="prefetch" href="/laravel/assets/horizon.html-e800222e.js" as="script"><link rel="prefetch" href="/laravel/assets/http-client.html-9f84f500.js" as="script"><link rel="prefetch" href="/laravel/assets/http-tests.html-4dfd35dd.js" as="script"><link rel="prefetch" href="/laravel/assets/installation.html-4d0898a2.js" as="script"><link rel="prefetch" href="/laravel/assets/lifecycle.html-15ea7de1.js" as="script"><link rel="prefetch" href="/laravel/assets/localization.html-26363233.js" as="script"><link rel="prefetch" href="/laravel/assets/logging.html-16ce0923.js" as="script"><link rel="prefetch" href="/laravel/assets/mail.html-c64f7bf0.js" as="script"><link rel="prefetch" href="/laravel/assets/middleware.html-8526e57a.js" as="script"><link rel="prefetch" href="/laravel/assets/migrations.html-5ee0d390.js" as="script"><link rel="prefetch" href="/laravel/assets/mix.html-70a0b4f5.js" as="script"><link rel="prefetch" href="/laravel/assets/mocking.html-418621da.js" as="script"><link rel="prefetch" href="/laravel/assets/notifications.html-66e2a5fc.js" as="script"><link rel="prefetch" href="/laravel/assets/octane.html-b2b376c4.js" as="script"><link rel="prefetch" href="/laravel/assets/packages.html-5480f21e.js" as="script"><link rel="prefetch" href="/laravel/assets/pagination.html-8df8beae.js" as="script"><link rel="prefetch" href="/laravel/assets/passport.html-5759611c.js" as="script"><link rel="prefetch" href="/laravel/assets/passwords.html-628baf17.js" as="script"><link rel="prefetch" href="/laravel/assets/pennant.html-9bf4a700.js" as="script"><link rel="prefetch" href="/laravel/assets/pint.html-8058af0f.js" as="script"><link rel="prefetch" href="/laravel/assets/precognition.html-aab299cd.js" as="script"><link rel="prefetch" href="/laravel/assets/processes.html-e05518ff.js" as="script"><link rel="prefetch" href="/laravel/assets/prompts.html-c65d2d8c.js" as="script"><link rel="prefetch" href="/laravel/assets/providers.html-0f06ed9b.js" as="script"><link rel="prefetch" href="/laravel/assets/queries.html-140df257.js" as="script"><link rel="prefetch" href="/laravel/assets/queues.html-17a5007e.js" as="script"><link rel="prefetch" href="/laravel/assets/rate-limiting.html-8fba0e20.js" as="script"><link rel="prefetch" href="/laravel/assets/redirects.html-e57b8f12.js" as="script"><link rel="prefetch" href="/laravel/assets/redis.html-5bc2e8bb.js" as="script"><link rel="prefetch" href="/laravel/assets/releases.html-628d2abe.js" as="script"><link rel="prefetch" href="/laravel/assets/requests.html-b79d9af6.js" as="script"><link rel="prefetch" href="/laravel/assets/responses.html-4d4a0dc1.js" as="script"><link rel="prefetch" href="/laravel/assets/routing.html-e68366c7.js" as="script"><link rel="prefetch" href="/laravel/assets/sail.html-552b47b1.js" as="script"><link rel="prefetch" href="/laravel/assets/sanctum.html-dcb3ac70.js" as="script"><link rel="prefetch" href="/laravel/assets/scheduling.html-d3d2ec18.js" as="script"><link rel="prefetch" href="/laravel/assets/scout.html-e98efb88.js" as="script"><link rel="prefetch" href="/laravel/assets/seeding.html-9f5f60fd.js" as="script"><link rel="prefetch" href="/laravel/assets/session.html-a723ae74.js" as="script"><link rel="prefetch" href="/laravel/assets/socialite.html-a9eb9bec.js" as="script"><link rel="prefetch" href="/laravel/assets/starter-kits.html-46c2bde4.js" as="script"><link rel="prefetch" href="/laravel/assets/strings.html-13e92edd.js" as="script"><link rel="prefetch" href="/laravel/assets/structure.html-bc88c757.js" as="script"><link rel="prefetch" href="/laravel/assets/telescope.html-655b3988.js" as="script"><link rel="prefetch" href="/laravel/assets/testing.html-d14f83e4.js" as="script"><link rel="prefetch" href="/laravel/assets/upgrade.html-60b44511.js" as="script"><link rel="prefetch" href="/laravel/assets/urls.html-0dc86b38.js" as="script"><link rel="prefetch" href="/laravel/assets/valet.html-21a3010b.js" as="script"><link rel="prefetch" href="/laravel/assets/validation.html-20f706e5.js" as="script"><link rel="prefetch" href="/laravel/assets/verification.html-442b3502.js" as="script"><link rel="prefetch" href="/laravel/assets/views.html-e67ca815.js" as="script"><link rel="prefetch" href="/laravel/assets/vite.html-77f5b90a.js" as="script"><link rel="prefetch" href="/laravel/assets/404.html-ac3192c6.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-708a06d6.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-63a4ec54.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-4fb158bf.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-d82a901a.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-594dce6f.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-f4de053d.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-b3ec4080.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-bb94f28e.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-af772c2f.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-747f1aa7.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-441a99d9.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-280418c1.js" as="script"><link rel="prefetch" href="/laravel/assets/mermaid.core-2ef0f556.js" as="script"><link rel="prefetch" href="/laravel/assets/VuePlayground-2ad5a2b5.js" as="script"><link rel="prefetch" href="/laravel/assets/photoswipe.esm-1464cdb9.js" as="script"><link rel="prefetch" href="/laravel/assets/pageview-d8908c75.js" as="script">
+  </head>
+  <body>
+    <div id="app"><!--[--><!--[--><!--[--><span tabindex="-1"></span><a href="#main-content" class="vp-skip-link sr-only">跳至主要內容</a><!--]--><!--[--><div class="theme-container has-toc"><!--[--><header id="navbar" class="vp-navbar"><div class="vp-navbar-start"><button type="button" class="vp-toggle-sidebar-button" title="Toggle Sidebar"><span class="icon"></span></button><!--[--><!----><!--]--><!--[--><a class="vp-link vp-brand vp-brand" href="/laravel/zh/"><!----><!----><span class="vp-site-name">Laravel 10 中文文档</span></a><!--]--><!--[--><!----><!--]--></div><div class="vp-navbar-center"><!--[--><!----><!--]--><!--[--><nav class="vp-nav-links"><div class="nav-item hide-in-mobile"><a aria-label="前言" class="vp-link nav-link nav-link" href="/laravel/zh/guide/releases.html"><!---->前言<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="入门指南" class="vp-link nav-link nav-link" href="/laravel/zh/guide/installation.html"><!---->入门指南<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="架构思想" class="vp-link nav-link nav-link" href="/laravel/zh/guide/lifecycle.html"><!---->架构思想<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="基础功能" class="vp-link nav-link nav-link" href="/laravel/zh/guide/routing.html"><!---->基础功能<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="深入话题" class="vp-link nav-link nav-link" href="/laravel/zh/guide/artisan.html"><!---->深入话题<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="安全" class="vp-link nav-link nav-link" href="/laravel/zh/guide/authentication.html"><!---->安全<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="数据库" class="vp-link nav-link nav-link" href="/laravel/zh/guide/database.html"><!---->数据库<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="Eloquent ORM" class="vp-link nav-link nav-link" href="/laravel/zh/guide/eloquent.html"><!---->Eloquent ORM<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="测试" class="vp-link nav-link nav-link" href="/laravel/zh/guide/testing.html"><!---->测试<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="官方扩展包" class="vp-link nav-link nav-link" href="/laravel/zh/guide/sanctum.html"><!---->官方扩展包<!----></a></div></nav><!--]--><!--[--><!----><!--]--></div><div class="vp-navbar-end"><!--[--><!----><!--]--><!--[--><div class="nav-item"><div class="dropdown-wrapper i18n-dropdown"><button type="button" class="dropdown-title" aria-label="选择语言"><!--[--><svg xmlns="http://www.w3.org/2000/svg" class="icon i18n-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="i18n icon" style="width:1rem;height:1rem;vertical-align:middle;"><path d="M379.392 460.8 494.08 575.488l-42.496 102.4L307.2 532.48 138.24 701.44l-71.68-72.704L234.496 460.8l-45.056-45.056c-27.136-27.136-51.2-66.56-66.56-108.544h112.64c7.68 14.336 16.896 27.136 26.112 35.84l45.568 46.08 45.056-45.056C382.976 312.32 409.6 247.808 409.6 204.8H0V102.4h256V0h102.4v102.4h256v102.4H512c0 70.144-37.888 161.28-87.04 210.944L378.88 460.8zM576 870.4 512 1024H409.6l256-614.4H768l256 614.4H921.6l-64-153.6H576zM618.496 768h196.608L716.8 532.48 618.496 768z"></path></svg><!--]--><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><a aria-label="English" class="vp-link nav-link nav-link" href="/laravel/guide/eloquent-mutators.html"><!---->English<!----></a></li><li class="dropdown-item"><a aria-label="简体中文" class="vp-link nav-link active nav-link active" href="/laravel/zh/guide/eloquent-mutators.html"><!---->简体中文<!----></a></li></ul></button></div></div><!----><div class="nav-item hide-in-mobile"><button type="button" id="appearance-switch"><svg xmlns="http://www.w3.org/2000/svg" class="icon auto-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="auto icon" style="display:block;"><path d="M512 992C246.92 992 32 777.08 32 512S246.92 32 512 32s480 214.92 480 480-214.92 480-480 480zm0-840c-198.78 0-360 161.22-360 360 0 198.84 161.22 360 360 360s360-161.16 360-360c0-198.78-161.22-360-360-360zm0 660V212c165.72 0 300 134.34 300 300 0 165.72-134.28 300-300 300z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon dark-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="dark icon" style="display:none;"><path d="M524.8 938.667h-4.267a439.893 439.893 0 0 1-313.173-134.4 446.293 446.293 0 0 1-11.093-597.334A432.213 432.213 0 0 1 366.933 90.027a42.667 42.667 0 0 1 45.227 9.386 42.667 42.667 0 0 1 10.24 42.667 358.4 358.4 0 0 0 82.773 375.893 361.387 361.387 0 0 0 376.747 82.774 42.667 42.667 0 0 1 54.187 55.04 433.493 433.493 0 0 1-99.84 154.88 438.613 438.613 0 0 1-311.467 128z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon light-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="light icon" style="display:none;"><path d="M952 552h-80a40 40 0 0 1 0-80h80a40 40 0 0 1 0 80zM801.88 280.08a41 41 0 0 1-57.96-57.96l57.96-58a41.04 41.04 0 0 1 58 58l-58 57.96zM512 752a240 240 0 1 1 0-480 240 240 0 0 1 0 480zm0-560a40 40 0 0 1-40-40V72a40 40 0 0 1 80 0v80a40 40 0 0 1-40 40zm-289.88 88.08-58-57.96a41.04 41.04 0 0 1 58-58l57.96 58a41 41 0 0 1-57.96 57.96zM192 512a40 40 0 0 1-40 40H72a40 40 0 0 1 0-80h80a40 40 0 0 1 40 40zm30.12 231.92a41 41 0 0 1 57.96 57.96l-57.96 58a41.04 41.04 0 0 1-58-58l58-57.96zM512 832a40 40 0 0 1 40 40v80a40 40 0 0 1-80 0v-80a40 40 0 0 1 40-40zm289.88-88.08 58 57.96a41.04 41.04 0 0 1-58 58l-57.96-58a41 41 0 0 1 57.96-57.96z"></path></svg></button></div><form class="search-box" role="search"><input type="search" placeholder="搜索文档" autocomplete="off" spellcheck="false" value><!----></form><!--]--><!--[--><!----><!--]--><button type="button" class="vp-toggle-navbar-button" aria-label="Toggle Navbar" aria-expanded="false" aria-controls="nav-screen"><span><span class="vp-top"></span><span class="vp-middle"></span><span class="vp-bottom"></span></span></button></div></header><!----><!--]--><!----><div class="toggle-sidebar-wrapper"><span class="arrow start"></span></div><aside id="sidebar" class="vp-sidebar"><!--[--><!----><!--]--><ul class="vp-sidebar-links"><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">前言</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">入门指南</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">架构思想</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">基础功能</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">深入话题</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">安全</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">数据库</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable active" type="button"><!----><span class="vp-sidebar-title">Eloquent ORM</span><span class="vp-arrow down"></span></button><ul class="vp-sidebar-links"><li><!--[--><a aria-label="Eloquent: 快速入门" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/eloquent.html"><!---->Eloquent: 快速入门<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="Eloquent: 关联" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/eloquent-relationships.html"><!---->Eloquent: 关联<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="Eloquent：集合" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/eloquent-collections.html"><!---->Eloquent：集合<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="Eloquent: 修改器 &amp; 类型转换" class="vp-link nav-link active vp-sidebar-link vp-sidebar-page active nav-link active vp-sidebar-link vp-sidebar-page active" href="/laravel/zh/guide/eloquent-mutators.html"><!---->Eloquent: 修改器 &amp; 类型转换<!----></a><ul class="vp-sidebar-sub-headers"><li class="vp-sidebar-sub-header"><a aria-label="简介" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/eloquent-mutators.html#简介"><!---->简介<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="访问器 &amp; 修改器" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/eloquent-mutators.html#访问器-修改器"><!---->访问器 &amp; 修改器<!----></a><ul class="vp-sidebar-sub-headers"><li class="vp-sidebar-sub-header"><a aria-label="定义一个访问器" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/eloquent-mutators.html#定义一个访问器"><!---->定义一个访问器<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="定义修改器" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/eloquent-mutators.html#定义修改器"><!---->定义修改器<!----></a><ul class="vp-sidebar-sub-headers"></ul></li></ul></li><li class="vp-sidebar-sub-header"><a aria-label="属性转换" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/eloquent-mutators.html#属性转换"><!---->属性转换<!----></a><ul class="vp-sidebar-sub-headers"><li class="vp-sidebar-sub-header"><a aria-label="强制转换" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/eloquent-mutators.html#强制转换"><!---->强制转换<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="数组 &amp; JSON 转换" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/eloquent-mutators.html#数组-json-转换"><!---->数组 &amp; JSON 转换<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="Date 转换" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/eloquent-mutators.html#date-转换"><!---->Date 转换<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="枚举转换" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/eloquent-mutators.html#枚举转换"><!---->枚举转换<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="加密转换" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/eloquent-mutators.html#加密转换"><!---->加密转换<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="查询时转换" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/eloquent-mutators.html#查询时转换"><!---->查询时转换<!----></a><ul class="vp-sidebar-sub-headers"></ul></li></ul></li><li class="vp-sidebar-sub-header"><a aria-label="自定义类型转换" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/eloquent-mutators.html#自定义类型转换"><!---->自定义类型转换<!----></a><ul class="vp-sidebar-sub-headers"><li class="vp-sidebar-sub-header"><a aria-label="值对象转换" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/eloquent-mutators.html#值对象转换"><!---->值对象转换<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="数组 / JSON 序列化" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/eloquent-mutators.html#数组-json-序列化"><!---->数组 / JSON 序列化<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="入站转换" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/eloquent-mutators.html#入站转换"><!---->入站转换<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="转换参数" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/eloquent-mutators.html#转换参数"><!---->转换参数<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="可转换" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/eloquent-mutators.html#可转换"><!---->可转换<!----></a><ul class="vp-sidebar-sub-headers"></ul></li></ul></li></ul><!--]--></li><li><!--[--><a aria-label="Eloquent: API Resources" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/eloquent-resources.html"><!---->Eloquent: API Resources<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="Eloquent: 序列化" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/eloquent-serialization.html"><!---->Eloquent: 序列化<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="Eloquent：数据工厂" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/eloquent-factories.html"><!---->Eloquent：数据工厂<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li></ul></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">测试</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">官方扩展包</span><span class="vp-arrow end"></span></button><!----></section></li></ul><!--[--><!----><!--]--></aside><!--[--><main id="main-content" class="vp-page"><!--[--><!----><!----><nav class="vp-breadcrumb disable"></nav><div class="vp-page-title"><h1><!---->Eloquent: 修改器 &amp; 类型转换</h1><div class="page-info"><span class="page-author-info" aria-label="作者🖊" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon author-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="author icon"><path d="M649.6 633.6c86.4-48 147.2-144 147.2-249.6 0-160-128-288-288-288s-288 128-288 288c0 108.8 57.6 201.6 147.2 249.6-121.6 48-214.4 153.6-240 288-3.2 9.6 0 19.2 6.4 25.6 3.2 9.6 12.8 12.8 22.4 12.8h704c9.6 0 19.2-3.2 25.6-12.8 6.4-6.4 9.6-16 6.4-25.6-25.6-134.4-121.6-240-243.2-288z"></path></svg><span><span class="page-author-item">Moments</span></span><span property="author" content="Moments"></span></span><!----><!----><!----><span class="page-reading-time-info" aria-label="阅读时间⌛" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon timer-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="timer icon"><path d="M799.387 122.15c4.402-2.978 7.38-7.897 7.38-13.463v-1.165c0-8.933-7.38-16.312-16.312-16.312H256.33c-8.933 0-16.311 7.38-16.311 16.312v1.165c0 5.825 2.977 10.874 7.637 13.592 4.143 194.44 97.22 354.963 220.201 392.763-122.204 37.542-214.893 196.511-220.2 389.397-4.661 5.049-7.638 11.651-7.638 19.03v5.825h566.49v-5.825c0-7.379-2.849-13.981-7.509-18.9-5.049-193.016-97.867-351.985-220.2-389.527 123.24-37.67 216.446-198.453 220.588-392.892zM531.16 450.445v352.632c117.674 1.553 211.787 40.778 211.787 88.676H304.097c0-48.286 95.149-87.382 213.728-88.676V450.445c-93.077-3.107-167.901-81.297-167.901-177.093 0-8.803 6.99-15.793 15.793-15.793 8.803 0 15.794 6.99 15.794 15.793 0 80.261 63.69 145.635 142.01 145.635s142.011-65.374 142.011-145.635c0-8.803 6.99-15.793 15.794-15.793s15.793 6.99 15.793 15.793c0 95.019-73.789 172.82-165.96 177.093z"></path></svg><span>大约 17 分钟</span><meta property="timeRequired" content="PT17M"></span><!----><!----></div><hr></div><div class="toc-place-holder"><aside id="toc"><!--[--><!----><!--]--><div class="toc-header">此页内容<!----></div><div class="toc-wrapper"><ul class="toc-list"><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/laravel/#简介">简介</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/laravel/#访问器-修改器">访问器 &amp; 修改器</a></li><li><ul class="toc-list"><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#定义一个访问器">定义一个访问器</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#定义修改器">定义修改器</a></li><!----><!--]--></ul></li><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/laravel/#属性转换">属性转换</a></li><li><ul class="toc-list"><!--[--><li class="toc-item"><a class="vp-link toc-link level4 toc-link level4" href="/laravel/#强制转换">强制转换</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#数组-json-转换">数组 &amp; JSON 转换</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#date-转换">Date 转换</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#枚举转换">枚举转换</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#加密转换">加密转换</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#查询时转换">查询时转换</a></li><!----><!--]--></ul></li><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/laravel/#自定义类型转换">自定义类型转换</a></li><li><ul class="toc-list"><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#值对象转换">值对象转换</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#数组-json-序列化">数组 / JSON 序列化</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#入站转换">入站转换</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#转换参数">转换参数</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#可转换">可转换</a></li><!----><!--]--></ul></li><!--]--></ul><div class="toc-marker" style="top:-1.7rem;"></div></div><!--[--><!----><!--]--></aside></div><!----><div class="theme-hope-content"><h1 id="eloquent-修改器-类型转换" tabindex="-1"><a class="header-anchor" href="#eloquent-修改器-类型转换" aria-hidden="true">#</a> Eloquent: 修改器 &amp; 类型转换</h1><ul><li><a href="#introduction">简介</a></li><li><a href="#accessors-and-mutators">访问器 &amp; 修改器</a><ul><li><a href="#defining-an-accessor">定义一个访问器</a></li><li><a href="#defining-a-mutator">定义一个修改器</a></li></ul></li><li><a href="#attribute-casting">属性转换</a><ul><li><a href="#array-and-json-casting">数组 &amp; JSON 转换</a></li><li><a href="#date-casting">日期转换</a></li><li><a href="#enum-casting">枚举转换</a></li><li><a href="#encrypted-casting">加密转换</a></li><li><a href="#query-time-casting">查询时转换</a></li></ul></li><li><a href="#custom-casts">自定义类型转换</a><ul><li><a href="#value-object-casting">值对象转换</a></li><li><a href="#array-json-serialization">数组 / JSON 序列化</a></li><li><a href="#inbound-casting">入站转换</a></li><li><a href="#cast-parameters">类型转换参数</a></li><li><a href="#castables">可转换</a></li></ul></li></ul><p><a name="introduction"></a></p><h2 id="简介" tabindex="-1"><a class="header-anchor" href="#简介" aria-hidden="true">#</a> 简介</h2><p>当你在 Eloquent 模型实例中获取或设置某些属性值时，访问器和修改器允许你对 Eloquent 属性值进行格式化。例如，你可能需要使用<a href="./encryption"> Laravel 加密器</a> 来加密保存在数据库中的值，而在使用 Eloquent 模型访问该属性的时候自动进行解密其值。</p><p>或者，当通过 Eloquent 模型访问存储在数据库的 JSON 字符串时，你可能希望将其转换为数组。</p><p><a name="accessors-and-mutators"></a></p><h2 id="访问器-修改器" tabindex="-1"><a class="header-anchor" href="#访问器-修改器" aria-hidden="true">#</a> 访问器 &amp; 修改器</h2><p><a name="defining-an-accessor"></a></p><h3 id="定义一个访问器" tabindex="-1"><a class="header-anchor" href="#定义一个访问器" aria-hidden="true">#</a> 定义一个访问器</h3><p>访问器会在访问一个模型的属性时转换 Eloquent 值。要定义访问器，请在模型中创建一个受保护的「驼峰式」方法来表示可访问属性。此方法名称对应到真正的底层模型 <code>属性/数据库字段</code> 的表示。</p><p>在本例中，我们将为 <code>first_name</code> 属性定义一个访问器。在尝试检索 <code>first_name</code> 属性的值时，Eloquent 会自动调用访问器。所有属性访问器 / 修改器方法必须声明 <code>Illuminate\Database\Eloquent\Casts\Attribute</code>的返回类型提示：</p><pre><code>&lt;?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Model
+{
+    /**
+     * 获取用户的名字。
+     */
+    protected function firstName(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) =&gt; ucfirst($value),
+        );
+    }
+}
+</code></pre><p>所有访问器方法都返回一个 <code>Attribute</code> 实例，该实例定义了如何访问该属性以及如何改变该属性。 在此示例中，我们仅定义如何访问该属性。 为此，我们将 <code>get</code> 参数提供给 <code>Attribute</code> 类构造函数。</p><p>如你所见，字段的原始值被传递到访问器中，允许你对它进行处理并返回结果。如果想获取被修改后的值，你可以在模型实例上访问 <code>first_name</code> 属性：</p><pre><code>use App\Models\User;
+
+$user = User::find(1);
+
+$firstName = $user-&gt;first_name;
+</code></pre><blockquote><p><strong>注意</strong>： 如果要将这些计算值添加到模型的 array / JSON 中表示，<a href="./eloquent-serialization/14893#appending-values-to-json">你需要追加它们</a>.</p></blockquote><p><a name="building-value-objects-from-multiple-attributes"></a></p><h4 id="从多个属性构建值对象" tabindex="-1"><a class="header-anchor" href="#从多个属性构建值对象" aria-hidden="true">#</a> 从多个属性构建值对象</h4><p>有时你的访问器可能需要将多个模型属性转换为单个「值对象」。 为此，你的 <code>get</code> 闭包可以接受 <code>$attributes</code> 的第二个参数，该参数将自动提供给闭包，并将包含模型所有当前属性的数组：</p><div class="language-php line-numbers-mode" data-ext="php"><pre class="language-php"><code><span class="token keyword">use</span> <span class="token package">App<span class="token punctuation">\</span>Support<span class="token punctuation">\</span>Address</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Database<span class="token punctuation">\</span>Eloquent<span class="token punctuation">\</span>Casts<span class="token punctuation">\</span>Attribute</span><span class="token punctuation">;</span>
+
+<span class="token doc-comment comment">/**
+ * 与用户地址交互。
+ */</span>
+<span class="token keyword">protected</span> <span class="token keyword">function</span> <span class="token function-definition function">address</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token class-name return-type">Attribute</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token class-name static-context">Attribute</span><span class="token operator">::</span><span class="token function">make</span><span class="token punctuation">(</span>
+        <span class="token argument-name">get</span><span class="token punctuation">:</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword type-hint">mixed</span> <span class="token variable">$value</span><span class="token punctuation">,</span> <span class="token keyword type-hint">array</span> <span class="token variable">$attributes</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">new</span> <span class="token class-name">Address</span><span class="token punctuation">(</span>
+            <span class="token variable">$attributes</span><span class="token punctuation">[</span><span class="token string single-quoted-string">&#39;address_line_one&#39;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token variable">$attributes</span><span class="token punctuation">[</span><span class="token string single-quoted-string">&#39;address_line_two&#39;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><a name="accessor-caching"></a></p><h4 id="访问器缓存" tabindex="-1"><a class="header-anchor" href="#访问器缓存" aria-hidden="true">#</a> 访问器缓存</h4><p>从访问器返回值对象时，对值对象所做的任何更改都将在模型保存之前自动同步回模型。 这是可能的，因为 Eloquent 保留了访问器返回的实例，因此每次调用访问器时都可以返回相同的实例：</p><pre><code>use App\Models\User;
+
+$user = User::find(1);
+
+$user-&gt;address-&gt;lineOne = &#39;Updated Address Line 1 Value&#39;;
+$user-&gt;address-&gt;lineTwo = &#39;Updated Address Line 2 Value&#39;;
+
+$user-&gt;save();
+</code></pre><p>有时你可能希望为字符串和布尔值等原始值启用缓存，特别是当它们是计算密集型时。要实现这一点，你可以在定义访问器时调用 <code>shouldCache</code> 方法：</p><div class="language-php line-numbers-mode" data-ext="php"><pre class="language-php"><code><span class="token keyword">protected</span> <span class="token keyword">function</span> <span class="token function-definition function">hash</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token class-name return-type">Attribute</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token class-name static-context">Attribute</span><span class="token operator">::</span><span class="token function">make</span><span class="token punctuation">(</span>
+        <span class="token argument-name">get</span><span class="token punctuation">:</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword type-hint">string</span> <span class="token variable">$value</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">bcrypt</span><span class="token punctuation">(</span><span class="token function">gzuncompress</span><span class="token punctuation">(</span><span class="token variable">$value</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token operator">-&gt;</span><span class="token function">shouldCache</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>如果要禁用属性的缓存，可以在定义属性时调用 <code>withoutObjectCaching</code> 方法：</p><div class="language-php line-numbers-mode" data-ext="php"><pre class="language-php"><code><span class="token doc-comment comment">/**
+ * 与 user 的 address 交互。
+ */</span>
+<span class="token keyword">protected</span> <span class="token keyword">function</span> <span class="token function-definition function">address</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token class-name return-type">Attribute</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token class-name static-context">Attribute</span><span class="token operator">::</span><span class="token function">make</span><span class="token punctuation">(</span>
+        <span class="token argument-name">get</span><span class="token punctuation">:</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword type-hint">mixed</span> <span class="token variable">$value</span><span class="token punctuation">,</span> <span class="token keyword type-hint">array</span> <span class="token variable">$attributes</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">new</span> <span class="token class-name">Address</span><span class="token punctuation">(</span>
+            <span class="token variable">$attributes</span><span class="token punctuation">[</span><span class="token string single-quoted-string">&#39;address_line_one&#39;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token variable">$attributes</span><span class="token punctuation">[</span><span class="token string single-quoted-string">&#39;address_line_two&#39;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token operator">-&gt;</span><span class="token function">withoutObjectCaching</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><a name="defining-a-mutator"></a></p><h3 id="定义修改器" tabindex="-1"><a class="header-anchor" href="#定义修改器" aria-hidden="true">#</a> 定义修改器</h3><p>修改器会在设置属性时生效。要定义修改器，可以在定义属性时提供 <code>set</code> 参数。让我们为 <code>first_name</code> 属性定义一个修改器。这个修改器将会在我们修改 <code>first_name</code> 属性的值时自动调用：</p><pre><code>&lt;?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Model
+{
+    /**
+     * 与 user 的 first name 交互。
+     */
+    protected function firstName(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) =&gt; ucfirst($value),
+            set: fn (string $value) =&gt; strtolower($value),
+        );
+    }
+}
+</code></pre><p>修改器的闭包会接收将要设置的值，并允许我们使用和返回该值。要使该修改器生效，只需在模型上设置 <code>first_name</code> 即可：</p><pre><code>use App\Models\User;
+
+$user = User::find(1);
+
+$user-&gt;first_name = &#39;Sally&#39;;
+</code></pre><p>在本例中，值 <code>Sally</code> 将会触发 <code>set</code> 回调。然后，修改器会使用 <code>strtolower</code> 函数处理姓名，并将结果值设置在模型的 <code>$attributes</code> 数组中。</p><p><a name="mutating-multiple-attributes"></a></p><h4 id="修改多个属性" tabindex="-1"><a class="header-anchor" href="#修改多个属性" aria-hidden="true">#</a> 修改多个属性</h4><p>有时你的修改器可能需要修改底层模型的多个属性。 为此，你的 <code>set</code> 闭包可以返回一个数组，数组中的每个键都应该与模型的属性 / 数据库列相对应：</p><div class="language-php line-numbers-mode" data-ext="php"><pre class="language-php"><code><span class="token keyword">use</span> <span class="token package">App<span class="token punctuation">\</span>Support<span class="token punctuation">\</span>Address</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Database<span class="token punctuation">\</span>Eloquent<span class="token punctuation">\</span>Casts<span class="token punctuation">\</span>Attribute</span><span class="token punctuation">;</span>
+
+<span class="token doc-comment comment">/**
+ * 与user模型的address交互。
+ */</span>
+<span class="token keyword">protected</span> <span class="token keyword">function</span> <span class="token function-definition function">address</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token class-name return-type">Attribute</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token class-name static-context">Attribute</span><span class="token operator">::</span><span class="token function">make</span><span class="token punctuation">(</span>
+        <span class="token argument-name">get</span><span class="token punctuation">:</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword type-hint">mixed</span> <span class="token variable">$value</span><span class="token punctuation">,</span> <span class="token keyword type-hint">array</span> <span class="token variable">$attributes</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">new</span> <span class="token class-name">Address</span><span class="token punctuation">(</span>
+            <span class="token variable">$attributes</span><span class="token punctuation">[</span><span class="token string single-quoted-string">&#39;address_line_one&#39;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token variable">$attributes</span><span class="token punctuation">[</span><span class="token string single-quoted-string">&#39;address_line_two&#39;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token argument-name">set</span><span class="token punctuation">:</span> <span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token class-name type-declaration">Address</span> <span class="token variable">$value</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">[</span>
+            <span class="token string single-quoted-string">&#39;address_line_one&#39;</span> <span class="token operator">=&gt;</span> <span class="token variable">$value</span><span class="token operator">-&gt;</span><span class="token property">lineOne</span><span class="token punctuation">,</span>
+            <span class="token string single-quoted-string">&#39;address_line_two&#39;</span> <span class="token operator">=&gt;</span> <span class="token variable">$value</span><span class="token operator">-&gt;</span><span class="token property">lineTwo</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><a name="attribute-casting"></a></p><h2 id="属性转换" tabindex="-1"><a class="header-anchor" href="#属性转换" aria-hidden="true">#</a> 属性转换</h2><p>属性转换提供了类似于访问器和修改器的功能，且无需在模型上定义任何其他方法。模型中的 <code>$casts</code> 属性提供了一个便利的方法来将属性转换为常见的数据类型。</p><p><code>$casts</code> 属性应是一个数组，且数组的键是那些需要被转换的属性名称，值则是你希望转换的数据类型。支持转换的数据类型有：</p><div class="content-list" markdown="1"><ul><li><code>array</code></li><li><code>AsStringable::class</code></li><li><code>boolean</code></li><li><code>collection</code></li><li><code>date</code></li><li><code>datetime</code></li><li><code>immutable_date</code></li><li><code>immutable_datetime</code></li><li><code>decimal:&lt;precision&gt;</code></li><li><code>double</code></li><li><code>encrypted</code></li><li><code>encrypted:array</code></li><li><code>encrypted:collection</code></li><li><code>encrypted:object</code></li><li><code>float</code></li><li><code>integer</code></li><li><code>object</code></li><li><code>real</code></li><li><code>string</code></li><li><code>timestamp</code></li></ul></div><p>示例， 让我们把以整数（<code>0</code> 或 <code>1</code>）形式存储在数据库中的 <code>is_admin</code> 属性转成布尔值：</p><pre><code>&lt;?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Model
+{
+    /**
+     * 类型转换。
+     *
+     * @var array
+     */
+    protected $casts = [
+        &#39;is_admin&#39; =&gt; &#39;boolean&#39;,
+    ];
+}
+</code></pre><p>现在当你访问 <code>is_admin</code> 属性时，虽然保存在数据库里的值是一个整数类型，但是返回值总是会被转换成布尔值类型：</p><pre><code>$user = App\Models\User::find(1);
+
+if ($user-&gt;is_admin) {
+    // ...
+}
+</code></pre><p>如果需要在运行时添加新的临时强制转换，可以使用 <code>mergeCasts</code> 这些强制转换定义将添加到模型上已定义的任何强制转换中：</p><pre><code>$user-&gt;mergeCasts([
+    &#39;is_admin&#39; =&gt; &#39;integer&#39;,
+    &#39;options&#39; =&gt; &#39;object&#39;,
+]);
+</code></pre><blockquote><p><strong>注意</strong>： 值属性将不会被转换。此外，禁止定义与关联同名的类型转换（或属性）。</p></blockquote><p><a name="stringable-casting"></a></p><h4 id="强制转换" tabindex="-1"><a class="header-anchor" href="#强制转换" aria-hidden="true">#</a> 强制转换</h4><p>你可以用 <code>Illuminate\Database\Eloquent\Casts\AsStringable</code> 类将模型属性强制转换为 <a href="./helpers#fluent-strings-method-list"><code>Illuminate\Support\Stringable</code> 对象</a>:</p><pre><code>&lt;?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Casts\AsStringable;
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Model
+{
+    /**
+     * 类型转换。
+     *
+     * @var array
+     */
+    protected $casts = [
+        &#39;directory&#39; =&gt; AsStringable::class,
+    ];
+}
+</code></pre><p><a name="array-and-json-casting"></a></p><h3 id="数组-json-转换" tabindex="-1"><a class="header-anchor" href="#数组-json-转换" aria-hidden="true">#</a> 数组 &amp; JSON 转换</h3><p>当你在数据库存储序列化的 <code>JSON</code> 的数据时， <code>array</code> 类型的转换非常有用。比如：如果你的数据库具有被序列化为 JSON 的 <code>JSON</code> 或 <code>TEXT</code> 字段类型，并且在 Eloquent 模型中加入了 <code>array</code> 类型转换，那么当你访问的时候就会自动被转换为 PHP 数组：</p><pre><code>&lt;?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Model
+{
+    /**
+     * 类型转换。
+     *
+     * @var array
+     */
+    protected $casts = [
+        &#39;options&#39; =&gt; &#39;array&#39;,
+    ];
+}
+</code></pre><p>一旦定义了转换，你访问 <code>options</code> 属性时他会自动从 JSON 类型反序列化为 PHP 数组。当你设置了 <code>options</code> 属性的值时，给定的数组也会自动序列化为 JSON 类型存储：</p><pre><code>use App\Models\User;
+
+$user = User::find(1);
+
+$options = $user-&gt;options;
+
+$options[&#39;key&#39;] = &#39;value&#39;;
+
+$user-&gt;options = $options;
+
+$user-&gt;save();
+</code></pre><p>当使用 <code>update</code> 方法更新 JSON 属性的单个字段时，可以使用 <code>-&gt;</code> 操作符让语法更加简洁：</p><pre><code>$user = User::find(1);
+
+$user-&gt;update([&#39;options-&gt;key&#39; =&gt; &#39;value&#39;]);
+</code></pre><p><a name="array-object-and-collection-casting"></a></p><h4 id="数组对象-集合类型转换" tabindex="-1"><a class="header-anchor" href="#数组对象-集合类型转换" aria-hidden="true">#</a> 数组对象 &amp; 集合类型转换</h4><p>虽然标准的 <code>array</code> 类型转换对于许多应用程序来说已经足够了，但它确实有一些缺点。由于 <code>array</code> 类型转换返回一个基础类型，因此不可能直接改变数组键的值。例如，以下代码将触发一个 PHP 错误：</p><pre><code>$user = User::find(1);
+
+$user-&gt;options[&#39;key&#39;] = $value;
+</code></pre><p>为了解决这个问题，Laravel 提供了一个 <code>AsArrayObject</code> 类型转换，它将 JSON 属性转换为一个 <a href="https://www.php.net/manual/en/class.arrayobject.php" target="_blank" rel="noopener noreferrer">数组对象<span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span></a> 类。这个特性是使用 Laravel 的 <a href="#custom-casts">自定义类型转换</a> 实现的，它允许 Laravel 智能地缓存和转换修改的对象，这样可以在不触发 PHP 错误的情况下修改各个键的值。要使用 <code>AsArrayObject</code> 类型转换，只需将其指定给一个属性即可：</p><pre><code>use Illuminate\Database\Eloquent\Casts\AsArrayObject;
+
+/**
+ * 类型转换。
+ *
+ * @var array
+ */
+protected $casts = [
+    &#39;options&#39; =&gt; AsArrayObject::class,
+];
+</code></pre><p>类似的，Laravel 提供了一个 <code>AsCollection</code> 类型转换，它将 JSON 属性转换为 Laravel <a href="./collections">集合</a> 实例：</p><pre><code>use Illuminate\Database\Eloquent\Casts\AsCollection;
+
+/**
+ * 类型转换。
+ *
+ * @var array
+ */
+protected $casts = [
+    &#39;options&#39; =&gt; AsCollection::class,
+];
+</code></pre><p><a name="date-casting"></a></p><h3 id="date-转换" tabindex="-1"><a class="header-anchor" href="#date-转换" aria-hidden="true">#</a> Date 转换</h3><p>默认情况下，Eloquent 会将 <code>created_at</code> 和 <code>updated_at</code> 字段转换为 <a href="https://github.com/briannesbitt/Carbon" target="_blank" rel="noopener noreferrer">Carbon<span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span></a> 实例，它继承了 PHP 原生的 <code>DateTime</code> 类并提供了各种有用的方法。你可以通过在模型的 <code>$casts</code> 属性数组中定义额外的日期类型转换，用来转换其他的日期属性。通常来说，日期应该使用 <code>datetime</code> 或 <code>immutable_datetime</code> 类型转换来转换。</p><p>当使用 <code>date</code> 或 <code>datetime</code> 类型转换时，你也可以指定日期的格式。这种格式会被用在 <a href="./eloquent-serialization">模型序列化为数组或者 JSON</a>：</p><pre><code>/**
+ * 类型转换。
+ *
+ * @var array
+ */
+protected $casts = [
+    &#39;created_at&#39; =&gt; &#39;datetime:Y-m-d&#39;,
+];
+</code></pre><p>将列类型转换为日期时，可以将其值设置为 UNIX 时间戳、日期字符串（<code>Y-m-d</code>）、日期时间字符串或 <code>DateTime</code> / <code>Carbon</code> 实例。日期值将会被准确的转换并存储在数据库中。</p><p>通过在模型中定义 <code>serializeDate</code> 方法，你可以自定义所有模型日期的默认序列化格式。此方法不会影响日期在数据库中存储的格式：</p><pre><code>/**
+ * 为 array / JSON 序列化准备日期格式。
+ */
+protected function serializeDate(DateTimeInterface $date): string
+{
+    return $date-&gt;format(&#39;Y-m-d&#39;);
+}
+</code></pre><p>在模型上定义 <code>$dateFormat</code> 属性后，模型的日期将会以你指定的格式实际存储于数据库中：</p><pre><code>/**
+ * 模型日期列的存储格式。
+ *
+ * @var string
+ */
+protected $dateFormat = &#39;U&#39;;
+</code></pre><p><a name="date-casting-and-timezones"></a></p><h4 id="日期转换-序列化-时区" tabindex="-1"><a class="header-anchor" href="#日期转换-序列化-时区" aria-hidden="true">#</a> 日期转换，序列化，&amp; 时区</h4><p>默认情况下，<code>date</code> 和 <code>datetime</code> 会序列化为 UTC ISO-8601 格式的（ <code>1986-05-28T21:05:54.000000Z</code> ）字符串，并不会受到应用的 <code>timezone</code> 配置影响。强烈建议您始终使用此序列化格式，并不更改应用程序的 <code>timezone</code> 配置（默认 <code>UTC</code> ）以将应用程序的日期存储在 UTC 时区中。在整个应用程序中始终使用 UTC 时区，会使与其他 PHP 和 JavaScript 类库的互操作性更高。</p><p>如果对 <code>date</code> 或 <code>datetime</code> 属性自定义了格式，例如 <code>datetime:Y-m-d H:i​:s</code>，那么在日期序列化期间将使用 Carbon 实例的内部时区。通常，这是应用程序的 <code>timezone</code> 配置选项中指定的时区。</p><p><a name="enum-casting"></a></p><h3 id="枚举转换" tabindex="-1"><a class="header-anchor" href="#枚举转换" aria-hidden="true">#</a> 枚举转换</h3><p>Eloquent 还允许您将属性值强制转换为 PHP 的 <a href="https://www.php.net/manual/en/language.enumerations.backed.php" target="_blank" rel="noopener noreferrer">枚举<span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span></a>。 为此，可以在模型的 <code>$casts</code> 数组属性中指定要转换的属性和枚举：</p><pre><code>use App\Enums\ServerStatus;
+
+/**
+ * 类型转换。
+ *
+ * @var array
+ */
+protected $casts = [
+    &#39;status&#39; =&gt; ServerStatus::class,
+];
+</code></pre><p>在模型上定义了转换后，与属性交互时，指定的属性都将在枚举中强制转换：</p><pre><code>if ($server-&gt;status == ServerStatus::Provisioned) {
+    $server-&gt;status = ServerStatus::Ready;
+
+    $server-&gt;save();
+}
+</code></pre><p><a name="casting-arrays-of-enums"></a></p><h4 id="转换枚举数组" tabindex="-1"><a class="header-anchor" href="#转换枚举数组" aria-hidden="true">#</a> 转换枚举数组</h4><p>有时，你可能需要模型在单个列中存储枚举值的数组。为此，你可以使用 Laravel 提供的<code>AsEnumArrayObject</code>或<code>AsEnumCollection</code>强制转换：</p><pre><code>use App\Enums\ServerStatus;
+use Illuminate\Database\Eloquent\Casts\AsEnumCollection;
+
+/**
+ * 类型转换。
+ *
+ * @var array
+ */
+protected $casts = [
+    &#39;statuses&#39; =&gt; AsEnumCollection::class.&#39;:&#39;.ServerStatus::class,
+];
+</code></pre><p><a name="encrypted-casting"></a></p><h3 id="加密转换" tabindex="-1"><a class="header-anchor" href="#加密转换" aria-hidden="true">#</a> 加密转换</h3><p><code>encrypted</code> 转换使用了 Laravel 的内置 <a href="./encryption">encryption</a> 功能加密模型的属性值。 此外，<code>encrypted:array</code>、<code>encrypted:collection</code>、<code>encrypted:object</code>、<code>AsEncryptedArrayObject</code> 和 <code>AsEncryptedCollection</code> 类型转换的工作方式与未加密的类型相同； 但是，正如您所料，底层值在存储在数据库中时是加密的。</p><p>由于加密文本的最终长度不可预测并且比其纯文本长度要长，因此请确保关联的数据库列属性是 <code>TEXT</code> 类型或更大。此外，由于数据库中的值是加密的，您将无法查询或搜索加密的属性值。</p><p><a name="key-rotation"></a></p><h4 id="密钥轮换" tabindex="-1"><a class="header-anchor" href="#密钥轮换" aria-hidden="true">#</a> 密钥轮换</h4><p>如你所知，Laravel使用应用程序的 <code>app</code> 配置文件中指定的 <code>key</code> 配置值对字符串进行加密。通常，该值对应于 <code>APP_KEY</code> 环境变量的值。如果需要轮换应用程序的加密密钥，则需要使用新密钥手动重新加密加密属性。</p><p><a name="query-time-casting"></a></p><h3 id="查询时转换" tabindex="-1"><a class="header-anchor" href="#查询时转换" aria-hidden="true">#</a> 查询时转换</h3><p>有时你可能需要在执行查询时应用强制转换，例如从表中选择原始值时。 例如，考虑以下查询：</p><pre><code>use App\Models\Post;
+use App\Models\User;
+
+$users = User::select([
+    &#39;users.*&#39;,
+    &#39;last_posted_at&#39; =&gt; Post::selectRaw(&#39;MAX(created_at)&#39;)
+            -&gt;whereColumn(&#39;user_id&#39;, &#39;users.id&#39;)
+])-&gt;get();
+</code></pre><p>在该查询获取到的结果集中，<code>last_posted_at</code> 属性将会是一个字符串。假如我们在执行查询时进行 <code>datetime</code> 类型转换将更方便。你可以通过使用 <code>withCasts</code> 方法来完成上述操作：</p><pre><code>$users = User::select([
+    &#39;users.*&#39;,
+    &#39;last_posted_at&#39; =&gt; Post::selectRaw(&#39;MAX(created_at)&#39;)
+            -&gt;whereColumn(&#39;user_id&#39;, &#39;users.id&#39;)
+])-&gt;withCasts([
+    &#39;last_posted_at&#39; =&gt; &#39;datetime&#39;
+])-&gt;get();
+</code></pre><p><a name="custom-casts"></a></p><h2 id="自定义类型转换" tabindex="-1"><a class="header-anchor" href="#自定义类型转换" aria-hidden="true">#</a> 自定义类型转换</h2><p>Laravel 有多种内置的、有用的类型转换； 如果需要自定义强制转换类型。要创建一个类型转换，执行<code>make:cast</code>命令。 新的强制转换类将被放置在你的<code>app/Casts</code>目录中:</p><div class="language-bash line-numbers-mode" data-ext="sh"><pre class="language-bash"><code>php artisan make:cast Json
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>所有自定义强制转换类都实现了<code>CastsAttributes</code>接口。 实现这个接口的类必须定义一个 <code>get</code> 和 <code>set</code> 方法。<code>get</code>方法负责将数据库中的原始值转换为转换值，而 <code>set</code> 方法应将转换值转换为可以存储在数据库中的原始值。 作为示例，我们将内置的 <code>json</code> 类型转换重新实现为自定义类型：</p><pre><code>&lt;?php
+
+namespace App\Casts;
+
+use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
+use Illuminate\Database\Eloquent\Model;
+
+class Json implements CastsAttributes
+{
+    /**
+     * 将取出的数据进行转换。
+     *
+     * @param  array&lt;string, mixed&gt;  $attributes
+     * @return array&lt;string, mixed&gt;
+     */
+    public function get(Model $model, string $key, mixed $value, array $attributes): array
+    {
+        return json_decode($value, true);
+    }
+
+    /**
+     * 转换成将要进行存储的值。
+     *
+     * @param  array&lt;string, mixed&gt;  $attributes
+     */
+    public function set(Model $model, string $key, mixed $value, array $attributes): string
+    {
+        return json_encode($value);
+    }
+}
+</code></pre><p>定义好自定义类型转换后，可以使用其类名称将其附加到模型属性里：</p><pre><code>&lt;?php
+
+namespace App\Models;
+
+use App\Casts\Json;
+use Illuminate\Database\Eloquent\Model;
+
+class User extends Model
+{
+    /**
+     * 应被强制转换的属性。
+     *
+     * @var array
+     */
+    protected $casts = [
+        &#39;options&#39; =&gt; Json::class,
+    ];
+}
+</code></pre><p><a name="value-object-casting"></a></p><h3 id="值对象转换" tabindex="-1"><a class="header-anchor" href="#值对象转换" aria-hidden="true">#</a> 值对象转换</h3><p>你不仅可以将数据转换成原生的数据类型，还可以将数据转换成对象。两种自定义类型转换的定义方式非常类似。但是将数据转换成对象的自定义转换类中的 <code>set</code> 方法需要返回键值对数组，用于设置原始、可存储的值到对应的模型中。</p><p>例如，我们将定义一个自定义转换类，将多个模型值转换为单个<code>Address</code>值对象。 我们将假设 <code>Address</code> 值有两个公共属性：<code>lineOne</code> 和 <code>lineTwo</code>：</p><pre><code>&lt;?php
+
+namespace App\Casts;
+
+use App\ValueObjects\Address as AddressValueObject;
+use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
+use Illuminate\Database\Eloquent\Model;
+use InvalidArgumentException;
+
+class Address implements CastsAttributes
+{
+    /**
+     * 转换给定的值。
+     *
+     * @param  array&lt;string, mixed&gt;  $attributes
+     */
+    public function get(Model $model, string $key, mixed $value, array $attributes): AddressValueObject
+    {
+        return new AddressValueObject(
+            $attributes[&#39;address_line_one&#39;],
+            $attributes[&#39;address_line_two&#39;]
+        );
+    }
+
+    /**
+     * 准备给定值以进行存储。
+     *
+     * @param  array&lt;string, mixed&gt;  $attributes
+     * @return array&lt;string, string&gt;
+     */
+    public function set(Model $model, string $key, mixed $value, array $attributes): array
+    {
+        if (! $value instanceof AddressValueObject) {
+            throw new InvalidArgumentException(&#39;The given value is not an Address instance.&#39;);
+        }
+
+        return [
+            &#39;address_line_one&#39; =&gt; $value-&gt;lineOne,
+            &#39;address_line_two&#39; =&gt; $value-&gt;lineTwo,
+        ];
+    }
+}
+</code></pre><p>转换为值对象时，对值对象所做的任何更改都将在模型保存之前自动同步回模型：</p><pre><code>use App\Models\User;
+
+$user = User::find(1);
+
+$user-&gt;address-&gt;lineOne = &#39;Updated Address Value&#39;;
+
+$user-&gt;save();
+</code></pre><blockquote><p>注意：如果你计划将包含值对象的 Eloquent 模型序列化为 JSON 或数组，那么应该在值对象上实现 <code>Illuminate\Contracts\Support\Arrayable</code> 和 <code>JsonSerializable</code> 接口。</p></blockquote><p><a name="array-json-serialization"></a></p><h3 id="数组-json-序列化" tabindex="-1"><a class="header-anchor" href="#数组-json-序列化" aria-hidden="true">#</a> 数组 / JSON 序列化</h3><p>当使用 <code>toArray</code> 和 <code>toJson</code> 方法将 Eloquent 模型转换为数组或 JSON 时，自定义转换值对象通常会被序列化，只要它们实现 <code>Illuminate\Contracts\Support\Arrayable</code> 和 <code>JsonSerializable</code> 接口。 但是，在使用第三方库提供的值对象时，你可能无法将这些接口添加到对象中。</p><p>因此，你可以指定你自定义的类型转换类，它将负责序列化成值对象。为此，你自定义的类型转换类需要实现 <code>Illuminate\Contracts\Database\Eloquent\SerializesCastableAttributes</code> 接口。此接口声明类应包含 <code>serialize</code> 方法，该方法应返回值对象的序列化形式：</p><pre><code>/**
+ * 获取值的序列化表示形式。
+ *
+ * @param  array&lt;string, mixed&gt;  $attributes
+ */
+public function serialize(Model $model, string $key, mixed $value, array $attributes): string
+{
+    return (string) $value;
+}
+</code></pre><p><a name="inbound-casting"></a></p><h3 id="入站转换" tabindex="-1"><a class="header-anchor" href="#入站转换" aria-hidden="true">#</a> 入站转换</h3><p>有时候，你可能只需要对写入模型的属性值进行类型转换而不需要对从模型中获取的属性值进行任何处理。</p><p>入站自定义强制转换应该实现<code>CastsInboundAttributes</code>接口，该接口只需要定义一个<code>set</code>方法。<code>make:cast</code>Artisan 命令可以通过<code>——inbound</code>选项调用来生成一个入站强制转换类:</p><div class="language-bash line-numbers-mode" data-ext="sh"><pre class="language-bash"><code>php artisan make:cast Hash <span class="token parameter variable">--inbound</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>仅入站强制转换的一个经典示例是「hashing」强制转换。例如，我们可以定义一个类型转换，通过给定的算法散列入站值:</p><pre><code>&lt;?php
+
+namespace App\Casts;
+
+use Illuminate\Contracts\Database\Eloquent\CastsInboundAttributes;
+use Illuminate\Database\Eloquent\Model;
+
+class Hash implements CastsInboundAttributes
+{
+    /**
+     * 创建一个新的强制转换类实例。
+     */
+    public function __construct(
+        protected string $algorithm = null,
+    ) {}
+
+    /**
+     * 转换成将要进行存储的值
+     *
+     * @param  array&lt;string, mixed&gt;  $attributes
+     */
+    public function set(Model $model, string $key, mixed $value, array $attributes): string
+    {
+        return is_null($this-&gt;algorithm)
+                    ? bcrypt($value)
+                    : hash($this-&gt;algorithm, $value);
+    }
+}
+</code></pre><p><a name="cast-parameters"></a></p><h3 id="转换参数" tabindex="-1"><a class="header-anchor" href="#转换参数" aria-hidden="true">#</a> 转换参数</h3><p>当将自定义类型转换附加到模型时，可以指定传入的类型转换参数。传入类型转换参数需使用 <code>:</code> 将参数与类名分隔，多个参数之间使用逗号分隔。这些参数将会传递到类型转换类的构造函数中：</p><pre><code>/**
+ * 应该强制转换的属性。
+ *
+ * @var array
+ */
+protected $casts = [
+    &#39;secret&#39; =&gt; Hash::class.&#39;:sha256&#39;,
+];
+</code></pre><p><a name="castables"></a></p><h3 id="可转换" tabindex="-1"><a class="header-anchor" href="#可转换" aria-hidden="true">#</a> 可转换</h3><p>如果要允许应用程序对象的值定义它们自定义转换类。除了将自定义转换类附加到你的模型之外，还可以附加一个实现 <code>Illuminate\Contracts\Database\Eloquent\Castable</code> 接口的值对象类：</p><pre><code>use App\Models\Address;
+
+protected $casts = [
+    &#39;address&#39; =&gt; Address::class,
+];
+</code></pre><p>实现 <code>Castable</code> 接口的对象必须定义一个 <code>castUsing</code> 方法，此方法返回的是负责将 <code>Castable</code> 类进行自定义转换的转换器类名：</p><pre><code>&lt;?php
+
+namespace App\Models;
+
+use Illuminate\Contracts\Database\Eloquent\Castable;
+use App\Casts\Address as AddressCast;
+
+class Address implements Castable
+{
+    /**
+     * 获取转换器的类名用以转换当前类型转换对象。
+     *
+     * @param  array&lt;string, mixed&gt;  $arguments
+     */
+    public static function castUsing(array $arguments): string
+    {
+        return AddressCast::class;
+    }
+}
+</code></pre><p>使用 <code>Castable</code> 类时，仍然可以在 <code>$casts</code> 定义中提供参数。参数将传递给 <code>castUsing</code> 方法：</p><pre><code>use App\Models\Address;
+
+protected $casts = [
+    &#39;address&#39; =&gt; Address::class.&#39;:argument&#39;,
+];
+</code></pre><p><a name="anonymous-cast-classes"></a></p><h4 id="可转换-匿名类型转换类" tabindex="-1"><a class="header-anchor" href="#可转换-匿名类型转换类" aria-hidden="true">#</a> 可转换 &amp; 匿名类型转换类</h4><p>通过将 <code>castables</code> 与 PHP 的 <a href="https://www.php.net/manual/en/language.oop5.anonymous.php" target="_blank" rel="noopener noreferrer">匿名类<span><svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg><span class="external-link-icon-sr-only">open in new window</span></span></a> 相结合，可以将值对象及其转换逻辑定义为单个可转换对象。为此，请从值对象的 <code>castUsing</code> 方法返回一个匿名类。匿名类应该实现 <code>CastsAttributes</code> 接口：</p><pre><code>&lt;?php
+
+namespace App\Models;
+
+use Illuminate\Contracts\Database\Eloquent\Castable;
+use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
+use Illuminate\Database\Eloquent\Model;
+
+class Address implements Castable
+{
+    // ...
+
+    /**
+     * 获取转换器类用以转换当前类型转换对象。
+     *
+     * @param  array&lt;string, mixed&gt;  $arguments
+     */
+    public static function castUsing(array $arguments): CastsAttributes
+    {
+        return new class implements CastsAttributes
+        {
+            public function get(Model $model, string $key, mixed $value, array $attributes): Address
+            {
+                return new Address(
+                    $attributes[&#39;address_line_one&#39;],
+                    $attributes[&#39;address_line_two&#39;]
+                );
+            }
+
+            public function set(Model $model, string $key, mixed $value, array $attributes): array
+            {
+                return [
+                    &#39;address_line_one&#39; =&gt; $value-&gt;lineOne,
+                    &#39;address_line_two&#39; =&gt; $value-&gt;lineTwo,
+                ];
+            }
+        };
+    }
+}
+</code></pre></div><!----><footer class="page-meta"><!----><div class="meta-item git-info"><!----><!----></div></footer><nav class="vp-page-nav"><a aria-label="Eloquent：集合" class="vp-link nav-link prev nav-link prev" href="/laravel/zh/guide/eloquent-collections.html"><div class="hint"><span class="arrow start"></span>上一页</div><div class="link"><!---->Eloquent：集合</div></a><a aria-label="Eloquent: API Resources" class="vp-link nav-link next nav-link next" href="/laravel/zh/guide/eloquent-resources.html"><div class="hint">下一页<span class="arrow end"></span></div><div class="link">Eloquent: API Resources<!----></div></a></nav><!----><!----><!--]--></main><!--]--><footer class="vp-footer-wrapper"><!----><div class="vp-copyright">Copyright © 2023 Moments</div></footer></div><!--]--><!--]--><!----><!--]--></div>
+    <script type="module" src="/laravel/assets/app-8cdff07c.js" defer></script>
+  </body>
+</html>

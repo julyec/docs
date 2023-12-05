@@ -1,0 +1,676 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>match</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="control-structures.switch.html">? switch</a></li>
+      <li style="float: right;"><a href="control-structures.declare.html">declare ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="language.control-structures.html">流程控制</a></li>
+    <li>match</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="control-structures.match" class="sect1">
+ <h2 class="title">match</h2>
+ <p class="verinfo">(PHP 8)</p>
+ <p class="para">
+  <code class="literal">match</code> 表达式基于值的一致性进行分支计算。
+  <code class="literal">match</code>表达式和 <code class="literal">switch</code> 语句类似，
+  都有一个表达式主体，可以和多个可选项进行比较。
+  与 <code class="literal">switch</code> 不同点是，它会像三元表达式一样求值。
+  与 <code class="literal">switch</code> 另一个不同点，它的比较是严格比较（
+  <code class="code">===</code>）而不是松散比较（<code class="code">==</code>）。
+  Match 表达式从 PHP 8.0.0 起可用。
+ </p>
+
+ <div class="example" id="language.oop5.traits.composition.ex1">
+  <p><strong>Example #1  <code class="literal">match</code> 表达式结构</strong></p>
+  <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$return_value </span><span style="color: #007700">= match (</span><span style="color: #0000BB">subject_expression</span><span style="color: #007700">) {<br />    </span><span style="color: #0000BB">single_conditional_expression </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">return_expression</span><span style="color: #007700">,<br />    </span><span style="color: #0000BB">conditional_expression1</span><span style="color: #007700">, </span><span style="color: #0000BB">conditional_expression2 </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">return_expression</span><span style="color: #007700">,<br />};<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+  </div>
+
+  
+   <div class="example" id="language.oop5.traits.static.ex1">
+   <p><strong>Example #2  <code class="literal">match</code> 的基础用法</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$food </span><span style="color: #007700">= </span><span style="color: #DD0000">'cake'</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$return_value </span><span style="color: #007700">= match (</span><span style="color: #0000BB">$food</span><span style="color: #007700">) {<br />    </span><span style="color: #DD0000">'apple' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'This food is an apple'</span><span style="color: #007700">,<br />    </span><span style="color: #DD0000">'bar' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'This food is a bar'</span><span style="color: #007700">,<br />    </span><span style="color: #DD0000">'cake' </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'This food is a cake'</span><span style="color: #007700">,<br />};<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$return_value</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+  </div>
+
+  <div class="example-contents"><p>以上示例会输出：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+string(19) &quot;This food is a cake&quot;
+</pre></div>
+   </div>
+  </div>
+
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <span class="simpara">
+    不一定要使用 <code class="literal">match</code> 表达式的结果。
+   </span>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <span class="simpara">
+    <code class="literal">match</code> 表达式<em class="emphasis">必须</em>使用分号 <code class="literal">;</code> 结尾。
+    </span>
+  </p></blockquote>
+ </div>
+
+ <p class="para">
+  <code class="literal">match</code> 表达式跟 <code class="literal">switch</code> 语句相似，但是有以下关键区别：
+  
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <span class="simpara">
+     <code class="literal">match</code> 比较分支值，使用了严格比较 (<code class="code">===</code>)，
+     而 switch 语句使用了松散比较。
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <code class="literal">match</code> 表达式会返回一个值。
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <code class="literal">match</code> 的分支不会像 <code class="literal">switch</code> 语句一样，
+     落空时执行下个 case。
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <code class="literal">match</code> 表达式必须彻底列举所有情况。
+    </span>
+   </li>
+  </ul>
+ </p>
+
+ <p class="para">
+  <code class="literal">match</code> 表达式和 <code class="literal">switch</code> 语句类似，
+  逐个检测匹配分支。一开始不会执行代码。
+  只有在所有之前的条件不匹配主体表达式时，才会执行剩下的条件表达式。
+  只会执行返回的表达式所对应的匹配条件表达式。
+  举例：
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$result </span><span style="color: #007700">= match (</span><span style="color: #0000BB">$x</span><span style="color: #007700">) {<br />    </span><span style="color: #0000BB">foo</span><span style="color: #007700">() =&gt; ...,<br />    </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">bar</span><span style="color: #007700">() =&gt; ..., </span><span style="color: #FF8000">// 如果 foo() === $x，不会执行 $this-&gt;bar()<br />    </span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">baz </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">beep</span><span style="color: #007700">(), </span><span style="color: #FF8000">// 只有 $x === $this-&gt;baz 时才会执行 beep() <br />    // 等等<br /></span><span style="color: #007700">};<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+ </p>
+
+ <p class="para">
+  <code class="literal">match</code> 表达式分支可以通过逗号分隔，包含多个表达式。
+  这是一个逻辑 OR，当多个分支表达式右侧相同时，就可以用这种缩写。
+ </p>
+ <p class="para">
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$result </span><span style="color: #007700">= match (</span><span style="color: #0000BB">$x</span><span style="color: #007700">) {<br />    </span><span style="color: #FF8000">// 匹配分支：<br />    </span><span style="color: #0000BB">$a</span><span style="color: #007700">, </span><span style="color: #0000BB">$b</span><span style="color: #007700">, </span><span style="color: #0000BB">$c </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">5</span><span style="color: #007700">,<br />    </span><span style="color: #FF8000">// 等同于以下三个分支：<br />    </span><span style="color: #0000BB">$a </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">5</span><span style="color: #007700">,<br />    </span><span style="color: #0000BB">$b </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">5</span><span style="color: #007700">,<br />    </span><span style="color: #0000BB">$c </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">5</span><span style="color: #007700">,<br />};<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+ </p>
+ <p class="para">
+ <code class="literal">default</code> 模式是个特殊的条件。
+当之前的条件都不匹配时，会匹配到该模式。
+  For example:
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$expressionResult </span><span style="color: #007700">= match (</span><span style="color: #0000BB">$condition</span><span style="color: #007700">) {<br />    </span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">2 </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">foo</span><span style="color: #007700">(),<br />    </span><span style="color: #0000BB">3</span><span style="color: #007700">, </span><span style="color: #0000BB">4 </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">bar</span><span style="color: #007700">(),<br />    default =&gt; </span><span style="color: #0000BB">baz</span><span style="color: #007700">(),<br />};<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <span class="simpara">
+    多个 default 模式将会触发 <strong><code>E_FATAL_ERROR</code></strong> 错误。
+   </span>
+  </p></blockquote>
+ </p>
+
+ <p class="para">
+  <code class="literal">match</code> 表达式必须详尽列出所有情况。
+  如果主体表达式不能被任意分支条件处理，
+  会抛出 <span class="classname"><a href="class.unhandledmatcherror.html" class="classname">UnhandledMatchError</a></span>。
+ </p>
+
+ <div class="example" id="language.oop5.traits.static.ex3">
+  <p><strong>Example #3 match 表达式存在未处理的示例</strong></p>
+  <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$condition </span><span style="color: #007700">= </span><span style="color: #0000BB">5</span><span style="color: #007700">;<br /><br />try {<br />    match (</span><span style="color: #0000BB">$condition</span><span style="color: #007700">) {<br />        </span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">2 </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">foo</span><span style="color: #007700">(),<br />        </span><span style="color: #0000BB">3</span><span style="color: #007700">, </span><span style="color: #0000BB">4 </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">bar</span><span style="color: #007700">(),<br />    };<br />} catch (</span><span style="color: #0000BB">\UnhandledMatchError $e</span><span style="color: #007700">) {<br />    </span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$e</span><span style="color: #007700">);<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+  </div>
+
+  <div class="example-contents"><p>以上示例会输出：</p></div>
+  <div class="example-contents screen">
+<div class="cdata"><pre>
+object(UnhandledMatchError)#1 (7) {
+  [&quot;message&quot;:protected]=&gt;
+  string(33) &quot;Unhandled match value of type int&quot;
+  [&quot;string&quot;:&quot;Error&quot;:private]=&gt;
+  string(0) &quot;&quot;
+  [&quot;code&quot;:protected]=&gt;
+  int(0)
+  [&quot;file&quot;:protected]=&gt;
+  string(9) &quot;/in/ICgGK&quot;
+  [&quot;line&quot;:protected]=&gt;
+  int(6)
+  [&quot;trace&quot;:&quot;Error&quot;:private]=&gt;
+  array(0) {
+  }
+  [&quot;previous&quot;:&quot;Error&quot;:private]=&gt;
+  NULL
+}
+</pre></div>
+  </div>
+ </div>
+
+ <div class="sect2">
+  <h3 class="title">使用 match 表达式处理非一致性检查</h3>
+  <p class="para">
+   可以使用 <code class="literal">match</code> 表达式将 <code class="code">true</code> 
+   作为主项表达式来处理非一致性条件的情况。
+  </p>
+
+  <div class="example" id="language.oop5.traits.properties.conflicts">
+   <p><strong>Example #4 针对整数范围，使用宽泛的表达式匹配分支</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />$age </span><span style="color: #007700">= </span><span style="color: #0000BB">23</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= match (</span><span style="color: #0000BB">true</span><span style="color: #007700">) {<br />    </span><span style="color: #0000BB">$age </span><span style="color: #007700">&gt;= </span><span style="color: #0000BB">65 </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'senior'</span><span style="color: #007700">,<br />    </span><span style="color: #0000BB">$age </span><span style="color: #007700">&gt;= </span><span style="color: #0000BB">25 </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'adult'</span><span style="color: #007700">,<br />    </span><span style="color: #0000BB">$age </span><span style="color: #007700">&gt;= </span><span style="color: #0000BB">18 </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'young adult'</span><span style="color: #007700">,<br />    default =&gt; </span><span style="color: #DD0000">'kid'</span><span style="color: #007700">,<br />};<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例会输出：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+string(11) &quot;young adult&quot;
+</pre></div>
+   </div>
+  </div>
+
+  <div class="example" id="language.oop5.traits.constants.conflicts">
+   <p><strong>Example #5 针对字符串内容，使用宽泛的表达式匹配分支</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />$text </span><span style="color: #007700">= </span><span style="color: #DD0000">'Bienvenue chez nous'</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= match (</span><span style="color: #0000BB">true</span><span style="color: #007700">) {<br />    </span><span style="color: #0000BB">str_contains</span><span style="color: #007700">(</span><span style="color: #0000BB">$text</span><span style="color: #007700">, </span><span style="color: #DD0000">'Welcome'</span><span style="color: #007700">) || </span><span style="color: #0000BB">str_contains</span><span style="color: #007700">(</span><span style="color: #0000BB">$text</span><span style="color: #007700">, </span><span style="color: #DD0000">'Hello'</span><span style="color: #007700">) =&gt; </span><span style="color: #DD0000">'en'</span><span style="color: #007700">,<br />    </span><span style="color: #0000BB">str_contains</span><span style="color: #007700">(</span><span style="color: #0000BB">$text</span><span style="color: #007700">, </span><span style="color: #DD0000">'Bienvenue'</span><span style="color: #007700">) || </span><span style="color: #0000BB">str_contains</span><span style="color: #007700">(</span><span style="color: #0000BB">$text</span><span style="color: #007700">, </span><span style="color: #DD0000">'Bonjour'</span><span style="color: #007700">) =&gt; </span><span style="color: #DD0000">'fr'</span><span style="color: #007700">,<br />    </span><span style="color: #FF8000">// ...<br /></span><span style="color: #007700">};<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例会输出：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+string(2) &quot;fr&quot;
+</pre></div>
+   </div>
+  </div>
+ </div>
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="128256""></a>
+  <div class="note">
+   <strong class="user">thomas at zuschneid dot de</strong>
+   <a href="#128256" class="date">27-Feb-2023 03:04</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+While match allows chaining multiple conditions with ",", like:<br />
+<span class="default">&lt;?php<br />
+$result </span><span class="keyword">= match (</span><span class="default">$source</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">cond1</span><span class="keyword">, </span><span class="default">cond2 </span><span class="keyword">=&gt; </span><span class="default">val1</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; default =&gt; </span><span class="default">val2<br />
+</span><span class="keyword">};<br />
+</span><span class="default">?&gt;<br />
+</span>it seems not valid to chain conditions with default, like:<br />
+<span class="default">&lt;?php<br />
+$result </span><span class="keyword">= match (</span><span class="default">$source</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">cond1 </span><span class="keyword">=&gt; </span><span class="default">val1</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">cond2</span><span class="keyword">, default =&gt; </span><span class="default">val2<br />
+</span><span class="keyword">};<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="128212""></a>
+  <div class="note">
+   <strong class="user">Sbastien</strong>
+   <a href="#128212" class="date">12-Feb-2023 02:46</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I use match instead of storing PDOStatement::rowCount() result and chaining if/elseif conditions or use the ugly switch/break :<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+$sql </span><span class="keyword">= &lt;&lt;&lt;SQL<br />
+</span><span class="string">&nbsp; &nbsp; INSERT INTO ...<br />
+&nbsp;&nbsp;&nbsp; ON DUPLICATE KEY UPDATE ...<br />
+</span><span class="keyword">&nbsp; &nbsp; SQL;<br />
+<br />
+</span><span class="default">$upkeep </span><span class="keyword">= </span><span class="default">$pdo</span><span class="keyword">-&gt;</span><span class="default">prepare</span><span class="keyword">(</span><span class="default">$sql</span><span class="keyword">);<br />
+<br />
+</span><span class="default">$count_untouched </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;<br />
+</span><span class="default">$count_inserted </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;<br />
+</span><span class="default">$count_updated </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;<br />
+<br />
+foreach (</span><span class="default">$data </span><span class="keyword">as </span><span class="default">$record</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$upkeep</span><span class="keyword">-&gt;</span><span class="default">execute</span><span class="keyword">(</span><span class="default">$record</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; match (</span><span class="default">$upkeep</span><span class="keyword">-&gt;</span><span class="default">rowCount</span><span class="keyword">()) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">0 </span><span class="keyword">=&gt; </span><span class="default">$count_untouched</span><span class="keyword">++,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">1 </span><span class="keyword">=&gt; </span><span class="default">$count_inserted</span><span class="keyword">++,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">2 </span><span class="keyword">=&gt; </span><span class="default">$count_updated</span><span class="keyword">++,<br />
+&nbsp;&nbsp;&nbsp; };<br />
+}<br />
+<br />
+echo </span><span class="string">"Untouched rows : </span><span class="keyword">{</span><span class="default">$count_untouched</span><span class="keyword">}</span><span class="string">\r\n"</span><span class="keyword">;<br />
+echo </span><span class="string">"Inserted rows : </span><span class="keyword">{</span><span class="default">$count_inserted</span><span class="keyword">}</span><span class="string">\r\n"</span><span class="keyword">;<br />
+echo </span><span class="string">"Updated rows : </span><span class="keyword">{</span><span class="default">$count_updated</span><span class="keyword">}</span><span class="string">\r\n"</span><span class="keyword">;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="126917""></a>
+  <div class="note">
+   <strong class="user">php at joren dot dev</strong>
+   <a href="#126917" class="date">11-Mar-2022 11:27</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you want to execute multiple return expressions when matching a conditional expression, you can do so by stating all return expressions inside an array.<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; $countries </span><span class="keyword">= [</span><span class="string">'Belgium'</span><span class="keyword">, </span><span class="string">'Netherlands'</span><span class="keyword">];<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$spoken_languages </span><span class="keyword">= [<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'Dutch' </span><span class="keyword">=&gt; </span><span class="default">false</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'French' </span><span class="keyword">=&gt; </span><span class="default">false</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'German' </span><span class="keyword">=&gt; </span><span class="default">false</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'English' </span><span class="keyword">=&gt; </span><span class="default">false</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; ];<br />
+<br />
+&nbsp;&nbsp;&nbsp; foreach (</span><span class="default">$countries </span><span class="keyword">as </span><span class="default">$country</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; match(</span><span class="default">$country</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'Belgium' </span><span class="keyword">=&gt; [<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$spoken_languages</span><span class="keyword">[</span><span class="string">'Dutch'</span><span class="keyword">] = </span><span class="default">true</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$spoken_languages</span><span class="keyword">[</span><span class="string">'French'</span><span class="keyword">] = </span><span class="default">true</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$spoken_languages</span><span class="keyword">[</span><span class="string">'German'</span><span class="keyword">] = </span><span class="default">true</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; ],<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'Netherlands' </span><span class="keyword">=&gt; </span><span class="default">$spoken_languages</span><span class="keyword">[</span><span class="string">'Dutch'</span><span class="keyword">] = </span><span class="default">true</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'Germany' </span><span class="keyword">=&gt; </span><span class="default">$spoken_languages</span><span class="keyword">[</span><span class="string">'German'</span><span class="keyword">] = </span><span class="default">true</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'United Kingdom' </span><span class="keyword">=&gt; </span><span class="default">$spoken_languages</span><span class="keyword">[</span><span class="string">'English'</span><span class="keyword">] = </span><span class="default">true</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; };<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">var_export</span><span class="keyword">(</span><span class="default">$spoken_languages</span><span class="keyword">); <br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// array ( 'Dutch' =&gt; true, 'French' =&gt; true, 'German' =&gt; true, 'English' =&gt; false, )<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="126843""></a>
+  <div class="note">
+   <strong class="user">mark at manngo dot net</strong>
+   <a href="#126843" class="date">12-Feb-2022 06:08</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+While you can't polyfill a language construct, you can mimic the basic behaviour with a simple array.<br />
+<br />
+Using example 2 above:<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; $food </span><span class="keyword">= </span><span class="string">'apple'</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$return_value </span><span class="keyword">= match (</span><span class="default">$food</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'apple' </span><span class="keyword">=&gt; </span><span class="string">'This food is an apple'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'bar' </span><span class="keyword">=&gt; </span><span class="string">'This food is a bar'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'cake' </span><span class="keyword">=&gt; </span><span class="string">'This food is a cake'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; };&nbsp; &nbsp; <br />
+&nbsp;&nbsp;&nbsp; print </span><span class="default">$return_value</span><span class="keyword">;<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+... you can get something similar with:<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; $food </span><span class="keyword">= </span><span class="string">'apple'</span><span class="keyword">;&nbsp; &nbsp; <br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$return_value </span><span class="keyword">= [<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'apple' </span><span class="keyword">=&gt; </span><span class="string">'This food is an apple'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'bar' </span><span class="keyword">=&gt; </span><span class="string">'This food is a bar'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'cake' </span><span class="keyword">=&gt; </span><span class="string">'This food is a cake'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; ][</span><span class="default">$food</span><span class="keyword">];<br />
+&nbsp;&nbsp;&nbsp; print </span><span class="default">$return_value</span><span class="keyword">;<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="126708""></a>
+  <div class="note">
+   <strong class="user">manoj904378 at gmail dot com</strong>
+   <a href="#126708" class="date">24-Dec-2021 09:32</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+When &amp; Where should you use?&nbsp; that's most important part of match<br />
+&nbsp;<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; $Error_Code</span><span class="keyword">=(int) </span><span class="default">400</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$message</span><span class="keyword">=(string) match(</span><span class="default">$Error_Code</span><span class="keyword">){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">200</span><span class="keyword">=&gt;</span><span class="string">"OK"</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">400</span><span class="keyword">=&gt;</span><span class="string">"Bad Request"</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">401</span><span class="keyword">=&gt;</span><span class="string">"Unauthorized"</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">403</span><span class="keyword">=&gt;</span><span class="string">"Forbidden"</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">404</span><span class="keyword">=&gt;</span><span class="string">"Not Found"</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; default=&gt;</span><span class="string">"Unknown Error"<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">};<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$message</span><span class="keyword">); </span><span class="comment">// string(11) "Bad Request" <br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="126542""></a>
+  <div class="note">
+   <strong class="user">tm</strong>
+   <a href="#126542" class="date">28-Oct-2021 03:02</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you are using a match expression for non-identity checks as described above make sure whatever you are using is actually returning `true` on success.<br />
+<br />
+Quite often you rely on truthy vs. falsy when using if conditions and that will not work for match (for example `preg_match`). Casting to bool will solve this issue.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="126392""></a>
+  <div class="note">
+   <strong class="user">Anonymous</strong>
+   <a href="#126392" class="date">06-Sep-2021 10:37</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+<span class="default">&lt;?php
+<br />
+</span><span class="keyword">function </span><span class="default">days_in_month</span><span class="keyword">(</span><span class="default">string $month</span><span class="keyword">, </span><span class="default">$year</span><span class="keyword">): </span><span class="default">int
+<br />
+</span><span class="keyword">{
+<br />
+&nbsp;&nbsp;&nbsp; return match(</span><span class="default">strtolower</span><span class="keyword">(</span><span class="default">substr</span><span class="keyword">(</span><span class="default">$month</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">, </span><span class="default">3</span><span class="keyword">))) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'jan' </span><span class="keyword">=&gt; </span><span class="default">31</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'feb' </span><span class="keyword">=&gt; </span><span class="default">is_leap</span><span class="keyword">(</span><span class="default">$year</span><span class="keyword">) ? </span><span class="default">29 </span><span class="keyword">: </span><span class="default">28</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'mar' </span><span class="keyword">=&gt; </span><span class="default">31</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'apr' </span><span class="keyword">=&gt; </span><span class="default">30</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'may' </span><span class="keyword">=&gt; </span><span class="default">31</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'jun' </span><span class="keyword">=&gt; </span><span class="default">30</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'jul' </span><span class="keyword">=&gt; </span><span class="default">31</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'aug' </span><span class="keyword">=&gt; </span><span class="default">31</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'sep' </span><span class="keyword">=&gt; </span><span class="default">30</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'oct' </span><span class="keyword">=&gt; </span><span class="default">31</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'nov' </span><span class="keyword">=&gt; </span><span class="default">30</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'dec' </span><span class="keyword">=&gt; </span><span class="default">31</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; default =&gt; throw new </span><span class="default">InvalidArgumentException</span><span class="keyword">(</span><span class="string">"Bogus month"</span><span class="keyword">),
+<br />
+&nbsp;&nbsp;&nbsp; };
+<br />
+}
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+can be more concisely written as
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="keyword">function </span><span class="default">days_in_month</span><span class="keyword">(</span><span class="default">string $month</span><span class="keyword">, </span><span class="default">$year</span><span class="keyword">): </span><span class="default">int
+<br />
+</span><span class="keyword">{
+<br />
+&nbsp;&nbsp;&nbsp; return match(</span><span class="default">strtolower</span><span class="keyword">(</span><span class="default">substr</span><span class="keyword">(</span><span class="default">$month</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">, </span><span class="default">3</span><span class="keyword">))) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'apr'</span><span class="keyword">, </span><span class="string">'jun'</span><span class="keyword">, </span><span class="string">'sep'</span><span class="keyword">,&nbsp; </span><span class="string">'nov'&nbsp; </span><span class="keyword">=&gt; </span><span class="default">30</span><span class="keyword">,&nbsp; &nbsp; &nbsp; &nbsp; 
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'jan'</span><span class="keyword">, </span><span class="string">'mar'</span><span class="keyword">, </span><span class="string">'may'</span><span class="keyword">, </span><span class="string">'jul'</span><span class="keyword">, </span><span class="string">'aug'</span><span class="keyword">,&nbsp; </span><span class="string">'oct'</span><span class="keyword">, </span><span class="string">'dec'&nbsp; </span><span class="keyword">=&gt; </span><span class="default">31</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'feb' </span><span class="keyword">=&gt; </span><span class="default">is_leap</span><span class="keyword">(</span><span class="default">$year</span><span class="keyword">) ? </span><span class="default">29 </span><span class="keyword">: </span><span class="default">28</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; default =&gt; throw new </span><span class="default">InvalidArgumentException</span><span class="keyword">(</span><span class="string">"Bogus month"</span><span class="keyword">),
+<br />
+&nbsp;&nbsp;&nbsp; };
+<br />
+}
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125987""></a>
+  <div class="note">
+   <strong class="user">darius dot restivan at gmail dot com</strong>
+   <a href="#125987" class="date">05-Apr-2021 09:43</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+This will allow for a nicer FizzBuzz solution:<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="keyword">function </span><span class="default">fizzbuzz</span><span class="keyword">(</span><span class="default">$num</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; print match (</span><span class="default">0</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$num </span><span class="keyword">% </span><span class="default">15 </span><span class="keyword">=&gt; </span><span class="string">"FizzBuzz" </span><span class="keyword">. </span><span class="default">PHP_EOL</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$num </span><span class="keyword">% </span><span class="default">3&nbsp; </span><span class="keyword">=&gt; </span><span class="string">"Fizz" </span><span class="keyword">. </span><span class="default">PHP_EOL</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$num </span><span class="keyword">% </span><span class="default">5&nbsp; </span><span class="keyword">=&gt; </span><span class="string">"Buzz" </span><span class="keyword">. </span><span class="default">PHP_EOL</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; default&nbsp;&nbsp; =&gt; </span><span class="default">$num </span><span class="keyword">. </span><span class="default">PHP_EOL</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; };<br />
+}<br />
+<br />
+for (</span><span class="default">$i </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">; </span><span class="default">$i </span><span class="keyword">&lt;=</span><span class="default">100</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">++)<br />
+{<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">fizzbuzz</span><span class="keyword">(</span><span class="default">$i</span><span class="keyword">);<br />
+}</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125580""></a>
+  <div class="note">
+   <strong class="user">Hayley Watson</strong>
+   <a href="#125580" class="date">09-Dec-2020 12:50</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+As well as being similar to a switch, match expressions can be thought of as enhanced lookup tables &mdash; for when a simple array lookup isn't enough without extra handling of edge cases, but a full switch statement would be overweight.
+<br />
+
+<br />
+For a familiar example, the following
+<br />
+<span class="default">&lt;?php
+<br />
+
+<br />
+</span><span class="keyword">function </span><span class="default">days_in_month</span><span class="keyword">(</span><span class="default">string $month</span><span class="keyword">): </span><span class="default">int
+<br />
+</span><span class="keyword">{
+<br />
+&nbsp;&nbsp;&nbsp; static </span><span class="default">$lookup </span><span class="keyword">= [
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'jan' </span><span class="keyword">=&gt; </span><span class="default">31</span><span class="keyword">,
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'feb' </span><span class="keyword">=&gt; </span><span class="default">0</span><span class="keyword">,
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'mar' </span><span class="keyword">=&gt; </span><span class="default">31</span><span class="keyword">,
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'apr' </span><span class="keyword">=&gt; </span><span class="default">30</span><span class="keyword">,
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'may' </span><span class="keyword">=&gt; </span><span class="default">31</span><span class="keyword">,
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'jun' </span><span class="keyword">=&gt; </span><span class="default">30</span><span class="keyword">,
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'jul' </span><span class="keyword">=&gt; </span><span class="default">31</span><span class="keyword">,
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'aug' </span><span class="keyword">=&gt; </span><span class="default">31</span><span class="keyword">,
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'sep' </span><span class="keyword">=&gt; </span><span class="default">30</span><span class="keyword">,
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'oct' </span><span class="keyword">=&gt; </span><span class="default">31</span><span class="keyword">,
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'nov' </span><span class="keyword">=&gt; </span><span class="default">30</span><span class="keyword">,
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'dec' </span><span class="keyword">=&gt; </span><span class="default">31
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">];
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$name </span><span class="keyword">= </span><span class="default">strtolower</span><span class="keyword">(</span><span class="default">substr</span><span class="keyword">(</span><span class="default">$name</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">, </span><span class="default">3</span><span class="keyword">));
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; if(isset(</span><span class="default">$lookup</span><span class="keyword">[</span><span class="default">$name</span><span class="keyword">])) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if(</span><span class="default">$name </span><span class="keyword">== </span><span class="string">'feb'</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">is_leap</span><span class="keyword">(</span><span class="default">$year</span><span class="keyword">) ? </span><span class="default">29 </span><span class="keyword">: </span><span class="default">28</span><span class="keyword">;
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; } else {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$lookup</span><span class="keyword">[</span><span class="default">$name</span><span class="keyword">];
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp;&nbsp; throw new </span><span class="default">InvalidArgumentException</span><span class="keyword">(</span><span class="string">"Bogus month"</span><span class="keyword">);
+<br />
+}
+<br />
+
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+with the fiddly stuff at the end, can be replaced by
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="keyword">function </span><span class="default">days_in_month</span><span class="keyword">(</span><span class="default">string $month</span><span class="keyword">): </span><span class="default">int
+<br />
+</span><span class="keyword">{
+<br />
+&nbsp;&nbsp;&nbsp; return match(</span><span class="default">strtolower</span><span class="keyword">(</span><span class="default">substr</span><span class="keyword">(</span><span class="default">$month</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">, </span><span class="default">3</span><span class="keyword">))) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'jan' </span><span class="keyword">=&gt; </span><span class="default">31</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'feb' </span><span class="keyword">=&gt; </span><span class="default">is_leap</span><span class="keyword">(</span><span class="default">$year</span><span class="keyword">) ? </span><span class="default">29 </span><span class="keyword">: </span><span class="default">28</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'mar' </span><span class="keyword">=&gt; </span><span class="default">31</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'apr' </span><span class="keyword">=&gt; </span><span class="default">30</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'may' </span><span class="keyword">=&gt; </span><span class="default">31</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'jun' </span><span class="keyword">=&gt; </span><span class="default">30</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'jul' </span><span class="keyword">=&gt; </span><span class="default">31</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'aug' </span><span class="keyword">=&gt; </span><span class="default">31</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'sep' </span><span class="keyword">=&gt; </span><span class="default">30</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'oct' </span><span class="keyword">=&gt; </span><span class="default">31</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'nov' </span><span class="keyword">=&gt; </span><span class="default">30</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'dec' </span><span class="keyword">=&gt; </span><span class="default">31</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; default =&gt; throw new </span><span class="default">InvalidArgumentException</span><span class="keyword">(</span><span class="string">"Bogus month"</span><span class="keyword">),
+<br />
+&nbsp;&nbsp;&nbsp; };
+<br />
+}
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+Which also takes advantage of "throw" being handled as of PHP 8.0 as an expression instead of a statement.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

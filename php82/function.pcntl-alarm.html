@@ -1,0 +1,339 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>为进程设置 alarm 闹钟信号</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="ref.pcntl.html">? PCNTL 函数</a></li>
+      <li style="float: right;"><a href="function.pcntl-async-signals.html">pcntl_async_signals ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.pcntl.html">PCNTL 函数</a></li>
+    <li>为进程设置 alarm 闹钟信号</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.pcntl-alarm" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">pcntl_alarm</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.3.0, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">pcntl_alarm</span> &mdash; <span class="dc-title">为进程设置 alarm 闹钟信号</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.pcntl-alarm-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>pcntl_alarm</strong></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$seconds</code></span>): <span class="type">int</span></div>
+
+  <p class="para rdfs-comment">
+   创建计时器，在指定的秒数后向进程发送 <strong><code>SIGALRM</code></strong> 信号。每次对
+   <span class="function"><strong>pcntl_alarm()</strong></span> 的调用都会取消之前设置的 alarm 信号。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.pcntl-alarm-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">seconds</code></dt>
+
+     <dd>
+
+      <p class="para">
+       等待的秒数。如果 <code class="parameter">seconds</code> 设置为 0,将不会创建 alarm 信号。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.pcntl-alarm-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+  返回上次 alarm 调度（离 alarm 信号发送）剩余的秒数，或者之前没有 alarm 调度（译注：或者之前调度已完成）
+  时返回 <code class="literal">0</code>。
+  </p>
+ </div>
+
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="128078""></a>
+  <div class="note">
+   <strong class="user">kuba at valentine dot dev</strong>
+   <a href="#128078" class="date">03-Jan-2023 05:32</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Keep in mind that you can easily and selectively prevent signal types of your choosing (including SIGALRM) from interrupting blocking operations you don't want interrupted. Use pcntl_sigprocmask() to shield any part of your code, whenever needed and without affecting expected signal behavior for the rest of it.<br />
+<br />
+Here is simple example of shielding one blocking sleep operation from being interrupted while allowing it to happen to another - right next to each other.<br />
+<br />
+<span class="default">&lt;?php<br />
+$alarm </span><span class="keyword">= </span><span class="default">2</span><span class="keyword">;<br />
+</span><span class="default">$sleep </span><span class="keyword">= </span><span class="default">10</span><span class="keyword">;<br />
+</span><span class="default">$stamp </span><span class="keyword">= </span><span class="default">time</span><span class="keyword">();<br />
+<br />
+</span><span class="default">pcntl_async_signals</span><span class="keyword">(</span><span class="default">TRUE</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">/**<br />
+&nbsp;* Alarm signal handler.<br />
+&nbsp;*/<br />
+</span><span class="default">pcntl_signal</span><span class="keyword">(</span><span class="default">SIGALRM</span><span class="keyword">, function(</span><span class="default">int $sig</span><span class="keyword">) use (</span><span class="default">$alarm</span><span class="keyword">, &amp;</span><span class="default">$stamp</span><span class="keyword">) {<br />
+&nbsp; </span><span class="default">$late </span><span class="keyword">= ((</span><span class="default">$now </span><span class="keyword">= </span><span class="default">time</span><span class="keyword">()) - </span><span class="default">$stamp</span><span class="keyword">) - </span><span class="default">$alarm</span><span class="keyword">;<br />
+&nbsp; </span><span class="default">$stamp </span><span class="keyword">= </span><span class="default">$now</span><span class="keyword">;<br />
+&nbsp; echo </span><span class="string">'* ALARM SIGNAL HANDLER * Fired '</span><span class="keyword">. (</span><span class="default">$late </span><span class="keyword">? (</span><span class="default">$late </span><span class="keyword">.</span><span class="string">' seconds late'</span><span class="keyword">) : </span><span class="string">'on schedule'</span><span class="keyword">) .</span><span class="string">' *'</span><span class="keyword">. </span><span class="default">PHP_EOL</span><span class="keyword">;<br />
+&nbsp; </span><span class="default">pcntl_alarm</span><span class="keyword">(</span><span class="default">$alarm</span><span class="keyword">);<br />
+});<br />
+<br />
+</span><span class="comment">/**<br />
+&nbsp;* Sleeping function.<br />
+&nbsp;*/<br />
+</span><span class="keyword">function </span><span class="default">get_some_sleep</span><span class="keyword">(</span><span class="default">int $duration</span><span class="keyword">, </span><span class="default">string $info</span><span class="keyword">) {<br />
+&nbsp; </span><span class="default">$start </span><span class="keyword">= </span><span class="default">time</span><span class="keyword">();<br />
+&nbsp; echo </span><span class="default">PHP_EOL </span><span class="keyword">. </span><span class="default">$duration </span><span class="keyword">.</span><span class="string">' seconds sleep - '</span><span class="keyword">. </span><span class="default">$info </span><span class="keyword">. </span><span class="default">PHP_EOL</span><span class="keyword">;<br />
+&nbsp; </span><span class="default">sleep</span><span class="keyword">(</span><span class="default">$duration</span><span class="keyword">);<br />
+&nbsp; </span><span class="default">$early </span><span class="keyword">= </span><span class="default">$duration </span><span class="keyword">- (</span><span class="default">time</span><span class="keyword">() - </span><span class="default">$start</span><span class="keyword">);<br />
+&nbsp; echo </span><span class="string">'Sleep was '</span><span class="keyword">. (</span><span class="default">$early </span><span class="keyword">? (</span><span class="string">'interrupted. Woke up '</span><span class="keyword">. </span><span class="default">$early </span><span class="keyword">.</span><span class="string">' seconds early.'</span><span class="keyword">) : </span><span class="string">'uninterrupted.'</span><span class="keyword">) . </span><span class="default">PHP_EOL</span><span class="keyword">;<br />
+}<br />
+<br />
+</span><span class="comment">/**<br />
+&nbsp;* Here we schedule first alarm.<br />
+&nbsp;*/<br />
+</span><span class="default">pcntl_alarm</span><span class="keyword">(</span><span class="default">$alarm</span><span class="keyword">);<br />
+<br />
+while (</span><span class="default">TRUE</span><span class="keyword">) {<br />
+&nbsp; </span><span class="comment">/**<br />
+&nbsp;&nbsp; * This sleep can and will be interrupted by alarm signal.<br />
+&nbsp;&nbsp; */<br />
+&nbsp; </span><span class="default">get_some_sleep</span><span class="keyword">(</span><span class="default">$sleep</span><span class="keyword">, </span><span class="string">'without a shield'</span><span class="keyword">);<br />
+<br />
+&nbsp; </span><span class="comment">/**<br />
+&nbsp;&nbsp; * Now we set our shield. From now on blocked signals will be ignored.<br />
+&nbsp;&nbsp; * Each blocked signal type that fires while shield is up is put on hold.<br />
+&nbsp;&nbsp; */<br />
+&nbsp; </span><span class="default">pcntl_sigprocmask</span><span class="keyword">(</span><span class="default">SIG_BLOCK</span><span class="keyword">, [</span><span class="default">SIGALRM</span><span class="keyword">]);<br />
+&nbsp; </span><span class="default">get_some_sleep</span><span class="keyword">(</span><span class="default">$sleep</span><span class="keyword">, </span><span class="string">'protected by sigprocmask()'</span><span class="keyword">);<br />
+<br />
+&nbsp; </span><span class="comment">/**<br />
+&nbsp;&nbsp; * Now we take off our shield. If any blocked signal fired while shield<br />
+&nbsp;&nbsp; * was up now it's handler will be executed immediately, single time.<br />
+&nbsp;&nbsp; * This is very useful behaviour because we protect what needs protecting but also<br />
+&nbsp;&nbsp; * don't miss out on anything - without being flooded thanks to "once per type" queue.<br />
+&nbsp;&nbsp; */<br />
+&nbsp; </span><span class="default">pcntl_sigprocmask</span><span class="keyword">(</span><span class="default">SIG_UNBLOCK</span><span class="keyword">, [</span><span class="default">SIGALRM</span><span class="keyword">]);<br />
+}</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="126692""></a>
+  <div class="note">
+   <strong class="user">molsavsky1 at gmail dot com</strong>
+   <a href="#126692" class="date">17-Dec-2021 09:55</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Beware that pcntl_signal will interrupt (u)sleep calls which will not be resumed once the handler is completed.<br />
+<br />
+It's a documented behaviour (https://www.php.net/manual/en/function.sleep.php) although it may look like a bug when encountered for the first time.<br />
+<br />
+From the docs:<br />
+"If the call was interrupted by a signal, sleep() returns a non-zero value. On Windows, this value will always be 192 (the value of the WAIT_IO_COMPLETION constant within the Windows API). On other platforms, the return value will be the number of seconds left to sleep."<br />
+<br />
+```<br />
+<span class="default">&lt;?php<br />
+<br />
+$interval </span><span class="keyword">= </span><span class="default">1</span><span class="keyword">;<br />
+</span><span class="default">pcntl_async_signals</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);<br />
+<br />
+</span><span class="default">pcntl_signal</span><span class="keyword">(</span><span class="default">SIGALRM</span><span class="keyword">, function () use (</span><span class="default">$interval</span><span class="keyword">): </span><span class="default">void </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">'SIGALRM called' </span><span class="keyword">. </span><span class="default">PHP_EOL</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">pcntl_alarm</span><span class="keyword">(</span><span class="default">$interval</span><span class="keyword">);<br />
+});<br />
+<br />
+</span><span class="default">pcntl_alarm</span><span class="keyword">(</span><span class="default">$interval</span><span class="keyword">);<br />
+<br />
+echo </span><span class="string">'Sleep (will be interrupted) started' </span><span class="keyword">. </span><span class="default">PHP_EOL</span><span class="keyword">;<br />
+<br />
+</span><span class="default">sleep</span><span class="keyword">(</span><span class="default">100000000000</span><span class="keyword">);<br />
+<br />
+echo </span><span class="string">'Sleep ended soon due to interrupt' </span><span class="keyword">. </span><span class="default">PHP_EOL</span><span class="keyword">;<br />
+<br />
+</span><span class="default">$sleepTimeout </span><span class="keyword">= </span><span class="default">10</span><span class="keyword">;<br />
+echo </span><span class="string">"Proper sleep for </span><span class="keyword">{</span><span class="default">$sleepTimeout</span><span class="keyword">}</span><span class="string"> seconds" </span><span class="keyword">. </span><span class="default">PHP_EOL</span><span class="keyword">;<br />
+<br />
+</span><span class="default">$startedAt </span><span class="keyword">= </span><span class="default">time</span><span class="keyword">();<br />
+while (</span><span class="default">$sleepTimeout </span><span class="keyword">&gt; </span><span class="default">0 </span><span class="keyword">&amp;&amp; (</span><span class="default">$sleepTimeout </span><span class="keyword">= </span><span class="default">sleep</span><span class="keyword">(</span><span class="default">$sleepTimeout</span><span class="keyword">)) !== </span><span class="default">true</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"Sleep interrupted, </span><span class="keyword">{</span><span class="default">$sleepTimeout</span><span class="keyword">}</span><span class="string"> seconds remaining" </span><span class="keyword">. </span><span class="default">PHP_EOL</span><span class="keyword">;<br />
+}<br />
+<br />
+</span><span class="default">$elapsed </span><span class="keyword">= </span><span class="default">time</span><span class="keyword">() - </span><span class="default">$startedAt</span><span class="keyword">;<br />
+echo </span><span class="string">"Sleep finished after </span><span class="keyword">{</span><span class="default">$elapsed</span><span class="keyword">}</span><span class="string"> seconds" </span><span class="keyword">. </span><span class="default">PHP_EOL</span><span class="keyword">;<br />
+```</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125458""></a>
+  <div class="note">
+   <strong class="user">kuba at valentine dot dev</strong>
+   <a href="#125458" class="date">24-Oct-2020 08:25</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+This is that universal timeout functionality you dreamed about and always wanted to have and guess what - it's as reliable as it gets, it's basically bulletproof. It can interrupt absolutely anything you throw at it and more, you name it - socket_connect(), socket_read(), fread(), infinite while() loops, sleep(), semaphores - seriously, any blocking operation. You can specify your own handler and just get over anything that normally would make your code unresponsive.
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="comment">/**
+<br />
+&nbsp;* Because we shouldn't handle asynchronous
+<br />
+&nbsp;* events in synchronous manner.
+<br />
+&nbsp;*/
+<br />
+</span><span class="default">pcntl_async_signals</span><span class="keyword">(</span><span class="default">TRUE</span><span class="keyword">);
+<br />
+
+<br />
+</span><span class="comment">/**
+<br />
+&nbsp;* Some flag we can change to know for sure
+<br />
+&nbsp;* that our operation timed out.
+<br />
+&nbsp;*/
+<br />
+</span><span class="default">$timed_out </span><span class="keyword">= </span><span class="default">FALSE</span><span class="keyword">;
+<br />
+
+<br />
+</span><span class="comment">/**
+<br />
+&nbsp;* Register SIGALRM signal handler to avoid
+<br />
+&nbsp;* getting our process killed when signal arrives.
+<br />
+&nbsp;*/
+<br />
+</span><span class="default">pcntl_signal</span><span class="keyword">(</span><span class="default">SIGALRM</span><span class="keyword">, function(</span><span class="default">$signal</span><span class="keyword">) use (&amp;</span><span class="default">$timed_out</span><span class="keyword">) {
+<br />
+&nbsp; </span><span class="default">$timed_out </span><span class="keyword">= </span><span class="default">TRUE</span><span class="keyword">;
+<br />
+});
+<br />
+
+<br />
+</span><span class="comment">/**
+<br />
+&nbsp;* Now we set our timeout for 2 seconds, but it's not set in stone
+<br />
+&nbsp;* we can call pcntl_alarm() anytime to extend or to turn if off.
+<br />
+&nbsp;*/
+<br />
+</span><span class="default">pcntl_alarm</span><span class="keyword">(</span><span class="default">2</span><span class="keyword">);
+<br />
+
+<br />
+</span><span class="comment">/**
+<br />
+&nbsp;* Here we do something with unpredictable outcome that could
+<br />
+&nbsp;* possibly block our program for a very long time.
+<br />
+&nbsp;* I like sockets as an example, but it can be anything.
+<br />
+&nbsp;*/
+<br />
+</span><span class="default">$socket </span><span class="keyword">= </span><span class="default">socket_create</span><span class="keyword">(</span><span class="default">AF_INET</span><span class="keyword">, </span><span class="default">SOCK_STREAM</span><span class="keyword">, </span><span class="default">SOL_TCP</span><span class="keyword">);
+<br />
+</span><span class="default">$connection </span><span class="keyword">= </span><span class="default">socket_connect</span><span class="keyword">(</span><span class="default">$socket</span><span class="keyword">, </span><span class="string">'irc.ircnet.com'</span><span class="keyword">, </span><span class="default">6667</span><span class="keyword">);
+<br />
+
+<br />
+</span><span class="comment">/**
+<br />
+&nbsp;* If our blocking operation didn't timed out then 
+<br />
+&nbsp;* timer is still ticking, we should turn it off ASAP.
+<br />
+&nbsp;*/
+<br />
+</span><span class="default">$timed_out </span><span class="keyword">|| </span><span class="default">pcntl_alarm</span><span class="keyword">(</span><span class="default">0</span><span class="keyword">);
+<br />
+
+<br />
+</span><span class="comment">/**
+<br />
+&nbsp;* And now we do whatever we want to do.
+<br />
+&nbsp;*/
+<br />
+</span><span class="default">$status </span><span class="keyword">= </span><span class="default">$connection </span><span class="keyword">? </span><span class="string">'Connected.' </span><span class="keyword">: (</span><span class="default">$timed_out </span><span class="keyword">? </span><span class="string">'Timed out.' </span><span class="keyword">: </span><span class="default">socket_strerror</span><span class="keyword">(</span><span class="default">socket_last_error</span><span class="keyword">(</span><span class="default">$socket</span><span class="keyword">)));
+<br />
+echo </span><span class="string">'STATUS: '</span><span class="keyword">. </span><span class="default">$status </span><span class="keyword">. </span><span class="default">PHP_EOL</span><span class="keyword">;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="122637""></a>
+  <div class="note">
+   <strong class="user">Gao,Shengwei</strong>
+   <a href="#122637" class="date">19-Apr-2018 05:12</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Use pcntl_signal_dispatch() to catch the signal, don't use declare(ticks=1) because it is ineffcient<br />
+<br />
+<span class="default">&lt;?php<br />
+pcntl_signal</span><span class="keyword">(</span><span class="default">SIGALRM</span><span class="keyword">, function () {<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">'Received an alarm signal !' </span><span class="keyword">. </span><span class="default">PHP_EOL</span><span class="keyword">;<br />
+}, </span><span class="default">false</span><span class="keyword">);<br />
+<br />
+</span><span class="default">pcntl_alarm</span><span class="keyword">(</span><span class="default">5</span><span class="keyword">);<br />
+<br />
+while (</span><span class="default">true</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">pcntl_signal_dispatch</span><span class="keyword">();<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">sleep</span><span class="keyword">(</span><span class="default">1</span><span class="keyword">);<br />
+}</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

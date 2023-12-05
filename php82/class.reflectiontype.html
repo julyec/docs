@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>ReflectionType 类</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="reflectionproperty.tostring.html">? ReflectionProperty::__toString</a></li>
+      <li style="float: right;"><a href="reflectiontype.allowsnull.html">ReflectionType::allowsNull ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="book.reflection.html">反射</a></li>
+    <li>ReflectionType 类</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="class.reflectiontype" class="reference">
+
+ <h1 class="title">ReflectionType 类</h1>
+ 
+
+ <div class="partintro"><p class="verinfo">(PHP 7, PHP 8)</p>
+
+
+  <div class="section" id="reflectiontype.intro">
+   <h2 class="title">简介</h2>
+   <p class="para">
+    <span class="classname"><strong class="classname">ReflectionType</strong></span> 类报告有关函数的参数/返回类型以及类的属性类型的信息。Reflection
+    扩展声明了以下子类型：
+    <ul class="simplelist">
+     <li class="member"><span class="classname"><a href="class.reflectionnamedtype.html" class="classname">ReflectionNamedType</a></span>（自 PHP 7.1.0 起）</li>
+     <li class="member"><span class="classname"><a href="class.reflectionuniontype.html" class="classname">ReflectionUnionType</a></span>（自 PHP 8.0.0 起）</li>
+     <li class="member"><span class="classname"><a href="class.reflectionintersectiontype.html" class="classname">ReflectionIntersectionType</a></span>（自 PHP 8.1.0 起）</li>
+    </ul>
+   </p>
+  </div>
+
+
+  <div class="section" id="reflectiontype.synopsis">
+   <h2 class="title">类摘要</h2>
+
+
+   <div class="classsynopsis">
+    <span class="ooclass">
+     <strong class="classname"></strong>
+    </span>
+
+    <div class="classsynopsisinfo">
+     <span class="ooclass">
+      <span class="modifier">abstract</span>
+      <span class="modifier">class</span> <strong class="classname">ReflectionType</strong>
+     </span>
+
+     <span class="oointerface"><span class="modifier">implements</span> 
+       <a href="class.stringable.html" class="interfacename">Stringable</a></span> {</div>
+
+    <div class="classsynopsisinfo classsynopsisinfo_comment">/* 方法 */</div>
+    <div class="methodsynopsis dc-description">
+   <span class="modifier">public</span> <span class="methodname"><a href="reflectiontype.allowsnull.html" class="methodname">allowsNull</a></span>(): <span class="type">bool</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="reflectiontype.tostring.html" class="methodname">__toString</a></span>(): <span class="type">string</span></div>
+
+   }</div>
+
+  </div>
+
+  <div class="section" id="reflectiontype.changelog">
+   <h2 class="title">更新日志</h2>
+   <p class="para">
+    <table class="doctable informaltable">
+     
+      <thead>
+       <tr>
+        <th>版本</th>
+        <th>说明</th>
+       </tr>
+
+      </thead>
+
+      <tbody class="tbody">
+       <tr>
+        <td>8.0.0</td>
+        <td>
+         <span class="classname"><strong class="classname">ReflectionType</strong></span> 已成为抽象类，<span class="function"><strong>ReflectionType::isBuiltin()</strong></span>
+         已移至 <span class="function"><a href="reflectionnamedtype.isbuiltin.html" class="function">ReflectionNamedType::isBuiltin()</a></span>。
+        </td>
+       </tr>
+
+      </tbody>
+     
+    </table>
+
+   </p>
+  </div>
+
+ </div>
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+<h2>Table of Contents</h2><ul class="chunklist chunklist_reference"><li><a href="reflectiontype.allowsnull.html">ReflectionType::allowsNull</a> &mdash; Checks if null is allowed</li><li><a href="reflectiontype.tostring.html">ReflectionType::__toString</a> &mdash; To string</li></ul>
+</div>
+<div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="125396""></a>
+  <div class="note">
+   <strong class="user">Ondej Mirtes</strong>
+   <a href="#125396" class="date">27-Sep-2020 06:53</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Method ReflectionType::getName() does not exist. This may have been virtually true in the past but not anymore. It exists on ReflectionNamedType which used to be the only child class of ReflectionType. So you could have kind of relied on that.<br />
+<br />
+But in PHP 8 there's also ReflectionUnionType which doesn't have the getName() method. So in order to support PHP 8, you need to support both ReflectionNamedType and ReflectionUnionType.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125376""></a>
+  <div class="note">
+   <strong class="user">benjamin dot morel at gmail dot com</strong>
+   <a href="#125376" class="date">18-Sep-2020 09:03</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Known subclasses:<br />
+<br />
+- ReflectionNamedType<br />
+- ReflectionUnionType</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="124814""></a>
+  <div class="note">
+   <strong class="user">roland at mxchange dot org</strong>
+   <a href="#124814" class="date">11-Mar-2020 09:13</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I guess it is <span class="default">&lt;?php ReflectionNamedType</span><span class="keyword">::</span><span class="default">getName</span><span class="keyword">(); </span><span class="default">?&gt;</span> ?</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="124658""></a>
+  <div class="note">
+   <strong class="user">1franck</strong>
+   <a href="#124658" class="date">28-Jan-2020 08:59</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+For those who stumble on notice about ReflectionType::__toString() beeing deprecated, use method ReflectionType::getName() instead which is not yet documented.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

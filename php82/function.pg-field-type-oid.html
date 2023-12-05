@@ -1,0 +1,233 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>Returns the type ID (OID) for the corresponding field number</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.pg-field-table.html">? pg_field_table</a></li>
+      <li style="float: right;"><a href="function.pg-field-type.html">pg_field_type ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.pgsql.html">PostgreSQL 函数</a></li>
+    <li>Returns the type ID (OID) for the corresponding field number</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.pg-field-type-oid" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">pg_field_type_oid</h1> 
+  <p class="verinfo">(PHP 5 &gt;= 5.1.0, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">pg_field_type_oid</span> &mdash; <span class="dc-title">
+   Returns the type ID (OID) for the corresponding field number
+  </span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.pg-field-type-oid-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>pg_field_type_oid</strong></span>(<span class="methodparam"><span class="type"><a href="class.pgsql-result.html" class="type PgSql\Result">PgSql\Result</a></span> <code class="parameter">$result</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$field</code></span>): <span class="type"><span class="type">string</span>|<span class="type">int</span></span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>pg_field_type_oid()</strong></span> returns an integer containing the
+   OID of the base type of the given <code class="parameter">field</code> in the
+   given <code class="parameter">result</code> instance.
+  </p>
+  <p class="para">
+    You can get more information about the field type by querying PostgreSQL&#039;s
+    <code class="literal">pg_type</code> system table using the OID obtained with this function.
+    The PostgreSQL <span class="function"><strong>format_type()</strong></span> function will convert a
+    type OID into an SQL standard type name.
+  </p>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    If the field uses a PostgreSQL domain (rather than a basic type), it is
+    the OID of the domain&#039;s underlying type that is returned, rather than the OID
+    of the domain itself.
+   </p>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.pg-field-type-oid-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">result</code></dt>
+
+     <dd>
+
+      <p class="para"><span class="classname"><a href="class.pgsql-result.html" class="classname">PgSql\Result</a></span> 实例，由
+<span class="function"><a href="function.pg-query.html" class="function">pg_query()</a></span>、<span class="function"><a href="function.pg-query-params.html" class="function">pg_query_params()</a></span> 或者 <span class="function"><a href="function.pg-execute.html" class="function">pg_execute()</a></span>（等）返回。</p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">field</code></dt>
+
+      <dd>
+
+       <p class="para">
+        Field number, starting from 0.
+       </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.pg-field-type-oid-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   The OID of the field&#039;s base type.
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.pg-field-type-oid-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+ <td>8.1.0</td>
+ <td>
+  现在 <code class="parameter">result</code> 参数接受 <span class="classname"><a href="class.pgsql-result.html" class="classname">PgSql\Result</a></span>
+  实例，之前接受 <a href="language.types.resource.html" class="link">资源(resource)</a>。
+ </td>
+</tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+ 
+ <div class="refsect1 examples" id="refsect1-function.pg-field-type-oid-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="example-3880">
+    <p><strong>Example #1 Getting information about fields</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />  $dbconn </span><span style="color: #007700">= </span><span style="color: #0000BB">pg_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">"dbname=publisher"</span><span style="color: #007700">) or die(</span><span style="color: #DD0000">"Could not connect"</span><span style="color: #007700">);<br /><br />  </span><span style="color: #FF8000">// Assume 'title' is a varchar type<br />  </span><span style="color: #0000BB">$res </span><span style="color: #007700">= </span><span style="color: #0000BB">pg_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$dbconn</span><span style="color: #007700">, </span><span style="color: #DD0000">"select title from authors where author = 'Orwell'"</span><span style="color: #007700">);<br /><br />  echo </span><span style="color: #DD0000">"Title field type OID: "</span><span style="color: #007700">, </span><span style="color: #0000BB">pg_field_type_oid</span><span style="color: #007700">(</span><span style="color: #0000BB">$res</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Title field type OID: 1043
+</pre></div>
+    </div>
+   </div> 
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 seealso" id="refsect1-function.pg-field-type-oid-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.pg-field-type.html" class="function" rel="rdfs-seeAlso">pg_field_type()</a> - 返回相应字段编号的类型名称</span></li>
+    <li class="member"><span class="function"><a href="function.pg-field-prtlen.html" class="function" rel="rdfs-seeAlso">pg_field_prtlen()</a> - 返回打印的长度</span></li>
+    <li class="member"><span class="function"><a href="function.pg-field-name.html" class="function" rel="rdfs-seeAlso">pg_field_name()</a> - 返回字段名</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="125702""></a>
+  <div class="note">
+   <strong class="user">stanislav dot perfilov at gmail dot com</strong>
+   <a href="#125702" class="date">20-Jan-2021 01:23</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="keyword">private function </span><span class="default">mapping</span><span class="keyword">(</span><span class="default">$q</span><span class="keyword">, </span><span class="default">$result</span><span class="keyword">)<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$types </span><span class="keyword">= [];<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; for (</span><span class="default">$i </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">, </span><span class="default">$count </span><span class="keyword">= </span><span class="default">\pg_num_fields</span><span class="keyword">(</span><span class="default">$q</span><span class="keyword">); </span><span class="default">$i </span><span class="keyword">&lt; </span><span class="default">$count</span><span class="keyword">; ++</span><span class="default">$i</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$types</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">] = </span><span class="default">\pg_field_type_oid</span><span class="keyword">(</span><span class="default">$q</span><span class="keyword">, </span><span class="default">$i</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; foreach (</span><span class="default">$result </span><span class="keyword">as </span><span class="default">$k </span><span class="keyword">=&gt; &amp;</span><span class="default">$row</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$i </span><span class="keyword">= -</span><span class="default">1</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; foreach (</span><span class="default">$row </span><span class="keyword">as </span><span class="default">$name </span><span class="keyword">=&gt; &amp;</span><span class="default">$value</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; ++</span><span class="default">$i</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">$value </span><span class="keyword">=== </span><span class="default">null</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; continue;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; switch (</span><span class="default">$types</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">]) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; case </span><span class="default">20</span><span class="keyword">:<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; case </span><span class="default">21</span><span class="keyword">:<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; case </span><span class="default">23</span><span class="keyword">: </span><span class="default">$value </span><span class="keyword">= (int)</span><span class="default">$value</span><span class="keyword">; break;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; case </span><span class="default">16507</span><span class="keyword">: </span><span class="comment">/*$value = (string)$value; */</span><span class="keyword">break;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; default:<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; throw new </span><span class="default">\RuntimeException</span><span class="keyword">(<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">\pg_field_type</span><span class="keyword">(</span><span class="default">$q</span><span class="keyword">, </span><span class="default">$i</span><span class="keyword">) .</span><span class="string">' type. Need mapping ' </span><span class="keyword">. </span><span class="default">\pg_field_type_oid</span><span class="keyword">(</span><span class="default">$q</span><span class="keyword">, </span><span class="default">$i</span><span class="keyword">)<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; );<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; unset(</span><span class="default">$value</span><span class="keyword">, </span><span class="default">$row</span><span class="keyword">);<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$result</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="51251""></a>
+  <div class="note">
+   <strong class="user">mauroi at digbang dot com</strong>
+   <a href="#51251" class="date">24-Mar-2005 07:55</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+This function can be used to improve the performance of your application. <br />
+pg_field_type() makes an internal query to the pg_type table and it can be really slow. <br />
+So if your application previously know the oids of your database, you can save the execution time of this query in every request.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

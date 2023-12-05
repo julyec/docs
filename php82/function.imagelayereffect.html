@@ -1,0 +1,306 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>设定 alpha 混合标志以使用分层效果</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.imagejpeg.html">? imagejpeg</a></li>
+      <li style="float: right;"><a href="function.imageline.html">imageline ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.image.html">GD 和图像处理 函数</a></li>
+    <li>设定 alpha 混合标志以使用分层效果</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.imagelayereffect" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">imagelayereffect</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.3.0, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">imagelayereffect</span> &mdash; <span class="dc-title">设定 alpha 混合标志以使用分层效果</span></p>
+
+ </div>
+ <div class="refsect1 description" id="refsect1-function.imagelayereffect-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>imagelayereffect</strong></span>(<span class="methodparam"><span class="type"><a href="class.gdimage.html" class="type GdImage">GdImage</a></span> <code class="parameter">$image</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$effect</code></span>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">
+   设定 alpha 混色标志以使用分层效果。
+  </p>
+ </div>
+
+ <div class="refsect1 parameters" id="refsect1-function.imagelayereffect-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    <dt>
+
+<code class="parameter">image</code></dt>
+<dd>
+<p class="para">由图象创建函数(例如<span class="function"><a href="function.imagecreatetruecolor.html" class="function">imagecreatetruecolor()</a></span>)返回的 
+<span class="classname"><a href="class.gdimage.html" class="classname">GdImage</a></span> 对象。</p></dd>
+
+    
+     <dt>
+<code class="parameter">effect</code></dt>
+
+     <dd>
+
+      <p class="para">
+       下列常量之一：
+       <dl>
+        
+         <dt>
+<strong><code>IMG_EFFECT_REPLACE</code></strong></dt>
+
+         <dd>
+
+          <span class="simpara">
+           使用像素替换（等同于将 <strong><code>true</code></strong> 传递给 <span class="function"><a href="function.imagealphablending.html" class="function">imagealphablending()</a></span>）
+          </span>
+         </dd>
+
+        
+        
+         <dt>
+<strong><code>IMG_EFFECT_ALPHABLEND</code></strong></dt>
+
+         <dd>
+
+          <span class="simpara">
+           使用普通像素混合（等同于将 <strong><code>false</code></strong> 传递给 <span class="function"><a href="function.imagealphablending.html" class="function">imagealphablending()</a></span>）
+          </span>
+         </dd>
+
+        
+        
+         <dt>
+<strong><code>IMG_EFFECT_NORMAL</code></strong></dt>
+
+         <dd>
+
+          <span class="simpara">
+           与 <strong><code>IMG_EFFECT_ALPHABLEND</code></strong> 相同。
+          </span>
+         </dd>
+
+        
+        
+         <dt>
+<strong><code>IMG_EFFECT_OVERLAY</code></strong></dt>
+
+         <dd>
+
+          <span class="simpara">
+           叠加（overlay）的效果是黑色背景像素将保持黑色，白色背景像素将保持白色，但灰色背景像素将采用前景像素的颜色。
+          </span>
+         </dd>
+
+        
+        
+         <dt>
+<strong><code>IMG_EFFECT_MULTIPLY</code></strong></dt>
+
+         <dd>
+
+          <span class="simpara">
+           Overlays with a multiply effect.
+          </span>
+         </dd>
+
+        
+       </dl>
+
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+ <div class="refsect1 returnvalues" id="refsect1-function.imagelayereffect-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   成功时返回 <strong><code>true</code></strong>， 或者在失败时返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.imagelayereffect-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+ <td>8.0.0</td>
+ <td>
+  <code class="parameter">image</code> 现在需要 <span class="classname"><a href="class.gdimage.html" class="classname">GdImage</a></span> 实例；之前需要有效的 <code class="literal">gd</code> <span class="type">resource</span>。
+ </td>
+</tr>
+
+     <tr>
+      <td>7.2.0</td>
+      <td>
+       新增 <strong><code>IMG_EFFECT_MULTIPLY</code></strong>（要求系统 libgd &gt;= 2.1.1 或捆绑 libgd）。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.imagelayereffect-examples">
+  <h3 class="title">示例</h3>
+  <div class="example" id="example-5544">
+   <p><strong>Example #1 <span class="function"><strong>imagelayereffect()</strong></span> 示例</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// Setup an image<br /></span><span style="color: #0000BB">$im </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecreatetruecolor</span><span style="color: #007700">(</span><span style="color: #0000BB">100</span><span style="color: #007700">, </span><span style="color: #0000BB">100</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// Set a background<br /></span><span style="color: #0000BB">imagefilledrectangle</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">100</span><span style="color: #007700">, </span><span style="color: #0000BB">100</span><span style="color: #007700">, </span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">, </span><span style="color: #0000BB">220</span><span style="color: #007700">, </span><span style="color: #0000BB">220</span><span style="color: #007700">, </span><span style="color: #0000BB">220</span><span style="color: #007700">));<br /><br /></span><span style="color: #FF8000">// Apply the overlay alpha blending flag<br /></span><span style="color: #0000BB">imagelayereffect</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">, </span><span style="color: #0000BB">IMG_EFFECT_OVERLAY</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// Draw two grey ellipses<br /></span><span style="color: #0000BB">imagefilledellipse</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">, </span><span style="color: #0000BB">50</span><span style="color: #007700">, </span><span style="color: #0000BB">50</span><span style="color: #007700">, </span><span style="color: #0000BB">40</span><span style="color: #007700">, </span><span style="color: #0000BB">40</span><span style="color: #007700">, </span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">, </span><span style="color: #0000BB">100</span><span style="color: #007700">, </span><span style="color: #0000BB">255</span><span style="color: #007700">, </span><span style="color: #0000BB">100</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">imagefilledellipse</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">, </span><span style="color: #0000BB">50</span><span style="color: #007700">, </span><span style="color: #0000BB">50</span><span style="color: #007700">, </span><span style="color: #0000BB">50</span><span style="color: #007700">, </span><span style="color: #0000BB">80</span><span style="color: #007700">, </span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">, </span><span style="color: #0000BB">100</span><span style="color: #007700">, </span><span style="color: #0000BB">100</span><span style="color: #007700">, </span><span style="color: #0000BB">255</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">imagefilledellipse</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">, </span><span style="color: #0000BB">50</span><span style="color: #007700">, </span><span style="color: #0000BB">50</span><span style="color: #007700">, </span><span style="color: #0000BB">80</span><span style="color: #007700">, </span><span style="color: #0000BB">50</span><span style="color: #007700">, </span><span style="color: #0000BB">imagecolorallocate</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">, </span><span style="color: #0000BB">255</span><span style="color: #007700">, </span><span style="color: #0000BB">100</span><span style="color: #007700">, </span><span style="color: #0000BB">100</span><span style="color: #007700">));<br /><br /></span><span style="color: #FF8000">// Output<br /></span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">'Content-type: image/png'</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">imagepng</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">imagedestroy</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例的输出类似于：</p></div>
+    <div class="mediaobject">
+     
+     <div class="imageobject">
+      <img src="images/21009b70229598c6a80eef8b45bf282b-imagelayereffect.png" alt="示例输出：imagelayereffect()" width="100" height="100" />
+     </div>
+    </div>
+  </div>
+ </div>
+
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="115787""></a>
+  <div class="note">
+   <strong class="user">rx</strong>
+   <a href="#115787" class="date">23-Sep-2014 12:15</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+IMG_EFFECT_OVERLAY doesn't work in PHP 5.6.0 with GD version: 2.1.0-alpha.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="86185""></a>
+  <div class="note">
+   <strong class="user">andrew at iwebsolutions dot co dot uk</strong>
+   <a href="#86185" class="date">07-Oct-2008 03:38</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I have been getting a fatal error:<br />
+<br />
+Fatal error: Call to undefined function imagelayereffect()<br />
+<br />
+This doesn't work with Ubuntu server (8.04 lts) and the php5-gd package.&nbsp; If you need this you will have to recompile PHP with GD built-in.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="81349""></a>
+  <div class="note">
+   <strong class="user">[myname] at mac dot com</strong>
+   <a href="#81349" class="date">23-Feb-2008 11:45</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+^^ my name is coreyward ^^<br />
+<br />
+imagelayereffect needs to be applied to the destination image, not the source image. As noted, the only useful "effect" as of this time is IMG_EFFECT_OVERLAY since the others are merely another way of setting the alpha blending flag. <br />
+<br />
+You can also use imagecopymerge with a lower pct argument to blend two images with more control over the opacity at which the top image is blended. <br />
+<br />
+&lt;?<br />
+<br />
+// overlays $im_src onto $im_dst properly (assuming same dims)<br />
+<br />
+imagelayereffect($im_dst, IMG_EFFECT_OVERLAY);<br />
+imagecopy($im_dst, $im_src, 0, 0, 0, 0, $im_dst_x, $im_dst_y);<br />
+<br />
+?&gt;</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="80871""></a>
+  <div class="note">
+   <strong class="user">Remon</strong>
+   <a href="#80871" class="date">05-Feb-2008 01:12</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I found the following example on a Chinese site and translated and adjusted it. It creates a portrait from the sample picture.<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="comment">// Portrait image<br />
+</span><span class="default">$im </span><span class="keyword">= </span><span class="default">imagecreatefromjpeg</span><span class="keyword">( </span><span class="string">"sample.jpg"</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">// Get width and height<br />
+</span><span class="default">$w </span><span class="keyword">= </span><span class="default">imagesx</span><span class="keyword">(</span><span class="default">$im</span><span class="keyword">); <br />
+</span><span class="default">$h </span><span class="keyword">= </span><span class="default">imagesy</span><span class="keyword">(</span><span class="default">$im</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">// Non-through<br />
+</span><span class="default">$c_visible </span><span class="keyword">= </span><span class="default">0x007F7F7F</span><span class="keyword">;<br />
+</span><span class="comment">// Background (black) <br />
+</span><span class="default">$c_bg </span><span class="keyword">= </span><span class="default">0x00000000</span><span class="keyword">; <br />
+<br />
+</span><span class="comment">// Create mask<br />
+</span><span class="default">$im_mask </span><span class="keyword">= </span><span class="default">imagecreatetruecolor</span><span class="keyword">(</span><span class="default">$w</span><span class="keyword">,</span><span class="default">$h</span><span class="keyword">);<br />
+</span><span class="default">imageFilledRectangle</span><span class="keyword">(</span><span class="default">$im_mask</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">,</span><span class="default">0</span><span class="keyword">, </span><span class="default">$w</span><span class="keyword">,</span><span class="default">$h</span><span class="keyword">, </span><span class="default">$c_bg</span><span class="keyword">); <br />
+</span><span class="default">imageFilledEllipse </span><span class="keyword">(</span><span class="default">$im_mask</span><span class="keyword">, </span><span class="default">$w</span><span class="keyword">/</span><span class="default">2</span><span class="keyword">,</span><span class="default">$h</span><span class="keyword">/</span><span class="default">2</span><span class="keyword">, </span><span class="default">$w</span><span class="keyword">*</span><span class="default">.9</span><span class="keyword">,</span><span class="default">$h</span><span class="keyword">*</span><span class="default">.9</span><span class="keyword">, </span><span class="default">$c_visible</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">// Only overlay seems to something useful<br />
+</span><span class="default">imagelayereffect</span><span class="keyword">(</span><span class="default">$im_mask</span><span class="keyword">, </span><span class="default">IMG_EFFECT_OVERLAY</span><span class="keyword">);<br />
+<br />
+</span><span class="default">imagecopy</span><span class="keyword">(</span><span class="default">$im_mask</span><span class="keyword">, </span><span class="default">$im</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">,</span><span class="default">0</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">,</span><span class="default">0</span><span class="keyword">, </span><span class="default">$w</span><span class="keyword">,</span><span class="default">$h</span><span class="keyword">); <br />
+</span><span class="default">imagedestroy</span><span class="keyword">(</span><span class="default">$im</span><span class="keyword">);<br />
+<br />
+</span><span class="default">imagepng</span><span class="keyword">(</span><span class="default">$im_mask</span><span class="keyword">);<br />
+</span><span class="default">imagedestroy</span><span class="keyword">(</span><span class="default">$im_mask</span><span class="keyword">);<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Try removing the 'create mask' code and just add another image with 'createimagefromjpeg' to see 'normal' overlay. It blends the colors like different layers in Photoshop.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

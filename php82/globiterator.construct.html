@@ -1,0 +1,252 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>Construct a directory using glob</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="class.globiterator.html">? GlobIterator</a></li>
+      <li style="float: right;"><a href="globiterator.count.html">GlobIterator::count ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="class.globiterator.html">GlobIterator</a></li>
+    <li>Construct a directory using glob</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="globiterator.construct" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">GlobIterator::__construct</h1>
+  <p class="verinfo">(PHP 5 &gt;= 5.3.0, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">GlobIterator::__construct</span> &mdash; <span class="dc-title">Construct a directory using glob</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-globiterator.construct-description">
+  <h3 class="title">说明</h3>
+  <div class="constructorsynopsis dc-description">
+   <span class="modifier">public</span> <span class="methodname"><strong>GlobIterator::__construct</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$pattern</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$flags</code><span class="initializer"> = FilesystemIterator::KEY_AS_PATHNAME | FilesystemIterator::CURRENT_AS_FILEINFO</span></span>)</div>
+
+  <p class="para rdfs-comment">
+   Constructs a new directory iterator from a glob expression.
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-globiterator.construct-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">pattern</code></dt>
+
+     <dd>
+
+      <p class="para">
+       A <span class="function"><a href="function.glob.html" class="function">glob()</a></span> pattern.
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">flags</code></dt>
+
+     <dd>
+
+      <p class="para">
+       Option flags, the flags may be a bitmask of the 
+       <span class="classname"><a href="class.filesystemiterator.html" class="classname">FilesystemIterator</a></span> constants.
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 errors" id="refsect1-globiterator.construct-errors">
+  <h3 class="title">错误／异常</h3>
+  <p class="para">
+   Throws an <span class="classname"><a href="class.unexpectedvalueexception.html" class="classname">UnexpectedValueException</a></span>
+   if the <code class="parameter">directory</code> does not exist.
+  </p>
+  <p class="para">
+   Throws a <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>
+   if the <code class="parameter">directory</code> is an empty string.
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-globiterator.construct-changelog">
+  <h3 class="title">更新日志</h3>
+  <p class="para">
+   <table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>版本</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>8.0.0</td>
+       <td>
+        Now throws a <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span> if
+        <code class="parameter">directory</code> is an empty string;
+        previously it threw a <span class="classname"><a href="class.runtimeexception.html" class="classname">RuntimeException</a></span>.
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-globiterator.construct-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #1 <span class="classname"><a href="class.globiterator.html" class="classname">GlobIterator</a></span> example</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$iterator </span><span style="color: #007700">= new </span><span style="color: #0000BB">GlobIterator</span><span style="color: #007700">(</span><span style="color: #DD0000">'*.dll'</span><span style="color: #007700">, </span><span style="color: #0000BB">FilesystemIterator</span><span style="color: #007700">::</span><span style="color: #0000BB">KEY_AS_FILENAME</span><span style="color: #007700">);<br /><br />if (!</span><span style="color: #0000BB">$iterator</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">count</span><span style="color: #007700">()) {<br />    echo </span><span style="color: #DD0000">'No matches'</span><span style="color: #007700">;<br />} else {<br />    </span><span style="color: #0000BB">$n </span><span style="color: #007700">= </span><span style="color: #0000BB">0</span><span style="color: #007700">;<br /><br />    </span><span style="color: #0000BB">printf</span><span style="color: #007700">(</span><span style="color: #DD0000">"Matched %d item(s)\r\n"</span><span style="color: #007700">, </span><span style="color: #0000BB">$iterator</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">count</span><span style="color: #007700">());<br /><br />    foreach (</span><span style="color: #0000BB">$iterator </span><span style="color: #007700">as </span><span style="color: #0000BB">$item</span><span style="color: #007700">) {<br />        </span><span style="color: #0000BB">printf</span><span style="color: #007700">(</span><span style="color: #DD0000">"[%d] %s\r\n"</span><span style="color: #007700">, ++</span><span style="color: #0000BB">$n</span><span style="color: #007700">, </span><span style="color: #0000BB">$iterator</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">key</span><span style="color: #007700">());<br />    }<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例的输出类似于：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Matched 2 item(s)
+[1] php5ts.dll
+[2] php_gd2.dll
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-globiterator.construct-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="methodname"><a href="directoryiterator.construct.html" class="methodname" rel="rdfs-seeAlso">DirectoryIterator::__construct()</a> - Constructs a new directory iterator from a path</span></li>
+    <li class="member"><span class="methodname"><a href="globiterator.count.html" class="methodname" rel="rdfs-seeAlso">GlobIterator::count()</a> - Get the number of directories and files</span></li>
+    <li class="member"><span class="function"><a href="function.glob.html" class="function" rel="rdfs-seeAlso">glob()</a> - 寻找与模式匹配的文件路径</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="125221""></a>
+  <div class="note">
+   <strong class="user">info at ensostudio dot ru</strong>
+   <a href="#125221" class="date">28-Jul-2020 12:30</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Fix problem with braces in template:<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">class </span><span class="default">GlobStreamWrapper<br />
+</span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; private </span><span class="default">$generator</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; protected function </span><span class="default">createGenerator</span><span class="keyword">(array </span><span class="default">$paths</span><span class="keyword">): </span><span class="default">Generator<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">{<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return yield from </span><span class="default">$paths</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">dir_opendir</span><span class="keyword">(</span><span class="default">string $pattern</span><span class="keyword">, </span><span class="default">int $options </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">): </span><span class="default">bool<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">{<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$pattern </span><span class="keyword">= </span><span class="default">substr</span><span class="keyword">(</span><span class="default">$pattern</span><span class="keyword">, </span><span class="default">7</span><span class="keyword">); </span><span class="comment">// crop 'glob://' prefix<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$pattern </span><span class="keyword">= </span><span class="default">str_replace</span><span class="keyword">([</span><span class="string">'\\'</span><span class="keyword">, </span><span class="string">'/'</span><span class="keyword">], </span><span class="default">DIRECTORY_SEPARATOR</span><span class="keyword">, </span><span class="default">$pattern</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$paths </span><span class="keyword">= (array) </span><span class="default">glob</span><span class="keyword">(</span><span class="default">$pattern</span><span class="keyword">, </span><span class="default">GLOB_BRACE </span><span class="keyword">| </span><span class="default">GLOB_NOSORT</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">generator </span><span class="keyword">= </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">createGenerator</span><span class="keyword">(</span><span class="default">$paths</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">generator</span><span class="keyword">-&gt;</span><span class="default">valid</span><span class="keyword">();<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">dir_readdir</span><span class="keyword">(): </span><span class="default">string<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">{<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$path </span><span class="keyword">= </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">generator</span><span class="keyword">-&gt;</span><span class="default">current</span><span class="keyword">() ?: </span><span class="string">''</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">generator</span><span class="keyword">-&gt;</span><span class="default">next</span><span class="keyword">();<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$path</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">dir_rewinddir</span><span class="keyword">(): </span><span class="default">bool<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">{<br />
+&nbsp;&nbsp; &nbsp; &nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">generator</span><span class="keyword">-&gt;</span><span class="default">rewind</span><span class="keyword">();<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">generator</span><span class="keyword">-&gt;</span><span class="default">valid</span><span class="keyword">();<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">dir_closedir</span><span class="keyword">(): </span><span class="default">bool<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">{<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">generator </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">true</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span>Replace glob wrapper:<br />
+<span class="default">&lt;?php<br />
+stream_wrapper_unregister</span><span class="keyword">(</span><span class="string">'glob'</span><span class="keyword">);<br />
+</span><span class="default">stream_wrapper_register</span><span class="keyword">(</span><span class="string">'glob'</span><span class="keyword">, </span><span class="string">'GlobStreamWrapper'</span><span class="keyword">);<br />
+</span><span class="default">?&gt;<br />
+</span>Example:<br />
+<span class="default">&lt;?php<br />
+$iterator </span><span class="keyword">= new </span><span class="default">GlobIterator</span><span class="keyword">(</span><span class="default">__DIR__ </span><span class="keyword">. </span><span class="string">'/{application,system}/src/*.php'</span><span class="keyword">);<br />
+while (</span><span class="default">$iterator</span><span class="keyword">-&gt;</span><span class="default">valid</span><span class="keyword">()) {<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="default">$iterator</span><span class="keyword">-&gt;</span><span class="default">current</span><span class="keyword">()-&gt;</span><span class="default">getFilename</span><span class="keyword">() . </span><span class="string">'&lt;/br&gt;'</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$iterator</span><span class="keyword">-&gt;</span><span class="default">next</span><span class="keyword">();<br />
+}<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="114725""></a>
+  <div class="note">
+   <strong class="user">ozana at omdesign dot cz</strong>
+   <a href="#114725" class="date">29-Mar-2014 10:08</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+GlobIterator doesn't have a way to support GLOB_BRACE!<br />
+<br />
+<span class="default">&lt;?php<br />
+$iterator </span><span class="keyword">= new </span><span class="default">GlobIterator</span><span class="keyword">(</span><span class="default">getcwd</span><span class="keyword">. </span><span class="string">'/*.{php,txt}'</span><span class="keyword">); </span><span class="comment">// generate an empty array<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

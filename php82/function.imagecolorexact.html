@@ -1,0 +1,258 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>取得指定颜色的索引值</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.imagecolordeallocate.html">? imagecolordeallocate</a></li>
+      <li style="float: right;"><a href="function.imagecolorexactalpha.html">imagecolorexactalpha ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.image.html">GD 和图像处理 函数</a></li>
+    <li>取得指定颜色的索引值</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.imagecolorexact" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">imagecolorexact</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">imagecolorexact</span> &mdash; <span class="dc-title">取得指定颜色的索引值</span></p>
+
+ </div>
+ <div class="refsect1 description" id="refsect1-function.imagecolorexact-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>imagecolorexact</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><a href="class.gdimage.html" class="type GdImage">GdImage</a></span> <code class="parameter">$image</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$red</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$green</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$blue</code></span><br>): <span class="type">int</span></div>
+
+  <p class="para rdfs-comment">
+   返回图像调色板中指定颜色的索引值。
+  </p>
+  <p class="para">如果图象由文件创建，只有该图象使用到的颜色会被解析。仅存在于调色板中的颜色不会被解析。</p>
+ </div>
+
+ <div class="refsect1 parameters" id="refsect1-function.imagecolorexact-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    <dt>
+
+<code class="parameter">image</code></dt>
+<dd>
+<p class="para">由图象创建函数(例如<span class="function"><a href="function.imagecreatetruecolor.html" class="function">imagecreatetruecolor()</a></span>)返回的 
+<span class="classname"><a href="class.gdimage.html" class="classname">GdImage</a></span> 对象。</p></dd>
+
+    
+     <dt>
+<code class="parameter">red</code></dt>
+
+     <dd>
+
+      <p class="para">红色成分的值。</p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">green</code></dt>
+
+     <dd>
+
+      <p class="para">绿色成分的值。</p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">blue</code></dt>
+
+     <dd>
+
+      <p class="para">蓝色成分的值。</p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+ <div class="refsect1 returnvalues" id="refsect1-function.imagecolorexact-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回调色板中指定颜色的索引值，如果该颜色不存在则返回 -1。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.imagecolorexact-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+ <td>8.0.0</td>
+ <td>
+  <code class="parameter">image</code> 现在需要 <span class="classname"><a href="class.gdimage.html" class="classname">GdImage</a></span> 实例；之前需要有效的 <code class="literal">gd</code> <span class="type">resource</span>。
+ </td>
+</tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.imagecolorexact-examples">
+  <h3 class="title">示例</h3>
+  <div class="example" id="example-5400">
+   <p><strong>Example #1 从 GD logo 中获取颜色</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// Setup an image<br /></span><span style="color: #0000BB">$im </span><span style="color: #007700">= </span><span style="color: #0000BB">imagecreatefrompng</span><span style="color: #007700">(</span><span style="color: #DD0000">'./gdlogo.png'</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$colors   </span><span style="color: #007700">= Array();<br /></span><span style="color: #0000BB">$colors</span><span style="color: #007700">[] = </span><span style="color: #0000BB">imagecolorexact</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">, </span><span style="color: #0000BB">255</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$colors</span><span style="color: #007700">[] = </span><span style="color: #0000BB">imagecolorexact</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">0</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$colors</span><span style="color: #007700">[] = </span><span style="color: #0000BB">imagecolorexact</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">, </span><span style="color: #0000BB">255</span><span style="color: #007700">, </span><span style="color: #0000BB">255</span><span style="color: #007700">, </span><span style="color: #0000BB">255</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$colors</span><span style="color: #007700">[] = </span><span style="color: #0000BB">imagecolorexact</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">, </span><span style="color: #0000BB">100</span><span style="color: #007700">, </span><span style="color: #0000BB">255</span><span style="color: #007700">, </span><span style="color: #0000BB">52</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$colors</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// Free from memory<br /></span><span style="color: #0000BB">imagedestroy</span><span style="color: #007700">(</span><span style="color: #0000BB">$im</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例的输出类似于：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+Array
+(
+    [0] =&gt; 16711680
+    [1] =&gt; 0
+    [2] =&gt; 16777215
+    [3] =&gt; 6618932
+)
+</pre></div>
+   </div>
+  </div>
+ </div>
+
+ <div class="refsect1 seealso" id="refsect1-function.imagecolorexact-seealso">
+  <h3 class="title">参见</h3>
+  <ul class="simplelist">
+   <li class="member"><span class="function"><a href="function.imagecolorclosest.html" class="function" rel="rdfs-seeAlso">imagecolorclosest()</a> - 取得与指定的颜色最接近的颜色索引值</span></li>
+  </ul>
+ </div>
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="103092""></a>
+  <div class="note">
+   <strong class="user">samtobia at geemail dot com</strong>
+   <a href="#103092" class="date">24-Mar-2011 10:11</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+A script that changes colors depending on get variable<br />
+important to note: I had little success with pngs and getting true red<br />
+gifs work much better<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="comment">//0 is yellow, 1 is red, 2 is blue<br />
+</span><span class="default">$y </span><span class="keyword">= </span><span class="default">1 </span><span class="keyword">- </span><span class="default">ceil</span><span class="keyword">(</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">"c"</span><span class="keyword">]/</span><span class="default">2</span><span class="keyword">);<br />
+</span><span class="default">$r </span><span class="keyword">= </span><span class="default">1 </span><span class="keyword">- </span><span class="default">floor</span><span class="keyword">(</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">"c"</span><span class="keyword">]/</span><span class="default">2</span><span class="keyword">);<br />
+</span><span class="default">$b </span><span class="keyword">= </span><span class="default">floor</span><span class="keyword">(</span><span class="default">$_GET</span><span class="keyword">[</span><span class="string">"c"</span><span class="keyword">]/</span><span class="default">2</span><span class="keyword">);<br />
+<br />
+</span><span class="default">$gd </span><span class="keyword">= </span><span class="default">imagecreatefromgif</span><span class="keyword">(</span><span class="string">"example.gif"</span><span class="keyword">);<br />
+</span><span class="default">imagecolorset</span><span class="keyword">(</span><span class="default">$gd</span><span class="keyword">, </span><span class="default">imagecolorexact</span><span class="keyword">(</span><span class="default">$gd</span><span class="keyword">, </span><span class="default">255</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">), </span><span class="default">$r</span><span class="keyword">*</span><span class="default">255</span><span class="keyword">, </span><span class="default">$y</span><span class="keyword">*</span><span class="default">255</span><span class="keyword">, </span><span class="default">$b</span><span class="keyword">*</span><span class="default">255</span><span class="keyword">);<br />
+</span><span class="default">imagecolorset</span><span class="keyword">(</span><span class="default">$gd</span><span class="keyword">, </span><span class="default">imagecolorexact</span><span class="keyword">(</span><span class="default">$gd</span><span class="keyword">, </span><span class="default">191</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">), </span><span class="default">$r</span><span class="keyword">*</span><span class="default">191</span><span class="keyword">, </span><span class="default">$y</span><span class="keyword">*</span><span class="default">191</span><span class="keyword">, </span><span class="default">$b</span><span class="keyword">*</span><span class="default">191</span><span class="keyword">);<br />
+</span><span class="default">imagecolorset</span><span class="keyword">(</span><span class="default">$gd</span><span class="keyword">, </span><span class="default">imagecolorexact</span><span class="keyword">(</span><span class="default">$gd</span><span class="keyword">, </span><span class="default">128</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">), </span><span class="default">$r</span><span class="keyword">*</span><span class="default">128</span><span class="keyword">, </span><span class="default">$y</span><span class="keyword">*</span><span class="default">128</span><span class="keyword">, </span><span class="default">$b</span><span class="keyword">*</span><span class="default">128</span><span class="keyword">);<br />
+</span><span class="default">imagecolorset</span><span class="keyword">(</span><span class="default">$gd</span><span class="keyword">, </span><span class="default">imagecolorexact</span><span class="keyword">(</span><span class="default">$gd</span><span class="keyword">, </span><span class="default">255</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">), </span><span class="default">$r</span><span class="keyword">*</span><span class="default">64</span><span class="keyword">, </span><span class="default">$y</span><span class="keyword">*</span><span class="default">64</span><span class="keyword">, </span><span class="default">$b</span><span class="keyword">*</span><span class="default">64</span><span class="keyword">);<br />
+<br />
+</span><span class="default">header</span><span class="keyword">(</span><span class="string">'Content-Type: image/gif'</span><span class="keyword">);<br />
+</span><span class="default">imagegif</span><span class="keyword">(</span><span class="default">$gd</span><span class="keyword">);<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="62071""></a>
+  <div class="note">
+   <strong class="user">jbr at ya-right dot com</strong>
+   <a href="#62071" class="date">18-Feb-2006 12:38</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+A few notes about this function...<br />
+<br />
+This function will only work on images where the palette is 256 colors or less. You also can not use imagetruecolortopalette() to reduce the palette on a true color PNG image that has greater than 256 colors in it's palette, then call this function. If you try to do this imagecolorexact() will report colors not being in the image when they are in the image!<br />
+<br />
+1. works on png(s) 8bit/256 colors or less.<br />
+2. works on all gif(s)<br />
+3. does not work on any type of jpg/jpeg image.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="58810""></a>
+  <div class="note">
+   <strong class="user">info at educar dot pro dot br</strong>
+   <a href="#58810" class="date">16-Nov-2005 11:14</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+<span class="default">&lt;?php<br />
+<br />
+$src </span><span class="keyword">= </span><span class="string">"../images/pic.gif"</span><span class="keyword">;<br />
+<br />
+</span><span class="default">$red </span><span class="keyword">= </span><span class="default">9</span><span class="keyword">;<br />
+</span><span class="default">$green </span><span class="keyword">= </span><span class="default">9</span><span class="keyword">;<br />
+</span><span class="default">$blue </span><span class="keyword">= </span><span class="default">4</span><span class="keyword">;<br />
+<br />
+</span><span class="default">$pic0026 </span><span class="keyword">= </span><span class="default">imagecreatefromgif </span><span class="keyword">( </span><span class="default">$src </span><span class="keyword">);<br />
+<br />
+</span><span class="default">$ind </span><span class="keyword">= </span><span class="default">imagecolorexact </span><span class="keyword">( </span><span class="default">$pic</span><span class="keyword">, </span><span class="default">$red</span><span class="keyword">, </span><span class="default">$green</span><span class="keyword">, </span><span class="default">$blue </span><span class="keyword">);<br />
+<br />
+echo </span><span class="string">'&lt;img src="../images/pic.gif" border="0" alt="pic" title="View pic" /&gt;&lt;br /&gt;&lt;br /&gt;'</span><span class="keyword">;<br />
+<br />
+echo </span><span class="string">"RED ( " </span><span class="keyword">. </span><span class="default">$red </span><span class="keyword">. </span><span class="string">" ) GREEN ( " </span><span class="keyword">. </span><span class="default">$green </span><span class="keyword">. </span><span class="string">" ) BLUE ( " </span><span class="keyword">. </span><span class="default">$blue </span><span class="keyword">. </span><span class="string">" )&lt;br /&gt;-&gt; Palette Index = " </span><span class="keyword">. </span><span class="default">$ind</span><span class="keyword">;<br />
+<br />
+if ( </span><span class="default">$ind </span><span class="keyword">!= -</span><span class="default">1 </span><span class="keyword">)<br />
+{<br />
+echo </span><span class="string">"&lt;br /&gt;[ The color exists! ]"</span><span class="keyword">;<br />
+}<br />
+else<br />
+{<br />
+echo </span><span class="string">"&lt;br /&gt;[ The color does not exist! ]"</span><span class="keyword">;<br />
+}<br />
+<br />
+</span><span class="default">imagedestroy </span><span class="keyword">( </span><span class="default">$pic </span><span class="keyword">);<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

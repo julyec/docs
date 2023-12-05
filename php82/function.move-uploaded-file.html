@@ -1,0 +1,582 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>将上传的文件移动到新位置</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.mkdir.html">? mkdir</a></li>
+      <li style="float: right;"><a href="function.parse-ini-file.html">parse_ini_file ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.filesystem.html">文件系统函数</a></li>
+    <li>将上传的文件移动到新位置</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.move-uploaded-file" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">move_uploaded_file</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.0.3, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">move_uploaded_file</span> &mdash; <span class="dc-title">将上传的文件移动到新位置</span></p>
+
+ </div>
+ <div class="refsect1 description" id="refsect1-function.move-uploaded-file-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>move_uploaded_file</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$from</code></span>, <span class="methodparam"><span class="type">string</span> <code class="parameter">$to</code></span>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">
+   本函数检查并确保由 <code class="parameter">from</code>
+   指定的文件是合法的上传文件（即通过 PHP 的 HTTP POST
+   上传机制所上传的）。如果文件合法，则将其移动为由
+   <code class="parameter">to</code> 指定的文件。
+  </p>
+  <p class="para">
+   这种检查显得格外重要，如果上传的文件有可能会造成对用户或本系统的其他用户显示其内容的话。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.move-uploaded-file-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">from</code></dt>
+
+     <dd>
+
+      <p class="para">
+       上传的文件的文件名。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">to</code></dt>
+
+     <dd>
+
+      <p class="para">
+       移动文件到这个位置。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 returnvalues" id="refsect1-function.move-uploaded-file-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   成功时返回 <strong><code>true</code></strong>。
+  </p>
+  <p class="para">
+   如果 <code class="parameter">from</code>
+   不是合法的上传文件，不会出现任何操作，<span class="function"><strong>move_uploaded_file()</strong></span>
+   将返回 <strong><code>false</code></strong>。
+  </p>
+  <p class="para">
+   如果 <code class="parameter">from</code>
+   是合法的上传文件，但出于某些原因无法移动，不会出现任何操作，<span class="function"><strong>move_uploaded_file()</strong></span>
+   将返回 <strong><code>false</code></strong>。此外还会发出一条警告。
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.move-uploaded-file-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="example-4528">
+    <p><strong>Example #1 Uploading multiple files</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$uploads_dir </span><span style="color: #007700">= </span><span style="color: #DD0000">'/uploads'</span><span style="color: #007700">;<br />foreach (</span><span style="color: #0000BB">$_FILES</span><span style="color: #007700">[</span><span style="color: #DD0000">"pictures"</span><span style="color: #007700">][</span><span style="color: #DD0000">"error"</span><span style="color: #007700">] as </span><span style="color: #0000BB">$key </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">$error</span><span style="color: #007700">) {<br />    if (</span><span style="color: #0000BB">$error </span><span style="color: #007700">== </span><span style="color: #0000BB">UPLOAD_ERR_OK</span><span style="color: #007700">) {<br />        </span><span style="color: #0000BB">$tmp_name </span><span style="color: #007700">= </span><span style="color: #0000BB">$_FILES</span><span style="color: #007700">[</span><span style="color: #DD0000">"pictures"</span><span style="color: #007700">][</span><span style="color: #DD0000">"tmp_name"</span><span style="color: #007700">][</span><span style="color: #0000BB">$key</span><span style="color: #007700">];<br />        </span><span style="color: #FF8000">// basename() 可以防止遍历攻击文件系统；<br />        // 进一步验证/清理文件名可能是合适的<br />        </span><span style="color: #0000BB">$name </span><span style="color: #007700">= </span><span style="color: #0000BB">basename</span><span style="color: #007700">(</span><span style="color: #0000BB">$_FILES</span><span style="color: #007700">[</span><span style="color: #DD0000">"pictures"</span><span style="color: #007700">][</span><span style="color: #DD0000">"name"</span><span style="color: #007700">][</span><span style="color: #0000BB">$key</span><span style="color: #007700">]);<br />        </span><span style="color: #0000BB">move_uploaded_file</span><span style="color: #007700">(</span><span style="color: #0000BB">$tmp_name</span><span style="color: #007700">, </span><span style="color: #DD0000">"</span><span style="color: #0000BB">$uploads_dir</span><span style="color: #DD0000">/</span><span style="color: #0000BB">$name</span><span style="color: #DD0000">"</span><span style="color: #007700">);<br />    }<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.move-uploaded-file-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    <span class="function"><strong>move_uploaded_file()</strong></span> 对
+    <a href="ini.core.html#ini.open-basedir" class="link">open_basedir</a> 是敏感的。不过，限制只针对
+    <code class="parameter">to</code> 路径，因为允许移动上传的文件名
+    <code class="parameter">from</code>
+    可能会与这些限制产生冲突。<span class="function"><strong>move_uploaded_file()</strong></span>
+    仅作用于通过 PHP 上传的文件以确保这个操作的安全性。
+   </p>
+  </p></blockquote>
+  <div class="warning"><strong class="warning">Warning</strong>
+   <p class="para">
+    如果目标文件已经存在，将会被覆盖。
+   </p>
+  </div>
+ </div>
+
+ 
+ <div class="refsect1 seealso" id="refsect1-function.move-uploaded-file-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.is-uploaded-file.html" class="function" rel="rdfs-seeAlso">is_uploaded_file()</a> - 判断文件是否是通过 HTTP POST 上传的</span></li>
+    <li class="member"><span class="function"><a href="function.rename.html" class="function" rel="rdfs-seeAlso">rename()</a> - 重命名一个文件或目录</span></li>
+    <li class="member">参见<a href="features.file-upload.html" class="link">文件上传处理</a>一章中的简单使用例子。</li>
+   </ul>
+  </p>
+ </div>
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="128697""></a>
+  <div class="note">
+   <strong class="user">chelidze dot givia at gmail dot com</strong>
+   <a href="#128697" class="date">06-Jul-2023 02:54</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+When using move_uploaded_file(). If the user uploads an image with a name that already exists, move_uploaded_file() will overwrite it. It's a good practice to store images in directories that you generate upon creating ur card/user/product etc...<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">function </span><span class="default">generateDir</span><span class="keyword">(</span><span class="default">int $n</span><span class="keyword">): </span><span class="default">string </span><span class="keyword">{<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$characters</span><span class="keyword">=</span><span class="string">"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$dir </span><span class="keyword">= </span><span class="string">""</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; for(</span><span class="default">$i </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">&lt;</span><span class="default">$n</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">++){<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$index </span><span class="keyword">= </span><span class="default">rand</span><span class="keyword">(</span><span class="default">0</span><span class="keyword">, </span><span class="default">strlen</span><span class="keyword">(</span><span class="default">$characters</span><span class="keyword">)-</span><span class="default">1</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$dir </span><span class="keyword">.= </span><span class="default">$characters</span><span class="keyword">[</span><span class="default">$index</span><span class="keyword">];<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$dir</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$image </span><span class="keyword">= </span><span class="default">$_FILES</span><span class="keyword">[</span><span class="string">"image"</span><span class="keyword">];<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$imagePath </span><span class="keyword">= </span><span class="string">'images/'</span><span class="keyword">. </span><span class="default">generateDir</span><span class="keyword">(</span><span class="default">10</span><span class="keyword">) .</span><span class="string">'/'</span><span class="keyword">. </span><span class="default">$image</span><span class="keyword">[</span><span class="string">"name"</span><span class="keyword">];<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// Make the directory first or else it will not proceed with the upload.<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">mkdir</span><span class="keyword">(</span><span class="default">$imagePath</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// some error handling etc...<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">move_uploaded_file</span><span class="keyword">(</span><span class="default">$image</span><span class="keyword">[</span><span class="string">"tmp_name"</span><span class="keyword">],&nbsp; </span><span class="default">$imagePath</span><span class="keyword">);<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="128556""></a>
+  <div class="note">
+   <strong class="user">benbrown3882 at gmail dot com</strong>
+   <a href="#128556" class="date">19-May-2023 04:04</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Ensure the upload temporary directory and the destination directory have "write" permissions for Other.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="123705""></a>
+  <div class="note">
+   <strong class="user">Juliano P. Santos</strong>
+   <a href="#123705" class="date">19-Mar-2019 10:25</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+For those which will use inotify-tools to start an event when move_uploaded_file put the file in a specific directory, be aware that move_uploaded_file will trigger the create event, and not the move event of inotify-tools.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="116451""></a>
+  <div class="note">
+   <strong class="user">Tom</strong>
+   <a href="#116451" class="date">05-Jan-2015 03:33</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Nowhere does it say how to get the error/warning message when this fails.<br />
+<br />
+The only way I know of doing it is something like this:<br />
+<br />
+&nbsp;&nbsp; if (move_uploaded_file($_FILES["file1"]["tmp_name"], $target_file)) {<br />
+&nbsp;&nbsp; &nbsp;&nbsp; echo "&lt;P&gt;FILE UPLOADED TO: $target_file&lt;/P&gt;";<br />
+&nbsp;&nbsp; } else {<br />
+&nbsp;&nbsp; &nbsp;&nbsp; echo "&lt;P&gt;MOVE UPLOADED FILE FAILED!&lt;/P&gt;";<br />
+&nbsp;&nbsp; &nbsp;&nbsp; print_r(error_get_last());<br />
+&nbsp;&nbsp; }</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="111412""></a>
+  <div class="note">
+   <strong class="user">Yousef Ismaeil Cliprz</strong>
+   <a href="#111412" class="date">17-Feb-2013 10:59</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Security tips you must know before use this function :<br />
+<br />
+First : make sure that the file is not empty.<br />
+<br />
+Second : make sure the file name in English characters, numbers and (_-.) symbols, For more protection.<br />
+<br />
+You can use below function as in example<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="comment">/**<br />
+&nbsp;* Check $_FILES[][name]<br />
+&nbsp;*<br />
+&nbsp;* @param (string) $filename - Uploaded file name.<br />
+&nbsp;* @author Yousef Ismaeil Cliprz<br />
+&nbsp;*/<br />
+</span><span class="keyword">function </span><span class="default">check_file_uploaded_name </span><span class="keyword">(</span><span class="default">$filename</span><span class="keyword">)<br />
+{<br />
+&nbsp;&nbsp;&nbsp; (bool) ((</span><span class="default">preg_match</span><span class="keyword">(</span><span class="string">"`^[-0-9A-Z_\.]+$`i"</span><span class="keyword">,</span><span class="default">$filename</span><span class="keyword">)) ? </span><span class="default">true </span><span class="keyword">: </span><span class="default">false</span><span class="keyword">);<br />
+}<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Third : make sure that the file name not bigger than 250 characters.<br />
+<br />
+as in example :<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="comment">/**<br />
+&nbsp;* Check $_FILES[][name] length.<br />
+&nbsp;*<br />
+&nbsp;* @param (string) $filename - Uploaded file name.<br />
+&nbsp;* @author Yousef Ismaeil Cliprz.<br />
+&nbsp;*/<br />
+</span><span class="keyword">function </span><span class="default">check_file_uploaded_length </span><span class="keyword">(</span><span class="default">$filename</span><span class="keyword">)<br />
+{<br />
+&nbsp;&nbsp;&nbsp; return (bool) ((</span><span class="default">mb_strlen</span><span class="keyword">(</span><span class="default">$filename</span><span class="keyword">,</span><span class="string">"UTF-8"</span><span class="keyword">) &gt; </span><span class="default">225</span><span class="keyword">) ? </span><span class="default">true </span><span class="keyword">: </span><span class="default">false</span><span class="keyword">);<br />
+}<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Fourth: Check File extensions and Mime Types that you want to allow in your project. You can use : pathinfo() <a href="http://php.net/pathinfo" rel="nofollow" target="_blank">http://php.net/pathinfo</a><br />
+<br />
+or you can use regular expression for check File extensions as in example<br />
+<br />
+#^(gif|jpg|jpeg|jpe|png)$#i<br />
+<br />
+or use in_array checking as<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+$ext_type </span><span class="keyword">= array(</span><span class="string">'gif'</span><span class="keyword">,</span><span class="string">'jpg'</span><span class="keyword">,</span><span class="string">'jpe'</span><span class="keyword">,</span><span class="string">'jpeg'</span><span class="keyword">,</span><span class="string">'png'</span><span class="keyword">);<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+You have multi choices to checking extensions and Mime types.<br />
+<br />
+Fifth: Check file size and make sure the limit of php.ini to upload files is what you want, You can start from <a href="http://www.php.net/manual/en/ini.core.php#ini.file-uploads" rel="nofollow" target="_blank">http://www.php.net/manual/en/ini.core.php#ini.file-uploads</a><br />
+<br />
+And last but not least : Check the file content if have a bad codes or something like this function <a href="http://php.net/manual/en/function.file-get-contents.php." rel="nofollow" target="_blank">http://php.net/manual/en/function.file-get-contents.php.</a><br />
+<br />
+You can use .htaccess to stop working some scripts as in example php file in your upload path.<br />
+<br />
+use :<br />
+<br />
+AddHandler cgi-script .php .pl .jsp .asp .sh .cgi<br />
+Options -ExecCGI&nbsp; <br />
+<br />
+Do not forget this steps for your project protection.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="105026""></a>
+  <div class="note">
+   <strong class="user">matthias dot dailey at gmail dot com</strong>
+   <a href="#105026" class="date">22-Jul-2011 01:26</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+The destination directory must exist; move_uploaded_file() will not automatically create it for you.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="103791""></a>
+  <div class="note">
+   <strong class="user">labsy at seznam dot org</strong>
+   <a href="#103791" class="date">03-May-2011 04:07</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+A note for PHP on Windows IIS platform:<br />
+PHP does obviously not like directory traversing among partitions, so if you set upload_tmp_dir to be on different partition as php-cgi.exe or php.exe is, upload_tmp_dir will NOT be accessible for file uploads! You will get ERROR 6 on any attempt to upload file, and file size will be 0.<br />
+Resolution is to have upload_tmp_dir set to a path under PHP install folder.<br />
+...and make sure this folder (and also session_save_path folder) has at least read/write permissions granted to AppPool owner (usually NETWORK SERVICE) and IIS web user (by default IUSR_).</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="103190""></a>
+  <div class="note">
+   <strong class="user">wilcobeekhuizen at gmail dot com</strong>
+   <a href="#103190" class="date">30-Mar-2011 12:55</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+When uploading a file with a very long filename, for example 255 characters, move_uploaded_file fails. The longest file I've succesfully uploaded has a 247 character filename. So, although you can create a 250 character filename locally the server may not be able to move it.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="99456""></a>
+  <div class="note">
+   <strong class="user">Ray.Paseur sometimes uses Gmail</strong>
+   <a href="#99456" class="date">18-Aug-2010 08:42</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+You can only move the uploaded file once.&nbsp; You can use copy() if you need the file in more than one place.<br />
+<span class="default">&lt;?php </span><span class="comment">// RAY_temp_upload_example.php<br />
+</span><span class="default">error_reporting</span><span class="keyword">(</span><span class="default">E_ALL</span><span class="keyword">);<br />
+echo </span><span class="string">"&lt;pre&gt;" </span><span class="keyword">. </span><span class="default">PHP_EOL</span><span class="keyword">;<br />
+<br />
+</span><span class="comment">// IF A FILE HAS BEEN UPLOADED<br />
+</span><span class="keyword">if (!empty(</span><span class="default">$_FILES</span><span class="keyword">))<br />
+{<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// SHOW THE UPLOADED FILES<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">print_r</span><span class="keyword">(</span><span class="default">$_FILES</span><span class="keyword">);<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// TRY TO MOVE THE FILE TWICE - SECOND MOVE RETURNS FALSE<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">if (!</span><span class="default">move_uploaded_file</span><span class="keyword">(</span><span class="default">$_FILES</span><span class="keyword">[</span><span class="string">"userfile"</span><span class="keyword">][</span><span class="string">"tmp_name"</span><span class="keyword">], </span><span class="default">$_FILES</span><span class="keyword">[</span><span class="string">"userfile"</span><span class="keyword">][</span><span class="string">"name"</span><span class="keyword">])) echo </span><span class="string">"CANNOT MOVE </span><span class="keyword">{</span><span class="default">$_FILES</span><span class="keyword">[</span><span class="string">"userfile"</span><span class="keyword">][</span><span class="string">"name"</span><span class="keyword">]}</span><span class="string">" </span><span class="keyword">. </span><span class="default">PHP_EOL</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; if (!</span><span class="default">move_uploaded_file</span><span class="keyword">(</span><span class="default">$_FILES</span><span class="keyword">[</span><span class="string">"userfile"</span><span class="keyword">][</span><span class="string">"tmp_name"</span><span class="keyword">], </span><span class="default">$_FILES</span><span class="keyword">[</span><span class="string">"userfile"</span><span class="keyword">][</span><span class="string">"name"</span><span class="keyword">])) echo </span><span class="string">"CANNOT MOVE </span><span class="keyword">{</span><span class="default">$_FILES</span><span class="keyword">[</span><span class="string">"userfile"</span><span class="keyword">][</span><span class="string">"name"</span><span class="keyword">]}</span><span class="string">" </span><span class="keyword">. </span><span class="default">PHP_EOL</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// SHOW THE UPLOADED FILES AFTER THE MOVE - NO VISIBLE CHANGE<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">print_r</span><span class="keyword">(</span><span class="default">$_FILES</span><span class="keyword">);<br />
+}<br />
+<br />
+</span><span class="comment">// END OF PHP, PUT UP THE HTML FORM TO GET THE FILE<br />
+</span><span class="default">?&gt;<br />
+</span>&lt;!-- The data encoding type, enctype, MUST be specified as below --&gt;<br />
+&lt;form enctype="multipart/form-data" method="POST"&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;!-- MAX_FILE_SIZE must precede the file input field --&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;input type="hidden" name="MAX_FILE_SIZE" value="300000" /&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;!-- Name of input element determines name in $_FILES array --&gt;<br />
+&nbsp;&nbsp;&nbsp; Send this file: &lt;input name="userfile" type="file" /&gt;<br />
+&nbsp;&nbsp;&nbsp; &lt;input type="submit" value="Send File" /&gt;<br />
+&lt;/form&gt;</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="94141""></a>
+  <div class="note">
+   <strong class="user">chatchaw at tot dot co dot th</strong>
+   <a href="#94141" class="date">19-Oct-2009 12:03</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+When you use move_uploaded_file function to upload a file with utf-8&nbsp; filename to linux system, you probably check your result by browsing to see the file in the target directory so please make sure that your terminal emulator or your samba configuration is set the character encoding to utf-8 otherwise&nbsp; your file will be shown as ?????? (unreadable character).</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="86332""></a>
+  <div class="note">
+   <strong class="user">Dan Delaney</strong>
+   <a href="#86332" class="date">13-Oct-2008 01:41</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+For those using PHP on Windows and IIS, you SHOULD set the "upload_tmp_dir" value in php.ini to some directory around where your websites directory is, create that directory, and then set the same permissions on it that you have set for your websites directory. Otherwise, when you upload a file and it goes into C:\WINDOWS\Temp, then you move it to your website directory, its permissions will NOT be set correctly. This will cause you problems if you then want to manipulate that file with something like ImageMagick's convert utility.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="85371""></a>
+  <div class="note">
+   <strong class="user">Mark Kazemier</strong>
+   <a href="#85371" class="date">27-Aug-2008 09:36</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I have the same problem as the person two comments below me. When I use the move_uploaded_file function the permissions for the file are set to 0600. No matter what configurations you set.<br />
+<br />
+I searched the internet and I found more people with the same problems, but no solutions. I set the umask of apache to 013 and still the files were set to 0600. <br />
+<br />
+The copy function solves the problem. Another way to solve this problem is using the chmod function after uploading.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="85149""></a>
+  <div class="note">
+   <strong class="user">Florian S. in H. an der E. [.de]</strong>
+   <a href="#85149" class="date">17-Aug-2008 02:02</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+move_uploaded_file (on my setup) always makes files 0600 ("rw- --- ---") and owned by the user running the webserver (owner AND group).<br />
+Even though the directory has a sticky bit set to the group permissions!<br />
+I couldn't find any settings to change this via php.ini or even using "umask()".<br />
+<br />
+I want my regular user on the server to be able to "tar cjf" the directory .. which would fail on files totally owned by the webserver-process-user;<br />
+the "copy(from, to)" function obeys the sticky-bit though!</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="76452""></a>
+  <div class="note">
+   <strong class="user">nlgordon at iastate dot edu</strong>
+   <a href="#76452" class="date">16-Jul-2007 11:29</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Just a helpful comment.&nbsp; If you have open_basedir set then you must set upload_tmp_dir to somewhere within the open_basedir.&nbsp; Otherwise the file upload will be denied.&nbsp; move_uploaded_file might be open_basedir aware, but the rest of the upload process isn't.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="75654""></a>
+  <div class="note">
+   <strong class="user">bogusred</strong>
+   <a href="#75654" class="date">10-Jun-2007 01:58</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you have a directory in a *nix environment where you store all of your file uploads and your php script only seems to work when permissions for that directory are set to 777, here's how to fix it so that you can have the security benefits of 755 while still allowing your php scripts to work, including the move_uploaded_file().<br />
+<br />
+through shell access, navigate to the directory that contains your uploads folder and run the following 2 commands:<br />
+chown -R nobody uploaddir<br />
+chmod -R 755 uploaddir<br />
+<br />
+Replace 'uploaddir' with the name of your uploads directory. The first command changes the owner of the directory and files to 'nobody' which is what php operates under. The second changes the folder and files to only allow user access to writing. This is much more secure.<br />
+<br />
+Hopefully this will help someone out there who had the same problem as me.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="69555""></a>
+  <div class="note">
+   <strong class="user">shacker at birdhouse dot org</strong>
+   <a href="#69555" class="date">10-Sep-2006 12:28</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you're dealing with files uploaded through some external FTP source and need to move them to a final destination, searching php.net for "mv" or "move" won't get you what you want. You want the rename() function. <br />
+<br />
+<a href="http://www.php.net/manual/en/function.rename.php" rel="nofollow" target="_blank">http://www.php.net/manual/en/function.rename.php</a><br />
+<br />
+(move_uploaded_file() won't work, since the POST vars won't be present.)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="69096""></a>
+  <div class="note">
+   <strong class="user">Rob Szarka</strong>
+   <a href="#69096" class="date">22-Aug-2006 06:18</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Apparently the warning above might better be written "If the destination file already exists, it will be overwritten ... regardless of the destination file's permissions."<br />
+<br />
+In other words, move_uploaded_file() executes as if it's root, not the user under which the web server is operating or the owner of the script that's executing.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="64418""></a>
+  <div class="note">
+   <strong class="user">Zarel</strong>
+   <a href="#64418" class="date">13-Apr-2006 06:12</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+nouncad at mayetlite dot com posted a function that uploaded a file, and would rename it if it already existed, to filename[n].ext<br />
+<br />
+It only worked for files with extensions exactly three letters long, so I fixed that (and made a few other improvements while I was at it).<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="comment">// Usage: uploadfile($_FILE['file']['name'],'temp/',$_FILE['file']['tmp_name'])<br />
+</span><span class="keyword">function </span><span class="default">uploadfile</span><span class="keyword">(</span><span class="default">$origin</span><span class="keyword">, </span><span class="default">$dest</span><span class="keyword">, </span><span class="default">$tmp_name</span><span class="keyword">)<br />
+{<br />
+&nbsp; </span><span class="default">$origin </span><span class="keyword">= </span><span class="default">strtolower</span><span class="keyword">(</span><span class="default">basename</span><span class="keyword">(</span><span class="default">$origin</span><span class="keyword">));<br />
+&nbsp; </span><span class="default">$fulldest </span><span class="keyword">= </span><span class="default">$dest</span><span class="keyword">.</span><span class="default">$origin</span><span class="keyword">;<br />
+&nbsp; </span><span class="default">$filename </span><span class="keyword">= </span><span class="default">$origin</span><span class="keyword">;<br />
+&nbsp; for (</span><span class="default">$i</span><span class="keyword">=</span><span class="default">1</span><span class="keyword">; </span><span class="default">file_exists</span><span class="keyword">(</span><span class="default">$fulldest</span><span class="keyword">); </span><span class="default">$i</span><span class="keyword">++)<br />
+&nbsp; {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$fileext </span><span class="keyword">= (</span><span class="default">strpos</span><span class="keyword">(</span><span class="default">$origin</span><span class="keyword">,</span><span class="string">'.'</span><span class="keyword">)===</span><span class="default">false</span><span class="keyword">?</span><span class="string">''</span><span class="keyword">:</span><span class="string">'.'</span><span class="keyword">.</span><span class="default">substr</span><span class="keyword">(</span><span class="default">strrchr</span><span class="keyword">(</span><span class="default">$origin</span><span class="keyword">, </span><span class="string">"."</span><span class="keyword">), </span><span class="default">1</span><span class="keyword">));<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$filename </span><span class="keyword">= </span><span class="default">substr</span><span class="keyword">(</span><span class="default">$origin</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">, </span><span class="default">strlen</span><span class="keyword">(</span><span class="default">$origin</span><span class="keyword">)-</span><span class="default">strlen</span><span class="keyword">(</span><span class="default">$fileext</span><span class="keyword">)).</span><span class="string">'['</span><span class="keyword">.</span><span class="default">$i</span><span class="keyword">.</span><span class="string">']'</span><span class="keyword">.</span><span class="default">$fileext</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$fulldest </span><span class="keyword">= </span><span class="default">$dest</span><span class="keyword">.</span><span class="default">$newfilename</span><span class="keyword">;<br />
+&nbsp; }<br />
+&nbsp; <br />
+&nbsp; if (</span><span class="default">move_uploaded_file</span><span class="keyword">(</span><span class="default">$tmp_name</span><span class="keyword">, </span><span class="default">$fulldest</span><span class="keyword">))<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$filename</span><span class="keyword">;<br />
+&nbsp; return </span><span class="default">false</span><span class="keyword">;<br />
+}<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="57959""></a>
+  <div class="note">
+   <strong class="user">jest3r at mtonic dot net</strong>
+   <a href="#57959" class="date">19-Oct-2005 09:10</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+It seems that move_uploaded_file use the GROUP permissions of the parent directory of the tmp file location, whereas a simple "copy" uses the group of the apache process. This could create a security nighmare if your tmp file location is owned by root:wheel</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

@@ -1,0 +1,733 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>执行一个正则表达式的搜索和替换</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.preg-replace-callback.html">? preg_replace_callback</a></li>
+      <li style="float: right;"><a href="function.preg-split.html">preg_split ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.pcre.html">PCRE 函数</a></li>
+    <li>执行一个正则表达式的搜索和替换</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.preg-replace" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">preg_replace</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">preg_replace</span> &mdash; <span class="dc-title">执行一个正则表达式的搜索和替换</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.preg-replace-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>preg_replace</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><span class="type">string</span>|<span class="type">array</span></span> <code class="parameter">$pattern</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><span class="type">string</span>|<span class="type">array</span></span> <code class="parameter">$replacement</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><span class="type">string</span>|<span class="type">array</span></span> <code class="parameter">$subject</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$limit</code><span class="initializer"> = -1</span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter reference">&$count</code><span class="initializer"> = <strong><code>null</code></strong></span></span><br>): <span class="type"><span class="type">string</span>|<span class="type">array</span>|<span class="type">null</span></span></div>
+
+  <p class="para rdfs-comment">
+    搜索 <code class="parameter">subject</code> 中匹配 <code class="parameter">pattern</code> 的部分，以
+    <code class="parameter">replacement</code> 进行替换。
+  </p>
+  <p class="para">
+   匹配一个精确的字符串，而不是一个模式，
+   可以使用 <span class="function"><a href="function.str-replace.html" class="function">str_replace()</a></span> 或
+   <span class="function"><a href="function.str-ireplace.html" class="function">str_ireplace()</a></span> 代替这个函数。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.preg-replace-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">pattern</code></dt>
+
+     <dd>
+
+      <p class="para">
+      要搜索的模式。可以是一个字符串或字符串数组。
+      </p>
+      <p class="para">
+       可以使用一些 <a href="reference.pcre.pattern.modifiers.html" class="link">PCRE 修饰符</a>。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">replacement</code></dt>
+
+     <dd>
+
+      <p class="para">
+        用于替换的字符串或字符串数组。如果这个参数是一个字符串，并且 <code class="parameter">pattern</code>
+        是一个数组，那么所有的模式都使用这个字符串进行替换。如果 <code class="parameter">pattern</code> 和 <code class="parameter">replacement</code>
+        都是数组，每个 <code class="parameter">pattern</code> 使用 <code class="parameter">replacement</code> 中对应的元素进行替换。如果
+        <code class="parameter">replacement</code> 中的元素比 <code class="parameter">pattern</code> 中的少，多出来的
+        <code class="parameter">pattern</code> 使用空字符串进行替换。
+      </p>
+      <p class="para">
+        <code class="parameter">replacement</code> 中可以包含后向引用 <code class="literal">\\<span class="replaceable">n</span></code>
+        或 <code class="literal">$<span class="replaceable">n</span></code>，语法上首选后者。 每个这样的引用将被匹配到的第
+        <span class="replaceable">n</span> 个捕获子组捕获到的文本替换。 <span class="replaceable">n</span> 可以是0-99，<code class="literal">\\0</code> 和 <code class="literal">$0</code>
+        代表完整的模式匹配文本。捕获子组的序号计数方式为：代表捕获子组的左括号从左到右， 从1开始数。如果要在
+        <code class="parameter">replacement</code> 中使用反斜线，必须使用 4 个(<code class="literal">&quot;\\\\&quot;</code>，译注：因为这首先是 PHP
+        的字符串，经过转义后，是两个，再经过正则表达式引擎后才被认为是一个原文反斜线)。
+      </p>
+      <p class="para">
+        当在替换模式下工作并且后向引用后面紧跟着需要是另外一个数字 (比如：在一个匹配模式后紧接着增加一个原文数字)，不能使用
+        <code class="literal">\\1</code> 这样的语法来描述后向引用。比如，<code class="literal">\\11</code>将会使<span class="function"><strong>preg_replace()</strong></span>
+        不能理解你希望的是一个 <code class="literal">\\1</code> 后向引用紧跟一个原文 <code class="literal">1</code>，还是一个
+        <code class="literal">\\11</code> 后向引用后面不跟任何东西。 这种情况下解决方案是使用 <code class="literal">${1}1</code>。这创建了一个独立的
+        <code class="literal">$1</code> 后向引用, 一个独立的原文 <code class="literal">1</code>。
+      </p>
+      <p class="para">
+        当使用被弃用的 <code class="literal">e</code> 修饰符时, 这个函数会转义一些字符 (即：<code class="literal">&#039;</code>、<code class="literal">&quot;</code>、
+        <code class="literal">\</code> 和 NULL) 然后进行后向引用替换。当这些完成后请确保后向引用解析完后没有单引号或双引号引起的语法错误 (比如：
+        <code class="literal">&#039;strlen(\&#039;$1\&#039;)+strlen(&quot;$2&quot;)&#039;</code>)。确保符合 PHP 的
+        <a href="language.types.string.html" class="link">字符串语法</a>，并且符合 eval 语法。因为在完成替换后，引擎会将结果字符串作为 PHP 代码使用
+        eval 方式进行评估并将返回值作为最终参与替换的字符串。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">subject</code></dt>
+
+     <dd>
+
+      <p class="para">
+        要进行搜索和替换的字符串或字符串数组。
+      </p>
+      <p class="para">
+        如果 <code class="parameter">subject</code> 是一个数组，搜索和替换回在
+        <code class="parameter">subject</code> 的每一个元素上进行, 并且返回值也会是一个数组。
+      </p>
+      <p class="para">
+       如果 <code class="parameter">subject</code> 是关联数组，则键会保留在返回值中。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">limit</code></dt>
+
+     <dd>
+
+      <p class="para">
+        每个模式在每个 <code class="parameter">subject</code> 上进行替换的最大次数。默认是
+        <code class="literal">-1</code>(无限)。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">count</code></dt>
+
+     <dd>
+
+      <p class="para">
+        如果指定，将会被填充为完成的替换次数。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.preg-replace-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+    如果 <code class="parameter">subject</code> 是一个数组，<span class="function"><strong>preg_replace()</strong></span>
+    返回一个数组，其他情况下返回一个字符串。
+  </p>
+  <p class="para">
+  如果匹配被查找到，替换后的 <code class="parameter">subject</code> 被返回，其他情况下返回没有改变的
+  <code class="parameter">subject</code>。如果发生错误，返回 <strong><code>null</code></strong> 。
+  </p>
+ </div>
+
+
+  <div class="refsect1 errors" id="refsect1-function.preg-replace-errors">
+  <h3 class="title">错误／异常</h3>
+  <p class="para">
+   &quot;\e&quot; 会并忽略，并产生
+   <strong><code>E_WARNING</code></strong> 错误。
+  </p>
+  <p class="para">
+如果传递的正则表达式无法正常解析，会发出 <strong><code>E_WARNING</code></strong>。 
+</p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.preg-replace-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #1 使用后向引用紧跟数值原文</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$string </span><span style="color: #007700">= </span><span style="color: #DD0000">'April 15, 2003'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$pattern </span><span style="color: #007700">= </span><span style="color: #DD0000">'/(\w+) (\d+), (\d+)/i'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$replacement </span><span style="color: #007700">= </span><span style="color: #DD0000">'${1}1,$3'</span><span style="color: #007700">;<br />echo </span><span style="color: #0000BB">preg_replace</span><span style="color: #007700">(</span><span style="color: #0000BB">$pattern</span><span style="color: #007700">, </span><span style="color: #0000BB">$replacement</span><span style="color: #007700">, </span><span style="color: #0000BB">$string</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+April1,2003
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #2 <span class="function"><strong>preg_replace()</strong></span> 中使用基于索引的数组</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$string </span><span style="color: #007700">= </span><span style="color: #DD0000">'The quick brown fox jumps over the lazy dog.'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$patterns </span><span style="color: #007700">= array();<br /></span><span style="color: #0000BB">$patterns</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">] = </span><span style="color: #DD0000">'/quick/'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$patterns</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">] = </span><span style="color: #DD0000">'/brown/'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$patterns</span><span style="color: #007700">[</span><span style="color: #0000BB">2</span><span style="color: #007700">] = </span><span style="color: #DD0000">'/fox/'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$replacements </span><span style="color: #007700">= array();<br /></span><span style="color: #0000BB">$replacements</span><span style="color: #007700">[</span><span style="color: #0000BB">2</span><span style="color: #007700">] = </span><span style="color: #DD0000">'bear'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$replacements</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">] = </span><span style="color: #DD0000">'black'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$replacements</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">] = </span><span style="color: #DD0000">'slow'</span><span style="color: #007700">;<br />echo </span><span style="color: #0000BB">preg_replace</span><span style="color: #007700">(</span><span style="color: #0000BB">$patterns</span><span style="color: #007700">, </span><span style="color: #0000BB">$replacements</span><span style="color: #007700">, </span><span style="color: #0000BB">$string</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+The bear black slow jumps over the lazy dog.
+</pre></div>
+    </div>
+    <div class="example-contents"><p>
+    对模式和替换内容按 key 进行排序我们可以得到期望的结果。
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />ksort</span><span style="color: #007700">(</span><span style="color: #0000BB">$patterns</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">ksort</span><span style="color: #007700">(</span><span style="color: #0000BB">$replacements</span><span style="color: #007700">);<br />echo </span><span style="color: #0000BB">preg_replace</span><span style="color: #007700">(</span><span style="color: #0000BB">$patterns</span><span style="color: #007700">, </span><span style="color: #0000BB">$replacements</span><span style="color: #007700">, </span><span style="color: #0000BB">$string</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+The slow black bear jumps over the lazy dog.
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #3 替换一些值</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$patterns </span><span style="color: #007700">= array (</span><span style="color: #DD0000">'/(19|20)(\d{2})-(\d{1,2})-(\d{1,2})/'</span><span style="color: #007700">,<br />                   </span><span style="color: #DD0000">'/^\s*{(\w+)}\s*=/'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$replace </span><span style="color: #007700">= array (</span><span style="color: #DD0000">'\3/\4/\1\2'</span><span style="color: #007700">, </span><span style="color: #DD0000">'$\1 ='</span><span style="color: #007700">);<br />echo </span><span style="color: #0000BB">preg_replace</span><span style="color: #007700">(</span><span style="color: #0000BB">$patterns</span><span style="color: #007700">, </span><span style="color: #0000BB">$replace</span><span style="color: #007700">, </span><span style="color: #DD0000">'{startDate} = 1999-5-27'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+$startDate = 5/27/1999
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #4 剥离空白字符</strong></p>
+    <div class="example-contents"><p>
+     这个例子剥离多余的空白字符
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$str </span><span style="color: #007700">= </span><span style="color: #DD0000">'foo   o'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$str </span><span style="color: #007700">= </span><span style="color: #0000BB">preg_replace</span><span style="color: #007700">(</span><span style="color: #DD0000">'/\s\s+/'</span><span style="color: #007700">, </span><span style="color: #DD0000">' '</span><span style="color: #007700">, </span><span style="color: #0000BB">$str</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">// 将会改变为'foo o'<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">$str</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #5 使用参数 <code class="parameter">count</code></strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$count </span><span style="color: #007700">= </span><span style="color: #0000BB">0</span><span style="color: #007700">;<br /><br />echo </span><span style="color: #0000BB">preg_replace</span><span style="color: #007700">(array(</span><span style="color: #DD0000">'/\d/'</span><span style="color: #007700">, </span><span style="color: #DD0000">'/\s/'</span><span style="color: #007700">), </span><span style="color: #DD0000">'*'</span><span style="color: #007700">, </span><span style="color: #DD0000">'xp 4 to'</span><span style="color: #007700">, -</span><span style="color: #0000BB">1 </span><span style="color: #007700">, </span><span style="color: #0000BB">$count</span><span style="color: #007700">);<br />echo </span><span style="color: #0000BB">$count</span><span style="color: #007700">; </span><span style="color: #FF8000">//3<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+xp***to
+3
+</pre></div>     
+    </div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.preg-replace-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+   当使用数组形式的<code class="parameter">pattern</code>和<code class="parameter">replacement</code>时, 
+   将会按照key在数组中出现的顺序进行处理. 这<em class="emphasis">不一定</em>和数组的索引顺序一致.
+   如果你期望使用索引对等方式用<code class="parameter">replacement</code>对<code class="parameter">pattern</code>
+   进行替换, 你可以在调用<span class="function"><strong>preg_replace()</strong></span>之前对两个数组各进行一次<span class="function"><a href="function.ksort.html" class="function">ksort()</a></span>排序.
+   </p>
+  </p></blockquote>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    当 <code class="parameter">pattern</code> 和 <code class="parameter">replacement</code>
+    都是数组时，匹配规则将按顺序执行。也就是说第二个 <code class="parameter">pattern</code>/<code class="parameter">replacement</code>
+    将作用于第一个 <code class="parameter">pattern</code>/<code class="parameter">replacement</code>
+    生成的字符串，而不是原始字符串。
+    If you want to simulate replacements operating in parallel,
+    such as swapping two values, replace one pattern by an intermediary placeholder, then in a
+    later pair replace that intermediary placeholder with the desired replacement.
+   </p>
+   <div class="example" id="">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$p </span><span style="color: #007700">= array(</span><span style="color: #DD0000">'/a/'</span><span style="color: #007700">, </span><span style="color: #DD0000">'/b/'</span><span style="color: #007700">, </span><span style="color: #DD0000">'/c/'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$r </span><span style="color: #007700">= array(</span><span style="color: #DD0000">'b'</span><span style="color: #007700">, </span><span style="color: #DD0000">'c'</span><span style="color: #007700">, </span><span style="color: #DD0000">'d'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">preg_replace</span><span style="color: #007700">(</span><span style="color: #0000BB">$p</span><span style="color: #007700">, </span><span style="color: #0000BB">$r</span><span style="color: #007700">, </span><span style="color: #DD0000">'a'</span><span style="color: #007700">));<br /></span><span style="color: #FF8000">// 打印 d<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.preg-replace-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><a href="pcre.pattern.html" class="link">PCRE 模式</a></li>
+    <li class="member"><span class="function"><a href="function.preg-quote.html" class="function" rel="rdfs-seeAlso">preg_quote()</a> - 转义正则表达式字符</span></li>
+    <li class="member"><span class="function"><a href="function.preg-filter.html" class="function" rel="rdfs-seeAlso">preg_filter()</a> - 执行一个正则表达式搜索和替换</span></li>
+    <li class="member"><span class="function"><a href="function.preg-match.html" class="function" rel="rdfs-seeAlso">preg_match()</a> - 执行匹配正则表达式</span></li>
+    <li class="member"><span class="function"><a href="function.preg-replace-callback.html" class="function" rel="rdfs-seeAlso">preg_replace_callback()</a> - 执行一个正则表达式搜索并且使用一个回调进行替换</span></li>
+    <li class="member"><span class="function"><a href="function.preg-split.html" class="function" rel="rdfs-seeAlso">preg_split()</a> - 通过一个正则表达式分隔字符串</span></li>
+    <li class="member"><span class="function"><a href="function.preg-last-error.html" class="function" rel="rdfs-seeAlso">preg_last_error()</a> - 返回最后一个PCRE正则执行产生的错误代码</span></li>
+    <li class="member"><span class="function"><a href="function.str-replace.html" class="function" rel="rdfs-seeAlso">str_replace()</a> - 子字符串替换</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="127704""></a>
+  <div class="note">
+   <strong class="user">razvan_bc at yahoo dot com</strong>
+   <a href="#127704" class="date">08-Oct-2022 10:11</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+How to replace all comments inside code without remove crln&nbsp; = \r\n or cr \r each line?<br />
+<br />
+<span class="default">&lt;?php<br />
+$txt_target</span><span class="keyword">=&lt;&lt;&lt;t1<br />
+</span><span class="string">this;//&nbsp; &nbsp; dsdsds<br />
+&nbsp;&nbsp;&nbsp; nope<br />
+&nbsp;&nbsp;&nbsp; <br />
+/*<br />
+&nbsp;&nbsp;&nbsp; ok<br />
+&nbsp;&nbsp;&nbsp; */<br />
+is;huge<br />
+/*text bla*/<br />
+&nbsp;&nbsp;&nbsp; /*bla*/<br />
+&nbsp;<br />
+</span><span class="keyword">t1;<br />
+<br />
+</span><span class="comment">/*<br />
+=======================================================================<br />
+expected result:<br />
+=======================================================================<br />
+this;<br />
+&nbsp;&nbsp;&nbsp; nope<br />
+<br />
+is;huge<br />
+=======================================================================<br />
+visualizing in a hex viewer .. to_check_with_a_hex_viewer.txt ...<br />
+&nbsp;t&nbsp; h&nbsp; i&nbsp; s&nbsp; ; LF TAB n&nbsp; o&nbsp; p&nbsp; e CR LF CR LF&nbsp; i&nbsp; s&nbsp; ;&nbsp; h&nbsp; u&nbsp; g&nbsp; e CR LF<br />
+74 68 69 73 3b 0a 09 6e 6f 70 65 0d 0a 0d 0a 69 73 3b 68 75 67 65 0d 0a<br />
+I used F3 (viewer + options 3: hex) in mythical TOTAL COMMANDER!<br />
+=======================================================================<br />
+*/<br />
+<br />
+</span><span class="keyword">echo </span><span class="string">'&lt;hr&gt;&lt;pre&gt;'</span><span class="keyword">;<br />
+echo&nbsp; </span><span class="default">$txt_target</span><span class="keyword">;<br />
+echo </span><span class="string">'&lt;/pre&gt;'</span><span class="keyword">;<br />
+<br />
+</span><span class="comment">//&nbsp; a single line '//' comments<br />
+</span><span class="default">$txt_target </span><span class="keyword">= </span><span class="default">preg_replace</span><span class="keyword">(</span><span class="string">'![ \t]*//.*[ \t]*!'</span><span class="keyword">, </span><span class="string">''</span><span class="keyword">, </span><span class="default">$txt_target</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">//&nbsp; /* comment */<br />
+</span><span class="default">$txt_target </span><span class="keyword">= </span><span class="default">preg_replace</span><span class="keyword">(</span><span class="string">'/\/\*([^\/]*)\*\/(\s+)/smi'</span><span class="keyword">, </span><span class="string">''</span><span class="keyword">, </span><span class="default">$txt_target</span><span class="keyword">);<br />
+echo </span><span class="string">'&lt;hr&gt;&lt;pre&gt;'</span><span class="keyword">;<br />
+echo&nbsp; </span><span class="default">$txt_target</span><span class="keyword">;<br />
+echo </span><span class="string">'&lt;/pre&gt;&lt;hr&gt;'</span><span class="keyword">;<br />
+<br />
+</span><span class="default">file_put_contents</span><span class="keyword">(</span><span class="string">'to_check_with_a_hex_viewer.txt'</span><span class="keyword">,</span><span class="default">$txt_target</span><span class="keyword">);<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="124391""></a>
+  <div class="note">
+   <strong class="user">mail at johanvandemerwe dot nl</strong>
+   <a href="#124391" class="date">13-Nov-2019 12:41</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Sample for replacing bracketed short-codes<br />
+<br />
+The used short-codes are purely used for educational purposes for they could be shorter as in 'italic' to 'i' or 'bold' to 'b'.<br />
+<br />
+Sample text<br />
+----<br />
+This sample shows how to have [italic]italic[/italic], [bold]bold[/bold] and [underline]underlined[/underline] and [strikethrough]striked[/striketrhough] text. <br />
+<br />
+with this function:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">textDecoration</span><span class="keyword">(</span><span class="default">$html</span><span class="keyword">)<br />
+{<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$patterns </span><span class="keyword">= [<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'/\[(italic)\].*?\[\/\1\] ?/'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'/\[(bold)\].*?\[\/\1\] ?/'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'/\[(underline)\].*?\[\/\1\] ?/'<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">];<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$replacements </span><span class="keyword">= [<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'&lt;i&gt;$1&lt;/i&gt;'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'&lt;strong&gt;$1&lt;/strong&gt;'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'&lt;u&gt;$1&lt;/u&gt;'<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">];<br />
+<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">preg_replace</span><span class="keyword">(</span><span class="default">$patterns</span><span class="keyword">, </span><span class="default">$replacements</span><span class="keyword">, </span><span class="default">$html</span><span class="keyword">);<br />
+}<br />
+<br />
+</span><span class="default">$html </span><span class="keyword">= </span><span class="default">textDecoration</span><span class="keyword">(</span><span class="default">$html</span><span class="keyword">);<br />
+<br />
+echo </span><span class="default">$html</span><span class="keyword">; </span><span class="comment">// or return<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+results in:<br />
+----<br />
+This sample shows how to have &lt;i&gt;italic&lt;/i&gt;, &lt;b&gt;bold&lt;/b&gt; and &lt;u&gt;underlined&lt;/u&gt; and [strikethrough]striked[/striketrhough] text.<br />
+<br />
+Notice!<br />
+There is no [strikethrough]striked[/striketrhough] fallback in the patterns and replacements array</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="122778""></a>
+  <div class="note">
+   <strong class="user">bublifuk at mailinator dot com</strong>
+   <a href="#122778" class="date">30-May-2018 03:36</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+A delimiter can be any ASCII non-alphanumeric, non-backslash, non-whitespace character:&nbsp; !"#$%&amp;'*+,./:;=?@^_`|~-&nbsp; and&nbsp; ({[&lt;&gt;]})</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="111695""></a>
+  <div class="note">
+   <strong class="user">nik at rolls dot cc</strong>
+   <a href="#111695" class="date">17-Mar-2013 10:14</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+To split Pascal/CamelCase into Title Case (for example, converting descriptive class names for use in human-readable frontends), you can use the below function:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">expandCamelCase</span><span class="keyword">(</span><span class="default">$source</span><span class="keyword">) {<br />
+&nbsp; return </span><span class="default">preg_replace</span><span class="keyword">(</span><span class="string">'/(?&lt;!^)([A-Z][a-z]|(?&lt;=[a-z])[^a-z]|(?&lt;=[A-Z])[0-9_])/'</span><span class="keyword">, </span><span class="string">' $1'</span><span class="keyword">, </span><span class="default">$source</span><span class="keyword">);<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Before:<br />
+&nbsp; ExpandCamelCaseAPIDescriptorPHP5_3_4Version3_21Beta<br />
+After:<br />
+&nbsp; Expand Camel Case API Descriptor PHP 5_3_4 Version 3_21 Beta</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="102589""></a>
+  <div class="note">
+   <strong class="user">me at perochak dot com</strong>
+   <a href="#102589" class="date">22-Feb-2011 09:57</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you would like to remove a tag along with the text inside it then use the following code.
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+preg_replace</span><span class="keyword">(</span><span class="string">'/(&lt;tag&gt;.+?)+(&lt;\/tag&gt;)/i'</span><span class="keyword">, </span><span class="string">''</span><span class="keyword">, </span><span class="default">$string</span><span class="keyword">);
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+example
+<br />
+<span class="default">&lt;?php $string</span><span class="keyword">=</span><span class="string">'&lt;span class="normalprice"&gt;55 PKR&lt;/span&gt;'</span><span class="keyword">; </span><span class="default">?&gt;
+<br />
+</span>
+<br />
+<span class="default">&lt;?php
+<br />
+$string </span><span class="keyword">= </span><span class="default">preg_replace</span><span class="keyword">(</span><span class="string">'/(&lt;span class="normalprice"&gt;.+?)+(&lt;\/span&gt;)/i'</span><span class="keyword">, </span><span class="string">''</span><span class="keyword">, </span><span class="default">$string</span><span class="keyword">);
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+This will results a null or empty string.
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+$string</span><span class="keyword">=</span><span class="string">'My String &lt;span class="normalprice"&gt;55 PKR&lt;/span&gt;'</span><span class="keyword">;
+<br />
+
+<br />
+</span><span class="default">$string </span><span class="keyword">= </span><span class="default">preg_replace</span><span class="keyword">(</span><span class="string">'/(&lt;span class="normalprice"&gt;.+?)+(&lt;\/span&gt;)/i'</span><span class="keyword">, </span><span class="string">''</span><span class="keyword">, </span><span class="default">$string</span><span class="keyword">);
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+This will results a " My String"</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="89364""></a>
+  <div class="note">
+   <strong class="user">arkani at iol dot pt</strong>
+   <a href="#89364" class="date">04-Mar-2009 11:00</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Because i search a lot 4 this:<br />
+<br />
+The following should be escaped if you are trying to match that character<br />
+<br />
+\ ^ . $ | ( ) [ ]<br />
+* + ? { } ,<br />
+<br />
+Special Character Definitions<br />
+\ Quote the next metacharacter<br />
+^ Match the beginning of the line<br />
+. Match any character (except newline)<br />
+$ Match the end of the line (or before newline at the end)<br />
+| Alternation<br />
+() Grouping<br />
+[] Character class<br />
+* Match 0 or more times<br />
++ Match 1 or more times<br />
+? Match 1 or 0 times<br />
+{n} Match exactly n times<br />
+{n,} Match at least n times<br />
+{n,m} Match at least n but not more than m times<br />
+More Special Character Stuff<br />
+\t tab (HT, TAB)<br />
+\n newline (LF, NL)<br />
+\r return (CR)<br />
+\f form feed (FF)<br />
+\a alarm (bell) (BEL)<br />
+\e escape (think troff) (ESC)<br />
+\033 octal char (think of a PDP-11)<br />
+\x1B hex char<br />
+\c[ control char<br />
+\l lowercase next char (think vi)<br />
+\u uppercase next char (think vi)<br />
+\L lowercase till \E (think vi)<br />
+\U uppercase till \E (think vi)<br />
+\E end case modification (think vi)<br />
+\Q quote (disable) pattern metacharacters till \E<br />
+Even More Special Characters<br />
+\w Match a "word" character (alphanumeric plus "_")<br />
+\W Match a non-word character<br />
+\s Match a whitespace character<br />
+\S Match a non-whitespace character<br />
+\d Match a digit character<br />
+\D Match a non-digit character<br />
+\b Match a word boundary<br />
+\B Match a non-(word boundary)<br />
+\A Match only at beginning of string<br />
+\Z Match only at end of string, or before newline at the end<br />
+\z Match only at end of string<br />
+\G Match only where previous m//g left off (works only with /g)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="81486""></a>
+  <div class="note">
+   <strong class="user">php-comments-REMOVE dot ME at dotancohen dot com</strong>
+   <a href="#81486" class="date">29-Feb-2008 12:02</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Below is a function for converting Hebrew final characters to their<br />
+normal equivelants should they appear in the middle of a word.<br />
+The /b argument does not treat Hebrew letters as part of a word,<br />
+so I had to work around that limitation.<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+$text</span><span class="keyword">=</span><span class="string">"????? ???????"</span><span class="keyword">;<br />
+<br />
+function </span><span class="default">hebrewNotWordEndSwitch </span><span class="keyword">(</span><span class="default">$from</span><span class="keyword">, </span><span class="default">$to</span><span class="keyword">, </span><span class="default">$text</span><span class="keyword">) {<br />
+&nbsp;&nbsp; </span><span class="default">$text</span><span class="keyword">=<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">preg_replace</span><span class="keyword">(</span><span class="string">'/'</span><span class="keyword">.</span><span class="default">$from</span><span class="keyword">.</span><span class="string">'([?-?])/u'</span><span class="keyword">,</span><span class="string">'$2'</span><span class="keyword">.</span><span class="default">$to</span><span class="keyword">.</span><span class="string">'$1'</span><span class="keyword">,</span><span class="default">$text</span><span class="keyword">);<br />
+&nbsp;&nbsp; return </span><span class="default">$text</span><span class="keyword">;<br />
+}<br />
+<br />
+do {<br />
+&nbsp;&nbsp; </span><span class="default">$text_before</span><span class="keyword">=</span><span class="default">$text</span><span class="keyword">;<br />
+&nbsp;&nbsp; </span><span class="default">$text</span><span class="keyword">=</span><span class="default">hebrewNotWordEndSwitch</span><span class="keyword">(</span><span class="string">"?"</span><span class="keyword">,</span><span class="string">"?"</span><span class="keyword">,</span><span class="default">$text</span><span class="keyword">);<br />
+&nbsp;&nbsp; </span><span class="default">$text</span><span class="keyword">=</span><span class="default">hebrewNotWordEndSwitch</span><span class="keyword">(</span><span class="string">"?"</span><span class="keyword">,</span><span class="string">"?"</span><span class="keyword">,</span><span class="default">$text</span><span class="keyword">);<br />
+&nbsp;&nbsp; </span><span class="default">$text</span><span class="keyword">=</span><span class="default">hebrewNotWordEndSwitch</span><span class="keyword">(</span><span class="string">"?"</span><span class="keyword">,</span><span class="string">"?"</span><span class="keyword">,</span><span class="default">$text</span><span class="keyword">);<br />
+&nbsp;&nbsp; </span><span class="default">$text</span><span class="keyword">=</span><span class="default">hebrewNotWordEndSwitch</span><span class="keyword">(</span><span class="string">"?"</span><span class="keyword">,</span><span class="string">"?"</span><span class="keyword">,</span><span class="default">$text</span><span class="keyword">);<br />
+&nbsp;&nbsp; </span><span class="default">$text</span><span class="keyword">=</span><span class="default">hebrewNotWordEndSwitch</span><span class="keyword">(</span><span class="string">"?"</span><span class="keyword">,</span><span class="string">"?"</span><span class="keyword">,</span><span class="default">$text</span><span class="keyword">);<br />
+}&nbsp;&nbsp; while ( </span><span class="default">$text_before</span><span class="keyword">!=</span><span class="default">$text </span><span class="keyword">);<br />
+<br />
+print </span><span class="default">$text</span><span class="keyword">; </span><span class="comment">// ????? ??????!<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+The do-while is necessary for multiple instances of letters, such<br />
+as "????" which would start off as "????". Note that there's still the<br />
+problem of acronyms with gershiim but that's not a difficult one<br />
+to solve. The code is in use at <a href="http://gibberish.co.il which you can" rel="nofollow" target="_blank">http://gibberish.co.il which you can</a><br />
+use to translate wrongly-encoded Hebrew, transliterize, and some<br />
+other Hebrew-related functions.<br />
+<br />
+To ensure that there will be no regular characters at the end of a<br />
+word, just convert all regular characters to their final forms, then<br />
+run this function. Enjoy!</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="77317""></a>
+  <div class="note">
+   <strong class="user">sternkinder at gmail dot com</strong>
+   <a href="#77317" class="date">24-Aug-2007 03:10</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+From what I can see, the problem is, that if you go straight and substitute all 'A's wit 'T's you can't tell for sure which 'T's to substitute with 'A's afterwards. This can be for instance solved by simply replacing all 'A's by another character (for instance '_' or whatever you like), then replacing all 'T's by 'A's, and then replacing all '_'s (or whatever character you chose) by 'A's:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+$dna </span><span class="keyword">= </span><span class="string">"AGTCTGCCCTAG"</span><span class="keyword">;
+<br />
+echo </span><span class="default">str_replace</span><span class="keyword">(array(</span><span class="string">"A"</span><span class="keyword">,</span><span class="string">"G"</span><span class="keyword">,</span><span class="string">"C"</span><span class="keyword">,</span><span class="string">"T"</span><span class="keyword">,</span><span class="string">"_"</span><span class="keyword">,</span><span class="string">"-"</span><span class="keyword">), array(</span><span class="string">"_"</span><span class="keyword">,</span><span class="string">"-"</span><span class="keyword">,</span><span class="string">"G"</span><span class="keyword">,</span><span class="string">"A"</span><span class="keyword">,</span><span class="string">"T"</span><span class="keyword">,</span><span class="string">"C"</span><span class="keyword">), </span><span class="default">$dna</span><span class="keyword">); </span><span class="comment">//output will be TCAGACGGGATC
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+Although I don't know how transliteration in perl works (though I remember that is kind of similar to the UNIX command "tr") I would suggest following function for "switching" single chars:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="keyword">function </span><span class="default">switch_chars</span><span class="keyword">(</span><span class="default">$subject</span><span class="keyword">,</span><span class="default">$switch_table</span><span class="keyword">,</span><span class="default">$unused_char</span><span class="keyword">=</span><span class="string">"_"</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp;&nbsp; foreach ( </span><span class="default">$switch_table </span><span class="keyword">as </span><span class="default">$_1 </span><span class="keyword">=&gt; </span><span class="default">$_2 </span><span class="keyword">) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$subject </span><span class="keyword">= </span><span class="default">str_replace</span><span class="keyword">(</span><span class="default">$_1</span><span class="keyword">,</span><span class="default">$unused_char</span><span class="keyword">,</span><span class="default">$subject</span><span class="keyword">);
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$subject </span><span class="keyword">= </span><span class="default">str_replace</span><span class="keyword">(</span><span class="default">$_2</span><span class="keyword">,</span><span class="default">$_1</span><span class="keyword">,</span><span class="default">$subject</span><span class="keyword">);
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$subject </span><span class="keyword">= </span><span class="default">str_replace</span><span class="keyword">(</span><span class="default">$unused_char</span><span class="keyword">,</span><span class="default">$_2</span><span class="keyword">,</span><span class="default">$subject</span><span class="keyword">);
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$subject</span><span class="keyword">;
+<br />
+}
+<br />
+
+<br />
+echo </span><span class="default">switch_chars</span><span class="keyword">(</span><span class="string">"AGTCTGCCCTAG"</span><span class="keyword">, array(</span><span class="string">"A"</span><span class="keyword">=&gt;</span><span class="string">"T"</span><span class="keyword">,</span><span class="string">"G"</span><span class="keyword">=&gt;</span><span class="string">"C"</span><span class="keyword">)); </span><span class="comment">//output will be TCAGACGGGATC
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="74037""></a>
+  <div class="note">
+   <strong class="user">ismith at nojunk dot motorola dot com</strong>
+   <a href="#74037" class="date">21-Mar-2007 09:47</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Be aware that when using the "/u" modifier, if your input text contains any bad UTF-8 code sequences, then preg_replace will return an empty string, regardless of whether there were any matches.<br />
+<br />
+This is due to the PCRE library returning an error code if the string contains bad UTF-8.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

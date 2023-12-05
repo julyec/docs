@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>简介</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="book.cmark.html">? CommonMark</a></li>
+      <li style="float: right;"><a href="cmark.setup.html">安装/配置 ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="book.cmark.html">CommonMark</a></li>
+    <li>简介</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="intro.cmark" class="preface">
+  <h1 class="title">简介</h1>
+  <p class="para">
+  This extension provides access to the reference implementation of CommonMark, a rationalized version of Markdown syntax with a specification.
+  </p>
+  <p class="formalpara">
+    <h5 class="title">Parsing:</h5>
+    <p class="para">
+    The CommonMark extension provides a simple parsing API:
+    <div class="methodsynopsis dc-description">
+   <span class="methodname"><a href="function.commonmark-parse.html" class="methodname">CommonMark\Parse</a></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$content</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$options</code><span class="initializer"> = ?</span></span>): <span class="type"><a href="class.commonmark-node.html" class="type CommonMark\Node">CommonMark\Node</a></span></div>
+
+    </p>
+  </p>
+  <p class="formalpara">
+    <h5 class="title">Rendering:</h5>
+    <p class="para">
+    The CommonMark extension provides simple rendering API that supports multiple formats:
+    <div class="methodsynopsis dc-description"><span class="methodname"><a href="function.commonmark-render.html" class="methodname">CommonMark\Render</a></span>(<span class="methodparam"><span class="type"><a href="class.commonmark-node.html" class="type CommonMark\Node">CommonMark\Node</a></span> <code class="parameter">$node</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$options</code><span class="initializer"> = ?</span></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$width</code><span class="initializer"> = ?</span></span>): <span class="type">string</span></div>
+
+  <div class="methodsynopsis dc-description"><span class="methodname"><a href="function.commonmark-render-html.html" class="methodname">CommonMark\Render\HTML</a></span>(<span class="methodparam"><span class="type"><a href="class.commonmark-node.html" class="type CommonMark\Node">CommonMark\Node</a></span> <code class="parameter">$node</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$options</code><span class="initializer"> = ?</span></span>): <span class="type">string</span></div>
+
+  <div class="methodsynopsis dc-description"><span class="methodname"><a href="function.commonmark-render-xml.html" class="methodname">CommonMark\Render\XML</a></span>(<span class="methodparam"><span class="type"><a href="class.commonmark-node.html" class="type CommonMark\Node">CommonMark\Node</a></span> <code class="parameter">$node</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$options</code><span class="initializer"> = ?</span></span>): <span class="type">string</span></div>
+
+  <div class="methodsynopsis dc-description"><span class="methodname"><a href="function.commonmark-render-man.html" class="methodname">CommonMark\Render\Man</a></span>(<span class="methodparam"><span class="type"><a href="class.commonmark-node.html" class="type CommonMark\Node">CommonMark\Node</a></span> <code class="parameter">$node</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$options</code><span class="initializer"> = ?</span></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$width</code><span class="initializer"> = ?</span></span>): <span class="type">string</span></div>
+
+  <div class="methodsynopsis dc-description"><span class="methodname"><a href="function.commonmark-render-latex.html" class="methodname">CommonMark\Render\Latex</a></span>(<span class="methodparam"><span class="type"><a href="class.commonmark-node.html" class="type CommonMark\Node">CommonMark\Node</a></span> <code class="parameter">$node</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$options</code><span class="initializer"> = ?</span></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$width</code><span class="initializer"> = ?</span></span>): <span class="type">string</span></div>
+
+    </p>
+  </p>
+  <p class="formalpara">
+    <h5 class="title">AST:</h5>
+    <p class="para">
+    The CommonMark extension implements visitation for CommonMark\Node objects:
+  <div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="commonmark-node.accept.html" class="methodname">CommonMark\Node::accept</a></span>(<span class="methodparam"><span class="type"><a href="class.commonmark-interfaces-ivisitor.html" class="type CommonMark\Interfaces\IVisitor">CommonMark\Interfaces\IVisitor</a></span> <code class="parameter">$visitor</code></span>): <span class="type"><span class="type void">void</span></span></div>
+
+    </p>
+  </p>
+  <p class="formalpara">
+    <h5 class="title">CQL:</h5>
+    <p class="para">
+    The CommonMark extension provides an interface to CQL, CommonMark Query Language:
+    <div class="constructorsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="commonmark-cql.construct.html" class="methodname">CommonMark\CQL::__construct</a></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$query</code></span>)</div>
+
+    </p>
+  </p>
+ </div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="128563""></a>
+  <div class="note">
+   <strong class="user">xuepeng dot gao dot ggle at gmail dot com</strong>
+   <a href="#128563" class="date">21-May-2023 05:58</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+in PHP 7.4.27<br />
+<br />
+code:<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; $markDownContent</span><span class="keyword">=</span><span class="string">"### test_H3 \r\n<br />
+&nbsp;&nbsp;&nbsp; #### test_H4"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$c </span><span class="keyword">= </span><span class="default">CommonMark\Parse</span><span class="keyword">(</span><span class="default">$markDownContent</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$c</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"The markdown syntax content is converted to html content: \r\n"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$str </span><span class="keyword">= </span><span class="default">CommonMark\Render\HTML</span><span class="keyword">(</span><span class="default">$c</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="default">$str</span><span class="keyword">;<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+output :<br />
+&nbsp;&nbsp; object(CommonMark\Node\Document)#1 (1) {<br />
+&nbsp; ["children"]=&gt;<br />
+&nbsp; array(2) {<br />
+&nbsp;&nbsp;&nbsp; [0]=&gt;<br />
+&nbsp;&nbsp;&nbsp; object(CommonMark\Node\Heading)#2 (1) {<br />
+&nbsp;&nbsp; &nbsp;&nbsp; ["children"]=&gt;<br />
+&nbsp;&nbsp; &nbsp;&nbsp; array(1) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; [0]=&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; object(CommonMark\Node\Text)#4 (1) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; ["literal"]=&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; string(7) "test_H3"<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; [1]=&gt;<br />
+&nbsp;&nbsp;&nbsp; object(CommonMark\Node\Heading)#3 (1) {<br />
+&nbsp;&nbsp; &nbsp;&nbsp; ["children"]=&gt;<br />
+&nbsp;&nbsp; &nbsp;&nbsp; array(1) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; [0]=&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; object(CommonMark\Node\Text)#4 (1) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; ["literal"]=&gt;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; string(7) "test_H4"<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp; }<br />
+}<br />
+The markdown syntax content is converted to html content:<br />
+&nbsp;&lt;h3&gt;test_H3&lt;/h3&gt;<br />
+&lt;h4&gt;test_H4&lt;/h4&gt;</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

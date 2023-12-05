@@ -1,0 +1,1884 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>移除数组中重复的值</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.array-uintersect.html">? array_uintersect</a></li>
+      <li style="float: right;"><a href="function.array-unshift.html">array_unshift ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.array.html">数组 函数</a></li>
+    <li>移除数组中重复的值</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.array-unique" class="refentry">
+   <div class="refnamediv">
+    <h1 class="refname">array_unique</h1>
+    <p class="verinfo">(PHP 4 &gt;= 4.0.1, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">array_unique</span> &mdash; <span class="dc-title">移除数组中重复的值</span></p>
+
+   </div>
+ <div class="refsect1 description" id="refsect1-function.array-unique-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>array_unique</strong></span>(<span class="methodparam"><span class="type">array</span> <code class="parameter">$array</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$flags</code><span class="initializer"> = <strong><code>SORT_STRING</code></strong></span></span>): <span class="type">array</span></div>
+
+    <p class="para rdfs-comment">
+     <span class="function"><strong>array_unique()</strong></span> 接受
+     <code class="parameter">array</code> 作为输入并返回没有重复值的新数组。
+    </p>
+    <p class="para">
+     注意键名保留不变。如果在指定了 <code class="parameter">flags</code> 时存在多个相等的元素，
+     会保留第一个相等的元素的键（key）和值（value）。
+    </p>
+    <blockquote class="note"><p><strong class="note">Note</strong>: 
+     <span class="simpara">
+      当且仅当
+      <code class="literal">(string) $elem1 === (string) $elem2</code> 时两个单元被认为相同。
+      例如，字符串表达一样时，会使用首个元素。
+     </span>
+    </p></blockquote>
+   </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.array-unique-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">array</code></dt>
+
+     <dd>
+
+      <p class="para">
+       输入的数组。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">flags</code></dt>
+
+     <dd>
+
+      <p class="para">
+       第二个可选参数<code class="parameter">flags</code> 可用于修改比较行为：
+      </p>
+      <p class="para">
+       比较类型标记：
+       <ul class="itemizedlist">
+        <li class="listitem">
+         <span class="simpara"><strong><code>SORT_REGULAR</code></strong> - 按照通常方法比较（不修改类型）</span>
+        </li>
+        <li class="listitem">
+         <span class="simpara"><strong><code>SORT_NUMERIC</code></strong> - 按照数字形式比较</span>
+        </li>
+        <li class="listitem">
+         <span class="simpara"><strong><code>SORT_STRING</code></strong> - 按照字符串形式比较</span>
+        </li>
+        <li class="listitem">
+         <span class="simpara"><strong><code>SORT_LOCALE_STRING</code></strong> - 根据当前的本地化设置，按照字符串比较。
+         </span>
+        </li>
+       </ul>
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.array-unique-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回过滤后的数组。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.array-unique-changelog">
+  <h3 class="title">更新日志</h3>
+  <p class="para">
+   <table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>版本</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>7.2.0</td>
+       <td>
+        如果 <code class="parameter">flags</code> 是 <strong><code>SORT_STRING</code></strong>，
+        之前会复制 <code class="parameter">array</code> 并移除非唯一数组（之后并不打包数组），
+        现在是通过添加唯一元素来生成新数组。这可能会导致不同的数字索引。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.array-unique-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #1 <span class="function"><strong>array_unique()</strong></span> 例子</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$input </span><span style="color: #007700">= array(</span><span style="color: #DD0000">"a" </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">"green"</span><span style="color: #007700">, </span><span style="color: #DD0000">"red"</span><span style="color: #007700">, </span><span style="color: #DD0000">"b" </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">"green"</span><span style="color: #007700">, </span><span style="color: #DD0000">"blue"</span><span style="color: #007700">, </span><span style="color: #DD0000">"red"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">array_unique</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Array
+(
+    [a] =&gt; green
+    [0] =&gt; red
+    [1] =&gt; blue
+)
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #2 <span class="function"><strong>array_unique()</strong></span> 和类型</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$input </span><span style="color: #007700">= array(</span><span style="color: #0000BB">4</span><span style="color: #007700">, </span><span style="color: #DD0000">"4"</span><span style="color: #007700">, </span><span style="color: #DD0000">"3"</span><span style="color: #007700">, </span><span style="color: #0000BB">4</span><span style="color: #007700">, </span><span style="color: #0000BB">3</span><span style="color: #007700">, </span><span style="color: #DD0000">"3"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">array_unique</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+array(2) {
+  [0] =&gt; int(4)
+  [2] =&gt; string(1) &quot;3&quot;
+}
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.array-unique-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <span class="simpara">
+    注意， <span class="function"><strong>array_unique()</strong></span> 不能应用于多维数组。
+   </span>
+  </p></blockquote>
+ </div>
+
+
+<div class="refsect1 seealso" id="refsect1-function.array-unique-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.array-count-values.html" class="function" rel="rdfs-seeAlso">array_count_values()</a> - 统计数组中每个不同值的出现次数</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="128321""></a>
+  <div class="note">
+   <strong class="user">Victoire Nkolo at crinastudio.com</strong>
+   <a href="#128321" class="date">18-Mar-2023 12:35</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="comment">//removes duplicated objetcs from an array according to the property given<br />
+<br />
+</span><span class="keyword">class </span><span class="default">ArrayFilter<br />
+</span><span class="keyword">{<br />
+<br />
+&nbsp;&nbsp;&nbsp; public static function </span><span class="default">dedupe_array_of_objets</span><span class="keyword">(array </span><span class="default">$array</span><span class="keyword">, </span><span class="default">string $property</span><span class="keyword">) : array<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$i </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$filteredArray </span><span class="keyword">= array();<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$keyArray </span><span class="keyword">= array();<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; foreach(</span><span class="default">$array </span><span class="keyword">as </span><span class="default">$item</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if (!</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">$item</span><span class="keyword">-&gt;</span><span class="default">$property</span><span class="keyword">, </span><span class="default">$keyArray</span><span class="keyword">)) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$keyArray</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">] = </span><span class="default">$item</span><span class="keyword">-&gt;</span><span class="default">$property</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$filteredArray</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">] = </span><span class="default">$item</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$i</span><span class="keyword">++;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$filteredArray</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="128025""></a>
+  <div class="note">
+   <strong class="user">Mike D. - michal at euro-net.pl</strong>
+   <a href="#128025" class="date">17-Dec-2022 12:47</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+modified code originally posted by Ghanshyam Katriya(anshkatriya at gmail) [highest voted comment here].<br />
+<br />
+1. In php 7.4 counter $i breaks the function. Removed completely (imo was waste of keystrokes anyway).<br />
+2. I added second return value - array of duplicates. So you can take both and compare them (I had to).<br />
+<br />
+Example array (copy-paste from original post):<br />
+<span class="default">&lt;?php<br />
+$details </span><span class="keyword">= array(<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">0 </span><span class="keyword">=&gt; array(</span><span class="string">"id"</span><span class="keyword">=&gt;</span><span class="string">"1"</span><span class="keyword">, </span><span class="string">"name"</span><span class="keyword">=&gt;</span><span class="string">"Mike"</span><span class="keyword">,&nbsp; &nbsp; </span><span class="string">"num"</span><span class="keyword">=&gt;</span><span class="string">"9876543210"</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">1 </span><span class="keyword">=&gt; array(</span><span class="string">"id"</span><span class="keyword">=&gt;</span><span class="string">"2"</span><span class="keyword">, </span><span class="string">"name"</span><span class="keyword">=&gt;</span><span class="string">"Carissa"</span><span class="keyword">, </span><span class="string">"num"</span><span class="keyword">=&gt;</span><span class="string">"08548596258"</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">2 </span><span class="keyword">=&gt; array(</span><span class="string">"id"</span><span class="keyword">=&gt;</span><span class="string">"1"</span><span class="keyword">, </span><span class="string">"name"</span><span class="keyword">=&gt;</span><span class="string">"Mathew"</span><span class="keyword">,&nbsp; </span><span class="string">"num"</span><span class="keyword">=&gt;</span><span class="string">"784581254"</span><span class="keyword">),<br />
+);<br />
+</span><span class="default">?&gt;</span> <br />
+<br />
+Function:<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">unique_multidim_array</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">, </span><span class="default">$key</span><span class="keyword">) : array {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$uniq_array </span><span class="keyword">= array();<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$dup_array </span><span class="keyword">= array();<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$key_array </span><span class="keyword">= array();<br />
+<br />
+&nbsp;&nbsp;&nbsp; foreach(</span><span class="default">$array </span><span class="keyword">as </span><span class="default">$val</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (!</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">$val</span><span class="keyword">[</span><span class="default">$key</span><span class="keyword">], </span><span class="default">$key_array</span><span class="keyword">)) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$key_array</span><span class="keyword">[] = </span><span class="default">$val</span><span class="keyword">[</span><span class="default">$key</span><span class="keyword">];<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$uniq_array</span><span class="keyword">[] = </span><span class="default">$val</span><span class="keyword">;<br />
+</span><span class="comment">/*<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; # 1st list to check:<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; # echo "ID or sth: " . $val['building_id'] . "; Something else: " . $val['nodes_name'] . (...) "\n";<br />
+*/<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">} else {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$dup_array</span><span class="keyword">[] = </span><span class="default">$val</span><span class="keyword">;<br />
+</span><span class="comment">/*<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; # 2nd list to check:<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; # echo "ID or sth: " . $val['building_id'] . "; Something else: " . $val['nodes_name'] . (...) "\n";<br />
+*/<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">}<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; return array(</span><span class="default">$uniq_array</span><span class="keyword">, </span><span class="default">$dup_array</span><span class="keyword">, </span><span class="comment">/* $key_array */</span><span class="keyword">);<br />
+}<br />
+</span><span class="default">?&gt;</span> <br />
+<br />
+Usage:<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">list(</span><span class="default">$unique_addresses</span><span class="keyword">, </span><span class="default">$duplicates</span><span class="keyword">, </span><span class="comment">/* $unique_keys */</span><span class="keyword">) = </span><span class="default">unique_multidim_array</span><span class="keyword">(</span><span class="default">$details</span><span class="keyword">,</span><span class="string">'id'</span><span class="keyword">);<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Then:<br />
+var_dump($unique_addresses);<br />
+or<br />
+var_dump($duplicates);<br />
+or foreach or whatever. Personally I just echo-ed 1st and then 2nd (both DOUBLE COMMENTED) list in function itself (then copied both to notepad++ and compared them - just to be 100% sure), but in case you want to do something else with it - enjoy :)<br />
+Plus - as a bonus - you also get an array of UNIQUE keys you searched for (just uncomment &gt;$key_array&lt; in both: function return and function call code).<br />
+<br />
+From example array code returns:<br />
+var_dump($unique_addresses); <br />
+array(2) {<br />
+&nbsp; [0]=&gt;<br />
+&nbsp; array(3) {<br />
+&nbsp;&nbsp;&nbsp; ["id"]=&gt;<br />
+&nbsp;&nbsp;&nbsp; string(1) "1"<br />
+&nbsp;&nbsp;&nbsp; ["name"]=&gt;<br />
+&nbsp;&nbsp;&nbsp; string(4) "Mike"<br />
+&nbsp;&nbsp;&nbsp; ["num"]=&gt;<br />
+&nbsp;&nbsp;&nbsp; string(10) "9876543210"<br />
+&nbsp; }<br />
+&nbsp; [1]=&gt;<br />
+&nbsp; array(3) {<br />
+&nbsp;&nbsp;&nbsp; ["id"]=&gt;<br />
+&nbsp;&nbsp;&nbsp; string(1) "2"<br />
+&nbsp;&nbsp;&nbsp; ["name"]=&gt;<br />
+&nbsp;&nbsp;&nbsp; string(7) "Carissa"<br />
+&nbsp;&nbsp;&nbsp; ["num"]=&gt;<br />
+&nbsp;&nbsp;&nbsp; string(11) "08548596258"<br />
+&nbsp; }<br />
+}<br />
+<br />
+var_dump($duplicates); <br />
+array(1) {<br />
+&nbsp; [0]=&gt;<br />
+&nbsp; array(3) {<br />
+&nbsp;&nbsp;&nbsp; ["id"]=&gt;<br />
+&nbsp;&nbsp;&nbsp; string(1) "1"<br />
+&nbsp;&nbsp;&nbsp; ["name"]=&gt;<br />
+&nbsp;&nbsp;&nbsp; string(6) "Mathew"<br />
+&nbsp;&nbsp;&nbsp; ["num"]=&gt;<br />
+&nbsp;&nbsp;&nbsp; string(9) "784581254"<br />
+&nbsp; }<br />
+}<br />
+<br />
+Plus keys, if you want.<br />
+<br />
+P.S.: in my - practical - case of DB querying I got around 4k uniques and 15k dupes :)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="127958""></a>
+  <div class="note">
+   <strong class="user">tasiot</strong>
+   <a href="#127958" class="date">23-Nov-2022 10:45</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+array_unique is not compatible with php 8.1 enums because enums don't have a string representation yet (even the BackedEnum of string type...).<br />
+You get an error: "Object of class XXXX could not be converted to string."<br />
+<br />
+So I wrote this function that creates a string representation of the enums and use the array keys to remove duplicates:<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="keyword">function </span><span class="default">array_unique_81</span><span class="keyword">(array </span><span class="default">$values</span><span class="keyword">): array<br />
+{<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$unique </span><span class="keyword">= [];<br />
+&nbsp;&nbsp;&nbsp; foreach (</span><span class="default">$values </span><span class="keyword">as </span><span class="default">$value</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">$value </span><span class="keyword">instanceof </span><span class="default">\UnitEnum</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$key </span><span class="keyword">= </span><span class="string">'e:' </span><span class="keyword">. </span><span class="default">\get_class</span><span class="keyword">(</span><span class="default">$value</span><span class="keyword">) . </span><span class="string">':' </span><span class="keyword">. </span><span class="default">$value</span><span class="keyword">-&gt;</span><span class="default">name</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; } else {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$key </span><span class="keyword">= </span><span class="string">'s:' </span><span class="keyword">. (string)</span><span class="default">$value</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$unique</span><span class="keyword">[</span><span class="default">$key</span><span class="keyword">] = </span><span class="default">$value</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">\array_values</span><span class="keyword">(</span><span class="default">$unique</span><span class="keyword">);<br />
+}<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="127884""></a>
+  <div class="note">
+   <strong class="user">free dot smilesrg at gmail dot com</strong>
+   <a href="#127884" class="date">01-Nov-2022 02:43</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+$a = new StdClass();<br />
+$b = new StdClass();<br />
+<br />
+var_dump(array_unique([$a, $b, $b, $a], SORT_REGULAR));<br />
+//array(1) {<br />
+//&nbsp; [0]=&gt;<br />
+//&nbsp; &nbsp; object(stdClass)#1 (0) {<br />
+//&nbsp; }<br />
+//}<br />
+<br />
+$a-&gt;name = 'One';<br />
+$b-&gt;name = 'Two';<br />
+<br />
+var_dump(array_unique([$a, $b, $b, $a], SORT_REGULAR));<br />
+<br />
+//array(2) {<br />
+//&nbsp; [0]=&gt;<br />
+//&nbsp; object(stdClass)#1 (1) {<br />
+//&nbsp; &nbsp; ["name"]=&gt;<br />
+//&nbsp; &nbsp; string(3) "One"<br />
+//&nbsp; }<br />
+//&nbsp; [1]=&gt;<br />
+//&nbsp; object(stdClass)#2 (1) {<br />
+//&nbsp; &nbsp; ["name"]=&gt;<br />
+//&nbsp; &nbsp; string(3) "Two"<br />
+//&nbsp; }<br />
+//}</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="127129""></a>
+  <div class="note">
+   <strong class="user">Sbastien</strong>
+   <a href="#127129" class="date">24-May-2022 09:45</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Because of PHP comparaisons modalities, you can never distinguish null from others falsy values.<br />
+Note the absorbing nature of true and false booleans in mix types array.<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+$a </span><span class="keyword">= [</span><span class="default">true</span><span class="keyword">, </span><span class="default">false</span><span class="keyword">, </span><span class="default">null</span><span class="keyword">, </span><span class="string">''</span><span class="keyword">, </span><span class="string">'0'</span><span class="keyword">, </span><span class="string">'123'</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">, </span><span class="default">123</span><span class="keyword">];<br />
+foreach ([</span><span class="string">'SORT_REGULAR'</span><span class="keyword">, </span><span class="string">'SORT_NUMERIC'</span><span class="keyword">, </span><span class="string">'SORT_STRING'</span><span class="keyword">, </span><span class="string">'SORT_LOCALE_STRING'</span><span class="keyword">] as </span><span class="default">$flag</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$a_new </span><span class="keyword">= </span><span class="default">array_unique</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">, </span><span class="default">constant</span><span class="keyword">(</span><span class="default">$flag</span><span class="keyword">));<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"</span><span class="keyword">{</span><span class="default">$flag</span><span class="keyword">}</span><span class="string"> ==&gt; "</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$a_new</span><span class="keyword">);<br />
+}<br />
+<br />
+</span><span class="comment">/*<br />
+<br />
+Gives :<br />
+<br />
+SORT_REGULAR ==&gt; array(2) {<br />
+&nbsp; [0]=&gt; bool(true)<br />
+&nbsp; [1]=&gt; bool(false)<br />
+}<br />
+SORT_NUMERIC ==&gt; array(3) {<br />
+&nbsp; [0]=&gt; bool(true)<br />
+&nbsp; [1]=&gt; bool(false)<br />
+&nbsp; [5]=&gt; string(3) "123"<br />
+}<br />
+SORT_STRING ==&gt; array(4) {<br />
+&nbsp; [0]=&gt; bool(true)<br />
+&nbsp; [1]=&gt; bool(false)<br />
+&nbsp; [4]=&gt; string(1) "0"<br />
+&nbsp; [5]=&gt; string(3) "123"<br />
+}<br />
+SORT_LOCALE_STRING ==&gt; array(4) {<br />
+&nbsp; [0]=&gt; bool(true)<br />
+&nbsp; [1]=&gt; bool(false)<br />
+&nbsp; [4]=&gt; string(1) "0"<br />
+&nbsp; [5]=&gt; string(3) "123"<br />
+}<br />
+<br />
+*/</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125828""></a>
+  <div class="note">
+   <strong class="user">contact at evoweb dot fr</strong>
+   <a href="#125828" class="date">16-Feb-2021 08:32</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Here is a solution to make unique values keeping empty values for an array with keys :<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">array_unique_kempty</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$values </span><span class="keyword">= </span><span class="default">array_unique</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$return </span><span class="keyword">= </span><span class="default">array_combine</span><span class="keyword">(</span><span class="default">array_keys</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">), </span><span class="default">array_fill</span><span class="keyword">(</span><span class="default">0</span><span class="keyword">,</span><span class="default">count</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">),</span><span class="default">null</span><span class="keyword">));<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">array_merge</span><span class="keyword">(</span><span class="default">$return</span><span class="keyword">,</span><span class="default">$values</span><span class="keyword">);<br />
+}<br />
+<br />
+</span><span class="default">$myArray </span><span class="keyword">= [<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">"test1" </span><span class="keyword">=&gt; </span><span class="string">"aaa"</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">"test2" </span><span class="keyword">=&gt; </span><span class="default">null</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">"test3" </span><span class="keyword">=&gt; </span><span class="string">"aaa"</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">"test4" </span><span class="keyword">=&gt; </span><span class="string">"bbb"</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">"test5" </span><span class="keyword">=&gt; </span><span class="default">null</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">"test6" </span><span class="keyword">=&gt; </span><span class="string">"ccc"</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">"test7" </span><span class="keyword">=&gt; </span><span class="string">"ddd"</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">"test8" </span><span class="keyword">=&gt; </span><span class="string">"ccc"<br />
+</span><span class="keyword">];<br />
+<br />
+echo </span><span class="string">"&lt;pre&gt;"</span><span class="keyword">.</span><span class="default">print_r</span><span class="keyword">(</span><span class="default">array_unique_kempty</span><span class="keyword">(</span><span class="default">$myArray</span><span class="keyword">),</span><span class="default">true</span><span class="keyword">).</span><span class="string">"&lt;/pre&gt;"</span><span class="keyword">;<br />
+<br />
+</span><span class="comment">/*<br />
+Array<br />
+(<br />
+&nbsp;&nbsp;&nbsp; [test1] =&gt; aaa<br />
+&nbsp;&nbsp;&nbsp; [test2] =&gt; <br />
+&nbsp;&nbsp;&nbsp; [test3] =&gt; <br />
+&nbsp;&nbsp;&nbsp; [test4] =&gt; bbb<br />
+&nbsp;&nbsp;&nbsp; [test5] =&gt; <br />
+&nbsp;&nbsp;&nbsp; [test6] =&gt; ccc<br />
+&nbsp;&nbsp;&nbsp; [test7] =&gt; ddd<br />
+&nbsp;&nbsp;&nbsp; [test8] =&gt; <br />
+)<br />
+*/<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="122857""></a>
+  <div class="note">
+   <strong class="user">falundir at gmail dot com</strong>
+   <a href="#122857" class="date">19-Jun-2018 05:51</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I find it odd that there is no version of this function which allows you to use a comparator callable in order to determine items equality (like array_udiff and array_uintersect). So, here's my version for you:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">array_uunique</span><span class="keyword">(array </span><span class="default">$array</span><span class="keyword">, callable </span><span class="default">$comparator</span><span class="keyword">): array {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$unique_array </span><span class="keyword">= [];<br />
+&nbsp;&nbsp;&nbsp; do {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$element </span><span class="keyword">= </span><span class="default">array_shift</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$unique_array</span><span class="keyword">[] = </span><span class="default">$element</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$array </span><span class="keyword">= </span><span class="default">array_udiff</span><span class="keyword">(<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$array</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; [</span><span class="default">$element</span><span class="keyword">],<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$comparator<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; } while (</span><span class="default">count</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">) &gt; </span><span class="default">0</span><span class="keyword">);<br />
+<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$unique_array</span><span class="keyword">;<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+And here is a test code:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">class </span><span class="default">Foo </span><span class="keyword">{<br />
+<br />
+&nbsp;&nbsp;&nbsp; public </span><span class="default">$a</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">__construct</span><span class="keyword">(</span><span class="default">int $a</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">a </span><span class="keyword">= </span><span class="default">$a</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+</span><span class="default">$array_of_objects </span><span class="keyword">= [new </span><span class="default">Foo</span><span class="keyword">(</span><span class="default">2</span><span class="keyword">), new </span><span class="default">Foo</span><span class="keyword">(</span><span class="default">1</span><span class="keyword">), new </span><span class="default">Foo</span><span class="keyword">(</span><span class="default">3</span><span class="keyword">), new </span><span class="default">Foo</span><span class="keyword">(</span><span class="default">2</span><span class="keyword">), new </span><span class="default">Foo</span><span class="keyword">(</span><span class="default">2</span><span class="keyword">), new </span><span class="default">Foo</span><span class="keyword">(</span><span class="default">1</span><span class="keyword">)];<br />
+<br />
+</span><span class="default">$comparator </span><span class="keyword">= function (</span><span class="default">Foo $foo1</span><span class="keyword">, </span><span class="default">Foo $foo2</span><span class="keyword">): </span><span class="default">int </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$foo1</span><span class="keyword">-&gt;</span><span class="default">a </span><span class="keyword">&lt;=&gt; </span><span class="default">$foo2</span><span class="keyword">-&gt;</span><span class="default">a</span><span class="keyword">;<br />
+};<br />
+<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">array_uunique</span><span class="keyword">(</span><span class="default">$array_of_objects</span><span class="keyword">, </span><span class="default">$comparator</span><span class="keyword">)); </span><span class="comment">// should output [Foo(2), Foo(1), Foo(3)]<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="122791""></a>
+  <div class="note">
+   <strong class="user">subhrajyoti dot de007 at gmail dot com</strong>
+   <a href="#122791" class="date">01-Jun-2018 05:25</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Simple and clean way to get duplicate entries removed from a multidimensional array.<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $multi_array </span><span class="keyword">= </span><span class="default">$multi_array </span><span class="keyword">[</span><span class="default">0</span><span class="keyword">];<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$multi_array </span><span class="keyword">= </span><span class="default">array_unique</span><span class="keyword">(</span><span class="default">$multi_array</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">print_r</span><span class="keyword">(</span><span class="default">$multi_array</span><span class="keyword">);<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="122226""></a>
+  <div class="note">
+   <strong class="user">Fabiano</strong>
+   <a href="#122226" class="date">04-Jan-2018 10:22</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+As for PHP 7.1.12, this is the comparison between array_keys(array_flip()), array_flip(array_flip()), for each elimination and array_unique. The array_keys(array_flip()) is the fastest method to remove duplication values from a single dimension array:<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+$max </span><span class="keyword">= </span><span class="default">1000000</span><span class="keyword">;<br />
+</span><span class="default">$arr </span><span class="keyword">= </span><span class="default">range</span><span class="keyword">(</span><span class="default">1</span><span class="keyword">,</span><span class="default">$max</span><span class="keyword">,</span><span class="default">3</span><span class="keyword">);<br />
+</span><span class="default">$arr2 </span><span class="keyword">= </span><span class="default">range</span><span class="keyword">(</span><span class="default">1</span><span class="keyword">,</span><span class="default">$max</span><span class="keyword">,</span><span class="default">2</span><span class="keyword">);<br />
+</span><span class="default">$arr </span><span class="keyword">= </span><span class="default">array_merge</span><span class="keyword">(</span><span class="default">$arr</span><span class="keyword">,</span><span class="default">$arr2</span><span class="keyword">);<br />
+<br />
+</span><span class="default">$time </span><span class="keyword">= -</span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);<br />
+</span><span class="default">$res1 </span><span class="keyword">= </span><span class="default">array_unique</span><span class="keyword">(</span><span class="default">$arr</span><span class="keyword">);<br />
+</span><span class="default">$time </span><span class="keyword">+= </span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);<br />
+<br />
+echo </span><span class="string">"&lt;br&gt;deduped to "</span><span class="keyword">.</span><span class="default">count</span><span class="keyword">(</span><span class="default">$res1</span><span class="keyword">).</span><span class="string">" in "</span><span class="keyword">.</span><span class="default">$time</span><span class="keyword">;<br />
+</span><span class="comment">// deduped to 666667 in 0.78185796737671<br />
+// memory used: 33558528<br />
+<br />
+</span><span class="default">$time </span><span class="keyword">= -</span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);<br />
+</span><span class="default">$res2 </span><span class="keyword">= </span><span class="default">array_flip</span><span class="keyword">(</span><span class="default">array_flip</span><span class="keyword">(</span><span class="default">$arr</span><span class="keyword">));<br />
+</span><span class="default">$time </span><span class="keyword">+= </span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);<br />
+<br />
+echo </span><span class="string">"&lt;br&gt;&lt;br&gt;deduped to "</span><span class="keyword">.</span><span class="default">count</span><span class="keyword">(</span><span class="default">$res2</span><span class="keyword">).</span><span class="string">" in "</span><span class="keyword">.</span><span class="default">$time</span><span class="keyword">;<br />
+</span><span class="comment">// deduped to 666667 in 0.072191953659058<br />
+// memory used: 3774873<br />
+<br />
+</span><span class="default">$time </span><span class="keyword">= -</span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);<br />
+</span><span class="default">$res3 </span><span class="keyword">= array();<br />
+foreach(</span><span class="default">$arr </span><span class="keyword">as </span><span class="default">$key</span><span class="keyword">=&gt;</span><span class="default">$val</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$res3</span><span class="keyword">[</span><span class="default">$val</span><span class="keyword">] = </span><span class="default">true</span><span class="keyword">;<br />
+}<br />
+</span><span class="default">$res3 </span><span class="keyword">= </span><span class="default">array_keys</span><span class="keyword">(</span><span class="default">$res3</span><span class="keyword">);<br />
+</span><span class="default">$time </span><span class="keyword">+= </span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);<br />
+<br />
+echo </span><span class="string">"&lt;br /&gt;&lt;br&gt;deduped to "</span><span class="keyword">.</span><span class="default">count</span><span class="keyword">(</span><span class="default">$res3</span><span class="keyword">).</span><span class="string">" in "</span><span class="keyword">.</span><span class="default">$time</span><span class="keyword">;<br />
+</span><span class="comment">// deduped to 666667 in 0.095494985580444<br />
+// memory used: 33558528<br />
+<br />
+</span><span class="default">$time </span><span class="keyword">= -</span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);<br />
+</span><span class="default">$res4 </span><span class="keyword">= </span><span class="default">array_keys</span><span class="keyword">(</span><span class="default">array_flip</span><span class="keyword">(</span><span class="default">$arr</span><span class="keyword">));<br />
+</span><span class="default">$time </span><span class="keyword">+= </span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);<br />
+<br />
+echo </span><span class="string">"&lt;br /&gt;&lt;br&gt;deduped to "</span><span class="keyword">.</span><span class="default">count</span><span class="keyword">(</span><span class="default">$res4</span><span class="keyword">).</span><span class="string">" in "</span><span class="keyword">.</span><span class="default">$time</span><span class="keyword">;<br />
+</span><span class="comment">// deduped to 666667 in 0.05807900428772<br />
+// memory used: 33558528</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="121252""></a>
+  <div class="note">
+   <strong class="user">calexandrepcjr at gmail dot com</strong>
+   <a href="#121252" class="date">20-Jun-2017 03:19</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Following the Ghanshyam Katriya idea, but with an array of objects, where the $key is related to object propriety that you want to filter the uniqueness of array:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">obj_multi_unique</span><span class="keyword">(</span><span class="default">$obj</span><span class="keyword">, </span><span class="default">$key </span><span class="keyword">= </span><span class="default">false</span><span class="keyword">)<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$totalObjs </span><span class="keyword">= </span><span class="default">count</span><span class="keyword">(</span><span class="default">$obj</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$obj</span><span class="keyword">) &amp;&amp; </span><span class="default">$totalObjs </span><span class="keyword">&gt; </span><span class="default">0 </span><span class="keyword">&amp;&amp; </span><span class="default">is_object</span><span class="keyword">(</span><span class="default">$obj</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">]) &amp;&amp; (</span><span class="default">$key </span><span class="keyword">&amp;&amp; !</span><span class="default">is_numeric</span><span class="keyword">(</span><span class="default">$key</span><span class="keyword">))) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; for (</span><span class="default">$i </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">; </span><span class="default">$i </span><span class="keyword">&lt; </span><span class="default">$totalObjs</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">++) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if (isset(</span><span class="default">$obj</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">])) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; for (</span><span class="default">$j </span><span class="keyword">= </span><span class="default">$i </span><span class="keyword">+ </span><span class="default">1</span><span class="keyword">; </span><span class="default">$j </span><span class="keyword">&lt; </span><span class="default">$totalObjs</span><span class="keyword">; </span><span class="default">$j</span><span class="keyword">++) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if (isset(</span><span class="default">$obj</span><span class="keyword">[</span><span class="default">$j</span><span class="keyword">]) &amp;&amp; </span><span class="default">$obj</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">]-&gt;{</span><span class="default">$key</span><span class="keyword">} === </span><span class="default">$obj</span><span class="keyword">[</span><span class="default">$j</span><span class="keyword">]-&gt;{</span><span class="default">$key</span><span class="keyword">}) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; unset(</span><span class="default">$obj</span><span class="keyword">[</span><span class="default">$j</span><span class="keyword">]);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">array_values</span><span class="keyword">(</span><span class="default">$obj</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; } else {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; throw new </span><span class="default">Exception</span><span class="keyword">(</span><span class="string">'Invalid argument or your array of objects is empty'</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="120487""></a>
+  <div class="note">
+   <strong class="user">stoff@</strong>
+   <a href="#120487" class="date">20-Jan-2017 03:23</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+In reply to performance tests array_unique vs foreach.<br />
+<br />
+In PHP7 there were significant changes to Packed and Immutable arrays resulting in the performance difference to drop considerably. Here is the same test on php7.1 here;<br />
+<a href="http://sandbox.onlinephpfunctions.com/code/2a9e986690ef8505490489581c1c0e70f20d26d1" rel="nofollow" target="_blank">http://sandbox.onlinephpfunctions.com/code/2a9e986690ef8505490489581c1c0e70f20d26d1</a><br />
+<br />
+$max = 770000; //large enough number within memory allocation<br />
+$arr = range(1,$max,3); <br />
+$arr2 = range(1,$max,2); <br />
+$arr = array_merge($arr,$arr2); <br />
+<br />
+$time = -microtime(true); <br />
+$res1 = array_unique($arr); <br />
+$time += microtime(true); <br />
+echo "deduped to ".count($res1)." in ".$time; <br />
+// deduped to 513333 in 1.0876770019531<br />
+<br />
+$time = -microtime(true); <br />
+$res2 = array(); <br />
+foreach($arr as $key=&gt;$val) {&nbsp; &nbsp; <br />
+&nbsp;&nbsp;&nbsp; $res2[$val] = true; <br />
+} <br />
+$res2 = array_keys($res2); <br />
+$time += microtime(true); <br />
+echo "&lt;br /&gt;deduped to ".count($res2)." in ".$time; <br />
+// deduped to 513333 in 0.054931879043579</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="118680""></a>
+  <div class="note">
+   <strong class="user">zoolyka at gmail dot com</strong>
+   <a href="#118680" class="date">18-Jan-2016 10:48</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I found the simplest way to "unique" multidimensional arrays as follows:<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+$array </span><span class="keyword">= array(<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'a' </span><span class="keyword">=&gt; array(</span><span class="default">1</span><span class="keyword">, </span><span class="default">2</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'b' </span><span class="keyword">=&gt; array(</span><span class="default">1</span><span class="keyword">, </span><span class="default">2</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'c' </span><span class="keyword">=&gt; array(</span><span class="default">2</span><span class="keyword">, </span><span class="default">2</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'d' </span><span class="keyword">=&gt; array(</span><span class="default">2</span><span class="keyword">, </span><span class="default">1</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'e' </span><span class="keyword">=&gt; array(</span><span class="default">1</span><span class="keyword">, </span><span class="default">1</span><span class="keyword">),<br />
+);<br />
+<br />
+</span><span class="default">$array </span><span class="keyword">= </span><span class="default">array_map</span><span class="keyword">(</span><span class="string">'json_encode'</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">);<br />
+</span><span class="default">$array </span><span class="keyword">= </span><span class="default">array_unique</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">);<br />
+</span><span class="default">$array </span><span class="keyword">= </span><span class="default">array_map</span><span class="keyword">(</span><span class="string">'json_decode'</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">);<br />
+<br />
+</span><span class="default">print_r</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">);<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+As you can see "b" will be removed without any errors or notices.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="116363""></a>
+  <div class="note">
+   <strong class="user">Ludovico Grossi</strong>
+   <a href="#116363" class="date">19-Dec-2014 02:01</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+[Editor's note: please note that this will not work well with non-scalar values in the array. Array keys can not be arrays themselves, nor streams, resources, etc. Flipping the array causes a change in key-name]
+<br />
+
+<br />
+You can do a super fast version of array_unique directly in PHP, even faster than the other solution posted in the comments!
+<br />
+
+<br />
+Compared to the built in function it is 20x faster! (2x faster than the solution in the comments). 
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="keyword">function </span><span class="default">superfast_array_unique</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">array_keys</span><span class="keyword">(</span><span class="default">array_flip</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">));
+<br />
+}
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+This works faster for small and big arrays.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="116302""></a>
+  <div class="note">
+   <strong class="user">Ghanshyam Katriya(anshkatriya at gmail)</strong>
+   <a href="#116302" class="date">09-Dec-2014 10:15</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Create multidimensional array unique for any single key index.
+<br />
+e.g I want to create multi dimentional unique array for specific code
+<br />
+
+<br />
+Code : 
+<br />
+My array is like this,
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+$details </span><span class="keyword">= array(
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">0 </span><span class="keyword">=&gt; array(</span><span class="string">"id"</span><span class="keyword">=&gt;</span><span class="string">"1"</span><span class="keyword">, </span><span class="string">"name"</span><span class="keyword">=&gt;</span><span class="string">"Mike"</span><span class="keyword">,&nbsp; &nbsp; </span><span class="string">"num"</span><span class="keyword">=&gt;</span><span class="string">"9876543210"</span><span class="keyword">),
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">1 </span><span class="keyword">=&gt; array(</span><span class="string">"id"</span><span class="keyword">=&gt;</span><span class="string">"2"</span><span class="keyword">, </span><span class="string">"name"</span><span class="keyword">=&gt;</span><span class="string">"Carissa"</span><span class="keyword">, </span><span class="string">"num"</span><span class="keyword">=&gt;</span><span class="string">"08548596258"</span><span class="keyword">),
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">2 </span><span class="keyword">=&gt; array(</span><span class="string">"id"</span><span class="keyword">=&gt;</span><span class="string">"1"</span><span class="keyword">, </span><span class="string">"name"</span><span class="keyword">=&gt;</span><span class="string">"Mathew"</span><span class="keyword">,&nbsp; </span><span class="string">"num"</span><span class="keyword">=&gt;</span><span class="string">"784581254"</span><span class="keyword">),
+<br />
+);
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+You can make it unique for any field like id, name or num.
+<br />
+
+<br />
+I have develop this function for same : 
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="keyword">function </span><span class="default">unique_multidim_array</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">, </span><span class="default">$key</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$temp_array </span><span class="keyword">= array();
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$i </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$key_array </span><span class="keyword">= array();
+<br />
+&nbsp;&nbsp;&nbsp; 
+<br />
+&nbsp;&nbsp;&nbsp; foreach(</span><span class="default">$array </span><span class="keyword">as </span><span class="default">$val</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (!</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">$val</span><span class="keyword">[</span><span class="default">$key</span><span class="keyword">], </span><span class="default">$key_array</span><span class="keyword">)) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$key_array</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">] = </span><span class="default">$val</span><span class="keyword">[</span><span class="default">$key</span><span class="keyword">];
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$temp_array</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">] = </span><span class="default">$val</span><span class="keyword">;
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$i</span><span class="keyword">++;
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$temp_array</span><span class="keyword">;
+<br />
+}
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+Now, call this function anywhere from your code,
+<br />
+
+<br />
+something like this,
+<br />
+<span class="default">&lt;?php
+<br />
+$details </span><span class="keyword">= </span><span class="default">unique_multidim_array</span><span class="keyword">(</span><span class="default">$details</span><span class="keyword">,</span><span class="string">'id'</span><span class="keyword">);
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+Output will be like this :
+<br />
+<span class="default">&lt;?php
+<br />
+$details </span><span class="keyword">= array(
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">0 </span><span class="keyword">=&gt; array(</span><span class="string">"id"</span><span class="keyword">=&gt;</span><span class="string">"1"</span><span class="keyword">,</span><span class="string">"name"</span><span class="keyword">=&gt;</span><span class="string">"Mike"</span><span class="keyword">,</span><span class="string">"num"</span><span class="keyword">=&gt;</span><span class="string">"9876543210"</span><span class="keyword">),
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">1 </span><span class="keyword">=&gt; array(</span><span class="string">"id"</span><span class="keyword">=&gt;</span><span class="string">"2"</span><span class="keyword">,</span><span class="string">"name"</span><span class="keyword">=&gt;</span><span class="string">"Carissa"</span><span class="keyword">,</span><span class="string">"num"</span><span class="keyword">=&gt;</span><span class="string">"08548596258"</span><span class="keyword">),
+<br />
+);
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="113889""></a>
+  <div class="note">
+   <strong class="user">mostafatalebi at rocketmail dot com</strong>
+   <a href="#113889" class="date">13-Dec-2013 02:38</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you find the need to get a sorted array without it preserving the keys, use this code which has worked for me:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+
+<br />
+$array </span><span class="keyword">= array(</span><span class="string">"hello"</span><span class="keyword">, </span><span class="string">"fine"</span><span class="keyword">, </span><span class="string">"good"</span><span class="keyword">, </span><span class="string">"fine"</span><span class="keyword">, </span><span class="string">"hello"</span><span class="keyword">, </span><span class="string">"bye"</span><span class="keyword">);
+<br />
+
+<br />
+</span><span class="default">$get_sorted_unique_array </span><span class="keyword">= </span><span class="default">array_values</span><span class="keyword">(</span><span class="default">array_unique</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">));
+<br />
+
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+The above code returns an array which is both unique and sorted from zero.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="108421""></a>
+  <div class="note">
+   <strong class="user">sashasimkin at gmail dot com</strong>
+   <a href="#108421" class="date">25-Apr-2012 01:26</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+My object unique function:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">object_unique</span><span class="keyword">( </span><span class="default">$obj </span><span class="keyword">){<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$objArray </span><span class="keyword">= (array) </span><span class="default">$obj</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$objArray </span><span class="keyword">= </span><span class="default">array_intersect_assoc</span><span class="keyword">( </span><span class="default">array_unique</span><span class="keyword">( </span><span class="default">$objArray </span><span class="keyword">), </span><span class="default">$objArray </span><span class="keyword">);<br />
+<br />
+&nbsp;&nbsp;&nbsp; foreach( </span><span class="default">$obj </span><span class="keyword">as </span><span class="default">$n </span><span class="keyword">=&gt; </span><span class="default">$f </span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if( !</span><span class="default">array_key_exists</span><span class="keyword">( </span><span class="default">$n</span><span class="keyword">, </span><span class="default">$objArray </span><span class="keyword">) ) unset( </span><span class="default">$obj</span><span class="keyword">-&gt;</span><span class="default">$n </span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$obj</span><span class="keyword">;<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+And these code:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">class </span><span class="default">Test</span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public </span><span class="default">$pr0 </span><span class="keyword">= </span><span class="string">'string'</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; public </span><span class="default">$pr1 </span><span class="keyword">= </span><span class="string">'string1'</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; public </span><span class="default">$pr2 </span><span class="keyword">= </span><span class="string">'string'</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; public </span><span class="default">$pr3 </span><span class="keyword">= </span><span class="string">'string2'</span><span class="keyword">;<br />
+}<br />
+<br />
+</span><span class="default">$obj </span><span class="keyword">= new </span><span class="default">Test</span><span class="keyword">;<br />
+<br />
+</span><span class="default">var_dump</span><span class="keyword">( </span><span class="default">object_unique</span><span class="keyword">( </span><span class="default">$obj </span><span class="keyword">) );<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+returns:<br />
+object(Test)[1]<br />
+&nbsp; public 'pr0' =&gt; string 'string' (length=6)<br />
+&nbsp; public 'pr1' =&gt; string 'string1' (length=7)<br />
+&nbsp; public 'pr3' =&gt; string 'string2' (length=7)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="98453""></a>
+  <div class="note">
+   <strong class="user">Anonymous</strong>
+   <a href="#98453" class="date">16-Jun-2010 05:46</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+It's often faster to use a foreache and array_keys than array_unique:
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; <span class="default">&lt;?php
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; $max </span><span class="keyword">= </span><span class="default">1000000</span><span class="keyword">;
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$arr </span><span class="keyword">= </span><span class="default">range</span><span class="keyword">(</span><span class="default">1</span><span class="keyword">,</span><span class="default">$max</span><span class="keyword">,</span><span class="default">3</span><span class="keyword">);
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$arr2 </span><span class="keyword">= </span><span class="default">range</span><span class="keyword">(</span><span class="default">1</span><span class="keyword">,</span><span class="default">$max</span><span class="keyword">,</span><span class="default">2</span><span class="keyword">);
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$arr </span><span class="keyword">= </span><span class="default">array_merge</span><span class="keyword">(</span><span class="default">$arr</span><span class="keyword">,</span><span class="default">$arr2</span><span class="keyword">);
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$time </span><span class="keyword">= -</span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$res1 </span><span class="keyword">= </span><span class="default">array_unique</span><span class="keyword">(</span><span class="default">$arr</span><span class="keyword">);
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$time </span><span class="keyword">+= </span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);
+<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"deduped to "</span><span class="keyword">.</span><span class="default">count</span><span class="keyword">(</span><span class="default">$res1</span><span class="keyword">).</span><span class="string">" in "</span><span class="keyword">.</span><span class="default">$time</span><span class="keyword">;
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// deduped to 666667 in 32.300781965256
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$time </span><span class="keyword">= -</span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$res2 </span><span class="keyword">= array();
+<br />
+&nbsp;&nbsp;&nbsp; foreach(</span><span class="default">$arr </span><span class="keyword">as </span><span class="default">$key</span><span class="keyword">=&gt;</span><span class="default">$val</span><span class="keyword">) {&nbsp; &nbsp; 
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$res2</span><span class="keyword">[</span><span class="default">$val</span><span class="keyword">] = </span><span class="default">true</span><span class="keyword">;
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$res2 </span><span class="keyword">= </span><span class="default">array_keys</span><span class="keyword">(</span><span class="default">$res2</span><span class="keyword">);
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$time </span><span class="keyword">+= </span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);
+<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"&lt;br /&gt;deduped to "</span><span class="keyword">.</span><span class="default">count</span><span class="keyword">(</span><span class="default">$res2</span><span class="keyword">).</span><span class="string">" in "</span><span class="keyword">.</span><span class="default">$time</span><span class="keyword">;
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// deduped to 666667 in 0.84372591972351
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="97285""></a>
+  <div class="note">
+   <strong class="user">regeda at inbox dot ru</strong>
+   <a href="#97285" class="date">12-Apr-2010 08:11</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+recursive array unique for multiarrays<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">super_unique</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">)<br />
+{<br />
+&nbsp; </span><span class="default">$result </span><span class="keyword">= </span><span class="default">array_map</span><span class="keyword">(</span><span class="string">"unserialize"</span><span class="keyword">, </span><span class="default">array_unique</span><span class="keyword">(</span><span class="default">array_map</span><span class="keyword">(</span><span class="string">"serialize"</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">)));<br />
+<br />
+&nbsp; foreach (</span><span class="default">$result </span><span class="keyword">as </span><span class="default">$key </span><span class="keyword">=&gt; </span><span class="default">$value</span><span class="keyword">)<br />
+&nbsp; {<br />
+&nbsp;&nbsp;&nbsp; if ( </span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$value</span><span class="keyword">) )<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$result</span><span class="keyword">[</span><span class="default">$key</span><span class="keyword">] = </span><span class="default">super_unique</span><span class="keyword">(</span><span class="default">$value</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp; }<br />
+<br />
+&nbsp; return </span><span class="default">$result</span><span class="keyword">;<br />
+}<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="95203""></a>
+  <div class="note">
+   <strong class="user">amri [ at t] dhstudio dot eu</strong>
+   <a href="#95203" class="date">18-Dec-2009 02:36</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I searched how to show only the de-duplicate elements from array, but failed. 
+<br />
+Here is my solution:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="keyword">function </span><span class="default">arrayUniqueElements</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">)
+<br />
+{
+<br />
+return </span><span class="default">array_unique</span><span class="keyword">(</span><span class="default">array_diff_assoc</span><span class="keyword">(</span><span class="default">$array1</span><span class="keyword">,</span><span class="default">array_unique</span><span class="keyword">(</span><span class="default">$array1</span><span class="keyword">)));
+<br />
+};
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+Example:
+<br />
+<span class="default">&lt;?php
+<br />
+$arr1 </span><span class="keyword">= array(</span><span class="string">'foo'</span><span class="keyword">, </span><span class="string">'bar'</span><span class="keyword">, </span><span class="string">'xyzzy'</span><span class="keyword">, </span><span class="string">'&amp;'</span><span class="keyword">, </span><span class="string">'xyzzy'</span><span class="keyword">,
+<br />
+</span><span class="string">'baz'</span><span class="keyword">, </span><span class="string">'bat'</span><span class="keyword">, </span><span class="string">'|'</span><span class="keyword">, </span><span class="string">'xyzzy'</span><span class="keyword">, </span><span class="string">'plugh'</span><span class="keyword">,
+<br />
+</span><span class="string">'xyzzy'</span><span class="keyword">, </span><span class="string">'foobar'</span><span class="keyword">, </span><span class="string">'|'</span><span class="keyword">, </span><span class="string">'plonk'</span><span class="keyword">, </span><span class="string">'xyzzy'</span><span class="keyword">,
+<br />
+</span><span class="string">'apples'</span><span class="keyword">, </span><span class="string">'&amp;'</span><span class="keyword">, </span><span class="string">'xyzzy'</span><span class="keyword">, </span><span class="string">'oranges'</span><span class="keyword">, </span><span class="string">'xyzzy'</span><span class="keyword">,
+<br />
+</span><span class="string">'pears'</span><span class="keyword">,</span><span class="string">'foobar'</span><span class="keyword">);
+<br />
+
+<br />
+</span><span class="default">$result</span><span class="keyword">=</span><span class="default">arrayUniqueElements</span><span class="keyword">(</span><span class="default">$arr1</span><span class="keyword">);
+<br />
+</span><span class="default">print_r</span><span class="keyword">(</span><span class="default">$result</span><span class="keyword">);exit;
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+Output:
+<br />
+
+<br />
+Array
+<br />
+(
+<br />
+[4] =&gt; xyzzy
+<br />
+[12] =&gt; |
+<br />
+[16] =&gt; &amp;
+<br />
+[21] =&gt; foobar
+<br />
+)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="90614""></a>
+  <div class="note">
+   <strong class="user">dirk dot avery a t gmail</strong>
+   <a href="#90614" class="date">30-Apr-2009 08:45</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Although array_unique is not intended to work with multi-dimensional arrays, it does on 5.2.9.&nbsp; However, it does not for 5.2.5.&nbsp; Beware.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="86848""></a>
+  <div class="note">
+   <strong class="user">jusvalceanu - SPAM at SPAM - yahoo dot com</strong>
+   <a href="#86848" class="date">06-Nov-2008 02:23</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+so .... my problem was multidimensional sort.
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; $new </span><span class="keyword">= array();
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$exclude </span><span class="keyword">= array(</span><span class="string">""</span><span class="keyword">); 
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; for (</span><span class="default">$i </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">&lt;=</span><span class="default">count</span><span class="keyword">(</span><span class="default">$attribs</span><span class="keyword">)-</span><span class="default">1</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">++) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; if (!</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">trim</span><span class="keyword">(</span><span class="default">$attribs</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">][</span><span class="string">"price"</span><span class="keyword">]) ,</span><span class="default">$exclude</span><span class="keyword">)) { </span><span class="default">$new</span><span class="keyword">[] = </span><span class="default">$attribs</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">]; </span><span class="default">$exclude</span><span class="keyword">[] = </span><span class="default">trim</span><span class="keyword">(</span><span class="default">$attribs</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">][</span><span class="string">"price"</span><span class="keyword">]); }
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; }
+<br />
+
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+Array $attribs is an array contaning arrays. Each array in the $attrib array consists in multiple fields (ex: name, lenght, price, etc.) to be more simpler in speech think that $attrib is the array resulted by a search sql query done by a visitator on your online shoopping website ... (so ... each array in the $attrib is a product :P) if you want to sort only the uniq results use the above or use this:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+&nbsp; 
+<br />
+&nbsp;&nbsp; </span><span class="comment">/* Our Array of products */
+<br />
+&nbsp;&nbsp; </span><span class="default">$attribs</span><span class="keyword">[] = array(
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="string">"name"&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">=&gt; </span><span class="string">"Test Product 1"</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="string">"length"&nbsp; &nbsp;&nbsp; </span><span class="keyword">=&gt; </span><span class="string">"42 cm"</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="string">"weight"&nbsp; &nbsp;&nbsp; </span><span class="keyword">=&gt; </span><span class="string">"0,5 kg"</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="string">"price"&nbsp; &nbsp;&nbsp; </span><span class="keyword">=&gt; </span><span class="string">"10 $"</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="string">"stock"&nbsp; &nbsp;&nbsp; </span><span class="keyword">=&gt; </span><span class="string">"100"</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; );
+<br />
+
+<br />
+&nbsp;&nbsp; </span><span class="default">$attribs</span><span class="keyword">[] = array(
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="string">"name"&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">=&gt; </span><span class="string">"Test Product 2"</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="string">"length"&nbsp; &nbsp;&nbsp; </span><span class="keyword">=&gt; </span><span class="string">"42 cm"</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="string">"weight"&nbsp; &nbsp;&nbsp; </span><span class="keyword">=&gt; </span><span class="string">"1,5 kg"</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="string">"price"&nbsp; &nbsp;&nbsp; </span><span class="keyword">=&gt; </span><span class="string">"10 $"</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="string">"stock"&nbsp; &nbsp;&nbsp; </span><span class="keyword">=&gt; </span><span class="string">"200"</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; );
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">/* The nice stuff */
+<br />
+
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$new </span><span class="keyword">= array();
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$exclude </span><span class="keyword">= array(</span><span class="string">""</span><span class="keyword">); 
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; for (</span><span class="default">$i </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">&lt;=</span><span class="default">count</span><span class="keyword">(</span><span class="default">$attribs</span><span class="keyword">)-</span><span class="default">1</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">++) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; if (!</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">trim</span><span class="keyword">(</span><span class="default">$attribs</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">][</span><span class="string">"price"</span><span class="keyword">]) ,</span><span class="default">$exclude</span><span class="keyword">)) { </span><span class="default">$new</span><span class="keyword">[] = </span><span class="default">$attribs</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">]; </span><span class="default">$exclude</span><span class="keyword">[] = </span><span class="default">trim</span><span class="keyword">(</span><span class="default">$attribs</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">][</span><span class="string">"price"</span><span class="keyword">]); }
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; 
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">print_r</span><span class="keyword">(</span><span class="default">$new</span><span class="keyword">); </span><span class="comment">// $new is our sorted array
+<br />
+
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+Have fun tweaking this ;)) i know you will ;))
+<br />
+
+<br />
+From Romania With Love</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="85320""></a>
+  <div class="note">
+   <strong class="user">quecoder at gmail</strong>
+   <a href="#85320" class="date">25-Aug-2008 10:30</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+another method to get unique values is :
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+$alpha</span><span class="keyword">=array(</span><span class="string">'a'</span><span class="keyword">,</span><span class="string">'b'</span><span class="keyword">,</span><span class="string">'c'</span><span class="keyword">,</span><span class="string">'a'</span><span class="keyword">,</span><span class="string">'b'</span><span class="keyword">,</span><span class="string">'d'</span><span class="keyword">,</span><span class="string">'e'</span><span class="keyword">,</span><span class="string">'f'</span><span class="keyword">,</span><span class="string">'f'</span><span class="keyword">);
+<br />
+
+<br />
+</span><span class="default">$alpha</span><span class="keyword">= </span><span class="default">array_keys</span><span class="keyword">(</span><span class="default">array_count_values</span><span class="keyword">(</span><span class="default">$alpha</span><span class="keyword">));
+<br />
+
+<br />
+</span><span class="default">print_r</span><span class="keyword">(</span><span class="default">$alpha</span><span class="keyword">);
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+Output:
+<br />
+Array ( [0] =&gt; a [1] =&gt; b [2] =&gt; c [3] =&gt; d [4] =&gt; e [5] =&gt; f )</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="84750""></a>
+  <div class="note">
+   <strong class="user">Dorphalsig</strong>
+   <a href="#84750" class="date">28-Jul-2008 09:47</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I had a problem with array_unique and multidimensional arrays ... Maybe there's a better way to do this, but this will work for any dimensional arrays.
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="keyword">function </span><span class="default">arrayUnique</span><span class="keyword">(</span><span class="default">$myArray</span><span class="keyword">)
+<br />
+{
+<br />
+&nbsp;&nbsp;&nbsp; if(!</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$myArray</span><span class="keyword">))
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">$myArray</span><span class="keyword">;
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; foreach (</span><span class="default">$myArray </span><span class="keyword">as &amp;</span><span class="default">$myvalue</span><span class="keyword">){
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$myvalue</span><span class="keyword">=</span><span class="default">serialize</span><span class="keyword">(</span><span class="default">$myvalue</span><span class="keyword">);
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$myArray</span><span class="keyword">=</span><span class="default">array_unique</span><span class="keyword">(</span><span class="default">$myArray</span><span class="keyword">);
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; foreach (</span><span class="default">$myArray </span><span class="keyword">as &amp;</span><span class="default">$myvalue</span><span class="keyword">){
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$myvalue</span><span class="keyword">=</span><span class="default">unserialize</span><span class="keyword">(</span><span class="default">$myvalue</span><span class="keyword">);
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$myArray</span><span class="keyword">;
+<br />
+
+<br />
+}
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="82508""></a>
+  <div class="note">
+   <strong class="user">PHP Expert</strong>
+   <a href="#82508" class="date">14-Apr-2008 05:34</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Case insensitive for PHP v4.x and up.
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+
+<br />
+</span><span class="keyword">function </span><span class="default">in_iarray</span><span class="keyword">(</span><span class="default">$str</span><span class="keyword">, </span><span class="default">$a</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp;&nbsp; foreach (</span><span class="default">$a </span><span class="keyword">as </span><span class="default">$v</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">strcasecmp</span><span class="keyword">(</span><span class="default">$str</span><span class="keyword">, </span><span class="default">$v</span><span class="keyword">) == </span><span class="default">0</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">true</span><span class="keyword">;
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">false</span><span class="keyword">;
+<br />
+}
+<br />
+
+<br />
+function </span><span class="default">array_iunique</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$n </span><span class="keyword">= array();
+<br />
+&nbsp;&nbsp;&nbsp; foreach (</span><span class="default">$a </span><span class="keyword">as </span><span class="default">$k </span><span class="keyword">=&gt; </span><span class="default">$v</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (!</span><span class="default">in_iarray</span><span class="keyword">(</span><span class="default">$v</span><span class="keyword">, </span><span class="default">$n</span><span class="keyword">)) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$n</span><span class="keyword">[</span><span class="default">$k</span><span class="keyword">]=</span><span class="default">$v</span><span class="keyword">;
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$n</span><span class="keyword">;
+<br />
+}
+<br />
+
+<br />
+</span><span class="default">$input </span><span class="keyword">= array(</span><span class="string">"aAa"</span><span class="keyword">,</span><span class="string">"bBb"</span><span class="keyword">,</span><span class="string">"cCc"</span><span class="keyword">,</span><span class="string">"AaA"</span><span class="keyword">,</span><span class="string">"ccC"</span><span class="keyword">,</span><span class="string">"ccc"</span><span class="keyword">,</span><span class="string">"CCC"</span><span class="keyword">,</span><span class="string">"bBB"</span><span class="keyword">,</span><span class="string">"AAA"</span><span class="keyword">,</span><span class="string">"XXX"</span><span class="keyword">);
+<br />
+</span><span class="default">$result </span><span class="keyword">= </span><span class="default">array_iunique</span><span class="keyword">(</span><span class="default">$input</span><span class="keyword">);
+<br />
+</span><span class="default">print_r</span><span class="keyword">(</span><span class="default">$result</span><span class="keyword">);
+<br />
+
+<br />
+</span><span class="comment">/*
+<br />
+Array
+<br />
+(
+<br />
+&nbsp;&nbsp;&nbsp; [0] =&gt; aAa
+<br />
+&nbsp;&nbsp;&nbsp; [1] =&gt; bBb
+<br />
+&nbsp;&nbsp;&nbsp; [2] =&gt; cCc
+<br />
+&nbsp;&nbsp;&nbsp; [9] =&gt; XXX
+<br />
+)
+<br />
+*/
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="81513""></a>
+  <div class="note">
+   <strong class="user">Ray dot Paseur at SometimesUsesGmail dot com</strong>
+   <a href="#81513" class="date">01-Mar-2008 07:46</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I needed to identify email addresses in a data table that were replicated, so I wrote the array_not_unique() function:<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="keyword">function </span><span class="default">array_not_unique</span><span class="keyword">(</span><span class="default">$raw_array</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$dupes </span><span class="keyword">= array();<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">natcasesort</span><span class="keyword">(</span><span class="default">$raw_array</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">reset </span><span class="keyword">(</span><span class="default">$raw_array</span><span class="keyword">);<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$old_key&nbsp; &nbsp; </span><span class="keyword">= </span><span class="default">NULL</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$old_value&nbsp; &nbsp; </span><span class="keyword">= </span><span class="default">NULL</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; foreach (</span><span class="default">$raw_array </span><span class="keyword">as </span><span class="default">$key </span><span class="keyword">=&gt; </span><span class="default">$value</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">$value </span><span class="keyword">=== </span><span class="default">NULL</span><span class="keyword">) { continue; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">$old_value </span><span class="keyword">== </span><span class="default">$value</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$dupes</span><span class="keyword">[</span><span class="default">$old_key</span><span class="keyword">]&nbsp; &nbsp; = </span><span class="default">$old_value</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$dupes</span><span class="keyword">[</span><span class="default">$key</span><span class="keyword">]&nbsp; &nbsp; &nbsp; &nbsp; = </span><span class="default">$value</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$old_value&nbsp; &nbsp; </span><span class="keyword">= </span><span class="default">$value</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$old_key&nbsp; &nbsp; </span><span class="keyword">= </span><span class="default">$key</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+return </span><span class="default">$dupes</span><span class="keyword">;<br />
+}<br />
+<br />
+</span><span class="default">$raw_array&nbsp; &nbsp;&nbsp; </span><span class="keyword">= array();<br />
+</span><span class="default">$raw_array</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">]&nbsp; &nbsp; = </span><span class="string">'abc@xyz.com'</span><span class="keyword">;<br />
+</span><span class="default">$raw_array</span><span class="keyword">[</span><span class="default">2</span><span class="keyword">]&nbsp; &nbsp; = </span><span class="string">'def@xyz.com'</span><span class="keyword">;<br />
+</span><span class="default">$raw_array</span><span class="keyword">[</span><span class="default">3</span><span class="keyword">]&nbsp; &nbsp; = </span><span class="string">'ghi@xyz.com'</span><span class="keyword">;<br />
+</span><span class="default">$raw_array</span><span class="keyword">[</span><span class="default">4</span><span class="keyword">]&nbsp; &nbsp; = </span><span class="string">'abc@xyz.com'</span><span class="keyword">; </span><span class="comment">// Duplicate<br />
+<br />
+</span><span class="default">$common_stuff&nbsp; &nbsp; </span><span class="keyword">= </span><span class="default">array_not_unique</span><span class="keyword">(</span><span class="default">$raw_array</span><span class="keyword">);<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$common_stuff</span><span class="keyword">);<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="78801""></a>
+  <div class="note">
+   <strong class="user">mnbayazit</strong>
+   <a href="#78801" class="date">28-Oct-2007 02:18</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Case insensitive; will keep first encountered value.
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+
+<br />
+</span><span class="keyword">function </span><span class="default">array_iunique</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$lowered </span><span class="keyword">= </span><span class="default">array_map</span><span class="keyword">(</span><span class="string">'strtolower'</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">);
+<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">array_intersect_key</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">, </span><span class="default">array_unique</span><span class="keyword">(</span><span class="default">$lowered</span><span class="keyword">));
+<br />
+}
+<br />
+
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="76769""></a>
+  <div class="note">
+   <strong class="user">webmaster at jukkis dot net</strong>
+   <a href="#76769" class="date">30-Jul-2007 04:08</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Another way to 'unique column' an array, in this case an array of objects: <br />
+Keep the desired unique column values in a static array inside the callback function for array_filter.<br />
+<br />
+Example:<br />
+<span class="default">&lt;?php<br />
+</span><span class="comment">/* example object */<br />
+</span><span class="keyword">class </span><span class="default">myObj </span><span class="keyword">{<br />
+&nbsp; public </span><span class="default">$id</span><span class="keyword">;<br />
+&nbsp; public </span><span class="default">$value</span><span class="keyword">;<br />
+&nbsp; function </span><span class="default">__construct</span><span class="keyword">( </span><span class="default">$id</span><span class="keyword">, </span><span class="default">$value </span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">id </span><span class="keyword">= </span><span class="default">$id</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">value </span><span class="keyword">= </span><span class="default">$value</span><span class="keyword">;<br />
+&nbsp; }<br />
+}<br />
+<br />
+</span><span class="comment">/* callback function */<br />
+</span><span class="keyword">function </span><span class="default">uniquecol</span><span class="keyword">( </span><span class="default">$obj </span><span class="keyword">) {<br />
+&nbsp; static </span><span class="default">$idlist </span><span class="keyword">= array();<br />
+<br />
+&nbsp; if ( </span><span class="default">in_array</span><span class="keyword">( </span><span class="default">$obj</span><span class="keyword">-&gt;</span><span class="default">id</span><span class="keyword">, </span><span class="default">$idlist </span><span class="keyword">) )<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">false</span><span class="keyword">;<br />
+<br />
+&nbsp; </span><span class="default">$idlist</span><span class="keyword">[] = </span><span class="default">$obj</span><span class="keyword">-&gt;</span><span class="default">id</span><span class="keyword">;<br />
+&nbsp; return </span><span class="default">true</span><span class="keyword">;&nbsp; &nbsp; <br />
+}<br />
+<br />
+</span><span class="comment">/* a couple of arrays with second array having an element with same id as the first */<br />
+</span><span class="default">$list&nbsp; </span><span class="keyword">= array( new </span><span class="default">myObj</span><span class="keyword">( </span><span class="default">1</span><span class="keyword">, </span><span class="default">1&nbsp; </span><span class="keyword">), new </span><span class="default">myObj</span><span class="keyword">( </span><span class="default">2</span><span class="keyword">, </span><span class="default">100 </span><span class="keyword">) );<br />
+</span><span class="default">$list2 </span><span class="keyword">= array( new </span><span class="default">myObj</span><span class="keyword">( </span><span class="default">1</span><span class="keyword">, </span><span class="default">10 </span><span class="keyword">), new </span><span class="default">myObj</span><span class="keyword">( </span><span class="default">3</span><span class="keyword">, </span><span class="default">100 </span><span class="keyword">) );<br />
+</span><span class="default">$list3 </span><span class="keyword">= </span><span class="default">array_merge</span><span class="keyword">( </span><span class="default">$list</span><span class="keyword">, </span><span class="default">$list2 </span><span class="keyword">);<br />
+<br />
+</span><span class="default">$unique </span><span class="keyword">= </span><span class="default">array_filter</span><span class="keyword">( </span><span class="default">$list3</span><span class="keyword">, </span><span class="string">'uniquecol' </span><span class="keyword">);<br />
+</span><span class="default">print_r</span><span class="keyword">( </span><span class="default">$list3 </span><span class="keyword">);<br />
+</span><span class="default">print_r</span><span class="keyword">( </span><span class="default">$unique </span><span class="keyword">);<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+In addition, use array_merge( $unique ) to reindex.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="70273""></a>
+  <div class="note">
+   <strong class="user">geuis dot teses at gmail dot com</strong>
+   <a href="#70273" class="date">09-Oct-2006 10:27</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Here's the shortest line of code I could find/create to remove all duplicate entries from an array and then reindex the keys.
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+
+<br />
+</span><span class="comment">// Fruits, vegetables, and other food:
+<br />
+</span><span class="default">$var </span><span class="keyword">= array(</span><span class="string">'apple'</span><span class="keyword">,</span><span class="string">'banana'</span><span class="keyword">,</span><span class="string">'carrot'</span><span class="keyword">,</span><span class="string">'cat'</span><span class="keyword">,</span><span class="string">'dog'</span><span class="keyword">,</span><span class="string">'egg'</span><span class="keyword">,</span><span class="string">'eggplant'</span><span class="keyword">,</span><span class="string">'fish'</span><span class="keyword">);
+<br />
+
+<br />
+</span><span class="default">$var </span><span class="keyword">= </span><span class="default">array_values</span><span class="keyword">(</span><span class="default">array_unique</span><span class="keyword">(</span><span class="default">$var</span><span class="keyword">));
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="70034""></a>
+  <div class="note">
+   <strong class="user">keneks at gmail dot com</strong>
+   <a href="#70034" class="date">30-Sep-2006 07:01</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Taking the advantage of array_unique, here is a simple function to check if an array has duplicate values.
+<br />
+
+<br />
+It simply compares the number of elements between the original array and the array_uniqued array.
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+
+<br />
+</span><span class="keyword">function </span><span class="default">array_has_duplicates</span><span class="keyword">(array </span><span class="default">$array</span><span class="keyword">)
+<br />
+{
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$uniq </span><span class="keyword">= </span><span class="default">array_unique</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">);
+<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">count</span><span class="keyword">(</span><span class="default">$uniq</span><span class="keyword">) != </span><span class="default">count</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">);
+<br />
+}
+<br />
+
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="63819""></a>
+  <div class="note">
+   <strong class="user">agarcia at rsn dot com dot co</strong>
+   <a href="#63819" class="date">31-Mar-2006 12:41</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+This is a script for multi_dimensional arrays
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="keyword">function </span><span class="default">remove_dup</span><span class="keyword">(</span><span class="default">$matriz</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$aux_ini</span><span class="keyword">=array();
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$entrega</span><span class="keyword">=array();
+<br />
+&nbsp;&nbsp;&nbsp; for(</span><span class="default">$n</span><span class="keyword">=</span><span class="default">0</span><span class="keyword">;</span><span class="default">$n</span><span class="keyword">&lt;</span><span class="default">count</span><span class="keyword">(</span><span class="default">$matriz</span><span class="keyword">);</span><span class="default">$n</span><span class="keyword">++)
+<br />
+&nbsp;&nbsp;&nbsp; {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$aux_ini</span><span class="keyword">[]=</span><span class="default">serialize</span><span class="keyword">(</span><span class="default">$matriz</span><span class="keyword">[</span><span class="default">$n</span><span class="keyword">]);
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$mat</span><span class="keyword">=</span><span class="default">array_unique</span><span class="keyword">(</span><span class="default">$aux_ini</span><span class="keyword">);
+<br />
+&nbsp;&nbsp;&nbsp; for(</span><span class="default">$n</span><span class="keyword">=</span><span class="default">0</span><span class="keyword">;</span><span class="default">$n</span><span class="keyword">&lt;</span><span class="default">count</span><span class="keyword">(</span><span class="default">$matriz</span><span class="keyword">);</span><span class="default">$n</span><span class="keyword">++)
+<br />
+&nbsp;&nbsp;&nbsp; {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; 
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$entrega</span><span class="keyword">[]=</span><span class="default">unserialize</span><span class="keyword">(</span><span class="default">$mat</span><span class="keyword">[</span><span class="default">$n</span><span class="keyword">]);
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; 
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$entrega</span><span class="keyword">;
+<br />
+}
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="60323""></a>
+  <div class="note">
+   <strong class="user">memandeemail at gmail dot com</strong>
+   <a href="#60323" class="date">03-Jan-2006 10:47</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Problem:
+<br />
+I have loaded an array with the results of a database
+<br />
+query.&nbsp; The Fields are 'FirstName' and 'LastName'.
+<br />
+
+<br />
+I would like to find a way to contactenate the two
+<br />
+fields, and then return only unique values for the
+<br />
+array.&nbsp; For example, if the database query returns
+<br />
+three instances of a record with the FirstName John
+<br />
+and the LastName Smith in two distinct fields, I would
+<br />
+like to build a new array that would contain all the
+<br />
+original fields, but with John Smith in it only once.
+<br />
+Thanks for: Colin Campbell
+<br />
+
+<br />
+Solution:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="comment">/**
+<br />
+&nbsp;* The same thing than implode function, but return the keys so
+<br />
+&nbsp;*
+<br />
+&nbsp;* &lt;code&gt;
+<br />
+&nbsp;* $_GET = array('id' =&gt; '4587','with' =&gt; 'key');
+<br />
+&nbsp;* ...
+<br />
+&nbsp;* echo shared::implode_with_key('&amp;',$_GET,'='); // Resultado: id=4587&amp;with=key
+<br />
+&nbsp;* ...
+<br />
+&nbsp;* &lt;/code&gt;
+<br />
+&nbsp;*
+<br />
+&nbsp;* @param string $glue Oque colocar entre as chave =&gt; valor
+<br />
+&nbsp;* @param array $pieces Valores
+<br />
+&nbsp;* @param string $hifen Separar chave da array do valor
+<br />
+&nbsp;* @return string
+<br />
+&nbsp;* @author memandeemail at gmail dot com
+<br />
+&nbsp;*/
+<br />
+</span><span class="keyword">function </span><span class="default">implode_with_key</span><span class="keyword">(</span><span class="default">$glue </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">, </span><span class="default">$pieces</span><span class="keyword">, </span><span class="default">$hifen </span><span class="keyword">= </span><span class="string">','</span><span class="keyword">) {
+<br />
+&nbsp; </span><span class="default">$return </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">;
+<br />
+&nbsp; foreach (</span><span class="default">$pieces </span><span class="keyword">as </span><span class="default">$tk </span><span class="keyword">=&gt; </span><span class="default">$tv</span><span class="keyword">) </span><span class="default">$return </span><span class="keyword">.= </span><span class="default">$glue</span><span class="keyword">.</span><span class="default">$tk</span><span class="keyword">.</span><span class="default">$hifen</span><span class="keyword">.</span><span class="default">$tv</span><span class="keyword">;
+<br />
+&nbsp; return </span><span class="default">substr</span><span class="keyword">(</span><span class="default">$return</span><span class="keyword">,</span><span class="default">1</span><span class="keyword">);
+<br />
+}
+<br />
+
+<br />
+</span><span class="comment">/**
+<br />
+&nbsp;* Return unique values from a tree of values
+<br />
+&nbsp;*
+<br />
+&nbsp;* @param array $array_tree
+<br />
+&nbsp;* @return array
+<br />
+&nbsp;* @author memandeemail at gmail dot com
+<br />
+&nbsp;*/
+<br />
+</span><span class="keyword">function </span><span class="default">array_unique_tree</span><span class="keyword">(</span><span class="default">$array_tree</span><span class="keyword">) {
+<br />
+&nbsp; </span><span class="default">$will_return </span><span class="keyword">= array(); </span><span class="default">$vtemp </span><span class="keyword">= array();
+<br />
+&nbsp; foreach (</span><span class="default">$array_tree </span><span class="keyword">as </span><span class="default">$tkey </span><span class="keyword">=&gt; </span><span class="default">$tvalue</span><span class="keyword">) </span><span class="default">$vtemp</span><span class="keyword">[</span><span class="default">$tkey</span><span class="keyword">] = </span><span class="default">implode_with_key</span><span class="keyword">(</span><span class="string">'&amp;'</span><span class="keyword">,</span><span class="default">$tvalue</span><span class="keyword">,</span><span class="string">'='</span><span class="keyword">);
+<br />
+&nbsp; foreach (</span><span class="default">array_keys</span><span class="keyword">(</span><span class="default">array_unique</span><span class="keyword">(</span><span class="default">$vtemp</span><span class="keyword">)) as </span><span class="default">$tvalue</span><span class="keyword">) </span><span class="default">$will_return</span><span class="keyword">[</span><span class="default">$tvalue</span><span class="keyword">] = </span><span class="default">$array_tree</span><span class="keyword">[</span><span class="default">$tvalue</span><span class="keyword">];
+<br />
+&nbsp; return </span><span class="default">$will_return</span><span class="keyword">;
+<br />
+}
+<br />
+
+<br />
+</span><span class="default">$problem </span><span class="keyword">= </span><span class="default">array_fill</span><span class="keyword">(</span><span class="default">0</span><span class="keyword">,</span><span class="default">3</span><span class="keyword">,
+<br />
+array(</span><span class="string">'FirstName' </span><span class="keyword">=&gt; </span><span class="string">'John'</span><span class="keyword">, </span><span class="string">'LastName' </span><span class="keyword">=&gt; </span><span class="string">'Smith'</span><span class="keyword">)
+<br />
+);
+<br />
+
+<br />
+</span><span class="default">$problem</span><span class="keyword">[] = array(</span><span class="string">'FirstName' </span><span class="keyword">=&gt; </span><span class="string">'Davi'</span><span class="keyword">, </span><span class="string">'LastName' </span><span class="keyword">=&gt; </span><span class="string">'S. Mesquita'</span><span class="keyword">);
+<br />
+</span><span class="default">$problem</span><span class="keyword">[] = array(</span><span class="string">'FirstName' </span><span class="keyword">=&gt; </span><span class="string">'John'</span><span class="keyword">, </span><span class="string">'LastName' </span><span class="keyword">=&gt; </span><span class="string">'Tom'</span><span class="keyword">);
+<br />
+
+<br />
+</span><span class="default">print_r</span><span class="keyword">(</span><span class="default">$problem</span><span class="keyword">);
+<br />
+
+<br />
+</span><span class="default">print_r</span><span class="keyword">(</span><span class="default">array_unique_tree</span><span class="keyword">(</span><span class="default">$problem</span><span class="keyword">));
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="43114""></a>
+  <div class="note">
+   <strong class="user">csaba at alum dot mit dot edu</strong>
+   <a href="#43114" class="date">09-Jun-2004 07:17</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+The following is an efficient, adaptable implementation of array_unique which always retains the first key having a given value:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="keyword">function </span><span class="default">array_unique2</span><span class="keyword">(&amp;</span><span class="default">$aray</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$aHash </span><span class="keyword">= array();
+<br />
+&nbsp;&nbsp;&nbsp; foreach (</span><span class="default">$aray </span><span class="keyword">as </span><span class="default">$key </span><span class="keyword">=&gt; &amp;</span><span class="default">$val</span><span class="keyword">) if (@</span><span class="default">$aHash</span><span class="keyword">[</span><span class="default">$val</span><span class="keyword">]++) unset (</span><span class="default">$aray</span><span class="keyword">[</span><span class="default">$key</span><span class="keyword">]);
+<br />
+}
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+It is also adaptable to multi dimensional arrays.&nbsp; For example, if your array is a sequence of (multidimensional) points, then in place of @$aHash[$val]++ you could use @$aHash[implode("X",$val)]++
+<br />
+If you want to not have holes in your array, you can do an array_merge($aray) at the end.
+<br />
+
+<br />
+Csaba Gabor</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

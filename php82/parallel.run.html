@@ -1,0 +1,486 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>Execution</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="parallel.bootstrap.html">? parallel\bootstrap</a></li>
+      <li style="float: right;"><a href="class.parallel-runtime.html">parallel\Runtime ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="functional.parallel.html">Functional API</a></li>
+    <li>Execution</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="parallel.run" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">parallel\run</h1>
+  <p class="verinfo">(1.0.0)</p><p class="refpurpose"><span class="refname">parallel\run</span> &mdash; <span class="dc-title">Execution</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-parallel.run-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>parallel\run</strong></span>(<span class="methodparam"><span class="type"><a href="class.closure.html" class="type Closure">Closure</a></span> <code class="parameter">$task</code></span>): <span class="type"><span class="type">?</span><span class="type"><span class="type Future">Future</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   Shall schedule <code class="parameter">task</code> for execution in parallel.
+  </p>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>parallel\run</strong></span>(<span class="methodparam"><span class="type"><a href="class.closure.html" class="type Closure">Closure</a></span> <code class="parameter">$task</code></span>, <span class="methodparam"><span class="type">array</span> <code class="parameter">$argv</code></span>): <span class="type"><span class="type">?</span><span class="type"><span class="type Future">Future</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   Shall schedule <code class="parameter">task</code> for execution in parallel, passing <code class="parameter">argv</code> at execution time.
+  </p>
+ </div>
+
+
+ <div class="refsect1 scheduling-characteristics" id="refsect1-parallel.run-scheduling-characteristics">
+  <h3 class="title">Automatic Scheduling</h3>
+  <p class="para">
+   If a <span class="classname"><strong class="classname">\parallel\Runtime</strong></span> internally created and cached by a previous call to <span class="function"><strong>parallel\run()</strong></span> is idle, 
+   it will be used to execute the task. If no <span class="classname"><strong class="classname">\parallel\Runtime</strong></span> is idle parallel will create and cache a 
+   <span class="classname"><strong class="classname">\parallel\Runtime</strong></span>.
+  </p>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    <span class="classname"><strong class="classname">\parallel\Runtime</strong></span> objects created by the programmer are not used for automatic scheduling.
+   </p>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-parallel.run-parameters">
+  <h3 class="title">参数</h3>
+  <dl>
+   
+    <dt>
+<code class="parameter">task</code></dt>
+
+    <dd>
+
+     <p class="para">
+      A <span class="classname"><a href="class.closure.html" class="classname">Closure</a></span> with specific characteristics.
+     </p>
+    </dd>
+
+   
+   
+    <dt>
+<code class="parameter">argv</code></dt>
+
+    <dd>
+
+     <p class="para">
+      An <span class="type">array</span> of arguments with specific characteristics to be passed to <code class="parameter">task</code> at execution time.
+     </p>
+    </dd>
+
+   
+  </dl>
+
+ </div>
+
+ <div class="refsect1 closure-characteristics" id="refsect1-parallel.run-closure-characteristics">
+ <h3 class="title">Task Characteristics</h3>
+ <p class="para">
+  Closures scheduled for parallel execution must not:
+  <ul class="simplelist">
+   <li class="member">accept or return by reference</li>
+   <li class="member">accept or return internal objects (see notes)</li>
+   <li class="member">execute a limited set of instructions</li>
+  </ul>
+ </p>
+ <p class="para">
+  Instructions prohibited in Closures intended for parallel execution are:
+  <ul class="simplelist">
+   <li class="member">yield</li>
+   <li class="member">use by-reference</li>
+   <li class="member">declare class</li>
+   <li class="member">declare named function</li>
+  </ul>
+ </p>
+ <blockquote class="note"><p><strong class="note">Note</strong>: 
+  <p class="para">
+   Nested closures may yield or use by-reference, but must not contain class or named function declarations.
+  </p>
+ </p></blockquote>
+ <blockquote class="note"><p><strong class="note">Note</strong>: 
+  <p class="para">
+   No instructions are prohibited in the files which the task may include.
+  </p>
+ </p></blockquote>
+ </div>
+
+ <div class="refsect1 argv-characteristics" id="refsect1-parallel.run-argv-characteristics">
+ <h3 class="title">Arguments Characteristics</h3>
+ <p class="para">
+  Arguments must not:
+  <ul class="simplelist">
+   <li class="member">contain references</li>
+   <li class="member">contain resources</li>
+   <li class="member">contain internal objects (see notes)</li>
+  </ul>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    In the case of file stream resources, the resource will be cast to the file descriptor and passed as <span class="type">int</span> where possible, this is unsupported on Windows.
+   </p>
+  </p></blockquote>
+ </p>
+ </div>
+
+ <div class="refsect1 object-characteristics" id="refsect1-parallel.run-object-characteristics">
+  <h3 class="title">Internal Objects Notes</h3>
+  <p class="para">
+   Internal objects generally use a custom structure which cannot be copied by value safely, PHP currently lacks the mechanics to do this (without serialization) 
+   and so only objects that do not use a custom structure may be shared.
+  </p>
+  <p class="para">
+   Some internal objects do not use a custom structure, for example <span class="classname"><a href="class.parallel-events-event.html" class="classname">parallel\Events\Event</a></span> and so may be shared.
+  </p>
+  <p class="para">
+   Closures are a special kind of internal object and support being copied by value, and so may be shared.
+  </p>
+  <p class="para">
+   Channels are central to writing parallel code and support concurrent access and execution by necessity, and so may be shared.
+  </p>
+  <div class="warning"><strong class="warning">Warning</strong>
+   <p class="para">
+    A user class that extends an internal class may use a custom structure as defined by the internal class, in which case they cannot be copied by value safely, 
+    and so may not be shared.
+   </p>
+  </div>
+ </div>
+
+ <div class="refsect1 returnvalues" id="refsect1-parallel.run-returnvalues">
+  <h3 class="title">返回值</h3>
+  <div class="warning"><strong class="warning">Warning</strong>
+   <p class="para">
+    The return <span class="type"><a href="class.parallel-future.html" class="type parallel\Future">parallel\Future</a></span> must not be ignored when the task contains a return or throw statement.
+   </p>
+  </div>
+ </div>
+
+ <div class="refsect1 exceptions" id="refsect1-parallel.run-exceptions">
+  <h3 class="title">Exceptions</h3>
+  <div class="warning"><strong class="warning">Warning</strong>
+   <p class="para">
+    Shall throw <span class="type"><span class="type parallel\Runtime\Error\Closed">parallel\Runtime\Error\Closed</span></span> if <span class="type"><a href="class.parallel-runtime.html" class="type parallel\Runtime">parallel\Runtime</a></span> was closed.
+   </p>
+  </div>
+  <div class="warning"><strong class="warning">Warning</strong>
+   <p class="para">
+    Shall throw <span class="type"><span class="type parallel\Runtime\Error\IllegalFunction">parallel\Runtime\Error\IllegalFunction</span></span> if <code class="parameter">task</code> is a closure created from an internal function.
+   </p>
+  </div>
+  <div class="warning"><strong class="warning">Warning</strong>
+   <p class="para">
+    Shall throw <span class="type"><span class="type parallel\Runtime\Error\IllegalInstruction">parallel\Runtime\Error\IllegalInstruction</span></span> if <code class="parameter">task</code> contains illegal instructions.
+   </p>
+  </div>
+  <div class="warning"><strong class="warning">Warning</strong>
+   <p class="para">
+    Shall throw <span class="type"><span class="type parallel\Runtime\Error\IllegalParameter">parallel\Runtime\Error\IllegalParameter</span></span> if <code class="parameter">task</code> accepts or <code class="parameter">argv</code> contains illegal variables.
+   </p>
+  </div>
+  <div class="warning"><strong class="warning">Warning</strong>
+   <p class="para">
+    Shall throw <span class="type"><span class="type parallel\Runtime\Error\IllegalReturn">parallel\Runtime\Error\IllegalReturn</span></span> if <code class="parameter">task</code> returns illegally.
+   </p>
+  </div>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-parallel.run-seealso">
+   <h3 class="title">参见</h3>
+   <ul class="simplelist">
+    <li class="member"><a href="parallel-runtime.run.html" class="xref">parallel\Runtime::run</a></li>
+   </ul>
+  </div>
+
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="126581""></a>
+  <div class="note">
+   <strong class="user">Thierry Kauffmann</strong>
+   <a href="#126581" class="date">12-Nov-2021 10:07</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="comment">/**<br />
+&nbsp;* Sample parralel functional API<br />
+&nbsp;* using a generator instead of a static list of items to process<br />
+&nbsp;* <br />
+&nbsp;* Items to process in parallel come from a generator<br />
+&nbsp;* It could be anything : e.g fetch a mysql array, a DirectoryIterator...<br />
+&nbsp;* Thus the number of items to process in parallel is NOT known in advance<br />
+&nbsp;* <br />
+&nbsp;* This algorithm attributes items to each parallel thread dynamically<br />
+&nbsp;* As soon as a thread has finished working<br />
+&nbsp;* It is assigned a new item to process<br />
+&nbsp;* until all items are processed (generator closes)<br />
+&nbsp;* <br />
+&nbsp;* In this example we process 50 items in 5 parallel threads<br />
+&nbsp;* It produces output in this form (output changes at each run) :<br />
+&nbsp;* <br />
+&nbsp;* ThreadId: 1 =&gt; Item: 1 (Start)<br />
+&nbsp;* ThreadId: 2 =&gt; Item: 2 (Start)<br />
+&nbsp;* ThreadId: 3 =&gt; Item: 3 (Start)<br />
+&nbsp;* ThreadId: 4 =&gt; Item: 4 (Start)<br />
+&nbsp;* ThreadId: 5 =&gt; Item: 5 (Start)<br />
+&nbsp;* ThreadId: 5 =&gt; Item: 5 Sleep: 3s (End)<br />
+&nbsp;* ThreadId: 5 =&gt; Item: 6 (Start)<br />
+&nbsp;* ThreadId: 3 =&gt; Item: 3 Sleep: 4s (End)<br />
+&nbsp;* ThreadId: 3 =&gt; Item: 7 (Start)<br />
+&nbsp;* ThreadId: 2 =&gt; Item: 2 Sleep: 6s (End)<br />
+&nbsp;* ThreadId: 2 =&gt; Item: 8 (Start)<br />
+&nbsp;* ...<br />
+&nbsp;* ThreadId: 4 =&gt; Item: 44 Sleep: 6s (End)<br />
+&nbsp;* ThreadId: 4 =&gt; Item: 49 (Start)<br />
+&nbsp;* ThreadId: 3 =&gt; Item: 46 Sleep: 5s (End)<br />
+&nbsp;* ThreadId: 3 =&gt; Item: 50 (Start)<br />
+&nbsp;* ThreadId: 2 =&gt; Item: 43 Sleep: 9s (End)<br />
+&nbsp;* Destroy ThreadId: 2<br />
+&nbsp;* ThreadId: 1 =&gt; Item: 47 Sleep: 5s (End)<br />
+&nbsp;* Destroy ThreadId: 1<br />
+&nbsp;* ThreadId: 4 =&gt; Item: 49 Sleep: 7s (End)<br />
+&nbsp;* Destroy ThreadId: 4<br />
+&nbsp;* ThreadId: 5 =&gt; Item: 48 Sleep: 10s (End)<br />
+&nbsp;* Destroy ThreadId: 5<br />
+&nbsp;* ThreadId: 3 =&gt; Item: 50 Sleep: 10s (End)<br />
+&nbsp;* Destroy ThreadId: 3<br />
+&nbsp;*/<br />
+<br />
+</span><span class="keyword">use </span><span class="default">\parallel</span><span class="keyword">\{</span><span class="default">Runtime</span><span class="keyword">, </span><span class="default">Future</span><span class="keyword">, </span><span class="default">Channel</span><span class="keyword">, </span><span class="default">Events</span><span class="keyword">};<br />
+<br />
+</span><span class="comment">// Generate list of items to process with a generator<br />
+</span><span class="keyword">function </span><span class="default">generator</span><span class="keyword">(</span><span class="default">int $item_count</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; for (</span><span class="default">$i</span><span class="keyword">=</span><span class="default">1</span><span class="keyword">; </span><span class="default">$i </span><span class="keyword">&lt;= </span><span class="default">$item_count</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">++) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; yield </span><span class="default">$i</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+function </span><span class="default">testConcurrency</span><span class="keyword">(</span><span class="default">int $concurrency</span><span class="keyword">, </span><span class="default">int $item_count</span><span class="keyword">) {<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$generator </span><span class="keyword">= </span><span class="default">generator</span><span class="keyword">(</span><span class="default">$item_count</span><span class="keyword">);<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// Function executing in each thread. Have a snap for a random time for example !<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$producer </span><span class="keyword">= function (</span><span class="default">int $item_id</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$seconds </span><span class="keyword">= </span><span class="default">rand</span><span class="keyword">(</span><span class="default">1</span><span class="keyword">, </span><span class="default">10</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">sleep</span><span class="keyword">(</span><span class="default">$seconds</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return [</span><span class="string">'item_id' </span><span class="keyword">=&gt; </span><span class="default">$item_id</span><span class="keyword">, </span><span class="string">'sleep_seconds' </span><span class="keyword">=&gt; </span><span class="default">$seconds</span><span class="keyword">];<br />
+&nbsp;&nbsp;&nbsp; };<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// Fill up threads with initial 'inactive' state<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$threads </span><span class="keyword">= </span><span class="default">array_fill</span><span class="keyword">(</span><span class="default">1</span><span class="keyword">, </span><span class="default">$concurrency</span><span class="keyword">, [</span><span class="string">'is_active' </span><span class="keyword">=&gt; </span><span class="default">false</span><span class="keyword">]);<br />
+<br />
+&nbsp;&nbsp;&nbsp; while (</span><span class="default">true</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// Loop through threads until all threads are finished<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">foreach (</span><span class="default">$threads </span><span class="keyword">as </span><span class="default">$thread_id </span><span class="keyword">=&gt; </span><span class="default">$thread</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if (!</span><span class="default">$thread</span><span class="keyword">[</span><span class="string">'is_active'</span><span class="keyword">] and </span><span class="default">$generator</span><span class="keyword">-&gt;</span><span class="default">valid</span><span class="keyword">()) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// Thread is inactive and generator still has values : run something in the thread<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$item_id </span><span class="keyword">= </span><span class="default">$generator</span><span class="keyword">-&gt;</span><span class="default">current</span><span class="keyword">();<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$threads</span><span class="keyword">[</span><span class="default">$thread_id</span><span class="keyword">][</span><span class="string">'run'</span><span class="keyword">] = </span><span class="default">\parallel\run</span><span class="keyword">(</span><span class="default">$producer</span><span class="keyword">, [</span><span class="default">$item_id</span><span class="keyword">]);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"ThreadId: </span><span class="default">$thread_id</span><span class="string"> =&gt; Item: </span><span class="default">$item_id</span><span class="string"> (Start)\n"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$threads</span><span class="keyword">[</span><span class="default">$thread_id</span><span class="keyword">][</span><span class="string">'is_active'</span><span class="keyword">] = </span><span class="default">true</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$generator</span><span class="keyword">-&gt;</span><span class="default">next</span><span class="keyword">();<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; } elseif (!isset(</span><span class="default">$threads</span><span class="keyword">[</span><span class="default">$thread_id</span><span class="keyword">][</span><span class="string">'run'</span><span class="keyword">])) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// Destroy supplementary threads in case generator closes sooner than number of threads<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">echo </span><span class="string">"Destroy ThreadId: </span><span class="default">$thread_id</span><span class="string">\n"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; unset(</span><span class="default">$threads</span><span class="keyword">[</span><span class="default">$thread_id</span><span class="keyword">]);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; } elseif (</span><span class="default">$threads</span><span class="keyword">[</span><span class="default">$thread_id</span><span class="keyword">][</span><span class="string">'run'</span><span class="keyword">]-&gt;</span><span class="default">done</span><span class="keyword">()) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// Thread finished. Get results<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$item </span><span class="keyword">= </span><span class="default">$threads</span><span class="keyword">[</span><span class="default">$thread_id</span><span class="keyword">][</span><span class="string">'run'</span><span class="keyword">]-&gt;</span><span class="default">value</span><span class="keyword">();<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"ThreadId: </span><span class="default">$thread_id</span><span class="string"> =&gt; Item: </span><span class="keyword">{</span><span class="default">$item</span><span class="keyword">[</span><span class="string">'item_id'</span><span class="keyword">]}</span><span class="string"> Sleep: </span><span class="keyword">{</span><span class="default">$item</span><span class="keyword">[</span><span class="string">'sleep_seconds'</span><span class="keyword">]}</span><span class="string">s (End)\n"</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if (!</span><span class="default">$generator</span><span class="keyword">-&gt;</span><span class="default">valid</span><span class="keyword">()) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// Generator is closed then destroy thread<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">echo </span><span class="string">"Destroy ThreadId: </span><span class="default">$thread_id</span><span class="string">\n"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; unset(</span><span class="default">$threads</span><span class="keyword">[</span><span class="default">$thread_id</span><span class="keyword">]);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; } else {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// Thread is ready to run again<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$threads</span><span class="keyword">[</span><span class="default">$thread_id</span><span class="keyword">][</span><span class="string">'is_active'</span><span class="keyword">] = </span><span class="default">false</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// Escape loop when all threads are destroyed<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">if (empty(</span><span class="default">$threads</span><span class="keyword">)) break;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+</span><span class="default">$concurrency </span><span class="keyword">= </span><span class="default">5</span><span class="keyword">;<br />
+</span><span class="default">$item_count </span><span class="keyword">= </span><span class="default">50</span><span class="keyword">;<br />
+<br />
+</span><span class="default">testConcurrency</span><span class="keyword">(</span><span class="default">$concurrency</span><span class="keyword">, </span><span class="default">$item_count</span><span class="keyword">);<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125792""></a>
+  <div class="note">
+   <strong class="user">anonymous user</strong>
+   <a href="#125792" class="date">07-Feb-2021 02:49</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Although function declaration is not allowed inside thread exec code, include is allowed. So if we want to declare a function, we could write another file that contain the function and include it.<br />
+# main.php<br />
+<span class="default">&lt;?php<br />
+$runtime </span><span class="keyword">= new </span><span class="default">parallel\Runtime </span><span class="keyword">();<br />
+</span><span class="default">$future </span><span class="keyword">= </span><span class="default">$runtime</span><span class="keyword">-&gt;</span><span class="default">run </span><span class="keyword">( function () {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$future </span><span class="keyword">= </span><span class="default">$runtime</span><span class="keyword">-&gt;</span><span class="default">run </span><span class="keyword">( function () {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; include </span><span class="string">"included.php"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">add </span><span class="keyword">(</span><span class="default">1</span><span class="keyword">, </span><span class="default">3</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; }, [ ] );<br />
+echo </span><span class="default">$future</span><span class="keyword">-&gt;</span><span class="default">value </span><span class="keyword">();<br />
+</span><span class="comment"># output: 4<br />
+# included.php<br />
+</span><span class="keyword">&lt;?</span><span class="default">php<br />
+</span><span class="keyword">function </span><span class="default">add</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">, </span><span class="default">$b</span><span class="keyword">){<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$a </span><span class="keyword">+ </span><span class="default">$b</span><span class="keyword">;<br />
+}</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="124742""></a>
+  <div class="note">
+   <strong class="user">john_2885 at yahoo dot com</strong>
+   <a href="#124742" class="date">20-Feb-2020 05:35</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Here's a more substantial example of how to use the run functional API.<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="comment">/*********************************************<br />
+&nbsp;* Sample parallel functional API<br />
+&nbsp;* <br />
+&nbsp;* Scenario<br />
+&nbsp;* -------------------------------------------<br />
+&nbsp;* Given a large number of rows of<br />
+&nbsp;* data to process, divide the work amongst<br />
+&nbsp;* a set of workers.&nbsp; Each worker is responsible<br />
+&nbsp;* for finishing their assigned task.<br />
+&nbsp;* <br />
+&nbsp;* In the code below, assume we have arbitrary <br />
+&nbsp;* start and end IDs (rows) - we will try to<br />
+&nbsp;* divide the number of IDs (rows) evenly<br />
+&nbsp;* across 8 workers.&nbsp; The workers will get the<br />
+&nbsp;* following batches to process to completion:<br />
+&nbsp;*<br />
+&nbsp;* Total number of IDs (rows): 1371129<br />
+&nbsp;* Each worker will get 171392 IDs to process<br />
+&nbsp;*<br />
+&nbsp;* Worker 1: IDs from 11001 to 182393<br />
+&nbsp;* Worker 2: IDs from 182393 to 353785<br />
+&nbsp;* Worker 3: IDs from 353785 to 525177<br />
+&nbsp;* Worker 4: IDs from 525177 to 696569<br />
+&nbsp;* Worker 5: IDs from 696569 to 867961<br />
+&nbsp;* Worker 6: IDs from 867961 to 1039353<br />
+&nbsp;* Worker 7: IDs from 1039353 to 1210745<br />
+&nbsp;* Worker 8: IDs from 1210745 to 1382130<br />
+&nbsp;*<br />
+&nbsp;* Each worker then processes 5000 rows at a time<br />
+&nbsp;* until they are done with their assigned work<br />
+&nbsp;*<br />
+&nbsp;*********************************************/<br />
+<br />
+</span><span class="keyword">use </span><span class="default">\parallel</span><span class="keyword">\{</span><span class="default">Runtime</span><span class="keyword">, </span><span class="default">Future</span><span class="keyword">, </span><span class="default">Channel</span><span class="keyword">, </span><span class="default">Events</span><span class="keyword">};<br />
+<br />
+</span><span class="default">$minId </span><span class="keyword">= </span><span class="default">11001</span><span class="keyword">;<br />
+</span><span class="default">$maxId </span><span class="keyword">= </span><span class="default">1382130</span><span class="keyword">;<br />
+</span><span class="default">$workers </span><span class="keyword">= </span><span class="default">8</span><span class="keyword">;<br />
+</span><span class="default">$totalIds </span><span class="keyword">= </span><span class="default">$maxId </span><span class="keyword">- </span><span class="default">$minId</span><span class="keyword">;<br />
+</span><span class="comment">// Try to divide IDs evenly across the number of workers<br />
+</span><span class="default">$batchSize </span><span class="keyword">= </span><span class="default">ceil</span><span class="keyword">(</span><span class="default">$totalIds </span><span class="keyword">/ </span><span class="default">$workers</span><span class="keyword">);<br />
+</span><span class="comment">// The last batch gets whatever is left over<br />
+</span><span class="default">$lastBatch </span><span class="keyword">= </span><span class="default">$totalIds </span><span class="keyword">% </span><span class="default">$batchSize</span><span class="keyword">;<br />
+</span><span class="comment">// The number of IDs (rows) to divide the overall<br />
+// task into sub-batches <br />
+</span><span class="default">$rowsToFetch </span><span class="keyword">= </span><span class="default">5000</span><span class="keyword">;<br />
+<br />
+print </span><span class="string">"Total IDs: " </span><span class="keyword">. </span><span class="default">$totalIds </span><span class="keyword">. </span><span class="string">"\n"</span><span class="keyword">;<br />
+print </span><span class="string">"Batch Size: " </span><span class="keyword">. </span><span class="default">$batchSize </span><span class="keyword">. </span><span class="string">"\n"</span><span class="keyword">;<br />
+print </span><span class="string">"Last Batch: " </span><span class="keyword">. </span><span class="default">$lastBatch </span><span class="keyword">. </span><span class="string">"\n"</span><span class="keyword">;<br />
+<br />
+</span><span class="default">$producer </span><span class="keyword">= function(</span><span class="default">int $worker</span><span class="keyword">, </span><span class="default">int $startId</span><span class="keyword">, </span><span class="default">int $endId</span><span class="keyword">, </span><span class="default">int $fetchSize</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$tempMinId </span><span class="keyword">= </span><span class="default">$startId</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$tempMaxId </span><span class="keyword">= </span><span class="default">$tempMinId </span><span class="keyword">+ </span><span class="default">$fetchSize</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$fetchCount </span><span class="keyword">= </span><span class="default">1</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; print </span><span class="string">"Worker " </span><span class="keyword">. </span><span class="default">$worker </span><span class="keyword">. </span><span class="string">" working on IDs from " </span><span class="keyword">. </span><span class="default">$startId </span><span class="keyword">. </span><span class="string">" to " </span><span class="keyword">. </span><span class="default">$endId </span><span class="keyword">. </span><span class="string">"\n"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; while(</span><span class="default">$tempMinId </span><span class="keyword">&lt; </span><span class="default">$endId</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; for(</span><span class="default">$i </span><span class="keyword">= </span><span class="default">$tempMinId</span><span class="keyword">; </span><span class="default">$i </span><span class="keyword">&lt; </span><span class="default">$tempMaxId</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">++) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$usleep </span><span class="keyword">= </span><span class="default">rand</span><span class="keyword">(</span><span class="default">500000</span><span class="keyword">, </span><span class="default">1000000</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">usleep</span><span class="keyword">(</span><span class="default">$usleep</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; print </span><span class="string">"Worker " </span><span class="keyword">. </span><span class="default">$worker </span><span class="keyword">.&nbsp; </span><span class="string">" finished batch " </span><span class="keyword">. </span><span class="default">$fetchCount </span><span class="keyword">. </span><span class="string">" from ID " </span><span class="keyword">. </span><span class="default">$tempMinId </span><span class="keyword">. </span><span class="string">" to " </span><span class="keyword">. </span><span class="default">$tempMaxId </span><span class="keyword">. </span><span class="string">"\n"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// Need to explicitly break out of the for loop once complete or else it will forever process only the first sub-batch<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">break;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// Now we move on to the next sub-batch for this worker<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$tempMinId </span><span class="keyword">= </span><span class="default">$tempMaxId</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$tempMaxId </span><span class="keyword">= </span><span class="default">$tempMinId </span><span class="keyword">+ </span><span class="default">$fetchSize</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if(</span><span class="default">$tempMaxId </span><span class="keyword">&gt; </span><span class="default">$endId</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$tempMaxId </span><span class="keyword">= </span><span class="default">$endId</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// Introduce some timing randomness<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$sleep </span><span class="keyword">= </span><span class="default">rand</span><span class="keyword">(</span><span class="default">1</span><span class="keyword">,</span><span class="default">5</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">sleep</span><span class="keyword">(</span><span class="default">$sleep</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$fetchCount</span><span class="keyword">++;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// This worker has completed their entire batch<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">print </span><span class="string">"Worker " </span><span class="keyword">. </span><span class="default">$worker </span><span class="keyword">.&nbsp; </span><span class="string">" finished\n"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; <br />
+};<br />
+<br />
+</span><span class="comment">// Create our workers and have them start working on their task<br />
+// In this case, it's a set of 171392 IDs to process<br />
+</span><span class="keyword">for(</span><span class="default">$i </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">; </span><span class="default">$i </span><span class="keyword">&lt; </span><span class="default">$workers</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">++) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$startId </span><span class="keyword">= </span><span class="default">$minId </span><span class="keyword">+ (</span><span class="default">$i </span><span class="keyword">* </span><span class="default">$batchSize</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$endId </span><span class="keyword">= </span><span class="default">$startId </span><span class="keyword">+ </span><span class="default">$batchSize</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; if(</span><span class="default">$i </span><span class="keyword">== (</span><span class="default">$workers </span><span class="keyword">- </span><span class="default">1</span><span class="keyword">)) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$endId </span><span class="keyword">= </span><span class="default">$maxId</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">\parallel\run</span><span class="keyword">(</span><span class="default">$producer</span><span class="keyword">, array((</span><span class="default">$i</span><span class="keyword">+</span><span class="default">1</span><span class="keyword">), </span><span class="default">$startId</span><span class="keyword">, </span><span class="default">$endId</span><span class="keyword">, </span><span class="default">$rowsToFetch</span><span class="keyword">));<br />
+}<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

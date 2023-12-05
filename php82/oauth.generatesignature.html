@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>生成一个签名</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="oauth.fetch.html">? OAuth::fetch</a></li>
+      <li style="float: right;"><a href="oauth.getaccesstoken.html">OAuth::getAccessToken ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="class.oauth.html">OAuth</a></li>
+    <li>生成一个签名</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="oauth.generatesignature" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">OAuth::generateSignature</h1>
+  <p class="verinfo">(No version information available, might only be in Git)</p><p class="refpurpose"><span class="refname">OAuth::generateSignature</span> &mdash; <span class="dc-title">生成一个签名</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-oauth.generatesignature-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="modifier">public</span> <span class="methodname"><strong>OAuth::generateSignature</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$http_method</code></span>, <span class="methodparam"><span class="type">string</span> <code class="parameter">$url</code></span>, <span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">$extra_parameters</code><span class="initializer"> = ?</span></span>): <span class="type"><span class="type">string</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   生成一个基于最终 HTTP 方法、URL 和 一个字符串/数组参数的签名。
+  </p>
+
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-oauth.generatesignature-parameters">
+  <h3 class="title">参数</h3>
+  <dl>
+   
+    <dt>
+<code class="parameter">http_method</code></dt>
+
+    <dd>
+
+     <p class="para">
+      用来请求的 HTTP 方法
+     </p>
+    </dd>
+
+   
+   
+    <dt>
+<code class="parameter">url</code></dt>
+
+    <dd>
+
+     <p class="para">
+      用来请求的 URL
+     </p>
+    </dd>
+
+   
+   
+    <dt>
+<code class="parameter">extra_parameters</code></dt>
+
+    <dd>
+
+     <p class="para">
+      字符串或数组的附加参数
+     </p>
+    </dd>
+
+   
+  </dl>
+
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-oauth.generatesignature-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   一个包含签名的字符串  或者在失败时返回 <strong><code>false</code></strong>
+  </p>
+ </div>
+
+
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="126743""></a>
+  <div class="note">
+   <strong class="user">vk221000 at gmail dot com</strong>
+   <a href="#126743" class="date">03-Jan-2022 11:46</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+<span class="default">&lt;?php<br />
+</span><span class="comment">/**<br />
+&nbsp;&nbsp; &nbsp; * Get signature for the request Oauth 1.0<br />
+&nbsp;&nbsp; &nbsp; *<br />
+&nbsp;&nbsp; &nbsp; * @param string&nbsp; &nbsp; &nbsp; $url url to send request to.<br />
+&nbsp;&nbsp; &nbsp; * @param string&nbsp; &nbsp; &nbsp; $consumer_key consumer key for the request credential.<br />
+&nbsp;&nbsp; &nbsp; * @param string&nbsp; &nbsp; &nbsp; $consumer_secret consumer secret for the request credential.<br />
+&nbsp;&nbsp; &nbsp; * @param string&nbsp; &nbsp; &nbsp; $method GET, POST etc methods.<br />
+&nbsp;&nbsp; &nbsp; * @param array|false $params parameters to send during the request.<br />
+&nbsp;&nbsp; &nbsp; * @since 1.0.0<br />
+&nbsp;&nbsp; &nbsp; * @return string<br />
+&nbsp;&nbsp; &nbsp; */<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">public function </span><span class="default">get_signature</span><span class="keyword">( </span><span class="default">$url</span><span class="keyword">, </span><span class="default">$consumer_key</span><span class="keyword">, </span><span class="default">$consumer_secret</span><span class="keyword">, </span><span class="default">$method </span><span class="keyword">= </span><span class="string">'GET'</span><span class="keyword">, </span><span class="default">$params </span><span class="keyword">= </span><span class="default">false </span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$nonce&nbsp; &nbsp;&nbsp; </span><span class="keyword">= </span><span class="default">mt_rand</span><span class="keyword">();<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$timestamp </span><span class="keyword">= </span><span class="default">time</span><span class="keyword">();<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$oauth&nbsp; &nbsp;&nbsp; </span><span class="keyword">= new </span><span class="default">\OAuth</span><span class="keyword">( </span><span class="default">$consumer_key</span><span class="keyword">, </span><span class="default">$consumer_secret </span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$oauth</span><span class="keyword">-&gt;</span><span class="default">setTimestamp</span><span class="keyword">( </span><span class="default">$timestamp </span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$oauth</span><span class="keyword">-&gt;</span><span class="default">setNonce</span><span class="keyword">( </span><span class="default">$nonce </span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$sig </span><span class="keyword">= </span><span class="default">$oauth</span><span class="keyword">-&gt;</span><span class="default">generateSignature</span><span class="keyword">( </span><span class="default">$method</span><span class="keyword">, </span><span class="default">$url</span><span class="keyword">, </span><span class="default">$params </span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp;&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$header </span><span class="keyword">= </span><span class="string">'OAuth ' </span><span class="keyword">.<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'oauth_consumer_key=' </span><span class="keyword">. </span><span class="default">$consumer_key </span><span class="keyword">.<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">',oauth_signature_method="HMAC-SHA1"' </span><span class="keyword">.<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">',oauth_nonce="'</span><span class="keyword">. </span><span class="default">$nonce </span><span class="keyword">. </span><span class="string">'"' </span><span class="keyword">.<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">',oauth_timestamp="' </span><span class="keyword">. </span><span class="default">$timestamp </span><span class="keyword">. </span><span class="string">'"'</span><span class="keyword">.<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">',oauth_version="1.0"'</span><span class="keyword">.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">',oauth_signature="' </span><span class="keyword">. </span><span class="default">urlencode</span><span class="keyword">( </span><span class="default">$sig </span><span class="keyword">) . </span><span class="string">'"'<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$header</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

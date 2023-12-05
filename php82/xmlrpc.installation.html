@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>安装</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="xmlrpc.requirements.html">? 需求</a></li>
+      <li style="float: right;"><a href="xmlrpc.configuration.html">运行时配置 ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="xmlrpc.setup.html">安装/配置</a></li>
+    <li>安装</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="xmlrpc.installation" class="section">
+ <h2 class="title">安装</h2>
+ <p class="para">
+  PHP 默认不启用 XML-RPC 支持。编译 PHP 时需要使用
+  <strong class="option configure">--with-xmlrpc[=DIR]</strong>
+  配置项才能启用 XML-RPC 支持。
+ </p>
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="128291""></a>
+  <div class="note">
+   <strong class="user">Lars</strong>
+   <a href="#128291" class="date">06-Mar-2023 08:51</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Since PHP 8.0 the xmlrpc extension is not shipped with php any more.<br />
+Go to https://pecl.php.net/package/xmlrpc and download the latest version.<br />
+<br />
+For linux you might use something like that:<br />
+<br />
+$ wget https://pecl.php.net/get/xmlrpc-1.0.0RC3.tg<br />
+$ tar xfv xmlrpc-1.0.0RC3.tg<br />
+$ cd xmlrpc-1.0.0RC3<br />
+$ phpize &amp;&amp; ./configure &amp;&amp; make &amp;&amp; make test &amp;&amp; make install<br />
+<br />
+Add the build extension in your php.ini section and don't forget to restart php-fpm or your webserver after the installation.<br />
+<br />
+To verify the installation, you can use something like this (should at least return the line "xmlrpc"):<br />
+$ php -i | grep xmlrpc | grep -v "xmlrpc_error"</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="127714""></a>
+  <div class="note">
+   <strong class="user">georgemilojevic at gmail dot com</strong>
+   <a href="#127714" class="date">11-Oct-2022 10:30</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+# For MacOS users (using M1 machine - Version: 12.5.1)<br />
+<br />
+brew install pkg-config<br />
+<br />
+pecl install channel://pecl.php.net/xmlrpc-1.0.0RC3<br />
+<br />
+Then restart your apache, the extensions should be automatically added to php.ini and the output of phpinfo() should show it now</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="126987""></a>
+  <div class="note">
+   <strong class="user">Clive</strong>
+   <a href="#126987" class="date">13-Apr-2022 10:41</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Unless my host has deliberately installed it, PHP 8.0.17 still has xmlrpc included (1.0.0RC3).</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125752""></a>
+  <div class="note">
+   <strong class="user">pitje</strong>
+   <a href="#125752" class="date">31-Jan-2021 07:40</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+according to php(dot)watch/versions/8.0/xmlrpc ,<br />
+PHP 8.0: XMLRPC extension is moved to PECL<br />
+<br />
+checked, xmlrpc-1.0.0RC2 works for me</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125636""></a>
+  <div class="note">
+   <strong class="user">giunta dot gaetano at gmail dot com</strong>
+   <a href="#125636" class="date">29-Dec-2020 01:18</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Here's what I had to do in order to install the xmlrpc extension on php 8 (from sury repos) on Ubuntu 16, as there is no package available via pecl or apt:<br />
+<br />
+# build<br />
+git clone https://git.php.net/repository/pecl/networking/xmlrpc.git<br />
+export CPPFLAGS=-I/usr/include/libxml2/<br />
+cd xmlrpc &amp;&amp; phpize &amp;&amp; ./configure --with-expat &amp;&amp; make &amp;&amp; make install<br />
+<br />
+# enable - this varies depending on your configuration; apache/nginx/fpm will also need to be restarted<br />
+echo "extension=xmlrpc.so" &gt; /etc/php/8.0/mods-available/xmlrpc.ini<br />
+ln -s /etc/php/8.0/mods-available/xmlrpc.ini /etc/php/8.0/cli/conf.d/20-xmlrpc.ini<br />
+ln -s /etc/php/8.0/mods-available/xmlrpc.ini /etc/php/8.0/fpm/conf.d/20-xmlrpc.ini</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125604""></a>
+  <div class="note">
+   <strong class="user">Anonymous</strong>
+   <a href="#125604" class="date">15-Dec-2020 02:11</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+for centos try:<br />
+yum install php-xmlrpc</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

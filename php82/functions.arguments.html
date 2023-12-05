@@ -1,0 +1,1247 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>函数的参数</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="functions.user-defined.html">? 用户自定义函数</a></li>
+      <li style="float: right;"><a href="functions.returning-values.html">返回值 ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="language.functions.html">函数</a></li>
+    <li>函数的参数</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="functions.arguments" class="sect1">
+   <h2 class="title">函数的参数</h2>
+
+   <p class="simpara">
+    通过参数列表可以传递信息到函数，即以逗号作为分隔符的表达式列表。函数在实际调用之前，值参数是从左向右求值的（<em class="emphasis">及早</em>求值）。
+   </p>
+
+   <p class="para">
+    PHP 支持按值传递参数（默认），<a href="functions.arguments.html#functions.arguments.by-reference" class="link">通过引用传递参数</a> 以及 <a href="functions.arguments.html#functions.arguments.default" class="link">默认参数</a>。也支持
+    <a href="functions.arguments.html#functions.variable-arg-list" class="link">可变长度参数列表</a> 和
+    <a href="functions.arguments.html#functions.named-arguments" class="link">命名参数</a>。
+   </p>
+   <p class="para">
+    <div class="example" id="example-302">
+     <p><strong>Example #1 向函数传递数组</strong></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">takes_array</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">)<br />{<br />    echo </span><span style="color: #DD0000">"</span><span style="color: #0000BB">$input</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">]</span><span style="color: #DD0000"> + </span><span style="color: #0000BB">$input</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">]</span><span style="color: #DD0000"> = "</span><span style="color: #007700">, </span><span style="color: #0000BB">$input</span><span style="color: #007700">[</span><span style="color: #0000BB">0</span><span style="color: #007700">]+</span><span style="color: #0000BB">$input</span><span style="color: #007700">[</span><span style="color: #0000BB">1</span><span style="color: #007700">];<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+   </p>
+   <p class="para">
+    从 PHP 8.0.0 开始，函数参数列表可以包含一个尾部的逗号，这个逗号将被忽略。这在参数列表较长或包含较长的变量名的情况下特别有用，这样可以方便地垂直列出参数。
+   </p>
+   <div class="example" id="example-304">
+    <p><strong>Example #2 函数参数使用尾部逗号</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">takes_many_args</span><span style="color: #007700">(<br />    </span><span style="color: #0000BB">$first_arg</span><span style="color: #007700">,<br />    </span><span style="color: #0000BB">$second_arg</span><span style="color: #007700">,<br />    </span><span style="color: #0000BB">$a_very_long_argument_name</span><span style="color: #007700">,<br />    </span><span style="color: #0000BB">$arg_with_default </span><span style="color: #007700">= </span><span style="color: #0000BB">5</span><span style="color: #007700">,<br />    </span><span style="color: #0000BB">$again </span><span style="color: #007700">= </span><span style="color: #DD0000">'a default string'</span><span style="color: #007700">, </span><span style="color: #FF8000">// 在 8.0.0 之前，这个尾部的逗号是不允许的。<br /></span><span style="color: #007700">)<br />{<br />    </span><span style="color: #FF8000">// ...<br /></span><span style="color: #007700">}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+
+   <div class="sect2" id="functions.arguments.by-reference">
+    <h3 class="title">通过引用传递参数</h3>
+
+    <p class="simpara">
+     默认情况下，函数参数通过值传递（因而即使在函数内部改变参数的值，它并不会改变函数外部的值）。如果希望允许函数修改它的参数值，必须通过引用传递参数。
+    </p>
+    <p class="para">
+     如果想要函数的一个参数总是通过引用传递，可以在函数定义中该参数的前面加上符号 &amp;：
+    </p>
+    <p class="para">
+     <div class="example" id="example-306">
+      <p><strong>Example #3 用引用传递函数参数</strong></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">add_some_extra</span><span style="color: #007700">(&amp;</span><span style="color: #0000BB">$string</span><span style="color: #007700">)<br />{<br />    </span><span style="color: #0000BB">$string </span><span style="color: #007700">.= </span><span style="color: #DD0000">'and something extra.'</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">$str </span><span style="color: #007700">= </span><span style="color: #DD0000">'This is a string, '</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">add_some_extra</span><span style="color: #007700">(</span><span style="color: #0000BB">$str</span><span style="color: #007700">);<br />echo </span><span style="color: #0000BB">$str</span><span style="color: #007700">;    </span><span style="color: #FF8000">// 输出 'This is a string, and something extra.'<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+     </div>
+    </p>
+   </div>
+   <div class="sect2" id="functions.arguments.default">
+    <h3 class="title">默认参数的值</h3>
+
+    <p class="para">
+     函数可以使用类似分配变量的语法定义参数的默认值。仅当参数未指定时才使用默认值；需要注意的是传递
+     <strong><code>null</code></strong> <em class="emphasis">不会</em>分配默认值。
+    </p>
+    <p class="para">
+     <div class="example" id="example-308">
+      <p><strong>Example #4 在函数中使用默认参数</strong></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">makecoffee</span><span style="color: #007700">(</span><span style="color: #0000BB">$type </span><span style="color: #007700">= </span><span style="color: #DD0000">"cappuccino"</span><span style="color: #007700">)<br />{<br />    return </span><span style="color: #DD0000">"Making a cup of </span><span style="color: #0000BB">$type</span><span style="color: #DD0000">.\n"</span><span style="color: #007700">;<br />}<br />echo </span><span style="color: #0000BB">makecoffee</span><span style="color: #007700">();<br />echo </span><span style="color: #0000BB">makecoffee</span><span style="color: #007700">(</span><span style="color: #0000BB">null</span><span style="color: #007700">);<br />echo </span><span style="color: #0000BB">makecoffee</span><span style="color: #007700">(</span><span style="color: #DD0000">"espresso"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+      <div class="example-contents"><p>以上示例会输出：</p></div>
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+Making a cup of cappuccino.
+Making a cup of .
+Making a cup of espresso.
+</pre></div>
+      </div>
+     </div>
+    </p>
+    <p class="para">
+     默认参数值可以是标量值、<span class="type">array</span>、特殊类型 <strong><code>null</code></strong>，以及从 PHP 8.1.0 开始，使用
+     <a href="language.oop5.basic.html#language.oop5.basic.new" class="link">new ClassName()</a> 语法的对象。
+    </p>
+    <p class="para">
+     <div class="example" id="example-310">
+      <p><strong>Example #5 使用非标量类型作为默认参数</strong></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">makecoffee</span><span style="color: #007700">(</span><span style="color: #0000BB">$types </span><span style="color: #007700">= array(</span><span style="color: #DD0000">"cappuccino"</span><span style="color: #007700">), </span><span style="color: #0000BB">$coffeeMaker </span><span style="color: #007700">= </span><span style="color: #0000BB">NULL</span><span style="color: #007700">)<br />{<br />    </span><span style="color: #0000BB">$device </span><span style="color: #007700">= </span><span style="color: #0000BB">is_null</span><span style="color: #007700">(</span><span style="color: #0000BB">$coffeeMaker</span><span style="color: #007700">) ? </span><span style="color: #DD0000">"hands" </span><span style="color: #007700">: </span><span style="color: #0000BB">$coffeeMaker</span><span style="color: #007700">;<br />    return </span><span style="color: #DD0000">"Making a cup of "</span><span style="color: #007700">.</span><span style="color: #0000BB">join</span><span style="color: #007700">(</span><span style="color: #DD0000">", "</span><span style="color: #007700">, </span><span style="color: #0000BB">$types</span><span style="color: #007700">).</span><span style="color: #DD0000">" with </span><span style="color: #0000BB">$device</span><span style="color: #DD0000">.\n"</span><span style="color: #007700">;<br />}<br />echo </span><span style="color: #0000BB">makecoffee</span><span style="color: #007700">();<br />echo </span><span style="color: #0000BB">makecoffee</span><span style="color: #007700">(array(</span><span style="color: #DD0000">"cappuccino"</span><span style="color: #007700">, </span><span style="color: #DD0000">"lavazza"</span><span style="color: #007700">), </span><span style="color: #DD0000">"teapot"</span><span style="color: #007700">);</span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+     </div>
+    </p>
+    <p class="para">
+     <div class="example" id="example-312">
+      <p><strong>Example #6 使用对象作为默认值（自 PHP 8.1.0 起）</strong></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">DefaultCoffeeMaker </span><span style="color: #007700">{<br />    public function </span><span style="color: #0000BB">brew</span><span style="color: #007700">() {<br />        return </span><span style="color: #DD0000">'Making coffee.'</span><span style="color: #007700">;<br />    }<br />}<br />class </span><span style="color: #0000BB">FancyCoffeeMaker </span><span style="color: #007700">{<br />    public function </span><span style="color: #0000BB">brew</span><span style="color: #007700">() {<br />        return </span><span style="color: #DD0000">'Crafting a beautiful coffee just for you.'</span><span style="color: #007700">;<br />    }<br />}<br />function </span><span style="color: #0000BB">makecoffee</span><span style="color: #007700">(</span><span style="color: #0000BB">$coffeeMaker </span><span style="color: #007700">= new </span><span style="color: #0000BB">DefaultCoffeeMaker</span><span style="color: #007700">)<br />{<br />    return </span><span style="color: #0000BB">$coffeeMaker</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">brew</span><span style="color: #007700">();<br />}<br />echo </span><span style="color: #0000BB">makecoffee</span><span style="color: #007700">();<br />echo </span><span style="color: #0000BB">makecoffee</span><span style="color: #007700">(new </span><span style="color: #0000BB">FancyCoffeeMaker</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+     </div>
+    </p>
+    <p class="simpara">
+     默认值必须是常量表达式，不能是诸如变量，类成员，或者函数调用等。
+    </p>
+    <p class="para">
+     注意任何可选参数都应在强制参数之后指定，否则可选参数不能在调用时省略。考虑以下示例：
+    </p>
+    <p class="para">
+     <div class="example" id="example-314">
+      <p><strong>Example #7 函数默认参数的不正确用法</strong></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">makeyogurt</span><span style="color: #007700">(</span><span style="color: #0000BB">$container </span><span style="color: #007700">= </span><span style="color: #DD0000">"bowl"</span><span style="color: #007700">, </span><span style="color: #0000BB">$flavour</span><span style="color: #007700">)<br />{<br />    return </span><span style="color: #DD0000">"Making a </span><span style="color: #0000BB">$container</span><span style="color: #DD0000"> of </span><span style="color: #0000BB">$flavour</span><span style="color: #DD0000"> yogurt.\n"</span><span style="color: #007700">;<br />}<br /> <br />echo </span><span style="color: #0000BB">makeyogurt</span><span style="color: #007700">(</span><span style="color: #DD0000">"raspberry"</span><span style="color: #007700">); </span><span style="color: #FF8000">// "raspberry" 是 $container, 不是 $flavour<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+      <div class="example-contents"><p>以上示例会输出：</p></div>
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+Fatal error: Uncaught ArgumentCountError: Too few arguments
+ to function makeyogurt(), 1 passed in example.php on line 42
+</pre></div>
+      </div>
+     </div>
+    </p>
+    <p class="para">
+     现在，比较上面的例子和这个例子：
+    </p>
+    <p class="para">
+     <div class="example" id="example-316">
+      <p><strong>Example #8 函数默认参数正确的用法</strong></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">makeyogurt</span><span style="color: #007700">(</span><span style="color: #0000BB">$flavour</span><span style="color: #007700">, </span><span style="color: #0000BB">$container </span><span style="color: #007700">= </span><span style="color: #DD0000">"bowl"</span><span style="color: #007700">)<br />{<br />    return </span><span style="color: #DD0000">"Making a </span><span style="color: #0000BB">$container</span><span style="color: #DD0000"> of </span><span style="color: #0000BB">$flavour</span><span style="color: #DD0000"> yogurt.\n"</span><span style="color: #007700">;<br />}<br /> <br />echo </span><span style="color: #0000BB">makeyogurt</span><span style="color: #007700">(</span><span style="color: #DD0000">"raspberry"</span><span style="color: #007700">); </span><span style="color: #FF8000">// "raspberry" 是 $flavour<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+      <div class="example-contents"><p>以上示例会输出：</p></div>
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+Making a bowl of raspberry yogurt.
+</pre></div>
+      </div>
+     </div>
+    </p>
+    <p class="para">
+     自 PHP 8.0.0 起，<a href="functions.arguments.html#functions.named-arguments" class="link">命名参数</a>可用于跳过多个可选参数。
+    </p>
+    <p class="para">
+     <div class="example" id="example-318">
+      <p><strong>Example #9 函数默认参数正确的用法</strong></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">makeyogurt</span><span style="color: #007700">(</span><span style="color: #0000BB">$container </span><span style="color: #007700">= </span><span style="color: #DD0000">"bowl"</span><span style="color: #007700">, </span><span style="color: #0000BB">$flavour </span><span style="color: #007700">= </span><span style="color: #DD0000">"raspberry"</span><span style="color: #007700">, </span><span style="color: #0000BB">$style </span><span style="color: #007700">= </span><span style="color: #DD0000">"Greek"</span><span style="color: #007700">)<br />{<br />    return </span><span style="color: #DD0000">"Making a </span><span style="color: #0000BB">$container</span><span style="color: #DD0000"> of </span><span style="color: #0000BB">$flavour</span><span style="color: #DD0000"> </span><span style="color: #0000BB">$style</span><span style="color: #DD0000"> yogurt.\n"</span><span style="color: #007700">;<br />}<br /><br />echo </span><span style="color: #0000BB">makeyogurt</span><span style="color: #007700">(</span><span style="color: #0000BB">style</span><span style="color: #007700">: </span><span style="color: #DD0000">"natural"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+      <div class="example-contents"><p>以上示例会输出：</p></div>
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+Making a bowl of raspberry natural yogurt.
+</pre></div>
+      </div>
+     </div>
+    </p>
+    <p class="para">
+     自 PHP 8.0.0 起，<em class="emphasis">弃用</em>在可选参数之后声明强制参数。这通常可以通过删除默认值来解决，因为它永远不会被使用。唯一的例外是
+     <code class="code">Type $param = null</code> 类型的参数，其中默认 <strong><code>null</code></strong> 使得该类型可以隐式为
+     null。这种做法依然允许，但是推荐使用显式<a href="language.types.declarations.html#language.types.declarations.nullable" class="link">可为 null 类型</a>代替。
+     <div class="example" id="example-320">
+      <p><strong>Example #10 强制参数后声明可选参数</strong></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /> </span><span style="color: #007700">function </span><span style="color: #0000BB">foo</span><span style="color: #007700">(</span><span style="color: #0000BB">$a </span><span style="color: #007700">= [], </span><span style="color: #0000BB">$b</span><span style="color: #007700">) {} </span><span style="color: #FF8000">// 默认不使用；自 PHP 8.0.0 起弃用<br /> </span><span style="color: #007700">function </span><span style="color: #0000BB">foo</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">, </span><span style="color: #0000BB">$b</span><span style="color: #007700">) {}      </span><span style="color: #FF8000">// 功能相同，无弃用通知<br /><br /> </span><span style="color: #007700">function </span><span style="color: #0000BB">bar</span><span style="color: #007700">(</span><span style="color: #0000BB">A $a </span><span style="color: #007700">= </span><span style="color: #0000BB">null</span><span style="color: #007700">, </span><span style="color: #0000BB">$b</span><span style="color: #007700">) {} </span><span style="color: #FF8000">// 仍然允许；但 $a 强制但可以为 null<br /> </span><span style="color: #007700">function </span><span style="color: #0000BB">bar</span><span style="color: #007700">(?</span><span style="color: #0000BB">A $a</span><span style="color: #007700">, </span><span style="color: #0000BB">$b</span><span style="color: #007700">) {}       </span><span style="color: #FF8000">// 推荐<br /> </span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+     </div>
+    </p>
+    <blockquote class="note"><p><strong class="note">Note</strong>: 
+     <span class="simpara">
+      自 PHP 7.1.0 起，省略未指定默认值的参数会原因引发
+      <span class="classname"><a href="class.argumentcounterror.html" class="classname">ArgumentCountError</a></span>；在此之前的版本会引发警告。
+     </span>
+    </p></blockquote>
+    <blockquote class="note"><p><strong class="note">Note</strong>: 
+     <span class="simpara">
+      传引用的参数也可以有默认值。
+     </span>
+    </p></blockquote>
+   </div>
+
+   <div class="sect2" id="functions.variable-arg-list">
+    <h3 class="title">可变数量的参数列表</h3>
+
+    <p class="simpara">
+     PHP 在用户自定义函数中支持可变数量的参数列表。由
+     <code class="literal">...</code> 语法实现。
+    </p>
+
+    <blockquote class="note"><p><strong class="note">Note</strong>: 
+     <span class="simpara">
+      还可以使用以下函数来获取可变参数
+      <span class="function"><a href="function.func-num-args.html" class="function">func_num_args()</a></span>、
+      <span class="function"><a href="function.func-get-arg.html" class="function">func_get_arg()</a></span> 和
+      <span class="function"><a href="function.func-get-args.html" class="function">func_get_args()</a></span>，不建议使用此方式，请使用
+      <code class="literal">...</code> 来替代。
+     </span>
+    </p></blockquote>
+
+    <p class="para">
+     包含 <code class="literal">...</code>
+     的参数，会转换为指定参数变量的一个 <span class="type">array</span>：
+
+     <div class="example" id="example-322">
+      <p><strong>Example #11 使用 <code class="literal">...</code> 来访问变量参数</strong></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">sum</span><span style="color: #007700">(...</span><span style="color: #0000BB">$numbers</span><span style="color: #007700">) {<br />    </span><span style="color: #0000BB">$acc </span><span style="color: #007700">= </span><span style="color: #0000BB">0</span><span style="color: #007700">;<br />    foreach (</span><span style="color: #0000BB">$numbers </span><span style="color: #007700">as </span><span style="color: #0000BB">$n</span><span style="color: #007700">) {<br />        </span><span style="color: #0000BB">$acc </span><span style="color: #007700">+= </span><span style="color: #0000BB">$n</span><span style="color: #007700">;<br />    }<br />    return </span><span style="color: #0000BB">$acc</span><span style="color: #007700">;<br />}<br /><br />echo </span><span style="color: #0000BB">sum</span><span style="color: #007700">(</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">, </span><span style="color: #0000BB">3</span><span style="color: #007700">, </span><span style="color: #0000BB">4</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+      <div class="example-contents"><p>以上示例会输出：</p></div>
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+10
+</pre></div>
+      </div>
+     </div>
+    </p>
+
+    <p class="para">
+    也可以使用 <code class="literal">...</code> 语法来传递 <span class="type">array</span> 或
+     <span class="classname"><a href="class.traversable.html" class="classname">Traversable</a></span>
+     做为参数到函数中：
+
+     <div class="example" id="example-324">
+      <p><strong>Example #12 使用 <code class="literal">...</code> 来传递参数</strong></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">add</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">, </span><span style="color: #0000BB">$b</span><span style="color: #007700">) {<br />    return </span><span style="color: #0000BB">$a </span><span style="color: #007700">+ </span><span style="color: #0000BB">$b</span><span style="color: #007700">;<br />}<br /><br />echo </span><span style="color: #0000BB">add</span><span style="color: #007700">(...[</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">]).</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$a </span><span style="color: #007700">= [</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">];<br />echo </span><span style="color: #0000BB">add</span><span style="color: #007700">(...</span><span style="color: #0000BB">$a</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+      <div class="example-contents"><p>以上示例会输出：</p></div>
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+3
+3
+</pre></div>
+      </div>
+     </div>
+    </p>
+
+    <p class="para">
+     你可以在
+     <code class="literal">...</code> 前指定正常的位置参数。在这种情况下，只有不符合位置参数的尾部参数才会被添加到
+     <code class="literal">...</code> 生成的数组中。
+    </p>
+
+    <p class="para">
+     你也可以在
+     <code class="literal">...</code> 标记前添加一个
+     <a href="language.types.declarations.html" class="link">类型声明</a>。如果存在这种情况，那么
+     <code class="literal">...</code> 捕获的所有参数都必须匹配参数类型。
+
+
+     <div class="example" id="example-326">
+      <p><strong>Example #13 输入提示的变量参数</strong></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">total_intervals</span><span style="color: #007700">(</span><span style="color: #0000BB">$unit</span><span style="color: #007700">, </span><span style="color: #0000BB">DateInterval </span><span style="color: #007700">...</span><span style="color: #0000BB">$intervals</span><span style="color: #007700">) {<br />    </span><span style="color: #0000BB">$time </span><span style="color: #007700">= </span><span style="color: #0000BB">0</span><span style="color: #007700">;<br />    foreach (</span><span style="color: #0000BB">$intervals </span><span style="color: #007700">as </span><span style="color: #0000BB">$interval</span><span style="color: #007700">) {<br />        </span><span style="color: #0000BB">$time </span><span style="color: #007700">+= </span><span style="color: #0000BB">$interval</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">$unit</span><span style="color: #007700">;<br />    }<br />    return </span><span style="color: #0000BB">$time</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">$a </span><span style="color: #007700">= new </span><span style="color: #0000BB">DateInterval</span><span style="color: #007700">(</span><span style="color: #DD0000">'P1D'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$b </span><span style="color: #007700">= new </span><span style="color: #0000BB">DateInterval</span><span style="color: #007700">(</span><span style="color: #DD0000">'P2D'</span><span style="color: #007700">);<br />echo </span><span style="color: #0000BB">total_intervals</span><span style="color: #007700">(</span><span style="color: #DD0000">'d'</span><span style="color: #007700">, </span><span style="color: #0000BB">$a</span><span style="color: #007700">, </span><span style="color: #0000BB">$b</span><span style="color: #007700">).</span><span style="color: #DD0000">' days'</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// 这将会失败，因为 null 不是 DateInterval 对象。<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">total_intervals</span><span style="color: #007700">(</span><span style="color: #DD0000">'d'</span><span style="color: #007700">, </span><span style="color: #0000BB">null</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+      <div class="example-contents"><p>以上示例会输出：</p></div>
+      <div class="example-contents screen">
+<div class="cdata"><pre>
+3 days
+Catchable fatal error: Argument 2 passed to total_intervals() must be an instance of DateInterval, null given, called in - on line 14 and defined in - on line 2
+</pre></div>
+      </div>
+     </div>
+    </p>
+
+    <p class="para">
+      最后，你还可以给参数传递
+     <a href="functions.arguments.html#functions.arguments.by-reference" class="link">引用变量</a>，通过在
+      <code class="literal">...</code> 前加上一个 (<code class="literal">&amp;</code>) 符号来实现。
+    </p>
+
+    <div class="sect3" id="functions.variable-arg-list.old">
+     <h4 class="title">旧版本的 PHP</h4>
+
+     <p class="para">
+      不需要特殊的语法来声明一个函数是可变的；但是访问函数的参数必须使用
+      <span class="function"><a href="function.func-num-args.html" class="function">func_num_args()</a></span>, <span class="function"><a href="function.func-get-arg.html" class="function">func_get_arg()</a></span>
+      和 <span class="function"><a href="function.func-get-args.html" class="function">func_get_args()</a></span> 函数。
+     </p>
+
+     <p class="para">
+      上面的第一个例子在早期 PHP 版本中的实现如下：
+
+      <div class="example" id="example-328">
+       <p><strong>Example #14 在 PHP 早期版本中访问可变参数</strong></p>
+       <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">sum</span><span style="color: #007700">() {<br />    </span><span style="color: #0000BB">$acc </span><span style="color: #007700">= </span><span style="color: #0000BB">0</span><span style="color: #007700">;<br />    foreach (</span><span style="color: #0000BB">func_get_args</span><span style="color: #007700">() as </span><span style="color: #0000BB">$n</span><span style="color: #007700">) {<br />        </span><span style="color: #0000BB">$acc </span><span style="color: #007700">+= </span><span style="color: #0000BB">$n</span><span style="color: #007700">;<br />    }<br />    return </span><span style="color: #0000BB">$acc</span><span style="color: #007700">;<br />}<br /><br />echo </span><span style="color: #0000BB">sum</span><span style="color: #007700">(</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">, </span><span style="color: #0000BB">3</span><span style="color: #007700">, </span><span style="color: #0000BB">4</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+       </div>
+
+       <div class="example-contents"><p>以上示例会输出：</p></div>
+       <div class="example-contents screen">
+<div class="cdata"><pre>
+10
+</pre></div>
+       </div>
+      </div>
+     </p>
+    </div>
+
+   </div>
+
+   <div class="sect2" id="functions.named-arguments">
+    <h3 class="title">命名参数</h3>
+
+    <p class="para">
+     PHP 8.0.0 开始引入了命名参数作为现有位置参数的扩展。命名参数允许根据参数名而不是参数位置向函数传参。这使得参数的含义自成体系，参数与顺序无关，并允许任意跳过默认值。
+    </p>
+
+    <p class="para">
+     命名参数通过在参数名前加上冒号来传递。允许使用保留关键字作为参数名。参数名必须是一个标识符，不允许动态指定。
+    </p>
+
+    <div class="example" id="example-330">
+     <p><strong>Example #15 命名参数的语法</strong></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />myFunction</span><span style="color: #007700">(</span><span style="color: #0000BB">paramName</span><span style="color: #007700">: </span><span style="color: #0000BB">$value</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">array_foobar</span><span style="color: #007700">(array: </span><span style="color: #0000BB">$value</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 不支持。<br /></span><span style="color: #0000BB">function_name</span><span style="color: #007700">(</span><span style="color: #0000BB">$variableStoringParamName</span><span style="color: #007700">: </span><span style="color: #0000BB">$value</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+
+    <div class="example" id="example-332">
+     <p><strong>Example #16 通过位置传参与命名参数的对比</strong></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// 使用顺序传递参数：<br /></span><span style="color: #0000BB">array_fill</span><span style="color: #007700">(</span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">100</span><span style="color: #007700">, </span><span style="color: #0000BB">50</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// 使用命名参数：<br /></span><span style="color: #0000BB">array_fill</span><span style="color: #007700">(</span><span style="color: #0000BB">start_index</span><span style="color: #007700">: </span><span style="color: #0000BB">0</span><span style="color: #007700">, </span><span style="color: #0000BB">count</span><span style="color: #007700">: </span><span style="color: #0000BB">100</span><span style="color: #007700">, </span><span style="color: #0000BB">value</span><span style="color: #007700">: </span><span style="color: #0000BB">50</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+
+    <p class="para">
+     指定参数的传递顺序并不重要。
+    </p>
+
+    <div class="example" id="example-334">
+     <p><strong>Example #17 参数顺序不同的示例（同上例）</strong></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />array_fill</span><span style="color: #007700">(</span><span style="color: #0000BB">value</span><span style="color: #007700">: </span><span style="color: #0000BB">50</span><span style="color: #007700">, </span><span style="color: #0000BB">count</span><span style="color: #007700">: </span><span style="color: #0000BB">100</span><span style="color: #007700">, </span><span style="color: #0000BB">start_index</span><span style="color: #007700">: </span><span style="color: #0000BB">0</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+
+    <p class="para">
+     命名参数也可以与位置参数相结合使用。此种情况下，命名参数必须在位置参数之后。也可以只指定一个函数的部分可选参数，而不考虑它们的顺序。
+    </p>
+
+    <div class="example" id="example-336">
+     <p><strong>Example #18 命名参数与位置参数结合使用</strong></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />htmlspecialchars</span><span style="color: #007700">(</span><span style="color: #0000BB">$string</span><span style="color: #007700">, </span><span style="color: #0000BB">double_encode</span><span style="color: #007700">: </span><span style="color: #0000BB">false</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">// 等价于<br /></span><span style="color: #0000BB">htmlspecialchars</span><span style="color: #007700">(</span><span style="color: #0000BB">$string</span><span style="color: #007700">, </span><span style="color: #0000BB">ENT_QUOTES </span><span style="color: #007700">| </span><span style="color: #0000BB">ENT_SUBSTITUTE </span><span style="color: #007700">| </span><span style="color: #0000BB">ENT_HTML401</span><span style="color: #007700">, </span><span style="color: #DD0000">'UTF-8'</span><span style="color: #007700">, </span><span style="color: #0000BB">false</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+
+    <p class="para">
+     传递多个相同参数将会导致 Error 异常。
+    </p>
+
+    <div class="example" id="example-338">
+     <p><strong>Example #19 传递多个相同参数将会导致抛出 Error</strong></p>
+     <div class="example-contents">
+      <div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">foo</span><span style="color: #007700">(</span><span style="color: #0000BB">$param</span><span style="color: #007700">) { ... }<br /><br /></span><span style="color: #0000BB">foo</span><span style="color: #007700">(</span><span style="color: #0000BB">param</span><span style="color: #007700">: </span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">param</span><span style="color: #007700">: </span><span style="color: #0000BB">2</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">// 错误：命名参数 $param 覆盖了之前的参数<br /></span><span style="color: #0000BB">foo</span><span style="color: #007700">(</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">param</span><span style="color: #007700">: </span><span style="color: #0000BB">2</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">// 错误：命名参数 $param 覆盖了之前的参数<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+
+    <p class="para">
+     自 PHP 8.1.0 起，可以在解包参数后面使用命名参数。命名参数<em class="emphasis">不能</em>覆盖已解包的参数。
+    </p>
+
+    <div class="example" id="language.fiber.example.basic">
+     <p><strong>Example #20 解包后使用命名参数</strong></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">foo</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">, </span><span style="color: #0000BB">$b</span><span style="color: #007700">, </span><span style="color: #0000BB">$c </span><span style="color: #007700">= </span><span style="color: #0000BB">3</span><span style="color: #007700">, </span><span style="color: #0000BB">$d </span><span style="color: #007700">= </span><span style="color: #0000BB">4</span><span style="color: #007700">) {<br />  return </span><span style="color: #0000BB">$a </span><span style="color: #007700">+ </span><span style="color: #0000BB">$b </span><span style="color: #007700">+ </span><span style="color: #0000BB">$c </span><span style="color: #007700">+ </span><span style="color: #0000BB">$d</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">foo</span><span style="color: #007700">(...[</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">], </span><span style="color: #0000BB">d</span><span style="color: #007700">: </span><span style="color: #0000BB">40</span><span style="color: #007700">)); </span><span style="color: #FF8000">// 46<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">foo</span><span style="color: #007700">(...[</span><span style="color: #DD0000">'b' </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">2</span><span style="color: #007700">, </span><span style="color: #DD0000">'a' </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">1</span><span style="color: #007700">], </span><span style="color: #0000BB">d</span><span style="color: #007700">: </span><span style="color: #0000BB">40</span><span style="color: #007700">)); </span><span style="color: #FF8000">// 46<br /><br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">foo</span><span style="color: #007700">(...[</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">], </span><span style="color: #0000BB">b</span><span style="color: #007700">: </span><span style="color: #0000BB">20</span><span style="color: #007700">)); </span><span style="color: #FF8000">// Fatal error。命名参数 $b 覆盖之前的参数<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+
+   </div>
+  </div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="128022""></a>
+  <div class="note">
+   <strong class="user">Luna</strong>
+   <a href="#128022" class="date">15-Dec-2022 06:23</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+When using named arguments and adding default values only to some of the arguments, the arguments with default values must be specified at the end or otherwise PHP throws an error:<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="keyword">function </span><span class="default">test1</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">, </span><span class="default">$c</span><span class="keyword">, </span><span class="default">$b </span><span class="keyword">= </span><span class="default">2</span><span class="keyword">)<br />
+{<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$a </span><span class="keyword">+ </span><span class="default">$b </span><span class="keyword">+ </span><span class="default">$c</span><span class="keyword">;<br />
+}<br />
+<br />
+function </span><span class="default">test2</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">, </span><span class="default">$b </span><span class="keyword">= </span><span class="default">2</span><span class="keyword">, </span><span class="default">$c</span><span class="keyword">)<br />
+{<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$a </span><span class="keyword">+ </span><span class="default">$b </span><span class="keyword">+ </span><span class="default">$c</span><span class="keyword">;<br />
+}<br />
+<br />
+echo </span><span class="default">test1</span><span class="keyword">(</span><span class="default">a</span><span class="keyword">: </span><span class="default">1</span><span class="keyword">, </span><span class="default">c</span><span class="keyword">: </span><span class="default">3</span><span class="keyword">).</span><span class="string">"\n"</span><span class="keyword">; </span><span class="comment">// Works<br />
+</span><span class="keyword">echo </span><span class="default">test2</span><span class="keyword">(</span><span class="default">a</span><span class="keyword">: </span><span class="default">1</span><span class="keyword">, </span><span class="default">c</span><span class="keyword">: </span><span class="default">3</span><span class="keyword">).</span><span class="string">"\n"</span><span class="keyword">; </span><span class="comment">// ArgumentCountError: Argument #2 ($b) not passed<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+I assume that this happens because internally PHP rewrites the calls to something like test1(1, 3) and test2(1, , 3). The first call is valid, but the second obviously isn't.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="127631""></a>
+  <div class="note">
+   <strong class="user">tianyiw at vip dot qq dot com</strong>
+   <a href="#127631" class="date">15-Sep-2022 06:57</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+<span class="default">&lt;?php<br />
+</span><span class="comment">/**<br />
+&nbsp;* Create an array using Named Parameters.<br />
+&nbsp;*<br />
+&nbsp;* @param mixed ...$values<br />
+&nbsp;* @return array<br />
+&nbsp;*/<br />
+</span><span class="keyword">function </span><span class="default">arr</span><span class="keyword">(</span><span class="default">mixed </span><span class="keyword">...</span><span class="default">$values</span><span class="keyword">): array<br />
+{<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$values</span><span class="keyword">;<br />
+}<br />
+<br />
+</span><span class="default">$arr </span><span class="keyword">= </span><span class="default">arr</span><span class="keyword">(<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">name</span><span class="keyword">: </span><span class="string">'php'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">mobile</span><span class="keyword">: </span><span class="default">123456</span><span class="keyword">,<br />
+);<br />
+<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$arr</span><span class="keyword">);<br />
+</span><span class="comment">// array(2) {<br />
+//&nbsp;&nbsp; ["name"]=&gt;<br />
+//&nbsp;&nbsp; string(3) "php"<br />
+//&nbsp;&nbsp; ["mobile"]=&gt;<br />
+//&nbsp;&nbsp; int(123456)<br />
+// }</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="127019""></a>
+  <div class="note">
+   <strong class="user">TwystO</strong>
+   <a href="#127019" class="date">28-Apr-2022 12:40</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+As stated in the documentation, the ... token can be used to pass an array of parameters to a function.<br />
+<br />
+But it also works for class constructors as you can see below :<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="keyword">class </span><span class="default">Courtesy </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public </span><span class="default">string $firstname</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; public </span><span class="default">string $lastname</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">__construct</span><span class="keyword">(</span><span class="default">$firstname</span><span class="keyword">, </span><span class="default">$lastname</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">firstname </span><span class="keyword">= </span><span class="default">$firstname</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">lastname </span><span class="keyword">= </span><span class="default">$lastname</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">hello</span><span class="keyword">() {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="string">'Hello ' </span><span class="keyword">. </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">firstname </span><span class="keyword">. </span><span class="string">' ' </span><span class="keyword">. </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">lastname </span><span class="keyword">. </span><span class="string">'!'</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+</span><span class="default">$params </span><span class="keyword">= [ </span><span class="string">'John'</span><span class="keyword">, </span><span class="string">'Doe' </span><span class="keyword">];<br />
+<br />
+</span><span class="default">$courtesy </span><span class="keyword">= new </span><span class="default">Courtesy</span><span class="keyword">(...</span><span class="default">$params</span><span class="keyword">);<br />
+<br />
+echo </span><span class="default">$courtesy</span><span class="keyword">-&gt;</span><span class="default">hello</span><span class="keyword">();<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="126910""></a>
+  <div class="note">
+   <strong class="user">Simmo at 9000 dot 000</strong>
+   <a href="#126910" class="date">09-Mar-2022 05:13</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+For anyone just getting started with php or searching, for an understanding, on what this page describes as a "... token" in Variable-length arguments:<br />
+https://www.php.net/manual/en/functions.arguments.php#functions.variable-arg-list<br />
+<span class="default">&lt;?php<br />
+<br />
+&nbsp; func</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">, ...</span><span class="default">$b</span><span class="keyword">) <br />
+<br />
+</span><span class="default">?&gt;<br />
+</span>The 3 dots, or elipsis, or "...", or dot dot dot is sometimes called the "spread operator" in other languages.<br />
+<br />
+As this is only used in function arguments, it is probably not technically an true operator in PHP.&nbsp; (As of 8.1 at least?).<br />
+<br />
+(With having an difficult to search for name like "... token", I hope this note helps someone).</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="126570""></a>
+  <div class="note">
+   <strong class="user">tesdy14 at gmail dot com</strong>
+   <a href="#126570" class="date">08-Nov-2021 05:43</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+function my_fonction(string $value) {<br />
+&nbsp;&nbsp;&nbsp; echo $value . PHP_EOL;<br />
+}<br />
+<br />
+my_fonction(['foo' =&gt; 'ko', 'bar' =&gt; 'not', 'goodValue' =&gt; 'Oh Yeah']['goodValue']);<br />
+<br />
+// return 'Oh Yeah'<br />
+<br />
+// This may sound strange, anyway it's very useful in a foreach (or other conditional structure).<br />
+<br />
+$expectedStatusCodes = [404, 403];<br />
+<br />
+function getValueFromArray(string $value): string<br />
+{<br />
+&nbsp;&nbsp;&nbsp; return $value . PHP_EOL;<br />
+}<br />
+<br />
+foreach ($expectedStatusCodes as $code) {<br />
+&nbsp;&nbsp;&nbsp; echo $currentUserReference = getValueFromArray(<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; [<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; 404 =&gt; "Doesn't exist",<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; 403 =&gt; 'Forbidden',<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; 200 =&gt; "you're welcome"<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; ][$code]<br />
+&nbsp;&nbsp;&nbsp; );<br />
+}</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="126472""></a>
+  <div class="note">
+   <strong class="user">LilyWhite</strong>
+   <a href="#126472" class="date">03-Oct-2021 12:20</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+It is worth noting that you can use functions as function arguments<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">run</span><span class="keyword">(</span><span class="default">$op</span><span class="keyword">, </span><span class="default">$a</span><span class="keyword">, </span><span class="default">$b</span><span class="keyword">) {<br />
+&nbsp; return </span><span class="default">$op</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">, </span><span class="default">$b</span><span class="keyword">);<br />
+}<br />
+<br />
+</span><span class="default">$add </span><span class="keyword">= function(</span><span class="default">$a</span><span class="keyword">, </span><span class="default">$b</span><span class="keyword">) {<br />
+&nbsp; return </span><span class="default">$a </span><span class="keyword">+ </span><span class="default">$b</span><span class="keyword">;<br />
+};<br />
+<br />
+</span><span class="default">$mul </span><span class="keyword">= function(</span><span class="default">$a</span><span class="keyword">, </span><span class="default">$b</span><span class="keyword">) {<br />
+&nbsp; return </span><span class="default">$a </span><span class="keyword">* </span><span class="default">$b</span><span class="keyword">;<br />
+};<br />
+<br />
+echo </span><span class="default">run</span><span class="keyword">(</span><span class="default">$add</span><span class="keyword">, </span><span class="default">1</span><span class="keyword">, </span><span class="default">2</span><span class="keyword">), </span><span class="string">"\n"</span><span class="keyword">;<br />
+echo </span><span class="default">run</span><span class="keyword">(</span><span class="default">$mul</span><span class="keyword">, </span><span class="default">1</span><span class="keyword">, </span><span class="default">2</span><span class="keyword">);<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Output:<br />
+3<br />
+2</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125816""></a>
+  <div class="note">
+   <strong class="user">rsperduta at gmail dot com</strong>
+   <a href="#125816" class="date">13-Feb-2021 07:33</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+About example #2: That little comma down at the end and often obscured by a line comment is easily over looked. I think it's worth considering putting it at the head of the next line to make clear what it's relationship is to the surrounding lines. Consider how much clearer it's continuation as a list of parameters:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">takes_many_args</span><span class="keyword">(<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$first_arg </span><span class="comment">// some description<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">, </span><span class="default">$second_arg </span><span class="comment">// another comment<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">, </span><span class="default">$a_very_long_argument_name </span><span class="keyword">= </span><span class="default">something</span><span class="keyword">(</span><span class="default">$complicated</span><span class="keyword">) </span><span class="comment">// IDK<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">, </span><span class="default">$arg_with_default </span><span class="keyword">= </span><span class="default">5<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">, </span><span class="default">$again </span><span class="keyword">= </span><span class="string">'a default string'</span><span class="keyword">, </span><span class="comment">// IMHO this trailing comma encourages illegible code and not being permitted seemed&nbsp; a good idea lost with 8.0.0.<br />
+</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// ...<br />
+</span><span class="keyword">}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+&nbsp;This principle can be applied equally to complicated boolean expressions of an "if" statement (or the parts of a for statement).</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="124424""></a>
+  <div class="note">
+   <strong class="user">shaman_master at list dot ru</strong>
+   <a href="#124424" class="date">22-Nov-2019 04:38</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+You can use the class/interface as a type even if the class/interface is not&nbsp; defined yet or the class/interface implements current class/interface.<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">interface </span><span class="default">RouteInterface<br />
+</span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">getGroup</span><span class="keyword">(): ?</span><span class="default">RouteGroupInterface</span><span class="keyword">;<br />
+}<br />
+interface </span><span class="default">RouteGroupInterface </span><span class="keyword">extends </span><span class="default">RouteInterface<br />
+</span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">set</span><span class="keyword">(</span><span class="default">RouteInterface $item</span><span class="keyword">);<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span>'self' type - alias to current class/interface, it's not changed in implementations. This code looks right but throw error:<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">class </span><span class="default">Route<br />
+</span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; protected </span><span class="default">$name</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; </span><span class="comment">// method must return Route object<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">public function </span><span class="default">setName</span><span class="keyword">(</span><span class="default">string $name</span><span class="keyword">): </span><span class="default">self<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">{<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">name </span><span class="keyword">= </span><span class="default">$name</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">$this</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+class </span><span class="default">RouteGroup </span><span class="keyword">extends </span><span class="default">Route<br />
+</span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// method STILL must return only Route object<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">public function </span><span class="default">setName</span><span class="keyword">(</span><span class="default">string $name</span><span class="keyword">): </span><span class="default">self<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">{<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$name </span><span class="keyword">.= </span><span class="string">' group'</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">parent</span><span class="keyword">::</span><span class="default">setName</span><span class="keyword">(</span><span class="default">$name</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="123338""></a>
+  <div class="note">
+   <strong class="user">dmitry dot balabka at gmail dot com</strong>
+   <a href="#123338" class="date">13-Nov-2018 09:47</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+There is a possibility to use parent keyword as type hint which is not mentioned in the documentation.<br />
+<br />
+Following code snippet will be executed w/o errors on PHP version 7. In this example, parent keyword is referencing on ParentClass instead of ClassTrait.<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">namespace </span><span class="default">TestTypeHints</span><span class="keyword">;<br />
+<br />
+class </span><span class="default">ParentClass<br />
+</span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">someMethod</span><span class="keyword">()<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">'Some method called' </span><span class="keyword">. </span><span class="default">\PHP_EOL</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+trait </span><span class="default">ClassTrait<br />
+</span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; private </span><span class="default">$original</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">__construct</span><span class="keyword">(</span><span class="default">parent $original</span><span class="keyword">)<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">original </span><span class="keyword">= </span><span class="default">$original</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; protected function </span><span class="default">getOriginal</span><span class="keyword">(): </span><span class="default">parent<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">{<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">original</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+class </span><span class="default">Implementation </span><span class="keyword">extends </span><span class="default">ParentClass<br />
+</span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; use </span><span class="default">ClassTrait</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">callSomeMethod</span><span class="keyword">()<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">getOriginal</span><span class="keyword">()-&gt;</span><span class="default">someMethod</span><span class="keyword">();<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+</span><span class="default">$obj </span><span class="keyword">= new </span><span class="default">Implementation</span><span class="keyword">(new </span><span class="default">ParentClass</span><span class="keyword">());<br />
+</span><span class="default">$obj</span><span class="keyword">-&gt;</span><span class="default">callSomeMethod</span><span class="keyword">();<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Outputs:<br />
+Some method called</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="122371""></a>
+  <div class="note">
+   <strong class="user">boan dot web at outlook dot com</strong>
+   <a href="#122371" class="date">08-Feb-2018 11:27</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Quote:<br />
+<br />
+"The declaration can be made to accept NULL values if the default value of the parameter is set to NULL."<br />
+<br />
+But you can do this (PHP 7.1+):<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">foo</span><span class="keyword">(?</span><span class="default">string $bar</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">//...<br />
+</span><span class="keyword">}<br />
+<br />
+</span><span class="default">foo</span><span class="keyword">(); </span><span class="comment">// Fatal error<br />
+</span><span class="default">foo</span><span class="keyword">(</span><span class="default">null</span><span class="keyword">); </span><span class="comment">// Okay<br />
+</span><span class="default">foo</span><span class="keyword">(</span><span class="string">'Hello world'</span><span class="keyword">); </span><span class="comment">// Okay<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="122189""></a>
+  <div class="note">
+   <strong class="user">igorsantos07 at gmail dot com</strong>
+   <a href="#122189" class="date">27-Dec-2017 05:06</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+PHP 7+ does type coercion if strict typing is not enabled, but there's a small gotcha: it won't convert null values into anything.<br />
+<br />
+You must explicitly set your default argument value to be null (as explained in this page) so your function can also receive nulls.<br />
+<br />
+For instance, if you type an argument as "string", but pass a null variable into it, you might expect to receive an empty string, but actually, PHP will yell at you a TypeError.<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">null_string_wrong</span><span class="keyword">(</span><span class="default">string $str</span><span class="keyword">) {<br />
+&nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$str</span><span class="keyword">);<br />
+}<br />
+function </span><span class="default">null_string_correct</span><span class="keyword">(</span><span class="default">string $str </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">) {<br />
+&nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$str</span><span class="keyword">);<br />
+}<br />
+</span><span class="default">$null </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">;<br />
+</span><span class="default">null_string_wrong</span><span class="keyword">(</span><span class="string">'a'</span><span class="keyword">);&nbsp; &nbsp;&nbsp; </span><span class="comment">//string(1) "a"<br />
+</span><span class="default">null_string_correct</span><span class="keyword">(</span><span class="string">'a'</span><span class="keyword">);&nbsp;&nbsp; </span><span class="comment">//string(1) "a"<br />
+</span><span class="default">null_string_correct</span><span class="keyword">();&nbsp; &nbsp; &nbsp; </span><span class="comment">//NULL<br />
+</span><span class="default">null_string_correct</span><span class="keyword">(</span><span class="default">$null</span><span class="keyword">); </span><span class="comment">//NULL<br />
+</span><span class="default">null_string_wrong</span><span class="keyword">(</span><span class="default">$null</span><span class="keyword">);&nbsp;&nbsp; </span><span class="comment">//TypeError thrown<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="121667""></a>
+  <div class="note">
+   <strong class="user">info at keraweb dot nl</strong>
+   <a href="#121667" class="date">21-Sep-2017 09:25</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+You can use a class constant as a default parameter.<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="keyword">class </span><span class="default">A </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; const </span><span class="default">FOO </span><span class="keyword">= </span><span class="string">'default'</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; function </span><span class="default">bar</span><span class="keyword">( </span><span class="default">$val </span><span class="keyword">= </span><span class="default">self</span><span class="keyword">::</span><span class="default">FOO </span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="default">$val</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+</span><span class="default">$a </span><span class="keyword">= new </span><span class="default">A</span><span class="keyword">();<br />
+</span><span class="default">$a</span><span class="keyword">-&gt;</span><span class="default">bar</span><span class="keyword">(); </span><span class="comment">// Will echo "default"</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="121579""></a>
+  <div class="note">
+   <strong class="user">Hayley Watson</strong>
+   <a href="#121579" class="date">30-Aug-2017 11:41</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+There are fewer restrictions on using ... to supply multiple arguments to a function call than there are on using it to declare a variadic parameter in the function declaration. In particular, it can be used more than once to unpack arguments, provided that all such uses come after any positional arguments.<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+$array1 </span><span class="keyword">= [[</span><span class="default">1</span><span class="keyword">],[</span><span class="default">2</span><span class="keyword">],[</span><span class="default">3</span><span class="keyword">]];<br />
+</span><span class="default">$array2 </span><span class="keyword">= [</span><span class="default">4</span><span class="keyword">];<br />
+</span><span class="default">$array3 </span><span class="keyword">= [[</span><span class="default">5</span><span class="keyword">],[</span><span class="default">6</span><span class="keyword">],[</span><span class="default">7</span><span class="keyword">]];<br />
+<br />
+</span><span class="default">$result </span><span class="keyword">= </span><span class="default">array_merge</span><span class="keyword">(...</span><span class="default">$array1</span><span class="keyword">); </span><span class="comment">// Legal, of course: $result == [1,2,3];<br />
+</span><span class="default">$result </span><span class="keyword">= </span><span class="default">array_merge</span><span class="keyword">(</span><span class="default">$array2</span><span class="keyword">, ...</span><span class="default">$array1</span><span class="keyword">); </span><span class="comment">// $result == [4,1,2,3]<br />
+</span><span class="default">$result </span><span class="keyword">= </span><span class="default">array_merge</span><span class="keyword">(...</span><span class="default">$array1</span><span class="keyword">, </span><span class="default">$array2</span><span class="keyword">); </span><span class="comment">// Fatal error: Cannot use positional argument after argument unpacking.<br />
+</span><span class="default">$result </span><span class="keyword">= </span><span class="default">array_merge</span><span class="keyword">(...</span><span class="default">$array1</span><span class="keyword">, ...</span><span class="default">$array3</span><span class="keyword">); </span><span class="comment">// Legal! $result == [1,2,3,5,6,7]<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+The Right Thing for the error case above would be for $result==[1,2,3,4], but this isn't yet (v7.1.8) supported.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="121526""></a>
+  <div class="note">
+   <strong class="user">Hayley Watson</strong>
+   <a href="#121526" class="date">16-Aug-2017 12:50</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you use ... in a function's parameter list, you can use it only once for obvious reasons. Less obvious is that it has to be on the LAST parameter; as the manual puts it: "You may specify normal positional arguments BEFORE the ... token. (emphasis mine).<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">variadic</span><span class="keyword">(</span><span class="default">$first</span><span class="keyword">, ...</span><span class="default">$most</span><span class="keyword">, </span><span class="default">$last</span><span class="keyword">)<br />
+{</span><span class="comment">/*etc.*/</span><span class="keyword">}<br />
+<br />
+</span><span class="default">variadic</span><span class="keyword">(</span><span class="default">1</span><span class="keyword">, </span><span class="default">2</span><span class="keyword">, </span><span class="default">3</span><span class="keyword">, </span><span class="default">4</span><span class="keyword">, </span><span class="default">5</span><span class="keyword">);<br />
+</span><span class="default">?&gt;<br />
+</span>results in a fatal error, even though it looks like the Thing To Do&trade; would be to set $first to 1, $most to [2, 3, 4], and $last to 5.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="119724""></a>
+  <div class="note">
+   <strong class="user">gabriel at figdice dot org</strong>
+   <a href="#119724" class="date">11-Aug-2016 07:05</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+A function's argument that is an object, will have its properties modified by the function although you don't need to pass it by reference.<br />
+<br />
+<span class="default">&lt;?php<br />
+$x </span><span class="keyword">= new </span><span class="default">stdClass</span><span class="keyword">();<br />
+</span><span class="default">$x</span><span class="keyword">-&gt;</span><span class="default">prop </span><span class="keyword">= </span><span class="default">1</span><span class="keyword">;<br />
+<br />
+function </span><span class="default">f </span><span class="keyword">( </span><span class="default">$o </span><span class="keyword">) </span><span class="comment">// Notice the absence of &amp;<br />
+</span><span class="keyword">{<br />
+&nbsp; </span><span class="default">$o</span><span class="keyword">-&gt;</span><span class="default">prop </span><span class="keyword">++;<br />
+}<br />
+<br />
+</span><span class="default">f</span><span class="keyword">(</span><span class="default">$x</span><span class="keyword">);<br />
+<br />
+echo </span><span class="default">$x</span><span class="keyword">-&gt;</span><span class="default">prop</span><span class="keyword">; </span><span class="comment">// shows: 2<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+This is different for arrays:<br />
+<br />
+<span class="default">&lt;?php<br />
+$y </span><span class="keyword">= [ </span><span class="string">'prop' </span><span class="keyword">=&gt; </span><span class="default">1 </span><span class="keyword">];<br />
+<br />
+function </span><span class="default">g</span><span class="keyword">( </span><span class="default">$a </span><span class="keyword">)<br />
+{<br />
+&nbsp; </span><span class="default">$a</span><span class="keyword">[</span><span class="string">'prop'</span><span class="keyword">] ++;<br />
+&nbsp; echo </span><span class="default">$a</span><span class="keyword">[</span><span class="string">'prop'</span><span class="keyword">];&nbsp; </span><span class="comment">// shows: 2<br />
+</span><span class="keyword">}<br />
+<br />
+</span><span class="default">g</span><span class="keyword">(</span><span class="default">$y</span><span class="keyword">);<br />
+<br />
+echo </span><span class="default">$y</span><span class="keyword">[</span><span class="string">'prop'</span><span class="keyword">];&nbsp; </span><span class="comment">// shows: 1<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="118795""></a>
+  <div class="note">
+   <strong class="user">catman at esteticas dot se</strong>
+   <a href="#118795" class="date">07-Feb-2016 01:06</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I wondered if variable length argument lists and references works together, and what the syntax might be. It is not mentioned explicitly yet in the php manual as far as I can find. But other sources mention the following syntax "&amp;...$variable" that works in php&nbsp; 5.6.16. <br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">foo</span><span class="keyword">(&amp;...</span><span class="default">$args</span><span class="keyword">)<br />
+{<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$i </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; foreach (</span><span class="default">$args </span><span class="keyword">as &amp;</span><span class="default">$arg</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$arg </span><span class="keyword">= ++</span><span class="default">$i</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+</span><span class="default">foo</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">, </span><span class="default">$b</span><span class="keyword">, </span><span class="default">$c</span><span class="keyword">);<br />
+echo </span><span class="string">'a = '</span><span class="keyword">, </span><span class="default">$a</span><span class="keyword">, </span><span class="string">', b = '</span><span class="keyword">, </span><span class="default">$b</span><span class="keyword">, </span><span class="string">', c = '</span><span class="keyword">, </span><span class="default">$c</span><span class="keyword">;<br />
+</span><span class="default">?&gt;<br />
+</span>Gives<br />
+a = 1, b = 2, c = 3</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="116968""></a>
+  <div class="note">
+   <strong class="user">php at richardneill dot org</strong>
+   <a href="#116968" class="date">28-Mar-2015 07:24</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+To experiment on performance of pass-by-reference and pass-by-value, I used this&nbsp; script. Conclusions are below. <br />
+<br />
+#!/usr/bin/php<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">sum</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">,</span><span class="default">$max</span><span class="keyword">){&nbsp;&nbsp; </span><span class="comment">//For Reference, use:&nbsp; "&amp;$array"<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$sum</span><span class="keyword">=</span><span class="default">0</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; for (</span><span class="default">$i</span><span class="keyword">=</span><span class="default">0</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">&lt;</span><span class="default">2</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">++){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">#$array[$i]++;&nbsp; &nbsp; &nbsp; &nbsp; //Uncomment this line to modify the array within the function.<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$sum </span><span class="keyword">+= </span><span class="default">$array</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">];&nbsp; <br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; return (</span><span class="default">$sum</span><span class="keyword">);<br />
+}<br />
+<br />
+</span><span class="default">$max </span><span class="keyword">= </span><span class="default">1E7&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">//10 M data points.<br />
+</span><span class="default">$data </span><span class="keyword">= </span><span class="default">range</span><span class="keyword">(</span><span class="default">0</span><span class="keyword">,</span><span class="default">$max</span><span class="keyword">,</span><span class="default">1</span><span class="keyword">);<br />
+<br />
+</span><span class="default">$start </span><span class="keyword">= </span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);<br />
+for (</span><span class="default">$x </span><span class="keyword">= </span><span class="default">0 </span><span class="keyword">; </span><span class="default">$x </span><span class="keyword">&lt; </span><span class="default">100</span><span class="keyword">; </span><span class="default">$x</span><span class="keyword">++){<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$sum </span><span class="keyword">= </span><span class="default">sum</span><span class="keyword">(</span><span class="default">$data</span><span class="keyword">, </span><span class="default">$max</span><span class="keyword">);<br />
+}<br />
+</span><span class="default">$end </span><span class="keyword">=&nbsp; </span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);<br />
+echo </span><span class="string">"Time: "</span><span class="keyword">.(</span><span class="default">$end </span><span class="keyword">- </span><span class="default">$start</span><span class="keyword">).</span><span class="string">" s\n"</span><span class="keyword">;<br />
+<br />
+</span><span class="comment">/* Run times:<br />
+#&nbsp; &nbsp; PASS BY&nbsp; &nbsp; MODIFIED?&nbsp;&nbsp; Time<br />
+-&nbsp; &nbsp; -------&nbsp; &nbsp; ---------&nbsp;&nbsp; ----<br />
+1&nbsp; &nbsp; value&nbsp; &nbsp; &nbsp; no&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 56 us<br />
+2&nbsp; &nbsp; reference&nbsp; no&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 58 us<br />
+<br />
+3&nbsp; &nbsp; valuue&nbsp; &nbsp;&nbsp; yes&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; 129 s<br />
+4&nbsp; &nbsp; reference&nbsp; yes&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; 66 us<br />
+<br />
+Conclusions:<br />
+<br />
+1. PHP is already smart about zero-copy / copy-on-write. A function call does NOT copy the data unless it needs to; the data is<br />
+&nbsp;&nbsp; only copied on write. That's why&nbsp; #1 and #2 take similar times, whereas #3 takes 2 million times longer than #4.<br />
+&nbsp;&nbsp; [You never need to use &amp;$array to ask the compiler to do a zero-copy optimisation; it can work that out for itself.]<br />
+<br />
+2. You do use &amp;$array&nbsp; to tell the compiler "it is OK for the function to over-write my argument in place, I don't need the original<br />
+&nbsp;&nbsp; any more." This can make a huge difference to performance when we have large amounts of memory to copy.<br />
+&nbsp;&nbsp; (This is the only way it is done in C, arrays are always passed as pointers)<br />
+<br />
+3. The other use of &amp; is as a way to specify where data should be *returned*. (e.g. as used by exec() ).<br />
+&nbsp;&nbsp; (This is a C-like way of passing pointers for outputs, whereas PHP functions normally return complex types, or multiple answers<br />
+&nbsp;&nbsp; in an array)<br />
+<br />
+4. It's&nbsp; unhelpful that only the function definition has &amp;. The caller should have it, at least as syntactic sugar. Otherwise<br />
+&nbsp;&nbsp; it leads to unreadable code: because the person reading the function call doesn't expect it to pass by reference. At the moment,<br />
+&nbsp;&nbsp; it's necessary to write a by-reference function call with a comment, thus:<br />
+&nbsp;&nbsp;&nbsp; $sum = sum($data,$max);&nbsp; //warning, $data passed by reference, and may be modified.<br />
+<br />
+5. Sometimes, pass by reference could be at the choice of the caller, NOT the function definitition. PHP doesn't allow it, but it<br />
+&nbsp;&nbsp; would be meaningful for the caller to decide to pass data in as a reference. i.e. "I'm done with the variable, it's OK to stomp<br />
+&nbsp;&nbsp; on it in memory".<br />
+*/<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="114065""></a>
+  <div class="note">
+   <strong class="user">Horst Schirmeier</strong>
+   <a href="#114065" class="date">08-Jan-2014 11:58</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Editor's note: what is expected here by the parser is a non-evaluated expression. An operand and two constants requires evaluation, which is not done by the parser. However, this feature is included as of PHP 5.6.0. See this page for more information: <a href="http://php.net/migration56.new-features#migration56.new-features.const-scalar-exprs" rel="nofollow" target="_blank">http://php.net/migration56.new-features#migration56.new-features.const-scalar-exprs</a>
+<br />
+--------
+<br />
+
+<br />
+"The default value must be a constant expression" is misleading (or even wrong).&nbsp; PHP 5.4.4 fails to parse this function definition:
+<br />
+
+<br />
+function htmlspecialchars_latin1($s, $flags = ENT_COMPAT | ENT_HTML401) {}
+<br />
+
+<br />
+This yields a " PHP Parse error:&nbsp; syntax error, unexpected '|', expecting ')' " although ENT_COMPAT|ENT_HTML401 is certainly what a compiler-affine person would call a "constant expression".
+<br />
+
+<br />
+The obvious workaround is to use a single special value ($flags = NULL) as the default, and to set it to the desired value in the function's body (if ($flags === NULL) { $flags = ENT_COMPAT | ENT_HTML401; }).</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="71198""></a>
+  <div class="note">
+   <strong class="user">John</strong>
+   <a href="#71198" class="date">15-Nov-2006 03:20</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+This might be documented somewhere OR obvious to most, but when passing an argument by reference (as of PHP 5.04) you can assign a value to an argument variable in the function call. For example:<br />
+<br />
+function my_function($arg1, &amp;$arg2) {<br />
+&nbsp; if ($arg1 == true) {<br />
+&nbsp;&nbsp;&nbsp; $arg2 = true;<br />
+&nbsp; }<br />
+}<br />
+my_function(true, $arg2 = false);<br />
+echo $arg2;<br />
+<br />
+outputs 1 (true)<br />
+<br />
+my_function(false, $arg2 = false);<br />
+echo $arg2;<br />
+<br />
+outputs 0 (false)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="62803""></a>
+  <div class="note">
+   <strong class="user">jcaplan at bogus dot amazon dot com</strong>
+   <a href="#62803" class="date">09-Mar-2006 03:11</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+In function calls, PHP clearly distinguishes between missing arguments and present but empty arguments.&nbsp; Thus:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">f</span><span class="keyword">( </span><span class="default">$x </span><span class="keyword">= </span><span class="default">4 </span><span class="keyword">) { echo </span><span class="default">$x </span><span class="keyword">. </span><span class="string">"\\n"</span><span class="keyword">; }<br />
+</span><span class="default">f</span><span class="keyword">(); </span><span class="comment">// prints 4<br />
+</span><span class="default">f</span><span class="keyword">( </span><span class="default">null </span><span class="keyword">); </span><span class="comment">// prints blank line<br />
+</span><span class="default">f</span><span class="keyword">( </span><span class="default">$y </span><span class="keyword">); </span><span class="comment">// $y undefined, prints blank line<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+The utility of the optional argument feature is thus somewhat diminished.&nbsp; Suppose you want to call the function f many times from function g, allowing the caller of g to specify if f should be called with a specific value or with its default value:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">f</span><span class="keyword">( </span><span class="default">$x </span><span class="keyword">= </span><span class="default">4 </span><span class="keyword">) {echo </span><span class="default">$x </span><span class="keyword">. </span><span class="string">"\\n"</span><span class="keyword">; }<br />
+<br />
+</span><span class="comment">// option 1: cut and paste the default value from f's interface into g's<br />
+</span><span class="keyword">function </span><span class="default">g</span><span class="keyword">( </span><span class="default">$x </span><span class="keyword">= </span><span class="default">4 </span><span class="keyword">) { </span><span class="default">f</span><span class="keyword">( </span><span class="default">$x </span><span class="keyword">); </span><span class="default">f</span><span class="keyword">( </span><span class="default">$x </span><span class="keyword">); }<br />
+<br />
+</span><span class="comment">// option 2: branch based on input to g<br />
+</span><span class="keyword">function </span><span class="default">g</span><span class="keyword">( </span><span class="default">$x </span><span class="keyword">= </span><span class="default">null </span><span class="keyword">) { if ( !isset( </span><span class="default">$x </span><span class="keyword">) ) { </span><span class="default">f</span><span class="keyword">(); </span><span class="default">f</span><span class="keyword">() } else { </span><span class="default">f</span><span class="keyword">( </span><span class="default">$x </span><span class="keyword">); </span><span class="default">f</span><span class="keyword">( </span><span class="default">$x </span><span class="keyword">); } }<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Both options suck.<br />
+<br />
+The best approach, it seems to me, is to always use a sentinel like null as the default value of an optional argument.&nbsp; This way, callers like g and g's clients have many options, and furthermore, callers always know how to omit arguments so they can omit one in the middle of the parameter list.<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">f</span><span class="keyword">( </span><span class="default">$x </span><span class="keyword">= </span><span class="default">null </span><span class="keyword">) { if ( !isset( </span><span class="default">$x </span><span class="keyword">) ) </span><span class="default">$x </span><span class="keyword">= </span><span class="default">4</span><span class="keyword">; echo </span><span class="default">$x </span><span class="keyword">. </span><span class="string">"\\n"</span><span class="keyword">; }<br />
+<br />
+function </span><span class="default">g</span><span class="keyword">( </span><span class="default">$x </span><span class="keyword">= </span><span class="default">null </span><span class="keyword">) { </span><span class="default">f</span><span class="keyword">( </span><span class="default">$x </span><span class="keyword">); </span><span class="default">f</span><span class="keyword">( </span><span class="default">$x </span><span class="keyword">); }<br />
+<br />
+</span><span class="default">f</span><span class="keyword">(); </span><span class="comment">// prints 4<br />
+</span><span class="default">f</span><span class="keyword">( </span><span class="default">null </span><span class="keyword">); </span><span class="comment">// prints 4<br />
+</span><span class="default">f</span><span class="keyword">( </span><span class="default">$y </span><span class="keyword">); </span><span class="comment">// $y undefined, prints 4<br />
+</span><span class="default">g</span><span class="keyword">(); </span><span class="comment">// prints 4 twice<br />
+</span><span class="default">g</span><span class="keyword">( </span><span class="default">null </span><span class="keyword">); </span><span class="comment">// prints 4 twice<br />
+</span><span class="default">g</span><span class="keyword">( </span><span class="default">5 </span><span class="keyword">); </span><span class="comment">// prints 5 twice<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="58331""></a>
+  <div class="note">
+   <strong class="user">Sergio Santana: ssantana at tlaloc dot imta dot mx</strong>
+   <a href="#58331" class="date">31-Oct-2005 02:59</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+PASSING A "VARIABLE-LENGTH ARGUMENT LIST OF REFERENCES" TO A FUNCTION<br />
+As of PHP 5, Call-time pass-by-reference has been deprecated, this represents no problem in most cases, since instead of calling a function like this:<br />
+&nbsp;&nbsp; myfunction($arg1, &amp;$arg2, &amp;$arg3);<br />
+<br />
+you can call it<br />
+&nbsp;&nbsp; myfunction($arg1, $arg2, $arg3);<br />
+<br />
+provided you have defined your function as <br />
+&nbsp;&nbsp; function myfuncion($a1, &amp;$a2, &amp;$a3) { // so &amp;$a2 and &amp;$a3 are <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // declared to be refs.<br />
+&nbsp;&nbsp;&nbsp; ... &lt;function-code&gt;<br />
+&nbsp;&nbsp; }<br />
+<br />
+However, what happens if you wanted to pass an undefined number of references, i.e., something like:<br />
+&nbsp;&nbsp; myfunction(&amp;$arg1, &amp;$arg2, ..., &amp;$arg-n);?<br />
+This doesn't work in PHP 5 anymore.<br />
+<br />
+In the following code I tried to amend this by using the <br />
+array() language-construct as the actual argument in the <br />
+call to the function.<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+&nbsp; </span><span class="keyword">function </span><span class="default">aa </span><span class="keyword">(</span><span class="default">$A</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// This function increments each <br />
+&nbsp;&nbsp;&nbsp; // "pseudo-argument" by 2s<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">foreach (</span><span class="default">$A </span><span class="keyword">as &amp;</span><span class="default">$x</span><span class="keyword">) { <br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="default">$x </span><span class="keyword">+= </span><span class="default">2</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp; }<br />
+&nbsp;<br />
+&nbsp; </span><span class="default">$x </span><span class="keyword">= </span><span class="default">1</span><span class="keyword">; </span><span class="default">$y </span><span class="keyword">= </span><span class="default">2</span><span class="keyword">; </span><span class="default">$z </span><span class="keyword">= </span><span class="default">3</span><span class="keyword">;<br />
+&nbsp; <br />
+&nbsp; </span><span class="default">aa</span><span class="keyword">(array(&amp;</span><span class="default">$x</span><span class="keyword">, &amp;</span><span class="default">$y</span><span class="keyword">, &amp;</span><span class="default">$z</span><span class="keyword">));<br />
+&nbsp; echo </span><span class="string">"--</span><span class="default">$x</span><span class="string">--</span><span class="default">$y</span><span class="string">--</span><span class="default">$z</span><span class="string">--\n"</span><span class="keyword">;<br />
+&nbsp; </span><span class="comment">// This will output:<br />
+&nbsp; // --3--4--5--<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+I hope this is useful.<br />
+<br />
+Sergio.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

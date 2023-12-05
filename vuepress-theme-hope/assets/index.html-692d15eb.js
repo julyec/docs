@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-eebd6834","path":"/zh/tag/emoji/","title":"标签: Emoji","lang":"en-US","frontmatter":{"title":"标签: Emoji","dir":{"index":false},"feed":false,"sitemap":false,"blog":{"type":"category","name":"Emoji","key":"tag"},"layout":"BlogCategory"},"headers":[],"git":{},"readingTime":{"minutes":0,"words":0},"filePathRelative":null,"excerpt":""}');export{e as data};

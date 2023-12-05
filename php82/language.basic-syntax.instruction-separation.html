@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>指令分隔符</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="language.basic-syntax.phpmode.html">? 从 HTML 中分离</a></li>
+      <li style="float: right;"><a href="language.basic-syntax.comments.html">注释 ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="language.basic-syntax.html">基本语法</a></li>
+    <li>指令分隔符</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="language.basic-syntax.instruction-separation" class="sect1">
+  <h2 class="title">指令分隔符</h2>
+  <p class="para">
+   同 C 或 Perl 一样，PHP 需要在每个语句后用分号结束指令。一段 PHP
+   代码中的结束标记隐含表示了一个分号；在一个 PHP
+   代码段中的最后一行可以不用分号结束。如果后面还有新行，则代码段的结束标记包含了行结束。
+   </p>
+
+   <p class="para">
+    <div class="example" id="example-64">
+     <p><strong>Example #1 包含末尾换行符的结束标记的例子</strong></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php </span><span style="color: #007700">echo </span><span style="color: #DD0000">"Some text"</span><span style="color: #007700">; </span><span style="color: #0000BB">?&gt;<br /></span>No newline<br /><span style="color: #0000BB">&lt;?= </span><span style="color: #DD0000">"But newline now" </span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+     <div class="example-contents"><p>以上示例会输出：</p></div>
+     <div class="example-contents screen">
+<div class="cdata"><pre>
+Some textNo newline
+But newline now
+</pre></div>
+     </div>
+    </div>
+   </p>
+
+   <p class="para">
+    进入和退出 PHP 解析的例子：
+
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />    </span><span style="color: #007700">echo </span><span style="color: #DD0000">'This is a test'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;<br /></span><br /><span style="color: #0000BB">&lt;?php </span><span style="color: #007700">echo </span><span style="color: #DD0000">'This is a test' </span><span style="color: #0000BB">?&gt;<br /></span><br /><span style="color: #0000BB">&lt;?php </span><span style="color: #007700">echo </span><span style="color: #DD0000">'We omitted the last closing tag'</span><span style="color: #007700">;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+   <blockquote class="note"><p><strong class="note">Note</strong>: 
+    <p class="para">
+     文件末尾的 PHP 代码段结束标记可以不要，有些情况下当使用
+     <span class="function"><a href="function.include.html" class="function">include</a></span> 或者 <span class="function"><a href="function.require.html" class="function">require</a></span>
+     时省略掉会更好些，这样不期望的空白符就不会出现在文件末尾，之后仍然可以输出响应标头。在使用输出缓冲时也很便利，就不会看到由包含文件生成的不期望的空白符。
+    </p>
+   </p></blockquote>
+  </p>
+ </div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="127176""></a>
+  <div class="note">
+   <strong class="user">M1001</strong>
+   <a href="#127176" class="date">12-Jun-2022 02:18</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+You are also able to write more than one statement in one line, just separating with a semicolon, example:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">echo </span><span class="string">"a"</span><span class="keyword">; echo </span><span class="string">"b"</span><span class="keyword">; echo </span><span class="string">"c"</span><span class="keyword">;<br />
+</span><span class="comment">#The output will be "abc" with no errors<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="125358""></a>
+  <div class="note">
+   <strong class="user">anisgazig at gmail dot com</strong>
+   <a href="#125358" class="date">12-Sep-2020 04:57</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+At the end of each statement,we will use a semicolon to seperate each statement.Php closing tag autometically implies a semiclon.So last line of a statment do not require a statement.<br />
+<br />
+<span class="default">&lt;?php </span><span class="keyword">echo </span><span class="string">"first statement"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp;&nbsp; echo </span><span class="string">"second statement"<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Closing tag is optional and some cases omitting the closing tag is very helpful.<br />
+1.using include or require function<br />
+2.unwanted whitespace will not occur at the end of file<br />
+3.add header any time<br />
+<br />
+<span class="default">&lt;?php </span><span class="keyword">echo </span><span class="string">"omitting closing tag"</span><span class="keyword">;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="68959""></a>
+  <div class="note">
+   <strong class="user">Krishna Srikanth</strong>
+   <a href="#68959" class="date">17-Aug-2006 04:44</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Do not mis interpret<br />
+<br />
+<span class="default">&lt;?php </span><span class="keyword">echo </span><span class="string">'Ending tag excluded'</span><span class="keyword">; <br />
+<br />
+</span><span class="default">with<br />
+<br />
+</span><span class="keyword">&lt;?</span><span class="default">php </span><span class="keyword">echo </span><span class="string">'Ending tag excluded'</span><span class="keyword">;<br />
+&lt;</span><span class="default">p</span><span class="keyword">&gt;</span><span class="default">But html is still visible</span><span class="keyword">&lt;/</span><span class="default">p</span><span class="keyword">&gt;<br />
+<br />
+</span><span class="default">The second one would give error</span><span class="keyword">. </span><span class="default">Exclude ?&gt;</span> if you no more html to write after the code.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

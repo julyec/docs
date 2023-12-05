@@ -1,0 +1,369 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>打开一个持久的 PostgreSQL 连接</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.pg-parameter-status.html">? pg_parameter_status</a></li>
+      <li style="float: right;"><a href="function.pg-ping.html">pg_ping ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.pgsql.html">PostgreSQL 函数</a></li>
+    <li>打开一个持久的 PostgreSQL 连接</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.pg-pconnect" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">pg_pconnect</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">pg_pconnect</span> &mdash; <span class="dc-title">打开一个持久的 PostgreSQL 连接</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.pg-pconnect-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>pg_pconnect</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$connection_string</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$flags</code><span class="initializer"> = 0</span></span>): <span class="type"><span class="type"><a href="class.pgsql-connection.html" class="type PgSql\Connection">PgSql\Connection</a></span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   <span class="function"><strong>pg_pconnect()</strong></span> 打开一个到 PostgreSQL 数据库的持久连接。返回其它 PostgreSQL 函数所需要的 <span class="classname"><a href="class.pgsql-connection.html" class="classname">PgSql\Connection</a></span> 实例。
+  </p>
+  <p class="para">
+   如果使用与已有连接相同的 <code class="parameter">connection_string</code> 对 <span class="function"><strong>pg_pconnect()</strong></span>
+   进行第二次调用，则将返回已有连接，除非将 <strong><code>PGSQL_CONNECT_FORCE_NEW</code></strong> 传递给 <code class="parameter">flags</code>。
+  </p>
+  <p class="para">
+   要打开持久连接功能，<var class="filename">php.ini</var> 中的 <a href="pgsql.configuration.html#ini.pgsql.allow-persistent" class="link">pgsql.allow_persistent</a> 参数必须为
+   &quot;On&quot;（也是默认值）。最大持久连接数目由 <var class="filename">php.ini</var> 中的 <a href="pgsql.configuration.html#ini.pgsql.max-persistent" class="link">pgsql.max_persistent</a>
+   参数定义（默认为 -1 表示没有限制）。所有连接的数目可由 <var class="filename">php.ini</var> 中的 <a href="pgsql.configuration.html#ini.pgsql.max-links" class="link">pgsql.max_links</a> 参数设置。
+  </p>
+  <p class="para">
+   <span class="function"><a href="function.pg-close.html" class="function">pg_close()</a></span> 不能关闭由 <span class="function"><strong>pg_pconnect()</strong></span> 打开的持久连接。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.pg-pconnect-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">connection_string</code></dt>
+
+     <dd>
+
+      <p class="para">
+       <code class="parameter">connection_string</code> 可以为空以使用所有默认参数，也可以包含一个或多个由空格分隔的参数设置。每个参数设置的形式为
+       <code class="literal">keyword = value</code>。等号旁边的空格是可选的。要写入空值或包含空格的值，请用单引号将其括起来，例如，<code class="literal">keyword = 
+       &#039;a value&#039;</code>。值中的单引号和反斜线必须用反斜线转义，即 \&#039; 和 \\。
+      </p>
+      <p class="para">
+       当前可识别的参数关键字是：<code class="parameter">host</code>、<code class="parameter">hostaddr</code>、<code class="parameter">port</code>、<code class="parameter">dbname</code>、<code class="parameter">user</code>、<code class="parameter">password</code>、<code class="parameter">connect_timeout</code>、<code class="parameter">options</code>、<code class="parameter">tty</code>（已忽略）、<code class="parameter">sslmode</code>、<code class="parameter">requiressl</code>（已弃用以支持
+       <code class="parameter">sslmode</code>）和 <code class="parameter">service</code>。存在哪些参数取决于 PostgreSQL 版本。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">flags</code></dt>
+
+     <dd>
+
+      <p class="para">
+       如果传递了 <strong><code>PGSQL_CONNECT_FORCE_NEW</code></strong>，则会创建新连接，即使 <code class="parameter">connection_string</code> 与现有连接相同。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.pg-pconnect-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   成功时返回 <span class="classname"><a href="class.pgsql-connection.html" class="classname">PgSql\Connection</a></span> 实例， 或者在失败时返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.pg-pconnect-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>8.1.0</td>
+      <td>
+       现在返回 <span class="classname"><a href="class.pgsql-connection.html" class="classname">PgSql\Connection</a></span> 实例；之前返回 <a href="language.types.resource.html" class="link">资源(resource)</a>。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+ 
+ <div class="refsect1 examples" id="refsect1-function.pg-pconnect-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="example-3936">
+    <p><strong>Example #1 使用 <span class="function"><strong>pg_pconnect()</strong></span></strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$dbconn </span><span style="color: #007700">= </span><span style="color: #0000BB">pg_pconnect</span><span style="color: #007700">(</span><span style="color: #DD0000">"dbname=mary"</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">//connect to a database named "mary"<br /><br /></span><span style="color: #0000BB">$dbconn2 </span><span style="color: #007700">= </span><span style="color: #0000BB">pg_pconnect</span><span style="color: #007700">(</span><span style="color: #DD0000">"host=localhost port=5432 dbname=mary"</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">// connect to a database named "mary" on "localhost" at port "5432"<br /><br /></span><span style="color: #0000BB">$dbconn3 </span><span style="color: #007700">= </span><span style="color: #0000BB">pg_pconnect</span><span style="color: #007700">(</span><span style="color: #DD0000">"host=sheep port=5432 dbname=mary user=lamb password=foo"</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">//connect to a database named "mary" on the host "sheep" with a username and password<br /><br /></span><span style="color: #0000BB">$conn_string </span><span style="color: #007700">= </span><span style="color: #DD0000">"host=sheep port=5432 dbname=test user=lamb password=bar"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$dbconn4 </span><span style="color: #007700">= </span><span style="color: #0000BB">pg_pconnect</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn_string</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">//connect to a database named "test" on the host "sheep" with a username and password<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 seealso" id="refsect1-function.pg-pconnect-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.pg-connect.html" class="function" rel="rdfs-seeAlso">pg_connect()</a> - 打开 PostgreSQL 连接</span></li>
+    <li class="member">
+     <a href="features.persistent-connections.html" class="link">持久数据库连接</a>
+    </li>
+   </ul>
+  </p>
+ </div>
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="87550""></a>
+  <div class="note">
+   <strong class="user">robertb</strong>
+   <a href="#87550" class="date">10-Dec-2008 12:54</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+You should not use pg_pconnect - it's broken. It will work but it doesn't really pool, and it's behaviour is unpredictable. It will only make you rise the max_connections parameter in postgresql.conf file until you run out of resources (which will slow your database down).<br />
+<br />
+If you have many concurrent connections to your database, you should use the PostgreSQL connection pooler PgBouncer (developed by the Skype-team). When using pgbouncer, make sure you use pg_connect and NOT pg_pconnect. Also, make sure you close your connections with pg_close.<br />
+<br />
+* PGBouncer homepage:<br />
+<a href="http://developer.skype.com/SkypeGarage/DbProjects/PgBouncer" rel="nofollow" target="_blank">http://developer.skype.com/SkypeGarage/DbProjects/PgBouncer</a><br />
+<br />
+* PostgreSQL pooling article by Last.fm:<br />
+<a href="http://www.last.fm/user/Russ/journal/2008/02/21" rel="nofollow" target="_blank">http://www.last.fm/user/Russ/journal/2008/02/21</a><br />
+/zd_postgres_connection_pools:_pgpool_vs._pgbouncer</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="78796""></a>
+  <div class="note">
+   <strong class="user">ts at dev dot websafe dot pl</strong>
+   <a href="#78796" class="date">28-Oct-2007 02:22</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+<span class="default">&lt;?php<br />
+</span><span class="comment">//<br />
+// Using pg_pconnect in a class.<br />
+//<br />
+// Why this? Because the manual says:<br />
+//<br />
+//&nbsp;&nbsp; If a second call is made to pg_pconnect() with the same<br />
+//&nbsp;&nbsp; connection_string as an existing connection, the existing <br />
+//&nbsp;&nbsp; connection will be returned unless you pass <br />
+//&nbsp;&nbsp; PGSQL_CONNECT_FORCE_NEW as connect_type.<br />
+//<br />
+// This is not always true.<br />
+//<br />
+/**<br />
+&nbsp;* MyClassA creates a postgresql connection using pg_pconnect <br />
+&nbsp;* and stores the resulting resource id to $this-&gt;conn <br />
+&nbsp;*/<br />
+</span><span class="keyword">class </span><span class="default">MyClassA<br />
+</span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; function </span><span class="default">__construct</span><span class="keyword">(</span><span class="default">$connection_string</span><span class="keyword">)<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">conn </span><span class="keyword">= <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">pg_pconnect</span><span class="keyword">(</span><span class="default">$connection_string</span><span class="keyword">) <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; or die(</span><span class="string">'Wrong CONN_STRING'</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+</span><span class="comment">//<br />
+// Showing current php.ini settings to be sure<br />
+// that persistent connections s&nbsp; are allowed. <br />
+// -1 means 'unlimited'<br />
+//<br />
+</span><span class="keyword">echo </span><span class="string">'&lt;br&gt;pgsql.allow_persistent: ' </span><span class="keyword">. </span><span class="default">ini_get</span><span class="keyword">(</span><span class="string">'pgsql.allow_persistent'</span><span class="keyword">);<br />
+echo </span><span class="string">'&lt;br&gt;pgsql.max_persistent: ' </span><span class="keyword">. </span><span class="default">ini_get</span><span class="keyword">(</span><span class="string">'pgsql.max_persistent'</span><span class="keyword">);<br />
+echo </span><span class="string">'&lt;br&gt;pgsql.max_links: ' </span><span class="keyword">. </span><span class="default">ini_get</span><span class="keyword">(</span><span class="string">'pgsql.max_links'</span><span class="keyword">);<br />
+echo </span><span class="string">'&lt;br&gt;&lt;br&gt;'</span><span class="keyword">;<br />
+<br />
+</span><span class="comment">// setting one custom connection string for all objects<br />
+// (modify $connection_string to fit your needs)<br />
+</span><span class="default">$connection_string </span><span class="keyword">=<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'host=localhost port=5432' </span><span class="keyword">.<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">' dbname=test user=test password=test'</span><span class="keyword">;<br />
+<br />
+</span><span class="comment">//&nbsp; <br />
+// Creating 10 MyClassA objects using the same $connection_string<br />
+//<br />
+</span><span class="default">$objArr </span><span class="keyword">= Array();<br />
+for (</span><span class="default">$i </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">; </span><span class="default">$i </span><span class="keyword">&lt; </span><span class="default">10</span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">++) <br />
+{<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$objArr</span><span class="keyword">[] = new </span><span class="default">MyClassA</span><span class="keyword">(</span><span class="default">$connection_string</span><span class="keyword">);<br />
+}<br />
+<br />
+</span><span class="comment">//<br />
+// Human readable result:<br />
+//<br />
+</span><span class="keyword">foreach(</span><span class="default">$objArr </span><span class="keyword">as </span><span class="default">$id </span><span class="keyword">=&gt; </span><span class="default">$object</span><span class="keyword">)<br />
+{<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">printf</span><span class="keyword">(<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'%s: Object %s: using db %s&lt;br&gt;'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">get_class</span><span class="keyword">(</span><span class="default">$object</span><span class="keyword">), </span><span class="default">$id</span><span class="keyword">, </span><span class="default">$object</span><span class="keyword">-&gt;</span><span class="default">conn<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">);<br />
+}<br />
+<br />
+</span><span class="comment">/* ------------------------------------------------------------- */<br />
+// The result<br />
+// pgsql.allow_persistent: 1<br />
+// pgsql.max_persistent: -1<br />
+// pgsql.max_links: -1<br />
+// <br />
+// MyClassA: Object 0: using db Resource id #2<br />
+// MyClassA: Object 1: using db Resource id #3<br />
+// MyClassA: Object 2: using db Resource id #4<br />
+// MyClassA: Object 3: using db Resource id #5<br />
+// MyClassA: Object 4: using db Resource id #6<br />
+// MyClassA: Object 5: using db Resource id #7<br />
+// MyClassA: Object 6: using db Resource id #8<br />
+// MyClassA: Object 7: using db Resource id #9<br />
+// MyClassA: Object 8: using db Resource id #10<br />
+// MyClassA: Object 9: using db Resource id #11<br />
+// <br />
+/* ------------------------------------------------------------- */<br />
+//<br />
+// Each MyClassA object will use its _own_ database Resource id<br />
+//<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="78476""></a>
+  <div class="note">
+   <strong class="user">Dennis Fogg</strong>
+   <a href="#78476" class="date">13-Oct-2007 01:27</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+As of Aug 2007, some suggestions from the postgresql forums<br />
+on pg_pconnect(), faster postgres connections, and connection pooling:<br />
+<br />
+Summary: <br />
+<a href="http://archives.postgresql.org/pgsql-general/2007-08/msg01406.php" rel="nofollow" target="_blank">http://archives.postgresql.org/pgsql-general/2007-08/msg01406.php</a><br />
+<br />
+Good details: <a href="http://archives.postgresql.org/pgsql-general/2007-08/msg00660.php" rel="nofollow" target="_blank">http://archives.postgresql.org/pgsql-general/2007-08/msg00660.php</a><br />
+Also: <a href="http://archives.postgresql.org/pgsql-general/2007-08/msg01489.php" rel="nofollow" target="_blank">http://archives.postgresql.org/pgsql-general/2007-08/msg01489.php</a></span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="29013""></a>
+  <div class="note">
+   <strong class="user">Spiros Ioannou</strong>
+   <a href="#29013" class="date">30-Jan-2003 05:40</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Instead of reducing MaxClients in apache you may try to<br />
+reduce pgsql.max_links in php to at least the number of<br />
+postmasters. It should work and leave<br />
+you with more available httpds for static html pages.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="20309""></a>
+  <div class="note">
+   <strong class="user">raggaflo at libertysurf dot fr</strong>
+   <a href="#20309" class="date">29-Mar-2002 08:03</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Be careful when using Apache/PHP dynamic module/PostgreSQL :<br />
+in httpd.conf (Apache conf) default MaxClients is 150, whereas default PG's max_connections is 32 which is much fewer than 150. You have to set max_connections to at least MaxClients (and pg's shared_buffers to 2*max_connections at least) to avoid PG's errors with pg_pconnect like : "Sorry, too many clients already connected"</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="19758""></a>
+  <div class="note">
+   <strong class="user">etsysx dot i dot hate dot spam at teleline dot es</strong>
+   <a href="#19758" class="date">10-Mar-2002 01:56</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+To setup a high availability server with apache as a static module and postgreSQL, change httpd.conf and set MaxClients to less than max postgreSQL simultaneous connections (like 32 or 64).<br />
+This way pg_pconnect will allways return a valid handle under heavy traffic or under a request flow attack without wasting resources and without connection problems.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="18898""></a>
+  <div class="note">
+   <strong class="user">garrett at bgb dot cc</strong>
+   <a href="#18898" class="date">08-Feb-2002 04:39</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If a transaction is in progress when page processing ends, is it aborted before the connection placed bak in the pool? Or is the connection added "as is"?<br />
+<br />
+It would seem that the correct thing to do is to always 'ABORT' before adding to the pool. <br />
+<br />
+As a note, this would be a good time to check and see if the connection is still open before readding it. Thus allowing closed connections to be cleaned up over time, instead of hanging around for ever as they do now.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

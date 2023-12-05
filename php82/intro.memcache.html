@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>简介</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="book.memcache.html">? Memcache</a></li>
+      <li style="float: right;"><a href="memcache.setup.html">安装/配置 ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="book.memcache.html">Memcache</a></li>
+    <li>简介</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="intro.memcache" class="preface">
+  <h1 class="title">简介</h1>
+  <p class="para">
+   Memcache 模块为 memcached 提供了方便的面向过程及面向对象的接口，memcached 是为了降低动态 web 应用程序数据库负载的一种高效的缓存守护程序。
+  </p>
+  <p class="para">
+   Memcache 模块同时提供了 <a href="ref.session.html" class="link">session</a> 处理程序（<code class="literal">memcache</code>）。
+  </p>
+  <p class="para">
+   更多关于 memcached 的信息请参见 <a href="http://www.memcached.org/" class="link external" title="Link : http://www.memcached.org/">&raquo;&nbsp;http://www.memcached.org/</a>。
+  </p>
+ </div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="126256""></a>
+  <div class="note">
+   <strong class="user">vidux dot me at gmail dot com</strong>
+   <a href="#126256" class="date">20-Jul-2021 11:36</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+i have faced a error when install Memcached.<br />
+"Memcached" class not found. im using php 7.4 with apache server on ubuntu 20.04. this is how i fixed it.. hope someone can help it.<br />
+<br />
+first i installed<br />
+<br />
+sudo apt install memcached libmemcached-tools<br />
+<br />
+then check service status<br />
+sudo systemctl status memcached<br />
+<br />
+then install php-memcached<br />
+sudo apt-get install -y php-memcached <br />
+<br />
+and lastly <br />
+sudo apt-get install php7.4-memcached<br />
+<br />
+then restarted Apache:<br />
+sudo service apache2 restart</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

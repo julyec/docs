@@ -1,0 +1,635 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>The RecursiveIteratorIterator class</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="recursivefilteriterator.haschildren.html">? RecursiveFilterIterator::hasChildren</a></li>
+      <li style="float: right;"><a href="recursiveiteratoriterator.beginchildren.html">RecursiveIteratorIterator::beginChildren ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="spl.iterators.html">迭代器</a></li>
+    <li>The RecursiveIteratorIterator class</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="class.recursiveiteratoriterator" class="reference">
+ <h1 class="title">The RecursiveIteratorIterator class</h1>
+ 
+
+ <div class="partintro"><p class="verinfo">(PHP 5, PHP 7, PHP 8)</p>
+
+
+  <div class="section" id="recursiveiteratoriterator.intro">
+   <h2 class="title">简介</h2>
+   <p class="para">
+    Can be used to iterate through recursive iterators.
+   </p>
+  </div>
+
+
+  <div class="section" id="recursiveiteratoriterator.synopsis">
+   <h2 class="title">类摘要</h2>
+
+
+   <div class="classsynopsis">
+    <span class="ooclass">
+     <strong class="classname"></strong>
+    </span>
+
+    <div class="classsynopsisinfo">
+     <span class="ooclass">
+      <span class="modifier">class</span> <strong class="classname">RecursiveIteratorIterator</strong>
+     </span>
+
+     <span class="oointerface"><span class="modifier">implements</span> 
+       <a href="class.outeriterator.html" class="interfacename">OuterIterator</a></span> {</div>
+
+    <div class="classsynopsisinfo classsynopsisinfo_comment">/* 常量 */</div>
+    <div class="fieldsynopsis">
+     <span class="modifier">public</span>
+     <span class="modifier">const</span>
+     <span class="type">int</span>
+      <var class="fieldsynopsis_varname"><a href="class.recursiveiteratoriterator.html#recursiveiteratoriterator.constants.leaves-only"><var class="varname">LEAVES_ONLY</var></a></var>;</div>
+
+    <div class="fieldsynopsis"><span class="modifier">public</span>
+     <span class="modifier">const</span>
+     <span class="type">int</span>
+      <var class="fieldsynopsis_varname"><a href="class.recursiveiteratoriterator.html#recursiveiteratoriterator.constants.self-first"><var class="varname">SELF_FIRST</var></a></var>;</div>
+
+    <div class="fieldsynopsis"><span class="modifier">public</span>
+     <span class="modifier">const</span>
+     <span class="type">int</span>
+      <var class="fieldsynopsis_varname"><a href="class.recursiveiteratoriterator.html#recursiveiteratoriterator.constants.child-first"><var class="varname">CHILD_FIRST</var></a></var>;</div>
+
+    <div class="fieldsynopsis"><span class="modifier">public</span>
+     <span class="modifier">const</span>
+     <span class="type">int</span>
+      <var class="fieldsynopsis_varname"><a href="class.recursiveiteratoriterator.html#recursiveiteratoriterator.constants.catch-get-child"><var class="varname">CATCH_GET_CHILD</var></a></var>;</div>
+
+
+    <div class="classsynopsisinfo classsynopsisinfo_comment">/* 方法 */</div>
+    <div class="constructorsynopsis dc-description">
+   <span class="modifier">public</span> <span class="methodname"><a href="recursiveiteratoriterator.construct.html" class="methodname">__construct</a></span>(<span class="methodparam"><span class="type"><a href="class.traversable.html" class="type Traversable">Traversable</a></span> <code class="parameter">$iterator</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$mode</code><span class="initializer"> = RecursiveIteratorIterator::LEAVES_ONLY</span></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$flags</code><span class="initializer"> = 0</span></span>)</div>
+
+    <div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="recursiveiteratoriterator.beginchildren.html" class="methodname">beginChildren</a></span>(): <span class="type"><span class="type void">void</span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="recursiveiteratoriterator.beginiteration.html" class="methodname">beginIteration</a></span>(): <span class="type"><span class="type void">void</span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="recursiveiteratoriterator.callgetchildren.html" class="methodname">callGetChildren</a></span>(): <span class="type"><span class="type">?</span><span class="type"><a href="class.recursiveiterator.html" class="type RecursiveIterator">RecursiveIterator</a></span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="recursiveiteratoriterator.callhaschildren.html" class="methodname">callHasChildren</a></span>(): <span class="type">bool</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="recursiveiteratoriterator.current.html" class="methodname">current</a></span>(): <span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="recursiveiteratoriterator.endchildren.html" class="methodname">endChildren</a></span>(): <span class="type"><span class="type void">void</span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="recursiveiteratoriterator.enditeration.html" class="methodname">endIteration</a></span>(): <span class="type"><span class="type void">void</span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="recursiveiteratoriterator.getdepth.html" class="methodname">getDepth</a></span>(): <span class="type">int</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="recursiveiteratoriterator.getinneriterator.html" class="methodname">getInnerIterator</a></span>(): <span class="type"><a href="class.recursiveiterator.html" class="type RecursiveIterator">RecursiveIterator</a></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="recursiveiteratoriterator.getmaxdepth.html" class="methodname">getMaxDepth</a></span>(): <span class="type"><span class="type">int</span>|<span class="type"><span class="type false">false</span></span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="recursiveiteratoriterator.getsubiterator.html" class="methodname">getSubIterator</a></span>(<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">int</span><span class="type"></span></span> <code class="parameter">$level</code><span class="initializer"> = <strong><code>null</code></strong></span></span>): <span class="type"><span class="type">?</span><span class="type"><a href="class.recursiveiterator.html" class="type RecursiveIterator">RecursiveIterator</a></span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="recursiveiteratoriterator.key.html" class="methodname">key</a></span>(): <span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="recursiveiteratoriterator.next.html" class="methodname">next</a></span>(): <span class="type"><span class="type void">void</span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="recursiveiteratoriterator.nextelement.html" class="methodname">nextElement</a></span>(): <span class="type"><span class="type void">void</span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="recursiveiteratoriterator.rewind.html" class="methodname">rewind</a></span>(): <span class="type"><span class="type void">void</span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="recursiveiteratoriterator.setmaxdepth.html" class="methodname">setMaxDepth</a></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$maxDepth</code><span class="initializer"> = -1</span></span>): <span class="type"><span class="type void">void</span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="recursiveiteratoriterator.valid.html" class="methodname">valid</a></span>(): <span class="type">bool</span></div>
+
+   }</div>
+
+  </div>
+
+
+  <div class="section" id="recursiveiteratoriterator.constants">
+   <h2 class="title">预定义常量</h2>
+   <dl>
+
+    
+     <dt id="recursiveiteratoriterator.constants.leaves-only"><strong><code>RecursiveIteratorIterator::LEAVES_ONLY</code></strong></dt>
+
+     <dd>
+
+      <p class="para"/>
+     </dd>
+
+    
+
+    
+     <dt id="recursiveiteratoriterator.constants.self-first"><strong><code>RecursiveIteratorIterator::SELF_FIRST</code></strong></dt>
+
+     <dd>
+
+      <p class="para"/>
+     </dd>
+
+    
+
+    
+     <dt id="recursiveiteratoriterator.constants.child-first"><strong><code>RecursiveIteratorIterator::CHILD_FIRST</code></strong></dt>
+
+     <dd>
+
+      <p class="para"/>
+     </dd>
+
+    
+
+    
+     <dt id="recursiveiteratoriterator.constants.catch-get-child"><strong><code>RecursiveIteratorIterator::CATCH_GET_CHILD</code></strong></dt>
+
+     <dd>
+
+      <p class="para"/>
+     </dd>
+
+    
+
+   </dl>
+
+  </div>
+
+
+ </div>
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Table of Contents</h2><ul class="chunklist chunklist_reference"><li><a href="recursiveiteratoriterator.beginchildren.html">RecursiveIteratorIterator::beginChildren</a> &mdash; Begin children</li><li><a href="recursiveiteratoriterator.beginiteration.html">RecursiveIteratorIterator::beginIteration</a> &mdash; Begin Iteration</li><li><a href="recursiveiteratoriterator.callgetchildren.html">RecursiveIteratorIterator::callGetChildren</a> &mdash; Get children</li><li><a href="recursiveiteratoriterator.callhaschildren.html">RecursiveIteratorIterator::callHasChildren</a> &mdash; Has children</li><li><a href="recursiveiteratoriterator.construct.html">RecursiveIteratorIterator::__construct</a> &mdash; Construct a RecursiveIteratorIterator</li><li><a href="recursiveiteratoriterator.current.html">RecursiveIteratorIterator::current</a> &mdash; Access the current element value</li><li><a href="recursiveiteratoriterator.endchildren.html">RecursiveIteratorIterator::endChildren</a> &mdash; End children</li><li><a href="recursiveiteratoriterator.enditeration.html">RecursiveIteratorIterator::endIteration</a> &mdash; End Iteration</li><li><a href="recursiveiteratoriterator.getdepth.html">RecursiveIteratorIterator::getDepth</a> &mdash; Get the current depth of the recursive iteration</li><li><a href="recursiveiteratoriterator.getinneriterator.html">RecursiveIteratorIterator::getInnerIterator</a> &mdash; Get inner iterator</li><li><a href="recursiveiteratoriterator.getmaxdepth.html">RecursiveIteratorIterator::getMaxDepth</a> &mdash; Get max depth</li><li><a href="recursiveiteratoriterator.getsubiterator.html">RecursiveIteratorIterator::getSubIterator</a> &mdash; The current active sub iterator</li><li><a href="recursiveiteratoriterator.key.html">RecursiveIteratorIterator::key</a> &mdash; Access the current key</li><li><a href="recursiveiteratoriterator.next.html">RecursiveIteratorIterator::next</a> &mdash; Move forward to the next element</li><li><a href="recursiveiteratoriterator.nextelement.html">RecursiveIteratorIterator::nextElement</a> &mdash; Next element</li><li><a href="recursiveiteratoriterator.rewind.html">RecursiveIteratorIterator::rewind</a> &mdash; Rewind the iterator to the first element of the top level inner iterator</li><li><a href="recursiveiteratoriterator.setmaxdepth.html">RecursiveIteratorIterator::setMaxDepth</a> &mdash; Set max depth</li><li><a href="recursiveiteratoriterator.valid.html">RecursiveIteratorIterator::valid</a> &mdash; Check whether the current position is valid</li></ul>
+</div>
+<div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="120131""></a>
+  <div class="note">
+   <strong class="user">Anonymous</strong>
+   <a href="#120131" class="date">08-Nov-2016 10:15</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+A very useful use case for RecusiveIteratorIterator in combination with RecursiveArrayIterator is to replace array values on a multidimensional array at any level deep.<br />
+<br />
+Usually, array_walk_recursive would be used to replace values deep within arrays, but unfortunately this only works when there is a standard key value pair - in other words, array_walk_recursive ONLY VISITS LEAF NODES, NOT arrays.<br />
+<br />
+So to get around this, the iterators can be used in this way:<br />
+<br />
+<span class="default">&lt;?php<br />
+$array </span><span class="keyword">= [<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'test' </span><span class="keyword">=&gt; </span><span class="string">'value'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'level_one' </span><span class="keyword">=&gt; [<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'level_two' </span><span class="keyword">=&gt; [<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'level_three' </span><span class="keyword">=&gt; [<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'replace_this_array' </span><span class="keyword">=&gt; [<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'special_key' </span><span class="keyword">=&gt; </span><span class="string">'replacement_value'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'key_one' </span><span class="keyword">=&gt; </span><span class="string">'testing'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'key_two' </span><span class="keyword">=&gt; </span><span class="string">'value'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'four' </span><span class="keyword">=&gt; </span><span class="string">'another value'<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">]<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; ],<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'ordinary_key' </span><span class="keyword">=&gt; </span><span class="string">'value'<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">]<br />
+&nbsp;&nbsp;&nbsp; ]<br />
+];<br />
+<br />
+</span><span class="default">$arrayIterator </span><span class="keyword">= new </span><span class="default">\RecursiveArrayIterator</span><span class="keyword">(</span><span class="default">$array</span><span class="keyword">);<br />
+</span><span class="default">$recursiveIterator </span><span class="keyword">= new </span><span class="default">\RecursiveIteratorIterator</span><span class="keyword">(</span><span class="default">$arrayIterator</span><span class="keyword">, </span><span class="default">\RecursiveIteratorIterator</span><span class="keyword">::</span><span class="default">SELF_FIRST</span><span class="keyword">);<br />
+<br />
+foreach (</span><span class="default">$recursiveIterator </span><span class="keyword">as </span><span class="default">$key </span><span class="keyword">=&gt; </span><span class="default">$value</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; if (</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$value</span><span class="keyword">) &amp;&amp; </span><span class="default">array_key_exists</span><span class="keyword">(</span><span class="string">'special_key'</span><span class="keyword">, </span><span class="default">$value</span><span class="keyword">)) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// Here we replace ALL keys with the same value from 'special_key'<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$replaced </span><span class="keyword">= </span><span class="default">array_fill</span><span class="keyword">(</span><span class="default">0</span><span class="keyword">, </span><span class="default">count</span><span class="keyword">(</span><span class="default">$value</span><span class="keyword">), </span><span class="default">$value</span><span class="keyword">[</span><span class="string">'special_key'</span><span class="keyword">]);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$value </span><span class="keyword">= </span><span class="default">array_combine</span><span class="keyword">(</span><span class="default">array_keys</span><span class="keyword">(</span><span class="default">$value</span><span class="keyword">), </span><span class="default">$replaced</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// set a new key<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$value</span><span class="keyword">[</span><span class="string">'new_key'</span><span class="keyword">] = </span><span class="string">'new value'</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// Get the current depth and traverse back up the tree, saving the modifications<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$currentDepth </span><span class="keyword">= </span><span class="default">$recursiveIterator</span><span class="keyword">-&gt;</span><span class="default">getDepth</span><span class="keyword">();<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; for (</span><span class="default">$subDepth </span><span class="keyword">= </span><span class="default">$currentDepth</span><span class="keyword">; </span><span class="default">$subDepth </span><span class="keyword">&gt;= </span><span class="default">0</span><span class="keyword">; </span><span class="default">$subDepth</span><span class="keyword">--) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// Get the current level iterator<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$subIterator </span><span class="keyword">= </span><span class="default">$recursiveIterator</span><span class="keyword">-&gt;</span><span class="default">getSubIterator</span><span class="keyword">(</span><span class="default">$subDepth</span><span class="keyword">); <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// If we are on the level we want to change, use the replacements ($value) other wise set the key to the parent iterators value<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$subIterator</span><span class="keyword">-&gt;</span><span class="default">offsetSet</span><span class="keyword">(</span><span class="default">$subIterator</span><span class="keyword">-&gt;</span><span class="default">key</span><span class="keyword">(), (</span><span class="default">$subDepth </span><span class="keyword">=== </span><span class="default">$currentDepth </span><span class="keyword">? </span><span class="default">$value </span><span class="keyword">: </span><span class="default">$recursiveIterator</span><span class="keyword">-&gt;</span><span class="default">getSubIterator</span><span class="keyword">((</span><span class="default">$subDepth</span><span class="keyword">+</span><span class="default">1</span><span class="keyword">))-&gt;</span><span class="default">getArrayCopy</span><span class="keyword">())); <br />
+&nbsp;&nbsp; &nbsp; &nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+return </span><span class="default">$recursiveIterator</span><span class="keyword">-&gt;</span><span class="default">getArrayCopy</span><span class="keyword">();<br />
+</span><span class="comment">// return:<br />
+</span><span class="default">$array </span><span class="keyword">= [<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'test' </span><span class="keyword">=&gt; </span><span class="string">'value'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'level_one' </span><span class="keyword">=&gt; [<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'level_two' </span><span class="keyword">=&gt; [<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'level_three' </span><span class="keyword">=&gt; [<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'replace_this_array' </span><span class="keyword">=&gt; [<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'special_key' </span><span class="keyword">=&gt; </span><span class="string">'replacement_value'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'key_one' </span><span class="keyword">=&gt; </span><span class="string">'replacement_value'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'key_two' </span><span class="keyword">=&gt; </span><span class="string">'replacement_value'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'four' </span><span class="keyword">=&gt; </span><span class="string">'replacement_value'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'new_key' </span><span class="keyword">=&gt; </span><span class="string">'new value'<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">]<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; ],<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'ordinary_key' </span><span class="keyword">=&gt; </span><span class="string">'value'<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">]<br />
+&nbsp;&nbsp;&nbsp; ]<br />
+];<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+The key is in traversing back up the tree to save the changes at that level - simply calling $recursiveIterator-&gt;offsetSet(); will only set a key on the root array.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="115192""></a>
+  <div class="note">
+   <strong class="user">gerry at king-foo dot be</strong>
+   <a href="#115192" class="date">11-Jun-2014 12:44</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Carefull when using iterator_to_array(). Because it flattens down your subiterators, elements with the same keys will overwrite eachother.<br />
+<br />
+For example:<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+$iterator </span><span class="keyword">= new </span><span class="default">RecursiveIteratorIterator</span><span class="keyword">(<br />
+&nbsp;&nbsp;&nbsp; new </span><span class="default">RecursiveArrayIterator</span><span class="keyword">([<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; [</span><span class="string">'foo'</span><span class="keyword">, </span><span class="string">'bar'</span><span class="keyword">],<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; [</span><span class="string">'baz'</span><span class="keyword">, </span><span class="string">'qux'</span><span class="keyword">]<br />
+&nbsp;&nbsp;&nbsp; ])<br />
+);<br />
+<br />
+foreach (</span><span class="default">$iterator </span><span class="keyword">as </span><span class="default">$element</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="default">$element</span><span class="keyword">;<br />
+}<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+This will output all 4 elements as expected:<br />
+<br />
+string(3) "foo"<br />
+string(3) "bar"<br />
+string(3) "baz"<br />
+string(3) "qux"<br />
+<br />
+While doing:<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+var_dump</span><span class="keyword">(</span><span class="default">iterator_to_array</span><span class="keyword">(</span><span class="default">$iterator</span><span class="keyword">));<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+will output an array with only the last 2 elements:<br />
+<br />
+array(2) {<br />
+&nbsp; [0]=&gt;<br />
+&nbsp; string(3) "baz"<br />
+&nbsp; [1]=&gt;<br />
+&nbsp; string(3) "qux"<br />
+}</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="113031""></a>
+  <div class="note">
+   <strong class="user">fengdingbo at gmail dot com</strong>
+   <a href="#113031" class="date">21-Aug-2013 02:18</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+if you want traversal directory。<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">foreach (new </span><span class="default">RecursiveIteratorIterator</span><span class="keyword">(new </span><span class="default">RecursiveDirectoryIterator</span><span class="keyword">(</span><span class="string">"./"</span><span class="keyword">)) as </span><span class="default">$key</span><span class="keyword">=&gt;</span><span class="default">$val</span><span class="keyword">)<br />
+{<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="default">$key</span><span class="keyword">,</span><span class="string">"=&gt;"</span><span class="keyword">,</span><span class="default">$val</span><span class="keyword">,</span><span class="string">"\n"</span><span class="keyword">;<br />
+}<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="104587""></a>
+  <div class="note">
+   <strong class="user">Adil Baig @ AIdezigns</strong>
+   <a href="#104587" class="date">23-Jun-2011 11:17</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+A very important thing to note about \RecursiveIteratorIterator is that it returns a flattened array when used with the iterator_to_array function. Ex:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+$arr </span><span class="keyword">= array(</span><span class="string">'Zero'</span><span class="keyword">, </span><span class="string">'name'</span><span class="keyword">=&gt;</span><span class="string">'Adil'</span><span class="keyword">, </span><span class="string">'address' </span><span class="keyword">=&gt; array( </span><span class="string">'city'</span><span class="keyword">=&gt;</span><span class="string">'Dubai'</span><span class="keyword">, </span><span class="string">'tel' </span><span class="keyword">=&gt; array(</span><span class="string">'int' </span><span class="keyword">=&gt; </span><span class="default">971</span><span class="keyword">, </span><span class="string">'tel'</span><span class="keyword">=&gt;</span><span class="default">12345487</span><span class="keyword">)), </span><span class="string">'' </span><span class="keyword">=&gt; </span><span class="string">'nothing'</span><span class="keyword">);
+<br />
+
+<br />
+</span><span class="default">$iterator </span><span class="keyword">= new </span><span class="default">\RecursiveIteratorIterator</span><span class="keyword">(new </span><span class="default">\RecursiveArrayIterator</span><span class="keyword">(</span><span class="default">$arr</span><span class="keyword">));
+<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">iterator_to_array</span><span class="keyword">(</span><span class="default">$iterator</span><span class="keyword">,</span><span class="default">true</span><span class="keyword">));
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+This code will return :
+<br />
+
+<br />
+array(6) {
+<br />
+&nbsp; [0]=&gt;
+<br />
+&nbsp; string(4) "Zero"
+<br />
+&nbsp; ["name"]=&gt;
+<br />
+&nbsp; string(4) "Adil"
+<br />
+&nbsp; ["city"]=&gt;
+<br />
+&nbsp; string(5) "Dubai"
+<br />
+&nbsp; ["int"]=&gt;
+<br />
+&nbsp; int(91)
+<br />
+&nbsp; ["tel"]=&gt;
+<br />
+&nbsp; int(12345487)
+<br />
+&nbsp; [""]=&gt;
+<br />
+&nbsp; string(7) "nothing"
+<br />
+}
+<br />
+
+<br />
+To get the non-flattened proper array use the getArrayCopy() method, like so :
+<br />
+
+<br />
+$iterator-&gt;getArrayCopy()
+<br />
+
+<br />
+This will return
+<br />
+
+<br />
+array(4) {
+<br />
+&nbsp; [0]=&gt;
+<br />
+&nbsp; string(4) "Zero"
+<br />
+&nbsp; ["name"]=&gt;
+<br />
+&nbsp; string(4) "Adil"
+<br />
+&nbsp; ["address"]=&gt;
+<br />
+&nbsp; array(2) {
+<br />
+&nbsp;&nbsp;&nbsp; ["city"]=&gt;
+<br />
+&nbsp;&nbsp;&nbsp; string(5) "Dubai"
+<br />
+&nbsp;&nbsp;&nbsp; ["tel"]=&gt;
+<br />
+&nbsp;&nbsp;&nbsp; array(2) {
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; ["int"]=&gt;
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; int(91)
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; ["tel"]=&gt;
+<br />
+&nbsp;&nbsp; &nbsp;&nbsp; int(12345487)
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+&nbsp; }
+<br />
+&nbsp; [""]=&gt;
+<br />
+&nbsp; string(7) "nothing"
+<br />
+}</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="101710""></a>
+  <div class="note">
+   <strong class="user">Tom</strong>
+   <a href="#101710" class="date">06-Jan-2011 01:35</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+This class operates on a tree of elements, which is build by nesting recursive iterators into one another.<br />
+<br />
+Thus you might say it is an iterator over iterators. While traversing those, the class pushes the iterators on a stack while traversing down to a leaf and removes them from the stack while going back up.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="97642""></a>
+  <div class="note">
+   <strong class="user">aidan at php dot net</strong>
+   <a href="#97642" class="date">29-Apr-2010 09:57</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+This example demonstrates using the getDepth() method with a RecursiveArrayIterator.<br />
+<br />
+<span class="default">&lt;?php<br />
+$tree </span><span class="keyword">= array();<br />
+</span><span class="default">$tree</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">][</span><span class="default">2</span><span class="keyword">][</span><span class="default">3</span><span class="keyword">] = </span><span class="string">'lemon'</span><span class="keyword">;<br />
+</span><span class="default">$tree</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">][</span><span class="default">4</span><span class="keyword">] = </span><span class="string">'melon'</span><span class="keyword">;<br />
+</span><span class="default">$tree</span><span class="keyword">[</span><span class="default">2</span><span class="keyword">][</span><span class="default">3</span><span class="keyword">] = </span><span class="string">'orange'</span><span class="keyword">;<br />
+</span><span class="default">$tree</span><span class="keyword">[</span><span class="default">2</span><span class="keyword">][</span><span class="default">5</span><span class="keyword">] = </span><span class="string">'grape'</span><span class="keyword">;<br />
+</span><span class="default">$tree</span><span class="keyword">[</span><span class="default">3</span><span class="keyword">] = </span><span class="string">'pineapple'</span><span class="keyword">;<br />
+<br />
+</span><span class="default">print_r</span><span class="keyword">(</span><span class="default">$tree</span><span class="keyword">);<br />
+&nbsp;<br />
+</span><span class="default">$arrayiter </span><span class="keyword">= new </span><span class="default">RecursiveArrayIterator</span><span class="keyword">(</span><span class="default">$tree</span><span class="keyword">);<br />
+</span><span class="default">$iteriter </span><span class="keyword">= new </span><span class="default">RecursiveIteratorIterator</span><span class="keyword">(</span><span class="default">$arrayiter</span><span class="keyword">);<br />
+&nbsp;<br />
+foreach (</span><span class="default">$iteriter </span><span class="keyword">as </span><span class="default">$key </span><span class="keyword">=&gt; </span><span class="default">$value</span><span class="keyword">) {<br />
+&nbsp; </span><span class="default">$d </span><span class="keyword">= </span><span class="default">$iteriter</span><span class="keyword">-&gt;</span><span class="default">getDepth</span><span class="keyword">();<br />
+&nbsp; echo </span><span class="string">"depth=</span><span class="default">$d</span><span class="string"> k=</span><span class="default">$key</span><span class="string"> v=</span><span class="default">$value</span><span class="string">\n"</span><span class="keyword">;<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+The output of this would be:<br />
+<br />
+Array<br />
+(<br />
+&nbsp;&nbsp;&nbsp; [1] =&gt; Array<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; (<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; [2] =&gt; Array<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; (<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; [3] =&gt; lemon<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; )<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; [4] =&gt; melon<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; )<br />
+<br />
+&nbsp;&nbsp;&nbsp; [2] =&gt; Array<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; (<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; [3] =&gt; orange<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; [5] =&gt; grape<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; )<br />
+<br />
+&nbsp;&nbsp;&nbsp; [3] =&gt; pineapple<br />
+)<br />
+<br />
+depth=2 k=3 v=lemon<br />
+depth=1 k=4 v=melon<br />
+depth=1 k=3 v=orange<br />
+depth=1 k=5 v=grape<br />
+depth=0 k=3 v=pineapple</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="91519""></a>
+  <div class="note">
+   <strong class="user">Michiel Brandenburg</strong>
+   <a href="#91519" class="date">14-Jun-2009 04:40</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+You can use this to quickly find all the files (recursively) in a certain directory. This beats maintaining a stack yourself.<br />
+<span class="default">&lt;?php<br />
+$directory </span><span class="keyword">= </span><span class="string">"/tmp/"</span><span class="keyword">;<br />
+</span><span class="default">$fileSPLObjects </span><span class="keyword">=&nbsp; new </span><span class="default">RecursiveIteratorIterator</span><span class="keyword">(<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; new </span><span class="default">RecursiveDirectoryIterator</span><span class="keyword">(</span><span class="default">$directory</span><span class="keyword">),<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">RecursiveIteratorIterator</span><span class="keyword">::</span><span class="default">CHILD_FIRST<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">);<br />
+try {<br />
+&nbsp;&nbsp;&nbsp; foreach( </span><span class="default">$fileSPLObjects </span><span class="keyword">as </span><span class="default">$fullFileName </span><span class="keyword">=&gt; </span><span class="default">$fileSPLObject </span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; print </span><span class="default">$fullFileName </span><span class="keyword">. </span><span class="string">" " </span><span class="keyword">. </span><span class="default">$fileSPLObject</span><span class="keyword">-&gt;</span><span class="default">getFilename</span><span class="keyword">() . </span><span class="string">"\n"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+catch (</span><span class="default">UnexpectedValueException $e</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">printf</span><span class="keyword">(</span><span class="string">"Directory [%s] contained a directory we can not recurse into"</span><span class="keyword">, </span><span class="default">$directory</span><span class="keyword">);<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span>Note: if there is a directory contained within the directory you are searching in that you have no access to read an UnexpectedValueException will be thrown (leaving you with an empty list).<br />
+Note: objects returned are SPLFileObjects</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>按 Unicode 码位值返回字符</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.mb-check-encoding.html">? mb_check_encoding</a></li>
+      <li style="float: right;"><a href="function.mb-convert-case.html">mb_convert_case ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.mbstring.html">多字节字符串 函数</a></li>
+    <li>按 Unicode 码位值返回字符</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.mb-chr" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">mb_chr</h1>
+  <p class="verinfo">(PHP 7 &gt;= 7.2.0, PHP 8)</p><p class="refpurpose"><span class="refname">mb_chr</span> &mdash; <span class="dc-title">按 Unicode 码位值返回字符</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.mb-chr-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>mb_chr</strong></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$codepoint</code></span>, <span class="methodparam"><span class="type">?</span><span class="type"><span class="type">string</span><span class="type"></span></span> <code class="parameter">$encoding</code><span class="initializer"> = <strong><code>null</code></strong></span></span>): <span class="type"><span class="type">string</span>|<span class="type"><span class="type false">false</span></span></span></div>
+
+  <p class="para rdfs-comment">
+   返回一个含有由 Unicode 码位值所指定的字符的字符串，以指定的编码进行编码。
+  </p>
+  <p class="para">
+   此函数与 <span class="function"><a href="function.mb-ord.html" class="function">mb_ord()</a></span> 互补。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.mb-chr-parameters">
+  <h3 class="title">参数</h3>
+  <dl>
+   
+    <dt>
+<code class="parameter">codepoint</code></dt>
+
+    <dd>
+
+     <p class="para">
+      一个 Unicode 码位值，例如 <code class="literal">128024</code> 是 <em class="emphasis">U+1F418 ELEPHANT</em>
+     </p>
+    </dd>
+
+   
+   
+    <dt>
+<code class="parameter">encoding</code></dt>
+
+    <dd>
+
+     <p class="para"><code class="parameter">encoding</code>
+参数为字符编码。如果省略或是 <strong><code>null</code></strong>，则使用内部字符编码。</p>
+    </dd>
+
+   
+  </dl>
+
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.mb-chr-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   如果可以用所指定的编码表示，则返回含有所请求的字符的字符串， 或者在失败时返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.mb-chr-changelog">
+  <h3 class="title">更新日志</h3>
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+  <td>8.0.0</td>
+  <td>
+   现在 <code class="parameter">encoding</code> 可以为 null。
+  </td>
+ </tr>
+
+    </tbody>
+   
+  </table>
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.mb-chr-examples">
+  <h3 class="title">示例</h3>
+  <div class="example" id="example-5234">
+   <p><strong>Example #1 Testing different code points</strong></p>
+   <div class="example-contents">
+    <div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$values </span><span style="color: #007700">= [</span><span style="color: #0000BB">65</span><span style="color: #007700">, </span><span style="color: #0000BB">63</span><span style="color: #007700">, </span><span style="color: #0000BB">0x20AC</span><span style="color: #007700">, </span><span style="color: #0000BB">128024</span><span style="color: #007700">];<br />foreach (</span><span style="color: #0000BB">$values </span><span style="color: #007700">as </span><span style="color: #0000BB">$value</span><span style="color: #007700">) {<br />    </span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">mb_chr</span><span style="color: #007700">(</span><span style="color: #0000BB">$value</span><span style="color: #007700">, </span><span style="color: #DD0000">'UTF-8'</span><span style="color: #007700">));<br />    </span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">mb_chr</span><span style="color: #007700">(</span><span style="color: #0000BB">$value</span><span style="color: #007700">, </span><span style="color: #DD0000">'ISO-8859-1'</span><span style="color: #007700">));<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例会输出：</p></div>
+   <div class="example-contents screen">
+    <div class="cdata"><pre>
+string(1) &quot;A&quot;
+string(1) &quot;A&quot;
+string(1) &quot;?&quot;
+string(1) &quot;?&quot;
+string(3) &quot;€&quot;
+bool(false)
+string(4) &quot;??&quot;
+bool(false)
+</pre></div>
+   </div>
+  </div>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.mb-chr-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.mb-internal-encoding.html" class="function" rel="rdfs-seeAlso">mb_internal_encoding()</a> - 设置/获取内部字符编码</span></li>
+    <li class="member"><span class="function"><a href="function.mb-ord.html" class="function" rel="rdfs-seeAlso">mb_ord()</a> - 获取字符的 Unicode 码位值</span></li>
+    <li class="member"><span class="function"><a href="intlchar.ord.html" class="function" rel="rdfs-seeAlso">IntlChar::ord()</a> - Return Unicode code point value of character</span></li>
+    <li class="member"><span class="function"><a href="function.chr.html" class="function" rel="rdfs-seeAlso">chr()</a> - 从数字生成单字节字符串</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+ <div class="note">There are no user contributed notes for this page.</div>
+</div>
+</div></div></body></html>

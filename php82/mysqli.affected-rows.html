@@ -1,0 +1,339 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>Gets the number of affected rows in a previous MySQL operation</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="class.mysqli.html">? mysqli</a></li>
+      <li style="float: right;"><a href="mysqli.autocommit.html">mysqli::autocommit ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="class.mysqli.html">mysqli</a></li>
+    <li>Gets the number of affected rows in a previous MySQL operation</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="mysqli.affected-rows" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">mysqli::$affected_rows</h1>
+  <h1 class="refname">mysqli_affected_rows</h1>
+  <p class="verinfo">(PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">mysqli::$affected_rows</span> -- <span class="refname">mysqli_affected_rows</span> &mdash; <span class="dc-title">Gets the number of affected rows in a previous MySQL operation</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-mysqli.affected-rows-description">
+  <h3 class="title">说明</h3>
+  <p class="para">面向对象风格</p>
+  <div class="fieldsynopsis"><span class="type"><span class="type">int</span>|<span class="type">string</span></span> <var class="varname"><a href="mysqli.affected-rows.html">$mysqli-&gt;affected_rows</a></var>;</div>
+
+  <p class="para">过程化风格</p>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>mysqli_affected_rows</strong></span>(<span class="methodparam"><span class="type"><a href="class.mysqli.html" class="type mysqli">mysqli</a></span> <code class="parameter">$mysql</code></span>): <span class="type"><span class="type">int</span>|<span class="type">string</span></span></div>
+
+  <p class="para rdfs-comment">
+   Returns the number of rows affected by the last <code class="literal">INSERT</code>,
+   <code class="literal">UPDATE</code>, <code class="literal">REPLACE</code> or 
+   <code class="literal">DELETE</code> query.
+   Works like <span class="function"><a href="mysqli-result.num-rows.html" class="function">mysqli_num_rows()</a></span> for
+   <code class="literal">SELECT</code> statements.
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 parameters" id="refsect1-mysqli.affected-rows-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    <dt>
+
+<code class="parameter">mysql</code></dt>
+<dd>
+<p class="para">仅以过程化样式：由<span class="function"><a href="function.mysqli-connect.html" class="function">mysqli_connect()</a></span> 或 <span class="function"><a href="mysqli.init.html" class="function">mysqli_init()</a></span>
+返回的 <span class="classname"><a href="class.mysqli.html" class="classname">mysqli</a></span> 对象。</p></dd>
+
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-mysqli.affected-rows-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   An integer greater than zero indicates the number of rows affected or
+   retrieved. Zero indicates that no records were updated for an 
+   <code class="literal">UPDATE</code> statement, no rows matched the
+   <code class="literal">WHERE</code> clause in the query or that no query has yet been
+   executed. <code class="literal">-1</code> indicates that the query returned an error or
+   that <span class="function"><strong>mysqli_affected_rows()</strong></span> was called for an unbuffered
+   <code class="literal">SELECT</code> query.
+  </p>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <p class="para">
+    If the number of affected rows is greater than the maximum int value
+    (<strong><code>PHP_INT_MAX</code></strong>), the number of affected rows will be
+    returned as a string.
+   </p>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-mysqli.affected-rows-examples">
+  <h3 class="title">示例</h3>
+  <div class="example" id="example-2900">
+   <p><strong>Example #1 <var class="varname">$mysqli->affected_rows</var> example</strong></p>
+   <div class="example-contents"><p>面向对象风格</p></div>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />mysqli_report</span><span style="color: #007700">(</span><span style="color: #0000BB">MYSQLI_REPORT_ERROR </span><span style="color: #007700">| </span><span style="color: #0000BB">MYSQLI_REPORT_STRICT</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$mysqli </span><span style="color: #007700">= new </span><span style="color: #0000BB">mysqli</span><span style="color: #007700">(</span><span style="color: #DD0000">"localhost"</span><span style="color: #007700">, </span><span style="color: #DD0000">"my_user"</span><span style="color: #007700">, </span><span style="color: #DD0000">"my_password"</span><span style="color: #007700">, </span><span style="color: #DD0000">"world"</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">/* Insert rows */<br /></span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">query</span><span style="color: #007700">(</span><span style="color: #DD0000">"CREATE TABLE Language SELECT * from CountryLanguage"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">printf</span><span style="color: #007700">(</span><span style="color: #DD0000">"Affected rows (INSERT): %d\n"</span><span style="color: #007700">, </span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">affected_rows</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">query</span><span style="color: #007700">(</span><span style="color: #DD0000">"ALTER TABLE Language ADD Status int default 0"</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">/* update rows */<br /></span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">query</span><span style="color: #007700">(</span><span style="color: #DD0000">"UPDATE Language SET Status=1 WHERE Percentage &gt; 50"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">printf</span><span style="color: #007700">(</span><span style="color: #DD0000">"Affected rows (UPDATE): %d\n"</span><span style="color: #007700">, </span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">affected_rows</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">/* delete rows */<br /></span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">query</span><span style="color: #007700">(</span><span style="color: #DD0000">"DELETE FROM Language WHERE Percentage &lt; 50"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">printf</span><span style="color: #007700">(</span><span style="color: #DD0000">"Affected rows (DELETE): %d\n"</span><span style="color: #007700">, </span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">affected_rows</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">/* select all rows */<br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">query</span><span style="color: #007700">(</span><span style="color: #DD0000">"SELECT CountryCode FROM Language"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">printf</span><span style="color: #007700">(</span><span style="color: #DD0000">"Affected rows (SELECT): %d\n"</span><span style="color: #007700">, </span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">affected_rows</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">/* Delete table Language */<br /></span><span style="color: #0000BB">$mysqli</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">query</span><span style="color: #007700">(</span><span style="color: #DD0000">"DROP TABLE Language"</span><span style="color: #007700">);</span>
+</span>
+</code></div>
+   </div>
+
+   <div class="example-contents"><p>过程化风格</p></div>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />mysqli_report</span><span style="color: #007700">(</span><span style="color: #0000BB">MYSQLI_REPORT_ERROR </span><span style="color: #007700">| </span><span style="color: #0000BB">MYSQLI_REPORT_STRICT</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$link </span><span style="color: #007700">= </span><span style="color: #0000BB">mysqli_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">"localhost"</span><span style="color: #007700">, </span><span style="color: #DD0000">"my_user"</span><span style="color: #007700">, </span><span style="color: #DD0000">"my_password"</span><span style="color: #007700">, </span><span style="color: #DD0000">"world"</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">/* Insert rows */<br /></span><span style="color: #0000BB">mysqli_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$link</span><span style="color: #007700">, </span><span style="color: #DD0000">"CREATE TABLE Language SELECT * from CountryLanguage"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">printf</span><span style="color: #007700">(</span><span style="color: #DD0000">"Affected rows (INSERT): %d\n"</span><span style="color: #007700">, </span><span style="color: #0000BB">mysqli_affected_rows</span><span style="color: #007700">(</span><span style="color: #0000BB">$link</span><span style="color: #007700">));<br /><br /></span><span style="color: #0000BB">mysqli_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$link</span><span style="color: #007700">, </span><span style="color: #DD0000">"ALTER TABLE Language ADD Status int default 0"</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">/* update rows */<br /></span><span style="color: #0000BB">mysqli_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$link</span><span style="color: #007700">, </span><span style="color: #DD0000">"UPDATE Language SET Status=1 WHERE Percentage &gt; 50"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">printf</span><span style="color: #007700">(</span><span style="color: #DD0000">"Affected rows (UPDATE): %d\n"</span><span style="color: #007700">, </span><span style="color: #0000BB">mysqli_affected_rows</span><span style="color: #007700">(</span><span style="color: #0000BB">$link</span><span style="color: #007700">));<br /><br /></span><span style="color: #FF8000">/* delete rows */<br /></span><span style="color: #0000BB">mysqli_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$link</span><span style="color: #007700">, </span><span style="color: #DD0000">"DELETE FROM Language WHERE Percentage &lt; 50"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">printf</span><span style="color: #007700">(</span><span style="color: #DD0000">"Affected rows (DELETE): %d\n"</span><span style="color: #007700">, </span><span style="color: #0000BB">mysqli_affected_rows</span><span style="color: #007700">(</span><span style="color: #0000BB">$link</span><span style="color: #007700">));<br /><br /></span><span style="color: #FF8000">/* select all rows */<br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">mysqli_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$link</span><span style="color: #007700">, </span><span style="color: #DD0000">"SELECT CountryCode FROM Language"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">printf</span><span style="color: #007700">(</span><span style="color: #DD0000">"Affected rows (SELECT): %d\n"</span><span style="color: #007700">, </span><span style="color: #0000BB">mysqli_affected_rows</span><span style="color: #007700">(</span><span style="color: #0000BB">$link</span><span style="color: #007700">));<br /><br /></span><span style="color: #FF8000">/* Delete table Language */<br /></span><span style="color: #0000BB">mysqli_query</span><span style="color: #007700">(</span><span style="color: #0000BB">$link</span><span style="color: #007700">, </span><span style="color: #DD0000">"DROP TABLE Language"</span><span style="color: #007700">);</span>
+</span>
+</code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例会输出：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+Affected rows (INSERT): 984
+Affected rows (UPDATE): 168
+Affected rows (DELETE): 815
+Affected rows (SELECT): 169
+</pre></div>
+   </div>
+  </div>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-mysqli.affected-rows-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="mysqli-result.num-rows.html" class="function" rel="rdfs-seeAlso">mysqli_num_rows()</a> - Gets the number of rows in the result set</span></li>
+    <li class="member"><span class="function"><a href="mysqli.info.html" class="function" rel="rdfs-seeAlso">mysqli_info()</a> - 返回最近执行的 SQL 语句的信息</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="128196""></a>
+  <div class="note">
+   <strong class="user">lucgommans.nl</strong>
+   <a href="#128196" class="date">07-Feb-2023 03:02</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Under the hood, this calls into mysql_affected_rows (1). The MariaDB function ROW_COUNT() mentions (2) that it is the equivalent of that C API function. These two lines, SQL followed by PHP, should be equivalent:<br />
+<br />
+SELECT ROW_COUNT();<br />
+$db-&gt;affected_rows;<br />
+<br />
+I found this useful to double check things in an SQL prompt, to make sure affected_rows is reflecting what I expect (changed rows as opposed to matched rows in an update statement), which indeed it did.<br />
+<br />
+1. https://github.com/php/php-src/blob/1521cafee29e23ca147ec777f3770a7ac46c6880/ext/mysqli/mysqli_api.c#L36-L49<br />
+2. https://mariadb.com/kb/en/row_count/</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="120963""></a>
+  <div class="note">
+   <strong class="user">Jacques Amar</strong>
+   <a href="#120963" class="date">10-Apr-2017 04:07</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+While using prepared statements, even if there is no result set (Like in an UPDATE or DELETE), you still need to store the results before affected_rows returns the actual number:<br />
+<br />
+<span class="default">&lt;?php<br />
+$del_stmt</span><span class="keyword">-&gt;</span><span class="default">execute</span><span class="keyword">();<br />
+</span><span class="default">$del_stmt</span><span class="keyword">-&gt;</span><span class="default">store_result</span><span class="keyword">();<br />
+</span><span class="default">$count </span><span class="keyword">= </span><span class="default">$del_stmt</span><span class="keyword">-&gt;</span><span class="default">affected_rows</span><span class="keyword">;<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Otherwise things will just be frustrating ..</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="118435""></a>
+  <div class="note">
+   <strong class="user">anonymous</strong>
+   <a href="#118435" class="date">04-Dec-2015 10:48</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+This may seem obvious, but if you do an UPDATE with each of the values in your SET clause having the exact same value that is already in the table, then affected_rows returns 0.&nbsp; For example:<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; $mysqli </span><span class="keyword">= new </span><span class="default">mysqli</span><span class="keyword">(</span><span class="default">$host</span><span class="keyword">, </span><span class="default">$usr</span><span class="keyword">, </span><span class="default">$pwd</span><span class="keyword">, </span><span class="default">$db</span><span class="keyword">, </span><span class="default">$port</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$appointment_date </span><span class="keyword">= </span><span class="string">"2015-12-07"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$sql </span><span class="keyword">= </span><span class="string">"update appointments set appointment_date = ? where appointment_id = 78"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$stmt </span><span class="keyword">= </span><span class="default">$mysqli</span><span class="keyword">-&gt;</span><span class="default">prepare</span><span class="keyword">(</span><span class="default">$sql</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$stmt</span><span class="keyword">-&gt;</span><span class="default">bind_param</span><span class="keyword">(</span><span class="string">"s"</span><span class="keyword">,</span><span class="default">$appointment_date</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$stmt</span><span class="keyword">-&gt;</span><span class="default">execute</span><span class="keyword">();<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="default">$mysqli </span><span class="keyword">-&gt;</span><span class="default">affected_rows </span><span class="keyword">. </span><span class="string">"&lt;br&gt;"</span><span class="keyword">;<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+This returns 1 the first time I run it after changing the value of the $appointment_date variable.&nbsp; When I run it a second time (making no changes), it returns 0.&nbsp; I also verified the same behavior without using prepared statements.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="116152""></a>
+  <div class="note">
+   <strong class="user">Michael</strong>
+   <a href="#116152" class="date">15-Nov-2014 06:35</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you need to know specifically whether the WHERE condition of an UPDATE operation failed to match rows, or that simply no rows required updating you need to instead check mysqli::$info.<br />
+<br />
+As this returns a string that requires parsing, you can use the following to convert the results into an associative array.<br />
+<br />
+Object oriented style:<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; preg_match_all </span><span class="keyword">(</span><span class="string">'/(\S[^:]+): (\d+)/'</span><span class="keyword">, </span><span class="default">$mysqli</span><span class="keyword">-&gt;</span><span class="default">info</span><span class="keyword">, </span><span class="default">$matches</span><span class="keyword">); <br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$info </span><span class="keyword">= </span><span class="default">array_combine </span><span class="keyword">(</span><span class="default">$matches</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">], </span><span class="default">$matches</span><span class="keyword">[</span><span class="default">2</span><span class="keyword">]);<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Procedural style:<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; preg_match_all </span><span class="keyword">(</span><span class="string">'/(\S[^:]+): (\d+)/'</span><span class="keyword">, </span><span class="default">mysqli_info </span><span class="keyword">(</span><span class="default">$link</span><span class="keyword">), </span><span class="default">$matches</span><span class="keyword">); <br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$info </span><span class="keyword">= </span><span class="default">array_combine </span><span class="keyword">(</span><span class="default">$matches</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">], </span><span class="default">$matches</span><span class="keyword">[</span><span class="default">2</span><span class="keyword">]);<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+You can then use the array to test for the different conditions<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">if (</span><span class="default">$info </span><span class="keyword">[</span><span class="string">'Rows matched'</span><span class="keyword">] == </span><span class="default">0</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"This operation did not match any rows.\n"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; } elseif (</span><span class="default">$info </span><span class="keyword">[</span><span class="string">'Changed'</span><span class="keyword">] == </span><span class="default">0</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"This operation matched rows, but none required updating.\n"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; if (</span><span class="default">$info </span><span class="keyword">[</span><span class="string">'Changed'</span><span class="keyword">] &lt; </span><span class="default">$info </span><span class="keyword">[</span><span class="string">'Rows matched'</span><span class="keyword">]) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo (</span><span class="default">$info </span><span class="keyword">[</span><span class="string">'Rows matched'</span><span class="keyword">] - </span><span class="default">$info </span><span class="keyword">[</span><span class="string">'Changed'</span><span class="keyword">]).</span><span class="string">" rows matched but were not changed.\n"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+This approach can be used with any query that mysqli::$info supports (INSERT INTO, LOAD DATA, ALTER TABLE, and UPDATE), for other any queries it returns an empty array.<br />
+<br />
+For any UPDATE operation the array returned will have the following elements:<br />
+<br />
+Array<br />
+(<br />
+&nbsp;&nbsp;&nbsp; [Rows matched] =&gt; 1<br />
+&nbsp;&nbsp;&nbsp; [Changed] =&gt; 0<br />
+&nbsp;&nbsp;&nbsp; [Warnings] =&gt; 0<br />
+)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="115180""></a>
+  <div class="note">
+   <strong class="user">fastest963 at gmail dot com</strong>
+   <a href="#115180" class="date">10-Jun-2014 05:50</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+empty($db-&gt;affected_rows) will return TRUE even if affected_rows is greater than 0. Manually check &lt; 1 if you're looking for failure.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="102523""></a>
+  <div class="note">
+   <strong class="user">Anonymous</strong>
+   <a href="#102523" class="date">18-Feb-2011 02:50</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+On "INSERT INTO ON DUPLICATE KEY UPDATE" queries, though one may expect affected_rows to return only 0 or 1 per row on successful queries, it may in fact return 2.<br />
+<br />
+From Mysql manual: "With ON DUPLICATE KEY UPDATE, the affected-rows value per row is 1 if the row is inserted as a new row and 2 if an existing row is updated."<br />
+<br />
+See: <a href="http://dev.mysql.com/doc/refman/5.0/en/insert-on-duplicate.html" rel="nofollow" target="_blank">http://dev.mysql.com/doc/refman/5.0/en/insert-on-duplicate.html</a><br />
+<br />
+Here's the sum breakdown _per row_:<br />
++0: a row wasn't updated or inserted (likely because the row already existed, but no field values were actually changed during the UPDATE)<br />
++1: a row was inserted<br />
++2: a row was updated</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="94612""></a>
+  <div class="note">
+   <strong class="user">oilpc at oilpc dot com</strong>
+   <a href="#94612" class="date">14-Nov-2009 10:06</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+For "INSERT" or "UPDATE" statement for modifying data contained in one row of one table I checked if number of affected rows equals 1 to determine success of the operation. It works fine both for errors and false value of WHERE condition (that might be generated according to specific application user acces privileges).<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">if (</span><span class="default">$mysqli</span><span class="keyword">-&gt;</span><span class="default">affected_rows</span><span class="keyword">==</span><span class="default">1</span><span class="keyword">){<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"success"</span><span class="keyword">;<br />
+}<br />
+else {<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"fail"</span><span class="keyword">;<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Checking if mysqli-&gt;affected_rows will equal -1 or not is not a good method of determining success of "INSERT IGNORE" statements. Example: Ignoring duplicate key errors while inserting some rows containing data provided by user only if they will match specified unique constraint causes returning of -1 value by mysqli-&gt;affected_rows even if rows were inserted. (checked on MySQL 5.0.85 linux and php 5.2.9-2 windows). However mysqli-&gt;sqlstate returns no error if statement was executed successfully.<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">if (</span><span class="default">$mysqli</span><span class="keyword">-&gt;</span><span class="default">affected_rows</span><span class="keyword">!=-</span><span class="default">1</span><span class="keyword">){<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"success"</span><span class="keyword">;</span><span class="comment">// for "INSERT IGNORE" statements will not occur if there were any duplicate key errors ignored during execution of the query<br />
+</span><span class="keyword">}<br />
+else {<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"fail"</span><span class="keyword">;</span><span class="comment">// "INSERT IGNORE" statements causing any duplicate key errors (however ignored) lead to mysqli-&gt;affected_rows equal -1<br />
+</span><span class="keyword">}<br />
+<br />
+</span><span class="comment">// Example below works for "INSERT IGNORE" stattements, too<br />
+</span><span class="keyword">if (</span><span class="default">$mysqli</span><span class="keyword">-&gt;</span><span class="default">sqlstate</span><span class="keyword">==</span><span class="string">"00000"</span><span class="keyword">){<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"success"</span><span class="keyword">;<br />
+}<br />
+else {<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"fail"</span><span class="keyword">;<br />
+}<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

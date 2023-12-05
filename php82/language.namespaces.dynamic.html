@@ -1,0 +1,552 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>命名空间和动态语言特征</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="language.namespaces.basics.html">? 使用命名空间：基础</a></li>
+      <li style="float: right;"><a href="language.namespaces.nsconstants.html">namespace 关键字和 __NAMESPACE__ 常量 ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="language.namespaces.html">命名空间</a></li>
+    <li>命名空间和动态语言特征</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="language.namespaces.dynamic" class="sect1">
+  <h2 class="title">命名空间和动态语言特征</h2>
+  <p class="verinfo">(PHP 5 &gt;= 5.3.0, PHP 7, PHP 8)</p>
+  <p class="para">
+   PHP 命名空间的实现受到其语言自身的动态特征的影响。因此，如果要将下面的代码转换到命名空间中：
+   <div class="example" id="example-602">
+    <p><strong>Example #1 动态访问元素</strong></p>
+    <div class="example-contents"><p>example1.php:</p></div>
+    <div class="example-contents">
+     <div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">classname<br /></span><span style="color: #007700">{<br />    function </span><span style="color: #0000BB">__construct</span><span style="color: #007700">()<br />    {<br />        echo </span><span style="color: #0000BB">__METHOD__</span><span style="color: #007700">,</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />    }<br />}<br />function </span><span style="color: #0000BB">funcname</span><span style="color: #007700">()<br />{<br />    echo </span><span style="color: #0000BB">__FUNCTION__</span><span style="color: #007700">,</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />}<br />const </span><span style="color: #0000BB">constname </span><span style="color: #007700">= </span><span style="color: #DD0000">"global"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$a </span><span style="color: #007700">= </span><span style="color: #DD0000">'classname'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$obj </span><span style="color: #007700">= new </span><span style="color: #0000BB">$a</span><span style="color: #007700">; </span><span style="color: #FF8000">// 输出 classname::__construct<br /></span><span style="color: #0000BB">$b </span><span style="color: #007700">= </span><span style="color: #DD0000">'funcname'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$b</span><span style="color: #007700">(); </span><span style="color: #FF8000">// 输出 funcname<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">constant</span><span style="color: #007700">(</span><span style="color: #DD0000">'constname'</span><span style="color: #007700">), </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">; </span><span style="color: #FF8000">// 输出 global<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+   必须使用完全限定名称（包括命名空间前缀的类名称）。注意因为在动态的类名称、函数名称或常量名称中，限定名称和完全限定名称没有区别，因此其前导的反斜杠是不必要的。
+   <div class="example" id="example-604">
+    <p><strong>Example #2 动态访问命名空间的元素</strong></p>
+    <div class="example-contents">
+     <div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">namespace </span><span style="color: #0000BB">namespacename</span><span style="color: #007700">;<br />class </span><span style="color: #0000BB">classname<br /></span><span style="color: #007700">{<br />    function </span><span style="color: #0000BB">__construct</span><span style="color: #007700">()<br />    {<br />        echo </span><span style="color: #0000BB">__METHOD__</span><span style="color: #007700">,</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />    }<br />}<br />function </span><span style="color: #0000BB">funcname</span><span style="color: #007700">()<br />{<br />    echo </span><span style="color: #0000BB">__FUNCTION__</span><span style="color: #007700">,</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />}<br />const </span><span style="color: #0000BB">constname </span><span style="color: #007700">= </span><span style="color: #DD0000">"namespaced"</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">/* 注意，如果使用双引号，要这样写 "\\namespacename\\classname" */<br /></span><span style="color: #0000BB">$a </span><span style="color: #007700">= </span><span style="color: #DD0000">'\namespacename\classname'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$obj </span><span style="color: #007700">= new </span><span style="color: #0000BB">$a</span><span style="color: #007700">; </span><span style="color: #FF8000">// 输出 namespacename\classname::__construct<br /></span><span style="color: #0000BB">$a </span><span style="color: #007700">= </span><span style="color: #DD0000">'namespacename\classname'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$obj </span><span style="color: #007700">= new </span><span style="color: #0000BB">$a</span><span style="color: #007700">; </span><span style="color: #FF8000">// 也会输出 namespacename\classname::__construct<br /></span><span style="color: #0000BB">$b </span><span style="color: #007700">= </span><span style="color: #DD0000">'namespacename\funcname'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$b</span><span style="color: #007700">(); </span><span style="color: #FF8000">// 输出 namespacename\funcname<br /></span><span style="color: #0000BB">$b </span><span style="color: #007700">= </span><span style="color: #DD0000">'\namespacename\funcname'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$b</span><span style="color: #007700">(); </span><span style="color: #FF8000">// 也会输出 namespacename\funcname<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">constant</span><span style="color: #007700">(</span><span style="color: #DD0000">'\namespacename\constname'</span><span style="color: #007700">), </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">; </span><span style="color: #FF8000">// 输出 namespaced<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">constant</span><span style="color: #007700">(</span><span style="color: #DD0000">'namespacename\constname'</span><span style="color: #007700">), </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">; </span><span style="color: #FF8000">// 也会输出 namespaced<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   请一定别忘了阅读 <a href="language.namespaces.faq.html#language.namespaces.faq.quote" class="link">对字符串中的命名空间名称转义的注解</a>.
+  </p>
+ </div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="126621""></a>
+  <div class="note">
+   <strong class="user">anisgazig at gmail dot com</strong>
+   <a href="#126621" class="date">19-Nov-2021 05:12</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="comment">//single or double quotes with single or double backslash in dynamic namespace class.<br />
+<br />
+</span><span class="keyword">namespace </span><span class="default">Country_Name</span><span class="keyword">{<br />
+class </span><span class="default">Mexico</span><span class="keyword">{<br />
+function </span><span class="default">__construct</span><span class="keyword">(){<br />
+echo </span><span class="default">__METHOD__</span><span class="keyword">,</span><span class="string">"&lt;br&gt;"</span><span class="keyword">;<br />
+}<br />
+}<br />
+<br />
+</span><span class="default">$a </span><span class="keyword">= </span><span class="string">'Country_Name\Mexico'</span><span class="keyword">;</span><span class="comment">//Country_Name\Mexico::__construct<br />
+</span><span class="default">$a </span><span class="keyword">= </span><span class="string">"Country_Name\Mexico"</span><span class="keyword">;<br />
+</span><span class="comment">//Country_Name\Mexico::__construct<br />
+</span><span class="default">$a </span><span class="keyword">= </span><span class="string">'\Country_Name\Mexico'</span><span class="keyword">;<br />
+</span><span class="comment">//Country_Name\Mexico::__construct<br />
+</span><span class="default">$a </span><span class="keyword">= </span><span class="string">"\Country_Name\Mexico"</span><span class="keyword">;<br />
+</span><span class="comment">//Country_Name\Mexico::__construct<br />
+</span><span class="default">$a </span><span class="keyword">= </span><span class="string">"\\Country_Name\\Mexico"</span><span class="keyword">;<br />
+</span><span class="comment">//Country_Name\Mexico::__construct<br />
+</span><span class="default">$o </span><span class="keyword">= new </span><span class="default">$a</span><span class="keyword">;<br />
+<br />
+}<br />
+<br />
+</span><span class="comment">/* if your namespace name or class name start with lowercase n then you should be alart about the use of single or double quotes with backslash&nbsp; */<br />
+<br />
+</span><span class="keyword">namespace </span><span class="default">name_of_country</span><span class="keyword">{<br />
+class </span><span class="default">Japan</span><span class="keyword">{<br />
+function </span><span class="default">__construct</span><span class="keyword">()<br />
+{<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="default">__METHOD__</span><span class="keyword">,</span><span class="string">"&lt;br&gt;"</span><span class="keyword">;<br />
+}<br />
+<br />
+}<br />
+<br />
+</span><span class="default">$a </span><span class="keyword">= </span><span class="string">'name_of_country\Japan'</span><span class="keyword">;<br />
+</span><span class="comment">//name_of_country\Japan::__construct<br />
+</span><span class="default">$a </span><span class="keyword">= </span><span class="string">"name_of_country\Japan"</span><span class="keyword">;<br />
+</span><span class="comment">//name_of_country\Japan::__construct<br />
+</span><span class="default">$a </span><span class="keyword">= </span><span class="string">'\name_of_country\Japan'</span><span class="keyword">;<br />
+</span><span class="comment">//name_of_country\Japan::__construct<br />
+//$a = "\name_of_country\Japan";<br />
+//Fatal error: Uncaught Error: Class ' ame_of_country\Japan' not found <br />
+//In this statement "\name_of_country\Japan" means -first letter n with "\ == new line("\n). for fix it we can use double back slash or single quotes with single backslash. <br />
+</span><span class="default">$a </span><span class="keyword">= </span><span class="string">"\\name_of_country\\Japan"</span><span class="keyword">;<br />
+</span><span class="comment">//name_of_country\Japan::__construct<br />
+</span><span class="default">$o </span><span class="keyword">= new </span><span class="default">$a</span><span class="keyword">;<br />
+}<br />
+<br />
+namespace </span><span class="default">Country_Name</span><span class="keyword">{<br />
+class </span><span class="default">name</span><span class="keyword">{<br />
+function </span><span class="default">__construct</span><span class="keyword">(){<br />
+echo </span><span class="default">__METHOD__</span><span class="keyword">,</span><span class="string">"&lt;br&gt;"</span><span class="keyword">;<br />
+}<br />
+}<br />
+<br />
+</span><span class="default">$a </span><span class="keyword">= </span><span class="string">'Country_Name\name'</span><span class="keyword">;<br />
+</span><span class="comment">//Country_Name\Norway::__construct<br />
+</span><span class="default">$a </span><span class="keyword">= </span><span class="string">"Country_Name\name"</span><span class="keyword">;<br />
+</span><span class="comment">//Country_Name\Norway::__construct<br />
+</span><span class="default">$a </span><span class="keyword">= </span><span class="string">'\Country_Name\name'</span><span class="keyword">;<br />
+</span><span class="comment">//Country_Name\Norway::__construct<br />
+//$a = "\Country_Name\name";<br />
+//Fatal error: Uncaught Error: Class '\Country_Name ame' not found <br />
+<br />
+//In this statement "\Country_Name\name" at class name's first letter n with "\ == new line("\n). for fix it we can use double back slash or single quotes with single backslash<br />
+</span><span class="default">$a </span><span class="keyword">= </span><span class="string">"\\Country_Name\\name"</span><span class="keyword">;<br />
+</span><span class="comment">//Country_Name\name::__construct<br />
+</span><span class="default">$o </span><span class="keyword">= new </span><span class="default">$a</span><span class="keyword">;<br />
+<br />
+}<br />
+<br />
+</span><span class="comment">//"\n == new line are case insensitive so "\N could not affected<br />
+<br />
+&nbsp;</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="124210""></a>
+  <div class="note">
+   <strong class="user">Daan</strong>
+   <a href="#124210" class="date">19-Sep-2019 08:56</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Important to know is that you need to use the *fully qualified name* in a dynamic class name. Here is an example that emphasizes the difference between a dynamic class name and a normal class name.<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">namespace </span><span class="default">namespacename\foo</span><span class="keyword">;<br />
+<br />
+class </span><span class="default">classname&nbsp; &nbsp; &nbsp; <br />
+</span><span class="keyword">{&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp;&nbsp;&nbsp; function </span><span class="default">__construct</span><span class="keyword">()&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; {&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">'bar'</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />
+}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />
+<br />
+</span><span class="default">$a </span><span class="keyword">= </span><span class="string">'\namespacename\foo\classname'</span><span class="keyword">; </span><span class="comment">// Works, is fully qualified name&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <br />
+</span><span class="default">$b </span><span class="keyword">= </span><span class="string">'namespacename\foo\classname'</span><span class="keyword">; </span><span class="comment">// Works, is treated as it was with a prefixed "\"&nbsp;&nbsp; <br />
+</span><span class="default">$c </span><span class="keyword">= </span><span class="string">'foo\classname'</span><span class="keyword">; </span><span class="comment">// Will not work, it should be the fully qualified name&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />
+<br />
+// Use dynamic class name&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <br />
+</span><span class="keyword">new </span><span class="default">$a</span><span class="keyword">; </span><span class="comment">// bar<br />
+</span><span class="keyword">new </span><span class="default">$b</span><span class="keyword">; </span><span class="comment">// bar<br />
+</span><span class="keyword">new </span><span class="default">$c</span><span class="keyword">; </span><span class="comment">// [500]: / - Uncaught Error: Class 'foo\classname' not found in <br />
+<br />
+// Use normal class name&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <br />
+</span><span class="keyword">new </span><span class="default">\namespacename\foo\classname</span><span class="keyword">; </span><span class="comment">// bar<br />
+</span><span class="keyword">new </span><span class="default">namespacename\foo\classname</span><span class="keyword">; </span><span class="comment">// [500]: / - Uncaught Error: Class 'namespacename\foo\namespacename\foo\classname' not found<br />
+</span><span class="keyword">new </span><span class="default">foo\classname</span><span class="keyword">; </span><span class="comment">// [500]: / - Uncaught Error: Class 'namespacename\foo\foo\classname' not found</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="123673""></a>
+  <div class="note">
+   <strong class="user">museyib dot e at gmail dot com</strong>
+   <a href="#123673" class="date">09-Mar-2019 04:48</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Be careful when using dynamic accessing namespaced elements. If you use double-quote backslashes will be parsed as escape character.<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; $a</span><span class="keyword">=</span><span class="string">"\namespacename\classname"</span><span class="keyword">; </span><span class="comment">//Invalid use and Fatal error.<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$a</span><span class="keyword">=</span><span class="string">"\\namespacename\\classname"</span><span class="keyword">; </span><span class="comment">//Valid use.<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$a</span><span class="keyword">=</span><span class="string">'\namespacename\classname'</span><span class="keyword">; </span><span class="comment">//Valid use.<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="120707""></a>
+  <div class="note">
+   <strong class="user">m dot mannes at gmail dot com</strong>
+   <a href="#120707" class="date">25-Feb-2017 06:36</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Case you are trying call a static method that's the way to go:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">class </span><span class="default">myClass <br />
+</span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public static function </span><span class="default">myMethod</span><span class="keyword">() <br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp;&nbsp; return </span><span class="string">"You did it!\n"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+</span><span class="default">$foo </span><span class="keyword">= </span><span class="string">"myClass"</span><span class="keyword">;<br />
+</span><span class="default">$bar </span><span class="keyword">= </span><span class="string">"myMethod"</span><span class="keyword">;<br />
+<br />
+echo </span><span class="default">$foo</span><span class="keyword">::</span><span class="default">$bar</span><span class="keyword">(); </span><span class="comment">// prints "You did it!";<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="112942""></a>
+  <div class="note">
+   <strong class="user">akhoondi+php at gmail dot com</strong>
+   <a href="#112942" class="date">09-Aug-2013 04:17</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+It might make it more clear if said this way: <br />
+<br />
+One must note that when using a dynamic class name, function name or constant name, the "current namespace", as in <a href="http://www.php.net/manual/en/language.namespaces.basics.php is global namespace." rel="nofollow" target="_blank">http://www.php.net/manual/en/language.namespaces.basics.php is global namespace.</a><br />
+<br />
+One situation that dynamic class names are used is in 'factory' pattern. Thus, add the desired namespace of your target class before the variable name.<br />
+<br />
+namespaced.php<br />
+<span class="default">&lt;?php<br />
+</span><span class="comment">// namespaced.php<br />
+</span><span class="keyword">namespace </span><span class="default">Mypackage</span><span class="keyword">;<br />
+class </span><span class="default">Foo </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">factory</span><span class="keyword">(</span><span class="default">$name</span><span class="keyword">, </span><span class="default">$global </span><span class="keyword">= </span><span class="default">FALSE</span><span class="keyword">)<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">$global</span><span class="keyword">)<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$class </span><span class="keyword">= </span><span class="default">$name</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; else<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$class </span><span class="keyword">= </span><span class="string">'Mypackage\\' </span><span class="keyword">. </span><span class="default">$name</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return new </span><span class="default">$class</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+<br />
+class </span><span class="default">A </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; function </span><span class="default">__construct</span><span class="keyword">()<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="default">__METHOD__ </span><span class="keyword">. </span><span class="string">"&lt;br /&gt;\n"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+class </span><span class="default">B </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; function </span><span class="default">__construct</span><span class="keyword">()<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="default">__METHOD__ </span><span class="keyword">. </span><span class="string">"&lt;br /&gt;\n"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+global.php<br />
+<span class="default">&lt;?php <br />
+</span><span class="comment">// global.php<br />
+</span><span class="keyword">class </span><span class="default">A </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; function </span><span class="default">__construct</span><span class="keyword">()<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo&nbsp; </span><span class="default">__METHOD__</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+index.php<br />
+<span class="default">&lt;?php<br />
+</span><span class="comment">//&nbsp; index.php<br />
+</span><span class="keyword">namespace </span><span class="default">Mypackage</span><span class="keyword">;<br />
+include(</span><span class="string">'namespaced.php'</span><span class="keyword">);<br />
+include(</span><span class="string">'global.php'</span><span class="keyword">);<br />
+&nbsp; <br />
+&nbsp; </span><span class="default">$foo </span><span class="keyword">= new </span><span class="default">Foo</span><span class="keyword">();<br />
+&nbsp; <br />
+&nbsp; </span><span class="default">$a </span><span class="keyword">= </span><span class="default">$foo</span><span class="keyword">-&gt;</span><span class="default">factory</span><span class="keyword">(</span><span class="string">'A'</span><span class="keyword">);&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// Mypackage\A::__construct <br />
+&nbsp; </span><span class="default">$b </span><span class="keyword">= </span><span class="default">$foo</span><span class="keyword">-&gt;</span><span class="default">factory</span><span class="keyword">(</span><span class="string">'B'</span><span class="keyword">);&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// Mypackage\B::__construct<br />
+&nbsp; <br />
+&nbsp; </span><span class="default">$a2 </span><span class="keyword">= </span><span class="default">$foo</span><span class="keyword">-&gt;</span><span class="default">factory</span><span class="keyword">(</span><span class="string">'A'</span><span class="keyword">,</span><span class="default">TRUE</span><span class="keyword">);&nbsp; &nbsp; </span><span class="comment">// A::__construct<br />
+&nbsp; </span><span class="default">$b2 </span><span class="keyword">= </span><span class="default">$foo</span><span class="keyword">-&gt;</span><span class="default">factory</span><span class="keyword">(</span><span class="string">'B'</span><span class="keyword">,</span><span class="default">TRUE</span><span class="keyword">);&nbsp; &nbsp; </span><span class="comment">// Will produce : Fatal error: Class 'B' not found in ...namespaced.php on line ...<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="104762""></a>
+  <div class="note">
+   <strong class="user">Alexander Kirk</strong>
+   <a href="#104762" class="date">06-Jul-2011 12:57</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+When extending a class from another namespace that should instantiate a class from within the current namespace, you need to pass on the namespace.<br />
+<br />
+<span class="default">&lt;?php </span><span class="comment">// File1.php<br />
+</span><span class="keyword">namespace </span><span class="default">foo</span><span class="keyword">;<br />
+class </span><span class="default">A </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">factory</span><span class="keyword">() {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return new </span><span class="default">C</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+class </span><span class="default">C </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">tell</span><span class="keyword">() {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"foo"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+<span class="default">&lt;?php </span><span class="comment">// File2.php<br />
+</span><span class="keyword">namespace </span><span class="default">bar</span><span class="keyword">;<br />
+class </span><span class="default">B </span><span class="keyword">extends </span><span class="default">\foo\A </span><span class="keyword">{}<br />
+class </span><span class="default">C </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">tell</span><span class="keyword">() {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"bar"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">include </span><span class="string">"File1.php"</span><span class="keyword">;<br />
+include </span><span class="string">"File2.php"</span><span class="keyword">;<br />
+</span><span class="default">$b </span><span class="keyword">= new </span><span class="default">bar\B</span><span class="keyword">;<br />
+</span><span class="default">$c </span><span class="keyword">= </span><span class="default">$b</span><span class="keyword">-&gt;</span><span class="default">factory</span><span class="keyword">();<br />
+</span><span class="default">$c</span><span class="keyword">-&gt;</span><span class="default">tell</span><span class="keyword">(); </span><span class="comment">// "foo" but you want "bar"<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+You need to do it like this:<br />
+<br />
+When extending a class from another namespace that should instantiate a class from within the current namespace, you need to pass on the namespace.<br />
+<br />
+<span class="default">&lt;?php </span><span class="comment">// File1.php<br />
+</span><span class="keyword">namespace </span><span class="default">foo</span><span class="keyword">;<br />
+class </span><span class="default">A </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; protected </span><span class="default">$namespace </span><span class="keyword">= </span><span class="default">__NAMESPACE__</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">factory</span><span class="keyword">() {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$c </span><span class="keyword">= </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">namespace </span><span class="keyword">. </span><span class="string">'\C'</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return new </span><span class="default">$c</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+class </span><span class="default">C </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">tell</span><span class="keyword">() {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"foo"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+<span class="default">&lt;?php </span><span class="comment">// File2.php<br />
+</span><span class="keyword">namespace </span><span class="default">bar</span><span class="keyword">;<br />
+class </span><span class="default">B </span><span class="keyword">extends </span><span class="default">\foo\A </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; protected </span><span class="default">$namespace </span><span class="keyword">= </span><span class="default">__NAMESPACE__</span><span class="keyword">;<br />
+}<br />
+class </span><span class="default">C </span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">tell</span><span class="keyword">() {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"bar"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">include </span><span class="string">"File1.php"</span><span class="keyword">;<br />
+include </span><span class="string">"File2.php"</span><span class="keyword">;<br />
+</span><span class="default">$b </span><span class="keyword">= new </span><span class="default">bar\B</span><span class="keyword">;<br />
+</span><span class="default">$c </span><span class="keyword">= </span><span class="default">$b</span><span class="keyword">-&gt;</span><span class="default">factory</span><span class="keyword">();<br />
+</span><span class="default">$c</span><span class="keyword">-&gt;</span><span class="default">tell</span><span class="keyword">(); </span><span class="comment">// "bar"<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+(it seems that the namespace-backslashes are stripped from the source code in the preview, maybe it works in the main view. If not: fooA was written as \foo\A and barB as bar\B)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="92764""></a>
+  <div class="note">
+   <strong class="user">scott at intothewild dot ca</strong>
+   <a href="#92764" class="date">07-Aug-2009 03:33</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+as noted by guilhermeblanco at php dot net, <br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+&nbsp; </span><span class="comment">// fact.php<br />
+<br />
+&nbsp; </span><span class="keyword">namespace </span><span class="default">foo</span><span class="keyword">;<br />
+<br />
+&nbsp; class </span><span class="default">fact </span><span class="keyword">{<br />
+<br />
+&nbsp;&nbsp;&nbsp; public function </span><span class="default">create</span><span class="keyword">(</span><span class="default">$class</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp;&nbsp; return new </span><span class="default">$class</span><span class="keyword">();<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp; }<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+<span class="default">&lt;?php <br />
+<br />
+&nbsp; </span><span class="comment">// bar.php<br />
+<br />
+&nbsp; </span><span class="keyword">namespace </span><span class="default">foo</span><span class="keyword">;<br />
+<br />
+&nbsp; class </span><span class="default">bar </span><span class="keyword">{<br />
+&nbsp; ... <br />
+&nbsp; }<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+<span class="default">&lt;?php<br />
+<br />
+&nbsp; </span><span class="comment">// index.php<br />
+&nbsp;<br />
+&nbsp; </span><span class="keyword">namespace </span><span class="default">foo</span><span class="keyword">;<br />
+<br />
+&nbsp; include(</span><span class="string">'fact.php'</span><span class="keyword">);<br />
+&nbsp; <br />
+&nbsp; </span><span class="default">$foofact </span><span class="keyword">= new </span><span class="default">fact</span><span class="keyword">();<br />
+&nbsp; </span><span class="default">$bar </span><span class="keyword">= </span><span class="default">$foofact</span><span class="keyword">-&gt;</span><span class="default">create</span><span class="keyword">(</span><span class="string">'bar'</span><span class="keyword">); </span><span class="comment">// attempts to create \bar<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; // even though foofact and<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; // bar reside in \foo<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="91552""></a>
+  <div class="note">
+   <strong class="user">guilhermeblanco at php dot net</strong>
+   <a href="#91552" class="date">16-Jun-2009 12:04</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Please be aware of FQCN (Full Qualified Class Name) point.
+<br />
+Many people will have troubles with this:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+
+<br />
+</span><span class="comment">// File1.php
+<br />
+</span><span class="keyword">namespace </span><span class="default">foo</span><span class="keyword">;
+<br />
+
+<br />
+class </span><span class="default">Bar </span><span class="keyword">{ ... }
+<br />
+
+<br />
+function </span><span class="default">factory</span><span class="keyword">(</span><span class="default">$class</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp;&nbsp; return new </span><span class="default">$class</span><span class="keyword">;
+<br />
+}
+<br />
+
+<br />
+</span><span class="comment">// File2.php
+<br />
+</span><span class="default">$bar </span><span class="keyword">= </span><span class="default">\foo\factory</span><span class="keyword">(</span><span class="string">'Bar'</span><span class="keyword">); </span><span class="comment">// Will try to instantiate \Bar, not \foo\Bar
+<br />
+
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+To fix that, and also incorporate a 2 step namespace resolution, you can check for \ as first char of $class, and if not present, build manually the FQCN:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+
+<br />
+</span><span class="comment">// File1.php
+<br />
+</span><span class="keyword">namespace </span><span class="default">foo</span><span class="keyword">;
+<br />
+
+<br />
+function </span><span class="default">factory</span><span class="keyword">(</span><span class="default">$class</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp;&nbsp; if (</span><span class="default">$class</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">] != </span><span class="string">'\\'</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">'-&gt;'</span><span class="keyword">;
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$class </span><span class="keyword">= </span><span class="string">'\\' </span><span class="keyword">. </span><span class="default">__NAMESPACE__ </span><span class="keyword">. </span><span class="string">'\\' </span><span class="keyword">. </span><span class="default">$class</span><span class="keyword">;
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; return new </span><span class="default">$class</span><span class="keyword">();
+<br />
+}
+<br />
+
+<br />
+</span><span class="comment">// File2.php
+<br />
+</span><span class="default">$bar </span><span class="keyword">= </span><span class="default">\foo\factory</span><span class="keyword">(</span><span class="string">'Bar'</span><span class="keyword">); </span><span class="comment">// Will correctly instantiate \foo\Bar
+<br />
+
+<br />
+</span><span class="default">$bar2 </span><span class="keyword">= </span><span class="default">\foo\factory</span><span class="keyword">(</span><span class="string">'\anotherfoo\Bar'</span><span class="keyword">); </span><span class="comment">// Wil correctly instantiate \anotherfoo\Bar
+<br />
+
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

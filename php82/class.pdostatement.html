@@ -1,0 +1,541 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>PDOStatement 类</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="pdo.setattribute.html">? PDO::setAttribute</a></li>
+      <li style="float: right;"><a href="pdostatement.bindcolumn.html">PDOStatement::bindColumn ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="book.pdo.html">PDO</a></li>
+    <li>PDOStatement 类</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="class.pdostatement" class="reference">
+ <h1 class="title">PDOStatement 类</h1>
+ 
+ 
+ <div class="partintro"><p class="verinfo">(PHP 5 &gt;= 5.1.0, PHP 7, PHP 8, PECL pdo &gt;= 1.0.0)</p>
+ 
+
+  <div class="section" id="pdostatement.intro">
+   <h2 class="title">简介</h2>
+   <p class="para">
+    代表一条预处理语句，并在该语句被执行后代表一个相关的结果集。
+   </p>
+  </div>
+
+ 
+  <div class="section" id="pdostatement.synopsis">
+   <h2 class="title">类摘要</h2>
+ 
+
+   <div class="classsynopsis">
+    <span class="ooclass">
+     <strong class="classname"></strong>
+    </span>
+
+    <div class="classsynopsisinfo">
+     <span class="ooclass">
+      <span class="modifier">class</span> <strong class="classname">PDOStatement</strong>
+     </span>
+
+     <span class="oointerface"><span class="modifier">implements</span> 
+       <a href="class.iteratoraggregate.html" class="interfacename">IteratorAggregate</a></span> {</div>
+
+    <div class="classsynopsisinfo classsynopsisinfo_comment">/* 属性 */</div>
+    <div class="fieldsynopsis">
+     <span class="modifier">public</span>
+     <span class="type">string</span>
+      <var class="varname"><a href="class.pdostatement.html#pdostatement.props.querystring">$<var class="varname">queryString</var></a></var>;</div>
+
+
+    <div class="classsynopsisinfo classsynopsisinfo_comment">/* 方法 */</div>
+    <div class="methodsynopsis dc-description">
+   <span class="modifier">public</span> <span class="methodname"><a href="pdostatement.bindcolumn.html" class="methodname">bindColumn</a></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><span class="type">string</span>|<span class="type">int</span></span> <code class="parameter">$column</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter reference">&$var</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$type</code><span class="initializer"> = PDO::PARAM_STR</span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$maxLength</code><span class="initializer"> = 0</span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">$driverOptions</code><span class="initializer"> = <strong><code>null</code></strong></span></span><br>): <span class="type">bool</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="pdostatement.bindparam.html" class="methodname">bindParam</a></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><span class="type">string</span>|<span class="type">int</span></span> <code class="parameter">$param</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter reference">&$var</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$type</code><span class="initializer"> = PDO::PARAM_STR</span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$maxLength</code><span class="initializer"> = 0</span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">$driverOptions</code><span class="initializer"> = <strong><code>null</code></strong></span></span><br>): <span class="type">bool</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="pdostatement.bindvalue.html" class="methodname">bindValue</a></span>(<span class="methodparam"><span class="type"><span class="type">string</span>|<span class="type">int</span></span> <code class="parameter">$param</code></span>, <span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">$value</code></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$type</code><span class="initializer"> = PDO::PARAM_STR</span></span>): <span class="type">bool</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="pdostatement.closecursor.html" class="methodname">closeCursor</a></span>(): <span class="type">bool</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="pdostatement.columncount.html" class="methodname">columnCount</a></span>(): <span class="type">int</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="pdostatement.debugdumpparams.html" class="methodname">debugDumpParams</a></span>(): <span class="type"><span class="type">?</span><span class="type">bool</span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="pdostatement.errorcode.html" class="methodname">errorCode</a></span>(): <span class="type"><span class="type">?</span><span class="type">string</span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="pdostatement.errorinfo.html" class="methodname">errorInfo</a></span>(): <span class="type">array</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="pdostatement.execute.html" class="methodname">execute</a></span>(<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">array</span><span class="type"></span></span> <code class="parameter">$params</code><span class="initializer"> = <strong><code>null</code></strong></span></span>): <span class="type">bool</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="pdostatement.fetch.html" class="methodname">fetch</a></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$mode</code><span class="initializer"> = PDO::FETCH_DEFAULT</span></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$cursorOrientation</code><span class="initializer"> = PDO::FETCH_ORI_NEXT</span></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$cursorOffset</code><span class="initializer"> = 0</span></span>): <span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="pdostatement.fetchall.html" class="methodname">fetchAll</a></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$mode</code><span class="initializer"> = PDO::FETCH_DEFAULT</span></span>): <span class="type">array</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="pdostatement.fetchall.html" class="methodname">fetchAll</a></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$mode</code><span class="initializer"> = PDO::FETCH_COLUMN</span></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$column</code></span>): <span class="type">array</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="pdostatement.fetchall.html" class="methodname">fetchAll</a></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$mode</code><span class="initializer"> = PDO::FETCH_CLASS</span></span>, <span class="methodparam"><span class="type">string</span> <code class="parameter">$class</code></span>, <span class="methodparam"><span class="type">?</span><span class="type"><span class="type">array</span><span class="type"></span></span> <code class="parameter">$constructorArgs</code></span>): <span class="type">array</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="pdostatement.fetchall.html" class="methodname">fetchAll</a></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$mode</code><span class="initializer"> = PDO::FETCH_FUNC</span></span>, <span class="methodparam"><span class="type"><a href="language.types.callable.html" class="type callable">callable</a></span> <code class="parameter">$callback</code></span>): <span class="type">array</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="pdostatement.fetchcolumn.html" class="methodname">fetchColumn</a></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$column</code><span class="initializer"> = 0</span></span>): <span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="pdostatement.fetchobject.html" class="methodname">fetchObject</a></span>(<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">string</span><span class="type"></span></span> <code class="parameter">$class</code><span class="initializer"> = &quot;stdClass&quot;</span></span>, <span class="methodparam"><span class="type">array</span> <code class="parameter">$constructorArgs</code><span class="initializer"> = []</span></span>): <span class="type"><span class="type">object</span>|<span class="type"><span class="type false">false</span></span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="pdostatement.getattribute.html" class="methodname">getAttribute</a></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$name</code></span>): <span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="pdostatement.getcolumnmeta.html" class="methodname">getColumnMeta</a></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$column</code></span>): <span class="type"><span class="type">array</span>|<span class="type"><span class="type false">false</span></span></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="pdostatement.getiterator.html" class="methodname">getIterator</a></span>(): <span class="type"><a href="class.iterator.html" class="type Iterator">Iterator</a></span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="pdostatement.nextrowset.html" class="methodname">nextRowset</a></span>(): <span class="type">bool</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="pdostatement.rowcount.html" class="methodname">rowCount</a></span>(): <span class="type">int</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="pdostatement.setattribute.html" class="methodname">setAttribute</a></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$attribute</code></span>, <span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">$value</code></span>): <span class="type">bool</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="pdostatement.setfetchmode.html" class="methodname">setFetchMode</a></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$mode</code></span>): <span class="type">bool</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="pdostatement.setfetchmode.html" class="methodname">setFetchMode</a></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$mode</code><span class="initializer"> = PDO::FETCH_COLUMN</span></span>, <span class="methodparam"><span class="type">int</span> <code class="parameter">$colno</code></span>): <span class="type">bool</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="pdostatement.setfetchmode.html" class="methodname">setFetchMode</a></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$mode</code><span class="initializer"> = PDO::FETCH_CLASS</span></span>, <span class="methodparam"><span class="type">string</span> <code class="parameter">$class</code></span>, <span class="methodparam"><span class="type">?</span><span class="type"><span class="type">array</span><span class="type"></span></span> <code class="parameter">$constructorArgs</code><span class="initializer"> = <strong><code>null</code></strong></span></span>): <span class="type">bool</span></div>
+<div class="methodsynopsis dc-description"><span class="modifier">public</span> <span class="methodname"><a href="pdostatement.setfetchmode.html" class="methodname">setFetchMode</a></span>(<span class="methodparam"><span class="type">int</span> <code class="parameter">$mode</code><span class="initializer"> = PDO::FETCH_INTO</span></span>, <span class="methodparam"><span class="type">object</span> <code class="parameter">$object</code></span>): <span class="type">bool</span></div>
+
+   }</div>
+
+  </div>
+ 
+  <div class="section" id="pdostatement.props">
+   <h2 class="title">属性</h2>
+   <dl>
+    
+     <dt id="pdostatement.props.querystring"><var class="varname">queryString</var></dt>
+
+     <dd>
+
+      <p class="para">
+       所用的查询字符串
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </div>
+ 
+  <div class="section">
+   <h2 class="title">更新日志</h2>
+   <table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>版本</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>8.0.0</td>
+       <td>
+        现在 <span class="classname"><strong class="classname">PDOStatement</strong></span> 的实现不是 <span class="interfacename"><a href="class.traversable.html" class="interfacename">Traversable</a></span>
+        而是 <span class="interfacename"><a href="class.iteratoraggregate.html" class="interfacename">IteratorAggregate</a></span>。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </div>
+
+ </div>
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+<h2>Table of Contents</h2><ul class="chunklist chunklist_reference"><li><a href="pdostatement.bindcolumn.html">PDOStatement::bindColumn</a> &mdash; 绑定一列到一个 PHP 变量</li><li><a href="pdostatement.bindparam.html">PDOStatement::bindParam</a> &mdash; 绑定一个参数到指定的变量名</li><li><a href="pdostatement.bindvalue.html">PDOStatement::bindValue</a> &mdash; 把一个值绑定到一个参数</li><li><a href="pdostatement.closecursor.html">PDOStatement::closeCursor</a> &mdash; 关闭游标，使语句能再次被执行</li><li><a href="pdostatement.columncount.html">PDOStatement::columnCount</a> &mdash; 返回结果集中的列数</li><li><a href="pdostatement.debugdumpparams.html">PDOStatement::debugDumpParams</a> &mdash; 打印一条 SQL 预处理命令</li><li><a href="pdostatement.errorcode.html">PDOStatement::errorCode</a> &mdash; 获取跟上一次语句句柄操作相关的 SQLSTATE</li><li><a href="pdostatement.errorinfo.html">PDOStatement::errorInfo</a> &mdash; 获取跟上一次语句句柄操作相关的扩展错误信息</li><li><a href="pdostatement.execute.html">PDOStatement::execute</a> &mdash; 执行预处理语句</li><li><a href="pdostatement.fetch.html">PDOStatement::fetch</a> &mdash; 从结果集中获取下一行</li><li><a href="pdostatement.fetchall.html">PDOStatement::fetchAll</a> &mdash; 从结果集中获取剩余的行</li><li><a href="pdostatement.fetchcolumn.html">PDOStatement::fetchColumn</a> &mdash; 从结果集中的下一行返回单独的一列</li><li><a href="pdostatement.fetchobject.html">PDOStatement::fetchObject</a> &mdash; 获取下一行并作为一个对象返回</li><li><a href="pdostatement.getattribute.html">PDOStatement::getAttribute</a> &mdash; 检索语句属性</li><li><a href="pdostatement.getcolumnmeta.html">PDOStatement::getColumnMeta</a> &mdash; 返回结果集中一列的元数据</li><li><a href="pdostatement.getiterator.html">PDOStatement::getIterator</a> &mdash; Gets result set iterator</li><li><a href="pdostatement.nextrowset.html">PDOStatement::nextRowset</a> &mdash; 在一个多行集合语句句柄中推进到下一个行集合</li><li><a href="pdostatement.rowcount.html">PDOStatement::rowCount</a> &mdash; 返回受上一个 SQL 语句影响的行数</li><li><a href="pdostatement.setattribute.html">PDOStatement::setAttribute</a> &mdash; 设置一个语句属性</li><li><a href="pdostatement.setfetchmode.html">PDOStatement::setFetchMode</a> &mdash; 为语句设置默认的获取模式</li></ul>
+</div>
+<div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="125581""></a>
+  <div class="note">
+   <strong class="user">nmurzin at mail dot ru</strong>
+   <a href="#125581" class="date">09-Dec-2020 08:22</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I think I found a way to execute a protected SQL query and at the same time find out the number of affected records.<br />
+I have the table 'tbl_users' with the following fields: id, login, password, age<br />
+<br />
+&lt;?<br />
+const DB_DRIVER = "mysql";<br />
+const DB_HOST = "localhost";<br />
+const DB_NAME = "my_db_name";<br />
+const DB_LOGIN = "root";<br />
+const DB_PASS = "root"; //OpenServer.<br />
+<br />
+$connectionString = DB_DRIVER.':host='.DB_HOST.';dbname='.DB_NAME;<br />
+try<br />
+{<br />
+&nbsp;&nbsp;&nbsp; //Connect to database.<br />
+&nbsp;&nbsp;&nbsp; $db = new PDO($connectionString, DB_LOGIN, DB_PASS);<br />
+}<br />
+catch(PDOException $e)<br />
+{<br />
+&nbsp;&nbsp;&nbsp; die("Error: ".$e-&gt;getMessage());<br />
+}<br />
+$db-&gt;setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);<br />
+<br />
+try<br />
+{<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; //Decreasing age for user 'nick1'.<br />
+&nbsp;&nbsp;&nbsp; $prep1 = $db-&gt;prepare("UPDATE tbl_users SET age=age-1 WHERE login='nick1'");<br />
+<br />
+&nbsp;&nbsp;&nbsp; //Increasing age for user 'nick2'.<br />
+&nbsp;&nbsp;&nbsp; $prep2 = $db-&gt;prepare("UPDATE tbl_users SET \r\n age=age+1 WHERE login='nick2'");<br />
+<br />
+&nbsp;&nbsp;&nbsp; //Start transaction.<br />
+&nbsp;&nbsp;&nbsp; $db-&gt;beginTransaction(); //Table type must be InnerDB!<br />
+<br />
+&nbsp;&nbsp;&nbsp; //We assume that everything will be fine.<br />
+&nbsp;&nbsp;&nbsp; $flagDone = true; <br />
+<br />
+&nbsp;&nbsp;&nbsp; //The exec() method returns the number of rows affected by the query.<br />
+&nbsp;&nbsp;&nbsp; //$prep1-&gt;queryString is already an escaped SQL string.<br />
+&nbsp;&nbsp;&nbsp; $result = $db-&gt;exec($prep1-&gt;queryString);<br />
+&nbsp;&nbsp;&nbsp; if($result==false || $result!=1) //var_dump($result) - int(1) or bool(false).<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $flagDone = false;<br />
+<br />
+&nbsp;&nbsp;&nbsp; $result = $db-&gt;exec($prep2-&gt;queryString);<br />
+&nbsp;&nbsp;&nbsp; if($result==false || $result!=1)<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $flagDone = false;<br />
+<br />
+&nbsp;&nbsp;&nbsp; if($flagDone)<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if($db-&gt;commit())<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; echo "Transaction was successful";<br />
+&nbsp;&nbsp;&nbsp; }&nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp;&nbsp;&nbsp; else{<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; echo "Transaction fail";<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $db-&gt;rollback();<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; echo "&lt;br&gt;";<br />
+<br />
+}<br />
+catch(PDOException $e)<br />
+{<br />
+&nbsp;&nbsp;&nbsp; die("Error: ".$e-&gt;getMessage());<br />
+}</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="121766""></a>
+  <div class="note">
+   <strong class="user">Gino D.</strong>
+   <a href="#121766" class="date">17-Oct-2017 10:01</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I don't know why PDOStatement don't return "execution time" and "found rows" so here I created an extended class of PDOStatement with these attributes.<br />
+<br />
+Just have to "setAttribute" of PDO's object to $PDO-&gt;setAttribute(\PDO::ATTR_STATEMENT_CLASS , ['\customs\PDOStatement', [&amp;$this]]);<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="comment">/**<br />
+*<br />
+*<br />
+*<br />
+*/<br />
+<br />
+</span><span class="keyword">namespace </span><span class="default">customs</span><span class="keyword">;<br />
+<br />
+</span><span class="comment">/**<br />
+*<br />
+*<br />
+*<br />
+*/<br />
+<br />
+</span><span class="keyword">final class </span><span class="default">PDOStatement </span><span class="keyword">extends </span><span class="default">\PDOStatement </span><span class="keyword">{<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">/**<br />
+&nbsp;&nbsp;&nbsp; *<br />
+&nbsp;&nbsp;&nbsp; *<br />
+&nbsp;&nbsp;&nbsp; *<br />
+&nbsp;&nbsp;&nbsp; */<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">protected </span><span class="default">$PDO </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; protected </span><span class="default">$inputParams </span><span class="keyword">= [];<br />
+&nbsp;&nbsp;&nbsp; protected </span><span class="default">$executionTime </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; protected </span><span class="default">$resultCount </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">/**<br />
+&nbsp;&nbsp;&nbsp; *<br />
+&nbsp;&nbsp;&nbsp; *<br />
+&nbsp;&nbsp;&nbsp; *<br />
+&nbsp;&nbsp;&nbsp; */<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">protected function </span><span class="default">__construct</span><span class="keyword">(</span><span class="default">PDO </span><span class="keyword">&amp;</span><span class="default">$PDO</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">PDO </span><span class="keyword">= </span><span class="default">$PDO</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">executionTime </span><span class="keyword">= </span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">/**<br />
+&nbsp;&nbsp;&nbsp; *<br />
+&nbsp;&nbsp;&nbsp; *<br />
+&nbsp;&nbsp;&nbsp; *<br />
+&nbsp;&nbsp;&nbsp; */<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">final public function </span><span class="default">getExecutionError</span><span class="keyword">(</span><span class="default">int $i </span><span class="keyword">= </span><span class="default">2</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$executionError </span><span class="keyword">= </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">errorInfo</span><span class="keyword">();<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (isset(</span><span class="default">$executionError</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">]))<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$executionError</span><span class="keyword">[</span><span class="default">$i</span><span class="keyword">];<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$executionError</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">/**<br />
+&nbsp;&nbsp;&nbsp; *<br />
+&nbsp;&nbsp;&nbsp; *<br />
+&nbsp;&nbsp;&nbsp; *<br />
+&nbsp;&nbsp;&nbsp; */<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">final public function </span><span class="default">getExecutionTime</span><span class="keyword">(</span><span class="default">$numberFormat </span><span class="keyword">= </span><span class="default">false</span><span class="keyword">, </span><span class="default">$decPoint </span><span class="keyword">= </span><span class="string">'.'</span><span class="keyword">, </span><span class="default">$thousandsSep </span><span class="keyword">= </span><span class="string">','</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">is_numeric</span><span class="keyword">(</span><span class="default">$numberFormat</span><span class="keyword">))<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">number_format</span><span class="keyword">(</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">executionTime</span><span class="keyword">, </span><span class="default">$numberFormat</span><span class="keyword">, </span><span class="default">$decPoint</span><span class="keyword">, </span><span class="default">$thousandsSep</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">executionTime</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">/**<br />
+&nbsp;&nbsp;&nbsp; *<br />
+&nbsp;&nbsp;&nbsp; *<br />
+&nbsp;&nbsp;&nbsp; *<br />
+&nbsp;&nbsp;&nbsp; */<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">final public function </span><span class="default">getResultCount</span><span class="keyword">(</span><span class="default">$numberFormat </span><span class="keyword">= </span><span class="default">false</span><span class="keyword">, </span><span class="default">$decPoint </span><span class="keyword">= </span><span class="string">'.'</span><span class="keyword">, </span><span class="default">$thousandsSep </span><span class="keyword">= </span><span class="string">','</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">is_numeric</span><span class="keyword">(</span><span class="default">$numberFormat</span><span class="keyword">))<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">number_format</span><span class="keyword">(</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">resultCount</span><span class="keyword">, </span><span class="default">$numberFormat</span><span class="keyword">, </span><span class="default">$decPoint</span><span class="keyword">, </span><span class="default">$thousandsSep</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">resultCount</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">/**<br />
+&nbsp;&nbsp;&nbsp; *<br />
+&nbsp;&nbsp;&nbsp; *<br />
+&nbsp;&nbsp;&nbsp; *<br />
+&nbsp;&nbsp;&nbsp; */<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">final public function </span><span class="default">getLastInsertId</span><span class="keyword">() {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">PDO</span><span class="keyword">-&gt;</span><span class="default">lastInsertId</span><span class="keyword">();<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">/**<br />
+&nbsp;&nbsp;&nbsp; *<br />
+&nbsp;&nbsp;&nbsp; *<br />
+&nbsp;&nbsp;&nbsp; *<br />
+&nbsp;&nbsp;&nbsp; */<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">final public function </span><span class="default">bindValues</span><span class="keyword">(array </span><span class="default">$inputParams</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; foreach (</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">inputParams </span><span class="keyword">= </span><span class="default">array_values</span><span class="keyword">(</span><span class="default">$inputParams</span><span class="keyword">) as </span><span class="default">$i </span><span class="keyword">=&gt; </span><span class="default">$value</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$varType </span><span class="keyword">= </span><span class="default">is_null</span><span class="keyword">(</span><span class="default">$value</span><span class="keyword">) ? </span><span class="default">\PDO</span><span class="keyword">::</span><span class="default">PARAM_NULL </span><span class="keyword">: </span><span class="default">is_bool</span><span class="keyword">(</span><span class="default">$value</span><span class="keyword">) ? </span><span class="default">\PDO</span><span class="keyword">::</span><span class="default">PARAM_BOOL </span><span class="keyword">: </span><span class="default">is_int</span><span class="keyword">(</span><span class="default">$value</span><span class="keyword">) ? </span><span class="default">\PDO</span><span class="keyword">::</span><span class="default">PARAM_INT </span><span class="keyword">: </span><span class="default">\PDO</span><span class="keyword">::</span><span class="default">PARAM_STR</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if (!</span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">bindValue</span><span class="keyword">(++ </span><span class="default">$i</span><span class="keyword">, </span><span class="default">$value</span><span class="keyword">, </span><span class="default">$varType</span><span class="keyword">))<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">false</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">true</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">/**<br />
+&nbsp;&nbsp;&nbsp; *<br />
+&nbsp;&nbsp;&nbsp; *<br />
+&nbsp;&nbsp;&nbsp; *<br />
+&nbsp;&nbsp;&nbsp; */<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">final public function </span><span class="default">execute</span><span class="keyword">(</span><span class="default">$inputParams </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">$inputParams</span><span class="keyword">)<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">inputParams </span><span class="keyword">= </span><span class="default">$inputParams</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">$executed </span><span class="keyword">= </span><span class="default">parent</span><span class="keyword">::</span><span class="default">execute</span><span class="keyword">(</span><span class="default">$inputParams</span><span class="keyword">))<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">executionTime </span><span class="keyword">= </span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">) - </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">executionTime</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$executed</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">/**<br />
+&nbsp;&nbsp;&nbsp; *<br />
+&nbsp;&nbsp;&nbsp; *<br />
+&nbsp;&nbsp;&nbsp; *<br />
+&nbsp;&nbsp;&nbsp; */<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">final public function </span><span class="default">fetchAll</span><span class="keyword">(</span><span class="default">$how </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">, </span><span class="default">$className </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">, </span><span class="default">$ctorArgs </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$resultSet </span><span class="keyword">= </span><span class="default">parent</span><span class="keyword">::</span><span class="default">fetchAll</span><span class="keyword">(... </span><span class="default">func_get_args</span><span class="keyword">());<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (!empty(</span><span class="default">$resultSet</span><span class="keyword">)) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$queryString </span><span class="keyword">= </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">queryString</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$inputParams </span><span class="keyword">= </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">inputParams</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">preg_match</span><span class="keyword">(</span><span class="string">'/(.*)?LIMIT/is'</span><span class="keyword">, </span><span class="default">$queryString</span><span class="keyword">, </span><span class="default">$match</span><span class="keyword">))<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$queryString </span><span class="keyword">= </span><span class="default">$match</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">];<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$queryString </span><span class="keyword">= </span><span class="default">sprintf</span><span class="keyword">(</span><span class="string">'SELECT COUNT(*) AS T FROM (%s) DT'</span><span class="keyword">, </span><span class="default">$queryString</span><span class="keyword">);<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if ((</span><span class="default">$placeholders </span><span class="keyword">= </span><span class="default">substr_count</span><span class="keyword">(</span><span class="default">$queryString</span><span class="keyword">, </span><span class="string">'?'</span><span class="keyword">)) &lt; </span><span class="default">count</span><span class="keyword">(</span><span class="default">$inputParams</span><span class="keyword">))<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$inputParams </span><span class="keyword">= </span><span class="default">array_slice</span><span class="keyword">(</span><span class="default">$inputParams</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">, </span><span class="default">$placeholders</span><span class="keyword">);<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if ((</span><span class="default">$sth </span><span class="keyword">= </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">PDO</span><span class="keyword">-&gt;</span><span class="default">prepare</span><span class="keyword">(</span><span class="default">$queryString</span><span class="keyword">)) &amp;&amp; </span><span class="default">$sth</span><span class="keyword">-&gt;</span><span class="default">bindValues</span><span class="keyword">(</span><span class="default">$inputParams</span><span class="keyword">) &amp;&amp; </span><span class="default">$sth</span><span class="keyword">-&gt;</span><span class="default">execute</span><span class="keyword">())<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">resultCount </span><span class="keyword">= </span><span class="default">$sth</span><span class="keyword">-&gt;</span><span class="default">fetchColumn</span><span class="keyword">();<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$sth </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$resultSet</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

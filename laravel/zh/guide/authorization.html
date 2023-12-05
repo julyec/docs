@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content="VuePress 2.0.0-beta.67" />
+    <meta name="theme" content="VuePress Theme Hope" />
+    <script type="text/javascript" async="" src="/laravel/iconify-icon@1.js" data-loaded="true"></script><meta name="keywords" content="php,go,python,c++,nsis"><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?800fce94596cf587cd6a0e80314e5360";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><title>用户授权 | Laravel 10 中文文档</title><meta name="description" content="语法优雅的Web应用框架">
+    <style>
+      html {
+        background: #fff;
+      }
+
+      html[data-theme="dark"] {
+        background: #1d1e1f;
+      }
+
+      body {
+        background: var(--bg-color);
+      }
+    </style>
+    <script>
+      const userMode = localStorage.getItem("vuepress-theme-hope-scheme");
+      const systemDarkMode =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+      if (userMode === "dark" || (userMode !== "light" && systemDarkMode)) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    </script>
+    <link rel="preload" href="/laravel/assets/style-46281858.css" as="style"><link rel="stylesheet" href="/laravel/assets/style-46281858.css">
+    <link rel="modulepreload" href="/laravel/assets/app-8cdff07c.js"><link rel="modulepreload" href="/laravel/assets/authorization.html-7863fce7.js"><link rel="modulepreload" href="/laravel/assets/plugin-vue_export-helper-c27b6911.js"><link rel="modulepreload" href="/laravel/assets/authorization.html-4c505770.js"><link rel="prefetch" href="/laravel/assets/index.html-f96c0672.js" as="script"><link rel="prefetch" href="/laravel/assets/artisan.html-0e9d03c9.js" as="script"><link rel="prefetch" href="/laravel/assets/authentication.html-38ef59d8.js" as="script"><link rel="prefetch" href="/laravel/assets/authorization.html-313c4047.js" as="script"><link rel="prefetch" href="/laravel/assets/billing.html-ebe1a72a.js" as="script"><link rel="prefetch" href="/laravel/assets/blade.html-5155c6b6.js" as="script"><link rel="prefetch" href="/laravel/assets/broadcasting.html-e3959b4b.js" as="script"><link rel="prefetch" href="/laravel/assets/cache.html-70e1224c.js" as="script"><link rel="prefetch" href="/laravel/assets/cashier-paddle.html-d34b45b1.js" as="script"><link rel="prefetch" href="/laravel/assets/collections.html-1bd259e8.js" as="script"><link rel="prefetch" href="/laravel/assets/configuration.html-b8f3b774.js" as="script"><link rel="prefetch" href="/laravel/assets/console-tests.html-4c60daf9.js" as="script"><link rel="prefetch" href="/laravel/assets/container.html-b94c7ddb.js" as="script"><link rel="prefetch" href="/laravel/assets/contracts.html-c22783be.js" as="script"><link rel="prefetch" href="/laravel/assets/contributions.html-ab50d596.js" as="script"><link rel="prefetch" href="/laravel/assets/controllers.html-ac993460.js" as="script"><link rel="prefetch" href="/laravel/assets/csrf.html-16cf0dfe.js" as="script"><link rel="prefetch" href="/laravel/assets/database-testing.html-2c62b269.js" as="script"><link rel="prefetch" href="/laravel/assets/database.html-b52ec6ec.js" as="script"><link rel="prefetch" href="/laravel/assets/deployment.html-4c508f11.js" as="script"><link rel="prefetch" href="/laravel/assets/documentation.html-91f17157.js" as="script"><link rel="prefetch" href="/laravel/assets/dusk.html-89649ae7.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-collections.html-ac2068d3.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-factories.html-dc84ddb7.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-mutators.html-14654604.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-relationships.html-2aef18f6.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-resources.html-756db712.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-serialization.html-b7d47b88.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent.html-2648a01d.js" as="script"><link rel="prefetch" href="/laravel/assets/encryption.html-5624bd7a.js" as="script"><link rel="prefetch" href="/laravel/assets/envoy.html-151ce29e.js" as="script"><link rel="prefetch" href="/laravel/assets/errors.html-4e830ab6.js" as="script"><link rel="prefetch" href="/laravel/assets/events.html-23967b21.js" as="script"><link rel="prefetch" href="/laravel/assets/facades.html-fac9d294.js" as="script"><link rel="prefetch" href="/laravel/assets/filesystem.html-c5ce7cdd.js" as="script"><link rel="prefetch" href="/laravel/assets/folio.html-0cc287b9.js" as="script"><link rel="prefetch" href="/laravel/assets/fortify.html-eb8b5276.js" as="script"><link rel="prefetch" href="/laravel/assets/frontend.html-cfcef92f.js" as="script"><link rel="prefetch" href="/laravel/assets/hashing.html-e8bbaa17.js" as="script"><link rel="prefetch" href="/laravel/assets/helpers.html-a2bc32eb.js" as="script"><link rel="prefetch" href="/laravel/assets/homestead.html-ad159085.js" as="script"><link rel="prefetch" href="/laravel/assets/horizon.html-8e76a89c.js" as="script"><link rel="prefetch" href="/laravel/assets/http-client.html-5a16d377.js" as="script"><link rel="prefetch" href="/laravel/assets/http-tests.html-03ae925a.js" as="script"><link rel="prefetch" href="/laravel/assets/installation.html-8821556d.js" as="script"><link rel="prefetch" href="/laravel/assets/license.html-bc66f84b.js" as="script"><link rel="prefetch" href="/laravel/assets/lifecycle.html-686bfd8a.js" as="script"><link rel="prefetch" href="/laravel/assets/localization.html-cccfd668.js" as="script"><link rel="prefetch" href="/laravel/assets/logging.html-00676fcd.js" as="script"><link rel="prefetch" href="/laravel/assets/mail.html-9e64e563.js" as="script"><link rel="prefetch" href="/laravel/assets/middleware.html-e48e346e.js" as="script"><link rel="prefetch" href="/laravel/assets/migrations.html-d78bac4a.js" as="script"><link rel="prefetch" href="/laravel/assets/mix.html-2b8bdbfe.js" as="script"><link rel="prefetch" href="/laravel/assets/mocking.html-f1956c22.js" as="script"><link rel="prefetch" href="/laravel/assets/notifications.html-1579c318.js" as="script"><link rel="prefetch" href="/laravel/assets/octane.html-c7fc39fc.js" as="script"><link rel="prefetch" href="/laravel/assets/packages.html-36c879b0.js" as="script"><link rel="prefetch" href="/laravel/assets/pagination.html-1d87fa5b.js" as="script"><link rel="prefetch" href="/laravel/assets/passport.html-5c57ac15.js" as="script"><link rel="prefetch" href="/laravel/assets/passwords.html-8d207cd7.js" as="script"><link rel="prefetch" href="/laravel/assets/pennant.html-69b48e93.js" as="script"><link rel="prefetch" href="/laravel/assets/pint.html-dc08bca4.js" as="script"><link rel="prefetch" href="/laravel/assets/precognition.html-3249a97e.js" as="script"><link rel="prefetch" href="/laravel/assets/processes.html-8a5622d9.js" as="script"><link rel="prefetch" href="/laravel/assets/prompts.html-b6325a9f.js" as="script"><link rel="prefetch" href="/laravel/assets/providers.html-5ea45f09.js" as="script"><link rel="prefetch" href="/laravel/assets/queries.html-10f3290c.js" as="script"><link rel="prefetch" href="/laravel/assets/queues.html-80da253f.js" as="script"><link rel="prefetch" href="/laravel/assets/rate-limiting.html-1c41ec54.js" as="script"><link rel="prefetch" href="/laravel/assets/redirects.html-43482cb9.js" as="script"><link rel="prefetch" href="/laravel/assets/redis.html-a3b5ee4a.js" as="script"><link rel="prefetch" href="/laravel/assets/releases.html-476c8b9c.js" as="script"><link rel="prefetch" href="/laravel/assets/requests.html-be013b84.js" as="script"><link rel="prefetch" href="/laravel/assets/responses.html-9beef5ff.js" as="script"><link rel="prefetch" href="/laravel/assets/routing.html-f8c71973.js" as="script"><link rel="prefetch" href="/laravel/assets/sail.html-47beb292.js" as="script"><link rel="prefetch" href="/laravel/assets/sanctum.html-303fd66c.js" as="script"><link rel="prefetch" href="/laravel/assets/scheduling.html-1b59676e.js" as="script"><link rel="prefetch" href="/laravel/assets/scout.html-7921380f.js" as="script"><link rel="prefetch" href="/laravel/assets/seeding.html-183db364.js" as="script"><link rel="prefetch" href="/laravel/assets/session.html-3244e34a.js" as="script"><link rel="prefetch" href="/laravel/assets/socialite.html-30fef159.js" as="script"><link rel="prefetch" href="/laravel/assets/starter-kits.html-08d43c42.js" as="script"><link rel="prefetch" href="/laravel/assets/strings.html-5caa398e.js" as="script"><link rel="prefetch" href="/laravel/assets/structure.html-d831ad60.js" as="script"><link rel="prefetch" href="/laravel/assets/telescope.html-07644439.js" as="script"><link rel="prefetch" href="/laravel/assets/testing.html-238fa923.js" as="script"><link rel="prefetch" href="/laravel/assets/upgrade.html-2dffc447.js" as="script"><link rel="prefetch" href="/laravel/assets/urls.html-d42d29d2.js" as="script"><link rel="prefetch" href="/laravel/assets/valet.html-895e5076.js" as="script"><link rel="prefetch" href="/laravel/assets/validation.html-c4305591.js" as="script"><link rel="prefetch" href="/laravel/assets/verification.html-dcbd00f1.js" as="script"><link rel="prefetch" href="/laravel/assets/views.html-41709ab9.js" as="script"><link rel="prefetch" href="/laravel/assets/vite.html-d65b641f.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-5631fb16.js" as="script"><link rel="prefetch" href="/laravel/assets/artisan.html-e3f03ec9.js" as="script"><link rel="prefetch" href="/laravel/assets/authentication.html-570e0239.js" as="script"><link rel="prefetch" href="/laravel/assets/billing.html-88d8885f.js" as="script"><link rel="prefetch" href="/laravel/assets/blade.html-b64aa35f.js" as="script"><link rel="prefetch" href="/laravel/assets/broadcasting.html-12a9e8bc.js" as="script"><link rel="prefetch" href="/laravel/assets/cache.html-bb5c9ae7.js" as="script"><link rel="prefetch" href="/laravel/assets/cashier-paddle.html-d0d72082.js" as="script"><link rel="prefetch" href="/laravel/assets/collections.html-d11860ac.js" as="script"><link rel="prefetch" href="/laravel/assets/configuration.html-ef1b96fe.js" as="script"><link rel="prefetch" href="/laravel/assets/console-tests.html-067056ba.js" as="script"><link rel="prefetch" href="/laravel/assets/container.html-61acca56.js" as="script"><link rel="prefetch" href="/laravel/assets/contracts.html-84cb10c6.js" as="script"><link rel="prefetch" href="/laravel/assets/contributions.html-fce99fc6.js" as="script"><link rel="prefetch" href="/laravel/assets/controllers.html-3e90ab99.js" as="script"><link rel="prefetch" href="/laravel/assets/csrf.html-cca49abf.js" as="script"><link rel="prefetch" href="/laravel/assets/database-testing.html-b1f8d202.js" as="script"><link rel="prefetch" href="/laravel/assets/database.html-56afdfc4.js" as="script"><link rel="prefetch" href="/laravel/assets/deployment.html-4185fda7.js" as="script"><link rel="prefetch" href="/laravel/assets/documentation.html-131ef588.js" as="script"><link rel="prefetch" href="/laravel/assets/dusk.html-a5e6d446.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-collections.html-4b4e2d65.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-factories.html-f932bd31.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-mutators.html-229dc52b.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-relationships.html-e1fe4d70.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-resources.html-3c63a8eb.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-serialization.html-72f70b3a.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent.html-5455c9d2.js" as="script"><link rel="prefetch" href="/laravel/assets/encryption.html-419526ec.js" as="script"><link rel="prefetch" href="/laravel/assets/envoy.html-17270835.js" as="script"><link rel="prefetch" href="/laravel/assets/errors.html-13da2477.js" as="script"><link rel="prefetch" href="/laravel/assets/events.html-5732e8dc.js" as="script"><link rel="prefetch" href="/laravel/assets/facades.html-e1c0e131.js" as="script"><link rel="prefetch" href="/laravel/assets/filesystem.html-aae8333b.js" as="script"><link rel="prefetch" href="/laravel/assets/folio.html-5751cd6a.js" as="script"><link rel="prefetch" href="/laravel/assets/fortify.html-de544b50.js" as="script"><link rel="prefetch" href="/laravel/assets/frontend.html-c0546cc4.js" as="script"><link rel="prefetch" href="/laravel/assets/hashing.html-d62b0c77.js" as="script"><link rel="prefetch" href="/laravel/assets/helpers.html-e22a2360.js" as="script"><link rel="prefetch" href="/laravel/assets/homestead.html-d6d4616d.js" as="script"><link rel="prefetch" href="/laravel/assets/horizon.html-8c3589f2.js" as="script"><link rel="prefetch" href="/laravel/assets/http-client.html-3fd134cc.js" as="script"><link rel="prefetch" href="/laravel/assets/http-tests.html-ac17c893.js" as="script"><link rel="prefetch" href="/laravel/assets/installation.html-0300ec90.js" as="script"><link rel="prefetch" href="/laravel/assets/lifecycle.html-42ef0670.js" as="script"><link rel="prefetch" href="/laravel/assets/localization.html-f5186801.js" as="script"><link rel="prefetch" href="/laravel/assets/logging.html-4f779e10.js" as="script"><link rel="prefetch" href="/laravel/assets/mail.html-cd3aaf70.js" as="script"><link rel="prefetch" href="/laravel/assets/middleware.html-df624dbc.js" as="script"><link rel="prefetch" href="/laravel/assets/migrations.html-ba6aabb2.js" as="script"><link rel="prefetch" href="/laravel/assets/mix.html-2ef5bcc9.js" as="script"><link rel="prefetch" href="/laravel/assets/mocking.html-303d8f5d.js" as="script"><link rel="prefetch" href="/laravel/assets/notifications.html-b3122e5b.js" as="script"><link rel="prefetch" href="/laravel/assets/octane.html-33e350ba.js" as="script"><link rel="prefetch" href="/laravel/assets/packages.html-3b6d480b.js" as="script"><link rel="prefetch" href="/laravel/assets/pagination.html-9d7ef5b6.js" as="script"><link rel="prefetch" href="/laravel/assets/passport.html-99fa6d16.js" as="script"><link rel="prefetch" href="/laravel/assets/passwords.html-e112c41c.js" as="script"><link rel="prefetch" href="/laravel/assets/pennant.html-d41a13be.js" as="script"><link rel="prefetch" href="/laravel/assets/pint.html-cd80abc4.js" as="script"><link rel="prefetch" href="/laravel/assets/precognition.html-d6193fa1.js" as="script"><link rel="prefetch" href="/laravel/assets/processes.html-dc160b96.js" as="script"><link rel="prefetch" href="/laravel/assets/prompts.html-43f92ec5.js" as="script"><link rel="prefetch" href="/laravel/assets/providers.html-8113e0c3.js" as="script"><link rel="prefetch" href="/laravel/assets/queries.html-18b3df87.js" as="script"><link rel="prefetch" href="/laravel/assets/queues.html-371e349e.js" as="script"><link rel="prefetch" href="/laravel/assets/rate-limiting.html-eb27bba5.js" as="script"><link rel="prefetch" href="/laravel/assets/redirects.html-a277c696.js" as="script"><link rel="prefetch" href="/laravel/assets/redis.html-3d2e8c35.js" as="script"><link rel="prefetch" href="/laravel/assets/releases.html-20f1c49f.js" as="script"><link rel="prefetch" href="/laravel/assets/requests.html-e7bb39cd.js" as="script"><link rel="prefetch" href="/laravel/assets/responses.html-964d8da8.js" as="script"><link rel="prefetch" href="/laravel/assets/routing.html-cdd5aefe.js" as="script"><link rel="prefetch" href="/laravel/assets/sail.html-edb4e5fb.js" as="script"><link rel="prefetch" href="/laravel/assets/sanctum.html-1acec381.js" as="script"><link rel="prefetch" href="/laravel/assets/scheduling.html-0dfd2863.js" as="script"><link rel="prefetch" href="/laravel/assets/scout.html-dc7b7abb.js" as="script"><link rel="prefetch" href="/laravel/assets/seeding.html-7e6fae04.js" as="script"><link rel="prefetch" href="/laravel/assets/session.html-b1d84cee.js" as="script"><link rel="prefetch" href="/laravel/assets/socialite.html-1924a537.js" as="script"><link rel="prefetch" href="/laravel/assets/starter-kits.html-57960007.js" as="script"><link rel="prefetch" href="/laravel/assets/strings.html-51dbbc47.js" as="script"><link rel="prefetch" href="/laravel/assets/structure.html-cbbae4a7.js" as="script"><link rel="prefetch" href="/laravel/assets/telescope.html-8ed6a181.js" as="script"><link rel="prefetch" href="/laravel/assets/testing.html-85e55a0b.js" as="script"><link rel="prefetch" href="/laravel/assets/upgrade.html-06aeb8f2.js" as="script"><link rel="prefetch" href="/laravel/assets/urls.html-0aa1615d.js" as="script"><link rel="prefetch" href="/laravel/assets/valet.html-dae1469d.js" as="script"><link rel="prefetch" href="/laravel/assets/validation.html-7aba5426.js" as="script"><link rel="prefetch" href="/laravel/assets/verification.html-9d448ce8.js" as="script"><link rel="prefetch" href="/laravel/assets/views.html-44c76116.js" as="script"><link rel="prefetch" href="/laravel/assets/vite.html-2c3c8f9a.js" as="script"><link rel="prefetch" href="/laravel/assets/404.html-fce79bde.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-ebda9a17.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-0dab9b40.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-8048da3d.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-6af0b259.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-0341c66f.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-c4c647eb.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-aa7de2dc.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-7993dca7.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-6c43b2d4.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-ee40829a.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-aed7618a.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-2341e875.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-edc8931d.js" as="script"><link rel="prefetch" href="/laravel/assets/artisan.html-e993b633.js" as="script"><link rel="prefetch" href="/laravel/assets/authentication.html-7da6db12.js" as="script"><link rel="prefetch" href="/laravel/assets/authorization.html-d4c66ac1.js" as="script"><link rel="prefetch" href="/laravel/assets/billing.html-7eb0b79a.js" as="script"><link rel="prefetch" href="/laravel/assets/blade.html-c1cb1dfc.js" as="script"><link rel="prefetch" href="/laravel/assets/broadcasting.html-11edd1a7.js" as="script"><link rel="prefetch" href="/laravel/assets/cache.html-65ddb893.js" as="script"><link rel="prefetch" href="/laravel/assets/cashier-paddle.html-37b20071.js" as="script"><link rel="prefetch" href="/laravel/assets/collections.html-f3d4eec3.js" as="script"><link rel="prefetch" href="/laravel/assets/configuration.html-139c4ce1.js" as="script"><link rel="prefetch" href="/laravel/assets/console-tests.html-f13384fc.js" as="script"><link rel="prefetch" href="/laravel/assets/container.html-3fecf713.js" as="script"><link rel="prefetch" href="/laravel/assets/contracts.html-d2c8d8e2.js" as="script"><link rel="prefetch" href="/laravel/assets/contributions.html-4bc7357e.js" as="script"><link rel="prefetch" href="/laravel/assets/controllers.html-96388c46.js" as="script"><link rel="prefetch" href="/laravel/assets/csrf.html-0aed46d2.js" as="script"><link rel="prefetch" href="/laravel/assets/database-testing.html-d1cea1af.js" as="script"><link rel="prefetch" href="/laravel/assets/database.html-1c324c1e.js" as="script"><link rel="prefetch" href="/laravel/assets/deployment.html-cd42449c.js" as="script"><link rel="prefetch" href="/laravel/assets/documentation.html-6ef98220.js" as="script"><link rel="prefetch" href="/laravel/assets/dusk.html-6327491d.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-collections.html-53d3e276.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-factories.html-426c1e26.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-mutators.html-d9486734.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-relationships.html-c02078c7.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-resources.html-ecb9bcf3.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-serialization.html-34f984bc.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent.html-66438545.js" as="script"><link rel="prefetch" href="/laravel/assets/encryption.html-8d1623ce.js" as="script"><link rel="prefetch" href="/laravel/assets/envoy.html-63d38c3e.js" as="script"><link rel="prefetch" href="/laravel/assets/errors.html-e19b0e13.js" as="script"><link rel="prefetch" href="/laravel/assets/events.html-22c8bd0c.js" as="script"><link rel="prefetch" href="/laravel/assets/facades.html-8e1e5183.js" as="script"><link rel="prefetch" href="/laravel/assets/filesystem.html-53609b73.js" as="script"><link rel="prefetch" href="/laravel/assets/folio.html-ad52a678.js" as="script"><link rel="prefetch" href="/laravel/assets/fortify.html-e45c98c4.js" as="script"><link rel="prefetch" href="/laravel/assets/frontend.html-15391800.js" as="script"><link rel="prefetch" href="/laravel/assets/hashing.html-6da54123.js" as="script"><link rel="prefetch" href="/laravel/assets/helpers.html-e2446946.js" as="script"><link rel="prefetch" href="/laravel/assets/homestead.html-2884a781.js" as="script"><link rel="prefetch" href="/laravel/assets/horizon.html-973e1311.js" as="script"><link rel="prefetch" href="/laravel/assets/http-client.html-d81392ad.js" as="script"><link rel="prefetch" href="/laravel/assets/http-tests.html-a03a5f0c.js" as="script"><link rel="prefetch" href="/laravel/assets/installation.html-95a9c3aa.js" as="script"><link rel="prefetch" href="/laravel/assets/license.html-62430ab5.js" as="script"><link rel="prefetch" href="/laravel/assets/lifecycle.html-18ea8fb3.js" as="script"><link rel="prefetch" href="/laravel/assets/localization.html-922ff115.js" as="script"><link rel="prefetch" href="/laravel/assets/logging.html-050985f2.js" as="script"><link rel="prefetch" href="/laravel/assets/mail.html-47a04f02.js" as="script"><link rel="prefetch" href="/laravel/assets/middleware.html-6453d1cc.js" as="script"><link rel="prefetch" href="/laravel/assets/migrations.html-f1ebff53.js" as="script"><link rel="prefetch" href="/laravel/assets/mix.html-249cd58a.js" as="script"><link rel="prefetch" href="/laravel/assets/mocking.html-e522dfa3.js" as="script"><link rel="prefetch" href="/laravel/assets/notifications.html-269dd42d.js" as="script"><link rel="prefetch" href="/laravel/assets/octane.html-e5187b2c.js" as="script"><link rel="prefetch" href="/laravel/assets/packages.html-4a09b71f.js" as="script"><link rel="prefetch" href="/laravel/assets/pagination.html-f3918ef6.js" as="script"><link rel="prefetch" href="/laravel/assets/passport.html-3a76745f.js" as="script"><link rel="prefetch" href="/laravel/assets/passwords.html-146f6313.js" as="script"><link rel="prefetch" href="/laravel/assets/pennant.html-0709c429.js" as="script"><link rel="prefetch" href="/laravel/assets/pint.html-bd0a9ee4.js" as="script"><link rel="prefetch" href="/laravel/assets/precognition.html-15b4c7aa.js" as="script"><link rel="prefetch" href="/laravel/assets/processes.html-17788aeb.js" as="script"><link rel="prefetch" href="/laravel/assets/prompts.html-10f9437f.js" as="script"><link rel="prefetch" href="/laravel/assets/providers.html-f4c3a729.js" as="script"><link rel="prefetch" href="/laravel/assets/queries.html-85a38561.js" as="script"><link rel="prefetch" href="/laravel/assets/queues.html-57e09fd0.js" as="script"><link rel="prefetch" href="/laravel/assets/rate-limiting.html-85518e10.js" as="script"><link rel="prefetch" href="/laravel/assets/redirects.html-7ee7088a.js" as="script"><link rel="prefetch" href="/laravel/assets/redis.html-fa970b20.js" as="script"><link rel="prefetch" href="/laravel/assets/releases.html-45fa3fe7.js" as="script"><link rel="prefetch" href="/laravel/assets/requests.html-9d100885.js" as="script"><link rel="prefetch" href="/laravel/assets/responses.html-a10133de.js" as="script"><link rel="prefetch" href="/laravel/assets/routing.html-a924b8e7.js" as="script"><link rel="prefetch" href="/laravel/assets/sail.html-bc7fbf87.js" as="script"><link rel="prefetch" href="/laravel/assets/sanctum.html-e527697f.js" as="script"><link rel="prefetch" href="/laravel/assets/scheduling.html-8b344747.js" as="script"><link rel="prefetch" href="/laravel/assets/scout.html-97fcbf47.js" as="script"><link rel="prefetch" href="/laravel/assets/seeding.html-cc731f3b.js" as="script"><link rel="prefetch" href="/laravel/assets/session.html-f238564d.js" as="script"><link rel="prefetch" href="/laravel/assets/socialite.html-b92fde73.js" as="script"><link rel="prefetch" href="/laravel/assets/starter-kits.html-f28c174c.js" as="script"><link rel="prefetch" href="/laravel/assets/strings.html-f042b92f.js" as="script"><link rel="prefetch" href="/laravel/assets/structure.html-1a62269a.js" as="script"><link rel="prefetch" href="/laravel/assets/telescope.html-001dace4.js" as="script"><link rel="prefetch" href="/laravel/assets/testing.html-1102a85d.js" as="script"><link rel="prefetch" href="/laravel/assets/upgrade.html-ba213e40.js" as="script"><link rel="prefetch" href="/laravel/assets/urls.html-1078da29.js" as="script"><link rel="prefetch" href="/laravel/assets/valet.html-59bc6d60.js" as="script"><link rel="prefetch" href="/laravel/assets/validation.html-277792fc.js" as="script"><link rel="prefetch" href="/laravel/assets/verification.html-79793389.js" as="script"><link rel="prefetch" href="/laravel/assets/views.html-9a61add6.js" as="script"><link rel="prefetch" href="/laravel/assets/vite.html-3bbbc50b.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-1144717f.js" as="script"><link rel="prefetch" href="/laravel/assets/artisan.html-dc3c095b.js" as="script"><link rel="prefetch" href="/laravel/assets/authentication.html-62464972.js" as="script"><link rel="prefetch" href="/laravel/assets/billing.html-8124e2f1.js" as="script"><link rel="prefetch" href="/laravel/assets/blade.html-ae3b5f0c.js" as="script"><link rel="prefetch" href="/laravel/assets/broadcasting.html-3234c7c8.js" as="script"><link rel="prefetch" href="/laravel/assets/cache.html-3ffdf275.js" as="script"><link rel="prefetch" href="/laravel/assets/cashier-paddle.html-a60fdc5c.js" as="script"><link rel="prefetch" href="/laravel/assets/collections.html-f4e66de6.js" as="script"><link rel="prefetch" href="/laravel/assets/configuration.html-b2ad20ab.js" as="script"><link rel="prefetch" href="/laravel/assets/console-tests.html-3581fee2.js" as="script"><link rel="prefetch" href="/laravel/assets/container.html-7548cb3d.js" as="script"><link rel="prefetch" href="/laravel/assets/contracts.html-6960023d.js" as="script"><link rel="prefetch" href="/laravel/assets/contributions.html-e0dd9987.js" as="script"><link rel="prefetch" href="/laravel/assets/controllers.html-9e1646d8.js" as="script"><link rel="prefetch" href="/laravel/assets/csrf.html-5f4d93e3.js" as="script"><link rel="prefetch" href="/laravel/assets/database-testing.html-4d366885.js" as="script"><link rel="prefetch" href="/laravel/assets/database.html-efce3f76.js" as="script"><link rel="prefetch" href="/laravel/assets/deployment.html-1ed53845.js" as="script"><link rel="prefetch" href="/laravel/assets/documentation.html-5e743689.js" as="script"><link rel="prefetch" href="/laravel/assets/dusk.html-dc4913b2.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-collections.html-2f01a6dc.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-factories.html-580b426f.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-mutators.html-6f353e2d.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-relationships.html-fcc1f4a6.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-resources.html-11415ee4.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent-serialization.html-b5478211.js" as="script"><link rel="prefetch" href="/laravel/assets/eloquent.html-8beb952b.js" as="script"><link rel="prefetch" href="/laravel/assets/encryption.html-95a90989.js" as="script"><link rel="prefetch" href="/laravel/assets/envoy.html-73c049a2.js" as="script"><link rel="prefetch" href="/laravel/assets/errors.html-1a22224a.js" as="script"><link rel="prefetch" href="/laravel/assets/events.html-2f99d345.js" as="script"><link rel="prefetch" href="/laravel/assets/facades.html-99284915.js" as="script"><link rel="prefetch" href="/laravel/assets/filesystem.html-780bb3a2.js" as="script"><link rel="prefetch" href="/laravel/assets/folio.html-51fb2e3e.js" as="script"><link rel="prefetch" href="/laravel/assets/fortify.html-23142e51.js" as="script"><link rel="prefetch" href="/laravel/assets/frontend.html-3edb75bc.js" as="script"><link rel="prefetch" href="/laravel/assets/hashing.html-3da37589.js" as="script"><link rel="prefetch" href="/laravel/assets/helpers.html-1ea596c9.js" as="script"><link rel="prefetch" href="/laravel/assets/homestead.html-e14b2e40.js" as="script"><link rel="prefetch" href="/laravel/assets/horizon.html-e800222e.js" as="script"><link rel="prefetch" href="/laravel/assets/http-client.html-9f84f500.js" as="script"><link rel="prefetch" href="/laravel/assets/http-tests.html-4dfd35dd.js" as="script"><link rel="prefetch" href="/laravel/assets/installation.html-4d0898a2.js" as="script"><link rel="prefetch" href="/laravel/assets/lifecycle.html-15ea7de1.js" as="script"><link rel="prefetch" href="/laravel/assets/localization.html-26363233.js" as="script"><link rel="prefetch" href="/laravel/assets/logging.html-16ce0923.js" as="script"><link rel="prefetch" href="/laravel/assets/mail.html-c64f7bf0.js" as="script"><link rel="prefetch" href="/laravel/assets/middleware.html-8526e57a.js" as="script"><link rel="prefetch" href="/laravel/assets/migrations.html-5ee0d390.js" as="script"><link rel="prefetch" href="/laravel/assets/mix.html-70a0b4f5.js" as="script"><link rel="prefetch" href="/laravel/assets/mocking.html-418621da.js" as="script"><link rel="prefetch" href="/laravel/assets/notifications.html-66e2a5fc.js" as="script"><link rel="prefetch" href="/laravel/assets/octane.html-b2b376c4.js" as="script"><link rel="prefetch" href="/laravel/assets/packages.html-5480f21e.js" as="script"><link rel="prefetch" href="/laravel/assets/pagination.html-8df8beae.js" as="script"><link rel="prefetch" href="/laravel/assets/passport.html-5759611c.js" as="script"><link rel="prefetch" href="/laravel/assets/passwords.html-628baf17.js" as="script"><link rel="prefetch" href="/laravel/assets/pennant.html-9bf4a700.js" as="script"><link rel="prefetch" href="/laravel/assets/pint.html-8058af0f.js" as="script"><link rel="prefetch" href="/laravel/assets/precognition.html-aab299cd.js" as="script"><link rel="prefetch" href="/laravel/assets/processes.html-e05518ff.js" as="script"><link rel="prefetch" href="/laravel/assets/prompts.html-c65d2d8c.js" as="script"><link rel="prefetch" href="/laravel/assets/providers.html-0f06ed9b.js" as="script"><link rel="prefetch" href="/laravel/assets/queries.html-140df257.js" as="script"><link rel="prefetch" href="/laravel/assets/queues.html-17a5007e.js" as="script"><link rel="prefetch" href="/laravel/assets/rate-limiting.html-8fba0e20.js" as="script"><link rel="prefetch" href="/laravel/assets/redirects.html-e57b8f12.js" as="script"><link rel="prefetch" href="/laravel/assets/redis.html-5bc2e8bb.js" as="script"><link rel="prefetch" href="/laravel/assets/releases.html-628d2abe.js" as="script"><link rel="prefetch" href="/laravel/assets/requests.html-b79d9af6.js" as="script"><link rel="prefetch" href="/laravel/assets/responses.html-4d4a0dc1.js" as="script"><link rel="prefetch" href="/laravel/assets/routing.html-e68366c7.js" as="script"><link rel="prefetch" href="/laravel/assets/sail.html-552b47b1.js" as="script"><link rel="prefetch" href="/laravel/assets/sanctum.html-dcb3ac70.js" as="script"><link rel="prefetch" href="/laravel/assets/scheduling.html-d3d2ec18.js" as="script"><link rel="prefetch" href="/laravel/assets/scout.html-e98efb88.js" as="script"><link rel="prefetch" href="/laravel/assets/seeding.html-9f5f60fd.js" as="script"><link rel="prefetch" href="/laravel/assets/session.html-a723ae74.js" as="script"><link rel="prefetch" href="/laravel/assets/socialite.html-a9eb9bec.js" as="script"><link rel="prefetch" href="/laravel/assets/starter-kits.html-46c2bde4.js" as="script"><link rel="prefetch" href="/laravel/assets/strings.html-13e92edd.js" as="script"><link rel="prefetch" href="/laravel/assets/structure.html-bc88c757.js" as="script"><link rel="prefetch" href="/laravel/assets/telescope.html-655b3988.js" as="script"><link rel="prefetch" href="/laravel/assets/testing.html-d14f83e4.js" as="script"><link rel="prefetch" href="/laravel/assets/upgrade.html-60b44511.js" as="script"><link rel="prefetch" href="/laravel/assets/urls.html-0dc86b38.js" as="script"><link rel="prefetch" href="/laravel/assets/valet.html-21a3010b.js" as="script"><link rel="prefetch" href="/laravel/assets/validation.html-20f706e5.js" as="script"><link rel="prefetch" href="/laravel/assets/verification.html-442b3502.js" as="script"><link rel="prefetch" href="/laravel/assets/views.html-e67ca815.js" as="script"><link rel="prefetch" href="/laravel/assets/vite.html-77f5b90a.js" as="script"><link rel="prefetch" href="/laravel/assets/404.html-ac3192c6.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-708a06d6.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-63a4ec54.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-4fb158bf.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-d82a901a.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-594dce6f.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-f4de053d.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-b3ec4080.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-bb94f28e.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-af772c2f.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-747f1aa7.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-441a99d9.js" as="script"><link rel="prefetch" href="/laravel/assets/index.html-280418c1.js" as="script"><link rel="prefetch" href="/laravel/assets/mermaid.core-2ef0f556.js" as="script"><link rel="prefetch" href="/laravel/assets/VuePlayground-2ad5a2b5.js" as="script"><link rel="prefetch" href="/laravel/assets/photoswipe.esm-1464cdb9.js" as="script"><link rel="prefetch" href="/laravel/assets/pageview-d8908c75.js" as="script">
+  </head>
+  <body>
+    <div id="app"><!--[--><!--[--><!--[--><span tabindex="-1"></span><a href="#main-content" class="vp-skip-link sr-only">跳至主要內容</a><!--]--><!--[--><div class="theme-container has-toc"><!--[--><header id="navbar" class="vp-navbar"><div class="vp-navbar-start"><button type="button" class="vp-toggle-sidebar-button" title="Toggle Sidebar"><span class="icon"></span></button><!--[--><!----><!--]--><!--[--><a class="vp-link vp-brand vp-brand" href="/laravel/zh/"><!----><!----><span class="vp-site-name">Laravel 10 中文文档</span></a><!--]--><!--[--><!----><!--]--></div><div class="vp-navbar-center"><!--[--><!----><!--]--><!--[--><nav class="vp-nav-links"><div class="nav-item hide-in-mobile"><a aria-label="前言" class="vp-link nav-link nav-link" href="/laravel/zh/guide/releases.html"><!---->前言<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="入门指南" class="vp-link nav-link nav-link" href="/laravel/zh/guide/installation.html"><!---->入门指南<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="架构思想" class="vp-link nav-link nav-link" href="/laravel/zh/guide/lifecycle.html"><!---->架构思想<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="基础功能" class="vp-link nav-link nav-link" href="/laravel/zh/guide/routing.html"><!---->基础功能<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="深入话题" class="vp-link nav-link nav-link" href="/laravel/zh/guide/artisan.html"><!---->深入话题<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="安全" class="vp-link nav-link nav-link" href="/laravel/zh/guide/authentication.html"><!---->安全<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="数据库" class="vp-link nav-link nav-link" href="/laravel/zh/guide/database.html"><!---->数据库<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="Eloquent ORM" class="vp-link nav-link nav-link" href="/laravel/zh/guide/eloquent.html"><!---->Eloquent ORM<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="测试" class="vp-link nav-link nav-link" href="/laravel/zh/guide/testing.html"><!---->测试<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="官方扩展包" class="vp-link nav-link nav-link" href="/laravel/zh/guide/sanctum.html"><!---->官方扩展包<!----></a></div></nav><!--]--><!--[--><!----><!--]--></div><div class="vp-navbar-end"><!--[--><!----><!--]--><!--[--><div class="nav-item"><div class="dropdown-wrapper i18n-dropdown"><button type="button" class="dropdown-title" aria-label="选择语言"><!--[--><svg xmlns="http://www.w3.org/2000/svg" class="icon i18n-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="i18n icon" style="width:1rem;height:1rem;vertical-align:middle;"><path d="M379.392 460.8 494.08 575.488l-42.496 102.4L307.2 532.48 138.24 701.44l-71.68-72.704L234.496 460.8l-45.056-45.056c-27.136-27.136-51.2-66.56-66.56-108.544h112.64c7.68 14.336 16.896 27.136 26.112 35.84l45.568 46.08 45.056-45.056C382.976 312.32 409.6 247.808 409.6 204.8H0V102.4h256V0h102.4v102.4h256v102.4H512c0 70.144-37.888 161.28-87.04 210.944L378.88 460.8zM576 870.4 512 1024H409.6l256-614.4H768l256 614.4H921.6l-64-153.6H576zM618.496 768h196.608L716.8 532.48 618.496 768z"></path></svg><!--]--><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><a aria-label="English" class="vp-link nav-link nav-link" href="/laravel/guide/authorization.html"><!---->English<!----></a></li><li class="dropdown-item"><a aria-label="简体中文" class="vp-link nav-link active nav-link active" href="/laravel/zh/guide/authorization.html"><!---->简体中文<!----></a></li></ul></button></div></div><!----><div class="nav-item hide-in-mobile"><button type="button" id="appearance-switch"><svg xmlns="http://www.w3.org/2000/svg" class="icon auto-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="auto icon" style="display:block;"><path d="M512 992C246.92 992 32 777.08 32 512S246.92 32 512 32s480 214.92 480 480-214.92 480-480 480zm0-840c-198.78 0-360 161.22-360 360 0 198.84 161.22 360 360 360s360-161.16 360-360c0-198.78-161.22-360-360-360zm0 660V212c165.72 0 300 134.34 300 300 0 165.72-134.28 300-300 300z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon dark-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="dark icon" style="display:none;"><path d="M524.8 938.667h-4.267a439.893 439.893 0 0 1-313.173-134.4 446.293 446.293 0 0 1-11.093-597.334A432.213 432.213 0 0 1 366.933 90.027a42.667 42.667 0 0 1 45.227 9.386 42.667 42.667 0 0 1 10.24 42.667 358.4 358.4 0 0 0 82.773 375.893 361.387 361.387 0 0 0 376.747 82.774 42.667 42.667 0 0 1 54.187 55.04 433.493 433.493 0 0 1-99.84 154.88 438.613 438.613 0 0 1-311.467 128z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon light-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="light icon" style="display:none;"><path d="M952 552h-80a40 40 0 0 1 0-80h80a40 40 0 0 1 0 80zM801.88 280.08a41 41 0 0 1-57.96-57.96l57.96-58a41.04 41.04 0 0 1 58 58l-58 57.96zM512 752a240 240 0 1 1 0-480 240 240 0 0 1 0 480zm0-560a40 40 0 0 1-40-40V72a40 40 0 0 1 80 0v80a40 40 0 0 1-40 40zm-289.88 88.08-58-57.96a41.04 41.04 0 0 1 58-58l57.96 58a41 41 0 0 1-57.96 57.96zM192 512a40 40 0 0 1-40 40H72a40 40 0 0 1 0-80h80a40 40 0 0 1 40 40zm30.12 231.92a41 41 0 0 1 57.96 57.96l-57.96 58a41.04 41.04 0 0 1-58-58l58-57.96zM512 832a40 40 0 0 1 40 40v80a40 40 0 0 1-80 0v-80a40 40 0 0 1 40-40zm289.88-88.08 58 57.96a41.04 41.04 0 0 1-58 58l-57.96-58a41 41 0 0 1 57.96-57.96z"></path></svg></button></div><form class="search-box" role="search"><input type="search" placeholder="搜索文档" autocomplete="off" spellcheck="false" value><!----></form><!--]--><!--[--><!----><!--]--><button type="button" class="vp-toggle-navbar-button" aria-label="Toggle Navbar" aria-expanded="false" aria-controls="nav-screen"><span><span class="vp-top"></span><span class="vp-middle"></span><span class="vp-bottom"></span></span></button></div></header><!----><!--]--><!----><div class="toggle-sidebar-wrapper"><span class="arrow start"></span></div><aside id="sidebar" class="vp-sidebar"><!--[--><!----><!--]--><ul class="vp-sidebar-links"><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">前言</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">入门指南</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">架构思想</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">基础功能</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">深入话题</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable active" type="button"><!----><span class="vp-sidebar-title">安全</span><span class="vp-arrow down"></span></button><ul class="vp-sidebar-links"><li><!--[--><a aria-label="用户认证" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/authentication.html"><!---->用户认证<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="用户授权" class="vp-link nav-link active vp-sidebar-link vp-sidebar-page active nav-link active vp-sidebar-link vp-sidebar-page active" href="/laravel/zh/guide/authorization.html"><!---->用户授权<!----></a><ul class="vp-sidebar-sub-headers"><li class="vp-sidebar-sub-header"><a aria-label="简介" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/authorization.html#简介"><!---->简介<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="拦截器 (Gates)" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/authorization.html#拦截器-gates"><!---->拦截器 (Gates)<!----></a><ul class="vp-sidebar-sub-headers"><li class="vp-sidebar-sub-header"><a aria-label="编写拦截器（Gates）" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/authorization.html#编写拦截器-gates"><!---->编写拦截器（Gates）<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="授权动作" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/authorization.html#授权动作"><!---->授权动作<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="拦截器响应" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/authorization.html#拦截器响应"><!---->拦截器响应<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="拦截 Gate 检查" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/authorization.html#拦截-gate-检查"><!---->拦截 Gate 检查<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="内联授权" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/authorization.html#内联授权"><!---->内联授权<!----></a><ul class="vp-sidebar-sub-headers"></ul></li></ul></li><li class="vp-sidebar-sub-header"><a aria-label="生成策略" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/authorization.html#生成策略"><!---->生成策略<!----></a><ul class="vp-sidebar-sub-headers"><li class="vp-sidebar-sub-header"><a aria-label="生成策略" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/authorization.html#生成策略-1"><!---->生成策略<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="注册策略" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/authorization.html#注册策略"><!---->注册策略<!----></a><ul class="vp-sidebar-sub-headers"></ul></li></ul></li><li class="vp-sidebar-sub-header"><a aria-label="编写策略" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/authorization.html#编写策略"><!---->编写策略<!----></a><ul class="vp-sidebar-sub-headers"><li class="vp-sidebar-sub-header"><a aria-label="策略方法" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/authorization.html#策略方法"><!---->策略方法<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="策略响应" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/authorization.html#策略响应"><!---->策略响应<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="无需传递模型的方法" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/authorization.html#无需传递模型的方法"><!---->无需传递模型的方法<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="Guest 用户" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/authorization.html#guest-用户"><!---->Guest 用户<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="策略过滤器" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/authorization.html#策略过滤器"><!---->策略过滤器<!----></a><ul class="vp-sidebar-sub-headers"></ul></li></ul></li><li class="vp-sidebar-sub-header"><a aria-label="使用策略进行授权操作" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/authorization.html#使用策略进行授权操作"><!---->使用策略进行授权操作<!----></a><ul class="vp-sidebar-sub-headers"><li class="vp-sidebar-sub-header"><a aria-label="通过用户模型" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/authorization.html#通过用户模型"><!---->通过用户模型<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="通过控制器辅助函数" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/authorization.html#通过控制器辅助函数"><!---->通过控制器辅助函数<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="通过中间件" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/authorization.html#通过中间件"><!---->通过中间件<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="通过 Blade 模板" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/authorization.html#通过-blade-模板"><!---->通过 Blade 模板<!----></a><ul class="vp-sidebar-sub-headers"></ul></li><li class="vp-sidebar-sub-header"><a aria-label="提供额外的上下文" class="vp-link nav-link vp-sidebar-link vp-heading nav-link vp-sidebar-link vp-heading" href="/laravel/zh/guide/authorization.html#提供额外的上下文"><!---->提供额外的上下文<!----></a><ul class="vp-sidebar-sub-headers"></ul></li></ul></li></ul><!--]--></li><li><!--[--><a aria-label="Email 认证" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/verification.html"><!---->Email 认证<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="加密解密" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/encryption.html"><!---->加密解密<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="哈希" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/hashing.html"><!---->哈希<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li><li><!--[--><a aria-label="重置密码" class="vp-link nav-link vp-sidebar-link vp-sidebar-page nav-link vp-sidebar-link vp-sidebar-page" href="/laravel/zh/guide/passwords.html"><!---->重置密码<!----></a><ul class="vp-sidebar-sub-headers"></ul><!--]--></li></ul></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">数据库</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">Eloquent ORM</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">测试</span><span class="vp-arrow end"></span></button><!----></section></li><li><section class="vp-sidebar-group"><button class="vp-sidebar-heading clickable" type="button"><!----><span class="vp-sidebar-title">官方扩展包</span><span class="vp-arrow end"></span></button><!----></section></li></ul><!--[--><!----><!--]--></aside><!--[--><main id="main-content" class="vp-page"><!--[--><!----><!----><nav class="vp-breadcrumb disable"></nav><div class="vp-page-title"><h1><!---->用户授权</h1><div class="page-info"><span class="page-author-info" aria-label="作者🖊" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon author-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="author icon"><path d="M649.6 633.6c86.4-48 147.2-144 147.2-249.6 0-160-128-288-288-288s-288 128-288 288c0 108.8 57.6 201.6 147.2 249.6-121.6 48-214.4 153.6-240 288-3.2 9.6 0 19.2 6.4 25.6 3.2 9.6 12.8 12.8 22.4 12.8h704c9.6 0 19.2-3.2 25.6-12.8 6.4-6.4 9.6-16 6.4-25.6-25.6-134.4-121.6-240-243.2-288z"></path></svg><span><span class="page-author-item">Moments</span></span><span property="author" content="Moments"></span></span><!----><!----><!----><span class="page-reading-time-info" aria-label="阅读时间⌛" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon timer-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="timer icon"><path d="M799.387 122.15c4.402-2.978 7.38-7.897 7.38-13.463v-1.165c0-8.933-7.38-16.312-16.312-16.312H256.33c-8.933 0-16.311 7.38-16.311 16.312v1.165c0 5.825 2.977 10.874 7.637 13.592 4.143 194.44 97.22 354.963 220.201 392.763-122.204 37.542-214.893 196.511-220.2 389.397-4.661 5.049-7.638 11.651-7.638 19.03v5.825h566.49v-5.825c0-7.379-2.849-13.981-7.509-18.9-5.049-193.016-97.867-351.985-220.2-389.527 123.24-37.67 216.446-198.453 220.588-392.892zM531.16 450.445v352.632c117.674 1.553 211.787 40.778 211.787 88.676H304.097c0-48.286 95.149-87.382 213.728-88.676V450.445c-93.077-3.107-167.901-81.297-167.901-177.093 0-8.803 6.99-15.793 15.793-15.793 8.803 0 15.794 6.99 15.794 15.793 0 80.261 63.69 145.635 142.01 145.635s142.011-65.374 142.011-145.635c0-8.803 6.99-15.793 15.794-15.793s15.793 6.99 15.793 15.793c0 95.019-73.789 172.82-165.96 177.093z"></path></svg><span>大约 22 分钟</span><meta property="timeRequired" content="PT22M"></span><!----><!----></div><hr></div><div class="toc-place-holder"><aside id="toc"><!--[--><!----><!--]--><div class="toc-header">此页内容<!----></div><div class="toc-wrapper"><ul class="toc-list"><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/laravel/#简介">简介</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/laravel/#拦截器-gates">拦截器 (Gates)</a></li><li><ul class="toc-list"><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#编写拦截器-gates">编写拦截器（Gates）</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#授权动作">授权动作</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#拦截器响应">拦截器响应</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#拦截-gate-检查">拦截 Gate 检查</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#内联授权">内联授权</a></li><!----><!--]--></ul></li><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/laravel/#生成策略">生成策略</a></li><li><ul class="toc-list"><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#生成策略-1">生成策略</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#注册策略">注册策略</a></li><!----><!--]--></ul></li><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/laravel/#编写策略">编写策略</a></li><li><ul class="toc-list"><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#策略方法">策略方法</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#策略响应">策略响应</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#无需传递模型的方法">无需传递模型的方法</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#guest-用户">Guest 用户</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#策略过滤器">策略过滤器</a></li><!----><!--]--></ul></li><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/laravel/#使用策略进行授权操作">使用策略进行授权操作</a></li><li><ul class="toc-list"><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#通过用户模型">通过用户模型</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#通过控制器辅助函数">通过控制器辅助函数</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#通过中间件">通过中间件</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#通过-blade-模板">通过 Blade 模板</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level3 toc-link level3" href="/laravel/#提供额外的上下文">提供额外的上下文</a></li><!----><!--]--></ul></li><!--]--></ul><div class="toc-marker" style="top:-1.7rem;"></div></div><!--[--><!----><!--]--></aside></div><!----><div class="theme-hope-content"><h1 id="用户授权" tabindex="-1"><a class="header-anchor" href="#用户授权" aria-hidden="true">#</a> 用户授权</h1><ul><li><a href="#introduction">简介</a></li><li><a href="#gates">拦截器</a><ul><li><a href="#writing-gates">编写拦截器</a></li><li><a href="#authorizing-actions-via-gates">授权动作</a></li><li><a href="#gate-responses">拦截器响应</a></li><li><a href="#intercepting-gate-checks">拦截器拦截检查</a></li><li><a href="#inline-authorization">内联授权</a></li></ul></li><li><a href="#creating-policies">创建策略</a><ul><li><a href="#generating-policies">生成策略</a></li><li><a href="#registering-policies">注册策略</a></li></ul></li><li><a href="#writing-policies">编辑策略</a><ul><li><a href="#policy-methods">策略模型</a></li><li><a href="#policy-responses">策略返回</a></li><li><a href="#methods-without-models">不使用模型的方法</a></li><li><a href="#guest-users">访客和用户</a></li><li><a href="#policy-filters">策略的过滤器</a></li></ul></li><li><a href="#authorizing-actions-using-policies">使用策略进行授权操作</a><ul><li><a href="#via-the-user-model">通过用户模型</a></li><li><a href="#via-controller-helpers">通过控制器辅助函数</a></li><li><a href="#via-middleware">通过中间件</a></li><li><a href="#via-blade-templates">通过 Blade 模板</a></li><li><a href="#supplying-additional-context">以附加形式提供给上下文调用</a></li></ul></li></ul><p><a name="introduction"></a></p><h2 id="简介" tabindex="-1"><a class="header-anchor" href="#简介" aria-hidden="true">#</a> 简介</h2><p>除了提供内置的 <a href="./authentication">authentication</a>（身份验证）服务外，Laravel 还提供了一种可以很简单就进行使用的方法，来对用户与资源的授权关系进行管理。 它很安全，即使用户已经通过了「身份验证（authentication)」, 用户也可能无权对应用程序中重要的模型或数据库记录进行删除或更改。简单、条理化的系统性，是 Laravel 对授权管理的特性。</p><p>Laravel 主要提供了两种授权操作的方法: <a href="#gates">拦截器</a>和<a href="#creating-policies">策略</a>。 可以把拦截器（gates）和策略（policies）想象成路由和控制器。拦截器（Gates）提供了一种轻便的基于闭包函数的授权方法，像是路由。而策略（policies)，就像是一个控制器，对特定模型或资源，进行分组管理的逻辑规则。 在本文档中，我们将首先探讨拦截器（gates），然后研究策略（policies)。</p><p>你在构建应用程序时，不用为是仅仅使用拦截器（gates）或是仅仅使用策略（policies）而担心，并不需要在两者中进行唯一选择。大多数的应用程序都同时包含两个方法，并且同时使用两者，能够更好的进行工作。拦截器（gates），更适用于没有与任何模型或资源有关的授权操作，例如查看管理员仪表盘。与之相反，当你希望为特定的模型或资源进行授权管理时，应该使用策略（policies) 方法。</p><p><a name="gates"></a></p><h2 id="拦截器-gates" tabindex="-1"><a class="header-anchor" href="#拦截器-gates" aria-hidden="true">#</a> 拦截器 (Gates)</h2><p><a name="writing-gates"></a></p><h3 id="编写拦截器-gates" tabindex="-1"><a class="header-anchor" href="#编写拦截器-gates" aria-hidden="true">#</a> 编写拦截器（Gates）</h3><blockquote><p><strong>注意</strong><br> 通过理解拦截器（Gates），是一个很好的学习 Laravel 授权特性的基础知识的方法。同时，考虑到 Laravel 应用程序的健壮性，应该结合使用策略 <a href="#creating-policies">policies</a> 来组织授权规则。</p></blockquote><p>拦截器（Gates）是用来确定用户是否有权执行给定操作的闭包函数。默认条件下，拦截器（Gates）的使用，是在<code>App\Providers\AuthServiceProvider</code>类中的 <code>boot</code> 函数里来规定<code>Gate</code>规则。拦截器（Gates）始终接收用户实例为其第一个参数，并且可以选择性的接收其他参数，例如相关的 Eloquent 模型。</p><p>在下面的例子中，我们将定义一个拦截器（Gates)，并通过调用<code>App\Models\Post</code>类，来实现结合用户的 POST 请求，命中给定的规则。拦截器（Gates）将通过比较用户的<code>id</code>，和 POST 请求中的<code>user_id</code>来实现这个目标：</p><pre><code>use App\Models\Post;
+use App\Models\User;
+use Illuminate\Support\Facades\Gate;
+
+/**
+ * 注册任何需要身份验证、授权服务的行为
+ */
+public function boot(): void
+{
+    Gate::define(&#39;update-post&#39;, function (User $user, Post $post)
+	{
+        return $user-&gt;id === $post-&gt;user_id;
+    });
+}
+</code></pre><p>像是在控制器中操作一样，也可以直接使用类，进行回调数组，完成拦截器（Gates）的定义：</p><pre><code>use App\Policies\PostPolicy;
+use Illuminate\Support\Facades\Gate;
+
+/**
+ * 注册任何需要身份验证、授权服务的行为
+ */
+public function boot(): void
+{
+    Gate::define(&#39;update-post&#39;, [PostPolicy::class, &#39;update&#39;]);
+}
+</code></pre><p><a name="authorizing-actions-via-gates"></a></p><h3 id="授权动作" tabindex="-1"><a class="header-anchor" href="#授权动作" aria-hidden="true">#</a> 授权动作</h3><p>如果需要通过拦截器（Gates）来对行为进行授权控制，你可以通过调用<code>Gate</code>中的<code>allows</code>或<code>denies</code>方法。请注意，在使用过程中，你不需要将已经通过身份验证的用户信息传递给这些方法。 Laravel 将会自动把用户信息传递给拦截器（Gates）。以下是一个典型的，在控制器中使用拦截器（Gates）进行行为授权控制的例子：</p><pre><code>&lt;?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use App\Models\Post;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+
+class PostController extends Controller
+{
+    /**
+     * 更新给定的帖子
+     */
+    public function update(Request $request, Post $post): RedirectResponse
+    {
+        if (! Gate::allows(&#39;update-post&#39;, $post)) {
+            abort(403);
+        }
+
+        // 更新帖子...
+
+        return redirect(&#39;/posts&#39;);
+    }
+}
+</code></pre><p>如果你需要判断某个用户，是否有权执行某个行为，你可以在<code>Gate</code>门面中，使用<code>forUser</code>方法：</p><pre><code>if (Gate::forUser($user)-&gt;allows(&#39;update-post&#39;, $post)) {
+    // 这个用户可以提交update...
+}
+
+if (Gate::forUser($user)-&gt;denies(&#39;update-post&#39;, $post)) {
+    // 这个用户不可以提交update...
+}
+</code></pre><p>你还可以通过<code>any</code>或<code>none</code>方法来一次性授权多个行为:</p><pre><code>if (Gate::any([&#39;update-post&#39;, &#39;delete-post&#39;], $post)) {
+    // 用户可以提交update或delete...
+}
+
+if (Gate::none([&#39;update-post&#39;, &#39;delete-post&#39;], $post)) {
+    // 用户不可以提交update和delete...
+}
+</code></pre><p><a name="authorizing-or-throwing-exceptions"></a></p><h4 id="未通过授权时的抛出异常" tabindex="-1"><a class="header-anchor" href="#未通过授权时的抛出异常" aria-hidden="true">#</a> 未通过授权时的抛出异常</h4><p><code>Illuminate\Auth\Access\AuthorizationException</code>中准备了 HTTP 的 403 响应。你可以使用<code>Gate</code>门面中的<code>authorize</code>方法，来规定如果用户进行了未授权的行为时，触发<code>AuthorizationException</code>实例 ，该实例会自动转换返回为 HTTP 的 403 响应:</p><pre><code>Gate::authorize(&#39;update-post&#39;, $post);
+
+// 行为已获授权...
+</code></pre><p><a name="gates-supplying-additional-context"></a></p><h4 id="上下文的值传递" tabindex="-1"><a class="header-anchor" href="#上下文的值传递" aria-hidden="true">#</a> 上下文的值传递</h4><p>能够用于拦截器（Gates）的授权方法，(<code>allows</code>，<code>denies</code>，<code>check</code>，<code>any</code>，<code>none</code>， <code>authorize</code>，<code>can</code>，<code>cannot</code>) 和在前端进行的授权方法 <a href="#via-blade-templates">Blade 指令</a> (<code>@can</code>，<code>@cannot</code>，<code>@canany</code>) 在第 2 个参数中，可以接收数组。这些数组元素作为参数传递给拦截器（Gates），在做出授权决策时可用于其他上下文:</p><pre><code>use App\Models\Category;
+use App\Models\User;
+use Illuminate\Support\Facades\Gate;
+
+Gate::define(&#39;create-post&#39;, function (User $user, Category $category, bool $pinned) {
+    if (! $user-&gt;canPublishToGroup($category-&gt;group)) {
+        return false;
+    } elseif ($pinned &amp;&amp; ! $user-&gt;canPinPosts()) {
+        return false;
+    }
+
+    return true;
+});
+
+if (Gate::check(&#39;create-post&#39;, [$category, $pinned])) {
+    // 用户可以请求create...
+}
+</code></pre><p><a name="gate-responses"></a></p><h3 id="拦截器响应" tabindex="-1"><a class="header-anchor" href="#拦截器响应" aria-hidden="true">#</a> 拦截器响应</h3><p>到目前为止，我们只学习了拦截器（Gates）中返回布尔值的简单操作。但是，有时你需要的返回可能更复杂，比如错误消息。所以，你可以尝试使用<code>Illuminate\Auth\Access\Response</code>来构建你的拦截器（Gates）：</p><pre><code>use App\Models\User;
+use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Gate;
+
+Gate::define(&#39;edit-settings&#39;, function (User $user) {
+    return $user-&gt;isAdmin
+                ? Response::allow()
+                : Response::deny(&#39;You must be an administrator.&#39;);
+});
+</code></pre><p>你希望从拦截器（Gates）中返回响应时，使用<code>Gate::allows</code>方法，将仅返回一个简单的布尔值；同时，你还可以使用<code>Gate::inspect</code>方法来返回拦截器（Gates）中的所有响应值：</p><pre><code>$response = Gate::inspect(&#39;edit-settings&#39;);
+
+if ($response-&gt;allowed()) {
+    // 行为进行授权...
+} else {
+    echo $response-&gt;message();
+}
+</code></pre><p>在使用<code>Gate::authorize</code>方法时，如果操作未被授权，仍然会触发<code>AuthorizationException</code>, 用户验证（authorization）响应提供的错误消息，将传递给 HTTP 响应：</p><pre><code>Gate::authorize(&#39;edit-settings&#39;);
+
+// 行为进行授权...
+</code></pre><p><a name="customising-gate-response-status"></a></p><h4 id="自定义http响应状态" tabindex="-1"><a class="header-anchor" href="#自定义http响应状态" aria-hidden="true">#</a> 自定义HTTP响应状态</h4><p>当一个操作通过 Gate 被拒绝时，返回一个<code>403</code>HTTP 响应；然而，有时返回一个可选的HTTP状态代码是有用的。你可以使用<code>Illuminate\Auth\Access\Response</code>类上的<code>denyWithStatus</code>静态构造函数自定义授权检查失败返回的HTTP状态代码：</p><pre><code>use App\Models\User;
+use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Gate;
+
+Gate::define(&#39;edit-settings&#39;, function (User $user) {
+    return $user-&gt;isAdmin
+                ? Response::allow()
+                : Response::denyWithStatus(404);
+});
+</code></pre><p>由于通过<code>404</code>响应隐藏资源是 Web 应用程序的常见模式，为了方便起见，提供了<code>denyAsNotFound</code>方法:</p><pre><code>use App\Models\User;
+use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Gate;
+
+Gate::define(&#39;edit-settings&#39;, function (User $user) {
+    return $user-&gt;isAdmin
+                ? Response::allow()
+                : Response::denyAsNotFound();
+});
+</code></pre><p><a name="intercepting-gate-checks"></a></p><h3 id="拦截-gate-检查" tabindex="-1"><a class="header-anchor" href="#拦截-gate-检查" aria-hidden="true">#</a> 拦截 Gate 检查</h3><p>有时，你可能希望将所有能力授予特定用户。你可以使用<code>before</code>方法定义一个闭包，在所有其他授权检查之前运行:</p><pre><code>use App\Models\User;
+use Illuminate\Support\Facades\Gate;
+
+Gate::before(function (User $user, string $ability) {
+    if ($user-&gt;isAdministrator()) {
+        return true;
+    }
+});
+</code></pre><p>如果<code>before</code>返回的是非 null 结果，则该返回将会被视为最终的检查结果。</p><p>你还可以使用<code>after</code>方法，来定义在所有授权拦截规则执行后，再次进行授权拦截规则判定：</p><pre><code>use App\Models\User;
+
+Gate::after(function (User $user, string $ability, bool|null $result, mixed $arguments) {
+    if ($user-&gt;isAdministrator()) {
+        return true;
+    }
+});
+</code></pre><p>类似于<code>before</code>方法，如果<code>after</code>闭包返回非空结果，则该结果将被视为授权检查的结果。</p><p><a name="inline-authorization"></a></p><h3 id="内联授权" tabindex="-1"><a class="header-anchor" href="#内联授权" aria-hidden="true">#</a> 内联授权</h3><p>有时，你可能希望确定当前经过身份验证的用户是否有权执行给定操作，而无需编写与该操作对应的专用拦截器。Laravel 允许你通过<code>Gate::allowIf</code>和<code>Gate::denyIf</code>方法执行这些类型的「内联」授权检查：</p><div class="language-php line-numbers-mode" data-ext="php"><pre class="language-php"><code><span class="token keyword">use</span> <span class="token package">App<span class="token punctuation">\</span>Models<span class="token punctuation">\</span>User</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">Illuminate<span class="token punctuation">\</span>Support<span class="token punctuation">\</span>Facades<span class="token punctuation">\</span>Gate</span><span class="token punctuation">;</span>
+
+<span class="token class-name static-context">Gate</span><span class="token operator">::</span><span class="token function">allowIf</span><span class="token punctuation">(</span><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token class-name type-declaration">User</span> <span class="token variable">$user</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token variable">$user</span><span class="token operator">-&gt;</span><span class="token function">isAdministrator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token class-name static-context">Gate</span><span class="token operator">::</span><span class="token function">denyIf</span><span class="token punctuation">(</span><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token class-name type-declaration">User</span> <span class="token variable">$user</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token variable">$user</span><span class="token operator">-&gt;</span><span class="token function">banned</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>如果该操作未授权或当前没有用户经过身份验证，Laravel 将自动抛出<code>Illuminate\Auth\Access\AuthorizationException</code>异常。<code>AuthorizationException</code>的实例会被 Laravel 的异常处理程序自动转换为 403 HTTP 响应：</p><p><a name="creating-policies"></a></p><h2 id="生成策略" tabindex="-1"><a class="header-anchor" href="#生成策略" aria-hidden="true">#</a> 生成策略</h2><p><a name="generating-policies"></a></p><h3 id="生成策略-1" tabindex="-1"><a class="header-anchor" href="#生成策略-1" aria-hidden="true">#</a> 生成策略</h3><p>策略是围绕特定模型或资源组织授权逻辑的类。例如，如果你的应用程序是博客，可能有一个<code>App\Models\Post</code>模型和一个相应的<code>App\Policies\PostPolicy</code>来授权用户操作，例如创建或更新帖子。</p><p>你可以使用<code>make:policy</code>Artisan 命令生成策略。生成的策略将放置在<code>app/Policies</code>目录中。如果应用程序中不存在此目录，Laravel 将自动创建：</p><div class="language-bash line-numbers-mode" data-ext="sh"><pre class="language-bash"><code>php artisan make:policy PostPolicy
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p><code>make:policy</code>命令将生成一个空的策略类。如果要生成一个包含与查看、创建、更新和删除资源相关的示例策略方法的类，可以在执行命令时提供一个<code>--model</code>选项：</p><div class="language-bash line-numbers-mode" data-ext="sh"><pre class="language-bash"><code>php artisan make:policy PostPolicy <span class="token parameter variable">--model</span><span class="token operator">=</span>Post
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p><a name="registering-policies"></a></p><h3 id="注册策略" tabindex="-1"><a class="header-anchor" href="#注册策略" aria-hidden="true">#</a> 注册策略</h3><p>创建了策略类之后，还需要对其进行注册。注册策略是告知 Laravel 在授权针对给定模型类型的操作时使用哪个策略。</p><p>新的 Laravel 应用程序中包含的<code>App\Providers\AuthServiceProvider</code>包含一个<code>policies</code>属性，它将 Eloquent 模型映射到其相应的策略。 注册策略将指示 Laravel 在授权针对给定 Eloquent 模型的操作时使用哪个策略：</p><pre><code>&lt;?php
+
+namespace App\Providers;
+
+use App\Models\Post;
+use App\Policies\PostPolicy;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
+
+class AuthServiceProvider extends ServiceProvider
+{
+    /**
+     * 应用程序的策略映射。
+     *
+     * @var array
+     */
+    protected $policies = [
+        Post::class =&gt; PostPolicy::class,
+    ];
+
+    /**
+     * 注册任何应用程序身份验证/授权服务。
+     */
+    public function boot(): void
+    {
+        // ...
+    }
+}
+</code></pre><p><a name="policy-auto-discovery"></a></p><h4 id="策略自动发现" tabindex="-1"><a class="header-anchor" href="#策略自动发现" aria-hidden="true">#</a> 策略自动发现</h4><p>只要模型和策略遵循标准的 Laravel 命名约定，Laravel 就可以自动发现策略，而不是手动注册模型策略。具体来说，策略必须位于包含模型的目录或其上方的「Policies」目录中。 因此，例如，模型可以放置在<code>app/Models</code>目录中，而策略可以放置在<code>app/Policies</code>目录中。在这种情况下，Laravel 将检查<code>app/Models/Policies</code>然后<code>app/Policies</code>中的策略。此外，策略名称必须与模型名称匹配并具有「策略」后缀。 因此，<code>User</code>模型将对应于<code>UserPolicy</code>策略类。</p><p>如果要自定义策略的发现逻辑，可以使用<code>Gate::guessPolicyNamesUsing</code>方法注册自定义策略发现回调。通常，应该从应用程序的<code>AuthServiceProvider</code>的<code>boot</code>方法调用此方法：</p><pre><code>use Illuminate\Support\Facades\Gate;
+
+Gate::guessPolicyNamesUsing(function (string $modelClass) {
+    // 返回给定模型的策略类的名称…
+});
+</code></pre><blockquote><p><strong>注意</strong><br> 在<code>AuthServiceProvider</code>中显式映射的任何策略将优先于任何可能自动发现的策略。</p></blockquote><p><a name="writing-policies"></a></p><h2 id="编写策略" tabindex="-1"><a class="header-anchor" href="#编写策略" aria-hidden="true">#</a> 编写策略</h2><p><a name="policy-methods"></a></p><h3 id="策略方法" tabindex="-1"><a class="header-anchor" href="#策略方法" aria-hidden="true">#</a> 策略方法</h3><p>注册策略类后，可以为其授权的每个操作添加方法。例如，让我们在<code>PostPolicy</code>上定义一个 <code>update</code>方法，该方法确定给定的<code>App\Models\User</code>是否可以更新给定的<code>App\Models\Post</code>实例。</p><p>该<code>update</code>方法将接收一个<code>User</code>和一个<code>Post</code>实例作为其参数，并应返回<code>true</code>或<code>false</code>，指示用户是否有权更新给定的<code>Post</code>。因此，在本例中，我们将验证用户的<code>id</code>是否与 Post 上的<code>user_id</code>匹配：</p><pre><code>&lt;?php
+
+namespace App\Policies;
+
+use App\Models\Post;
+use App\Models\User;
+
+class PostPolicy
+{
+    /**
+     * 确定用户是否可以更新给定的帖子
+     */
+    public function update(User $user, Post $post): bool
+    {
+        return $user-&gt;id === $post-&gt;user_id;
+    }
+}
+</code></pre><p>你可以继续根据需要为策略授权的各种操作定义其他方法。例如，你可以定义<code>view</code>或<code>delete</code>方法来授权各种与<code>Post</code>相关的操作，但请记住，你可以自由地为策略方法命名任何你喜欢的名称。</p><p>如果你在 Artisan 控制台生成策略时使用了<code>--model</code>选项，它将包含用于<code>viewAny</code>、<code>view</code>、 <code>create</code>、<code>update</code>、<code>delete</code>、<code>restore</code>和<code>forceDelete</code>操作。</p><blockquote><p><strong>技巧</strong><br> 所有策略都通过 Laravel <a href="./container">服务容器</a>解析，允许你在策略的构造函数中键入任何需要的依赖项，以自动注入它们。</p></blockquote><p><a name="policy-responses"></a></p><h3 id="策略响应" tabindex="-1"><a class="header-anchor" href="#策略响应" aria-hidden="true">#</a> 策略响应</h3><p>到目前为止，我们只检查了返回简单布尔值的策略方法。但是，有时你可能希望返回更详细的响应，包括错误消息。为此，你可以从你的策略方法返回一个<code>Illuminate\Auth\Access\Response</code>实例：</p><pre><code>use App\Models\Post;
+use App\Models\User;
+use Illuminate\Auth\Access\Response;
+
+/**
+ * 确定用户是否可以更新给定的帖子。
+ */
+public function update(User $user, Post $post): Response
+{
+    return $user-&gt;id === $post-&gt;user_id
+                ? Response::allow()
+                : Response::deny(&#39;你不拥有这个帖子。&#39;);
+}
+</code></pre><p>当从你的策略返回授权响应时，<code>Gate::allows</code>方法仍将返回一个简单的布尔值；但是，你可以使用<code>Gate::inspect</code>方法来获取返回的完整授权响应：</p><pre><code>use Illuminate\Support\Facades\Gate;
+
+$response = Gate::inspect(&#39;update&#39;, $post);
+
+if ($response-&gt;allowed()) {
+    // 操作已被授权…
+} else {
+    echo $response-&gt;message();
+}
+</code></pre><p>当使用<code>Gate::authorize</code>方法时，如果操作未被授权，该方法会抛出<code>AuthorizationException</code> ，授权响应提供的错误消息将传播到 HTTP 响应：</p><pre><code>Gate::authorize(&#39;update&#39;, $post);
+
+// 该操作已授权通过...
+</code></pre><p><a name="customising-policy-response-status"></a></p><h4 id="自定义http响应状态-1" tabindex="-1"><a class="header-anchor" href="#自定义http响应状态-1" aria-hidden="true">#</a> 自定义HTTP响应状态</h4><p>当一个操作通过策略方法被拒绝时，返回一个<code>403</code>HTTP 响应;然而，有时返回一个可选的 HTTP 状态代码是有用的。你可以使用<code>Illuminate\Auth\Access\Response</code>类上的<code>denyWithStatus</code>静态构造函数自定义授权检查失败返回的 HTTP 状态代码:</p><pre><code>use App\Models\Post;
+use App\Models\User;
+use Illuminate\Auth\Access\Response;
+
+/**
+ * 确定用户是否可以更新给定的帖子。
+ */
+public function update(User $user, Post $post): Response
+{
+    return $user-&gt;id === $post-&gt;user_id
+                ? Response::allow()
+                : Response::denyWithStatus(404);
+}
+</code></pre><p>由于通过<code>404</code>响应隐藏资源是 Web 应用程序的常见模式，为了方便起见，提供了<code>denyAsNotFound</code>方法:</p><pre><code>use App\Models\Post;
+use App\Models\User;
+use Illuminate\Auth\Access\Response;
+
+/**
+ * 确定用户是否可以更新给定的帖子。
+ */
+public function update(User $user, Post $post): Response
+{
+    return $user-&gt;id === $post-&gt;user_id
+                ? Response::allow()
+                : Response::denyAsNotFound();
+}
+</code></pre><p><a name="methods-without-models"></a></p><h3 id="无需传递模型的方法" tabindex="-1"><a class="header-anchor" href="#无需传递模型的方法" aria-hidden="true">#</a> 无需传递模型的方法</h3><p>一些策略方法只接收当前经过身份验证的用户实例，最常见的情况是给 <code>create</code> 方法做授权。例如，如果你正在创建一个博客，你可能希望确定一个用户是否被授权创建任何文章，在这种情况下，你的策略方法应该只期望接收一个用户实例：</p><pre><code>/**
+ * 确定给定用户是否可以创建文件
+ */
+public function create(User $user): bool
+{
+    return $user-&gt;role == &#39;writer&#39;;
+}
+</code></pre><p><a name="guest-users"></a></p><h3 id="guest-用户" tabindex="-1"><a class="header-anchor" href="#guest-用户" aria-hidden="true">#</a> Guest 用户</h3><p>默认情况下，如果传入的 HTTP 请求不是经过身份验证的用户发起的，那么所有的拦截器（gates）和策略（policies）会自动返回<code>false</code>。但是，你可以通过声明一个「optional」类型提示或为用户参数定义提供一个<code>null</code>默认值，从而允许这些授权检查通过你的拦截器（gates）和策略（policies）：</p><pre><code>&lt;?php
+
+namespace App\Policies;
+
+use App\Models\Post;
+use App\Models\User;
+
+class PostPolicy
+{
+    /**
+     * 确定用户是否可以更新给定的文章
+     */
+    public function update(?User $user, Post $post): bool
+    {
+        return $user?-&gt;id === $post-&gt;user_id;
+    }
+}
+</code></pre><p><a name="policy-filters"></a></p><h3 id="策略过滤器" tabindex="-1"><a class="header-anchor" href="#策略过滤器" aria-hidden="true">#</a> 策略过滤器</h3><p>对于某些用户，你可能希望给他授权给定策略中的所有操作。为了实现这一点，你可以在策略上定义一个<code>before</code>方法。该<code>before</code>方法将在策略上的所有方法之前执行，这样就使你有机会在实际调用预期的策略方法之前就已经授权了操作。该功能常用于授权应用程序管理员来执行任何操作：</p><pre><code>use App\Models\User;
+
+/**
+ * 执行预先授权检查
+ */
+public function before(User $user, string $ability): bool|null
+{
+    if ($user-&gt;isAdministrator()) {
+        return true;
+    }
+
+    return null;
+}
+</code></pre><p>如果你想拒绝特定类型用户的所有授权检查，那么你可以从<code>before</code>方法返回<code>false</code>。如果返回<code>null</code>，则授权检查将通过策略方法进行。</p><blockquote><p><strong>注意</strong><br> 如果策略类中不包含名称与被检查能力的名称相匹配的方法，则不会调用策略类的<code>before</code>方法。</p></blockquote><p><a name="authorizing-actions-using-policies"></a></p><h2 id="使用策略进行授权操作" tabindex="-1"><a class="header-anchor" href="#使用策略进行授权操作" aria-hidden="true">#</a> 使用策略进行授权操作</h2><p><a name="via-the-user-model"></a></p><h3 id="通过用户模型" tabindex="-1"><a class="header-anchor" href="#通过用户模型" aria-hidden="true">#</a> 通过用户模型</h3><p>Laravel 应用程序中的<code>App\Models\User</code>型提供了两个用于授权操作的方法：<code>can</code>和<code>cannot</code>。<code>can</code>和<code>cannot</code>方法接收你希望授权的操作名称和相关模型。例如，让我们确定一个用户是否被授权更新给定的<code>App\Models\Post</code>模型，这通常在控制器方法中实现：</p><pre><code>&lt;?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use App\Models\Post;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+
+class PostController extends Controller
+{
+    /**
+     * 更新给定的帖子。
+     */
+    public function update(Request $request, Post $post): RedirectResponse
+    {
+        if ($request-&gt;user()-&gt;cannot(&#39;update&#39;, $post)) {
+            abort(403);
+        }
+
+        // 更新帖子...
+
+        return redirect(&#39;/posts&#39;);
+    }
+}
+</code></pre><p>如果为给定模型<a href="#registering-policies">注册了策略</a>，该<code>can</code>方法将自动调用适当的策略并返回布尔值；如果没有为模型注册策略，该<code>can</code>方法将尝试调用基于 Gate 的闭包，该闭包将匹配给定的操作名称。</p><p><a name="user-model-actions-that-dont-require-models"></a></p><h4 id="不需要指定模型的操作" tabindex="-1"><a class="header-anchor" href="#不需要指定模型的操作" aria-hidden="true">#</a> 不需要指定模型的操作</h4><p>请记住，某些操作可能对应着「不需要模型实例」的策略方法，比如<code>create</code>。在这些情况下，你可以将类名传递给<code>can</code>方法，类名将用于确定在授权操作时使用哪个策略：</p><pre><code>&lt;?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use App\Models\Post;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+
+class PostController extends Controller
+{
+    /**
+     * 创建一个帖子。
+     */
+    public function store(Request $request): RedirectResponse
+    {
+        if ($request-&gt;user()-&gt;cannot(&#39;create&#39;, Post::class)) {
+            abort(403);
+        }
+
+        // 创建帖子…
+
+        return redirect(&#39;/posts&#39;);
+    }
+}
+</code></pre><p><a name="via-controller-helpers"></a></p><h3 id="通过控制器辅助函数" tabindex="-1"><a class="header-anchor" href="#通过控制器辅助函数" aria-hidden="true">#</a> 通过控制器辅助函数</h3><p>除了给<code>App\Models\User</code>模型提供了有用方法，Laravel 还给任何控制器提供了一个有用的 <code>authorize</code> 方法，这些控制器要继承（<code>extends</code>）<code>App\Http\Controllers\Controller</code>基类。</p><p>与<code>can</code>方法一样，<code>authorize</code>方法接收你希望授权的操作名称和相关模型，如果该操作未被授权，该方法将抛出<code>Illuminate\Auth\Access\AuthorizationException</code>异常，Laravel 的异常处理程序将自动将该异常转换为一个带有 403 状态码的 HTTP 响应：</p><pre><code>&lt;?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use App\Models\Post;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+
+class PostController extends Controller
+{
+    /**
+     * 更新指定的博客文章
+     *
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function update(Request $request, Post $post): RedirectResponse
+    {
+        $this-&gt;authorize(&#39;update&#39;, $post);
+
+        // 当前用户可以更新博客文章…
+
+        return redirect(&#39;/posts&#39;);
+    }
+}
+</code></pre><p><a name="controller-actions-that-dont-require-models"></a></p><h4 id="不需要指定模型的操作-1" tabindex="-1"><a class="header-anchor" href="#不需要指定模型的操作-1" aria-hidden="true">#</a> 不需要指定模型的操作</h4><p>如前所述，一些策略方法 如<code>create</code>不需要模型实例，在这些情况下，你应该给<code>authorize</code>方法传递一个类名，该类名将用来确定在授权操作时使用哪个策略：</p><pre><code>use App\Models\Post;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+
+/**
+ * 创建一个新的博客文章。
+ *
+ * @throws \Illuminate\Auth\Access\AuthorizationException
+ */
+public function create(Request $request): RedirectResponse
+{
+    $this-&gt;authorize(&#39;create&#39;, Post::class);
+
+    // 当前用户可以创建博客帖子…
+
+    return redirect(&#39;/posts&#39;);
+}
+</code></pre><p><a name="authorizing-resource-controllers"></a></p><h4 id="授权资源控制器" tabindex="-1"><a class="header-anchor" href="#授权资源控制器" aria-hidden="true">#</a> 授权资源控制器</h4><p>如果你正在使用<a href="./controllers#resource-controllers">资源控制器</a>，你可以在控制器的构造方法中使用<code>authorizeResource</code>方法，该方法将把适当的<code>can</code>中间件定义附加到资源控制器的方法上。</p><p>该<code>authorizeResource</code>方法的第一个参数是模型的类名，第二个参数是包含模型 ID 的 路由/请求参数的名称。你应该确保你的<a href="./controllers#resource-controllers">资源控制器</a>是使用 <code>--model</code> 标志创建的，这样它才具有所需的方法签名和类型提示。</p><pre><code>&lt;?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use App\Models\Post;
+use Illuminate\Http\Request;
+
+class PostController extends Controller
+{
+    /**
+     * 创建控制器实例
+     */
+    public function __construct()
+    {
+        $this-&gt;authorizeResource(Post::class, &#39;post&#39;);
+    }
+}
+</code></pre><p>以下控制器方法将映射到其相应的策略方法。当请求被路由到给定的控制器方法时，会在控制器方法执行之前自动调用相应的策略方法：</p><table><thead><tr><th>控制器方法</th><th>策略方法</th></tr></thead><tbody><tr><td>index</td><td>viewAny</td></tr><tr><td>show</td><td>view</td></tr><tr><td>create</td><td>create</td></tr><tr><td>store</td><td>create</td></tr><tr><td>edit</td><td>update</td></tr><tr><td>update</td><td>update</td></tr><tr><td>destroy</td><td>delete</td></tr></tbody></table><blockquote><p><strong>技巧</strong><br> 你可以使用带有<code>make:policy</code>带有 <code>--model</code>选项的命令，快速的为给定模型生成一个策略类：<code>php artisan make:policy PostPolicy --model=Post</code>。</p></blockquote><p><a name="via-middleware"></a></p><h3 id="通过中间件" tabindex="-1"><a class="header-anchor" href="#通过中间件" aria-hidden="true">#</a> 通过中间件</h3><p>Laravel 包含一个中间件，可以在传入的请求到达路由或控制器之前对操作进行授权。默认情况下，<code>Illuminate\Auth\Middleware\Authorize</code>中间件会在<code>App\Http\Kernel</code>中的<code>can</code>键中被指定。让我们来看一个使用<code>can</code>中间件授权用户更新博客文章的例子：</p><pre><code>use App\Models\Post;
+
+Route::put(&#39;/post/{post}&#39;, function (Post $post) {
+    // 当前用户可以更新帖子…
+})-&gt;middleware(&#39;can:update,post&#39;);
+</code></pre><p>在这个例子中，我们给<code>can</code>中间件传递了两个参数。第一个是我们希望授权操作的名称，第二个是我们希望传递给策略方法的路由参数。在这个例子中，当我们使用了<a href="./routing#implicit-binding">隐式模型绑定</a>后，一个<code>App\Models\Post</code>模型就将被传递给对应的策略方法。如果用户没有被授权执行给定操作的权限，那么中间件将会返回一个带有 403 状态码的 HTTP 响应。</p><p>为了方便起见，你也可以使用<code>can</code>方法将<code>can</code>中间件绑定到你的路由上：</p><pre><code>use App\Models\Post;
+
+Route::put(&#39;/post/{post}&#39;, function (Post $post) {
+    // 当前用户可以更新文章...
+})-&gt;can(&#39;update&#39;, &#39;post&#39;);
+</code></pre><p><a name="middleware-actions-that-dont-require-models"></a></p><h4 id="不需要指定模型的操作-2" tabindex="-1"><a class="header-anchor" href="#不需要指定模型的操作-2" aria-hidden="true">#</a> 不需要指定模型的操作</h4><p>同样的，一些策略方法不需要模型实例，比如<code>create</code>。在这些情况下，你可以给中间件传递一个类名。这个类名将用来确定在授权操作时使用哪个策略：</p><pre><code>Route::post(&#39;/post&#39;, function () {
+    // 当前用户可以创建文章...
+})-&gt;middleware(&#39;can:create,App\Models\Post&#39;);
+</code></pre><p>在一个中间件中定义整个类名会变得难以维护。因此，你也可以选择使用<code>can</code>方法将<code>can</code>中间件绑定到你的路由上：</p><pre><code>use App\Models\Post;
+
+Route::post(&#39;/post&#39;, function () {
+    // 当前用户可以创建文章
+})-&gt;can(&#39;create&#39;, Post::class);
+</code></pre><p><a name="via-blade-templates"></a></p><h3 id="通过-blade-模板" tabindex="-1"><a class="header-anchor" href="#通过-blade-模板" aria-hidden="true">#</a> 通过 Blade 模板</h3><p>当编写 Blade 模板时，你可能希望只展示给用户有权限操作的数据。例如，你可能希望当用户具有更新文章的权限时才展示更新博客文章的表单。在这种情况下，你可以使用<code>@can</code>和<code>@cannot</code>指令：</p><div class="language-blade line-numbers-mode" data-ext="blade"><pre class="language-blade"><code>@can(&#39;update&#39;, $post)
+    &lt;!-- 当前用户可更新的文章... --&gt;
+@elsecan(&#39;create&#39;, App\Models\Post::class)
+    &lt;!-- 当前用户可创建新文章... --&gt;
+@else
+    &lt;!-- ... --&gt;
+@endcan
+
+@cannot(&#39;update&#39;, $post)
+    &lt;!-- 当前用户不可更新的文章... --&gt;
+@elsecannot(&#39;create&#39;, App\Models\Post::class)
+    &lt;!-- 当前用户不可创建新文章... --&gt;
+@endcannot
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>这些指令是编写<code>@if</code>和<code>@unless</code>语句的快捷方式。上面的<code>@can</code>和<code>@cannot</code>语句相当于下面的语句：</p><div class="language-blade line-numbers-mode" data-ext="blade"><pre class="language-blade"><code>@if (Auth::user()-&gt;can(&#39;update&#39;, $post))
+    &lt;!-- 当前用户可更新的文章... --&gt;
+@endif
+
+@unless (Auth::user()-&gt;can(&#39;update&#39;, $post))
+    &lt;!-- 当前用户不可更新的文章... --&gt;
+@endunless
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>你还可以确定一个用户是否被授权从给定的操作数组中执行任何操作，要做到这一点，可以使用<code>@canany</code>指令：</p><div class="language-blade line-numbers-mode" data-ext="blade"><pre class="language-blade"><code>@canany([&#39;update&#39;, &#39;view&#39;, &#39;delete&#39;], $post)
+    &lt;!-- 当前用户可以更新、查看、删除文章... --&gt;
+@elsecanany([&#39;create&#39;], \App\Models\Post::class)
+    &lt;!-- 当前用户可以创建新文章... --&gt;
+@endcanany
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><a name="blade-actions-that-dont-require-models"></a></p><h4 id="不需要执行模型的操作" tabindex="-1"><a class="header-anchor" href="#不需要执行模型的操作" aria-hidden="true">#</a> 不需要执行模型的操作</h4><p>像大多数其他授权方法一样，如果操作不需要模型实例，你可以给<code>@can</code>和<code>@cannot</code>指令传递一个类名：</p><div class="language-blade line-numbers-mode" data-ext="blade"><pre class="language-blade"><code>@can(&#39;create&#39;, App\Models\Post::class)
+    &lt;!-- 当前用户可以创建文章... --&gt;
+@endcan
+
+@cannot(&#39;create&#39;, App\Models\Post::class)
+    &lt;!-- 当前用户不能创建文章... --&gt;
+@endcannot
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><a name="supplying-additional-context"></a></p><h3 id="提供额外的上下文" tabindex="-1"><a class="header-anchor" href="#提供额外的上下文" aria-hidden="true">#</a> 提供额外的上下文</h3><p>在使用策略授权操作时，可以将数组作为第二个参数传递给授权函数和辅助函数。数组中的第一个元素用于确定应该调用哪个策略，其余的数组元素作为参数传递给策略方法，并可在作出授权决策时用于额外的上下文中。例如，考虑下面的 <code>PostPolicy</code> 方法定义，它包含一个额外的 <code>$category</code> 参数：</p><pre><code>/**
+ * 确认用户是否可以更新给定的文章。
+ */
+public function update(User $user, Post $post, int $category): bool
+{
+    return $user-&gt;id === $post-&gt;user_id &amp;&amp;
+           $user-&gt;canUpdateCategory($category);
+}
+</code></pre><p>当尝试确认已验证过的用户是否可以更新给定的文章时，我们可以像这样调用此策略方法：</p><pre><code>/**
+ * 更新给定的博客文章
+ *
+ * @throws \Illuminate\Auth\Access\AuthorizationException
+ */
+public function update(Request $request, Post $post): RedirectResponse
+{
+    $this-&gt;authorize(&#39;update&#39;, [$post, $request-&gt;category]);
+
+    // 当前用户可以更新博客文章...
+
+    return redirect(&#39;/posts&#39;);
+}
+</code></pre></div><!----><footer class="page-meta"><!----><div class="meta-item git-info"><!----><!----></div></footer><nav class="vp-page-nav"><a aria-label="用户认证" class="vp-link nav-link prev nav-link prev" href="/laravel/zh/guide/authentication.html"><div class="hint"><span class="arrow start"></span>上一页</div><div class="link"><!---->用户认证</div></a><a aria-label="Email 认证" class="vp-link nav-link next nav-link next" href="/laravel/zh/guide/verification.html"><div class="hint">下一页<span class="arrow end"></span></div><div class="link">Email 认证<!----></div></a></nav><!----><!----><!--]--></main><!--]--><footer class="vp-footer-wrapper"><!----><div class="vp-copyright">Copyright © 2023 Moments</div></footer></div><!--]--><!--]--><!----><!--]--></div>
+    <script type="module" src="/laravel/assets/app-8cdff07c.js" defer></script>
+  </body>
+</html>

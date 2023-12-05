@@ -1,0 +1,456 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>以千位分隔符方式格式化一个数字</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.nl2br.html">? nl2br</a></li>
+      <li style="float: right;"><a href="function.ord.html">ord ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.strings.html">字符串 函数</a></li>
+    <li>以千位分隔符方式格式化一个数字</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.number-format" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">number_format</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">number_format</span> &mdash; <span class="dc-title">以千位分隔符方式格式化一个数字</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.number-format-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>number_format</strong></span>(<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">float</span> <code class="parameter">$num</code></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">int</span> <code class="parameter">$decimals</code><span class="initializer"> = 0</span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">string</span><span class="type"></span></span> <code class="parameter">$decimal_separator</code><span class="initializer"> = &quot;.&quot;</span></span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="methodparam"><span class="type">?</span><span class="type"><span class="type">string</span><span class="type"></span></span> <code class="parameter">$thousands_separator</code><span class="initializer"> = &quot;,&quot;</span></span><br>): <span class="type">string</span></div>
+
+  <p class="para rdfs-comment">
+   使用四舍五入的规则，将数字格式化为千位分组和小数位（可选）。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.number-format-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">num</code></dt>
+
+     <dd>
+
+      <p class="para">
+       要格式化的数字。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">decimals</code></dt>
+
+     <dd>
+
+      <p class="para">
+       设置小数位数。如果为 <code class="literal">0</code>，则从返回值中忽略 <code class="parameter">decimal_separator</code>。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">decimal_separator</code></dt>
+
+     <dd>
+
+      <p class="para">
+       指定小数点的分隔符。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">thousands_separator</code></dt>
+
+     <dd>
+
+      <p class="para">
+       设置千位分隔符。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.number-format-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   <code class="parameter">num</code> 的格式化版本。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.number-format-changelog">
+  <h3 class="title">更新日志</h3>
+  <p class="para">
+   <table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>版本</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>8.0.0</td>
+       <td>
+        在此版本之前，<span class="function"><strong>number_format()</strong></span> 接受一个、两个或四个参数（不会是三个）。
+       </td>
+      </tr>
+
+      <tr>
+       <td>7.2.0</td>
+       <td>
+        <span class="function"><strong>number_format()</strong></span> 现在再也不会返回 <code class="literal">-0</code>，之前
+        <code class="parameter">num</code> 为 <code class="literal">-0.01</code> 的情况下可以返回 <code class="literal">-0</code>。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.number-format-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #1 <span class="function"><strong>number_format()</strong></span> 示例</strong></p>
+    <div class="example-contents"><p>
+     例如，法语计数通常使用两位小数，逗号（","）作为小数分隔符，空格（" "）作为千位分隔符。以下示例展示了格式化数字的各种方法：
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />$number </span><span style="color: #007700">= </span><span style="color: #0000BB">1234.56</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// 英文计数（默认）<br /></span><span style="color: #0000BB">$english_format_number </span><span style="color: #007700">= </span><span style="color: #0000BB">number_format</span><span style="color: #007700">(</span><span style="color: #0000BB">$number</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">// 1,235<br /><br />// 法语计数<br /></span><span style="color: #0000BB">$nombre_format_francais </span><span style="color: #007700">= </span><span style="color: #0000BB">number_format</span><span style="color: #007700">(</span><span style="color: #0000BB">$number</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">, </span><span style="color: #DD0000">','</span><span style="color: #007700">, </span><span style="color: #DD0000">' '</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">// 1 234,56<br /><br /></span><span style="color: #0000BB">$number </span><span style="color: #007700">= </span><span style="color: #0000BB">1234.5678</span><span style="color: #007700">;<br /><br /></span><span style="color: #FF8000">// 没有千位分隔符的英文计数<br /></span><span style="color: #0000BB">$english_format_number </span><span style="color: #007700">= </span><span style="color: #0000BB">number_format</span><span style="color: #007700">(</span><span style="color: #0000BB">$number</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">, </span><span style="color: #DD0000">'.'</span><span style="color: #007700">, </span><span style="color: #DD0000">''</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">// 1234.57<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 seealso" id="refsect1-function.number-format-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.money-format.html" class="function" rel="rdfs-seeAlso">money_format()</a> - 将数字格式化成货币字符串</span></li>
+    <li class="member"><span class="function"><a href="function.sprintf.html" class="function" rel="rdfs-seeAlso">sprintf()</a> - 返回格式化字符串</span></li>
+    <li class="member"><span class="function"><a href="function.printf.html" class="function" rel="rdfs-seeAlso">printf()</a> - 输出格式化字符串</span></li>
+    <li class="member"><span class="function"><a href="function.sscanf.html" class="function" rel="rdfs-seeAlso">sscanf()</a> - 根据指定格式解析输入的字符</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="128399""></a>
+  <div class="note">
+   <strong class="user">support at piri dot sk</strong>
+   <a href="#128399" class="date">16-Apr-2023 12:18</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+My simpler solution to the problem of the decimal number in this function being longer than the specified number of decimals.<br />
+<br />
+Standard result for number_format() is..<br />
+number_format(5.00098, 2) = 5.00<br />
+<br />
+My function will return the result = 5.001<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="comment">// ** Warning: Does not work with scientific notation. Conversion to a real number is required. **<br />
+<br />
+</span><span class="keyword">echo </span><span class="default">auto_decimal_format</span><span class="keyword">(</span><span class="default">5.0005620</span><span class="keyword">); </span><span class="comment">// print 5.0006<br />
+</span><span class="keyword">echo </span><span class="default">auto_decimal_format</span><span class="keyword">(</span><span class="default">5.0009820</span><span class="keyword">); </span><span class="comment">// print 5.001<br />
+</span><span class="keyword">echo </span><span class="default">auto_decimal_format</span><span class="keyword">(</span><span class="default">5.00098</span><span class="keyword">, </span><span class="default">8</span><span class="keyword">); </span><span class="comment">// print 5.00098000<br />
+</span><span class="keyword">echo </span><span class="default">auto_decimal_format</span><span class="keyword">(</span><span class="default">1.0295691366783E-5</span><span class="keyword">, </span><span class="default">2</span><span class="keyword">); </span><span class="comment">// print 0.00<br />
+<br />
+</span><span class="keyword">function </span><span class="default">auto_decimal_format</span><span class="keyword">(</span><span class="default">$n</span><span class="keyword">, </span><span class="default">$def </span><span class="keyword">= </span><span class="default">2</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$a </span><span class="keyword">= </span><span class="default">explode</span><span class="keyword">(</span><span class="string">"."</span><span class="keyword">, </span><span class="default">$n</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; if (</span><span class="default">count</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">)&gt;</span><span class="default">1</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$b </span><span class="keyword">= </span><span class="default">str_split</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">]);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$pos </span><span class="keyword">= </span><span class="default">1</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; foreach (</span><span class="default">$b </span><span class="keyword">as </span><span class="default">$value</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">$value </span><span class="keyword">!= </span><span class="default">0 </span><span class="keyword">&amp;&amp; </span><span class="default">$pos </span><span class="keyword">&gt;= </span><span class="default">$def</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$c </span><span class="keyword">= </span><span class="default">number_format</span><span class="keyword">(</span><span class="default">$n</span><span class="keyword">, </span><span class="default">$pos</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$c_len </span><span class="keyword">= </span><span class="default">strlen</span><span class="keyword">(</span><span class="default">substr</span><span class="keyword">(</span><span class="default">strrchr</span><span class="keyword">(</span><span class="default">$c</span><span class="keyword">, </span><span class="string">"."</span><span class="keyword">), </span><span class="default">1</span><span class="keyword">));<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">$c_len </span><span class="keyword">&gt; </span><span class="default">$def</span><span class="keyword">) { return </span><span class="default">rtrim</span><span class="keyword">(</span><span class="default">$c</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">); }<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$c</span><span class="keyword">; </span><span class="comment">// or break<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">}<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$pos</span><span class="keyword">++;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">number_format</span><span class="keyword">(</span><span class="default">$n</span><span class="keyword">, </span><span class="default">$def</span><span class="keyword">);<br />
+}<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="126729""></a>
+  <div class="note">
+   <strong class="user">info at ensostudio dot ru</strong>
+   <a href="#126729" class="date">30-Dec-2021 08:28</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Note: use NumberFormatter to convert in human-readable format instead&nbsp; user function from comments:<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">echo </span><span class="default">NumberFormatter</span><span class="keyword">::</span><span class="default">create</span><span class="keyword">(</span><span class="string">'en'</span><span class="keyword">, </span><span class="default">NumberFormatter</span><span class="keyword">::</span><span class="default">SPELLOUT</span><span class="keyword">)-&gt;</span><span class="default">format</span><span class="keyword">(</span><span class="default">12309</span><span class="keyword">); </span><span class="comment">// twelve thousand three hundred nine<br />
+</span><span class="keyword">echo </span><span class="default">NumberFormatter</span><span class="keyword">::</span><span class="default">create</span><span class="keyword">(</span><span class="string">'ru'</span><span class="keyword">, </span><span class="default">NumberFormatter</span><span class="keyword">::</span><span class="default">SPELLOUT</span><span class="keyword">)-&gt;</span><span class="default">format</span><span class="keyword">(</span><span class="default">12307.5</span><span class="keyword">); </span><span class="comment">//&nbsp; двенадцать тысяч триста семь целых пять десятых<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="106560""></a>
+  <div class="note">
+   <strong class="user">liviu andrei (bls)</strong>
+   <a href="#106560" class="date">18-Nov-2011 08:10</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+To prevent the rounding that occurs when next digit after last significant decimal is 5 (mentioned by several people below):<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">fnumber_format</span><span class="keyword">(</span><span class="default">$number</span><span class="keyword">, </span><span class="default">$decimals</span><span class="keyword">=</span><span class="string">''</span><span class="keyword">, </span><span class="default">$sep1</span><span class="keyword">=</span><span class="string">''</span><span class="keyword">, </span><span class="default">$sep2</span><span class="keyword">=</span><span class="string">''</span><span class="keyword">) {<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if ((</span><span class="default">$number </span><span class="keyword">* </span><span class="default">pow</span><span class="keyword">(</span><span class="default">10 </span><span class="keyword">, </span><span class="default">$decimals </span><span class="keyword">+ </span><span class="default">1</span><span class="keyword">) % </span><span class="default">10 </span><span class="keyword">) == </span><span class="default">5</span><span class="keyword">)&nbsp; </span><span class="comment">//if next not significant digit is 5<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$number </span><span class="keyword">-= </span><span class="default">pow</span><span class="keyword">(</span><span class="default">10 </span><span class="keyword">, -(</span><span class="default">$decimals</span><span class="keyword">+</span><span class="default">1</span><span class="keyword">));<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">number_format</span><span class="keyword">(</span><span class="default">$number</span><span class="keyword">, </span><span class="default">$decimals</span><span class="keyword">, </span><span class="default">$sep1</span><span class="keyword">, </span><span class="default">$sep2</span><span class="keyword">);<br />
+<br />
+}<br />
+<br />
+</span><span class="default">$t</span><span class="keyword">=</span><span class="default">7.15</span><span class="keyword">;<br />
+echo </span><span class="default">$t </span><span class="keyword">. </span><span class="string">" | " </span><span class="keyword">. </span><span class="default">number_format</span><span class="keyword">(</span><span class="default">$t</span><span class="keyword">, </span><span class="default">1</span><span class="keyword">, </span><span class="string">'.'</span><span class="keyword">, </span><span class="string">','</span><span class="keyword">) .&nbsp; </span><span class="string">" | " </span><span class="keyword">. </span><span class="default">fnumber_format</span><span class="keyword">(</span><span class="default">$t</span><span class="keyword">, </span><span class="default">1</span><span class="keyword">, </span><span class="string">'.'</span><span class="keyword">, </span><span class="string">','</span><span class="keyword">) . </span><span class="string">"\n\n"</span><span class="keyword">;<br />
+</span><span class="comment">//result is: 7.15 | 7.2 | 7.1<br />
+<br />
+</span><span class="default">$t</span><span class="keyword">=</span><span class="default">7.3215</span><span class="keyword">;<br />
+echo </span><span class="default">$t </span><span class="keyword">. </span><span class="string">" | " </span><span class="keyword">. </span><span class="default">number_format</span><span class="keyword">(</span><span class="default">$t</span><span class="keyword">, </span><span class="default">3</span><span class="keyword">, </span><span class="string">'.'</span><span class="keyword">, </span><span class="string">','</span><span class="keyword">) .&nbsp; </span><span class="string">" | " </span><span class="keyword">. </span><span class="default">fnumber_format</span><span class="keyword">(</span><span class="default">$t</span><span class="keyword">, </span><span class="default">3</span><span class="keyword">, </span><span class="string">'.'</span><span class="keyword">, </span><span class="string">','</span><span class="keyword">) . </span><span class="string">"\n\n"</span><span class="keyword">;<br />
+</span><span class="comment">//result is: 7.3215 | 7.322 | 7.321<br />
+</span><span class="keyword">} </span><span class="default">?&gt;<br />
+</span><br />
+have fun!</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="89888""></a>
+  <div class="note">
+   <strong class="user">james at bandit dot co.nz</strong>
+   <a href="#89888" class="date">26-Mar-2009 09:03</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Outputs a human readable number.<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">#&nbsp; &nbsp; Output easy-to-read numbers<br />
+&nbsp;&nbsp;&nbsp; #&nbsp; &nbsp; by james at bandit.co.nz<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">function </span><span class="default">bd_nice_number</span><span class="keyword">(</span><span class="default">$n</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// first strip any formatting;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$n </span><span class="keyword">= (</span><span class="default">0</span><span class="keyword">+</span><span class="default">str_replace</span><span class="keyword">(</span><span class="string">","</span><span class="keyword">,</span><span class="string">""</span><span class="keyword">,</span><span class="default">$n</span><span class="keyword">));<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// is this a number?<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">if(!</span><span class="default">is_numeric</span><span class="keyword">(</span><span class="default">$n</span><span class="keyword">)) return </span><span class="default">false</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="comment">// now filter it;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">if(</span><span class="default">$n</span><span class="keyword">&gt;</span><span class="default">1000000000000</span><span class="keyword">) return </span><span class="default">round</span><span class="keyword">((</span><span class="default">$n</span><span class="keyword">/</span><span class="default">1000000000000</span><span class="keyword">),</span><span class="default">1</span><span class="keyword">).</span><span class="string">' trillion'</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; else if(</span><span class="default">$n</span><span class="keyword">&gt;</span><span class="default">1000000000</span><span class="keyword">) return </span><span class="default">round</span><span class="keyword">((</span><span class="default">$n</span><span class="keyword">/</span><span class="default">1000000000</span><span class="keyword">),</span><span class="default">1</span><span class="keyword">).</span><span class="string">' billion'</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; else if(</span><span class="default">$n</span><span class="keyword">&gt;</span><span class="default">1000000</span><span class="keyword">) return </span><span class="default">round</span><span class="keyword">((</span><span class="default">$n</span><span class="keyword">/</span><span class="default">1000000</span><span class="keyword">),</span><span class="default">1</span><span class="keyword">).</span><span class="string">' million'</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; else if(</span><span class="default">$n</span><span class="keyword">&gt;</span><span class="default">1000</span><span class="keyword">) return </span><span class="default">round</span><span class="keyword">((</span><span class="default">$n</span><span class="keyword">/</span><span class="default">1000</span><span class="keyword">),</span><span class="default">1</span><span class="keyword">).</span><span class="string">' thousand'</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">number_format</span><span class="keyword">(</span><span class="default">$n</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Outputs:<br />
+<br />
+247,704,360 -&gt; 247.7 million<br />
+866,965,260,000 -&gt; 867 billion</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="88424""></a>
+  <div class="note">
+   <strong class="user">thomas at weblizards dot de</strong>
+   <a href="#88424" class="date">23-Jan-2009 05:43</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+It's not explicitly documented; number_format also rounds:<br />
+<br />
+<span class="default">&lt;?php<br />
+$numbers </span><span class="keyword">= array(</span><span class="default">0.001</span><span class="keyword">, </span><span class="default">0.002</span><span class="keyword">, </span><span class="default">0.003</span><span class="keyword">, </span><span class="default">0.004</span><span class="keyword">, </span><span class="default">0.005</span><span class="keyword">, </span><span class="default">0.006</span><span class="keyword">, </span><span class="default">0.007</span><span class="keyword">, </span><span class="default">0.008</span><span class="keyword">, </span><span class="default">0.009</span><span class="keyword">);<br />
+foreach (</span><span class="default">$numbers </span><span class="keyword">as </span><span class="default">$number</span><span class="keyword">)<br />
+&nbsp;&nbsp;&nbsp; print </span><span class="default">$number</span><span class="keyword">.</span><span class="string">"-&gt;"</span><span class="keyword">.</span><span class="default">number_format</span><span class="keyword">(</span><span class="default">$number</span><span class="keyword">, </span><span class="default">2</span><span class="keyword">, </span><span class="string">'.'</span><span class="keyword">, </span><span class="string">','</span><span class="keyword">).</span><span class="string">"&lt;br&gt;"</span><span class="keyword">;<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+0.001-&gt;0.00<br />
+0.002-&gt;0.00<br />
+0.003-&gt;0.00<br />
+0.004-&gt;0.00<br />
+0.005-&gt;0.01<br />
+0.006-&gt;0.01<br />
+0.007-&gt;0.01<br />
+0.008-&gt;0.01<br />
+0.009-&gt;0.01</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="62141""></a>
+  <div class="note">
+   <strong class="user">MarcM</strong>
+   <a href="#62141" class="date">20-Feb-2006 10:03</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+For Zero fill - just use the sprintf() function<br />
+<br />
+$pr_id = 1;<br />
+$pr_id = sprintf("%03d", $pr_id);<br />
+echo $pr_id;<br />
+<br />
+//outputs 001<br />
+-----------------<br />
+<br />
+$pr_id = 10;<br />
+$pr_id = sprintf("%03d", $pr_id);<br />
+echo $pr_id;<br />
+<br />
+//outputs 010<br />
+-----------------<br />
+<br />
+You can change %03d to %04d, etc.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="57376""></a>
+  <div class="note">
+   <strong class="user">Jeroen de Bruijn [NL]</strong>
+   <a href="#57376" class="date">01-Oct-2005 03:02</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you want to display a number ending with ,- (like 200,-) when there are no decimal characters and display the decimals when there are decimal characters i use:<br />
+<br />
+function DisplayDouble($value)<br />
+&nbsp; {<br />
+&nbsp; list($whole, $decimals) = split ('[.,]', $value, 2);<br />
+&nbsp; if (intval($decimals) &gt; 0)<br />
+&nbsp;&nbsp;&nbsp; return number_format($value,2,".",",");<br />
+&nbsp; else<br />
+&nbsp;&nbsp;&nbsp; return number_format($value,0,".",",") .",-";<br />
+&nbsp; }</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="52311""></a>
+  <div class="note">
+   <strong class="user">stm555 at hotmail dot com</strong>
+   <a href="#52311" class="date">27-Apr-2005 08:54</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I ran across an issue where I wanted to keep the entered precision of a real value, without arbitrarily rounding off what the user had submitted.<br />
+<br />
+I figured it out with a quick explode on the number before formatting. I could then format either side of the decimal.<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp; &nbsp;&nbsp; </span><span class="keyword">function </span><span class="default">number_format_unlimited_precision</span><span class="keyword">(</span><span class="default">$number</span><span class="keyword">,</span><span class="default">$decimal </span><span class="keyword">= </span><span class="string">'.'</span><span class="keyword">)<br />
+&nbsp;&nbsp; &nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="default">$broken_number </span><span class="keyword">= </span><span class="default">explode</span><span class="keyword">(</span><span class="default">$decimal</span><span class="keyword">,</span><span class="default">$number</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return </span><span class="default">number_format</span><span class="keyword">(</span><span class="default">$broken_number</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">]).</span><span class="default">$decimal</span><span class="keyword">.</span><span class="default">$broken_number</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">];<br />
+&nbsp;&nbsp; &nbsp;&nbsp; }<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="30643""></a>
+  <div class="note">
+   <strong class="user">Theo Diem</strong>
+   <a href="#30643" class="date">24-Mar-2003 01:45</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+formatting numbers may be more easy if u use number_format function.<br />
+<br />
+I also wrote this :<br />
+function something($number)<br />
+{<br />
+&nbsp;&nbsp;&nbsp; $locale = localeconv();<br />
+&nbsp;&nbsp;&nbsp; return number_format($number,<br />
+&nbsp;&nbsp; &nbsp; &nbsp; $locale['frac_digits'],<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $locale['decimal_point'],<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $locale['thousands_sep']);<br />
+}<br />
+<br />
+hope this helps =)<br />
+[]'s</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

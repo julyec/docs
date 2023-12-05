@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>流程控制的替代语法</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="control-structures.elseif.html">? elseif/else if</a></li>
+      <li style="float: right;"><a href="control-structures.while.html">while ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="language.control-structures.html">流程控制</a></li>
+    <li>流程控制的替代语法</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="control-structures.alternative-syntax" class="sect1">
+ <h2 class="title">流程控制的替代语法</h2>
+ <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p>
+ <p class="para">
+  PHP 提供了一些流程控制的替代语法，包括
+  <code class="literal">if</code>，<code class="literal">while</code>，<code class="literal">for</code>，<code class="literal">foreach</code>
+  和 <code class="literal">switch</code>。替代语法的基本形式是把左花括号（{）换成冒号（:），把右花括号（}）分别换成
+  <code class="literal">endif;</code>，<code class="literal">endwhile;</code>，<code class="literal">endfor;</code>，<code class="literal">endforeach;</code>
+  以及 <code class="literal">endswitch;</code>。
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php </span><span style="color: #007700">if (</span><span style="color: #0000BB">$a </span><span style="color: #007700">== </span><span style="color: #0000BB">5</span><span style="color: #007700">): </span><span style="color: #0000BB">?&gt;<br /></span>A is equal to 5<br /><span style="color: #0000BB">&lt;?php </span><span style="color: #007700">endif; </span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+ </p>
+ <p class="simpara">
+  在上面的例子中，HTML 内容"A is equal to 5"用替代语法嵌套在
+  <code class="literal">if</code> 语句中。该 HTML 的内容仅在
+  <var class="varname">$a</var> 等于 5 时显示。
+ </p>
+ <p class="para">
+  替代语法同样可以用在 <code class="literal">else</code> 和
+  <code class="literal">elseif</code> 中。下面是一个包括
+  <code class="literal">elseif</code> 和 <code class="literal">else</code>
+  的 <code class="literal">if</code> 结构用替代语法格式写的例子：
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">if (</span><span style="color: #0000BB">$a </span><span style="color: #007700">== </span><span style="color: #0000BB">5</span><span style="color: #007700">):<br />    echo </span><span style="color: #DD0000">"a equals 5"</span><span style="color: #007700">;<br />    echo </span><span style="color: #DD0000">"..."</span><span style="color: #007700">;<br />elseif (</span><span style="color: #0000BB">$a </span><span style="color: #007700">== </span><span style="color: #0000BB">6</span><span style="color: #007700">):<br />    echo </span><span style="color: #DD0000">"a equals 6"</span><span style="color: #007700">;<br />    echo </span><span style="color: #DD0000">"!!!"</span><span style="color: #007700">;<br />else:<br />    echo </span><span style="color: #DD0000">"a is neither 5 nor 6"</span><span style="color: #007700">;<br />endif;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+ </p>
+ <blockquote class="note"><p><strong class="note">Note</strong>: 
+  <p class="para">
+   不支持在同一个控制块内混合使用两种语法。
+  </p>
+ </p></blockquote>
+  <div class="warning"><strong class="warning">Warning</strong>
+  <p class="para">
+   <code class="literal">switch</code> 和第一个 <code class="literal">case</code> 之间的任何输出（含空格）将导致语法错误。例如，这样是无效的：
+  </p>
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php </span><span style="color: #007700">switch (</span><span style="color: #0000BB">$foo</span><span style="color: #007700">): </span><span style="color: #0000BB">?&gt;<br /></span>    <span style="color: #0000BB">&lt;?php </span><span style="color: #007700">case </span><span style="color: #0000BB">1</span><span style="color: #007700">: </span><span style="color: #0000BB">?&gt;<br /></span>    ...<br /><span style="color: #0000BB">&lt;?php </span><span style="color: #007700">endswitch </span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+  <p class="para">
+   而这样是有效的，因为 <code class="literal">switch</code> 之后的换行符被认为是结束标记 <code class="literal">?&gt;</code>  的一部分，所以在 <code class="literal">switch</code> 和 <code class="literal">case</code> 之间不能有任何输出：
+  </p>
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php </span><span style="color: #007700">switch (</span><span style="color: #0000BB">$foo</span><span style="color: #007700">): </span><span style="color: #0000BB">?&gt;<br />&lt;?php </span><span style="color: #007700">case </span><span style="color: #0000BB">1</span><span style="color: #007700">: </span><span style="color: #0000BB">?&gt;<br /></span>    ...<br /><span style="color: #0000BB">&lt;?php </span><span style="color: #007700">endswitch </span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+ </div>
+ <p class="para">
+  更多例子参见 <a href="control-structures.while.html" class="link">while</a>，<a href="control-structures.for.html" class="link">for</a> 和
+  <a href="control-structures.if.html" class="link">if</a>。
+ </p>
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="127003""></a>
+  <div class="note">
+   <strong class="user">toxyy</strong>
+   <a href="#127003" class="date">22-Apr-2022 10:00</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I feel compelled to give a more elegant way using heredoc than the other comment:<br />
+<br />
+&lt;ul&gt;<br />
+<span class="default">&lt;?php </span><span class="keyword">foreach(</span><span class="default">$list </span><span class="keyword">as </span><span class="default">$item</span><span class="keyword">): echo<br />
+&lt;&lt;&lt;ITEM<br />
+</span><span class="string">&nbsp; &nbsp; &lt;li id="itm-</span><span class="default">$item</span><span class="keyword">[</span><span class="default">number</span><span class="keyword">]</span><span class="string">"&gt;Item </span><span class="default">$item</span><span class="keyword">[</span><span class="default">name</span><span class="keyword">]</span><span class="string">&lt;/li&gt;<br />
+</span><span class="keyword">ITEM;<br />
+endforeach; </span><span class="default">?&gt;<br />
+</span>&lt;/ul&gt;<br />
+<br />
+Which works better with multi line blocks, as you only need one overall php tag.<br />
+<br />
+(please don't omit the closing &lt;/li&gt; tag despite it being legal, personal preference)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

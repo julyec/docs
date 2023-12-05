@@ -1,0 +1,347 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>示例</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="svm.resources.html">? 资源类型</a></li>
+      <li style="float: right;"><a href="class.svm.html">SVM ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="book.svm.html">SVM</a></li>
+    <li>示例</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="svm.examples" class="chapter">
+ <h1>示例</h1>
+
+
+ <p class="para">
+  The basic process is to define parameters, supply training data to generate a 
+  model on, then make predictions based on the model. There are a default set 
+  of parameters that should get some results with most any input, so we&#039;ll start 
+  by looking at the data. 
+ </p>
+ <p class="para">
+  Data is supplied in either a file, a stream, or as an array. If supplied in 
+  a file or a stream, it must contain one line per training example, which must 
+  be formatted as an integer class (usually 1 and -1) followed by a series of 
+  feature/value pairs, in increasing feature order. The features are integers, 
+  the values floats, usually scaled 0-1. For example:
+ </p>
+ <p class="para">
+  -1 1:0.43 3:0.12 9284:0.2
+ </p>
+ <p class="para">
+  In a document classification problem, say a spam checker, each line would 
+  represent a document. There would be two classes, -1 for spam, 1 for ham. 
+  Each feature would represent some word, and the value would represent that 
+  importance of that word to the document (perhaps the frequency count, with 
+  the total scaled to unit length). Features that were 0 (e.g. the word did 
+  not appear in the document at all) would simply not be included.
+ </p>
+ <p class="para">
+  In array mode, the data must be passed as an array of arrays. Each sub-array 
+  must have the class as the first element, then key =&gt; value sets for the 
+  feature values pairs.
+ </p>
+ <p class="para">
+  This data is passed to the SVM class&#039;s train function, which will return an 
+  SVM model is successful.
+ </p>
+ <p class="para">
+  Once a model has been generated, it can be used to make predictions about 
+  previously unseen data. This can be passed as an array to the model&#039;s 
+  predict function, in the same format as before, but without the label. 
+  The response will be the class. 
+ </p>
+ <p class="para">
+  Models can be saved and restored as required, using the save and load 
+  functions, which both take a file location. 
+ </p>
+ <p class="para">
+  <div class="example" id="">
+   <p><strong>Example #1 Train from array</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$data </span><span style="color: #007700">= array(<br />    array(-</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">1 </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">0.43</span><span style="color: #007700">, </span><span style="color: #0000BB">3 </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">0.12</span><span style="color: #007700">, </span><span style="color: #0000BB">9284 </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">0.2</span><span style="color: #007700">),<br />    array(</span><span style="color: #0000BB">1</span><span style="color: #007700">, </span><span style="color: #0000BB">1 </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">0.22</span><span style="color: #007700">, </span><span style="color: #0000BB">5 </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">0.01</span><span style="color: #007700">, </span><span style="color: #0000BB">94 </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">0.11</span><span style="color: #007700">),<br />);<br /><br /></span><span style="color: #0000BB">$svm </span><span style="color: #007700">= new </span><span style="color: #0000BB">SVM</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$model </span><span style="color: #007700">= </span><span style="color: #0000BB">$svm</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">train</span><span style="color: #007700">(</span><span style="color: #0000BB">$data</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$data </span><span style="color: #007700">= array(</span><span style="color: #0000BB">1 </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">0.43</span><span style="color: #007700">, </span><span style="color: #0000BB">3 </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">0.12</span><span style="color: #007700">, </span><span style="color: #0000BB">9284 </span><span style="color: #007700">=&gt; </span><span style="color: #0000BB">0.2</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">$model</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">predict</span><span style="color: #007700">(</span><span style="color: #0000BB">$data</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$model</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">save</span><span style="color: #007700">(</span><span style="color: #DD0000">'model.svm'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+   <div class="example-contents"><p>以上示例的输出类似于：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+int(-1)
+</pre></div>
+   </div>
+  </div>
+  <div class="example" id="">
+   <p><strong>Example #2 Train from a file</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$svm </span><span style="color: #007700">= new </span><span style="color: #0000BB">SVM</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">$model </span><span style="color: #007700">= </span><span style="color: #0000BB">$svm</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">train</span><span style="color: #007700">(</span><span style="color: #DD0000">"traindata.txt"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+ </p>
+</div>
+<div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="127896""></a>
+  <div class="note">
+   <strong class="user">razvan_bc at yahoo dot com</strong>
+   <a href="#127896" class="date">04-Nov-2022 01:13</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+the example rated negative rated by the guy sign&nbsp; "6765419 at qq dot com"&nbsp; also works too!<br />
+<br />
+<span class="default">&lt;?php<br />
+$data </span><span class="keyword">= array(<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; array(-</span><span class="default">1</span><span class="keyword">, </span><span class="default">1 </span><span class="keyword">=&gt;</span><span class="default">170</span><span class="keyword">, </span><span class="default">2 </span><span class="keyword">=&gt; </span><span class="default">60</span><span class="keyword">),</span><span class="comment">//-1&nbsp; 表示男生，key 1表示身高，key 2表示体重=Represents a boy, key 1 represents height, key 2 represents weight<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">array(-</span><span class="default">1</span><span class="keyword">, </span><span class="default">1 </span><span class="keyword">=&gt;</span><span class="default">180</span><span class="keyword">, </span><span class="default">2 </span><span class="keyword">=&gt; </span><span class="default">70</span><span class="keyword">),<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; array(</span><span class="default">1</span><span class="keyword">, </span><span class="default">1 </span><span class="keyword">=&gt; </span><span class="default">160</span><span class="keyword">, </span><span class="default">2 </span><span class="keyword">=&gt; </span><span class="default">46</span><span class="keyword">),</span><span class="comment">//1&nbsp; 表示女生，key 1表示身高，key 2表示体重=Represents a girl, key 1 represents height, key 2 represents weight<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">array(</span><span class="default">1</span><span class="keyword">, </span><span class="default">1 </span><span class="keyword">=&gt; </span><span class="default">155</span><span class="keyword">, </span><span class="default">2 </span><span class="keyword">=&gt; </span><span class="default">40</span><span class="keyword">),<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; );<br />
+</span><span class="default">$svm </span><span class="keyword">= new </span><span class="default">SVM</span><span class="keyword">();<br />
+</span><span class="default">$model </span><span class="keyword">= </span><span class="default">$svm</span><span class="keyword">-&gt;</span><span class="default">train</span><span class="keyword">(</span><span class="default">$data</span><span class="keyword">);<br />
+</span><span class="default">$data </span><span class="keyword">= array( </span><span class="default">1 </span><span class="keyword">=&gt; </span><span class="default">165</span><span class="keyword">, </span><span class="default">2 </span><span class="keyword">=&gt;</span><span class="default">60</span><span class="keyword">);</span><span class="comment">//测试数据 =Test Data<br />
+</span><span class="default">$result </span><span class="keyword">= </span><span class="default">$model</span><span class="keyword">-&gt;</span><span class="default">predict</span><span class="keyword">(</span><span class="default">$data</span><span class="keyword">);<br />
+echo </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$result</span><span class="keyword">);</span><span class="comment">//echo var_export($result);<br />
+//return;<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+so i got :<br />
+<br />
+float(-1)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="127895""></a>
+  <div class="note">
+   <strong class="user">razvan_bc at yahoo dot com</strong>
+   <a href="#127895" class="date">04-Nov-2022 09:03</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+ok i did more tests..<br />
+<br />
+getting the source<br />
+https://github.com/ianbarber/php-svm/blob/master/tests/002_predict.phpt&nbsp; modified ..<br />
+<span class="default">&lt;?php<br />
+$svm </span><span class="keyword">= new </span><span class="default">svmmodel</span><span class="keyword">();<br />
+</span><span class="comment">//$result = $svm-&gt;load(dirname(__FILE__) . '/australian.model');<br />
+</span><span class="default">$result </span><span class="keyword">= </span><span class="default">$svm</span><span class="keyword">-&gt;</span><span class="default">load</span><span class="keyword">(</span><span class="string">'australian.model'</span><span class="keyword">);<br />
+<br />
+if(</span><span class="default">$result</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$data </span><span class="keyword">= array(<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"1" </span><span class="keyword">=&gt; </span><span class="default">1</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">2 </span><span class="keyword">=&gt; -</span><span class="default">0.731729</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">3 </span><span class="keyword">=&gt; -</span><span class="default">0.886786</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">4 </span><span class="keyword">=&gt; -</span><span class="default">1</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">5 </span><span class="keyword">=&gt; </span><span class="default">0.230769</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"6" </span><span class="keyword">=&gt; -</span><span class="default">0.25</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">7 </span><span class="keyword">=&gt; -</span><span class="default">0.783509</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">8 </span><span class="keyword">=&gt; </span><span class="default">1</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">9 </span><span class="keyword">=&gt; </span><span class="default">1</span><span class="keyword">, <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">10 </span><span class="keyword">=&gt; </span><span class="string">"-0.820896"</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">11 </span><span class="keyword">=&gt; -</span><span class="default">1</span><span class="keyword">, <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">13 </span><span class="keyword">=&gt; -</span><span class="default">0.92</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"14" </span><span class="keyword">=&gt; </span><span class="string">"-1"<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$result </span><span class="keyword">= </span><span class="default">$svm</span><span class="keyword">-&gt;</span><span class="default">predict</span><span class="keyword">(</span><span class="default">$data</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; if(</span><span class="default">$result </span><span class="keyword">&gt; </span><span class="default">0</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"ok"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">print_r</span><span class="keyword">(</span><span class="default">$result</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; } else {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"predict failed: </span><span class="default">$result</span><span class="string">"</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+} else {<br />
+&nbsp;&nbsp;&nbsp; echo </span><span class="string">"loading failed"</span><span class="keyword">;<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+with additional https://github.com/ianbarber/php-svm/blob/master/tests/australian.scale dropped inside the test folder where .php file is located i am able after running to get the result:<br />
+================================<br />
+<br />
+ok1&nbsp; <br />
+<br />
+so it's work</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="127894""></a>
+  <div class="note">
+   <strong class="user">razvan_bc at yahoo dot com</strong>
+   <a href="#127894" class="date">04-Nov-2022 08:41</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+i forgot a detail!<br />
+the installation folders if you think to install it manually in windows xampp should be&nbsp; c:\xampp\php\lib\libsvm-3.1 (for the files i described in the first post) and extension in c:\xampp\php\ext (php_svm.dll)<br />
+<br />
+works.good luck</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="127893""></a>
+  <div class="note">
+   <strong class="user">razvan_bc at yahoo dot com</strong>
+   <a href="#127893" class="date">04-Nov-2022 08:33</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+from pecl.php.net i download svm php_svm-0.2.3-8.1-ts-vs16-x64.zip so i read in README.md ..<br />
+<br />
+=====================================================<br />
+Data is supplied in either a file, a stream, or as an an array. If supplied in a file or a stream, it must contain one line per training example, which must be formatted as an integer class (usually 1 and -1) followed by a series of feature/value pairs, in increasing feature order. The features are integers, the values floats, usually scaled 0-1. For example:<br />
+<br />
+&nbsp;&nbsp;&nbsp; -1 1:0.43 3:0.12 9284:0.2<br />
+<br />
+=====================================================<br />
+<br />
+so creating traindata.txt with the content&nbsp; -1 1:0.43 3:0.12 9284:0.2 leads me to use it in the second example:<br />
+<br />
+<span class="default">&lt;?php<br />
+$svm </span><span class="keyword">= new </span><span class="default">SVM</span><span class="keyword">();<br />
+</span><span class="default">$model </span><span class="keyword">= </span><span class="default">$svm</span><span class="keyword">-&gt;</span><span class="default">train</span><span class="keyword">(</span><span class="string">"traindata.txt"</span><span class="keyword">);<br />
+</span><span class="default">$model</span><span class="keyword">-&gt;</span><span class="default">save</span><span class="keyword">(</span><span class="string">'model2.svm'</span><span class="keyword">);<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+and running and editing the model2.svm i got the content:<br />
+-------------------------------------------------------------------<br />
+svm_type c_svc<br />
+kernel_type rbf<br />
+gamma 0.00010771219302024989<br />
+nr_class 1<br />
+total_sv 0<br />
+rho<br />
+label -1<br />
+nr_sv 0<br />
+SV<br />
+--------------------------------------------------------------------<br />
+<br />
+so yes i think it's work, how i said i need to do more tests to get control with main functions to think to other more complicated</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="127892""></a>
+  <div class="note">
+   <strong class="user">razvan_bc at yahoo dot com</strong>
+   <a href="#127892" class="date">04-Nov-2022 08:24</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+premises:php 8.1 ,windows 64<br />
+----------------------------------<br />
+<br />
+install (for beginners)<br />
+--------<br />
+after i visit https://github.com/ianbarber/php-svm<br />
+<br />
+and i got from url found on page(install script) <br />
+..&nbsp; <a href="http://www.csie.ntu.edu.tw/~cjlin/cgi-bin/libsvm.cgi?+http://www.csie.ntu.edu.tw/~cjlin/libsvm+tar.gz" rel="nofollow" target="_blank">http://www.csie.ntu.edu.tw/~cjlin/cgi-bin/libsvm.cgi?+http://www.csie.ntu.edu.tw/~cjlin/libsvm+tar.gz</a><br />
+<br />
+and manual install it:<br />
+1.php.ini<br />
+&nbsp;(after the main group extension=... about 12 pieces)<br />
+...<br />
+extension=svm<br />
+...<br />
+<br />
+2.I put manually inside php a folder called libsvm-3.1 then i unzip there libsvm.dll , libsvmread.mexw64 ,libsvmwrite.mexw64 , svmpredict.mexw64 , svm-predict.exe, svm-scale.exe , svm-toy.exe , svmtrain.mexw64, svm-train.exe !<br />
+<br />
+running <br />
+<span class="default">&lt;?php<br />
+<br />
+$data </span><span class="keyword">= array(<br />
+&nbsp;&nbsp;&nbsp; array(-</span><span class="default">1</span><span class="keyword">, </span><span class="default">1 </span><span class="keyword">=&gt; </span><span class="default">0.43</span><span class="keyword">, </span><span class="default">3 </span><span class="keyword">=&gt; </span><span class="default">0.12</span><span class="keyword">, </span><span class="default">9284 </span><span class="keyword">=&gt; </span><span class="default">0.2</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; array(</span><span class="default">1</span><span class="keyword">, </span><span class="default">1 </span><span class="keyword">=&gt; </span><span class="default">0.22</span><span class="keyword">, </span><span class="default">5 </span><span class="keyword">=&gt; </span><span class="default">0.01</span><span class="keyword">, </span><span class="default">94 </span><span class="keyword">=&gt; </span><span class="default">0.11</span><span class="keyword">),<br />
+);<br />
+<br />
+</span><span class="default">$svm </span><span class="keyword">= new </span><span class="default">SVM</span><span class="keyword">();<br />
+</span><span class="default">$model </span><span class="keyword">= </span><span class="default">$svm</span><span class="keyword">-&gt;</span><span class="default">train</span><span class="keyword">(</span><span class="default">$data</span><span class="keyword">);<br />
+<br />
+</span><span class="default">$data </span><span class="keyword">= array(</span><span class="default">1 </span><span class="keyword">=&gt; </span><span class="default">0.43</span><span class="keyword">, </span><span class="default">3 </span><span class="keyword">=&gt; </span><span class="default">0.12</span><span class="keyword">, </span><span class="default">9284 </span><span class="keyword">=&gt; </span><span class="default">0.2</span><span class="keyword">);<br />
+</span><span class="default">$result </span><span class="keyword">= </span><span class="default">$model</span><span class="keyword">-&gt;</span><span class="default">predict</span><span class="keyword">(</span><span class="default">$data</span><span class="keyword">);<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$result</span><span class="keyword">);<br />
+</span><span class="default">$model</span><span class="keyword">-&gt;</span><span class="default">save</span><span class="keyword">(</span><span class="string">'model.svm'</span><span class="keyword">);<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+via server(apache ,php,mariadb;even custom or xampp) now i got results:<br />
+i got model.svm with the content<br />
+================================<br />
+svm_type c_svc<br />
+kernel_type rbf<br />
+gamma 0.00010771219302024989<br />
+nr_class 2<br />
+total_sv 2<br />
+rho 0<br />
+label 1 -1<br />
+nr_sv 1 1<br />
+SV<br />
+1 1:0.22 5:0.01 94:0.11 <br />
+-1 1:0.43 3:0.12 9284:0.2 <br />
+=================================<br />
+<br />
+so i think is very cool ..for a startup.<br />
+i will look around phpt files from github to understand why in yesterday's tests i got errors with some function witch require 2 parameters and not one like in the manual</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="113594""></a>
+  <div class="note">
+   <strong class="user">6765419 at qq dot com</strong>
+   <a href="#113594" class="date">02-Nov-2013 08:49</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+$data = array(<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; array(-1, 1 =&gt;170, 2 =&gt; 60),//-1表示男生，key 1表示身高，key 2表示体重<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; array(-1, 1 =&gt;180, 2 =&gt; 70), <br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; array(1, 1 =&gt; 160, 2 =&gt; 46),//1表示女生，key 1表示身高，key 2表示体重<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; array(1, 1 =&gt; 155, 2 =&gt; 40),<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; );<br />
+$svm = new SVM();<br />
+$model = $svm-&gt;train($data);<br />
+$data = array( 1 =&gt; 165, 2 =&gt;60);//测试数据<br />
+$result = $model-&gt;predict($data);<br />
+echo var_export($result);<br />
+return;</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

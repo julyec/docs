@@ -1,0 +1,296 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>别名和过时的 Mysqli 函数</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="mysqli-sql-exception.getsqlstate.html">? mysqli_sql_exception::getSqlState</a></li>
+      <li style="float: right;"><a href="function.mysqli-connect.html">mysqli_connect ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="book.mysqli.html">MySQLi</a></li>
+    <li>别名和过时的 Mysqli 函数</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="ref.mysqli" class="reference">
+ <h1 class="title">别名和过时的 Mysqli 函数</h1>
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Table of Contents</h2><ul class="chunklist chunklist_reference"><li><a href="function.mysqli-connect.html">mysqli_connect</a> &mdash; 别名 mysqli::__construct</li><li><a href="function.mysqli-escape-string.html">mysqli::escape_string</a> &mdash; 别名 mysqli_real_escape_string</li><li><a href="function.mysqli-execute.html">mysqli_execute</a> &mdash; 别名 mysqli_stmt_execute</li><li><a href="function.mysqli-get-client-stats.html">mysqli_get_client_stats</a> &mdash; 返回客户端进程统计信息</li><li><a href="function.mysqli-get-links-stats.html">mysqli_get_links_stats</a> &mdash; 返回打开和缓存的链接相关信息</li><li><a href="function.mysqli-report.html">mysqli_report</a> &mdash; 别名 mysqli_driver-&gt;report_mode</li><li><a href="function.mysqli-set-opt.html">mysqli::set_opt</a> &mdash; 别名 mysqli_options</li></ul>
+</div>
+<div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="115611""></a>
+  <div class="note">
+   <strong class="user">nulled elitscripts2000 at yahoo dot com</strong>
+   <a href="#115611" class="date">26-Aug-2014 01:00</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you need to install mysqli extension there is no need to recompile PHP5 pr PHP5-fpm... <br />
+<br />
+apt-get install php5-mysqlnd<br />
+<br />
+Will install mysql and mysqli and mysqlnd<br />
+<br />
+If you compile PHP from source then yes add the -use-mysqli in compile config.<br />
+<br />
+This is Debian and Ubuntu.&nbsp; Or at least Ubuntu.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="82365""></a>
+  <div class="note">
+   <strong class="user">Daniel Sowden</strong>
+   <a href="#82365" class="date">08-Apr-2008 03:56</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I had a problem compiling PHP 5.2.5 with mysqli enabled on Mac OS X. Whether this problem was unique to me I do not no, so I am posting this for anybody else that runs into the same problem. Configure would run right to the end, but I had it telling me something had failed and that it was likely messed up. Upon checking debug.log I noticed this:<br />
+<br />
+dyld: Library not loaded: /usr/local/mysql/lib/mysql/libmysqlclient.15.dylib<br />
+Referenced from: /Users/daniel/desktop/php -5.2.5/sapi/cli/php<br />
+Reason: image not found<br />
+/bin/sh: line 1: /Users/daniel/desktop/php -5.2.5/tmp-php.ini: Permission denied<br />
+dyld: Library not loaded: /usr/local/mysql/lib/mysql/libmysqlclient.15.dylib<br />
+Referenced from: /Users/daniel/desktop/php -5.2.5/sapi/cli/php<br />
+Reason: image not found<br />
+make: [test] Error 133 (ignored)<br />
+<br />
+After screwing around for an hour and screaming many profanities at my computer I looked back at the error and noticed:<br />
+<br />
+"/usr/local/mysql/lib/&lt;b&gt;mysql/&lt;/b&gt;libmysqlclient.15.dylib<br />
+<br />
+Why it was using this path I do not know, but I headslapped when I realised how simple it was! I solved the problem by creating a link called mysql that linked back on itself:<br />
+<br />
+cd /usr/local/mysql/lib<br />
+sudo ln -s ./ mysql<br />
+<br />
+Problem solved! I probably should have figured out why it was doing this instead, but this was easier and saved me from allot more frustration.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="78225""></a>
+  <div class="note">
+   <strong class="user">marcus at synchromedia dot co dot uk</strong>
+   <a href="#78225" class="date">03-Oct-2007 09:27</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+For those having trouble getting MySQLi to work, there is another way that is set to become much more common:<br />
+<br />
+<a href="http://dev.mysql.com/downloads/connector/php-mysqlnd/" rel="nofollow" target="_blank">http://dev.mysql.com/downloads/connector/php-mysqlnd/</a><br />
+<br />
+This is the new MySQL native driver which has been backported from PHP6 and replaces MySQLi with a version that doesn't require any local MySQL client libraries or binaries.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="49871""></a>
+  <div class="note">
+   <strong class="user">neil</strong>
+   <a href="#49871" class="date">10-Feb-2005 02:15</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I have spent far too much time finding this answer:<br />
+<br />
+Since PHP5 many many people are having installation problems.&nbsp; I found many apps were broken when I upgraded to version 5.&nbsp; I tried to install mysql and mysqli and had problems.<br />
+<br />
+Here's the solution:<br />
+<br />
+After doing:<br />
+<br />
+&nbsp;./configure --with-mysql=/path/to/mysql_config --with-mysqli=/path/to/mysql_config<br />
+<br />
+do this:<br />
+<br />
+"<br />
+&nbsp;&nbsp;&nbsp; if you want to use both the old mysql and the new mysqli interface, load the Makefile into your editor and search for the line beginning with EXTRA_LIBS; it includes -lmysqlclient twice; remove the second instance<br />
+"<br />
+<br />
+then you can:<br />
+<br />
+make<br />
+make install<br />
+<br />
+......<br />
+Please note:&nbsp; the mysql-dev must be installed or you won't have a mysql_config anywhere.&nbsp; I installed the mysql-dev rpm<br />
+<br />
+Further note:&nbsp; the information about the Makefile's duplicate instances of "-libmysqlclient" came from Michael Kofler.&nbsp; Thanks should be directed to him.&nbsp; He gives more details at the following link:<br />
+<br />
+<a href="http://www.kofler.cc/forum/forumthread.php?rootID=3571" rel="nofollow" target="_blank">http://www.kofler.cc/forum/forumthread.php?rootID=3571</a></span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="49610""></a>
+  <div class="note">
+   <strong class="user">php at arwin dot net</strong>
+   <a href="#49610" class="date">02-Feb-2005 03:32</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+For those having trouble compiling with both --with-mysql AND --with-mysqli, I found a solution at this URL:<br />
+<br />
+<a href="http://bugs.php.net/bug.php?id=29860&amp;edit=1" rel="nofollow" target="_blank">http://bugs.php.net/bug.php?id=29860&amp;edit=1</a><br />
+<br />
+rjanson at msn dot com writes:<br />
+<br />
+OK, finally an answer!<br />
+<br />
+I checked Makefile and found the following line:<br />
+<br />
+EXTRA_LIBS = -lcrypt -lcrypt -lmysqlclient -lpng -lz -lz -lresolv -lm<br />
+-ldl -lnsl -lxml2 -<br />
+lz -lm -lxml2 -lz -lm -lmysqlclient -lcrypt -lnsl -lm -lz -lnss_files<br />
+-lnss_dns -lresolv -lnss_files<br />
+&nbsp;-lnss_dns -lresolv -lxml2 -lz -lm -lcrypt -lxml2 -lz -lm -lcrypt <br />
+<br />
+By removing one of the -lmysqlclient entries on this line I was able to<br />
+successfully make and make install with both mysql and mysqli. As<br />
+confirmed by phpInfo().<br />
+<br />
+I'm not sure why the other libs have multiple entries and don't cause<br />
+make to crash.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="47298""></a>
+  <div class="note">
+   <strong class="user">Yair Lapin</strong>
+   <a href="#47298" class="date">10-Nov-2004 07:28</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I successed to install php support for a mysql 4.1.7 database after several attempts because the instructions are not clear.<br />
+I have a server with linux SuSe 9 enterprise with apache 1.3.31. I installed mysql from rpm files, i installed php 4.3.9 as dynamic library. this version database needs its own client library else the mysql functions in php will not work.<br />
+configuration must be as following:<br />
+<br />
+./configure --with-msqli=/usr/bin/mysql_config --with-mysql=/usr&nbsp; --with-apxs=/usr/local/apache/bin/apxs<br />
+<br />
+&nbsp;Must be installed in your machine the correct mysql librery:<br />
+<br />
+MySQL-devel-4.1.7-0<br />
+MySQL-shared-4.1.7-0</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="45639""></a>
+  <div class="note">
+   <strong class="user">nathansquires at pacbell dot net</strong>
+   <a href="#45639" class="date">13-Sep-2004 10:44</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you want to build php with both the Mysql and mysqli extensions, make sure your mysql distribution comes with shared libraries or build mysql yourself with shared libraries. With only static mysql libraries the compile process will fail.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="44684""></a>
+  <div class="note">
+   <strong class="user">severin dot kacianka at aon dot at</strong>
+   <a href="#44684" class="date">12-Aug-2004 03:55</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I tryed Marco Kaiser's way of getting both mysql_* and mysqli_*, but it failed for me. However I could get it working this way: <br />
+First of all I installed the MySQL 4.1.3 binary disribution acourding to the manual. Then I simply passed these ./configure arguments: <br />
+<br />
+--with-mysql=/path/to/mysql4.1.3<br />
+--with-mysqli=/path/to/mysql4.1.3/bin/mysql_config<br />
+<br />
+This enabled both, the mysql_* and mysqli_* functions. <br />
+<br />
+Severin Kacianka</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

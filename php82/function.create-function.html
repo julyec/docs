@@ -1,0 +1,1054 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>通过执行代码字符串创建动态函数</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.call-user-func.html">? call_user_func</a></li>
+      <li style="float: right;"><a href="function.forward-static-call-array.html">forward_static_call_array ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.funchand.html">函数处理 函数</a></li>
+    <li>通过执行代码字符串创建动态函数</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.create-function" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">create_function</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.0.1, PHP 5, PHP 7)</p><p class="refpurpose"><span class="refname">create_function</span> &mdash; <span class="dc-title">通过执行代码字符串创建动态函数</span></p>
+
+ </div>
+
+ <div id="function.create-function-refsynopsisdiv">
+  <div class="warning"><strong class="warning">Warning</strong><p class="simpara">本函数已自 PHP 7.2.0
+ 起被<em class="emphasis">废弃</em>，并自 PHP 8.0.0 起被<em class="emphasis">移除</em>。
+ 强烈建议不要依赖本函数。</p></div>
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.create-function-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>create_function</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$args</code></span>, <span class="methodparam"><span class="type">string</span> <code class="parameter">$code</code></span>): <span class="type">string</span></div>
+
+  <p class="para rdfs-comment">
+   从传递的参数中创建动态参数，并返回它的唯一名字。
+  </p>
+  <div class="caution"><strong class="caution">Caution</strong>
+   <p class="para">
+    此函数在内部执行 <span class="function"><a href="function.eval.html" class="function">eval()</a></span>，因此具有跟 <span class="function"><a href="function.eval.html" class="function">eval()</a></span>
+    相同的安全问题。还有性能以及内存使用较差的特性，因为创建的函数是全局的且无法释放。
+   </p>
+   <p class="para">
+    应该使用原生<a href="functions.anonymous.html" class="link">匿名函数</a>。
+   </p>
+  </div>
+ </div>
+
+ <div class="refsect1 parameters" id="refsect1-function.create-function-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   It is normally advisable to pass these parameters as
+   <a href="language.types.string.html#language.types.string.syntax.single" class="link">single quoted</a>
+   strings. If using <a href="language.types.string.html#language.types.string.syntax.double" class="link">double quoted</a>
+   strings, variable names in the code need to be escaped carefully, e.g.
+   <code class="literal">\$somevar</code>.
+   <dl>
+    
+     <dt>
+<code class="parameter">args</code></dt>
+
+     <dd>
+
+      <p class="para">
+       The function arguments, as a single comma-separated string.
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">code</code></dt>
+
+     <dd>
+
+      <p class="para">
+       The function code.
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.create-function-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   Returns a unique function name as a string,  或者在失败时返回 <strong><code>false</code></strong>.
+   Note that the name contains a non-printable character (<code class="literal">&quot;\0&quot;</code>),
+   so care should be taken when printing the name or incorporating it in any other
+   string.
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.create-function-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #1 
+     Creating a function dynamically, with <span class="function"><strong>create_function()</strong></span>
+     or anonymous functions
+    </strong></p>
+    <div class="example-contents"><p>
+     You can use a dynamically created function, to (for example) create a function from
+     information gathered at run time. First, using <span class="function"><strong>create_function()</strong></span>:
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$newfunc </span><span style="color: #007700">= </span><span style="color: #0000BB">create_function</span><span style="color: #007700">(</span><span style="color: #DD0000">'$a,$b'</span><span style="color: #007700">, </span><span style="color: #DD0000">'return "ln($a) + ln($b) = " . log($a * $b);'</span><span style="color: #007700">);<br />echo </span><span style="color: #0000BB">$newfunc</span><span style="color: #007700">(</span><span style="color: #0000BB">2</span><span style="color: #007700">, </span><span style="color: #0000BB">M_E</span><span style="color: #007700">) . </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>
+     Now the same code, using an <a href="functions.anonymous.html" class="link">anonymous function</a>;
+     note that the code and arguments are no longer contained in strings:
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$newfunc </span><span style="color: #007700">= function(</span><span style="color: #0000BB">$a</span><span style="color: #007700">,</span><span style="color: #0000BB">$b</span><span style="color: #007700">) { return </span><span style="color: #DD0000">"ln(</span><span style="color: #0000BB">$a</span><span style="color: #DD0000">) + ln(</span><span style="color: #0000BB">$b</span><span style="color: #DD0000">) = " </span><span style="color: #007700">. </span><span style="color: #0000BB">log</span><span style="color: #007700">(</span><span style="color: #0000BB">$a </span><span style="color: #007700">* </span><span style="color: #0000BB">$b</span><span style="color: #007700">); };<br />echo </span><span style="color: #0000BB">$newfunc</span><span style="color: #007700">(</span><span style="color: #0000BB">2</span><span style="color: #007700">, </span><span style="color: #0000BB">M_E</span><span style="color: #007700">) . </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+ln(2) + ln(2.718281828459) = 1.6931471805599
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #2 
+     Making a general processing function, with <span class="function"><strong>create_function()</strong></span>
+     or anonymous functions
+    </strong></p>
+    <div class="example-contents"><p>
+     Another use could be to have general handler function that can apply a set
+     of operations to a list of parameters:
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">process</span><span style="color: #007700">(</span><span style="color: #0000BB">$var1</span><span style="color: #007700">, </span><span style="color: #0000BB">$var2</span><span style="color: #007700">, </span><span style="color: #0000BB">$farr</span><span style="color: #007700">)<br />{<br />    foreach (</span><span style="color: #0000BB">$farr </span><span style="color: #007700">as </span><span style="color: #0000BB">$f</span><span style="color: #007700">) {<br />        echo </span><span style="color: #0000BB">$f</span><span style="color: #007700">(</span><span style="color: #0000BB">$var1</span><span style="color: #007700">, </span><span style="color: #0000BB">$var2</span><span style="color: #007700">) . </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />    }<br />}<br /><br /></span><span style="color: #FF8000">// create a bunch of math functions<br /></span><span style="color: #0000BB">$farr </span><span style="color: #007700">= array(<br />    </span><span style="color: #0000BB">create_function</span><span style="color: #007700">(</span><span style="color: #DD0000">'$x,$y'</span><span style="color: #007700">, </span><span style="color: #DD0000">'return "some trig: ".(sin($x) + $x*cos($y));'</span><span style="color: #007700">),<br />    </span><span style="color: #0000BB">create_function</span><span style="color: #007700">(</span><span style="color: #DD0000">'$x,$y'</span><span style="color: #007700">, </span><span style="color: #DD0000">'return "a hypotenuse: ".sqrt($x*$x + $y*$y);'</span><span style="color: #007700">),<br />    </span><span style="color: #0000BB">create_function</span><span style="color: #007700">(</span><span style="color: #DD0000">'$a,$b'</span><span style="color: #007700">, </span><span style="color: #DD0000">'if ($a &gt;=0) {return "b*a^2 = ".$b*sqrt($a);} else {return false;}'</span><span style="color: #007700">),<br />    </span><span style="color: #0000BB">create_function</span><span style="color: #007700">(</span><span style="color: #DD0000">'$a,$b'</span><span style="color: #007700">, </span><span style="color: #DD0000">"return \"min(b^2+a, a^2,b) = \".min(\$a*\$a+\$b,\$b*\$b+\$a);"</span><span style="color: #007700">),<br />    </span><span style="color: #0000BB">create_function</span><span style="color: #007700">(</span><span style="color: #DD0000">'$a,$b'</span><span style="color: #007700">, </span><span style="color: #DD0000">'if ($a &gt; 0 &amp;&amp; $b != 0) {return "ln(a)/b = ".log($a)/$b; } else { return false; }'</span><span style="color: #007700">)<br />);<br /><br />echo </span><span style="color: #DD0000">"\nUsing the first array of dynamic functions\n"</span><span style="color: #007700">;<br />echo </span><span style="color: #DD0000">"parameters: 2.3445, M_PI\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">process</span><span style="color: #007700">(</span><span style="color: #0000BB">2.3445</span><span style="color: #007700">, </span><span style="color: #0000BB">M_PI</span><span style="color: #007700">, </span><span style="color: #0000BB">$farr</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// now make a bunch of string processing functions<br /></span><span style="color: #0000BB">$garr </span><span style="color: #007700">= array(<br />    </span><span style="color: #0000BB">create_function</span><span style="color: #007700">(</span><span style="color: #DD0000">'$b,$a'</span><span style="color: #007700">, </span><span style="color: #DD0000">'if (strncmp($a, $b, 3) == 0) return "** \"$a\" '</span><span style="color: #007700">.<br />        </span><span style="color: #DD0000">'and \"$b\"\n** Look the same to me! (looking at the first 3 chars)";'</span><span style="color: #007700">),<br />    </span><span style="color: #0000BB">create_function</span><span style="color: #007700">(</span><span style="color: #DD0000">'$a,$b'</span><span style="color: #007700">, </span><span style="color: #DD0000">'return "CRCs: " . crc32($a) . ", ".crc32($b);'</span><span style="color: #007700">),<br />    </span><span style="color: #0000BB">create_function</span><span style="color: #007700">(</span><span style="color: #DD0000">'$a,$b'</span><span style="color: #007700">, </span><span style="color: #DD0000">'return "similar(a,b) = " . similar_text($a, $b, $p) . "($p%)";'</span><span style="color: #007700">)<br />);<br />echo </span><span style="color: #DD0000">"\nUsing the second array of dynamic functions\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">process</span><span style="color: #007700">(</span><span style="color: #DD0000">"Twas brilling and the slithy toves"</span><span style="color: #007700">, </span><span style="color: #DD0000">"Twas the night"</span><span style="color: #007700">, </span><span style="color: #0000BB">$garr</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>
+     Again, here is the same code using
+     <a href="functions.anonymous.html" class="link">anonymous functions</a>.
+     Note that variable names in the code no longer need to be escaped,
+     because they are not enclosed in a string.
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function </span><span style="color: #0000BB">process</span><span style="color: #007700">(</span><span style="color: #0000BB">$var1</span><span style="color: #007700">, </span><span style="color: #0000BB">$var2</span><span style="color: #007700">, </span><span style="color: #0000BB">$farr</span><span style="color: #007700">)<br />{<br />    foreach (</span><span style="color: #0000BB">$farr </span><span style="color: #007700">as </span><span style="color: #0000BB">$f</span><span style="color: #007700">) {<br />        echo </span><span style="color: #0000BB">$f</span><span style="color: #007700">(</span><span style="color: #0000BB">$var1</span><span style="color: #007700">, </span><span style="color: #0000BB">$var2</span><span style="color: #007700">) . </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />    }<br />}<br /><br /></span><span style="color: #FF8000">// create a bunch of math functions<br /></span><span style="color: #0000BB">$farr </span><span style="color: #007700">= array(<br />    function(</span><span style="color: #0000BB">$x</span><span style="color: #007700">,</span><span style="color: #0000BB">$y</span><span style="color: #007700">) { return </span><span style="color: #DD0000">"some trig: "</span><span style="color: #007700">.(</span><span style="color: #0000BB">sin</span><span style="color: #007700">(</span><span style="color: #0000BB">$x</span><span style="color: #007700">) + </span><span style="color: #0000BB">$x</span><span style="color: #007700">*</span><span style="color: #0000BB">cos</span><span style="color: #007700">(</span><span style="color: #0000BB">$y</span><span style="color: #007700">)); },<br />    function(</span><span style="color: #0000BB">$x</span><span style="color: #007700">,</span><span style="color: #0000BB">$y</span><span style="color: #007700">) { return </span><span style="color: #DD0000">"a hypotenuse: "</span><span style="color: #007700">.</span><span style="color: #0000BB">sqrt</span><span style="color: #007700">(</span><span style="color: #0000BB">$x</span><span style="color: #007700">*</span><span style="color: #0000BB">$x </span><span style="color: #007700">+ </span><span style="color: #0000BB">$y</span><span style="color: #007700">*</span><span style="color: #0000BB">$y</span><span style="color: #007700">); },<br />    function(</span><span style="color: #0000BB">$a</span><span style="color: #007700">,</span><span style="color: #0000BB">$b</span><span style="color: #007700">) { if (</span><span style="color: #0000BB">$a </span><span style="color: #007700">&gt;=</span><span style="color: #0000BB">0</span><span style="color: #007700">) {return </span><span style="color: #DD0000">"b*a^2 = "</span><span style="color: #007700">.</span><span style="color: #0000BB">$b</span><span style="color: #007700">*</span><span style="color: #0000BB">sqrt</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">);} else {return </span><span style="color: #0000BB">false</span><span style="color: #007700">;} },<br />    function(</span><span style="color: #0000BB">$a</span><span style="color: #007700">,</span><span style="color: #0000BB">$b</span><span style="color: #007700">) { return </span><span style="color: #DD0000">"min(b^2+a, a^2,b) = " </span><span style="color: #007700">. </span><span style="color: #0000BB">min</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">*</span><span style="color: #0000BB">$a</span><span style="color: #007700">+</span><span style="color: #0000BB">$b</span><span style="color: #007700">, </span><span style="color: #0000BB">$b</span><span style="color: #007700">*</span><span style="color: #0000BB">$b</span><span style="color: #007700">+</span><span style="color: #0000BB">$a</span><span style="color: #007700">); },<br />    function(</span><span style="color: #0000BB">$a</span><span style="color: #007700">,</span><span style="color: #0000BB">$b</span><span style="color: #007700">) { if (</span><span style="color: #0000BB">$a </span><span style="color: #007700">&gt; </span><span style="color: #0000BB">0 </span><span style="color: #007700">&amp;&amp; </span><span style="color: #0000BB">$b </span><span style="color: #007700">!= </span><span style="color: #0000BB">0</span><span style="color: #007700">) {return </span><span style="color: #DD0000">"ln(a)/b = "</span><span style="color: #007700">.</span><span style="color: #0000BB">log</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">)/</span><span style="color: #0000BB">$b</span><span style="color: #007700">; } else { return </span><span style="color: #0000BB">false</span><span style="color: #007700">; } }<br />);<br /><br />echo </span><span style="color: #DD0000">"\nUsing the first array of dynamic functions\n"</span><span style="color: #007700">;<br />echo </span><span style="color: #DD0000">"parameters: 2.3445, M_PI\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">process</span><span style="color: #007700">(</span><span style="color: #0000BB">2.3445</span><span style="color: #007700">, </span><span style="color: #0000BB">M_PI</span><span style="color: #007700">, </span><span style="color: #0000BB">$farr</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// now make a bunch of string processing functions<br /></span><span style="color: #0000BB">$garr </span><span style="color: #007700">= array(<br />    function(</span><span style="color: #0000BB">$b</span><span style="color: #007700">,</span><span style="color: #0000BB">$a</span><span style="color: #007700">) { if (</span><span style="color: #0000BB">strncmp</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">, </span><span style="color: #0000BB">$b</span><span style="color: #007700">, </span><span style="color: #0000BB">3</span><span style="color: #007700">) == </span><span style="color: #0000BB">0</span><span style="color: #007700">) return </span><span style="color: #DD0000">"** \"</span><span style="color: #0000BB">$a</span><span style="color: #DD0000">\" " </span><span style="color: #007700">.<br />        </span><span style="color: #DD0000">"and \"</span><span style="color: #0000BB">$b</span><span style="color: #DD0000">\"\n** Look the same to me! (looking at the first 3 chars)"</span><span style="color: #007700">; },<br />    function(</span><span style="color: #0000BB">$a</span><span style="color: #007700">,</span><span style="color: #0000BB">$b</span><span style="color: #007700">) { return </span><span style="color: #DD0000">"CRCs: " </span><span style="color: #007700">. </span><span style="color: #0000BB">crc32</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">) . </span><span style="color: #DD0000">", "</span><span style="color: #007700">.</span><span style="color: #0000BB">crc32</span><span style="color: #007700">(</span><span style="color: #0000BB">$b</span><span style="color: #007700">); },<br />    function(</span><span style="color: #0000BB">$a</span><span style="color: #007700">,</span><span style="color: #0000BB">$b</span><span style="color: #007700">) { return </span><span style="color: #DD0000">"similar(a,b) = " </span><span style="color: #007700">. </span><span style="color: #0000BB">similar_text</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">, </span><span style="color: #0000BB">$b</span><span style="color: #007700">, </span><span style="color: #0000BB">$p</span><span style="color: #007700">) . </span><span style="color: #DD0000">"(</span><span style="color: #0000BB">$p</span><span style="color: #DD0000">%)"</span><span style="color: #007700">; }<br />);<br />echo </span><span style="color: #DD0000">"\nUsing the second array of dynamic functions\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">process</span><span style="color: #007700">(</span><span style="color: #DD0000">"Twas brilling and the slithy toves"</span><span style="color: #007700">, </span><span style="color: #DD0000">"Twas the night"</span><span style="color: #007700">, </span><span style="color: #0000BB">$garr</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Using the first array of dynamic functions
+parameters: 2.3445, M_PI
+some trig: -1.6291725057799
+a hypotenuse: 3.9199852871011
+b*a^2 = 4.8103313314525
+min(b^2+a, a^2,b) = 8.6382729035898
+ln(a)/b = 0.27122299212594
+
+Using the second array of dynamic functions
+** &quot;Twas the night&quot; and &quot;Twas brilling and the slithy toves&quot;
+** Look the same to me! (looking at the first 3 chars)
+CRCs: 3569586014, 342550513
+similar(a,b) = 11(45.833333333333%)
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #3 Using dynamic functions as callback functions</strong></p>
+    <div class="example-contents"><p>
+     Perhaps the most common use for dynamic functions
+     is to pass them as callbacks, for example when using
+     <span class="function"><a href="function.array-walk.html" class="function">array_walk()</a></span> or <span class="function"><a href="function.usort.html" class="function">usort()</a></span>.
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$av </span><span style="color: #007700">= array(</span><span style="color: #DD0000">"the "</span><span style="color: #007700">, </span><span style="color: #DD0000">"a "</span><span style="color: #007700">, </span><span style="color: #DD0000">"that "</span><span style="color: #007700">, </span><span style="color: #DD0000">"this "</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">array_walk</span><span style="color: #007700">(</span><span style="color: #0000BB">$av</span><span style="color: #007700">, </span><span style="color: #0000BB">create_function</span><span style="color: #007700">(</span><span style="color: #DD0000">'&amp;$v,$k'</span><span style="color: #007700">, </span><span style="color: #DD0000">'$v = $v . "mango";'</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$av</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>
+     Converted to an <a href="functions.anonymous.html" class="link">anonymous function</a>:
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$av </span><span style="color: #007700">= array(</span><span style="color: #DD0000">"the "</span><span style="color: #007700">, </span><span style="color: #DD0000">"a "</span><span style="color: #007700">, </span><span style="color: #DD0000">"that "</span><span style="color: #007700">, </span><span style="color: #DD0000">"this "</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">array_walk</span><span style="color: #007700">(</span><span style="color: #0000BB">$av</span><span style="color: #007700">, function(&amp;</span><span style="color: #0000BB">$v</span><span style="color: #007700">,</span><span style="color: #0000BB">$k</span><span style="color: #007700">) { </span><span style="color: #0000BB">$v </span><span style="color: #007700">= </span><span style="color: #0000BB">$v </span><span style="color: #007700">. </span><span style="color: #DD0000">"mango"</span><span style="color: #007700">; });<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$av</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Array
+(
+  [0] =&gt; the mango
+  [1] =&gt; a mango
+  [2] =&gt; that mango
+  [3] =&gt; this mango
+)
+</pre></div>
+    </div>
+    <div class="example-contents"><p>
+     Sorting strings from longest to shortest with <span class="function"><strong>create_function()</strong></span>:
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$sv </span><span style="color: #007700">= array(</span><span style="color: #DD0000">"small"</span><span style="color: #007700">, </span><span style="color: #DD0000">"a big string"</span><span style="color: #007700">, </span><span style="color: #DD0000">"larger"</span><span style="color: #007700">, </span><span style="color: #DD0000">"it is a string thing"</span><span style="color: #007700">);<br />echo </span><span style="color: #DD0000">"Original:\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$sv</span><span style="color: #007700">);<br />echo </span><span style="color: #DD0000">"Sorted:\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">usort</span><span style="color: #007700">(</span><span style="color: #0000BB">$sv</span><span style="color: #007700">, </span><span style="color: #0000BB">create_function</span><span style="color: #007700">(</span><span style="color: #DD0000">'$a,$b'</span><span style="color: #007700">,</span><span style="color: #DD0000">'return strlen($b) - strlen($a);'</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$sv</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>
+     Converted to an <a href="functions.anonymous.html" class="link">anonymous function</a>:
+    </p></div>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$sv </span><span style="color: #007700">= array(</span><span style="color: #DD0000">"small"</span><span style="color: #007700">, </span><span style="color: #DD0000">"a big string"</span><span style="color: #007700">, </span><span style="color: #DD0000">"larger"</span><span style="color: #007700">, </span><span style="color: #DD0000">"it is a string thing"</span><span style="color: #007700">);<br />echo </span><span style="color: #DD0000">"Original:\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$sv</span><span style="color: #007700">);<br />echo </span><span style="color: #DD0000">"Sorted:\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">usort</span><span style="color: #007700">(</span><span style="color: #0000BB">$sv</span><span style="color: #007700">, function(</span><span style="color: #0000BB">$a</span><span style="color: #007700">,</span><span style="color: #0000BB">$b</span><span style="color: #007700">) { return </span><span style="color: #0000BB">strlen</span><span style="color: #007700">(</span><span style="color: #0000BB">$b</span><span style="color: #007700">) - </span><span style="color: #0000BB">strlen</span><span style="color: #007700">(</span><span style="color: #0000BB">$a</span><span style="color: #007700">); });<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$sv</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Original:
+Array
+(
+  [0] =&gt; small
+  [1] =&gt; a big string
+  [2] =&gt; larger
+  [3] =&gt; it is a string thing
+)
+Sorted:
+Array
+(
+  [0] =&gt; it is a string thing
+  [1] =&gt; a big string
+  [2] =&gt; larger
+  [3] =&gt; small
+)
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.create-function-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><a href="functions.anonymous.html" class="link">匿名函数</a></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="126024""></a>
+  <div class="note">
+   <strong class="user">lombax85 at gmail dot com</strong>
+   <a href="#126024" class="date">18-Apr-2021 02:40</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+For who *really* needs the create_function() on php8 (because of legacy code that cannot be changed easily) there is this: "composer require lombax85/create_function".</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="123214""></a>
+  <div class="note">
+   <strong class="user">tamagochi_man</strong>
+   <a href="#123214" class="date">09-Oct-2018 07:44</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Whilst it was correct 11 years ago, the statement of Dan D is not so correct any moreю Anonymous functions are now objects of a class Closure and are safely collected by garbage collector.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="113275""></a>
+  <div class="note">
+   <strong class="user">CertaiN</strong>
+   <a href="#113275" class="date">19-Sep-2013 11:49</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Best wapper:<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="keyword">function </span><span class="default">create_lambda</span><span class="keyword">(</span><span class="default">$args</span><span class="keyword">, </span><span class="default">$code</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; static </span><span class="default">$func</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; if (!isset(</span><span class="default">$func</span><span class="keyword">[</span><span class="default">$args</span><span class="keyword">][</span><span class="default">$code</span><span class="keyword">])) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$func</span><span class="keyword">[</span><span class="default">$args</span><span class="keyword">][</span><span class="default">$code</span><span class="keyword">] = </span><span class="default">create_function</span><span class="keyword">(</span><span class="default">$args</span><span class="keyword">, </span><span class="default">$code</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$func</span><span class="keyword">[</span><span class="default">$args</span><span class="keyword">][</span><span class="default">$code</span><span class="keyword">];<br />
+}</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="109197""></a>
+  <div class="note">
+   <strong class="user">kak dot serpom dot po dot yaitsam at gmail dot com</strong>
+   <a href="#109197" class="date">27-Jun-2012 12:17</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Try this to boost performance of your scripts (increase maxCacheSize):
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+runkit_function_copy</span><span class="keyword">(</span><span class="string">'create_function'</span><span class="keyword">, </span><span class="string">'create_function_native'</span><span class="keyword">);
+<br />
+</span><span class="default">runkit_function_redefine</span><span class="keyword">(</span><span class="string">'create_function'</span><span class="keyword">, </span><span class="string">'$arg,$body'</span><span class="keyword">, </span><span class="string">'return __create_function($arg,$body);'</span><span class="keyword">);
+<br />
+
+<br />
+function </span><span class="default">__create_function</span><span class="keyword">(</span><span class="default">$arg</span><span class="keyword">, </span><span class="default">$body</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp;&nbsp; static </span><span class="default">$cache </span><span class="keyword">= array();
+<br />
+&nbsp;&nbsp;&nbsp; static </span><span class="default">$maxCacheSize </span><span class="keyword">= </span><span class="default">64</span><span class="keyword">;
+<br />
+&nbsp;&nbsp;&nbsp; static </span><span class="default">$sorter</span><span class="keyword">;
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; if (</span><span class="default">$sorter </span><span class="keyword">=== </span><span class="default">NULL</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$sorter </span><span class="keyword">= function(</span><span class="default">$a</span><span class="keyword">, </span><span class="default">$b</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">$a</span><span class="keyword">-&gt;</span><span class="default">hits </span><span class="keyword">== </span><span class="default">$b</span><span class="keyword">-&gt;</span><span class="default">hits</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">0</span><span class="keyword">;
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }
+<br />
+
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return (</span><span class="default">$a</span><span class="keyword">-&gt;</span><span class="default">hits </span><span class="keyword">&lt; </span><span class="default">$b</span><span class="keyword">-&gt;</span><span class="default">hits</span><span class="keyword">) ? </span><span class="default">1 </span><span class="keyword">: -</span><span class="default">1</span><span class="keyword">;
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; };
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$crc </span><span class="keyword">= </span><span class="default">crc32</span><span class="keyword">(</span><span class="default">$arg </span><span class="keyword">. </span><span class="string">"\\x00" </span><span class="keyword">. </span><span class="default">$body</span><span class="keyword">);
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; if (isset(</span><span class="default">$cache</span><span class="keyword">[</span><span class="default">$crc</span><span class="keyword">])) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; ++</span><span class="default">$cache</span><span class="keyword">[</span><span class="default">$crc</span><span class="keyword">][</span><span class="default">1</span><span class="keyword">];
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$cache</span><span class="keyword">[</span><span class="default">$crc</span><span class="keyword">][</span><span class="default">0</span><span class="keyword">];
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; if (</span><span class="default">sizeof</span><span class="keyword">(</span><span class="default">$cache</span><span class="keyword">) &gt;= </span><span class="default">$maxCacheSize</span><span class="keyword">) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">uasort</span><span class="keyword">(</span><span class="default">$cache</span><span class="keyword">, </span><span class="default">$sorter</span><span class="keyword">);
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">array_pop</span><span class="keyword">(</span><span class="default">$cache</span><span class="keyword">);
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$cache</span><span class="keyword">[</span><span class="default">$crc</span><span class="keyword">] = array(</span><span class="default">$cb </span><span class="keyword">= eval(</span><span class="string">'return function('</span><span class="keyword">.</span><span class="default">$arg</span><span class="keyword">.</span><span class="string">'){'</span><span class="keyword">.</span><span class="default">$body</span><span class="keyword">.</span><span class="string">'};'</span><span class="keyword">), </span><span class="default">0</span><span class="keyword">);
+<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$cb</span><span class="keyword">;
+<br />
+}
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="103080""></a>
+  <div class="note">
+   <strong class="user">Dave H</strong>
+   <a href="#103080" class="date">24-Mar-2011 06:47</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+The following function is very useful for creating an alias of a user function. 
+<br />
+For built-in functions, it is less useful because default values are not available, so function aliases for built-in functions must have all parameters supplied, whether optional or not.
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="keyword">function </span><span class="default">create_function_alias</span><span class="keyword">(</span><span class="default">$function_name</span><span class="keyword">, </span><span class="default">$alias_name</span><span class="keyword">)
+<br />
+{
+<br />
+&nbsp;&nbsp;&nbsp; if(</span><span class="default">function_exists</span><span class="keyword">(</span><span class="default">$alias_name</span><span class="keyword">))
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">false</span><span class="keyword">;
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$rf </span><span class="keyword">= new </span><span class="default">ReflectionFunction</span><span class="keyword">(</span><span class="default">$function_name</span><span class="keyword">);
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$fproto </span><span class="keyword">= </span><span class="default">$alias_name</span><span class="keyword">.</span><span class="string">'('</span><span class="keyword">;
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$fcall </span><span class="keyword">= </span><span class="default">$function_name</span><span class="keyword">.</span><span class="string">'('</span><span class="keyword">;
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$need_comma </span><span class="keyword">= </span><span class="default">false</span><span class="keyword">;
+<br />
+&nbsp;&nbsp;&nbsp; 
+<br />
+&nbsp;&nbsp;&nbsp; foreach(</span><span class="default">$rf</span><span class="keyword">-&gt;</span><span class="default">getParameters</span><span class="keyword">() as </span><span class="default">$param</span><span class="keyword">)
+<br />
+&nbsp;&nbsp;&nbsp; {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if(</span><span class="default">$need_comma</span><span class="keyword">)
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$fproto </span><span class="keyword">.= </span><span class="string">','</span><span class="keyword">;
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$fcall </span><span class="keyword">.= </span><span class="string">','</span><span class="keyword">;
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }
+<br />
+
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$fproto </span><span class="keyword">.= </span><span class="string">'$'</span><span class="keyword">.</span><span class="default">$param</span><span class="keyword">-&gt;</span><span class="default">getName</span><span class="keyword">();
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$fcall </span><span class="keyword">.= </span><span class="string">'$'</span><span class="keyword">.</span><span class="default">$param</span><span class="keyword">-&gt;</span><span class="default">getName</span><span class="keyword">();
+<br />
+
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if(</span><span class="default">$param</span><span class="keyword">-&gt;</span><span class="default">isOptional</span><span class="keyword">() &amp;&amp; </span><span class="default">$param</span><span class="keyword">-&gt;</span><span class="default">isDefaultValueAvailable</span><span class="keyword">())
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$val </span><span class="keyword">= </span><span class="default">$param</span><span class="keyword">-&gt;</span><span class="default">getDefaultValue</span><span class="keyword">();
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if(</span><span class="default">is_string</span><span class="keyword">(</span><span class="default">$val</span><span class="keyword">))
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$val </span><span class="keyword">= </span><span class="string">"'</span><span class="default">$val</span><span class="string">'"</span><span class="keyword">;
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$fproto </span><span class="keyword">.= </span><span class="string">' = '</span><span class="keyword">.</span><span class="default">$val</span><span class="keyword">;
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$need_comma </span><span class="keyword">= </span><span class="default">true</span><span class="keyword">;
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$fproto </span><span class="keyword">.= </span><span class="string">')'</span><span class="keyword">;
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$fcall </span><span class="keyword">.= </span><span class="string">')'</span><span class="keyword">;
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$f </span><span class="keyword">= </span><span class="string">"function </span><span class="default">$fproto</span><span class="string">"</span><span class="keyword">.</span><span class="default">PHP_EOL</span><span class="keyword">;
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$f </span><span class="keyword">.= </span><span class="string">'{return '</span><span class="keyword">.</span><span class="default">$fcall</span><span class="keyword">.</span><span class="string">';}'</span><span class="keyword">;
+<br />
+
+<br />
+&nbsp;&nbsp;&nbsp; eval(</span><span class="default">$f</span><span class="keyword">);
+<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">true</span><span class="keyword">;
+<br />
+}
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="91949""></a>
+  <div class="note">
+   <strong class="user">edgar at goodforall dot eu</strong>
+   <a href="#91949" class="date">02-Jul-2009 07:45</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Just a little toy I thought up, I would like to share. Creates an anonymous function, which let you use a class&nbsp; as a function.<br />
+<br />
+In php 5.3 there is support for real functors&nbsp; (trough __invoke):<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">createFunctor</span><span class="keyword">(</span><span class="default">$className</span><span class="keyword">){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$content </span><span class="keyword">= </span><span class="string">"<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; static \$class;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; if(!\$class){<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; \$class = new </span><span class="default">$className</span><span class="string">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return \$class-&gt;run(\$args);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; "</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$f </span><span class="keyword">= </span><span class="default">create_function</span><span class="keyword">(</span><span class="string">'$args'</span><span class="keyword">, </span><span class="default">$content</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">$f</span><span class="keyword">;<br />
+<br />
+}<br />
+class </span><span class="default">test </span><span class="keyword">{<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; public function </span><span class="default">run</span><span class="keyword">(</span><span class="default">$args</span><span class="keyword">){<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; print </span><span class="default">$args</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+}<br />
+</span><span class="default">$test </span><span class="keyword">= </span><span class="default">createFunctor</span><span class="keyword">(</span><span class="string">'test'</span><span class="keyword">);<br />
+</span><span class="default">$test</span><span class="keyword">(</span><span class="string">'hello world'</span><span class="keyword">);<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="85391""></a>
+  <div class="note">
+   <strong class="user">neo at nowhere dot com</strong>
+   <a href="#85391" class="date">28-Aug-2008 01:56</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+In response to kkaiser at revolution-records dot net's note, even tho PHP will allow you to use <br />
+&lt;?<br />
+$myfunc = create_function('$this', $code);<br />
+?&gt;<br />
+You can NOT use a reference to "$this" inside of the anonymous function, as PHP will complain that you are using a reference to "$this" in a non-object context.<br />
+<br />
+Currently, I have not found a work-around for this...</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="84955""></a>
+  <div class="note">
+   <strong class="user">Alan FUNG</strong>
+   <a href="#84955" class="date">07-Aug-2008 12:24</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+$f = create_function('','echo "function defined by create_function";');<br />
+$f();<br />
+<br />
+result:<br />
+function defined by create_function<br />
+<br />
+You may define no return in function body while you are using create_function.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="80904""></a>
+  <div class="note">
+   <strong class="user">Rene Saarsoo</strong>
+   <a href="#80904" class="date">06-Feb-2008 02:31</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Here has been some discussion about the "memory leak" create_function() can create.<br />
+<br />
+What create_function() actually does, is creating an ordinary function with name chr(0).lambda_n where n is some number:<br />
+<br />
+<span class="default">&lt;?php<br />
+$f </span><span class="keyword">= </span><span class="default">create_function</span><span class="keyword">(</span><span class="string">''</span><span class="keyword">, </span><span class="string">'return 1;'</span><span class="keyword">);<br />
+<br />
+function </span><span class="default">lambda_1</span><span class="keyword">() { return </span><span class="default">2</span><span class="keyword">; }<br />
+<br />
+</span><span class="default">$g </span><span class="keyword">= </span><span class="string">"lambda_1"</span><span class="keyword">;<br />
+echo </span><span class="default">$g</span><span class="keyword">(); </span><span class="comment">// outputs: 2<br />
+<br />
+</span><span class="default">$h </span><span class="keyword">= </span><span class="default">chr</span><span class="keyword">(</span><span class="default">0</span><span class="keyword">).</span><span class="string">"lambda_1"</span><span class="keyword">;<br />
+echo </span><span class="default">$h</span><span class="keyword">(); </span><span class="comment">// outputs: 1<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="77177""></a>
+  <div class="note">
+   <strong class="user">TSE-WebDesign</strong>
+   <a href="#77177" class="date">18-Aug-2007 09:55</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Here's how to call a runtime-created function from another runtime-created function:<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $get_func </span><span class="keyword">= </span><span class="default">create_function</span><span class="keyword">(</span><span class="string">'$func'</span><span class="keyword">, </span><span class="string">'return substr($func,1);'</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$get_value </span><span class="keyword">= </span><span class="default">create_function</span><span class="keyword">(</span><span class="string">'$index'</span><span class="keyword">,</span><span class="string">'return pow($index,$index);'</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$another_func </span><span class="keyword">= </span><span class="default">create_function</span><span class="keyword">(</span><span class="string">'$a'</span><span class="keyword">, </span><span class="string">'$func="\x00"."'</span><span class="keyword">.</span><span class="default">$get_func</span><span class="keyword">(</span><span class="default">$get_value</span><span class="keyword">).</span><span class="string">'";return $func($a);'</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="default">$another_func</span><span class="keyword">(</span><span class="default">2</span><span class="keyword">); </span><span class="comment"># result is 4<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="74492""></a>
+  <div class="note">
+   <strong class="user">kkaiser at revolution-records dot net</strong>
+   <a href="#74492" class="date">13-Apr-2007 01:10</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+In the process of migrating a PHP4 codebase to PHP5, I ran into a peculiar problem. In the library, every class was derived from a generic class called 'class_container'. 'class_container' contained an array called runtime_functions and a method called class_function that was as follows:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="keyword">function </span><span class="default">class_function</span><span class="keyword">(</span><span class="default">$name</span><span class="keyword">,</span><span class="default">$params</span><span class="keyword">,</span><span class="default">$code</span><span class="keyword">) {
+<br />
+
+<br />
+&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">runtime_functions</span><span class="keyword">[</span><span class="default">$name</span><span class="keyword">] = </span><span class="default">create_function</span><span class="keyword">(</span><span class="default">$params</span><span class="keyword">,</span><span class="default">$code</span><span class="keyword">);
+<br />
+
+<br />
+}
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+In a subclass of class_container, there was a function that utilized class_function() to store some custom lambda functions that were self-referential:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="keyword">function </span><span class="default">myfunc</span><span class="keyword">(</span><span class="default">$name</span><span class="keyword">,</span><span class="default">$code</span><span class="keyword">) {
+<br />
+
+<br />
+&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">class_function</span><span class="keyword">(</span><span class="default">$name</span><span class="keyword">,</span><span class="string">'$theobj'</span><span class="keyword">,</span><span class="string">'$this=&amp;$theobj;'</span><span class="keyword">.</span><span class="default">$code</span><span class="keyword">);
+<br />
+
+<br />
+}
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+In PHP4, this worked just fine. The idea was to write blocks of code at the subclass level, such as "echo $this-&gt;id;", then simply $MYOBJ-&gt;myfunc("go","echo $this-&gt;id;"); and later call it like $MYOBJ-&gt;runtime_functions["go"]();
+<br />
+
+<br />
+It essentially worked exactly like binding anonymous functions to objects in Javascript.
+<br />
+
+<br />
+Note how the "$this" keyword had to be manually redefined for the $code block to work.
+<br />
+
+<br />
+In PHP5, however, you can't redeclare $this without getting a fatal error, so the code had to be updated to:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="keyword">function </span><span class="default">myfunc</span><span class="keyword">(</span><span class="default">$name</span><span class="keyword">,</span><span class="default">$code</span><span class="keyword">) {
+<br />
+
+<br />
+&nbsp; </span><span class="default">$this</span><span class="keyword">-&gt;</span><span class="default">class_function</span><span class="keyword">(</span><span class="default">$name</span><span class="keyword">,</span><span class="string">'$this'</span><span class="keyword">,</span><span class="default">$code</span><span class="keyword">);
+<br />
+
+<br />
+}
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+Apparently create_function() allows you to set $this via a function argument, allowing you to bind anonymous functions to instantiated objects. Thought it might be useful to somebody.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="70691""></a>
+  <div class="note">
+   <strong class="user">Dan D</strong>
+   <a href="#70691" class="date">23-Oct-2006 07:22</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Beware when using anonymous functions in PHP as you would in languages like Python, Ruby, Lisp or Javascript.&nbsp; As was stated previously, the allocated memory is never released; they are not objects in PHP -- they are just dynamically named global functions -- so they don't have scope and are not subject to garbage collection.<br />
+<br />
+So, if you're developing anything remotely reusable (OO or otherwise), I would avoid them like the plague.&nbsp; They're slow, inefficient and there's no telling if your implementation will end up in a large loop.&nbsp; Mine ended up in an iteration over ~1 million records and quickly exhasted my 500MB-per-process limit.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="70194""></a>
+  <div class="note">
+   <strong class="user">Phlyst</strong>
+   <a href="#70194" class="date">06-Oct-2006 05:10</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+In reply to info at adaniels dot nl:<br />
+<br />
+You may not be able to use __FUNCTION__ in a lambda (thanks for pointing it out; I was having that problem just now), but you can use $GLOBALS to work around it if you're assigning the function to a variable. I reimplemented array_walk_recursive() in PHP4 like this:<br />
+<br />
+<span class="default">&lt;?php<br />
+$array_walk_recursive </span><span class="keyword">= </span><span class="default">create_function</span><span class="keyword">(</span><span class="string">'&amp;$array, $callback'</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'foreach($array as $element) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if(is_array($element)) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $funky = $GLOBALS["array_walk_recursive"];<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $funky($element, $callback);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; else {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; $callback($element);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }'</span><span class="keyword">);<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="69951""></a>
+  <div class="note">
+   <strong class="user">Josh J</strong>
+   <a href="#69951" class="date">27-Sep-2006 12:45</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+In regards to the recursion issue by info at adaniels dot nl<br />
+<br />
+Anon function recursion by referencing the function variable in the correct scope.<br />
+<span class="default">&lt;?php<br />
+$fn2 </span><span class="keyword">= </span><span class="default">create_function</span><span class="keyword">(</span><span class="string">'$a'</span><span class="keyword">, </span><span class="string">'echo $a; if ($a &lt; 10) call_user_func($GLOBALS["fn2"], ++$a);'</span><span class="keyword">);<br />
+</span><span class="default">$fn2</span><span class="keyword">(</span><span class="default">1</span><span class="keyword">);<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="65964""></a>
+  <div class="note">
+   <strong class="user">info at adaniels dot nl</strong>
+   <a href="#65964" class="date">10-May-2006 03:42</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Note that using __FUNCTION__ in a an anonymous function, will always result '__lambda_func'.<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; $fn </span><span class="keyword">= </span><span class="default">create_function</span><span class="keyword">(</span><span class="string">''</span><span class="keyword">, </span><span class="string">'echo __FUNCTION__;'</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$fn</span><span class="keyword">();<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// Result: __lambda_func<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">echo </span><span class="default">$fn</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// Result: olambda_2 (the actual first character cannot be displayed)<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+This means that a anonymous function can't be used recursively. The following code (recursively counting to 10) results in an error:<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; $fn2 </span><span class="keyword">= </span><span class="default">create_function</span><span class="keyword">(</span><span class="string">'$a'</span><span class="keyword">, </span><span class="string">'echo $a; if ($a &lt; 10) call_user_func(__FUNCTION__, $a++);'</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$fn2</span><span class="keyword">(</span><span class="default">1</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// Warning: call_user_func(__lambda_func) [function.call-user-func]: First argument is expected to be a valid callback in T:/test/test.php(21) : runtime-created function on line 1<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="62577""></a>
+  <div class="note">
+   <strong class="user">josh at janrain dot com</strong>
+   <a href="#62577" class="date">03-Mar-2006 10:21</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Beware! This is merely a convenience function that generates a unique name for a regular function. It is *not* a closure or even an anonymous function. It is just a regular function that gets named for you.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="60913""></a>
+  <div class="note">
+   <strong class="user">Joshua E Cook</strong>
+   <a href="#60913" class="date">19-Jan-2006 04:43</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Functions created by create_function() cannot return a value by reference.&nbsp; The function below creates a function that can.&nbsp; The arguments are the same as create_function().&nbsp; Note that these arguments are passed, unmodified, to eval(), so be sure that data passed in is sanitized.<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="comment">/** <br />
+&nbsp;* create_ref_function<br />
+&nbsp;* Create an anonymous (lambda-style) function<br />
+&nbsp;* which returns a reference<br />
+&nbsp;* see <a href="http://php.net/create_function" rel="nofollow" target="_blank">http://php.net/create_function</a><br />
+&nbsp;*/<br />
+</span><span class="keyword">function<br />
+</span><span class="default">create_ref_function</span><span class="keyword">( </span><span class="default">$args</span><span class="keyword">, </span><span class="default">$code </span><span class="keyword">)<br />
+{<br />
+&nbsp;&nbsp;&nbsp; static </span><span class="default">$n </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$functionName </span><span class="keyword">= </span><span class="default">sprintf</span><span class="keyword">(</span><span class="string">'ref_lambda_%d'</span><span class="keyword">,++</span><span class="default">$n</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$declaration </span><span class="keyword">= </span><span class="default">sprintf</span><span class="keyword">(</span><span class="string">'function &amp;%s(%s) {%s}'</span><span class="keyword">,</span><span class="default">$functionName</span><span class="keyword">,</span><span class="default">$args</span><span class="keyword">,</span><span class="default">$body</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; eval(</span><span class="default">$declaration</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">$functionName</span><span class="keyword">;<br />
+}<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="60260""></a>
+  <div class="note">
+   <strong class="user">boards at gmail dot com</strong>
+   <a href="#60260" class="date">31-Dec-2005 11:18</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you were checking to see if a function is made properly, this would be a better way of checking:<br />
+<br />
+<span class="default">&lt;?php<br />
+$fnc </span><span class="keyword">= @</span><span class="default">create_function</span><span class="keyword">(</span><span class="string">'$arg1,$arg2,$arg3'</span><span class="keyword">, </span><span class="string">'return true;'</span><span class="keyword">);<br />
+</span><span class="comment"># make that function whatever you want<br />
+</span><span class="keyword">if (empty(</span><span class="default">$fnc</span><span class="keyword">)) {<br />
+&nbsp; die(</span><span class="string">'Could not create function $fnc.'</span><span class="keyword">);<br />
+}<br />
+<br />
+</span><span class="comment"># although, the follow will NOT work<br />
+</span><span class="keyword">if (empty(</span><span class="default">create_function</span><span class="keyword">(</span><span class="string">'$arg'</span><span class="keyword">, </span><span class="string">'return $arg;'</span><span class="keyword">))) {<br />
+&nbsp; die(</span><span class="string">'Could not create anonymous function.'</span><span class="keyword">);<br />
+}<br />
+</span><span class="comment"># you would get an error regarding not being able to use a<br />
+# return value in writeable context (i.e. a return value is <br />
+# a const in C, and the function empty() doesn't use a<br />
+# const void* parameter<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="40611""></a>
+  <div class="note">
+   <strong class="user">MagicalTux at FF.ST</strong>
+   <a href="#40611" class="date">09-Mar-2004 10:25</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+neo at gothic-chat d0t de wrote :<br />
+Beware of memory-leaks, the garbage-collection seems to 'oversee' dynamically created functions!<br />
+<br />
+Not really...<br />
+<br />
+In fact, PHP can not "unassign" functions. So if you create a function, it won't be deleted until the end of the script, even if you unset the variable containing its name.<br />
+<br />
+If you need to change a part of a function everytime you run a loop, think of a way to make a more general function or try using eval :) (functions are made to be re-used. If you need to run your own piece of code once, eval is much better).</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="39217""></a>
+  <div class="note">
+   <strong class="user">neo at gothic-chat d0t de</strong>
+   <a href="#39217" class="date">20-Jan-2004 08:54</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Beware of memory-leaks, the garbage-collection seems to 'oversee' dynamically created functions!<br />
+<br />
+I used a function like this to replace special characters in links with their htmlentities:<br />
+<span class="default">&lt;?php<br />
+$text </span><span class="keyword">= </span><span class="default">preg_replace_callback </span><span class="keyword">(<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">"/(&lt;(frame src|a href|form action)=\")([^\"]+)(\"[^&gt;]*&gt;)/i"</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">create_function </span><span class="keyword">(<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'$matches'</span><span class="keyword">,<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">'return $matches[1] . htmlentities ($matches[3]) . $matches[4];'<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$text</span><span class="keyword">);<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+After 1000 calls, the process used about 5MB more than before. In my situation this boosted up the memory-size of one PHP-process up to over 100MB!<br />
+<br />
+In such cases, better store the function in a global variable.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="30886""></a>
+  <div class="note">
+   <strong class="user">DB on music_ml at yahoo dot com dot ar</strong>
+   <a href="#30886" class="date">02-Apr-2003 04:58</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+[EDIT by danbrown AT php DOT net: Combined user-corrected post with previous (incorrect) post.]
+<br />
+
+<br />
+You can't refer to a class variable from an anonymous function inside a class method using $this.&nbsp; Anonymous functions don't inherit the method scope.&nbsp; You'll have to do this:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+</span><span class="keyword">class </span><span class="default">AnyClass </span><span class="keyword">{
+<br />
+&nbsp;
+<br />
+&nbsp;var </span><span class="default">$classVar </span><span class="keyword">= </span><span class="string">'some regular expression pattern'</span><span class="keyword">;
+<br />
+
+<br />
+&nbsp;function </span><span class="default">classMethod</span><span class="keyword">() {
+<br />
+
+<br />
+&nbsp;&nbsp; </span><span class="default">$_anonymFunc </span><span class="keyword">= </span><span class="default">create_function</span><span class="keyword">( </span><span class="string">'$arg1, $arg2'</span><span class="keyword">, </span><span class="string">'if ( eregi($arg2, $arg1) ) { return true; } else { return false; } ' </span><span class="keyword">);
+<br />
+
+<br />
+&nbsp;&nbsp; </span><span class="default">$willWork </span><span class="keyword">= </span><span class="default">$_anonymFunc</span><span class="keyword">(</span><span class="string">'some string'</span><span class="keyword">, </span><span class="default">$classVar</span><span class="keyword">);
+<br />
+&nbsp;
+<br />
+&nbsp;}
+<br />
+
+<br />
+}
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="13841""></a>
+  <div class="note">
+   <strong class="user">x-empt[a_t]ispep.cx</strong>
+   <a href="#13841" class="date">05-Jul-2001 11:41</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Create_function enables the ability to change the scope of functions.&nbsp; You might have a class where it needs to define a GLOBAL function.&nbsp; This is possible, like:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">class </span><span class="default">blah </span><span class="keyword">{
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; function </span><span class="default">blah</span><span class="keyword">() {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$z</span><span class="keyword">=</span><span class="default">create_function</span><span class="keyword">(</span><span class="string">'$arg1string'</span><span class="keyword">,</span><span class="string">'return "function-z-".$arg1string;'</span><span class="keyword">);
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$GLOBALS</span><span class="keyword">[</span><span class="string">'z'</span><span class="keyword">]=</span><span class="default">$z</span><span class="keyword">;
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$blah_object</span><span class="keyword">=new </span><span class="default">blah</span><span class="keyword">;
+<br />
+
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$result</span><span class="keyword">=</span><span class="default">$GLOBALS</span><span class="keyword">[</span><span class="string">'z'</span><span class="keyword">](</span><span class="string">'Argument 1 String'</span><span class="keyword">);
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="default">$result</span><span class="keyword">;
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+Making a function escape it's defined scope can be useful in many situations.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

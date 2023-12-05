@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>改变目录</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="ref.dir.html">? 目录函数函数</a></li>
+      <li style="float: right;"><a href="function.chroot.html">chroot ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.dir.html">目录函数函数</a></li>
+    <li>改变目录</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.chdir" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">chdir</h1>
+  <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">chdir</span> &mdash; <span class="dc-title">改变目录</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.chdir-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>chdir</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$directory</code></span>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">
+   将 PHP 的当前目录改为
+   <code class="parameter">directory</code>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.chdir-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">directory</code></dt>
+
+     <dd>
+
+      <p class="para">
+       新的当前目录
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.chdir-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   成功时返回 <strong><code>true</code></strong>， 或者在失败时返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 errors" id="refsect1-function.chdir-errors">
+  <h3 class="title">错误／异常</h3>
+  <p class="para">
+   Throws an error of level <strong><code>E_WARNING</code></strong> on failure.
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.chdir-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="example-4366">
+    <p><strong>Example #1 <span class="function"><strong>chdir()</strong></span> 例子</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #FF8000">// current directory<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">getcwd</span><span style="color: #007700">() . </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">chdir</span><span style="color: #007700">(</span><span style="color: #DD0000">'public_html'</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">// current directory<br /></span><span style="color: #007700">echo </span><span style="color: #0000BB">getcwd</span><span style="color: #007700">() . </span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例的输出类似于：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+/home/vincent
+/home/vincent/public_html
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-function.chdir-notes">
+  <h3 class="title">注释</h3>
+  <div class="caution"><strong class="caution">Caution</strong>
+   <p class="para">
+    If the PHP interpreter has been built with ZTS (Zend Thread Safety) enabled,
+    any changes to the current directory made through <span class="function"><strong>chdir()</strong></span>
+    will be invisible to the operating system. All built-in PHP functions will
+    still respect the change in current directory; but external library
+    functions called using <a href="book.ffi.html" class="link">FFI</a> will not. You
+    can tell whether your copy of PHP was built with ZTS enabled using
+    <strong class="command">php -i</strong> or the built-in constant
+    <strong><code>PHP_ZTS</code></strong>.
+   </p>
+  </div>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.chdir-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.getcwd.html" class="function" rel="rdfs-seeAlso">getcwd()</a> - 取得当前工作目录</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="125457""></a>
+  <div class="note">
+   <strong class="user">nesk at xakep dot ru</strong>
+   <a href="#125457" class="date">24-Oct-2020 12:43</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+When working with FFI under a PHP ZTS environment, there is no standard way to change the directory with libraries (dll/so/dylib/etc), so to get around this problem, you should use something like this polyfill:<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+$directory </span><span class="keyword">= </span><span class="string">'path/to/libraries'</span><span class="keyword">;<br />
+<br />
+switch (</span><span class="default">\PHP_OS_FAMILY</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; case </span><span class="string">'Windows'</span><span class="keyword">:<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">\FFI</span><span class="keyword">::</span><span class="default">cdef</span><span class="keyword">(</span><span class="string">'extern unsigned char SetDllDirectoryA(const char* lpPathName);'</span><span class="keyword">, </span><span class="string">'kernel32.dll'</span><span class="keyword">)<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; -&gt;</span><span class="default">SetDllDirectoryA</span><span class="keyword">(</span><span class="default">$directory</span><span class="keyword">)<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; ;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; break;<br />
+<br />
+&nbsp;&nbsp;&nbsp; case </span><span class="string">'Linux'</span><span class="keyword">:<br />
+&nbsp;&nbsp;&nbsp; case </span><span class="string">'BSD'</span><span class="keyword">:<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">\FFI</span><span class="keyword">::</span><span class="default">cdef</span><span class="keyword">(</span><span class="string">'int setenv(const char *name, const char *value, int overwrite);'</span><span class="keyword">)<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; -&gt;</span><span class="default">setenv</span><span class="keyword">(</span><span class="string">'LD_LIBRARY_PATH'</span><span class="keyword">, </span><span class="default">$directory</span><span class="keyword">, </span><span class="default">1</span><span class="keyword">)<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; ;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; break;<br />
+<br />
+&nbsp;&nbsp;&nbsp; case </span><span class="string">'Darwin'</span><span class="keyword">:<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">\FFI</span><span class="keyword">::</span><span class="default">cdef</span><span class="keyword">(</span><span class="string">'int setenv(const char *name, const char *value, int overwrite);'</span><span class="keyword">)<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; -&gt;</span><span class="default">setenv</span><span class="keyword">(</span><span class="string">'DYLD_LIBRARY_PATH'</span><span class="keyword">, </span><span class="default">$directory</span><span class="keyword">, </span><span class="default">1</span><span class="keyword">)<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; ;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; break;<br />
+}<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="88617""></a>
+  <div class="note">
+   <strong class="user">php dot duke at qik dot nl</strong>
+   <a href="#88617" class="date">31-Jan-2009 02:16</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+When changing dir's under windows environments:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+$path</span><span class="keyword">=</span><span class="string">"c:\temp"';
+<br />
+chdir($path);
+<br />
+/* getcwd() gives you back "c:\temp" */
+<br />
+
+<br />
+$path="c:\temp\"'</span><span class="keyword">;
+<br />
+</span><span class="default">chdir</span><span class="keyword">(</span><span class="default">$path</span><span class="keyword">);
+<br />
+</span><span class="comment">/* getcwd() gives you back "c:\temp\" */
+<br />
+</span><span class="default">?&gt;
+<br />
+</span>
+<br />
+to work around this inconsistency
+<br />
+doing a chdir('.') after the chdir always gives back "c:\temp"</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="68972""></a>
+  <div class="note">
+   <strong class="user">herwin at snt dot utwente dot nl</strong>
+   <a href="#68972" class="date">17-Aug-2006 11:58</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+When using PHP safe mode and trying to change to a dir that is not accessible due to the safe mode restrictions, the function simply fails without generating any kind of error message.<br />
+<br />
+(Tested in PHP 4.3.10-16, Debian Sarge default)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

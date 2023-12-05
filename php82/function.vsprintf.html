@@ -1,0 +1,931 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>返回格式化字符串</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.vprintf.html">? vprintf</a></li>
+      <li style="float: right;"><a href="function.wordwrap.html">wordwrap ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.strings.html">字符串 函数</a></li>
+    <li>返回格式化字符串</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.vsprintf" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">vsprintf</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.1.0, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">vsprintf</span> &mdash; <span class="dc-title">返回格式化字符串</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-function.vsprintf-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>vsprintf</strong></span>(<span class="methodparam"><span class="type">string</span> <code class="parameter">$format</code></span>, <span class="methodparam"><span class="type">array</span> <code class="parameter">$values</code></span>): <span class="type">string</span></div>
+
+  <p class="para rdfs-comment">
+   作用与 <span class="function"><a href="function.sprintf.html" class="function">sprintf()</a></span> 函数类似，但是接收一个数组参数，而不是一系列可变数量的参数。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.vsprintf-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+
+ <dt>
+<code class="parameter">format</code></dt>
+
+ <dd>
+
+  <p class="para">
+   format 字符串通常由零或多个指令组成：普通字符（不包含
+   <code class="literal">%</code>）&mdash;&mdash;直接复制到结果，<em class="emphasis">转换规范</em>&mdash;&mdash;获取每个参数的结果。
+  </p>
+
+  <p class="para">
+   转换规范遵循此原型：
+   <code class="literal">%[argnum$][flags][width][.precision]specifier</code>.
+  </p>
+
+  <p class="formalpara">
+   <h5 class="title">Argnum</h5>
+   <p class="para">
+    整数后跟美元符号 <code class="literal">$</code>，用于指定转换中要处理的参数数量。
+   </p>
+  </p>
+
+  <p class="para">
+   <table class="doctable table">
+    <caption><strong>标志</strong></caption>
+    
+     <thead>
+      <tr>
+       <th>标志</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td><code class="literal">-</code></td>
+       <td>
+        在指定字段宽度时左对齐，默认右对齐
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">+</code></td>
+       <td>
+        正数的加号 <code class="literal">+</code>前缀，默认负数的前缀是负号。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal"> </code>(space)</td>
+       <td>
+        空格填充结果。这是默认设置。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">0</code></td>
+       <td>
+        仅用 0 进行左侧数字填充。使用 <code class="literal">s</code> 标志符可以右侧填充。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">&#039;</code>(char)</td>
+       <td>
+        用字符（char）填充结果。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+
+  <p class="formalpara">
+   <h5 class="title">Width</h5>
+   <p class="para">
+    要么是整数，表示转换结果应该有多少个字符（最少），要么是 <code class="literal">*</code>。如果使用
+    <code class="literal">*</code>，那么宽度将作为额外的整数值提供，位于格式化符号之前。
+   </p>
+  </p>
+
+  <p class="formalpara">
+   <h5 class="title">Precision</h5>
+   <p class="para">
+    小数点 <code class="literal">.</code>，可选的后跟整数或者 <code class="literal">*</code>，其含义取决于格式化符号：
+    <ul class="itemizedlist">
+     <li class="listitem">
+      <span class="simpara">
+       <code class="literal">e</code>、<code class="literal">E</code>、<code class="literal">f</code>、<code class="literal">F</code>
+       标志符：小数点后需要打印的位数（默认是 6）。
+      </span>
+     </li>
+     <li class="listitem">
+      <span class="simpara">
+       <code class="literal">g</code>、<code class="literal">G</code>、<code class="literal">h</code>、<code class="literal">H</code>
+       标志符：这是要打印的最大有效位数。
+      </span>
+     </li>
+     <li class="listitem">
+      <span class="simpara">
+       <code class="literal">s</code> 标志符：充当分界点，为字符串设置最大字符限制。
+      </span>
+     </li>
+    </ul>
+    <blockquote class="note"><p><strong class="note">Note</strong>: 
+     <span class="simpara">
+      如果小数点没有明确的精度值，则假设是 0。如果使用 <code class="literal">*</code>，则精度将作为额外的整数值提供，位于格式化符号之前。
+     </span>
+    </p></blockquote>
+   </p>
+  </p>
+
+  <p class="para">
+   <table class="doctable table">
+    <caption><strong>标志符</strong></caption>
+    
+     <thead>
+      <tr>
+       <th>标志符</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td><code class="literal">%</code></td>
+       <td>
+        字面意思的百分号字符。不需要参数。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">b</code></td>
+       <td>
+        参数视为整数并以二进制数字呈现。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">c</code></td>
+       <td>
+        参数视为整数并以 ASCII 字符呈现。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">d</code></td>
+       <td>
+        参数视为整数并以（有符号）十进制数字呈现。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">e</code></td>
+       <td>
+        参数当做科学符号处理（例如 1.2e+2）。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">E</code></td>
+       <td>
+        与 <code class="literal">e</code> 标志符相同，但使用大写字母（例如 1.2E+2）。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">f</code></td>
+       <td>
+        参数当做浮点数处理且作为浮点数呈现（locale aware）。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">F</code></td>
+       <td>
+        参数当做浮点数处理且作为浮点数呈现（non-locale aware）。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">g</code></td>
+       <td>
+        <p class="para">
+         通用格式。
+        </p>
+        <p class="para">
+         Let P equal the precision if nonzero, 6 if the precision is omitted,
+         or 1 if the precision is zero.
+         Then, if a conversion with style E would have an exponent of X:
+        </p>
+        <p class="para">
+         If P &gt; X ≥ ?4, the conversion is with style f and precision P ? (X + 1).
+         Otherwise, the conversion is with style e and precision P ? 1.
+        </p>
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">G</code></td>
+       <td>
+        Like the <code class="literal">g</code> specifier but uses
+        <code class="literal">E</code> and <code class="literal">f</code>.
+       </td>
+      </tr>
+
+      <tr>
+        <td><code class="literal">h</code></td>
+        <td>
+         Like the <code class="literal">g</code> specifier but uses <code class="literal">F</code>.
+         Available as of PHP 8.0.0.
+        </td>
+       </tr>
+
+       <tr>
+        <td><code class="literal">H</code></td>
+        <td>
+         Like the <code class="literal">g</code> specifier but uses
+         <code class="literal">E</code> and <code class="literal">F</code>. Available as of PHP 8.0.0.
+        </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">o</code></td>
+       <td>
+        参数视为整数并以八进制数字来呈现。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">s</code></td>
+       <td>
+        参数视为字符串来呈现。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">u</code></td>
+       <td>
+        参数视为整数并以无符号十进制数字呈现。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">x</code></td>
+       <td>
+        参数视为整数并作为十六进制数字呈现（带小写字母）。
+       </td>
+      </tr>
+
+      <tr>
+       <td><code class="literal">X</code></td>
+       <td>
+        参数视为整数并作为十六进制数字呈现（带大写字母）。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+
+  <div class="warning"><strong class="warning">Warning</strong>
+   <p class="para">
+    <code class="literal">c</code> 类型标志符忽略填充和宽度
+   </p>
+  </div>
+
+  <div class="warning"><strong class="warning">Warning</strong>
+   <p class="para">
+    Attempting to use a combination of the string and width specifiers with character sets that require more than one byte per character may result in unexpected results
+   </p>
+  </div>
+
+  <p class="para">
+   变量将会强制转换为适合标志符的类型：
+   <table class="doctable table">
+    <caption><strong>类型处理</strong></caption>
+    
+     <thead>
+      <tr>
+       <th>类型</th>
+       <th>标志符</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td><span class="type">string</span></td>
+       <td><code class="literal">s</code></td>
+      </tr>
+
+      <tr>
+       <td><span class="type">int</span></td>
+       <td>
+        <code class="literal">d</code>,
+        <code class="literal">u</code>,
+        <code class="literal">c</code>,
+        <code class="literal">o</code>,
+        <code class="literal">x</code>,
+        <code class="literal">X</code>,
+        <code class="literal">b</code>
+       </td>
+      </tr>
+
+      <tr>
+       <td><span class="type">float</span></td>
+       <td>
+        <code class="literal">e</code>,
+        <code class="literal">E</code>,
+        <code class="literal">f</code>,
+        <code class="literal">F</code>,
+        <code class="literal">g</code>,
+        <code class="literal">G</code>,
+        <code class="literal">h</code>,
+        <code class="literal">H</code>
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+ </dd>
+
+
+
+    
+     <dt>
+<code class="parameter">values</code></dt>
+
+     <dd>
+
+      <p class="para">
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.vsprintf-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   根据 <code class="parameter">format</code> 和数组参数返回处理后的字符串。
+  </p>
+ </div>
+
+
+ <div class="refsect1 errors" id="refsect1-function.vsprintf-errors">
+  <h3 class="title">错误／异常</h3>
+  
+  <p class="para">
+   从 PHP 8.0.0 开始，如果参数个数为零，将抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>。在 PHP 8.0.0 之前，会发出 <strong><code>E_WARNING</code></strong>。
+  </p>
+  <p class="para">
+   从 PHP 8.0.0 开始，如果 <code class="literal">[width]</code> 小于零或大于 <strong><code>PHP_INT_MAX</code></strong>，则会抛出
+   <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>。在 PHP 8.0.0 之前，会发出 <strong><code>E_WARNING</code></strong>。
+  </p>
+  <p class="para">
+   从 PHP 8.0.0 开始，如果 <code class="literal">[precision]</code> 小于零或大于 <strong><code>PHP_INT_MAX</code></strong>，则会抛出
+   <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>。在 PHP 8.0.0 之前，会发出 <strong><code>E_WARNING</code></strong>。
+  </p>
+  <p class="para">
+   从 PHP 8.0.0 开始，当传递的参数少于所需的参数时会抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>。在 PHP 8.0.0 之前，返回 <strong><code>false</code></strong> 并发出 <strong><code>E_WARNING</code></strong>。
+  </p>
+
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.vsprintf-changelog">
+  <h3 class="title">更新日志</h3>
+  
+  <table class="doctable informaltable">
+   
+    <thead>
+     <tr>
+      <th>版本</th>
+      <th>说明</th>
+     </tr>
+
+    </thead>
+
+    <tbody class="tbody">
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       此函数失败时不再返回 <strong><code>false</code></strong>。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       如果参数个数为零则抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>；以前该函数则会发出 <strong><code>E_WARNING</code></strong>。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       如果 <code class="literal">[width]</code> 小于零或大于 <strong><code>PHP_INT_MAX</code></strong>，则抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>；以前该函数则会发出 <strong><code>E_WARNING</code></strong>。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       如果 <code class="literal">[precision]</code> 小于零或大于 <strong><code>PHP_INT_MAX</code></strong>，则抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>；以前该函数则会发出 <strong><code>E_WARNING</code></strong>。
+      </td>
+     </tr>
+
+     <tr>
+      <td>8.0.0</td>
+      <td>
+       当传递的参数少于所需的参数时抛出 <span class="classname"><a href="class.valueerror.html" class="classname">ValueError</a></span>；以前该函数则会发出 <strong><code>E_WARNING</code></strong>。
+      </td>
+     </tr>
+
+    </tbody>
+   
+  </table>
+
+
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.vsprintf-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #1 <span class="function"><strong>vsprintf()</strong></span>: 前导 0 的整数</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">print </span><span style="color: #0000BB">vsprintf</span><span style="color: #007700">(</span><span style="color: #DD0000">"%04d-%02d-%02d"</span><span style="color: #007700">, </span><span style="color: #0000BB">explode</span><span style="color: #007700">(</span><span style="color: #DD0000">'-'</span><span style="color: #007700">, </span><span style="color: #DD0000">'1988-8-1'</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+1988-08-01
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.vsprintf-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.printf.html" class="function" rel="rdfs-seeAlso">printf()</a> - 输出格式化字符串</span></li>
+    <li class="member"><span class="function"><a href="function.sprintf.html" class="function" rel="rdfs-seeAlso">sprintf()</a> - 返回格式化字符串</span></li>
+    <li class="member"><span class="function"><a href="function.fprintf.html" class="function" rel="rdfs-seeAlso">fprintf()</a> - 将格式化后的字符串写入到流</span></li>
+    <li class="member"><span class="function"><a href="function.vprintf.html" class="function" rel="rdfs-seeAlso">vprintf()</a> - 输出格式化字符串</span></li>
+    <li class="member"><span class="function"><a href="function.vfprintf.html" class="function" rel="rdfs-seeAlso">vfprintf()</a> - 将格式化字符串写入流</span></li>
+    <li class="member"><span class="function"><a href="function.sscanf.html" class="function" rel="rdfs-seeAlso">sscanf()</a> - 根据指定格式解析输入的字符</span></li>
+    <li class="member"><span class="function"><a href="function.fscanf.html" class="function" rel="rdfs-seeAlso">fscanf()</a> - 从文件中格式化输入</span></li>
+    <li class="member"><span class="function"><a href="function.number-format.html" class="function" rel="rdfs-seeAlso">number_format()</a> - 以千位分隔符方式格式化一个数字</span></li>
+    <li class="member"><span class="function"><a href="function.date.html" class="function" rel="rdfs-seeAlso">date()</a> - 格式化 Unix 时间戳</span></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="126220""></a>
+  <div class="note">
+   <strong class="user">crash</strong>
+   <a href="#126220" class="date">06-Jul-2021 09:03</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Note that this function now throws an ValueError* as of PHP 8.0 if there is an error:<br />
+<br />
+$ php -r 'var_dump(vsprintf("%d", []));'<br />
+&gt; Fatal error: Uncaught ValueError: The arguments array must contain 1 items, 0 given in Command line code:1<br />
+<br />
+*ValueError is new in PHP 8.0, so if you want to make your code compatible to PHP 7.x you should test that the arguments array has the correct length.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="122688""></a>
+  <div class="note">
+   <strong class="user">steven at nevvix dot com</strong>
+   <a href="#122688" class="date">02-May-2018 04:14</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+<span class="default">&lt;?php<br />
+</span><span class="comment">/**<br />
+&nbsp;* Return a formatted string like vsprintf() with named placeholders.<br />
+&nbsp;*<br />
+&nbsp;* When a placeholder doesn't have a matching key in `$args`,<br />
+&nbsp;*&nbsp;&nbsp; the placeholder is returned as is to see missing args.<br />
+&nbsp;* @param string $format<br />
+&nbsp;* @param array $args<br />
+&nbsp;* @param string $pattern<br />
+&nbsp;* @return string<br />
+&nbsp;*/<br />
+</span><span class="keyword">function </span><span class="default">p</span><span class="keyword">(</span><span class="default">$format</span><span class="keyword">, array </span><span class="default">$args</span><span class="keyword">, </span><span class="default">$pattern</span><span class="keyword">=</span><span class="string">"/\{(\w+)\}/"</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">preg_replace_callback</span><span class="keyword">(</span><span class="default">$pattern</span><span class="keyword">, function (</span><span class="default">$matches</span><span class="keyword">) use (</span><span class="default">$args</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return @</span><span class="default">$args</span><span class="keyword">[</span><span class="default">$matches</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">]] ?: </span><span class="default">$matches</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">];<br />
+&nbsp;&nbsp;&nbsp; }, </span><span class="default">$format</span><span class="keyword">);<br />
+}<br />
+<br />
+</span><span class="default">$args </span><span class="keyword">= [</span><span class="string">"database"</span><span class="keyword">=&gt;</span><span class="string">"people"</span><span class="keyword">, </span><span class="string">"user"</span><span class="keyword">=&gt;</span><span class="string">"staff"</span><span class="keyword">, </span><span class="string">"pass"</span><span class="keyword">=&gt;</span><span class="string">"pass123"</span><span class="keyword">, </span><span class="string">"host"</span><span class="keyword">=&gt;</span><span class="string">"localhost"</span><span class="keyword">];<br />
+<br />
+</span><span class="comment">// With PHP-like placeholders: the variable is embedded in a string "{$database}" but without the dollar sign<br />
+</span><span class="default">$format </span><span class="keyword">= &lt;&lt;&lt;SQL<br />
+</span><span class="string">CREATE DATABASE IF NOT EXISTS {database};<br />
+GRANT ALL PRIVILEGES ON {database_name}.* TO '{user}'@'{host}';<br />
+SET PASSWORD = PASSWORD('{pass}');<br />
+</span><span class="keyword">SQL;<br />
+echo </span><span class="default">p</span><span class="keyword">(</span><span class="default">$format</span><span class="keyword">, </span><span class="default">$args</span><span class="keyword">);<br />
+</span><span class="comment">/*<br />
+Result:<br />
+<br />
+CREATE DATABASE IF NOT EXISTS people;<br />
+GRANT ALL PRIVILEGES ON {database_name}.* TO 'staff'@'localhost';<br />
+SET PASSWORD = PASSWORD('pass123');<br />
+<br />
+The `{database_name}` placeholder doesn't exist as a matching key in `$args` so it's returned as is.<br />
+*/<br />
+<br />
+// With Ruby-like placeholders<br />
+</span><span class="default">$format </span><span class="keyword">= &lt;&lt;&lt;SQL<br />
+</span><span class="string">CREATE DATABASE IF NOT EXISTS :database;<br />
+GRANT ALL PRIVILEGES ON :database_name.* TO ':user'@':host';<br />
+SET PASSWORD = PASSWORD(':pass');<br />
+</span><span class="keyword">SQL;<br />
+echo </span><span class="default">p</span><span class="keyword">(</span><span class="default">$format</span><span class="keyword">, </span><span class="default">$args</span><span class="keyword">, </span><span class="string">"/:(\w+)/"</span><span class="keyword">);<br />
+</span><span class="comment">/*<br />
+Result:<br />
+<br />
+CREATE DATABASE IF NOT EXISTS people;<br />
+GRANT ALL PRIVILEGES ON :database_name.* TO 'staff'@'localhost';<br />
+SET PASSWORD = PASSWORD('pass123');<br />
+<br />
+The `:database_name` placeholder doesn't exist as a matching key in `$args` so it's returned as is.<br />
+*/</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="121893""></a>
+  <div class="note">
+   <strong class="user">ASchmidt at Anamera dot net</strong>
+   <a href="#121893" class="date">21-Nov-2017 06:58</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+It's necessary to clearly how to apply argument swapping when using an array of arguments. One might be tempted to use %0$ to reference $args[0].<br />
+<br />
+In reality, the position specifier is always the array index+1:<br />
+<br />
+$args[0]&nbsp; is referenced by %1$...<br />
+$args[1]&nbsp; is referenced by %2$... <br />
+etc.<br />
+<br />
+Similarly, the first subpattern of a RegEx match would be found in $matches[1], the second in $match[2], etc. However if the $matches array is used as arguments to vsprint(), then the position specifier is subpattern+1:<br />
+<br />
+preg_match( $pattern, $subject, $matches );<br />
+vsprintf( 'Full Match = %1$s, first Subpattern = %2$s, second Subpattern = %3$s', $matches );</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="119959""></a>
+  <div class="note">
+   <strong class="user">spectrumcat</strong>
+   <a href="#119959" class="date">28-Sep-2016 10:51</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Instead of inventing own functions in case you'd like to use array keys as placeholder names and replace corresponding array values in a string, just use the str_replace:<br />
+<br />
+$string = 'Hello %name!';<br />
+$data = array(<br />
+&nbsp; '%name' =&gt; 'John'<br />
+);<br />
+<br />
+$greeting = str_replace(array_keys($data), array_values($data), $string);</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="111122""></a>
+  <div class="note">
+   <strong class="user">dee jay simple zero07 at geemail dawt co</strong>
+   <a href="#111122" class="date">17-Jan-2013 05:03</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Using a heredoc with vprintf:
+<br />
+
+<br />
+<span class="default">&lt;?php
+<br />
+$string </span><span class="keyword">= &lt;&lt;&lt;THESTRING
+<br />
+</span><span class="string">I like the state of %1\$s &lt;br /&gt;
+<br />
+I picked: %2\$d as a number, &lt;br /&gt;
+<br />
+I also picked %2\$d as a number again &lt;br /&gt;
+<br />
+%3\$s&lt;br /&gt;
+<br />
+</span><span class="keyword">THESTRING;
+<br />
+
+<br />
+</span><span class="default">$returnText </span><span class="keyword">= </span><span class="default">vprintf</span><span class="keyword">(&nbsp; </span><span class="default">$string</span><span class="keyword">, array(</span><span class="string">'Oregon'</span><span class="keyword">,</span><span class="string">'7'</span><span class="keyword">,</span><span class="string">'I Love Oregon'</span><span class="keyword">)&nbsp; );
+<br />
+
+<br />
+echo </span><span class="default">$returnText</span><span class="keyword">;
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="110666""></a>
+  <div class="note">
+   <strong class="user">Josef Kufner</strong>
+   <a href="#110666" class="date">20-Nov-2012 11:51</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+<span class="default">&lt;?php
+<br />
+</span><span class="comment">/**
+<br />
+&nbsp;* Like vsprintf, but accepts $args keys instead of order index.
+<br />
+&nbsp;* Both numeric and strings matching /[a-zA-Z0-9_-]+/ are allowed.
+<br />
+&nbsp;*
+<br />
+&nbsp;* Example: vskprintf('y = %y$d, x = %x$1.1f', array('x' =&gt; 1, 'y' =&gt; 2))
+<br />
+&nbsp;* Result:&nbsp; 'y = 2, x = 1.0'
+<br />
+&nbsp;*
+<br />
+&nbsp;* $args also can be object, then it's properties are retrieved
+<br />
+&nbsp;* using get_object_vars().
+<br />
+&nbsp;*
+<br />
+&nbsp;* '%s' without argument name works fine too. Everything vsprintf() can do
+<br />
+&nbsp;* is supported.
+<br />
+&nbsp;*
+<br />
+&nbsp;* @author Josef Kufner &lt;jkufner(at)gmail.com&gt;
+<br />
+&nbsp;*/
+<br />
+</span><span class="keyword">function </span><span class="default">vksprintf</span><span class="keyword">(</span><span class="default">$str</span><span class="keyword">, </span><span class="default">$args</span><span class="keyword">)
+<br />
+{
+<br />
+&nbsp;&nbsp;&nbsp; if (</span><span class="default">is_object</span><span class="keyword">(</span><span class="default">$args</span><span class="keyword">)) {
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$args </span><span class="keyword">= </span><span class="default">get_object_vars</span><span class="keyword">(</span><span class="default">$args</span><span class="keyword">);
+<br />
+&nbsp;&nbsp;&nbsp; }
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$map </span><span class="keyword">= </span><span class="default">array_flip</span><span class="keyword">(</span><span class="default">array_keys</span><span class="keyword">(</span><span class="default">$args</span><span class="keyword">));
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$new_str </span><span class="keyword">= </span><span class="default">preg_replace_callback</span><span class="keyword">(</span><span class="string">'/(^|[^%])%([a-zA-Z0-9_-]+)\$/'</span><span class="keyword">,
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; function(</span><span class="default">$m</span><span class="keyword">) use (</span><span class="default">$map</span><span class="keyword">) { return </span><span class="default">$m</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">].</span><span class="string">'%'</span><span class="keyword">.(</span><span class="default">$map</span><span class="keyword">[</span><span class="default">$m</span><span class="keyword">[</span><span class="default">2</span><span class="keyword">]] + </span><span class="default">1</span><span class="keyword">).</span><span class="string">'$'</span><span class="keyword">; },
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$str</span><span class="keyword">);
+<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">vsprintf</span><span class="keyword">(</span><span class="default">$new_str</span><span class="keyword">, </span><span class="default">$args</span><span class="keyword">);
+<br />
+}
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="83883""></a>
+  <div class="note">
+   <strong class="user">www dot wesley at gmail dot com</strong>
+   <a href="#83883" class="date">16-Jun-2008 01:56</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+vnsprintf is equal to vsprintf except for associative, signed or floating keys.<br />
+<br />
+vnsprintf supports for example "%assocKey$05d", "%-2$'+10s" and "%3.2$05u", vsprintf doesn't<br />
+<br />
+vnsprintf( '%2$d', $array) [2nd value] is equal to vsprintf( '%2$d', $array) [2nd value]<br />
+vnsprintf( '%+2$d', $array) [key = 2] is equal to vnsprintf( '%2.0$d', $array) [key = 2]<br />
+vnsprintf( '%+2$d', $array) [key = 2] is different of vsprintf( '%+2$d', $array) [unsupported]<br />
+<br />
+When you use signed or floating keys, vnsprintf searchs for the signed truncated key of the original array<br />
+<br />
+Note1: vnsprintf does not support for example "%someKeyf" (floating number, key = someKey) or "%+03d" (signed decimal number, key = 3), you should use "%someKey$f" or "%+03$d" respectively.<br />
+Note2: "%+03d" (or "%1$+03d") will be interpreted as signed zero-padded decimal number<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">function </span><span class="default">vnsprintf</span><span class="keyword">( </span><span class="default">$format</span><span class="keyword">, array </span><span class="default">$data</span><span class="keyword">)<br />
+{<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">preg_match_all</span><span class="keyword">( </span><span class="string">'/ (?&lt;!%) % ( (?: [[:alpha:]_-][[:alnum:]_-]* | ([-+])? [0-9]+ (?(2) (?:\.[0-9]+)? | \.[0-9]+ ) ) ) \$ [-+]? \'? .? -? [0-9]* (\.[0-9]+)? \w/x'</span><span class="keyword">, </span><span class="default">$format</span><span class="keyword">, </span><span class="default">$match</span><span class="keyword">, </span><span class="default">PREG_SET_ORDER </span><span class="keyword">| </span><span class="default">PREG_OFFSET_CAPTURE</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$offset </span><span class="keyword">= </span><span class="default">0</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$keys </span><span class="keyword">= </span><span class="default">array_keys</span><span class="keyword">(</span><span class="default">$data</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; foreach ( </span><span class="default">$match </span><span class="keyword">as &amp;</span><span class="default">$value </span><span class="keyword">)<br />
+&nbsp;&nbsp;&nbsp; {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if ( ( </span><span class="default">$key </span><span class="keyword">= </span><span class="default">array_search</span><span class="keyword">( </span><span class="default">$value</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">][</span><span class="default">0</span><span class="keyword">], </span><span class="default">$keys</span><span class="keyword">) ) !== </span><span class="default">FALSE </span><span class="keyword">|| ( </span><span class="default">is_numeric</span><span class="keyword">( </span><span class="default">$value</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">][</span><span class="default">0</span><span class="keyword">]) &amp;&amp; ( </span><span class="default">$key </span><span class="keyword">= </span><span class="default">array_search</span><span class="keyword">( (int)</span><span class="default">$value</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">][</span><span class="default">0</span><span class="keyword">], </span><span class="default">$keys</span><span class="keyword">) ) !== </span><span class="default">FALSE </span><span class="keyword">) ) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$len </span><span class="keyword">= </span><span class="default">strlen</span><span class="keyword">( </span><span class="default">$value</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">][</span><span class="default">0</span><span class="keyword">]);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$format </span><span class="keyword">= </span><span class="default">substr_replace</span><span class="keyword">( </span><span class="default">$format</span><span class="keyword">, </span><span class="default">1 </span><span class="keyword">+ </span><span class="default">$key</span><span class="keyword">, </span><span class="default">$offset </span><span class="keyword">+ </span><span class="default">$value</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">][</span><span class="default">1</span><span class="keyword">], </span><span class="default">$len</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$offset </span><span class="keyword">-= </span><span class="default">$len </span><span class="keyword">- </span><span class="default">strlen</span><span class="keyword">( </span><span class="default">$key</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">vsprintf</span><span class="keyword">( </span><span class="default">$format</span><span class="keyword">, </span><span class="default">$data</span><span class="keyword">);<br />
+}<br />
+<br />
+</span><span class="default">$examples </span><span class="keyword">= array(<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">2.8</span><span class="keyword">=&gt;</span><span class="string">'positiveFloat'</span><span class="keyword">,&nbsp; &nbsp; </span><span class="comment">// key = 2 , 1st value<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">-</span><span class="default">3</span><span class="keyword">=&gt;</span><span class="string">'negativeInteger'</span><span class="keyword">,&nbsp; &nbsp; </span><span class="comment">// key = -3 , 2nd value<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'my_name'</span><span class="keyword">=&gt;</span><span class="string">'someString'&nbsp; &nbsp; </span><span class="comment">// key = my_name , 3rd value<br />
+</span><span class="keyword">);<br />
+<br />
+echo </span><span class="default">vsprintf</span><span class="keyword">( </span><span class="string">"%%my_name\$s = '%my_name\$s'\n"</span><span class="keyword">, </span><span class="default">$examples</span><span class="keyword">);&nbsp; &nbsp; </span><span class="comment">// [unsupported]<br />
+</span><span class="keyword">echo </span><span class="default">vnsprintf</span><span class="keyword">( </span><span class="string">"%%my_name\$s = '%my_name\$s'\n"</span><span class="keyword">, </span><span class="default">$examples</span><span class="keyword">);&nbsp; &nbsp; </span><span class="comment">// output : "someString"<br />
+<br />
+</span><span class="keyword">echo </span><span class="default">vsprintf</span><span class="keyword">( </span><span class="string">"%%2.5\$s = '%2.5\$s'\n"</span><span class="keyword">, </span><span class="default">$examples</span><span class="keyword">);&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// [unsupported]<br />
+</span><span class="keyword">echo </span><span class="default">vnsprintf</span><span class="keyword">( </span><span class="string">"%%2.5\$s = '%2.5\$s'\n"</span><span class="keyword">, </span><span class="default">$examples</span><span class="keyword">);&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// output : "positiveFloat"<br />
+<br />
+</span><span class="keyword">echo </span><span class="default">vsprintf</span><span class="keyword">( </span><span class="string">"%%+2.5\$s = '%+2.5\$s'\n"</span><span class="keyword">, </span><span class="default">$examples</span><span class="keyword">);&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// [unsupported]<br />
+</span><span class="keyword">echo </span><span class="default">vnsprintf</span><span class="keyword">( </span><span class="string">"%%+2.5\$s = '%+2.5\$s'\n"</span><span class="keyword">, </span><span class="default">$examples</span><span class="keyword">);&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// output : "positiveFloat"<br />
+<br />
+</span><span class="keyword">echo </span><span class="default">vsprintf</span><span class="keyword">( </span><span class="string">"%%-3.2\$s = '%-3.2\$s'\n"</span><span class="keyword">, </span><span class="default">$examples</span><span class="keyword">);&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// [unsupported]<br />
+</span><span class="keyword">echo </span><span class="default">vnsprintf</span><span class="keyword">( </span><span class="string">"%%-3.2\$s = '%-3.2\$s'\n"</span><span class="keyword">, </span><span class="default">$examples</span><span class="keyword">);&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// output : "negativeInteger"<br />
+<br />
+</span><span class="keyword">echo </span><span class="default">vsprintf</span><span class="keyword">( </span><span class="string">"%%2\$s = '%2\$s'\n"</span><span class="keyword">, </span><span class="default">$examples</span><span class="keyword">);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// output : "negativeInteger"<br />
+</span><span class="keyword">echo </span><span class="default">vnsprintf</span><span class="keyword">( </span><span class="string">"%%2\$s = '%2\$s'\n"</span><span class="keyword">, </span><span class="default">$examples</span><span class="keyword">);&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// output : [= vsprintf]<br />
+<br />
+</span><span class="keyword">echo </span><span class="default">vsprintf</span><span class="keyword">( </span><span class="string">"%%+2\$s = '%+2\$s'\n"</span><span class="keyword">, </span><span class="default">$examples</span><span class="keyword">);&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// [unsupported]<br />
+</span><span class="keyword">echo </span><span class="default">vnsprintf</span><span class="keyword">( </span><span class="string">"%%+2\$s = '%+2\$s'\n"</span><span class="keyword">, </span><span class="default">$examples</span><span class="keyword">);&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// output : "positiveFloat"<br />
+<br />
+</span><span class="keyword">echo </span><span class="default">vsprintf</span><span class="keyword">( </span><span class="string">"%%-3\$s = '%-3\$s'\n"</span><span class="keyword">, </span><span class="default">$examples</span><span class="keyword">);&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// [unsupported]<br />
+</span><span class="keyword">echo </span><span class="default">vnsprintf</span><span class="keyword">( </span><span class="string">"%%-3\$s = '%-3\$s'\n"</span><span class="keyword">, </span><span class="default">$examples</span><span class="keyword">);&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="comment">// output : "negativeInteger"<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="70039""></a>
+  <div class="note">
+   <strong class="user">Roadster</strong>
+   <a href="#70039" class="date">30-Sep-2006 07:44</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Please note: The same functionality (sortof) can be attained between version 4.0.4 and 4.1.0 using call_user_func_array.<br />
+<br />
+Example:<br />
+<br />
+call_user_func_array("sprintf", $arg)<br />
+<br />
+First element of $arg is the format. This rescued me in a situation where version 4.1.0 wasn't available.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="62016""></a>
+  <div class="note">
+   <strong class="user">jon at ardentcreative dot co dot uk</strong>
+   <a href="#62016" class="date">17-Feb-2006 03:56</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+This can be used for quick and dirty internationalization:<br />
+<br />
+<span class="default">&lt;?php<br />
+$GLOBALS</span><span class="keyword">[</span><span class="string">'strings'</span><span class="keyword">][</span><span class="string">'example'</span><span class="keyword">] = </span><span class="string">"There are %d people."</span><span class="keyword">;<br />
+<br />
+</span><span class="comment">// Loads a phrase from the translations list in lang/$lang/phrases.php<br />
+</span><span class="keyword">function </span><span class="default">t</span><span class="keyword">() {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$args </span><span class="keyword">= </span><span class="default">func_get_args</span><span class="keyword">();<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$nArgs </span><span class="keyword">= </span><span class="default">func_num_args</span><span class="keyword">();<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$phrase </span><span class="keyword">= </span><span class="default">array_shift</span><span class="keyword">(</span><span class="default">$args</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$nArgs</span><span class="keyword">--;<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; include_once(</span><span class="string">"../lang/" </span><span class="keyword">. </span><span class="default">lang</span><span class="keyword">() . </span><span class="string">"/phrases.php"</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; if (isset(</span><span class="default">$GLOBALS</span><span class="keyword">[</span><span class="string">'strings'</span><span class="keyword">][</span><span class="default">$phrase</span><span class="keyword">])) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">vsprintf</span><span class="keyword">(</span><span class="default">$GLOBALS</span><span class="keyword">[</span><span class="string">'strings'</span><span class="keyword">][</span><span class="default">$phrase</span><span class="keyword">], </span><span class="default">$args</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; } else {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="string">'&lt;span style="color: #ff0000"&gt;Untranslated string: ' </span><span class="keyword">. </span><span class="default">$phrase </span><span class="keyword">. </span><span class="string">'&lt;/span&gt;'</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; }<br />
+}<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="42598""></a>
+  <div class="note">
+   <strong class="user">jed at NOSPAM dot jed dot bz</strong>
+   <a href="#42598" class="date">22-May-2004 06:48</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+vsprintf() accepts arrays with any keys, so the array_shift() technique is unnecessary when writing a printf-type function. Any parameters you require are easily unset from the array you retrieve with func_get_args():<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="keyword">function </span><span class="default">mysprintf</span><span class="keyword">(</span><span class="default">$format</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$args </span><span class="keyword">= </span><span class="default">func_get_args</span><span class="keyword">();<br />
+&nbsp;&nbsp;&nbsp; unset(</span><span class="default">$args</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">]); </span><span class="comment">/* get rid of "$format" */<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">return </span><span class="default">vsprintf</span><span class="keyword">(</span><span class="default">$format</span><span class="keyword">, </span><span class="default">$args</span><span class="keyword">);<br />
+}<br />
+<br />
+</span><span class="comment">/* I use this technique in production code as follows: */<br />
+</span><span class="keyword">function </span><span class="default">logf</span><span class="keyword">(</span><span class="default">$target</span><span class="keyword">, </span><span class="default">$string</span><span class="keyword">) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$args </span><span class="keyword">= </span><span class="default">func_get_args</span><span class="keyword">();<br />
+&nbsp;&nbsp;&nbsp; unset(</span><span class="default">$args</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">], </span><span class="default">$args</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">]);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">fprintf</span><span class="keyword">(</span><span class="default">$GLOBALS</span><span class="keyword">[</span><span class="string">'config'</span><span class="keyword">][</span><span class="string">'logtargets'</span><span class="keyword">][</span><span class="default">$target</span><span class="keyword">],<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="string">"[%s] %s\n"</span><span class="keyword">, </span><span class="default">date</span><span class="keyword">(</span><span class="string">'H:i'</span><span class="keyword">), </span><span class="default">wordwrap</span><span class="keyword">(</span><span class="default">vsprintf</span><span class="keyword">(</span><span class="default">$string</span><span class="keyword">, </span><span class="default">$args</span><span class="keyword">), </span><span class="default">75</span><span class="keyword">, </span><span class="string">'\n\r '</span><span class="keyword">));<br />
+}<br />
+<br />
+</span><span class="comment">/* e.g.:<br />
+&nbsp;&nbsp;&nbsp; logf(DEBUG, "Oops! %s", mysql_error());<br />
+&nbsp;*/<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+array_shift() and other costly array operations aren't required, as far as I know. I could be wrong.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

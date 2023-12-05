@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-287d0843","path":"/tag/i18n/","title":"Tag: I18N","lang":"en-US","frontmatter":{"title":"Tag: I18N","dir":{"index":false},"feed":false,"sitemap":false,"blog":{"type":"category","name":"I18N","key":"tag"},"layout":"BlogCategory"},"headers":[],"git":{},"readingTime":{"minutes":0,"words":0},"filePathRelative":null,"excerpt":""}');export{e as data};

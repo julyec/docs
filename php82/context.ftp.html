@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>FTP 上下文选项列表</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="context.http.html">? HTTP context 选项</a></li>
+      <li style="float: right;"><a href="context.ssl.html">SSL 上下文选项 ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="context.html">上下文（Context）选项和参数</a></li>
+    <li>FTP 上下文选项列表</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="context.ftp" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">FTP 上下文选项</h1>
+  <p class="refpurpose"><span class="refname">FTP 上下文选项</span> &mdash; <span class="dc-title">FTP 上下文选项列表</span></p>
+
+ </div>
+ 
+ <div class="refsect1 description" id="refsect1-context.ftp-description">
+  <h3 class="title">说明</h3>
+  <p class="para">
+   <code class="literal">ftp://</code> 和 <code class="literal">ftps://</code> 传输的上下文选项。
+  </p>
+ </div>
+
+
+ <div class="refsect1 options" id="refsect1-context.ftp-options">
+  <h3 class="title">可选项</h3>
+  <p class="para">
+   <dl>
+    
+     <dt id="context.ftp.overwrite">
+      <code class="parameter">overwrite</code>
+      <span class="type">bool</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       允许覆盖远程服务器上已有的文件。仅适用于写入模式（上传）。
+      </p>
+      <p class="para">
+       默认为 <strong><code>false</code></strong>。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="context.ftp.resume-pos">
+      <code class="parameter">resume_pos</code>
+      <span class="type">int</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       开始传输的文件偏移量。仅适用于读取模式（下载）。
+      </p>
+      <p class="para">
+       默认为 <code class="literal">0</code> （文件开头）。
+      </p>
+     </dd>
+
+    
+    
+     <dt id="context.ftp.proxy">
+      <code class="parameter">proxy</code>
+      <span class="type">string</span>
+     </dt>
+
+     <dd>
+
+      <p class="para">
+       通过 http 代理服务器代理 FTP 请求。 仅适用于文件读取操作。 例如：<code class="literal">tcp://squid.example.com:8000</code>。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes" id="refsect1-context.ftp-notes">
+  <h3 class="title">注释</h3>
+  <blockquote class="note"><p><strong class="note">Note</strong>: 
+   <strong>底层套接字流上下文选项</strong><br />
+   <span class="simpara">
+    <a href="transports.inet.html" class="link">底层传输</a> 可能支持其他上下文选项
+    对于 <code class="literal">ftp://</code> 流，请参阅 <code class="literal">tcp://</code> 传输的上下文选项。
+    对于 <code class="literal">ftps://</code> 流，请参阅 <code class="literal">ssl://</code> 传输的上下文选项。
+   </span>
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-context.ftp-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><a href="wrappers.ftp.html" class="xref">ftp://</a></li>
+    <li class="member"><a href="context.socket.html" class="xref">套接字上下文选项</a></li>
+    <li class="member"><a href="context.ssl.html" class="xref">SSL 上下文选项</a></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="125884""></a>
+  <div class="note">
+   <strong class="user">instatiendaweb at gmail dot com</strong>
+   <a href="#125884" class="date">07-Mar-2021 08:38</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+// Ruta del ftp debe coincidir con la ruta del localhost<br />
+$ftp_path = '<a href="ftp://francisco:aaa@localhost:21/ftparchivo.txt" rel="nofollow" target="_blank">ftp://francisco:aaa@localhost:21/ftparchivo.txt</a>';<br />
+// Escribimos las opciones de stream<br />
+$stream_options = array('ftp' =&gt; array('overwrite' =&gt; TRUE));<br />
+// Creamos un contexto<br />
+$stream_context = stream_context_create($stream_options);<br />
+\escribir::verifacionnota($stream_context, 'STREAMCONTEXT');<br />
+// Abrimos el fichero que vamos a leer<br />
+$flujo = fopen($ftp_path, 'r', false, $stream_context);<br />
+//Funcion creada :vardump + string<br />
+\escribir::verifacionnota($flujo, 'VARDUMP FOPEN');<br />
+<br />
+$contenido = '';<br />
+//Traduccion mientras el contenido del archivo no este al final del fichero ==&gt; feof<br />
+while (!feof($flujo)) {<br />
+//Entonces lee 8192 bytes del archivo y a?adelos a la variable contenido<br />
+$contenido .= fread($flujo, 8192);<br />
+}<br />
+\escribir::verifacionnota($contenido, 'VARDUMP CONTENIDO');<br />
+//Cerramos el flujo<br />
+fclose($flujo);</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="120220""></a>
+  <div class="note">
+   <strong class="user">dev at codesatori dot com</strong>
+   <a href="#120220" class="date">24-Nov-2016 07:01</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Apparently the overwrite-option only registers as false if it's absent. If I specify it as false, it acts the same as true and overwrites. Then, <br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">if (empty(</span><span class="default">$opts</span><span class="keyword">[</span><span class="string">'overwrite'</span><span class="keyword">])) {<br />
+&nbsp;&nbsp;&nbsp; unset(</span><span class="default">$opts</span><span class="keyword">[</span><span class="string">'overwrite'</span><span class="keyword">]);<br />
+}<br />
+</span><span class="default">?&gt;<br />
+</span>...was the simple fix for my FTP stream wrapper class sporting default options. This is quite unexpected though; false means false even if I say so? Apparently PHP (7.0.2) just checks if the option exists, not its boolean value.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="90313""></a>
+  <div class="note">
+   <strong class="user">php dot net at misterchucker dot com</strong>
+   <a href="#90313" class="date">15-Apr-2009 06:19</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+This is an example of how to allow fopen() to overwrite a file on an FTP site. If the stream context is not modified, an error will occur: "...failed to open stream: Remote file already exists and overwrite context option not specified...".<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="comment">// The path to the FTP file, including login arguments<br />
+</span><span class="default">$ftp_path </span><span class="keyword">= </span><span class="string">'<a href="ftp://username:password@example.com/example.txt" rel="nofollow" target="_blank">ftp://username:password@example.com/example.txt</a>'</span><span class="keyword">;<br />
+<br />
+</span><span class="comment">// Allows overwriting of existing files on the remote FTP server<br />
+</span><span class="default">$stream_options </span><span class="keyword">= array(</span><span class="string">'ftp' </span><span class="keyword">=&gt; array(</span><span class="string">'overwrite' </span><span class="keyword">=&gt; </span><span class="default">true</span><span class="keyword">));<br />
+<br />
+</span><span class="comment">// Creates a stream context resource with the defined options<br />
+</span><span class="default">$stream_context </span><span class="keyword">= </span><span class="default">stream_context_create</span><span class="keyword">(</span><span class="default">$stream_options</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">// Opens the file for writing and truncates it to zero length <br />
+</span><span class="keyword">if (</span><span class="default">$fh </span><span class="keyword">= </span><span class="default">fopen</span><span class="keyword">(</span><span class="default">$ftp_path</span><span class="keyword">, </span><span class="string">'w'</span><span class="keyword">, </span><span class="default">0</span><span class="keyword">, </span><span class="default">$stream_context</span><span class="keyword">))<br />
+{<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// Writes contents to the file<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">fputs</span><span class="keyword">(</span><span class="default">$fh</span><span class="keyword">, </span><span class="string">'example contents'</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// Closes the file handle<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">fclose</span><span class="keyword">(</span><span class="default">$fh</span><span class="keyword">);<br />
+}<br />
+else<br />
+{<br />
+&nbsp;&nbsp;&nbsp; die(</span><span class="string">'Could not open file.'</span><span class="keyword">);<br />
+}<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

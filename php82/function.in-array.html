@@ -1,0 +1,446 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>检查数组中是否存在某个值</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.extract.html">? extract</a></li>
+      <li style="float: right;"><a href="function.key-exists.html">key_exists ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.array.html">数组 函数</a></li>
+    <li>检查数组中是否存在某个值</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.in-array" class="refentry">
+   <div class="refnamediv">
+    <h1 class="refname">in_array</h1>
+    <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">in_array</span> &mdash; <span class="dc-title">检查数组中是否存在某个值</span></p>
+
+   </div>
+ <div class="refsect1 description" id="refsect1-function.in-array-description">
+  <h3 class="title">说明</h3>
+    <div class="methodsynopsis dc-description">
+     <span class="methodname"><strong>in_array</strong></span>(<span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">$needle</code></span>, <span class="methodparam"><span class="type">array</span> <code class="parameter">$haystack</code></span>, <span class="methodparam"><span class="type">bool</span> <code class="parameter">$strict</code><span class="initializer"> = <strong><code>false</code></strong></span></span>): <span class="type">bool</span></div>
+
+    <p class="para rdfs-comment">
+     大海捞针，在大海（<code class="parameter">haystack</code>）中搜索针（
+     <code class="parameter">needle</code>），如果没有设置         <code class="parameter">strict</code> 则使用宽松的比较。
+    </p>
+   </div>
+
+ <div class="refsect1 parameters" id="refsect1-function.in-array-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">needle</code></dt>
+
+     <dd>
+
+      <p class="para">
+       待搜索的值。
+      </p>
+      <blockquote class="note"><p><strong class="note">Note</strong>: 
+       <p class="para">
+        如果 <code class="parameter">needle</code> 是字符串，则比较是区分大小写的。
+       </p>
+      </p></blockquote>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">haystack</code></dt>
+
+     <dd>
+
+      <p class="para">
+       待搜索的数组。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">strict</code></dt>
+
+     <dd>
+
+      <p class="para">
+        如果第三个参数 <code class="parameter">strict</code> 的值为
+     <strong><code>true</code></strong> 则 <span class="function"><strong>in_array()</strong></span> 函数还会检查
+     <code class="parameter">needle</code> 的<a href="language.types.html" class="link">类型</a>是否和
+     <code class="parameter">haystack</code> 中的相同。
+      </p>
+      <blockquote class="note"><p><strong class="note">Note</strong>: 
+       <p class="para">
+        在 PHP 8.0.0 之前，<code class="literal">string</code> <code class="parameter">needle</code> 在非严格模式下将会匹配数组中的值 
+        <code class="literal">0</code>，反之亦然。这可能会导致不希望的结果。其它类型也存在类似的边缘情况。如果不是绝对确定有关值的类型，请始终使用
+        <code class="parameter">strict</code> flag 以避免意外行为。
+       </p>
+      </p></blockquote>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+ <div class="refsect1 returnvalues" id="refsect1-function.in-array-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">如果找到 <code class="parameter">needle</code> 则返回 <strong><code>true</code></strong>，否则返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+ <div class="refsect1 examples" id="refsect1-function.in-array-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #1 <span class="function"><strong>in_array()</strong></span> 例子</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$os </span><span style="color: #007700">= array(</span><span style="color: #DD0000">"Mac"</span><span style="color: #007700">, </span><span style="color: #DD0000">"NT"</span><span style="color: #007700">, </span><span style="color: #DD0000">"Irix"</span><span style="color: #007700">, </span><span style="color: #DD0000">"Linux"</span><span style="color: #007700">);<br />if (</span><span style="color: #0000BB">in_array</span><span style="color: #007700">(</span><span style="color: #DD0000">"Irix"</span><span style="color: #007700">, </span><span style="color: #0000BB">$os</span><span style="color: #007700">)) {<br />    echo </span><span style="color: #DD0000">"Got Irix"</span><span style="color: #007700">;<br />}<br />if (</span><span style="color: #0000BB">in_array</span><span style="color: #007700">(</span><span style="color: #DD0000">"mac"</span><span style="color: #007700">, </span><span style="color: #0000BB">$os</span><span style="color: #007700">)) {<br />    echo </span><span style="color: #DD0000">"Got mac"</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>
+      第二个条件失败，因为 <span class="function"><strong>in_array()</strong></span>
+       是区分大小写的，所以以上程序显示为：
+    </p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Got Irix
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #2 <span class="function"><strong>in_array()</strong></span> 严格类型检查例子</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$a </span><span style="color: #007700">= array(</span><span style="color: #DD0000">'1.10'</span><span style="color: #007700">, </span><span style="color: #0000BB">12.4</span><span style="color: #007700">, </span><span style="color: #0000BB">1.13</span><span style="color: #007700">);<br /><br />if (</span><span style="color: #0000BB">in_array</span><span style="color: #007700">(</span><span style="color: #DD0000">'12.4'</span><span style="color: #007700">, </span><span style="color: #0000BB">$a</span><span style="color: #007700">, </span><span style="color: #0000BB">true</span><span style="color: #007700">)) {<br />    echo </span><span style="color: #DD0000">"'12.4' found with strict check\n"</span><span style="color: #007700">;<br />}<br /><br />if (</span><span style="color: #0000BB">in_array</span><span style="color: #007700">(</span><span style="color: #0000BB">1.13</span><span style="color: #007700">, </span><span style="color: #0000BB">$a</span><span style="color: #007700">, </span><span style="color: #0000BB">true</span><span style="color: #007700">)) {<br />    echo </span><span style="color: #DD0000">"1.13 found with strict check\n"</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+1.13 found with strict check
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #3 <span class="function"><strong>in_array()</strong></span> 中用数组作为 needle</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$a </span><span style="color: #007700">= array(array(</span><span style="color: #DD0000">'p'</span><span style="color: #007700">, </span><span style="color: #DD0000">'h'</span><span style="color: #007700">), array(</span><span style="color: #DD0000">'p'</span><span style="color: #007700">, </span><span style="color: #DD0000">'r'</span><span style="color: #007700">), </span><span style="color: #DD0000">'o'</span><span style="color: #007700">);<br /><br />if (</span><span style="color: #0000BB">in_array</span><span style="color: #007700">(array(</span><span style="color: #DD0000">'p'</span><span style="color: #007700">, </span><span style="color: #DD0000">'h'</span><span style="color: #007700">), </span><span style="color: #0000BB">$a</span><span style="color: #007700">)) {<br />    echo </span><span style="color: #DD0000">"'ph' was found\n"</span><span style="color: #007700">;<br />}<br /><br />if (</span><span style="color: #0000BB">in_array</span><span style="color: #007700">(array(</span><span style="color: #DD0000">'f'</span><span style="color: #007700">, </span><span style="color: #DD0000">'i'</span><span style="color: #007700">), </span><span style="color: #0000BB">$a</span><span style="color: #007700">)) {<br />    echo </span><span style="color: #DD0000">"'fi' was found\n"</span><span style="color: #007700">;<br />}<br /><br />if (</span><span style="color: #0000BB">in_array</span><span style="color: #007700">(</span><span style="color: #DD0000">'o'</span><span style="color: #007700">, </span><span style="color: #0000BB">$a</span><span style="color: #007700">)) {<br />    echo </span><span style="color: #DD0000">"'o' was found\n"</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+  &#039;ph&#039; was found
+  &#039;o&#039; was found
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-function.in-array-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.array-search.html" class="function" rel="rdfs-seeAlso">array_search()</a> - 在数组中搜索给定的值，如果成功则返回首个相应的键名</span></li>
+    <li class="member"><span class="function"><a href="function.isset.html" class="function" rel="rdfs-seeAlso">isset()</a> - 检测变量是否已声明并且其值不为 null</span></li>
+    <li class="member"><span class="function"><a href="function.array-key-exists.html" class="function" rel="rdfs-seeAlso">array_key_exists()</a> - 检查数组里是否有指定的键名或索引</span></li>
+   </ul>
+  </p>
+ </div>
+
+  </div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="128598""></a>
+  <div class="note">
+   <strong class="user">Julian Sawicki</strong>
+   <a href="#128598" class="date">09-Jun-2023 10:04</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Here is a recursive in_array function: <br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+$myNumbers </span><span class="keyword">= [<br />
+&nbsp;&nbsp;&nbsp; [</span><span class="default">1</span><span class="keyword">,</span><span class="default">2</span><span class="keyword">,</span><span class="default">3</span><span class="keyword">,</span><span class="default">4</span><span class="keyword">,</span><span class="default">5</span><span class="keyword">],<br />
+&nbsp;&nbsp;&nbsp; [</span><span class="default">6</span><span class="keyword">,</span><span class="default">7</span><span class="keyword">,</span><span class="default">8</span><span class="keyword">,</span><span class="default">9</span><span class="keyword">,</span><span class="default">10</span><span class="keyword">],<br />
+];<br />
+<br />
+</span><span class="default">$array </span><span class="keyword">= [<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'numbers' </span><span class="keyword">=&gt; </span><span class="default">$myNumbers<br />
+</span><span class="keyword">];<br />
+<br />
+</span><span class="comment">// Let's try to find number 7 within $array<br />
+</span><span class="default">$hasNumber </span><span class="keyword">= </span><span class="default">in_array</span><span class="keyword">(</span><span class="default">7</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">, </span><span class="default">true</span><span class="keyword">); </span><span class="comment">// bool(false)<br />
+</span><span class="default">$hasNumber </span><span class="keyword">= </span><span class="default">in_array_recursive</span><span class="keyword">(</span><span class="default">7</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">, </span><span class="default">true</span><span class="keyword">); </span><span class="comment">// bool(true)<br />
+<br />
+</span><span class="keyword">function </span><span class="default">in_array_recursive</span><span class="keyword">(</span><span class="default">mixed $needle</span><span class="keyword">, array </span><span class="default">$haystack</span><span class="keyword">, </span><span class="default">bool $strict</span><span class="keyword">): </span><span class="default">bool<br />
+</span><span class="keyword">{<br />
+&nbsp;&nbsp;&nbsp; foreach (</span><span class="default">$haystack </span><span class="keyword">as </span><span class="default">$element</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">$element </span><span class="keyword">=== </span><span class="default">$needle</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">true</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$isFound </span><span class="keyword">= </span><span class="default">false</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">is_array</span><span class="keyword">(</span><span class="default">$element</span><span class="keyword">)) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$isFound </span><span class="keyword">= </span><span class="default">in_array_recursive</span><span class="keyword">(</span><span class="default">$needle</span><span class="keyword">, </span><span class="default">$element</span><span class="keyword">, </span><span class="default">$strict</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; <br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; if (</span><span class="default">$isFound </span><span class="keyword">=== </span><span class="default">true</span><span class="keyword">) {<br />
+&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; return </span><span class="default">true</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; }<br />
+&nbsp;&nbsp;&nbsp; }<br />
+<br />
+&nbsp;&nbsp;&nbsp; return </span><span class="default">false</span><span class="keyword">;<br />
+}</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="128220""></a>
+  <div class="note">
+   <strong class="user">Armands Rieksti</strong>
+   <a href="#128220" class="date">14-Feb-2023 10:45</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I'd like to point out that, if you're using Enum data structures and want to compare whether an array of strings has a certain string Enum in it, you need to cast it to a string.<br />
+<br />
+From what I've tested, the function works correctly:<br />
+if the array is filled with strings and you're searching for a string;<br />
+if the array is filled with Enums and you're searching for an Enum.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="127901""></a>
+  <div class="note">
+   <strong class="user">leonhard dot radonic+phpnet at gmail dot com</strong>
+   <a href="#127901" class="date">08-Nov-2022 10:26</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I got an unexpected behavior working with in_array. I'm using following code:<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="comment">// ...<br />
+</span><span class="default">$someId </span><span class="keyword">= </span><span class="default">getSomeId</span><span class="keyword">(); </span><span class="comment">// it gets generated/fetched by another service, so I don't know what value it will have. P.S.: it's an integer<br />
+<br />
+// The actual data in my edge-case scenario:<br />
+// $someId = 0;<br />
+// $anyArray = ['dataOne', 'dataTwo'];<br />
+</span><span class="keyword">if (</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">$someId</span><span class="keyword">, </span><span class="default">$anyArray</span><span class="keyword">)) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="comment">// do some work<br />
+</span><span class="keyword">}<br />
+</span><span class="comment">// ...<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+With PHP7.4, in_array returns boolean true.<br />
+With PHP8.1, in_array returns boolean false.<br />
+<br />
+It took me quite some time to find out what's going on.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="127885""></a>
+  <div class="note">
+   <strong class="user">Anonymous</strong>
+   <a href="#127885" class="date">01-Nov-2022 02:46</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+$a = new StdClass();<br />
+$b = new StdClass();<br />
+<br />
+// Expected: false, got: true<br />
+var_dump(in_array($a, [$b]));<br />
+// bool(true)<br />
+<br />
+// Works fine<br />
+var_dump(in_array($a, [$b], true));<br />
+// bool(false)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="127886""></a>
+  <div class="note">
+   <strong class="user">Anonymous</strong>
+   <a href="#127886" class="date">01-Nov-2022 02:46</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+$a = new StdClass();<br />
+$b = new StdClass();<br />
+<br />
+// Expected: false, got: true<br />
+var_dump(in_array($a, [$b]));<br />
+// bool(true)<br />
+<br />
+// Works fine<br />
+var_dump(in_array($a, [$b], true));<br />
+// bool(false)</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="106319""></a>
+  <div class="note">
+   <strong class="user">beingmrkenny at gmail dot com</strong>
+   <a href="#106319" class="date">27-Oct-2011 03:35</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Loose checking returns some crazy, counter-intuitive results when used with certain arrays. It is completely correct behaviour, due to PHP's leniency on variable types, but in "real-life" is almost useless.<br />
+<br />
+The solution is to use the strict checking option.<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="comment">// Example array<br />
+<br />
+</span><span class="default">$array </span><span class="keyword">= array(<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'egg' </span><span class="keyword">=&gt; </span><span class="default">true</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'cheese' </span><span class="keyword">=&gt; </span><span class="default">false</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'hair' </span><span class="keyword">=&gt; </span><span class="default">765</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'goblins' </span><span class="keyword">=&gt; </span><span class="default">null</span><span class="keyword">,<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'ogres' </span><span class="keyword">=&gt; </span><span class="string">'no ogres allowed in this array'<br />
+</span><span class="keyword">);<br />
+<br />
+</span><span class="comment">// Loose checking -- return values are in comments<br />
+<br />
+// First three make sense, last four do not<br />
+<br />
+</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">null</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">); </span><span class="comment">// true<br />
+</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">false</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">); </span><span class="comment">// true<br />
+</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">765</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">); </span><span class="comment">// true<br />
+</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">763</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">); </span><span class="comment">// true<br />
+</span><span class="default">in_array</span><span class="keyword">(</span><span class="string">'egg'</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">); </span><span class="comment">// true<br />
+</span><span class="default">in_array</span><span class="keyword">(</span><span class="string">'hhh'</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">); </span><span class="comment">// true<br />
+</span><span class="default">in_array</span><span class="keyword">(array(), </span><span class="default">$array</span><span class="keyword">); </span><span class="comment">// true<br />
+<br />
+// Strict checking<br />
+<br />
+</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">null</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">, </span><span class="default">true</span><span class="keyword">); </span><span class="comment">// true<br />
+</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">false</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">, </span><span class="default">true</span><span class="keyword">); </span><span class="comment">// true<br />
+</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">765</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">, </span><span class="default">true</span><span class="keyword">); </span><span class="comment">// true<br />
+</span><span class="default">in_array</span><span class="keyword">(</span><span class="default">763</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">, </span><span class="default">true</span><span class="keyword">); </span><span class="comment">// false<br />
+</span><span class="default">in_array</span><span class="keyword">(</span><span class="string">'egg'</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">, </span><span class="default">true</span><span class="keyword">); </span><span class="comment">// false<br />
+</span><span class="default">in_array</span><span class="keyword">(</span><span class="string">'hhh'</span><span class="keyword">, </span><span class="default">$array</span><span class="keyword">, </span><span class="default">true</span><span class="keyword">); </span><span class="comment">// false<br />
+</span><span class="default">in_array</span><span class="keyword">(array(), </span><span class="default">$array</span><span class="keyword">, </span><span class="default">true</span><span class="keyword">); </span><span class="comment">// false<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="93880""></a>
+  <div class="note">
+   <strong class="user">thomas dot sahlin at gmail dot com</strong>
+   <a href="#93880" class="date">05-Oct-2009 12:53</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you're creating an array yourself and then using in_array to search it, consider setting the keys of the array and using isset instead since it's much faster.<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+$slow </span><span class="keyword">= array(</span><span class="string">'apple'</span><span class="keyword">, </span><span class="string">'banana'</span><span class="keyword">, </span><span class="string">'orange'</span><span class="keyword">);<br />
+<br />
+if (</span><span class="default">in_array</span><span class="keyword">(</span><span class="string">'banana'</span><span class="keyword">, </span><span class="default">$slow</span><span class="keyword">))<br />
+&nbsp;&nbsp;&nbsp; print(</span><span class="string">'Found it!'</span><span class="keyword">);<br />
+<br />
+</span><span class="default">$fast </span><span class="keyword">= array(</span><span class="string">'apple' </span><span class="keyword">=&gt; </span><span class="string">'apple'</span><span class="keyword">, </span><span class="string">'banana' </span><span class="keyword">=&gt; </span><span class="string">'banana'</span><span class="keyword">, </span><span class="string">'orange' </span><span class="keyword">=&gt; </span><span class="string">'orange'</span><span class="keyword">);<br />
+<br />
+if (isset(</span><span class="default">$fast</span><span class="keyword">[</span><span class="string">'banana'</span><span class="keyword">]))<br />
+&nbsp;&nbsp;&nbsp; print(</span><span class="string">'Found it!'</span><span class="keyword">);<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="88260""></a>
+  <div class="note">
+   <strong class="user">rhill at xenu-directory dot net</strong>
+   <a href="#88260" class="date">17-Jan-2009 01:05</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I found out that in_array will *not* find an associative array within a haystack of associative arrays in strict mode if the keys were not generated in the *same order*:<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+$needle </span><span class="keyword">= array(<br />
+&nbsp;&nbsp;&nbsp; </span><span class="string">'fruit'</span><span class="keyword">=&gt;</span><span class="string">'banana'</span><span class="keyword">, </span><span class="string">'vegetable'</span><span class="keyword">=&gt;</span><span class="string">'carrot'<br />
+&nbsp;&nbsp;&nbsp; </span><span class="keyword">);<br />
+<br />
+</span><span class="default">$haystack </span><span class="keyword">= array(<br />
+&nbsp;&nbsp;&nbsp; array(</span><span class="string">'vegetable'</span><span class="keyword">=&gt;</span><span class="string">'carrot'</span><span class="keyword">, </span><span class="string">'fruit'</span><span class="keyword">=&gt;</span><span class="string">'banana'</span><span class="keyword">),<br />
+&nbsp;&nbsp;&nbsp; array(</span><span class="string">'fruit'</span><span class="keyword">=&gt;</span><span class="string">'apple'</span><span class="keyword">, </span><span class="string">'vegetable'</span><span class="keyword">=&gt;</span><span class="string">'celery'</span><span class="keyword">)<br />
+&nbsp;&nbsp;&nbsp; );<br />
+<br />
+echo </span><span class="default">in_array</span><span class="keyword">(</span><span class="default">$needle</span><span class="keyword">, </span><span class="default">$haystack</span><span class="keyword">, </span><span class="default">true</span><span class="keyword">) ? </span><span class="string">'true' </span><span class="keyword">: </span><span class="string">'false'</span><span class="keyword">;<br />
+</span><span class="comment">// Output is 'false'<br />
+<br />
+</span><span class="keyword">echo </span><span class="default">in_array</span><span class="keyword">(</span><span class="default">$needle</span><span class="keyword">, </span><span class="default">$haystack</span><span class="keyword">) ? </span><span class="string">'true' </span><span class="keyword">: </span><span class="string">'false'</span><span class="keyword">;<br />
+</span><span class="comment">// Output is 'true'<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+I had wrongly assumed the order of the items in an associative array were irrelevant, regardless of whether 'strict' is TRUE or FALSE: The order is irrelevant *only* if not in strict mode.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

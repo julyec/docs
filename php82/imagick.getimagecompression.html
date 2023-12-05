@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>Gets the current image's compression type</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="imagick.getimagecompose.html">? Imagick::getImageCompose</a></li>
+      <li style="float: right;"><a href="imagick.getimagecompressionquality.html">Imagick::getImageCompressionQuality ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="class.imagick.html">Imagick</a></li>
+    <li>Gets the current image's compression type</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="imagick.getimagecompression" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">Imagick::getImageCompression</h1>
+  <p class="verinfo">(PECL imagick 3 &gt;= 3.3.0)</p><p class="refpurpose"><span class="refname">Imagick::getImageCompression</span> &mdash; <span class="dc-title">Gets the current image&#039;s compression type</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-imagick.getimagecompression-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="modifier">public</span> <span class="methodname"><strong>Imagick::getImageCompression</strong></span>(): <span class="type">int</span></div>
+
+
+  <p class="para rdfs-comment">
+   Gets the current image&#039;s compression type.
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-imagick.getimagecompression-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">此函数没有参数。</p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-imagick.getimagecompression-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   Returns the compression constant
+  </p>
+ </div>
+
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="125195""></a>
+  <div class="note">
+   <strong class="user">Mondragon</strong>
+   <a href="#125195" class="date">16-Jul-2020 05:25</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Example use:<br />
+<br />
+$im = new Imagick("mypicture.jpg");<br />
+$ctype = $im-&gt;getImageCompression();<br />
+if($ctype == Imagick::COMPRESSION_ZIP) echo "PNG file!";<br />
+if($ctype == Imagick::COMPRESSION_JPEG) echo "JPG file!";<br />
+if($ctype == Imagick::COMPRESSION_LZW) echo "GIF file!";<br />
+<br />
+All options:<br />
+COMPRESSION_UNDEFINED<br />
+COMPRESSION_NO<br />
+COMPRESSION_BZIP<br />
+COMPRESSION_FAX<br />
+COMPRESSION_GROUP4<br />
+COMPRESSION_JPEG<br />
+COMPRESSION_JPEG2000<br />
+COMPRESSION_LOSSLESSJPEG<br />
+COMPRESSION_LZW<br />
+COMPRESSION_RLE<br />
+COMPRESSION_ZIP<br />
+COMPRESSION_DXT1<br />
+COMPRESSION_DXT3<br />
+COMPRESSION_DXT5<br />
+COMPRESSION_ZIPS<br />
+COMPRESSION_PIZ<br />
+COMPRESSION_PXR24<br />
+COMPRESSION_B44<br />
+COMPRESSION_B44A<br />
+COMPRESSION_LZMA<br />
+COMPRESSION_JBIG1<br />
+COMPRESSION_JBIG2<br />
+<br />
+The numbers for which those constants stand differ by version. So always use the constants.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="121781""></a>
+  <div class="note">
+   <strong class="user">alitrix at gmail dot com</strong>
+   <a href="#121781" class="date">20-Oct-2017 12:51</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+This function is added in version 3.3.0 and above</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="112603""></a>
+  <div class="note">
+   <strong class="user">undoable at gmail dot com</strong>
+   <a href="#112603" class="date">03-Jul-2013 10:44</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+This function is undefined. You must use getImageCompressionQuality() instead.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

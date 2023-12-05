@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>执行运算符</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="language.operators.errorcontrol.html">? 错误控制运算符</a></li>
+      <li style="float: right;"><a href="language.operators.increment.html">递增／递减运算符 ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="language.operators.html">运算符</a></li>
+    <li>执行运算符</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="language.operators.execution" class="sect1">
+   <h2 class="title">执行运算符</h2>
+   <p class="para">
+    PHP 支持一个执行运算符：反引号（``）。注意这不是单引号！PHP
+    将尝试将反引号中的内容作为 shell 命令来执行，并将其输出信息返回（即，可以赋给一个变量而不是简单地丢弃到标准输出）。使用反引号运算符"`"的效果与函数
+    <span class="function"><a href="function.shell-exec.html" class="function">shell_exec()</a></span> 相同。
+    <div class="informalexample">
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$output </span><span style="color: #007700">= `</span><span style="color: #DD0000">ls -al</span><span style="color: #007700">`;<br />echo </span><span style="color: #DD0000">"&lt;pre&gt;</span><span style="color: #0000BB">$output</span><span style="color: #DD0000">&lt;/pre&gt;"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+   </p>
+   <blockquote class="note"><p><strong class="note">Note</strong>: 
+    <p class="para">
+     关闭了 <span class="function"><a href="function.shell-exec.html" class="function">shell_exec()</a></span> 时反引号运算符是无效的。
+    </p>
+   </p></blockquote>
+   <blockquote class="note"><p><strong class="note">Note</strong>: 
+    <p class="para">
+     与其它某些语言不同，反引号不能在双引号字符串中使用。
+    </p>
+   </p></blockquote>
+
+   <div class="sect2">
+    <h3 class="title">参见</h3>
+    <p class="para">
+     <ul class="simplelist">
+      <li class="member"><a href="ref.exec.html" class="link">程序执行函数</a></li>
+      <li class="member"><span class="function"><a href="function.popen.html" class="function">popen()</a></span></li>
+      <li class="member"><span class="function"><a href="function.proc-open.html" class="function">proc_open()</a></span></li>
+      <li class="member"><a href="features.commandline.html" class="link">PHP 的命令行模式</a></li>
+     </ul>
+    </p>
+   </div>
+  </div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="127915""></a>
+  <div class="note">
+   <strong class="user">paolo.bertani</strong>
+   <a href="#127915" class="date">10-Nov-2022 05:25</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you want to avoid situations like the one described by @robert you may want to disable `shell_exec` and -as a consequence- the backtick operator.<br />
+<br />
+To do this just edit the `php.ini` file and add `shell_exec` to the `disable_functions` setting:<br />
+<br />
+&nbsp;&nbsp;&nbsp; ; This directive allows you to disable certain functions.<br />
+&nbsp;&nbsp;&nbsp; ; It receives a comma-delimited list of function names.<br />
+&nbsp;&nbsp;&nbsp; ; https://php.net/disable-functions<br />
+&nbsp;&nbsp;&nbsp; disable_functions = "shell_exec"<br />
+<br />
+Then you can still use `exec()` to run terminal commands.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="120273""></a>
+  <div class="note">
+   <strong class="user">ohcc at 163 dot com</strong>
+   <a href="#120273" class="date">04-Dec-2016 02:22</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+You can use variables within a pair of backticks (``).<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; $host </span><span class="keyword">= </span><span class="string">'www.wuxiancheng.cn'</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; echo `</span><span class="string">ping -n 3 </span><span class="keyword">{</span><span class="default">$host</span><span class="keyword">}`;<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="62489""></a>
+  <div class="note">
+   <strong class="user">robert</strong>
+   <a href="#62489" class="date">01-Mar-2006 11:25</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Just a general usage note.&nbsp; I had a very difficult time solving a problem with my script, when I accidentally put one of these backticks at the beginning of a line, like so:<br />
+<br />
+[lots of code]<br />
+`&nbsp; &nbsp; $URL = "blah...";<br />
+[more code]<br />
+<br />
+Since the backtick is right above the tab key, I probably just fat-fingered it while indenting the code.<br />
+<br />
+What made this so hard to find, was that PHP reported a parse error about 50 or so lines *below* the line containing the backtick.&nbsp; (There were no other backticks anywhere in my code.)&nbsp; And the error message was rather cryptic:<br />
+<br />
+Parse error: parse error, expecting `T_STRING' or `T_VARIABLE' or `T_NUM_STRING' in /blah.php on line 446<br />
+<br />
+Just something to file away in case you're pulling your hair out trying to find an error that "isn't there."</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

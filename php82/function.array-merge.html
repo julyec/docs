@@ -1,0 +1,582 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>合并一个或多个数组</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.array-merge-recursive.html">? array_merge_recursive</a></li>
+      <li style="float: right;"><a href="function.array-multisort.html">array_multisort ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.array.html">数组 函数</a></li>
+    <li>合并一个或多个数组</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.array-merge" class="refentry">
+   <div class="refnamediv">
+    <h1 class="refname">array_merge</h1>
+    <p class="verinfo">(PHP 4, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">array_merge</span> &mdash; <span class="dc-title">合并一个或多个数组</span></p>
+
+   </div>
+ <div class="refsect1 description" id="refsect1-function.array-merge-description">
+  <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>array_merge</strong></span>(<span class="methodparam"><span class="type">array</span> <code class="parameter">...$arrays</code></span>): <span class="type">array</span></div>
+
+    <p class="para rdfs-comment">
+     将一个或多个数组的单元合并起来，一个数组中的值附加在前一个数组的后面。返回作为结果的数组。
+    </p>
+    <p class="para">
+     如果输入的数组中有相同的字符串键名，则该键名后面的值将覆盖前一个值。然而，如果数组包含数字键名，后面的值将
+     <em class="emphasis">不会</em> 覆盖原来的值，而是附加到后面。
+    </p>
+    <p class="para">
+     如果输入的数组存在以数字作为索引的内容，则这项内容的键名会以连续方式重新索引。
+    </p>
+   </div>
+
+ 
+ <div class="refsect1 parameters" id="refsect1-function.array-merge-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">arrays</code></dt>
+
+     <dd>
+
+      <p class="para">
+       要合并的数组。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+ <div class="refsect1 returnvalues" id="refsect1-function.array-merge-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回合并后的结果数组。如果参数为空，则返回空 <span class="type">array</span>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-function.array-merge-changelog">
+  <h3 class="title">更新日志</h3>
+  <p class="para">
+   <table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>版本</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>7.4.0</td>
+       <td>
+        允许不带参数调用，之前版本至少需要一个参数。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.array-merge-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #1 <span class="function"><strong>array_merge()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$array1 </span><span style="color: #007700">= array(</span><span style="color: #DD0000">"color" </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">"red"</span><span style="color: #007700">, </span><span style="color: #0000BB">2</span><span style="color: #007700">, </span><span style="color: #0000BB">4</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$array2 </span><span style="color: #007700">= array(</span><span style="color: #DD0000">"a"</span><span style="color: #007700">, </span><span style="color: #DD0000">"b"</span><span style="color: #007700">, </span><span style="color: #DD0000">"color" </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">"green"</span><span style="color: #007700">, </span><span style="color: #DD0000">"shape" </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">"trapezoid"</span><span style="color: #007700">, </span><span style="color: #0000BB">4</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">array_merge</span><span style="color: #007700">(</span><span style="color: #0000BB">$array1</span><span style="color: #007700">, </span><span style="color: #0000BB">$array2</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Array
+(
+    [color] =&gt; green
+    [0] =&gt; 2
+    [1] =&gt; 4
+    [2] =&gt; a
+    [3] =&gt; b
+    [shape] =&gt; trapezoid
+    [4] =&gt; 4
+)
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #2 单一结构的 <span class="function"><strong>array_merge()</strong></span> 示例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$array1 </span><span style="color: #007700">= array();<br /></span><span style="color: #0000BB">$array2 </span><span style="color: #007700">= array(</span><span style="color: #0000BB">1 </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">"data"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">array_merge</span><span style="color: #007700">(</span><span style="color: #0000BB">$array1</span><span style="color: #007700">, </span><span style="color: #0000BB">$array2</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>
+     别忘了数字键名将会被重新编号！
+    </p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+Array
+(
+    [0] =&gt; data
+)
+</pre></div>
+    </div>
+    <div class="example-contents"><p>
+     如果你想完全保留原有数组并只想新的数组附加到后面，可以使用
+     <code class="literal">+</code> 运算符：
+    </p></div>
+
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$array1 </span><span style="color: #007700">= array(</span><span style="color: #0000BB">0 </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'zero_a'</span><span style="color: #007700">, </span><span style="color: #0000BB">2 </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'two_a'</span><span style="color: #007700">, </span><span style="color: #0000BB">3 </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'three_a'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$array2 </span><span style="color: #007700">= array(</span><span style="color: #0000BB">1 </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'one_b'</span><span style="color: #007700">, </span><span style="color: #0000BB">3 </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'three_b'</span><span style="color: #007700">, </span><span style="color: #0000BB">4 </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'four_b'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">$array1 </span><span style="color: #007700">+ </span><span style="color: #0000BB">$array2</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>
+     第一个数组的键名将会被保留。在两个数组中存在相同的键名时，第一个数组中的同键名的元素将会被保留，第二个数组中的元素将会被忽略。
+    </p></div>
+
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+array(5) {
+  [0]=&gt;
+  string(6) &quot;zero_a&quot;
+  [2]=&gt;
+  string(5) &quot;two_a&quot;
+  [3]=&gt;
+  string(7) &quot;three_a&quot;
+  [1]=&gt;
+  string(5) &quot;one_b&quot;
+  [4]=&gt;
+  string(6) &quot;four_b&quot;
+}
+</pre></div>
+    </div>
+   </div>
+  </p>
+  <p class="para">
+   <div class="example" id="">
+    <p><strong>Example #3 <span class="function"><strong>array_merge()</strong></span> 合并非数组的类型</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$beginning </span><span style="color: #007700">= </span><span style="color: #DD0000">'foo'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$end </span><span style="color: #007700">= array(</span><span style="color: #0000BB">1 </span><span style="color: #007700">=&gt; </span><span style="color: #DD0000">'bar'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$result </span><span style="color: #007700">= </span><span style="color: #0000BB">array_merge</span><span style="color: #007700">((array)</span><span style="color: #0000BB">$beginning</span><span style="color: #007700">, (array)</span><span style="color: #0000BB">$end</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>以上示例会输出：</p></div>
+    <div class="example-contents screen">
+    <div class="cdata"><pre>
+    Array
+    (
+        [0] =&gt; foo
+        [1] =&gt; bar
+    )
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+ <div class="refsect1 seealso" id="refsect1-function.array-merge-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.array-merge-recursive.html" class="function" rel="rdfs-seeAlso">array_merge_recursive()</a> - 递归地合并一个或多个数组</span></li>
+    <li class="member"><span class="function"><a href="function.array-replace.html" class="function" rel="rdfs-seeAlso">array_replace()</a> - 使用传递的数组替换第一个数组的元素</span></li>
+    <li class="member"><span class="function"><a href="function.array-combine.html" class="function" rel="rdfs-seeAlso">array_combine()</a> - 创建一个数组，用一个数组的值作为其键名，另一个数组的值作为其值</span></li>
+    <li class="member"><a href="language.operators.array.html" class="link">数组操作符</a></li>
+   </ul>
+  </p>
+ </div>
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="128734""></a>
+  <div class="note">
+   <strong class="user">gwyneth dot llewelyn at gwynethllewelyn dot net</strong>
+   <a href="#128734" class="date">13-Jul-2023 07:27</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+If you're trying to merge an array with something that evaluates to NULL, you'll get unpredictable results:<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $a </span><span class="keyword">= [</span><span class="string">'1'</span><span class="keyword">, </span><span class="string">'2'</span><span class="keyword">, </span><span class="string">'4'</span><span class="keyword">];<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$b </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$b</span><span class="keyword">);<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$c </span><span class="keyword">= </span><span class="default">array_merge</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">, </span><span class="default">$b</span><span class="keyword">);&nbsp; </span><span class="comment">// this won't work<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="keyword">echo </span><span class="string">"The merged array is:"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$c</span><span class="keyword">);<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Depending on your error setting, you might not even get anything at all.<br />
+<br />
+Under PHP 7.4:<br />
+<br />
+array(3) {<br />
+&nbsp; [0]=&gt;<br />
+&nbsp; string(1) "1"<br />
+&nbsp; [1]=&gt;<br />
+&nbsp; string(1) "2"<br />
+&nbsp; [2]=&gt;<br />
+&nbsp; string(1) "4"<br />
+}<br />
+NULL<br />
+PHP Warning:&nbsp; array_merge(): Expected parameter 2 to be an array, null given in /home/gwyneth/stupid-test.php on line 8<br />
+The merged array is: NULL<br />
+<br />
+Under PHP 8.{0,1,2}:<br />
+<br />
+array(3) {<br />
+&nbsp; [0]=&gt;<br />
+&nbsp; string(1) "1"<br />
+&nbsp; [1]=&gt;<br />
+&nbsp; string(1) "2"<br />
+&nbsp; [2]=&gt;<br />
+&nbsp; string(1) "4"<br />
+}<br />
+NULL<br />
+PHP Fatal error:&nbsp; Uncaught TypeError: array_merge(): Argument #2 must be of type array, null given in /home/gwyneth/stupid-test.php:8<br />
+Stack trace:<br />
+#0 /home/gwyneth/stupid-test.php(8): array_merge()<br />
+#1 {main}<br />
+&nbsp; thrown in /home/gwyneth/stupid-test.php on line 8<br />
+<br />
+Depending on your display/debug settings, you might not even get anything.<br />
+<br />
+The solution, of course, is to do a quick &amp; dirty test before passing the 2nd argument:<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; $a </span><span class="keyword">= [</span><span class="string">'1'</span><span class="keyword">, </span><span class="string">'2'</span><span class="keyword">, </span><span class="string">'4'</span><span class="keyword">];<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$b </span><span class="keyword">= </span><span class="default">null</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$b</span><span class="keyword">);<br />
+<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">$c </span><span class="keyword">= </span><span class="default">array_merge</span><span class="keyword">(</span><span class="default">$a</span><span class="keyword">, </span><span class="default">$b </span><span class="keyword">?? []);<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; echo </span><span class="string">"The merged array is:"</span><span class="keyword">;<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$c</span><span class="keyword">);<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Which gives the expected result (PHP 7.4 to PHP 8.2):<br />
+<br />
+array(3) {<br />
+&nbsp; [0]=&gt;<br />
+&nbsp; string(1) "1"<br />
+&nbsp; [1]=&gt;<br />
+&nbsp; string(1) "2"<br />
+&nbsp; [2]=&gt;<br />
+&nbsp; string(1) "4"<br />
+}<br />
+NULL<br />
+The merged array is:array(3) {<br />
+&nbsp; [0]=&gt;<br />
+&nbsp; string(1) "1"<br />
+&nbsp; [1]=&gt;<br />
+&nbsp; string(1) "2"<br />
+&nbsp; [2]=&gt;<br />
+&nbsp; string(1) "4"<br />
+}<br />
+<br />
+While it's perfectly legitimate to merge empty arrays, null is *not* an empty array!</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="128356""></a>
+  <div class="note">
+   <strong class="user">Hayley Watson</strong>
+   <a href="#128356" class="date">31-Mar-2023 06:18</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Using the spread operator with array_merge allows merging any number of arrays together in one operation:<br />
+<br />
+<span class="default">&lt;?php<br />
+array_merge</span><span class="keyword">(...</span><span class="default">$array_of_arrays</span><span class="keyword">);<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Perhaps $array_of_arrays was built up in a loop, with $array_of_arrays[] = $another_array inside the loop. Collecting the arrays together this way and then merging them all at once is many times faster than repeatedly merging arrays two at a time (doing array_merge inside the loop).</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="127760""></a>
+  <div class="note">
+   <strong class="user">php at k dot ull dot at</strong>
+   <a href="#127760" class="date">19-Oct-2022 09:30</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Merge two arrays and retain only unique values.<br />
+Append values from second array.<br />
+Do not care about keys.<br />
+<br />
+$array1 = [<br />
+&nbsp;&nbsp;&nbsp; 0 =&gt; 'apple',<br />
+&nbsp;&nbsp;&nbsp; 1 =&gt; 'orange',<br />
+&nbsp;&nbsp;&nbsp; 2 =&gt; 'pear',<br />
+];<br />
+<br />
+$array2 = [<br />
+&nbsp;&nbsp;&nbsp; 0 =&gt; 'melon',<br />
+&nbsp;&nbsp;&nbsp; 1 =&gt; 'orange',<br />
+&nbsp;&nbsp;&nbsp; 2 =&gt; 'banana',<br />
+];<br />
+<br />
+$result = array_keys(<br />
+&nbsp;&nbsp;&nbsp; array_flip($array1) + array_flip($array2)<br />
+);<br />
+<br />
+Result:<br />
+[<br />
+&nbsp; [0] =&gt; "apple",<br />
+&nbsp; [1] =&gt; "orange",<br />
+&nbsp; [2] =&gt; "pear",<br />
+&nbsp; [3] =&gt; "melon",<br />
+&nbsp; [4] =&gt; "banana",<br />
+}</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="126928""></a>
+  <div class="note">
+   <strong class="user">JoshE</strong>
+   <a href="#126928" class="date">15-Mar-2022 10:11</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Not to contradict ChrisM's test, but I ran their code example and I got very different results for PHP 8.0.<br />
+<br />
+Testing PHP 8.0.14<br />
+1.4955070018768 sec for spread<br />
+4.4120140075684 sec for array_merge</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="126687""></a>
+  <div class="note">
+   <strong class="user">ChrisM</strong>
+   <a href="#126687" class="date">16-Dec-2021 09:04</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+I wished to point out that while other comments state that the spread operator should be faster than array_merge, I have actually found the opposite to be true for normal arrays. This is the case in both PHP 7.4 as well as PHP 8.0. The difference should be negligible for most applications, but I wanted to point this out for accuracy.<br />
+<br />
+Below is the code used to test, along with the results:<br />
+<br />
+<span class="default">&lt;?php<br />
+$before </span><span class="keyword">= </span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);<br />
+<br />
+for (</span><span class="default">$i</span><span class="keyword">=</span><span class="default">0 </span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">&lt;</span><span class="default">10000000 </span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">++) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$array1 </span><span class="keyword">= [</span><span class="string">'apple'</span><span class="keyword">,</span><span class="string">'orange'</span><span class="keyword">,</span><span class="string">'banana'</span><span class="keyword">];<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$array2 </span><span class="keyword">= [</span><span class="string">'carrot'</span><span class="keyword">,</span><span class="string">'lettuce'</span><span class="keyword">,</span><span class="string">'broccoli'</span><span class="keyword">];<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$array1 </span><span class="keyword">= [...</span><span class="default">$array1</span><span class="keyword">,...</span><span class="default">$array2</span><span class="keyword">];<br />
+}<br />
+<br />
+</span><span class="default">$after </span><span class="keyword">= </span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);<br />
+echo (</span><span class="default">$after</span><span class="keyword">-</span><span class="default">$before</span><span class="keyword">) . </span><span class="string">" sec for spread\n"</span><span class="keyword">;<br />
+<br />
+</span><span class="default">$before </span><span class="keyword">= </span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);<br />
+<br />
+for (</span><span class="default">$i</span><span class="keyword">=</span><span class="default">0 </span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">&lt;</span><span class="default">10000000 </span><span class="keyword">; </span><span class="default">$i</span><span class="keyword">++) {<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$array1 </span><span class="keyword">= [</span><span class="string">'apple'</span><span class="keyword">,</span><span class="string">'orange'</span><span class="keyword">,</span><span class="string">'banana'</span><span class="keyword">];<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$array2 </span><span class="keyword">= [</span><span class="string">'carrot'</span><span class="keyword">,</span><span class="string">'lettuce'</span><span class="keyword">,</span><span class="string">'broccoli'</span><span class="keyword">];<br />
+&nbsp;&nbsp;&nbsp; <br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$array1 </span><span class="keyword">= </span><span class="default">array_merge</span><span class="keyword">(</span><span class="default">$array1</span><span class="keyword">,</span><span class="default">$array2</span><span class="keyword">);<br />
+}<br />
+<br />
+</span><span class="default">$after </span><span class="keyword">= </span><span class="default">microtime</span><span class="keyword">(</span><span class="default">true</span><span class="keyword">);<br />
+echo (</span><span class="default">$after</span><span class="keyword">-</span><span class="default">$before</span><span class="keyword">) . </span><span class="string">" sec for array_merge\n"</span><span class="keyword">;<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+PHP 7.4:<br />
+1.2135608196259 sec for spread<br />
+1.1402177810669 sec for array_merge<br />
+<br />
+PHP 8.0:<br />
+1.1952061653137 sec for spread<br />
+1.099925994873 sec for array_merge</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="126628""></a>
+  <div class="note">
+   <strong class="user">Andreas Hofmann</strong>
+   <a href="#126628" class="date">21-Nov-2021 02:59</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+In addition to the text and Julian Egelstaffs comment regarding to keep the keys preserved with the + operator:<br />
+When they say "input arrays with numeric keys will be renumbered" they MEAN it. If you think you are smart and put your numbered keys into strings, this won't help. Strings which contain an integer will also be renumbered! I fell into this trap while merging two arrays with book ISBNs as keys. So let's have this example:<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; $test1</span><span class="keyword">[</span><span class="string">'24'</span><span class="keyword">] = </span><span class="string">'Mary'</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$test1</span><span class="keyword">[</span><span class="string">'17'</span><span class="keyword">] = </span><span class="string">'John'</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$test2</span><span class="keyword">[</span><span class="string">'67'</span><span class="keyword">] = </span><span class="string">'Phil'</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$test2</span><span class="keyword">[</span><span class="string">'33'</span><span class="keyword">] = </span><span class="string">'Brandon'</span><span class="keyword">;<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$result1 </span><span class="keyword">= </span><span class="default">array_merge</span><span class="keyword">(</span><span class="default">$test1</span><span class="keyword">, </span><span class="default">$test2</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$result1</span><span class="keyword">);<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$result2 </span><span class="keyword">= [...</span><span class="default">$test1</span><span class="keyword">, ...</span><span class="default">$test2</span><span class="keyword">];&nbsp; &nbsp; </span><span class="comment">// mentioned by fsb<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$result2</span><span class="keyword">);<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+You will get both:<br />
+<br />
+array(4) {<br />
+&nbsp; [0]=&gt;<br />
+&nbsp; string(4) "Mary"<br />
+&nbsp; [1]=&gt;<br />
+&nbsp; string(4) "John"<br />
+&nbsp; [2]=&gt;<br />
+&nbsp; string(4) "Phil"<br />
+&nbsp; [3]=&gt;<br />
+&nbsp; string(7) "Brandon"<br />
+}<br />
+<br />
+Use the + operator or array_replace, this will preserve - somewhat - the keys:<br />
+<br />
+<span class="default">&lt;?php<br />
+&nbsp;&nbsp;&nbsp; $result1 </span><span class="keyword">= </span><span class="default">array_replace</span><span class="keyword">(</span><span class="default">$test1</span><span class="keyword">, </span><span class="default">$test2</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$result1</span><span class="keyword">);<br />
+<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">$result2 </span><span class="keyword">= </span><span class="default">$test1 </span><span class="keyword">+ </span><span class="default">$test2</span><span class="keyword">;<br />
+&nbsp;&nbsp;&nbsp; </span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">$result2</span><span class="keyword">);<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+You will get both:<br />
+<br />
+array(4) {<br />
+&nbsp; [24]=&gt;<br />
+&nbsp; string(4) "Mary"<br />
+&nbsp; [17]=&gt;<br />
+&nbsp; string(4) "John"<br />
+&nbsp; [67]=&gt;<br />
+&nbsp; string(4) "Phil"<br />
+&nbsp; [33]=&gt;<br />
+&nbsp; string(7) "Brandon"<br />
+}<br />
+<br />
+The keys will keep the same, the order will keep the same, but with a little caveat: The keys will be converted to integers.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="124819""></a>
+  <div class="note">
+   <strong class="user">fsb at thefsb dot org</strong>
+   <a href="#124819" class="date">12-Mar-2020 11:36</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+We no longer need array_merge() as of PHP 7.4.<br />
+<br />
+&nbsp;&nbsp;&nbsp; [...$a, ...$b]<br />
+<br />
+does the same as<br />
+<br />
+&nbsp;&nbsp;&nbsp; array_merge($a, $b)<br />
+<br />
+and can be faster too.<br />
+<br />
+https://wiki.php.net/rfc/spread_operator_for_array#advantages_over_array_merge</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="92602""></a>
+  <div class="note">
+   <strong class="user">Julian Egelstaff</strong>
+   <a href="#92602" class="date">30-Jul-2009 11:48</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+In some situations, the union operator ( + ) might be more useful to you than array_merge.&nbsp; The array_merge function does not preserve numeric key values.&nbsp; If you need to preserve the numeric keys, then using + will do that.<br />
+<br />
+ie:<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+$array1</span><span class="keyword">[</span><span class="default">0</span><span class="keyword">] = </span><span class="string">"zero"</span><span class="keyword">;<br />
+</span><span class="default">$array1</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">] = </span><span class="string">"one"</span><span class="keyword">;<br />
+<br />
+</span><span class="default">$array2</span><span class="keyword">[</span><span class="default">1</span><span class="keyword">] = </span><span class="string">"one"</span><span class="keyword">;<br />
+</span><span class="default">$array2</span><span class="keyword">[</span><span class="default">2</span><span class="keyword">] = </span><span class="string">"two"</span><span class="keyword">;<br />
+</span><span class="default">$array2</span><span class="keyword">[</span><span class="default">3</span><span class="keyword">] = </span><span class="string">"three"</span><span class="keyword">;<br />
+<br />
+</span><span class="default">$array3 </span><span class="keyword">= </span><span class="default">$array1 </span><span class="keyword">+ </span><span class="default">$array2</span><span class="keyword">;<br />
+<br />
+</span><span class="comment">//This will result in::<br />
+<br />
+</span><span class="default">$array3 </span><span class="keyword">= array(</span><span class="default">0</span><span class="keyword">=&gt;</span><span class="string">"zero"</span><span class="keyword">, </span><span class="default">1</span><span class="keyword">=&gt;</span><span class="string">"one"</span><span class="keyword">, </span><span class="default">2</span><span class="keyword">=&gt;</span><span class="string">"two"</span><span class="keyword">, </span><span class="default">3</span><span class="keyword">=&gt;</span><span class="string">"three"</span><span class="keyword">);<br />
+<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Note the implicit "array_unique" that gets applied as well.&nbsp; In some situations where your numeric keys matter, this behaviour could be useful, and better than array_merge.<br />
+<br />
+--Julian</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>

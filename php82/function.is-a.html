@@ -1,0 +1,310 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; CHARSET=UTF-8">
+  <title>检查对象是否属于一个给定的类型或子类型。</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-base.css" />
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link media="all" rel="stylesheet" type="text/css" href="style.css"/>
+ </head>
+ <body class="docs" class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="function.interface-exists.html">? interface_exists</a></li>
+      <li style="float: right;"><a href="function.is-subclass-of.html">is_subclass_of ?</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="ref.classobj.html">类/对象 函数</a></li>
+    <li>检查对象是否属于一个给定的类型或子类型。</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="function.is-a" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">is_a</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.2.0, PHP 5, PHP 7, PHP 8)</p><p class="refpurpose"><span class="refname">is_a</span> &mdash; <span class="dc-title">检查对象是否属于一个给定的类型或子类型。</span></p>
+
+ </div>
+ <div class="refsect1 description" id="refsect1-function.is-a-description">
+    <h3 class="title">说明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><strong>is_a</strong></span>(<span class="methodparam"><span class="type"><a href="language.types.declarations.html#language.types.declarations.mixed" class="type mixed">mixed</a></span> <code class="parameter">$object_or_class</code></span>, <span class="methodparam"><span class="type">string</span> <code class="parameter">$class</code></span>, <span class="methodparam"><span class="type">bool</span> <code class="parameter">$allow_string</code><span class="initializer"> = <strong><code>false</code></strong></span></span>): <span class="type">bool</span></div>
+
+  <p class="para rdfs-comment">
+   检查指定 <code class="parameter">object_or_class</code>
+   是否属于此对象类型或具有此对象类型作为其超类（父类）。
+  </p>
+ </div>
+
+ <div class="refsect1 parameters" id="refsect1-function.is-a-parameters">
+  <h3 class="title">参数</h3>
+  <p class="para">
+   <dl>
+    
+     <dt>
+<code class="parameter">object_or_class</code></dt>
+
+     <dd>
+
+      <p class="para">
+       类名或者实例对象。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">class</code></dt>
+
+     <dd>
+
+      <p class="para">
+       类名或接口名。
+      </p>
+     </dd>
+
+    
+    
+     <dt>
+<code class="parameter">allow_string</code></dt>
+
+     <dd>
+
+      <p class="para">
+       如果本参数设置为 <strong><code>false</code></strong>，<code class="parameter">object_or_class</code> 就不允许传入字符串类名。
+       这也会在类不存在时，阻止调用自动加载器（autoloader）。
+      </p>
+     </dd>
+
+    
+   </dl>
+
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 returnvalues" id="refsect1-function.is-a-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   如果对象属于该对象类型或该类是此对象类型的超类（父类）时返回 <strong><code>true</code></strong>，否则返回 <strong><code>false</code></strong>。
+  </p>
+ </div>
+
+ <div class="refsect1 examples" id="refsect1-function.is-a-examples">
+  <h3 class="title">示例</h3>
+  <p class="para">
+    <div class="example" id="">
+      <p><strong>Example #1 <span class="function"><strong>is_a()</strong></span> 示例</strong></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">// 定义类<br /></span><span style="color: #007700">class </span><span style="color: #0000BB">WidgetFactory<br /></span><span style="color: #007700">{<br />  var </span><span style="color: #0000BB">$oink </span><span style="color: #007700">= </span><span style="color: #DD0000">'moo'</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #FF8000">// 创建新对象<br /></span><span style="color: #0000BB">$WF </span><span style="color: #007700">= new </span><span style="color: #0000BB">WidgetFactory</span><span style="color: #007700">();<br /><br />if (</span><span style="color: #0000BB">is_a</span><span style="color: #007700">(</span><span style="color: #0000BB">$WF</span><span style="color: #007700">, </span><span style="color: #DD0000">'WidgetFactory'</span><span style="color: #007700">)) {<br />  echo </span><span style="color: #DD0000">"yes, \$WF is still a WidgetFactory\n"</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+    </div>
+   <div class="example" id="">
+    <p><strong>Example #2 使用 <em class="emphasis">instanceof</em> 运算符</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">if (</span><span style="color: #0000BB">$WF </span><span style="color: #007700">instanceof </span><span style="color: #0000BB">WidgetFactory</span><span style="color: #007700">) {<br />    echo </span><span style="color: #DD0000">'Yes, $WF is a WidgetFactory'</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+ <div class="refsect1 seealso" id="refsect1-function.is-a-seealso">
+  <h3 class="title">参见</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.get-class.html" class="function" rel="rdfs-seeAlso">get_class()</a> - 返回对象的类名</span></li>
+    <li class="member"><span class="function"><a href="function.get-parent-class.html" class="function" rel="rdfs-seeAlso">get_parent_class()</a> - 检索对象或者类的父级类名</span></li>
+    <li class="member"><span class="function"><a href="function.is-subclass-of.html" class="function" rel="rdfs-seeAlso">is_subclass_of()</a> - 检查对象是否继承或者实现（implement）此类</span></li>
+   </ul>
+  </p>
+ </div>
+
+</div><div id="usernotes">
+ <div class="head">
+  <h3 class="title">User Contributed Notes</h3>
+ </div>
+<div id="allnotes">  <a name="127930""></a>
+  <div class="note">
+   <strong class="user">SlimDeluxe</strong>
+   <a href="#127930" class="date">14-Nov-2022 03:52</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+For anyone wondering, this does not work with traits :(</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="122252""></a>
+  <div class="note">
+   <strong class="user">dkrupyanskiy[at]gmail</strong>
+   <a href="#122252" class="date">10-Jan-2018 09:36</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Looks like the function signature given in description is wrong. Actually it can take a string&nbsp; as a first parameter in the case if $allow_string is set to true. <br />
+<br />
+It took some time to find out how the last parameter should be used. Please consider the following example<br />
+<br />
+<span class="default">&lt;?php<br />
+<br />
+</span><span class="keyword">class </span><span class="default">Foo</span><span class="keyword">{}<br />
+<br />
+</span><span class="default">spl_autoload_register</span><span class="keyword">(<br />
+&nbsp;&nbsp;&nbsp; function(</span><span class="default">$classname</span><span class="keyword">){<br />
+&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; </span><span class="default">printf</span><span class="keyword">(</span><span class="string">'autoload has been triggered for %s%s'</span><span class="keyword">, </span><span class="default">$classname</span><span class="keyword">, </span><span class="default">PHP_EOL</span><span class="keyword">);<br />
+&nbsp;&nbsp;&nbsp; }<br />
+);<br />
+<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">is_a</span><span class="keyword">(</span><span class="string">'UndefinedClassName'</span><span class="keyword">, </span><span class="default">Foo</span><span class="keyword">::class, </span><span class="default">true</span><span class="keyword">));<br />
+<br />
+</span><span class="default">?&gt;</span>
+</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="119972""></a>
+  <div class="note">
+   <strong class="user">Ronald Locke</strong>
+   <a href="#119972" class="date">30-Sep-2016 02:19</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Please note that you have to fully qualify the class name in the second parameter. <br />
+<br />
+A use statement will not resolve namespace dependencies in that is_a() function. <br />
+<br />
+<span class="default">&lt;?php <br />
+</span><span class="keyword">namespace </span><span class="default">foo\bar</span><span class="keyword">;<br />
+<br />
+class </span><span class="default">A </span><span class="keyword">{};<br />
+class </span><span class="default">B </span><span class="keyword">extends </span><span class="default">A </span><span class="keyword">{};<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">namespace </span><span class="default">har\var</span><span class="keyword">;<br />
+<br />
+use </span><span class="default">foo\bar\A</span><span class="keyword">;<br />
+</span><span class="default">$foo </span><span class="keyword">= new </span><span class="default">foo\bar\B</span><span class="keyword">();<br />
+<br />
+</span><span class="default">is_a</span><span class="keyword">(</span><span class="default">$foo</span><span class="keyword">, </span><span class="string">'A'</span><span class="keyword">); </span><span class="comment">// returns false;<br />
+</span><span class="default">is_a</span><span class="keyword">(</span><span class="default">$foo</span><span class="keyword">, </span><span class="string">'foo\bar\A'</span><span class="keyword">); </span><span class="comment">// returns true;<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+Just adding that note here because all examples are without namespaces.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="107181""></a>
+  <div class="note">
+   <strong class="user">eitan at mosenkis dot net</strong>
+   <a href="#107181" class="date">12-Jan-2012 01:09</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+As of PHP 5.3.9, is_a() seems to return false when passed a string for the first argument. Instead, use is_subclass_of() and, if necessary for your purposes, also check if the two arguments are equal, since is_subclass_of('foo', 'foo') will return false, while is_a('foo', 'foo') used to return true.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="105684""></a>
+  <div class="note">
+   <strong class="user">Aron Budinszky</strong>
+   <a href="#105684" class="date">07-Sep-2011 04:21</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+Be careful! Starting in PHP 5.3.7 the behavior of is_a() has changed slightly: when calling is_a() with a first argument that is not an object, __autoload() is triggered!<br />
+<br />
+In practice, this means that calling is_a('23', 'User'); will trigger __autoload() on "23". Previously, the above statement simply returned 'false'.<br />
+<br />
+More info can be found here:<br />
+https://bugs.php.net/bug.php?id=55475<br />
+<br />
+Whether this change is considered a bug and whether it will be reverted or kept in future versions is yet to be determined, but nevertheless it is how it is, for now...</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="72363""></a>
+  <div class="note">
+   <strong class="user">p dot scheit at zweipol dot net</strong>
+   <a href="#72363" class="date">16-Jan-2007 01:44</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+At least in PHP 5.1.6 this works as well with Interfaces.<br />
+<br />
+<span class="default">&lt;?php<br />
+</span><span class="keyword">interface </span><span class="default">test </span><span class="keyword">{<br />
+&nbsp; public function </span><span class="default">A</span><span class="keyword">();<br />
+}<br />
+<br />
+class </span><span class="default">TestImplementor </span><span class="keyword">implements </span><span class="default">test </span><span class="keyword">{<br />
+&nbsp; public function </span><span class="default">A </span><span class="keyword">() {<br />
+&nbsp;&nbsp;&nbsp; print </span><span class="string">"A"</span><span class="keyword">;<br />
+&nbsp; }<br />
+}<br />
+<br />
+</span><span class="default">$testImpl </span><span class="keyword">= new </span><span class="default">TestImplementor</span><span class="keyword">();<br />
+<br />
+</span><span class="default">var_dump</span><span class="keyword">(</span><span class="default">is_a</span><span class="keyword">(</span><span class="default">$testImpl</span><span class="keyword">,</span><span class="string">'test'</span><span class="keyword">));<br />
+</span><span class="default">?&gt;<br />
+</span><br />
+will return true</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+  <a name="57501""></a>
+  <div class="note">
+   <strong class="user">cesoid at yahoo dot com</strong>
+   <a href="#57501" class="date">05-Oct-2005 07:01</a>
+   <div class="text">
+    <div class="phpcode">
+<code><span class="html">
+is_a returns TRUE for instances of children of the class.<br />
+<br />
+For example:<br />
+<br />
+class Animal<br />
+{}<br />
+<br />
+class Dog extends Animal<br />
+{}<br />
+<br />
+$test = new Dog();<br />
+<br />
+In this example is_a($test, "Animal") would evaluate to TRUE as well as is_a($test, "Dog").<br />
+<br />
+This seemed intuitive to me, but did not seem to be documented.</span>
+</code>
+    </div>
+   </div>
+  </div>
+ <div class="foot"></div>
+</div>
+</div>
+</div></div></body></html>
