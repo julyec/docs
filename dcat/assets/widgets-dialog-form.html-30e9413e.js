@@ -1,0 +1,1 @@
+import{_ as e}from"./plugin-vue_export-helper-c27b6911.js";import{o,c as t}from"./app-98225aba.js";const r={};function c(_,s){return o(),t("div")}const m=e(r,[["render",c],["__file","widgets-dialog-form.html.vue"]]);export{m as default};

@@ -1,0 +1,11 @@
+import{_ as n}from"./plugin-vue_export-helper-c27b6911.js";import{o as s,c as a,a as e}from"./app-98225aba.js";const t={},o=e(`<h1 id="表格异步渲染" tabindex="-1"><a class="header-anchor" href="#表格异步渲染" aria-hidden="true">#</a> 表格异步渲染</h1><p>当页面的表格展示的数据特别多（列多行多），并且加载的组件也较多时，可能会出现卡顿的现象，此时可以使用表格异步渲染功能，可以有效地减轻页面卡顿的情况：</p><div class="language-php line-numbers-mode" data-ext="php"><pre class="language-php"><code><span class="token comment">// 启用表格异步渲染功能</span>
+<span class="token variable">$grid</span><span class="token operator">-&gt;</span><span class="token function">async</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 禁用</span>
+<span class="token variable">$grid</span><span class="token operator">-&gt;</span><span class="token function">async</span><span class="token punctuation">(</span><span class="token constant boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 判断是否是异步渲染请求</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$grid</span><span class="token operator">-&gt;</span><span class="token function">isAsyncRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token operator">...</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><blockquote><p>需要注意的是，如果页面没有出现明显的卡顿现象，则无需启用此功能。并且如果页面中存在多个数据表格，那么也无法使用此功能。</p></blockquote><p>开启此功能之后，表格<strong>工具栏</strong>(<code>toolbar</code>)以下的位置都会采用异步的方式进行渲染，换句话说，<strong>工具栏</strong>(<code>toolbar</code>)以及以上的位置只会刷新一次！在实际编码过程中需要注意有无特殊影响。</p>`,5),c=[o];function p(i,l){return s(),a("div",null,c)}const u=n(t,[["render",p],["__file","model-grid-async.html.vue"]]);export{u as default};

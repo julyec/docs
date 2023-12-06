@@ -1,0 +1,28 @@
+import{_ as n}from"./plugin-vue_export-helper-c27b6911.js";import{o as s,c as a,a as t}from"./app-98225aba.js";const e={},p=t(`<h1 id="自定义导出" tabindex="-1"><a class="header-anchor" href="#自定义导出" aria-hidden="true">#</a> 自定义导出</h1><p>dcat-admin的数据表格默认支持导出csv文件，</p><div class="language-php line-numbers-mode" data-ext="php"><pre class="language-php"><code><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+
+<span class="token keyword">namespace</span> <span class="token package">App<span class="token punctuation">\\</span>Admin<span class="token punctuation">\\</span>Extensions</span><span class="token punctuation">;</span>
+
+<span class="token keyword">use</span> <span class="token package">Dcat<span class="token punctuation">\\</span>Admin<span class="token punctuation">\\</span>Grid<span class="token punctuation">\\</span>Exporters<span class="token punctuation">\\</span>AbstractExporter</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">CustomExporter</span> <span class="token keyword">extends</span> <span class="token class-name">AbstractExporter</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">export</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token variable">$filename</span> <span class="token operator">=</span> <span class="token variable">$this</span><span class="token operator">-&gt;</span><span class="token function">getTable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">.</span><span class="token string single-quoted-string">&#39;.csv&#39;</span><span class="token punctuation">;</span>
+
+        <span class="token variable">$data</span> <span class="token operator">=</span> <span class="token variable">$this</span><span class="token operator">-&gt;</span><span class="token function">getData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token variable">$output</span> <span class="token operator">=</span> <span class="token string single-quoted-string">&#39;&#39;</span><span class="token punctuation">;</span>
+
+        <span class="token variable">$headers</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+            <span class="token string single-quoted-string">&#39;Content-Encoding&#39;</span>    <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">&#39;UTF-8&#39;</span><span class="token punctuation">,</span>
+            <span class="token string single-quoted-string">&#39;Content-Type&#39;</span>        <span class="token operator">=&gt;</span> <span class="token string single-quoted-string">&#39;text/csv;charset=UTF-8&#39;</span><span class="token punctuation">,</span>
+            <span class="token string single-quoted-string">&#39;Content-Disposition&#39;</span> <span class="token operator">=&gt;</span> <span class="token string double-quoted-string">&quot;attachment; filename=\\&quot;<span class="token interpolation"><span class="token variable">$filename</span></span>\\&quot;&quot;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+        <span class="token function">response</span><span class="token punctuation">(</span><span class="token function">rtrim</span><span class="token punctuation">(</span><span class="token variable">$output</span><span class="token punctuation">,</span> <span class="token string double-quoted-string">&quot;\\n&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token variable">$headers</span><span class="token punctuation">)</span><span class="token operator">-&gt;</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">exit</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div>`,3),o=[p];function i(c,l){return s(),a("div",null,o)}const d=n(e,[["render",i],["__file","model-grid-exporter.html.vue"]]);export{d as default};
