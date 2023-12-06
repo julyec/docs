@@ -1,0 +1,37 @@
+import{_ as u}from"./plugin-vue_export-helper-c27b6911.js";import{r as l,o as p,c as d,a as o,e as i,w as s,b as n,d as e,f as m}from"./app-083c2955.js";const k={},b=n("p",null,"Let the Markdown file in your VuePress site support footnotes.",-1),h=n("h2",{id:"settings",tabindex:"-1"},[n("a",{class:"header-anchor",href:"#settings","aria-hidden":"true"},"#"),e(" Settings")],-1),v=n("div",{class:"language-typescript line-numbers-mode","data-ext":"ts"},[n("pre",{ts:"",class:"language-typescript"},[n("code",null,[n("span",{class:"token comment"},"// .vuepress/config.ts"),e(`
+`),n("span",{class:"token keyword"},"import"),e(),n("span",{class:"token punctuation"},"{"),e(" mdEnhancePlugin "),n("span",{class:"token punctuation"},"}"),e(),n("span",{class:"token keyword"},"from"),e(),n("span",{class:"token string"},'"vuepress-plugin-md-enhance"'),n("span",{class:"token punctuation"},";"),e(`
+
+`),n("span",{class:"token keyword"},"export"),e(),n("span",{class:"token keyword"},"default"),e(),n("span",{class:"token punctuation"},"{"),e(`
+  plugins`),n("span",{class:"token operator"},":"),e(),n("span",{class:"token punctuation"},"["),e(`
+    `),n("span",{class:"token function"},"mdEnhancePlugin"),n("span",{class:"token punctuation"},"("),n("span",{class:"token punctuation"},"{"),e(`
+      `),n("span",{class:"token comment"},"// Enable Footnote"),e(`
+      footnote`),n("span",{class:"token operator"},":"),e(),n("span",{class:"token boolean"},"true"),n("span",{class:"token punctuation"},","),e(`
+    `),n("span",{class:"token punctuation"},"}"),n("span",{class:"token punctuation"},")"),n("span",{class:"token punctuation"},","),e(`
+  `),n("span",{class:"token punctuation"},"]"),n("span",{class:"token punctuation"},","),e(`
+`),n("span",{class:"token punctuation"},"}"),n("span",{class:"token punctuation"},";"),e(`
+`)])]),n("div",{class:"highlight-lines"},[n("br"),n("br"),n("br"),n("br"),n("br"),n("br"),n("br"),n("div",{class:"highlight-line"}," "),n("br"),n("br"),n("br")]),n("div",{class:"line-numbers","aria-hidden":"true"},[n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"})])],-1),f=n("div",{class:"language-javascript line-numbers-mode","data-ext":"js"},[n("pre",{js:"",class:"language-javascript"},[n("code",null,[n("span",{class:"token comment"},"// .vuepress/config.js"),e(`
+`),n("span",{class:"token keyword"},"import"),e(),n("span",{class:"token punctuation"},"{"),e(" mdEnhancePlugin "),n("span",{class:"token punctuation"},"}"),e(),n("span",{class:"token keyword"},"from"),e(),n("span",{class:"token string"},'"vuepress-plugin-md-enhance"'),n("span",{class:"token punctuation"},";"),e(`
+
+`),n("span",{class:"token keyword"},"export"),e(),n("span",{class:"token keyword"},"default"),e(),n("span",{class:"token punctuation"},"{"),e(`
+  `),n("span",{class:"token literal-property property"},"plugins"),n("span",{class:"token operator"},":"),e(),n("span",{class:"token punctuation"},"["),e(`
+    `),n("span",{class:"token function"},"mdEnhancePlugin"),n("span",{class:"token punctuation"},"("),n("span",{class:"token punctuation"},"{"),e(`
+      `),n("span",{class:"token comment"},"// Enable Footnote"),e(`
+      `),n("span",{class:"token literal-property property"},"footnote"),n("span",{class:"token operator"},":"),e(),n("span",{class:"token boolean"},"true"),n("span",{class:"token punctuation"},","),e(`
+    `),n("span",{class:"token punctuation"},"}"),n("span",{class:"token punctuation"},")"),n("span",{class:"token punctuation"},","),e(`
+  `),n("span",{class:"token punctuation"},"]"),n("span",{class:"token punctuation"},","),e(`
+`),n("span",{class:"token punctuation"},"}"),n("span",{class:"token punctuation"},";"),e(`
+`)])]),n("div",{class:"highlight-lines"},[n("br"),n("br"),n("br"),n("br"),n("br"),n("br"),n("br"),n("div",{class:"highlight-line"}," "),n("br"),n("br"),n("br")]),n("div",{class:"line-numbers","aria-hidden":"true"},[n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"})])],-1),g=m('<h2 id="syntax" tabindex="-1"><a class="header-anchor" href="#syntax" aria-hidden="true">#</a> Syntax</h2><ul><li><p>Use <code>[^Anchor text]</code> in Markdown to define a footnote</p></li><li><p>Use <code>[^Anchor text]: ...</code> to describe footnote content</p></li><li><p>If there are multiple paragraphs in footnote, the paragraph show be double indented</p></li></ul><h2 id="demo" tabindex="-1"><a class="header-anchor" href="#demo" aria-hidden="true">#</a> Demo</h2>',3),_=n("p",null,"Footnote 1 link[^first].",-1),x=n("p",null,"Footnote 2 link[^second].",-1),y=n("p",null,"Inline footnote^[Text of inline footnote] definition.",-1),w=n("p",null,"Duplicated footnote reference[^second].",-1),F=n("p",null,[e("[^first]: Footnote "),n("strong",null,"can have markup")],-1),E=n("pre",null,[n("code",null,`and multiple paragraphs.
+`)],-1),S=n("p",null,"[^second]: Footnote text.",-1),T=n("div",{class:"language-markdown line-numbers-mode","data-ext":"md"},[n("pre",{class:"language-markdown"},[n("code",null,[e(`Footnote 1 link[^first].
+
+Footnote 2 link[^second].
+
+Inline footnote^[Text of inline footnote] definition.
+
+Duplicated footnote reference[^second].
+
+`),n("span",{class:"token url-reference url"},[n("span",{class:"token punctuation"},"["),n("span",{class:"token variable"},"^first"),n("span",{class:"token punctuation"},"]"),n("span",{class:"token punctuation"},":"),e(" Footnote")]),e(),n("span",{class:"token bold"},[n("span",{class:"token punctuation"},"**"),n("span",{class:"token content"},"can have markup"),n("span",{class:"token punctuation"},"**")]),e(`
+
+`),n("span",{class:"token code keyword"},"    and multiple paragraphs."),e(`
+
+`),n("span",{class:"token url-reference url"},[n("span",{class:"token punctuation"},"["),n("span",{class:"token variable"},"^second"),n("span",{class:"token punctuation"},"]"),n("span",{class:"token punctuation"},":"),e(" Footnote")]),e(` text.
+`)])]),n("div",{class:"line-numbers","aria-hidden":"true"},[n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"}),n("div",{class:"line-number"})])],-1);function A(V,j){const c=l("CodeTabs"),r=l("MdDemo");return p(),d("div",null,[b,o(" more "),h,i(c,{id:"7",data:[{id:"TS"},{id:"JS"}],"tab-id":"language"},{title0:s(({value:a,isActive:t})=>[e("TS")]),title1:s(({value:a,isActive:t})=>[e("JS")]),tab0:s(({value:a,isActive:t})=>[v]),tab1:s(({value:a,isActive:t})=>[f]),_:1}),o(" #region after "),g,i(r,{title:"",id:"md-demo-39"},{default:s(()=>[_,x,y,w,F,E,S]),code:s(()=>[T]),_:1}),o(" #endregion after ")])}const N=u(k,[["render",A],["__file","footnote.html.vue"]]);export{N as default};
